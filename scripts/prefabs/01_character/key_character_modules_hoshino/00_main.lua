@@ -7,10 +7,14 @@ return function(inst)
         if inst.components.hoshino_data == nil then
             inst:AddComponent("hoshino_data")
         end
+        if inst.components.hoshino_com_rpc_event == nil then
+            inst:AddComponent("hoshino_com_rpc_event")
+        end
     end
 
     local modules = {
         "prefabs/01_character/key_character_modules_hoshino/01_inventorybar",                           ---- hud修改
+        "prefabs/01_character/key_character_modules_hoshino/02_pad_equip_slot",                         ---- 平板相关装备槽
 
     }
     for k, lua_addr in pairs(modules) do

@@ -1,13 +1,18 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
-    平板模块初始化
+
 
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-modimport("key_modules_for_hoshino/06_inspect_pad/01_base_pad.lua") 
---- 基础平板电脑
+return function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
 
-modimport("key_modules_for_hoshino/06_inspect_pad/02_character_page.lua") 
---- 角色检查页面
+    inst:ListenForEvent("pad_equip_slot_right_click",function(_,eslot)
+        inst.components.inventory:TakeActiveItemFromEquipSlot(eslot)
+        inst.components.inventory:ReturnActiveItem()
+    end)
+end

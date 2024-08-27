@@ -7,7 +7,7 @@
 local file_folders = {
     "01_character",         ---- 角色相关
     "02_items",             ---- 物品
-    -- "03_equipments",        ---- 装备
+    "03_special_equipment",        ---- 特殊装备
     -- "04_fx",                ---- 特效
     -- "05_buffs",             ---- buff
     -- "06_spell",             ---- spell

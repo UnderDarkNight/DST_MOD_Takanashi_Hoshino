@@ -2,11 +2,13 @@
 <Atlas>
 	<Texture filename="page_character.tex" />
 	<Elements>
-		<Element name="page_character_equipment_enhancement.tex" u1="0.001" u2="0.071265625" v2="0.50290625" v1="0.405296875" variant="" />
-		<Element name="page_character_picture.tex" u1="0.49269921875" u2="0.69821875" v2="0.999" v1="0.4150625" variant="" />
-		<Element name="page_character_skill.tex" u1="0.001" u2="0.24851171875" v2="0.999" v1="0.59865625" variant="" />
-		<Element name="page_character_skill_locked.tex" u1="0.25051171875" u2="0.3105234375" v2="0.999" v1="0.8867421875" variant="" />
-		<Element name="page_character_status.tex" u1="0.25051171875" u2="0.49069921875" v2="0.8847421875" v1="0.260765625" variant="" />
-		<Element name="page_character_switch_button.tex" u1="0.001" u2="0.05222265625" v2="0.59665625" v1="0.50490625" variant="" />
+		<Element name="excample_equipment.tex" u1="0.05422265625" u2="0.106421875" v2="0.999" v1="0.9004140625" variant="" />
+		<Element name="page_character_equipment_enhancement.tex" u1="0.001" u2="0.071265625" v2="0.8984140625" v1="0.8008046875" variant="" />
+		<Element name="page_character_picture.tex" u1="0.001" u2="0.20651953125" v2="0.7988046875" v1="0.2148671875" variant="" />
+		<Element name="page_character_picture2.tex" u1="0.20851953125" u2="0.3808359375" v2="0.999" v1="0.393578125" variant="" />
+		<Element name="page_character_skill.tex" u1="0.3828359375" u2="0.63034765625" v2="0.999" v1="0.59865625" variant="" />
+		<Element name="page_character_skill_locked.tex" u1="0.108421875" u2="0.16843359375" v2="0.999" v1="0.8867421875" variant="" />
+		<Element name="page_character_status.tex" u1="0.63234765625" u2="0.87253515625" v2="0.999" v1="0.3750234375" variant="" />
+		<Element name="page_character_switch_button.tex" u1="0.001" u2="0.05222265625" v2="0.999" v1="0.90725" variant="" />
 	</Elements>
 </Atlas>

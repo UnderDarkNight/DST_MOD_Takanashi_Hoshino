@@ -9,3 +9,8 @@
 
 -- EQUIPSLOTS["HOSHINO_SPECIAL_ITEM"] = "hoshino_special_item"
 -- EQUIPSLOTS["HOSHINO_BODY"] = "hoshino_body"
+
+
+EQUIPSLOTS["HOSHINO_SHOES"] = "hoshino_shoes" -- 鞋子
+EQUIPSLOTS["HOSHINO_BACKPACK"] = "hoshino_backpack" -- 背包
+EQUIPSLOTS["HOSHINO_AMULET"] = "hoshino_amulet" -- 项链

@@ -9,3 +9,4 @@ local function new_debug_fn(str,...)
 end
 rawset(_G,"D",new_debug_fn)
 rawset(_G,"d",new_debug_fn)
+rawset(_G,"reload",rawget(_G,"c_reset"))

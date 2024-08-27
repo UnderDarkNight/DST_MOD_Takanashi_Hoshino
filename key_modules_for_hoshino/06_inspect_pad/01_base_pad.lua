@@ -18,6 +18,9 @@
     local Text = require "widgets/text"
     local TEMPLATES = require "widgets/redux/templates"
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    TUNING.HOSHINO_INSPECT_PAD_FNS = TUNING.HOSHINO_INSPECT_PAD_FNS or{}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 AddPrefabPostInit(
     "hoshino",
@@ -101,11 +104,43 @@ AddPrefabPostInit(
                     root.inst:PushEvent("button_character")
                 end)
             -----------------------------------------------------------------------------------
-            ---
-                local pages_addr = {
-                    
+            --- 键盘监听
+                local fast_close_keys = {
+                    [MOVE_UP] = true,
+                    [MOVE_DOWN] = true,
+                    [MOVE_LEFT] = true,
+                    [MOVE_RIGHT] = true,
+                    [KEY_ESCAPE] = true,
+                    [KEY_W] = true,
+                    [KEY_S] = true,
+                    [KEY_A] = true,
+                    [KEY_D] = true,
                 }
-                
+                local key_handler = TheInput:AddKeyHandler(function(key,down)
+                    if down and fast_close_keys[key] then
+                        front_root.inst:PushEvent("pad_close")
+                    end
+                end)
+                root.inst:ListenForEvent("onremove",function()
+                    key_handler:Remove()
+                    -- print("remove key_handler")
+                end)
+            -----------------------------------------------------------------------------------
+            ---
+                local pages_create_fn = {
+                    ["character"] = TUNING.HOSHINO_INSPECT_PAD_FNS["character"],
+                }
+                local pages = {}
+                for index,temp_fn in pairs(pages_create_fn) do
+                    if temp_fn then
+                        local temp_page = temp_fn(root,MainScale)
+                        pages[index] = temp_page
+                    end
+                end
+
+                -- if ThePlayer.___test then
+                --     ThePlayer.___test(root,MainScale)
+                -- end
             -----------------------------------------------------------------------------------
 
 

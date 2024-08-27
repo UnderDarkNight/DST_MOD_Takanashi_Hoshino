@@ -30,7 +30,8 @@ local temp_assets = {
 		Asset("IMAGE", "images/inspect_pad/inspect_pad.tex"),
 		Asset("ATLAS", "images/inspect_pad/inspect_pad.xml"),
 		Asset("IMAGE", "images/inspect_pad/page_character.tex"),
-		Asset("ATLAS", "images/inspect_pad/page_character.xml"),
+		Asset("ATLAS", "images/inspect_pad/page_character.xml"),		
+		Asset("ANIM", "anim/hoshino_exp_bar.zip"),
 	---------------------------------------------------------------------------
 
 

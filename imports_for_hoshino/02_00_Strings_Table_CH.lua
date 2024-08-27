@@ -29,5 +29,22 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
         --- 组件动作
            
         --------------------------------------------------------------------
+        --- 03_special_equipment
+            ["hoshino_equipment_excample_shoes"] = {
+                ["name"] = "测试鞋子",
+                ["inspect_str"] = "inspect单纯的测试皮肤",
+                ["recipe_desc"] = "测试描述666",
+            },
+            ["hoshino_equipment_excample_backpack"] = {
+                ["name"] = "测试背包",
+                ["inspect_str"] = "inspect单纯的测试皮肤",
+                ["recipe_desc"] = "测试描述666",
+            },
+            ["hoshino_equipment_excample_amulet"] = {
+                ["name"] = "测试项链",
+                ["inspect_str"] = "inspect单纯的测试皮肤",
+                ["recipe_desc"] = "测试描述666",
+            },
+        --------------------------------------------------------------------
 }
 

@@ -4,8 +4,8 @@
 -- -- -- 注意文件路径
 
 
--- modimport("key_modules_for_hoshino/00_others/__all_others_modules_init.lua") 
--- -- 难以归类的杂乱东西
+modimport("key_modules_for_hoshino/00_others/__all_others_init.lua") 
+-- 难以归类的杂乱东西
 
 modimport("key_modules_for_hoshino/01_character/__all_character_modules_init.lua") 
 -- 角色模块
