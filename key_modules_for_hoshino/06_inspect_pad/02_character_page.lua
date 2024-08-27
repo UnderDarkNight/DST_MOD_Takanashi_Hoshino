@@ -121,14 +121,28 @@ local function page_create(front_root,MainScale)
                 sanity_txt:SetPosition(-150,150)
 
                 --- 护盾值
-                local defensive_txt = status_box:AddChild(Text(CODEFONT,35,"300",{ 126/255 , 133/255 ,143/255 , 1}))
+                local defensive_txt = status_box:AddChild(Text(CODEFONT,35,"N/A",{ 126/255 , 133/255 ,143/255 , 1}))
                 defensive_txt:SetPosition(60,230)
                 --- 伤害值
-                local damage_txt = status_box:AddChild(Text(CODEFONT,35,"400",{ 126/255 , 133/255 ,143/255 , 1}))
+                local damage_txt = status_box:AddChild(Text(CODEFONT,35,"N/A",{ 126/255 , 133/255 ,143/255 , 1}))
                 damage_txt:SetPosition(60,190)
                 --- 速度值
                 local speed_txt = status_box:AddChild(Text(CODEFONT,35,"1",{ 126/255 , 133/255 ,143/255 , 1}))
                 speed_txt:SetPosition(60,150)
+
+                local function RoundToTwoDecimalPlaces(number)
+                    return math.floor(number * 100 + 0.5) / 100
+                end
+                page.inst:DoPeriodicTask(FRAMES*3,function()
+                    -- 数值向上取整
+                    health_txt:SetString(tostring(math.ceil(ThePlayer.replica.health:GetCurrent())))   --- 血量
+                    hunger_txt:SetString(tostring(math.ceil(ThePlayer.replica.hunger:GetCurrent()))) --- 饥饿
+                    sanity_txt:SetString(tostring(math.ceil(ThePlayer.replica.sanity:GetCurrent()))) --- San
+
+                    -- defensive_txt:SetString(tostring(ThePlayer.replica.defense:GetCurrent())) --- 防御
+                    -- damage_txt:SetString(tostring(ThePlayer.replica.damage:GetCurrent())) --- 伤害
+                    speed_txt:SetString(tostring( ThePlayer.components.locomotor and RoundToTwoDecimalPlaces(ThePlayer.components.locomotor:GetRunSpeed()) or "N/A"  )) --- 速度
+                end)
 
             --------------------------------------------------------------------------------------
             --- 装备槽
@@ -266,6 +280,8 @@ local function page_create(front_root,MainScale)
                         end)
                     end
                 end
+            --------------------------------------------------------------------------------------
+            --- 
             --------------------------------------------------------------------------------------
             ---
                 return page

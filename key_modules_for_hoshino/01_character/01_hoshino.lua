@@ -66,9 +66,15 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -----选人界面人物三维显示
-    TUNING[string.upper("hoshino").."_HEALTH"] = 150
-    TUNING[string.upper("hoshino").."_HUNGER"] = 150
-    TUNING[string.upper("hoshino").."_SANITY"] = 150
+    if TUNING["hoshino.Config"].SERIOUSNESS_MODE then
+        TUNING[string.upper("hoshino").."_HEALTH"] = 250
+        TUNING[string.upper("hoshino").."_HUNGER"] = 100
+        TUNING[string.upper("hoshino").."_SANITY"] = 150
+    else            
+        TUNING[string.upper("hoshino").."_HEALTH"] = 450
+        TUNING[string.upper("hoshino").."_HUNGER"] = 100
+        TUNING[string.upper("hoshino").."_SANITY"] = 200
+    end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -----选人界面初始物品显示，物品相关的prefab
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT[string.upper("hoshino")] = {"log"}

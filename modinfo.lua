@@ -197,11 +197,20 @@ configuration_options = {
   {name = "AAAA",label = IsChinese() and GetTitle("角色") or GetTitle("Character"),hover = "",options = {{description = "",data = 0}},default = 0},
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-
+  {
+    name = "SERIOUSNESS_MODE",
+    label = IsChinese() and "认真模式" or "Seriousness Mode",
+    hover = IsChinese() and "是否开启认真模式" or "Whether to enable serious mode",
+    options = {
+      {description = "OFF",data = false},
+      {description = "ON",data = true},
+    },
+    default = false
+  },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-
+  {name = "AAAA",label = IsChinese() and GetTitle("其他设置") or GetTitle("Other Settings"),hover = "",options = {{description = "",data = 0}},default = 0},
   {
     name = "DEBUGGING_MOD",
     label = "开发者模式",
