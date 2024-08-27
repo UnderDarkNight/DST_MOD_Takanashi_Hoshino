@@ -51,12 +51,10 @@ local common_postinit = function(inst)
 
 	--------------------------------------------------------------------
 	-- 功能模块嵌入初始化
-		-- if TUNING["hoshino.Config"].WHITE_TEMPLATE ~= true then
-		-- 	local main_modules_init_fn = require("prefabs/01_character/hana_key_modules/00_main")
-		-- 	if type(main_modules_init_fn) == "function" then
-		-- 		main_modules_init_fn(inst)
-		-- 	end
-		-- end
+		local main_modules_init_fn = require("prefabs/01_character/key_character_modules_hoshino/00_main")
+		if type(main_modules_init_fn) == "function" then
+			main_modules_init_fn(inst)
+		end
 	--------------------------------------------------------------------
 
 
@@ -66,7 +64,7 @@ end
 -- 这里的的函数只在主机执行  一般组件之类的都写在这里
 local master_postinit = function(inst)
 	-- 人物音效
-	inst.soundsname = "wilson"
+	-- inst.soundsname = "wilson"
 
 	
 	-- 三维	
@@ -83,6 +81,7 @@ local master_postinit = function(inst)
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
 	
+	inst:PushEvent("master_postinit_hoshino")
 end
 
 return MakePlayerCharacter("hoshino", prefabs, assets, common_postinit, master_postinit, start_inv)

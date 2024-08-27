@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="inspect_pad.tex" />
+	<Elements>
+		<Element name="button_character.tex" u1="0.001" u2="0.02194921875" v2="0.9452890625" v1="0.885765625" variant="" />
+		<Element name="button_close.tex" u1="0.001" u2="0.03415625" v2="0.0917734375" v1="0.0234609375" variant="" />
+		<Element name="button_level_up.tex" u1="0.03615625" u2="0.0615" v2="0.0917734375" v1="0.038109375" variant="" />
+		<Element name="button_main_page.tex" u1="0.001" u2="0.0234140625" v2="0.999" v1="0.9472890625" variant="" />
+		<Element name="main_background.tex" u1="0.0254140625" u2="0.832984375" v2="0.999" v1="0.0937734375" variant="" />
+	</Elements>
+</Atlas>

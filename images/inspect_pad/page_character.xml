@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="page_character.tex" />
+	<Elements>
+		<Element name="page_character_equipment_enhancement.tex" u1="0.001" u2="0.071265625" v2="0.50290625" v1="0.405296875" variant="" />
+		<Element name="page_character_picture.tex" u1="0.49269921875" u2="0.69821875" v2="0.999" v1="0.4150625" variant="" />
+		<Element name="page_character_skill.tex" u1="0.001" u2="0.24851171875" v2="0.999" v1="0.59865625" variant="" />
+		<Element name="page_character_skill_locked.tex" u1="0.25051171875" u2="0.3105234375" v2="0.999" v1="0.8867421875" variant="" />
+		<Element name="page_character_status.tex" u1="0.25051171875" u2="0.49069921875" v2="0.8847421875" v1="0.260765625" variant="" />
+		<Element name="page_character_switch_button.tex" u1="0.001" u2="0.05222265625" v2="0.59665625" v1="0.50490625" variant="" />
+	</Elements>
+</Atlas>

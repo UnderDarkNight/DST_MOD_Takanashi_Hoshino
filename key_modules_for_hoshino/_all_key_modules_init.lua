@@ -10,4 +10,7 @@
 modimport("key_modules_for_hoshino/01_character/__all_character_modules_init.lua") 
 -- 角色模块
 
+modimport("key_modules_for_hoshino/06_inspect_pad/__inspect_pad_init.lua") 
+-- 角色平板电脑
+
 
