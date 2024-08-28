@@ -201,10 +201,14 @@ local flg,error_code = pcall(function()
         -- TheFrontEnd:GetSound():PlaySound("dontstarve/common/together/celestial_orb/active")
     ----------------------------------------------------------------------------------------------------------------
     --
-        ThePlayer.___test = function(front_root,MainScale)
+        -- ThePlayer.___test = function(front_root,MainScale)
             
-        end
+        -- end
 
+    ----------------------------------------------------------------------------------------------------------------
+    --- 卡牌系统调试
+        ThePlayer.components.hoshino_cards_sys:CreateWhiteCards(3)
+        -- ThePlayer.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_warning",true)  -- 下发HUD警告    
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

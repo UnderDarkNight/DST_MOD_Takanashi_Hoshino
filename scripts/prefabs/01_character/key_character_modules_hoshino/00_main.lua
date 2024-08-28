@@ -10,6 +10,9 @@ return function(inst)
         if inst.components.hoshino_com_rpc_event == nil then
             inst:AddComponent("hoshino_com_rpc_event")
         end
+        if inst.components.hoshino_cards_sys == nil and TUNING.HOSHINO_DEBUGGING_MODE then
+            inst:AddComponent("hoshino_cards_sys")
+        end
     end
 
     local modules = {

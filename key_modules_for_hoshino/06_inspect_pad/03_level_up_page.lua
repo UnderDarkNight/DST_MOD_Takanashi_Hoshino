@@ -65,95 +65,214 @@ local function page_create(front_root,MainScale)
             button_refresh.focus_scale = {1.02,1.02,1.02}
 
         --------------------------------------------------------------------------------------
-        --- 卡牌区（调试）。5张牌
-            local current_cards = {}
-            local function CreateCard(card_type,x,y,index)
-                local png = card_type ..".tex"
-                local temp_card = card_select_box:AddChild(ImageButton(
-                    "images/inspect_pad/page_level_up.xml",
-                    png,png,png,png,png
-                ))
-                temp_card:SetPosition(x,y)
-                temp_card:SetOnClick(function()
-                    print("card click",card_type,index)
-                    --- 通过RPC上传
-                    ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.card_click",{
-                        card_type = card_type,
-                        index = index,
-                    })
-                    --- 屏蔽卡牌选择。
-                    for k, v in pairs(current_cards) do
-                        v:Disable()
-                    end
-                end)
-                return temp_card
-            end
-            ------ 计算卡牌位置
-                local function Get_Card_Points(temp_card_num)
-                    local full_start_x = -320
-                    local full_end_x = 320
-                    local full_mid_x = (full_start_x + full_end_x) / 2
-                    local full_width = math.abs(full_end_x - full_start_x)
-                    local card_y = 30
+        --- 卡牌区（调试）。1-5张牌
+            -- local current_cards = {}
+            -- local function CreateCard(card_type,x,y,index)
+            --     local png = card_type ..".tex"
+            --     local temp_card = card_select_box:AddChild(ImageButton(
+            --         "images/inspect_pad/page_level_up.xml",
+            --         png,png,png,png,png
+            --     ))
+            --     temp_card:SetPosition(x,y)
+            --     temp_card:SetOnClick(function()
+            --         print("card click",card_type,index)
+            --         --- 通过RPC上传
+            --         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.card_click",{
+            --             card_type = card_type,
+            --             index = index,
+            --         })
+            --         --- 屏蔽卡牌选择。
+            --         for k, v in pairs(current_cards) do
+            --             v:Disable()
+            --         end
+            --     end)
+            --     return temp_card
+            -- end
+            -- ------ 计算卡牌位置
+            --     local function Get_Card_Points(temp_card_num)
+            --         local full_start_x = -320
+            --         local full_end_x = 320
+            --         local full_mid_x = (full_start_x + full_end_x) / 2
+            --         local full_width = math.abs(full_end_x - full_start_x)
+            --         local card_y = 30
                 
-                    local card_num = temp_card_num or 1
-                    card_num = math.clamp(card_num, 1, 5)
+            --         local card_num = temp_card_num or 1
+            --         card_num = math.clamp(card_num, 1, 5)
                 
-                    if card_num == 1 then
-                        return {Vector3((full_start_x + full_end_x) / 2, card_y, 0)}
-                    end
+            --         if card_num == 1 then
+            --             return {Vector3((full_start_x + full_end_x) / 2, card_y, 0)}
+            --         end
                 
-                    if card_num == 2 then
-                        local temp_length = full_width / 5
-                        local ret_table = {}
-                        table.insert(ret_table, Vector3(full_mid_x - temp_length, card_y, 0))
-                        table.insert(ret_table, Vector3(full_mid_x + temp_length, card_y, 0))
-                        return ret_table
-                    end
+            --         if card_num == 2 then
+            --             local temp_length = full_width / 5
+            --             local ret_table = {}
+            --             table.insert(ret_table, Vector3(full_mid_x - temp_length, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x + temp_length, card_y, 0))
+            --             return ret_table
+            --         end
                 
-                    if card_num == 3 then
-                        local delta_x = full_width / 4
-                        local ret_table = {}
-                        table.insert(ret_table, Vector3(full_mid_x - delta_x, card_y, 0))
-                        table.insert(ret_table, Vector3(full_mid_x, card_y, 0))
-                        table.insert(ret_table, Vector3(full_mid_x + delta_x, card_y, 0))
-                        return ret_table
-                    end
+            --         if card_num == 3 then
+            --             local delta_x = full_width / 4
+            --             local ret_table = {}
+            --             table.insert(ret_table, Vector3(full_mid_x - delta_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x + delta_x, card_y, 0))
+            --             return ret_table
+            --         end
                 
-                    if card_num == 4 then
-                        local delta_x = full_width / 3.5
-                        local ret_table = {}
-                        table.insert(ret_table, Vector3(full_mid_x - 1.5 * delta_x, card_y, 0))
-                        table.insert(ret_table, Vector3(full_mid_x - 0.5 * delta_x, card_y, 0))
-                        table.insert(ret_table, Vector3(full_mid_x + 0.5 * delta_x, card_y, 0))
-                        table.insert(ret_table, Vector3(full_mid_x + 1.5 * delta_x, card_y, 0))
-                        return ret_table
-                    end
+            --         if card_num == 4 then
+            --             local delta_x = full_width / 3.5
+            --             local ret_table = {}
+            --             table.insert(ret_table, Vector3(full_mid_x - 1.5 * delta_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x - 0.5 * delta_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x + 0.5 * delta_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x + 1.5 * delta_x, card_y, 0))
+            --             return ret_table
+            --         end
                 
-                    if card_num == 5 then
-                        local delta_x = full_width / 4
-                        local ret_table = {}
-                        for i = 1, 5, 1 do
-                            table.insert(ret_table, Vector3(full_start_x + (i - 1) * delta_x, card_y, 0))
-                        end
-                        return ret_table
-                    end
+            --         if card_num == 5 then
+            --             local delta_x = full_width / 4
+            --             local ret_table = {}
+            --             for i = 1, 5, 1 do
+            --                 table.insert(ret_table, Vector3(full_start_x + (i - 1) * delta_x, card_y, 0))
+            --             end
+            --             return ret_table
+            --         end
                 
-                    return {}
-                end
+            --         return {}
+            --     end
             
-            local card_num = 5
-            local ret_points = Get_Card_Points(card_num)
-            for i, pt in pairs(ret_points) do
-                current_cards[i] = CreateCard("card_black",pt.x,pt.y,i)
+            -- local card_num = 5
+            -- local ret_points = Get_Card_Points(card_num)
+            -- for i, pt in pairs(ret_points) do
+            --     current_cards[i] = CreateCard("card_black",pt.x,pt.y,i)
+            -- end
+            -- ---- 服务器返回下发的数据，然后更新卡牌正面。
+            -- page.inst:ListenForEvent("hoshino_event.card_display",function(_,_table)
+            --     local card_index = _table.index
+            --     local atlas = _table.atlas
+            --     local image = _table.image
+            --     current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
+            -- end,ThePlayer)
+            
+        --------------------------------------------------------------------------------------
+        --- 卡牌区。1-5张牌。数据从 ThePlayer.PAD_DATA.cards 获取。靠index返回。做决定，避免有MOD搞事。
+            --[[                
+                数据结构: 只有4种卡牌: card_black , card_colourful , card_golden , card_white
+                {
+                    [1] = "card_black",
+                    [2] = "card_colourful",
+                    [3] = "card_golden",
+                    [4] = "card_white",
+                    [5] = {atlas,image}, -- 卡牌正面
+                }
+            ]]--
+            local cards_data = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.cards
+            if type(cards_data) == "table" then
+
+                    local current_cards = {}
+                    local function CreateCard(card_type,x,y,index,atlas,image) --- 卡牌创建
+                        local png = card_type ..".tex"
+                        local temp_card = card_select_box:AddChild(ImageButton(
+                            "images/inspect_pad/page_level_up.xml",
+                            png,png,png,png,png
+                        ))
+                        temp_card:SetPosition(x,y)
+                        temp_card:SetOnClick(function()
+                            --- 通过RPC上传
+                            ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.card_click",index)
+                            --- 屏蔽卡牌选择。
+                            for k, v in pairs(current_cards) do
+                                v:Disable()
+                            end
+                        end)
+                        if atlas and image then
+                            temp_card:SetTextures(atlas,image,image,image,image,image)
+                        end
+                        return temp_card
+                    end
+                    ------ 计算卡牌位置
+                        local function Get_Card_Points(temp_card_num)
+                            local full_start_x = -320
+                            local full_end_x = 320
+                            local full_mid_x = (full_start_x + full_end_x) / 2
+                            local full_width = math.abs(full_end_x - full_start_x)
+                            local card_y = 30
+                        
+                            local card_num = temp_card_num or 1
+                            card_num = math.clamp(card_num, 1, 5)
+                        
+                            if card_num == 1 then
+                                return {Vector3((full_start_x + full_end_x) / 2, card_y, 0)}
+                            end
+                        
+                            if card_num == 2 then
+                                local temp_length = full_width / 5
+                                local ret_table = {}
+                                table.insert(ret_table, Vector3(full_mid_x - temp_length, card_y, 0))
+                                table.insert(ret_table, Vector3(full_mid_x + temp_length, card_y, 0))
+                                return ret_table
+                            end
+                        
+                            if card_num == 3 then
+                                local delta_x = full_width / 4
+                                local ret_table = {}
+                                table.insert(ret_table, Vector3(full_mid_x - delta_x, card_y, 0))
+                                table.insert(ret_table, Vector3(full_mid_x, card_y, 0))
+                                table.insert(ret_table, Vector3(full_mid_x + delta_x, card_y, 0))
+                                return ret_table
+                            end
+                        
+                            if card_num == 4 then
+                                local delta_x = full_width / 3.5
+                                local ret_table = {}
+                                table.insert(ret_table, Vector3(full_mid_x - 1.5 * delta_x, card_y, 0))
+                                table.insert(ret_table, Vector3(full_mid_x - 0.5 * delta_x, card_y, 0))
+                                table.insert(ret_table, Vector3(full_mid_x + 0.5 * delta_x, card_y, 0))
+                                table.insert(ret_table, Vector3(full_mid_x + 1.5 * delta_x, card_y, 0))
+                                return ret_table
+                            end
+                        
+                            if card_num == 5 then
+                                local delta_x = full_width / 4
+                                local ret_table = {}
+                                for i = 1, 5, 1 do
+                                    table.insert(ret_table, Vector3(full_start_x + (i - 1) * delta_x, card_y, 0))
+                                end
+                                return ret_table
+                            end
+                        
+                            return {}
+                        end
+                    
+                    local card_num = #cards_data
+                    local ret_points = Get_Card_Points(card_num)
+                    local card_clickable_flag = true
+                    for i, pt in pairs(ret_points) do
+                        --- 如果数据结构是卡牌背面index
+                        local card_back = type(cards_data[i]) == "string" and cards_data[i] or "card_black"
+                        local card_front = type(cards_data[i]) == "table" and cards_data[i] or {}
+                        if card_front.atlas and card_front.image then
+                            card_clickable_flag = false
+                        end
+                        current_cards[i] = CreateCard(card_back,pt.x,pt.y,i,card_front.atlas,card_front.image)
+                    end
+                    ---- 如果正面选择过了，则卡牌不可点击。
+                    if not card_clickable_flag then
+                        for k, v in pairs(current_cards) do
+                            v:Disable()
+                        end
+                    end
+                    ---- 服务器返回下发的数据，然后更新卡牌正面。
+                    page.inst:ListenForEvent("hoshino_event.card_display",function(_,_table)
+                        local card_index = _table.index
+                        local atlas = _table.atlas
+                        local image = _table.image
+                        current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
+                    end,ThePlayer)
+
             end
-            ---- 服务器返回下发的数据，然后更新卡牌正面。
-            page.inst:ListenForEvent("hoshino_event.card_display",function(_,_table)
-                local card_index = _table.index
-                local atlas = _table.atlas
-                local image = _table.image
-                current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
-            end,ThePlayer)
+            
         --------------------------------------------------------------------------------------
         --- 当前状态区
             local current_phrase = page:AddChild(Image("images/inspect_pad/page_level_up.xml", "current_phrase.tex"))

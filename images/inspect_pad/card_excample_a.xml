@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="card_excample_a.tex" />
+	<Elements>
+		<Element name="card_excample_a.tex" u1="0.001" u2="0.6161875" v2="0.999" v1="0.12990625" variant="" />
+	</Elements>
+</Atlas>

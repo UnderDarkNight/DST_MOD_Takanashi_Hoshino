@@ -36,6 +36,19 @@ local temp_assets = {
 		Asset("ANIM", "anim/hoshino_exp_bar.zip"),						--- 经验条
 		Asset("ANIM", "anim/hoshino_self_inspect_button_warning.zip"),	--- 自检按钮
 	---------------------------------------------------------------------------
+	--- 卡牌正面
+		Asset("IMAGE", "images/inspect_pad/card_excample_a.tex"),
+		Asset("ATLAS", "images/inspect_pad/card_excample_a.xml"),
+
+		Asset("IMAGE", "images/inspect_pad/card_excample_b.tex"),
+		Asset("ATLAS", "images/inspect_pad/card_excample_b.xml"),
+		
+		Asset("IMAGE", "images/inspect_pad/card_excample_c.tex"),
+		Asset("ATLAS", "images/inspect_pad/card_excample_c.xml"),
+
+		Asset("IMAGE", "images/inspect_pad/card_excample_d.tex"),
+		Asset("ATLAS", "images/inspect_pad/card_excample_d.xml"),
+	---------------------------------------------------------------------------
 
 
 }
