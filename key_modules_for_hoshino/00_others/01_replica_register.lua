@@ -19,6 +19,8 @@
 
 
 AddReplicableComponent("hoshino_com_rpc_event")  --- RPC通道
+AddReplicableComponent("hoshino_com_workable")  --- 通用workable组件
+AddReplicableComponent("hoshino_com_acceptable")  --- 通用acceptable组件
 
 
 

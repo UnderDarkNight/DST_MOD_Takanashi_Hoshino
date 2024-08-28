@@ -13,4 +13,7 @@ modimport("key_modules_for_hoshino/01_character/__all_character_modules_init.lua
 modimport("key_modules_for_hoshino/06_inspect_pad/__inspect_pad_init.lua") 
 -- 角色平板电脑
 
+modimport("key_modules_for_hoshino/07_actions/__all_actions_init.lua") 
+-- sg 和 com交互集中注册
+
 

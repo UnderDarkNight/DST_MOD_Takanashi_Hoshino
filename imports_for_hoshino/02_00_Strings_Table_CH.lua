@@ -25,6 +25,26 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "inspect单纯的测试皮肤",
                 ["recipe_desc"] = "测试描述666",
             },
+            ["hoshino_other_cards_debugger_1"] = {
+                ["name"] = "激活1张卡牌选择",
+                ["inspect_str"] = "激活1张卡牌选择",
+            },
+            ["hoshino_other_cards_debugger_2"] = {
+                ["name"] = "激活2张卡牌选择",
+                ["inspect_str"] = "激活2张卡牌选择",
+            },
+            ["hoshino_other_cards_debugger_3"] = {
+                ["name"] = "激活3张卡牌选择",
+                ["inspect_str"] = "激活3张卡牌选择",
+            },
+            ["hoshino_other_cards_debugger_4"] = {
+                ["name"] = "激活4张卡牌选择",
+                ["inspect_str"] = "激活4张卡牌选择",
+            },
+            ["hoshino_other_cards_debugger_5"] = {
+                ["name"] = "激活5张卡牌选择",
+                ["inspect_str"] = "激活5张卡牌选择",
+            },
         --------------------------------------------------------------------
         --- 组件动作
            

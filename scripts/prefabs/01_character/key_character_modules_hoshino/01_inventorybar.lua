@@ -63,9 +63,8 @@
         inst:PushEvent("hoshino_event.inspect_hud_open",root)
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-return function(inst)
-    inst:DoTaskInTime(0,function()
+--- 
+    local function Hook_Inspect_Button(inst)
         ------------------------------------------------------------------------------------------------
         ---
             local function arrow_create()  --- 创建警示箭头
@@ -100,7 +99,6 @@ return function(inst)
                     end
                 end)
             end
-
         ------------------------------------------------------------------------------------------------
         --- 
             inst.HUD.InspectSelf = function(self)
@@ -111,10 +109,20 @@ return function(inst)
                 end
             end
         ------------------------------------------------------------------------------------------------
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+return function(inst)
+    inst:DoTaskInTime(0,function()
+        if ThePlayer == inst and inst.HUD then
+            Hook_Inspect_Button(inst)
+        end
     end)
 
     inst:DoTaskInTime(3,function()
-
+        if not TheWorld.ismastersim then
+            return
+        end
         if not inst.components.hoshino_data:Get("hoshino_self_inspect_button_first_warning") then
             inst.components.hoshino_data:Set("hoshino_self_inspect_button_first_warning",true)
             inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_warning",true)
