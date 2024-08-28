@@ -198,9 +198,9 @@ configuration_options = {
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {
-    name = "SERIOUSNESS_MODE",
-    label = IsChinese() and "认真模式" or "Seriousness Mode",
-    hover = IsChinese() and "是否开启认真模式" or "Whether to enable serious mode",
+    name = "DIFFICULTY_MODE",
+    label = IsChinese() and "游玩难度" or "Difficulty Mode",
+    hover = IsChinese() and "游玩难度" or "Difficulty Mode",
     options = {
       {description = "OFF",data = false},
       {description = "ON",data = true},

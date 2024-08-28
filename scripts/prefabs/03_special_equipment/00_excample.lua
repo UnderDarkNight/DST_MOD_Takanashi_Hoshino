@@ -25,15 +25,29 @@ local assets =
     Asset( "ATLAS", "images/inspect_pad/hoshino_pad_excample_amulet.xml" ),
 
 }
-
-local function onequip(inst, owner)
-
-end
-
-local function onunequip(inst, owner)
-
-end
-
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+--- 特殊函数激活、反激活
+    local function Special_Fn_Active(inst,owner)
+        print("激活",inst,owner)
+    end
+    local function Special_Fn_Deactive(inst,owner)
+        print("反激活",inst,owner)        
+    end
+    local function onequip(inst, owner)
+        inst.owner = owner
+        inst:DoTaskInTime(0,function()   --- 使用延时激活，避免加载时候造成不可控崩溃
+            Special_Fn_Active(inst,owner)
+        end)
+    end
+    local function onunequip(inst, owner)
+        inst.owner = owner
+        -- owner:DoTaskInTime(0,function() --- 使用延时激活，避免加载时候造成不可控崩溃
+        --     Special_Fn_Deactive(inst,owner)
+        -- end)
+        Special_Fn_Deactive(inst,owner)
+    end
+------------------------------------------------------------------------------------------------------------------------------------------------
 local function common_fn()
     local inst = CreateEntity()
 
@@ -44,28 +58,47 @@ local function common_fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("cane")
-    inst.AnimState:SetBuild("swap_cane")
-    inst.AnimState:PlayAnimation("idle")
+    -- inst.AnimState:SetBank("cane")
+    -- inst.AnimState:SetBuild("swap_cane")
+    -- inst.AnimState:PlayAnimation("idle")
 
     -- inst:AddTag("weapon")
+    inst:AddTag("hoshino_special_equipment")
 
-    MakeInventoryFloatable(inst)
+    -- MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+    ---------------------------------------------------------------------
+    --- 
+        inst:AddComponent("inspectable")
+    ---------------------------------------------------------------------
+    ---
+        inst:AddComponent("inventoryitem")
+        inst.components.inventoryitem:SetOnDroppedFn(function()
+            inst:Remove()
+        end)
+        inst.components.inventoryitem.keepondeath = true
+    ---------------------------------------------------------------------
+    --- 
+        inst:AddComponent("equippable")
+        inst.components.equippable:SetOnEquip(onequip)
+        inst.components.equippable:SetOnUnequip(onunequip)
+        inst.components.equippable.restrictedtag = "hoshino"
+    ---------------------------------------------------------------------
+    --- 
+        local temp_deactive_fn = function(inst)
+            Special_Fn_Deactive(inst,inst.owner)            
+        end
+        inst:ListenForEvent("onremove",temp_deactive_fn)
+        inst:ListenForEvent("on_landed",temp_deactive_fn)
+        inst:ListenForEvent("ondropped",temp_deactive_fn)
+    ---------------------------------------------------------------------
 
-    inst:AddComponent("inspectable")
-    inst:AddComponent("inventoryitem")
-    inst:AddComponent("equippable")
-    inst.components.equippable:SetOnEquip(onequip)
-    inst.components.equippable:SetOnUnequip(onunequip)
-    -- inst.components.equippable.equipslot = EQUIPSLOTS.HANDS
-    -- inst.components.equippable.walkspeedmult = TUNING.CANE_SPEED_MULT
-    MakeHauntableLaunch(inst)
+
     return inst
 end
 

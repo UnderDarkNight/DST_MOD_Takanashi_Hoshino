@@ -66,7 +66,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -----选人界面人物三维显示
-    if TUNING["hoshino.Config"].SERIOUSNESS_MODE then
+    if TUNING["hoshino.Config"].DIFFICULTY_MODE then
         TUNING[string.upper("hoshino").."_HEALTH"] = 250
         TUNING[string.upper("hoshino").."_HUNGER"] = 100
         TUNING[string.upper("hoshino").."_SANITY"] = 150

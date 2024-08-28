@@ -27,11 +27,14 @@ local temp_assets = {
 	-- Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),	--- 单机声音集
 	---------------------------------------------------------------------------
 	--- 平板电脑相关的素材
-		Asset("IMAGE", "images/inspect_pad/inspect_pad.tex"),
+		Asset("IMAGE", "images/inspect_pad/inspect_pad.tex"),			--- 平板电脑贴图
 		Asset("ATLAS", "images/inspect_pad/inspect_pad.xml"),
-		Asset("IMAGE", "images/inspect_pad/page_character.tex"),
+		Asset("IMAGE", "images/inspect_pad/page_level_up.tex"),			--- 升级界面贴图
+		Asset("ATLAS", "images/inspect_pad/page_level_up.xml"),		
+		Asset("IMAGE", "images/inspect_pad/page_character.tex"),		--- 玩家信息界面贴图
 		Asset("ATLAS", "images/inspect_pad/page_character.xml"),		
-		Asset("ANIM", "anim/hoshino_exp_bar.zip"),
+		Asset("ANIM", "anim/hoshino_exp_bar.zip"),						--- 经验条
+		Asset("ANIM", "anim/hoshino_self_inspect_button_warning.zip"),	--- 自检按钮
 	---------------------------------------------------------------------------
 
 

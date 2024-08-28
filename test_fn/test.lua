@@ -201,11 +201,9 @@ local flg,error_code = pcall(function()
         -- TheFrontEnd:GetSound():PlaySound("dontstarve/common/together/celestial_orb/active")
     ----------------------------------------------------------------------------------------------------------------
     --
-        -- ThePlayer.___test = function(front_root,MainScale)
-        --     print("666666666666666666")
-
-        -- end
-        print(ThePlayer.components.locomotor:GetRunSpeed())
+        ThePlayer.___test = function(front_root,MainScale)
+            
+        end
 
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")

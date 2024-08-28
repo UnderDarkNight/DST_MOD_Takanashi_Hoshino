@@ -66,26 +66,58 @@
 
 return function(inst)
     inst:DoTaskInTime(0,function()
-        local inventorybar = ThePlayer == inst and inst.HUD and ThePlayer.HUD.controls.inv
-        if inventorybar then
+        ------------------------------------------------------------------------------------------------
+        ---
+            local function arrow_create()  --- 创建警示箭头
+                local inventorybar = ThePlayer == inst and inst.HUD and ThePlayer.HUD.controls.inv
+                if inventorybar then
+                    local inspect_button = inventorybar.inspectcontrol
+                    if inspect_button then               
+                        local arrow = inspect_button:AddChild(UIAnim())
+                        local arrow_anim = arrow:GetAnimState()
+                        arrow_anim:SetBuild("hoshino_self_inspect_button_warning")
+                        arrow_anim:SetBank("hoshino_self_inspect_button_warning")
+                        arrow_anim:PlayAnimation("idle",true)
+                        arrow:Hide()
+                        inst:ListenForEvent("hoshino_event.inspect_hud_warning",function(_,flag)
+                            if flag then
+                                arrow:Show()
+                            else
+                                arrow:Hide()
+                            end
+                        end)
+                        return true
+                    end
+                end
+                return false
+            end
 
-            -- local old_Rebuild = inventorybar.Rebuild
-            -- inventorybar.Rebuild = function(self,...)
-            --     old_Rebuild(self,...)
-            --     if self.inspectcontrol then
-            --         self.inspectcontrol:
+            if not arrow_create() then
+                inst.___inspect_button_task = inst:DoPeriodicTask(1,function()
+                    if arrow_create() then
+                        inst.___inspect_button_task:Cancel()
+                        inst.___inspect_button_task = nil
+                    end
+                end)
+            end
 
-            --     end
-            -- end
-
-
+        ------------------------------------------------------------------------------------------------
+        --- 
             inst.HUD.InspectSelf = function(self)
                 if self:IsVisible() and self.owner.components.playercontroller:IsEnabled() then
                     CreateInspectHUD(inst)
+                    inst:PushEvent("hoshino_event.inspect_hud_warning",false)
                     return true
                 end
             end
+        ------------------------------------------------------------------------------------------------
+    end)
 
+    inst:DoTaskInTime(3,function()
+
+        if not inst.components.hoshino_data:Get("hoshino_self_inspect_button_first_warning") then
+            inst.components.hoshino_data:Set("hoshino_self_inspect_button_first_warning",true)
+            inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_warning",true)
         end
     end)
 end

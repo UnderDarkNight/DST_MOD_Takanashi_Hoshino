@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="page_level_up.tex" />
+	<Elements>
+		<Element name="button_info.tex" u1="0.001" u2="0.040015625" v2="0.999" v1="0.9140859375" variant="" />
+		<Element name="button_refresh.tex" u1="0.042015625" u2="0.05905859375" v2="0.999" v1="0.9648671875" variant="" />
+		<Element name="card_black.tex" u1="0.06105859375" u2="0.13571875" v2="0.999" v1="0.784203125" variant="" />
+		<Element name="card_colourful.tex" u1="0.13771875" u2="0.21237890625" v2="0.999" v1="0.784203125" variant="" />
+		<Element name="card_golden.tex" u1="0.001" u2="0.07566015625" v2="0.782203125" v1="0.56740625" variant="" />
+		<Element name="card_select_box.tex" u1="0.07766015625" u2="0.508765625" v2="0.782203125" v1="0.1679921875" variant="" />
+		<Element name="card_white.tex" u1="0.21437890625" u2="0.2890390625" v2="0.999" v1="0.784203125" variant="" />
+		<Element name="current_phrase.tex" u1="0.510765625" u2="0.7411875" v2="0.999" v1="0.3847890625" variant="" />
+	</Elements>
+</Atlas>

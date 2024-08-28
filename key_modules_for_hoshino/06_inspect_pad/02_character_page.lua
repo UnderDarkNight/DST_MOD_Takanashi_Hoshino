@@ -176,19 +176,19 @@ local function page_create(front_root,MainScale)
                     -- temp_slot.inst.indicator_fn = function(mouse_indicator)
                     --     mouse_indicator.txt:SetString("equip slot "..i)
                     -- end
-                    local old_OnMouseButton = temp_slot.OnMouseButton
-                    temp_slot.OnMouseButton = function(self,button, down, x, y,...)
-                        local origin_ret = old_OnMouseButton(self,button, down, x, y,...)
-                        if down == false then
-                            if button == MOUSEBUTTON_LEFT then
-                                temp_slot.inst:PushEvent("mouse_left_clicked")
-                            else
-                            -- print("+++++666",i)
-                                temp_slot.inst:PushEvent("mouse_right_clicked")
-                            end
-                        end
-                        return origin_ret
-                    end
+                    -- local old_OnMouseButton = temp_slot.OnMouseButton
+                    -- temp_slot.OnMouseButton = function(self,button, down, x, y,...)
+                    --     local origin_ret = old_OnMouseButton(self,button, down, x, y,...)
+                    --     if down == false then
+                    --         if button == MOUSEBUTTON_LEFT then
+                    --             temp_slot.inst:PushEvent("mouse_left_clicked")
+                    --         else
+                    --         -- print("+++++666",i)
+                    --             temp_slot.inst:PushEvent("mouse_right_clicked")
+                    --         end
+                    --     end
+                    --     return origin_ret
+                    -- end
                     temp_slot:Hide()
                     table.insert(page.equip_slots,temp_slot)
                 end
@@ -268,16 +268,16 @@ local function page_create(front_root,MainScale)
                         end
                         page.equip_slots[i]:Show()
 
-                        page.equip_slots[i].inst:ListenForEvent("mouse_left_clicked",function()
-                            front_root.parent.inst:PushEvent("pad_close")
-                            ThePlayer.replica.inventory:TakeActiveItemFromEquipSlot(slot)
-                            -- print("装备槽被点击")
-                        end)
-                        page.equip_slots[i].inst:ListenForEvent("mouse_right_clicked",function()
-                            -- print("装备槽被右键点击")
-                            ThePlayer.replica.hoshino_com_rpc_event:PushEvent("pad_equip_slot_right_click",slot)
-                            page.equip_slots[i]:Hide()
-                        end)
+                        -- page.equip_slots[i].inst:ListenForEvent("mouse_left_clicked",function()
+                        --     front_root.parent.inst:PushEvent("pad_close")
+                        --     ThePlayer.replica.inventory:TakeActiveItemFromEquipSlot(slot)
+                        --     -- print("装备槽被点击")
+                        -- end)
+                        -- page.equip_slots[i].inst:ListenForEvent("mouse_right_clicked",function()
+                        --     -- print("装备槽被右键点击")
+                        --     ThePlayer.replica.hoshino_com_rpc_event:PushEvent("pad_equip_slot_right_click",slot)
+                        --     page.equip_slots[i]:Hide()
+                        -- end)
                     end
                 end
             --------------------------------------------------------------------------------------

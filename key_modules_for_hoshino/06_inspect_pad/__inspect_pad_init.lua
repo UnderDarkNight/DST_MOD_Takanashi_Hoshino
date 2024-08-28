@@ -11,3 +11,6 @@ modimport("key_modules_for_hoshino/06_inspect_pad/01_base_pad.lua")
 
 modimport("key_modules_for_hoshino/06_inspect_pad/02_character_page.lua") 
 --- 角色检查页面
+
+modimport("key_modules_for_hoshino/06_inspect_pad/03_level_up_page.lua") 
+--- 等级卡牌选择界面

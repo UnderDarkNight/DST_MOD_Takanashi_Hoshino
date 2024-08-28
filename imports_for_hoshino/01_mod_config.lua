@@ -8,7 +8,7 @@ TUNING["hoshino.Config"].Language = GetModConfigData("LANGUAGE")
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- 角色配置
-    TUNING["hoshino.Config"].SERIOUSNESS_MODE = GetModConfigData("SERIOUSNESS_MODE")     --- 认真模式
+    TUNING["hoshino.Config"].DIFFICULTY_MODE = GetModConfigData("DIFFICULTY_MODE")     --- 认真模式
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -4,12 +4,21 @@
 
     平板界面生成
 
+    部分数据从 ThePlayer.PAD_DATA 中获取
+    里面的数据以RPC形式下发更新 "hoshino_event.pad_data_update"
+    数据结构：
+        {
+            ["button_main_page_red_dot"] = true，
+            ["button_level_up_red_dot"] = true，
+            ["button_character_red_dot"] = true，
+
+        }
 ]]---
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----
     local Widget = require "widgets/widget"
     local Screen = require "widgets/screen"
-    local Image = require "widgets/image" -- 引入image控件
+    local Image = require "widgets/image"
     local UIAnim = require "widgets/uianim"
     local Screen = require "widgets/screen"
     local AnimButton = require "widgets/animbutton"
@@ -25,6 +34,7 @@
 AddPrefabPostInit(
     "hoshino",
     function(inst)
+        inst.PAD_DATA = inst.PAD_DATA or {}
         inst:ListenForEvent("hoshino_event.inspect_hud_open",function(inst,front_root)
             -----------------------------------------------------------------------------------
             ---
@@ -51,6 +61,7 @@ AddPrefabPostInit(
                     "button_close.tex",
                     "button_close.tex"
                 ))
+                root.button_close = button_close
                 button_close:SetPosition(465,0)
                 button_close:SetScale(MainScale,MainScale,MainScale)
                 button_close:SetOnClick(function()
@@ -68,11 +79,22 @@ AddPrefabPostInit(
                     "button_main_page.tex",
                     "button_main_page.tex"
                 ))
+                root.button_main_page = button_main_page
                 button_main_page:SetPosition(-220-5,-200+5)
                 button_main_page:SetScale(MainScale,MainScale,MainScale)
+                local button_main_page_red_dot = button_main_page:AddChild(Image())
+                button_main_page_red_dot:SetTexture("images/inspect_pad/inspect_pad.xml","red_dot.tex")
+                button_main_page_red_dot:SetPosition(20,20)
                 button_main_page:SetOnClick(function()
-                    root.inst:PushEvent("button_main_page")
+                    root.inst:PushEvent("button","main_page")
+                    button_main_page_red_dot:Hide()
+                    inst.PAD_DATA.button_main_page_red_dot = false
                 end)
+                if inst.PAD_DATA.button_main_page_red_dot == true then
+                    button_main_page_red_dot:Show()
+                else
+                    button_main_page_red_dot:Hide()
+                end
             -----------------------------------------------------------------------------------
             ---
                 local button_level_up = root:AddChild(ImageButton(
@@ -83,11 +105,22 @@ AddPrefabPostInit(
                     "button_level_up.tex",
                     "button_level_up.tex"
                 ))
+                root.button_level_up = button_level_up
                 button_level_up:SetPosition(12,-200+5)
                 button_level_up:SetScale(MainScale,MainScale,MainScale)
+                local button_level_up_red_dot = button_level_up:AddChild(Image())
+                button_level_up_red_dot:SetTexture("images/inspect_pad/inspect_pad.xml","red_dot.tex")
+                button_level_up_red_dot:SetPosition(20,20)
                 button_level_up:SetOnClick(function()
-                    root.inst:PushEvent("button_level_up")
+                    root.inst:PushEvent("button","level_up")
+                    button_level_up_red_dot:Hide()
+                    inst.PAD_DATA.button_level_up_red_dot = false
                 end)
+                if inst.PAD_DATA.button_level_up_red_dot == true then
+                    button_level_up_red_dot:Show()
+                else
+                    button_level_up_red_dot:Hide()
+                end
             -----------------------------------------------------------------------------------
             ---
                 local button_character = root:AddChild(ImageButton(
@@ -98,11 +131,22 @@ AddPrefabPostInit(
                     "button_character.tex",
                     "button_character.tex"
                 ))
+                root.button_character = button_character
                 button_character:SetPosition(253,-200+5)
                 button_character:SetScale(MainScale,MainScale,MainScale)
+                local button_character_red_dot = button_character:AddChild(Image())
+                button_character_red_dot:SetTexture("images/inspect_pad/inspect_pad.xml","red_dot.tex")
+                button_character_red_dot:SetPosition(20,20)
                 button_character:SetOnClick(function()
-                    root.inst:PushEvent("button_character")
+                    root.inst:PushEvent("button","character")
+                    button_character_red_dot:Hide()
+                    inst.PAD_DATA.button_character_red_dot = false
                 end)
+                if inst.PAD_DATA.button_character_red_dot == true then
+                    button_character_red_dot:Show()
+                else
+                    button_character_red_dot:Hide()
+                end
             -----------------------------------------------------------------------------------
             --- 键盘监听
                 local fast_close_keys = {
@@ -129,6 +173,7 @@ AddPrefabPostInit(
             ---
                 local pages_create_fn = {
                     ["character"] = TUNING.HOSHINO_INSPECT_PAD_FNS["character"],
+                    ["level_up"] = TUNING.HOSHINO_INSPECT_PAD_FNS["level_up"],
                 }
                 local pages = {}
                 for index,temp_fn in pairs(pages_create_fn) do
@@ -137,6 +182,21 @@ AddPrefabPostInit(
                         pages[index] = temp_page
                     end
                 end
+                for k, temp_page in pairs(pages) do
+                    temp_page:Hide()
+                end
+
+                pages["level_up"]:Show()
+
+                root.inst:ListenForEvent("button",function(_,page_index)
+                    for index, temp_page in pairs(pages) do
+                        if index == page_index then
+                            temp_page:Show()
+                        else
+                            temp_page:Hide()
+                        end
+                    end
+                end)
 
                 -- if ThePlayer.___test then
                 --     ThePlayer.___test(root,MainScale)
@@ -144,6 +204,21 @@ AddPrefabPostInit(
             -----------------------------------------------------------------------------------
 
 
+        end)
+    end
+)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+AddPrefabPostInit(
+    "hoshino",
+    function(inst)
+        inst.PAD_DATA = inst.PAD_DATA or {}
+        inst:ListenForEvent("hoshino_event.pad_data_update",function(inst,data)
+            data = data or {}
+            for k, v in pairs(data) do
+                inst.PAD_DATA[k] = v
+            end
         end)
     end
 )
