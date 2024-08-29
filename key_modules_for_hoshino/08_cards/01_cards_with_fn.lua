@@ -12,7 +12,7 @@ local cards = {
 
     --------------------------------------------------------------------------------
     -- 白：生命上限+15
-        {
+        ["max_health_up_15"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -27,7 +27,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：san上限+10
-        {
+        ["max_sanity_up_10"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -42,7 +42,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：饥饿上限+8
-        {
+        ["max_hunger_up_8"] ={
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -57,7 +57,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：移速+0.02
-        {
+        ["speed_up_2_percent"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -72,7 +72,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：攻击伤害倍率+0.04
-        {
+        ["damage_mult_up_4_percent"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -87,7 +87,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：立刻获得0.1攻击倍率，但是在接下来两天内每次失去san时会流失等量生命
-        {
+        ["damage_mult_up_10_percent_and_sanity_down"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -111,7 +111,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：饥饿降低速率降低3%（上限30%，满了之后不再出现）
-        {
+        ["hunger_down_mult_down_3_percent"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -129,7 +129,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：经验值获取速率提升10%
-        {
+        ["exp_up_mult_up_10_percent"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -144,7 +144,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：随机获得一项原版boss掉落物
-        {
+        ["random_boss_item_drop"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -165,7 +165,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：随机召唤一个非boss生物
-        {
+        ["random_monster_recall"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -191,7 +191,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：每次受到攻击时，对伤害来源造成3点伤害（可叠堆）。
-        {
+        ["counter_damage"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -206,7 +206,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：使用荷鲁斯之眼(专属武器)时有5%的概率不消耗耐久（最高100%）
-        {
+        ["the_eye_of_horus_finiteuses_down_block"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -221,7 +221,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：受伤时有5%的概率不损失盔甲耐久（最高100%）
-        {
+        ["armor_down_blocker_percent"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
