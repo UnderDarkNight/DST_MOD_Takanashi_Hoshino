@@ -219,8 +219,12 @@ local flg,error_code = pcall(function()
         -- ThePlayer.components.hoshino_com_debuff:Add_Max_Helth(33)
         -- ThePlayer.components.hoshino_com_debuff:Add_Max_Sanity(22)
         -- ThePlayer.components.hoshino_com_debuff:Add_Max_Hunger(66)
-        ThePlayer.components.hoshino_com_debuff:Add_Hunger_Down_Mult(0.03)
-        print("max",ThePlayer.components.hoshino_com_debuff:Is_Hunger_Down_Mult_Max())
+        -- ThePlayer.components.hoshino_com_debuff:Add_Hunger_Down_Mult(0.03)
+        -- print("max",ThePlayer.components.hoshino_com_debuff:Is_Hunger_Down_Mult_Max())
+
+
+        -- ThePlayer.components.hoshino_com_debuff:Add_Damage_Mult(1)
+        ThePlayer.components.sanity:DoDelta(-10)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

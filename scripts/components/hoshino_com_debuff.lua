@@ -16,6 +16,16 @@
         end)
         return self.__speed_mult_inst
     end
+    local function GetHungerMultInst2X(self)
+        if self.__hunger_mult_inst_2x then
+            return self.__hunger_mult_inst_2x
+        end
+        self.__hunger_mult_inst_2x = CreateEntity()
+        self.inst:ListenForEvent("onremove",function()
+            self.__hunger_mult_inst_2x:Remove()
+        end)
+        return self.__hunger_mult_inst_2x
+    end
 ----------------------------------------------------------------------------------------------------------------------------------
 ---
     local function hook_components(self,inst)
@@ -110,6 +120,48 @@
                 local current_mult = 1- (self:Get("hunger_down_mult") or 0)
                 return current_mult <= max_hunger_mult
             end
+        --------------------------------------------------------------------------------
+        --- 饥饿速度 翻倍。（按次数指数级,2的x次方）
+            function self:Add_Hunger_Down_Mult_2x_Times(value)
+                local current_times = self:Add("hunger_down_mult_2x_times",0)
+                local new_times = current_times + value
+                self:Set("hunger_down_mult_2x_times",new_times)
+                local ret_mult = math.pow(2,new_times)
+                inst.components.hunger.burnratemodifiers:SetModifier(GetHungerMultInst2X(self),ret_mult)
+            end
+            self:AddOnLoadFn(function()
+                self:Add_Hunger_Down_Mult_2x_Times(0)
+            end)
+        --------------------------------------------------------------------------------
+        --- 经验值加成
+            function self:Add_Exp_Mult(value)
+                local exp_mult = self:Add("exp_up_mult",value)
+            end
+            function self:GetExpMult()
+                return self:Add("exp_up_mult",0)
+            end
+        --------------------------------------------------------------------------------
+        --- 攻击伤害倍率
+            function self:Add_Damage_Mult(value)
+                local damage_mult = self:Add("damage_mult",value) + 1
+                inst.components.combat.externaldamagemultipliers:SetModifier(GetSpeedMultInst(self),damage_mult)
+                if value > 0 then
+                    -- 添加debuff、时间、触发event
+                    inst:PushEvent("hoshino_com_debuff.Add_Damage_Mult")
+                    local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
+                    while true do
+                        local debuff_inst = inst:GetDebuff(debuff_prefab)
+                        if debuff_inst then
+                            break
+                        end
+                        inst:AddDebuff(debuff_prefab,debuff_prefab)
+                    end
+                    inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
+                end
+            end
+            self:AddOnLoadFn(function()
+                self:Add_Damage_Mult(0)
+            end)
         --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------

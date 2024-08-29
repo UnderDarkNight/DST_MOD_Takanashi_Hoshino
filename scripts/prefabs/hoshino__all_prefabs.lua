@@ -5,14 +5,12 @@
 --------------------------------------------------------------------------------------------------------
 
 local file_folders = {
-    "00_others",            ---- others
-    "01_character",         ---- 角色相关
-    "02_items",             ---- 物品
-    "03_special_equipment",        ---- 特殊装备
-    -- "04_fx",                ---- 特效
-    -- "05_buffs",             ---- buff
-    -- "06_spell",             ---- spell
-    -- "07_projectile",        ---- 弹药
+    "00_others",                        ---- others
+    "01_character",                     ---- 角色相关
+    "02_items",                         ---- 物品
+    "03_special_equipment",             ---- 特殊装备
+    "04_debuffs",                       ---- debuffs
+
     
 }
 
