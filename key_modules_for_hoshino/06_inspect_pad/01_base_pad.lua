@@ -175,6 +175,11 @@ AddPrefabPostInit(
                     -- print("remove key_handler")
                 end)
             -----------------------------------------------------------------------------------
+            --- 伤害监听
+                root.inst:ListenForEvent("hoshino_event.attacked",function()
+                    front_root.inst:PushEvent("pad_close")
+                end,inst)
+            -----------------------------------------------------------------------------------
             ---
                 local pages_create_fn = {
                     ["character"] = TUNING.HOSHINO_INSPECT_PAD_FNS["character"],

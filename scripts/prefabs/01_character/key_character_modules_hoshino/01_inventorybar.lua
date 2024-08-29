@@ -128,4 +128,15 @@ return function(inst)
             inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_warning",true)
         end
     end)
+
+
+    if not TheWorld.ismastersim then
+        return
+    end
+
+
+    inst:ListenForEvent("attacked",function()
+        inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.attacked")
+    end)
+
 end
