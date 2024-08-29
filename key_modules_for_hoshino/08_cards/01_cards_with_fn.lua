@@ -172,6 +172,18 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 白：使用荷鲁斯之眼(专属武器)时有5%的概率不消耗耐久（最高100%）
+        {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.05)
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }

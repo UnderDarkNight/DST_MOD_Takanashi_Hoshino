@@ -170,6 +170,17 @@
                 end
             end)
         --------------------------------------------------------------------------------
+        --- The Eye of Horus  荷鲁斯之眼(专属武器散弹枪)
+            function self:TheEyeOfHorus_Finiteuses_Down_Block(value)
+                self:Add("the_eye_of_horus_finiteuses_down_block",value)
+            end
+            function self:TheEyeOfHorus_Finiteuses_Down_Check()
+                if math.random(10000)/10000 < self:Add("the_eye_of_horus_finiteuses_down_block",0) then
+                    return true
+                end
+                return false
+            end
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组
