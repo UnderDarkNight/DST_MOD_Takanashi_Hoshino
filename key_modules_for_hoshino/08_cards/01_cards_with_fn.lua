@@ -21,6 +21,9 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Max_Helth(15)
             end,
+            text = function(inst)
+                return "生命上限+15"
+            end,
         },
     --------------------------------------------------------------------------------
     -- 白：san上限+10
@@ -32,6 +35,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Max_Sanity(10)
+            end,
+            text = function(inst)
+                return "san上限+10"
             end,
         },
     --------------------------------------------------------------------------------
@@ -45,6 +51,9 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Max_Hunger(8)
             end,
+            text = function(inst)
+                return "饥饿上限+8"
+            end,
         },
     --------------------------------------------------------------------------------
     -- 白：移速+0.02
@@ -57,6 +66,9 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Speed_Mult(0.02)
             end,
+            text = function(inst)
+                return "移速+2%"
+            end,
         },
     --------------------------------------------------------------------------------
     -- 白：攻击伤害倍率+0.04
@@ -68,6 +80,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Damage_Mult(0.04)
+            end,
+            text = function(inst)
+                return "攻击伤害+4%"
             end,
         },
     --------------------------------------------------------------------------------
@@ -90,6 +105,9 @@ local cards = {
                 end
                 inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
             end,
+            text = function(inst)
+                return "攻击伤害+10%，接下来两天内每次失去san时会流失等量生命"
+            end,
         },
     --------------------------------------------------------------------------------
     -- 白：饥饿降低速率降低3%（上限30%，满了之后不再出现）
@@ -105,6 +123,9 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Hunger_Down_Mult(0.03)
             end,
+            text = function(inst)
+                return "饥饿降低速率降低3%"
+            end,
         },
     --------------------------------------------------------------------------------
     -- 白：经验值获取速率提升10%
@@ -116,6 +137,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Exp_Mult(0.1)
+            end,
+            text = function(inst)
+                return "经验值获取速率提升10%"
             end,
         },
     --------------------------------------------------------------------------------
@@ -134,6 +158,9 @@ local cards = {
                 if item then
                     inst.components.inventory:GiveItem(item)
                 end
+            end,
+            text = function(inst)
+                return "随机获得一项原版boss掉落物"
             end,
         },
     --------------------------------------------------------------------------------
@@ -158,6 +185,9 @@ local cards = {
                     monster_inst.Transform:SetPosition(inst.Transform:GetWorldPosition())
                 end
             end,
+            text = function(inst)
+                return "随机召唤一个非boss生物"
+            end,
         },
     --------------------------------------------------------------------------------
     -- 白：每次受到攻击时，对伤害来源造成3点伤害（可叠堆）。
@@ -170,6 +200,9 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Counter_Damage(3)
             end,
+            text = function(inst)
+                return "每次受到攻击时，对伤害来源造成3点伤害"
+            end,
         },
     --------------------------------------------------------------------------------
     -- 白：使用荷鲁斯之眼(专属武器)时有5%的概率不消耗耐久（最高100%）
@@ -181,6 +214,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.05)
+            end,
+            text = function(inst)
+                return "使用荷鲁斯之眼时有5%的概率不消耗耐久"
             end,
         },
     --------------------------------------------------------------------------------
