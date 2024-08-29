@@ -154,6 +154,22 @@
                 self:Add_Damage_Mult(0)
             end)
         --------------------------------------------------------------------------------
+        --- 反伤
+            function self:Add_Counter_Damage(value)
+                self:Add("counter_damage",value)
+            end
+            inst:ListenForEvent("attacked",function(inst,_table)
+                local attacker = _table and _table.attacker
+                local damage = _table and _table.damage or 0
+                local counter_damage = self:Add("counter_damage",0)
+                if counter_damage > 0 and damage > 0  
+                    and attacker and attacker:IsValid() and not attacker:HasTag("player")
+                    and attacker.components.health and not attacker.components.health:IsDead()
+                    then                        
+                        attacker.components.health:DoDelta(-counter_damage)
+                end
+            end)
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组

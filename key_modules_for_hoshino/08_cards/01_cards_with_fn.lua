@@ -160,6 +160,18 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 白：每次受到攻击时，对伤害来源造成3点伤害（可叠堆）。
+        {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Counter_Damage(3)
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }
