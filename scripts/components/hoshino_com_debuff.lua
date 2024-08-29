@@ -7,7 +7,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 辅助参数
     local function GetSpeedMultInst(self)
-        if self.__speed_mult_inst then
+        if self.__speed_mult_inst and self.__speed_mult_inst:IsValid() then
             return self.__speed_mult_inst
         end
         self.__speed_mult_inst = CreateEntity()
@@ -17,7 +17,7 @@
         return self.__speed_mult_inst
     end
     local function GetHungerMultInst2X(self)
-        if self.__hunger_mult_inst_2x then
+        if self.__hunger_mult_inst_2x and self.__hunger_mult_inst_2x:IsValid() then
             return self.__hunger_mult_inst_2x
         end
         self.__hunger_mult_inst_2x = CreateEntity()
@@ -179,6 +179,41 @@
                     return true
                 end
                 return false
+            end
+        --------------------------------------------------------------------------------
+        -- 白：受伤时有5%的概率不损失盔甲耐久（最高100%） 
+            --[[
+                笔记：被攻击的瞬间激活检查所有内容，并给 拥有 com_armor 组件的装备套上 conditionlossmultipliers
+                然后移除。倍增器。
+            ]]--
+
+            function self:Add_Armor_Down_Blocker_Percent(value)
+                local ret = self:Add("armor_down_blocker_percent",value)
+                -- print("盔甲不消耗概率",ret)
+            end
+            local function Add_armor_down_mult()
+                for _, item in pairs(inst.components.inventory.equipslots) do
+                    if item and item.components.armor then
+                        item.components.armor.conditionlossmultipliers:SetModifier(GetSpeedMultInst(self),0)
+                    end
+                end
+            end
+            local function Remove_armor_down_mult()
+                for _, item in pairs(inst.components.inventory.equipslots) do
+                    if item and item.components.armor then
+                        item.components.armor.conditionlossmultipliers:RemoveModifier(GetSpeedMultInst(self))
+                    end
+                end
+            end
+            local Armor_Down_Blocker_old_ApplyDamage = inst.components.inventory.ApplyDamage
+            inst.components.inventory.ApplyDamage = function(inv_com,...)
+                if math.random(10000)/10000 < self:Add("armor_down_blocker_percent",0) then -- 概率上倍增器
+                    Add_armor_down_mult()
+                    -- print("抵挡本次盔甲消耗")
+                end
+                local origin_ret = {Armor_Down_Blocker_old_ApplyDamage(inv_com,...)} -- 执行原来的函数
+                Remove_armor_down_mult()    --- 移除倍增器
+                return unpack(origin_ret)
             end
         --------------------------------------------------------------------------------
     end

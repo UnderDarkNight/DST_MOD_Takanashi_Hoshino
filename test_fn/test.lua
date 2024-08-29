@@ -224,7 +224,10 @@ local flg,error_code = pcall(function()
 
 
         -- ThePlayer.components.hoshino_com_debuff:Add_Damage_Mult(1)
-        ThePlayer.components.sanity:DoDelta(-10)
+        -- ThePlayer.components.sanity:DoDelta(-10)
+
+        ThePlayer.components.hoshino_com_debuff:Add_Armor_Down_Blocker_Percent(0.1)
+
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

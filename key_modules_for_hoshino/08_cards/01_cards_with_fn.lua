@@ -220,6 +220,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 白：受伤时有5%的概率不损失盔甲耐久（最高100%）
+        {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Armor_Down_Blocker_Percent(0.05)
+            end,
+            text = function(inst)
+                return "受伤时有5%的概率不损失盔甲耐久"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }
