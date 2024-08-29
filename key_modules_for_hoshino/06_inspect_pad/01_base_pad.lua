@@ -198,7 +198,7 @@ AddPrefabPostInit(
                 end
                 -------------------------------------------------------------------------------
                 --- 默认展示界面
-                    local default_page = "level_up"
+                    local default_page = "character"
                     pages[default_page]:Show()
                     root[page_swtich_buttons[default_page]].red_dot:Hide()
                     inst.PAD_DATA[page_swtich_buttons[default_page].."red_dot"] = false

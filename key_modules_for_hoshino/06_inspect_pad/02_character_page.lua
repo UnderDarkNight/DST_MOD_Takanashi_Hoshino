@@ -58,8 +58,10 @@ local function page_create(front_root,MainScale)
                 end
                 page:SetExp(300,900)
 
-                page.SetLevel = function(page,level)
-                    level_txt:SetString(tostring(level))                    
+                page.SetLevel = function(page,level,txt_offset)
+                    level_txt:SetString(tostring(level))
+                    txt_offset = txt_offset or 0
+                    level_txt:SetPosition(-30 + txt_offset,15)
                 end
             --------------------------------------------------------------------------------------
             --- 角色技能
@@ -281,7 +283,28 @@ local function page_create(front_root,MainScale)
                     end
                 end
             --------------------------------------------------------------------------------------
-            --- 
+            --- 经验值更新函数
+                local function update_level_exp_data()
+                    local level = ThePlayer.replica.hoshino_com_level_sys:GetLevel()
+                    local exp = ThePlayer.replica.hoshino_com_level_sys:GetExp()
+                    local exp_max = ThePlayer.replica.hoshino_com_level_sys:GetMaxExp()
+                    page:SetExp(exp,exp_max)
+
+                    --- 最大6位数。6位数的时候 偏移 70 。1位数的时候偏移-20
+                    local function calculateOffset(number)
+                        local numDigits = #tostring(number) -- 获取数字的位数
+                        local minDigits = 1
+                        local maxDigits = 6
+                        local minValue = -20
+                        local maxValue = 70                        
+                        -- 线性插值公式
+                        local offset = minValue + (maxValue - minValue) * (numDigits - minDigits) / (maxDigits - minDigits)                        
+                        return offset
+                    end
+                    page:SetLevel(level,calculateOffset(level))
+                end
+                update_level_exp_data()
+                page.inst:ListenForEvent("hoshino_com_level_sys_client_side_data_update",update_level_exp_data,ThePlayer)
             --------------------------------------------------------------------------------------
             ---
                 return page

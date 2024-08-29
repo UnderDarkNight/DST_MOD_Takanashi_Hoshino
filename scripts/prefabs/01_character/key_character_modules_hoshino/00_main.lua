@@ -10,14 +10,16 @@ return function(inst)
         if inst.components.hoshino_com_rpc_event == nil then
             inst:AddComponent("hoshino_com_rpc_event")
         end
-        if inst.components.hoshino_cards_sys == nil and TUNING.HOSHINO_DEBUGGING_MODE then
-            inst:AddComponent("hoshino_cards_sys")
-        end
+        -- if inst.components.hoshino_cards_sys == nil then
+        --     inst:AddComponent("hoshino_cards_sys")
+        -- end
     end
 
     local modules = {
         "prefabs/01_character/key_character_modules_hoshino/01_inventorybar",                           ---- hud修改
         "prefabs/01_character/key_character_modules_hoshino/02_pad_equip_slot",                         ---- 平板相关装备槽
+        "prefabs/01_character/key_character_modules_hoshino/03_cards_sys",                              ---- 卡牌相关系统
+        "prefabs/01_character/key_character_modules_hoshino/04_level_sys",                              ---- 等级系统
 
     }
     for k, lua_addr in pairs(modules) do
