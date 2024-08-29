@@ -16,4 +16,7 @@ modimport("key_modules_for_hoshino/06_inspect_pad/__inspect_pad_init.lua")
 modimport("key_modules_for_hoshino/07_actions/__all_actions_init.lua") 
 -- sg 和 com交互集中注册
 
+modimport("key_modules_for_hoshino/08_cards/__all_cards_init.lua") 
+-- 所有卡牌
+
 

@@ -148,15 +148,6 @@
                 if value > 0 then
                     -- 添加debuff、时间、触发event
                     inst:PushEvent("hoshino_com_debuff.Add_Damage_Mult")
-                    local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
-                    while true do
-                        local debuff_inst = inst:GetDebuff(debuff_prefab)
-                        if debuff_inst then
-                            break
-                        end
-                        inst:AddDebuff(debuff_prefab,debuff_prefab)
-                    end
-                    inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
                 end
             end
             self:AddOnLoadFn(function()
