@@ -20,6 +20,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/02_pad_equip_slot",                         ---- 平板相关装备槽
         "prefabs/01_character/key_character_modules_hoshino/03_cards_sys",                              ---- 卡牌相关系统
         "prefabs/01_character/key_character_modules_hoshino/04_level_sys",                              ---- 等级系统
+        "prefabs/01_character/key_character_modules_hoshino/05_cards_debuff_sys",                       ---- 卡组debuff系统
 
     }
     for k, lua_addr in pairs(modules) do

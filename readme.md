@@ -18,7 +18,7 @@ git bash 黑框技巧：
         git config --global http.sslverify false
 
     5、 输入 命令   ：     
-        git clone https://github.com/UnderDarkNight/DST_MOD_hoshino.git
+        git clone https://github.com/UnderDarkNight/DST_MOD_Takanashi_Hoshino.git
 
     6、 等待下载完成。这个时候会多出个文件夹【DST_MOD_hoshino】。这个就是MOD的所有东西。
 

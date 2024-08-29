@@ -211,9 +211,16 @@ local flg,error_code = pcall(function()
         -- ThePlayer.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_warning",true)  -- 下发HUD警告    
     ----------------------------------------------------------------------------------------------------------------
     --- 等级系统
-        ThePlayer.components.hoshino_com_level_sys:SetLevel(111999798)
-        ThePlayer.components.hoshino_com_level_sys:SetMaxExp(66000)
-        ThePlayer.components.hoshino_com_level_sys:SetExp(52345)
+        -- ThePlayer.components.hoshino_com_level_sys:SetLevel(111999798)
+        -- ThePlayer.components.hoshino_com_level_sys:SetMaxExp(66000)
+        -- ThePlayer.components.hoshino_com_level_sys:SetExp(52345)
+    ----------------------------------------------------------------------------------------------------------------
+    --- 卡牌 buff 调试
+        -- ThePlayer.components.hoshino_com_debuff:Add_Max_Helth(33)
+        -- ThePlayer.components.hoshino_com_debuff:Add_Max_Sanity(22)
+        -- ThePlayer.components.hoshino_com_debuff:Add_Max_Hunger(66)
+        ThePlayer.components.hoshino_com_debuff:Add_Hunger_Down_Mult(0.03)
+        print("max",ThePlayer.components.hoshino_com_debuff:Is_Hunger_Down_Mult_Max())
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
