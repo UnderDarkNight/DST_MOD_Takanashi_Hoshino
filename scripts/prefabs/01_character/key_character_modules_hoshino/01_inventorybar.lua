@@ -116,6 +116,9 @@ return function(inst)
     inst:DoTaskInTime(0,function()
         if ThePlayer == inst and inst.HUD then
             Hook_Inspect_Button(inst)
+            inst:ListenForEvent("hoshino_event.inspect_pad_open_by_force",function() -- 服务器强制打开界面
+                inst.HUD:InspectSelf()
+            end)
         end
     end)
 

@@ -400,6 +400,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 24、【金】【多多益善】【「升级卡包」选项+1，最高变成 5选1】【达到5选1的时候从卡池移除，小于的时候从新进卡池】
+        ["more_default_selectting_cards"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_cards_sys:GetDefaultCardsNum() ~= 5
+            end,
+            fn = function(inst)
+                inst.components.hoshino_cards_sys:DefultCardsNum_Delta(1)
+            end,
+            text = function(inst)
+                return "「升级卡包」选项+1，最高变成 5选1"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }

@@ -93,7 +93,7 @@ local hoshino_cards_sys = Class(function(self, inst)
         end)
     ---------------------------------------------------------------------
     --- 刷新次数。
-        self.refresh_num = 10
+        self.refresh_num = 10 -- 初始化送10次
         self:AddOnSaveFn(function()
             self:Set("refresh_num",self.refresh_num)
         end)
@@ -256,6 +256,29 @@ nil,
         self:SendCardsToClient(cards)
         self:SendInspectWarning()
         self:SendPageRedDot()
+    end
+    function hoshino_cards_sys:CreateCardsByForceCMD(temp_cards_data)
+        local ret_cards = {}
+        local current_num = 0
+        for i,card_type in ipairs(temp_cards_data) do
+            if card_type and self.CardPools[card_type] and current_num < self:GetDefaultCardsNum() then
+                table.insert(ret_cards,card_type)
+                current_num = current_num + 1
+            end
+        end
+        if #ret_cards == 0 then
+            return
+        end
+        self.cards_data = ret_cards
+        self:SendCardsToClient(ret_cards)
+        self:SendInspectWarning()
+        self:SendPageRedDot()
+        self:GetRPC():PushEvent("hoshino_event.pad_data_update",{
+            default_page = "level_up",
+        })
+        self.inst:DoTaskInTime(0.5,function()
+            self:GetRPC():PushEvent("hoshino_event.inspect_pad_open_by_force")
+        end)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- refresh 按钮点击后

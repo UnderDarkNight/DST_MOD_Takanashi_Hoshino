@@ -245,10 +245,18 @@ local flg,error_code = pcall(function()
     ----------------------------------------------------------------------------------------------------------------
     --- 卡牌创建
         -- ThePlayer.components.hoshino_cards_sys:DefultCardsNum_Delta(1)
-        ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
+        -- ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
         -- ThePlayer.components.hoshino_cards_sys:AddRefreshNum(100)
         -- print(ThePlayer.components.hoshino_cards_sys:GetDefaultCardsNum())
         -- print(ThePlayer.components.hoshino_cards_sys:IsCardsSelectting())
+
+        ThePlayer.components.hoshino_cards_sys:CreateCardsByForceCMD{
+            "card_white",
+            "card_colourful",
+            "card_golden",
+            "card_golden",
+            "card_golden",
+        }
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -11,7 +11,7 @@
             ["button_main_page_red_dot"] = true，
             ["button_level_up_red_dot"] = true，
             ["button_character_red_dot"] = true，
-
+            ["default_page"] = nil,
         }
 ]]---
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -203,7 +203,8 @@ AddPrefabPostInit(
                 end
                 -------------------------------------------------------------------------------
                 --- 默认展示界面
-                    local default_page = "level_up"
+                    local default_page = inst.PAD_DATA.default_page or "level_up"
+                    inst.PAD_DATA.default_page = nil
                     pages[default_page]:Show()
                     root[page_swtich_buttons[default_page]].red_dot:Hide()
                     inst.PAD_DATA[page_swtich_buttons[default_page].."red_dot"] = false
