@@ -103,8 +103,15 @@ local hoshino_cards_sys = Class(function(self, inst)
                 self.refresh_num = refresh_num
             end
         end)
+        local temp_refresh_cd_flag = true
         inst:ListenForEvent("hoshino_event.card_refresh_button_clicked",function()
-            self:Refresh_Clicked()
+            if temp_refresh_cd_flag then
+                self:Refresh_Clicked()
+                temp_refresh_cd_flag = false
+                inst:DoTaskInTime(1,function() -- 刷新冷却1秒
+                    temp_refresh_cd_flag = true
+                end)
+            end
         end)
     ---------------------------------------------------------------------
 end,
@@ -283,7 +290,7 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 --- refresh 按钮点击后
     function hoshino_cards_sys:Refresh_Clicked()
-        print("refresh clicked")
+        -- print("refresh clicked")
         if not self:IsCardsSelectting() then
             return
         end

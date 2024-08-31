@@ -61,10 +61,12 @@ local function page_create(front_root,MainScale)
             button_refresh:SetPosition(260,248)
             button_refresh:SetOnClick(function()
                 -- print("button_refresh")
-                ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.card_refresh_button_clicked")
-                button_refresh:Disable()
-                button_refresh.inst:DoTaskInTime(0.5,function()
-                    button_refresh:Enable()
+                if not button_refresh.temp_disable then
+                    ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.card_refresh_button_clicked")
+                    button_refresh.temp_disable = true
+                end
+                button_refresh.inst:DoTaskInTime(1,function()
+                    button_refresh.temp_disable = false
                 end)
             end)
             button_refresh.focus_scale = {1.02,1.02,1.02}
