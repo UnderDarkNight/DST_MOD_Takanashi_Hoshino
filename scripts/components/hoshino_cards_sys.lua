@@ -66,9 +66,9 @@ local hoshino_cards_sys = Class(function(self, inst)
     ---------------------------------------------------------------------
     --- 卡牌概率池子。初始化白色能力权重100，金色能力权重10，彩色能力权重1
         self.CardPools = {
-            card_white = 100,
-            card_colourful = 1,
-            card_golden = 10,
+            ["card_white"] = 100,
+            ["card_colourful"] = 1,
+            ["card_golden"] = 10,
         }
         self:AddOnSaveFn(function()
             self:Set("card_pools",self.CardPools)
@@ -200,7 +200,7 @@ nil,
         for k,v in pairs(self.CardPools) do
             total = total + v
         end
-        local rand = math.random(1,total)
+        local rand = math.random(total*100)/100
         for k,v in pairs(self.CardPools) do
             rand = rand - v
             if rand <= 0 then

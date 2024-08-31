@@ -62,6 +62,10 @@ local function page_create(front_root,MainScale)
             button_refresh:SetOnClick(function()
                 -- print("button_refresh")
                 ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.card_refresh_button_clicked")
+                button_refresh:Disable()
+                button_refresh.inst:DoTaskInTime(0.5,function()
+                    button_refresh:Enable()
+                end)
             end)
             button_refresh.focus_scale = {1.02,1.02,1.02}
 
@@ -69,7 +73,7 @@ local function page_create(front_root,MainScale)
         --- 刷新次数
             local refresh_num_text = card_select_box:AddChild(Text(CODEFONT,40,"500",{ 126/255 , 133/255 ,143/255 , 1}))
             refresh_num_text:SetPosition(320,245)
-            refresh_num_text:SetString(tostring(ThePlayer.replica.hoshino_cards_sys:Get_refresh_num()))
+            refresh_num_text:SetString(tostring(ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.refresh_num or ThePlayer.replica.hoshino_cards_sys:Get_refresh_num()))
         --------------------------------------------------------------------------------------
         --- 卡牌区（调试）。1-5张牌
             -- local current_cards = {}
