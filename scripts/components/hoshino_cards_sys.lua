@@ -261,7 +261,7 @@ nil,
         local ret_cards = {}
         local current_num = 0
         for i,card_type in ipairs(temp_cards_data) do
-            if card_type and self.CardPools[card_type] and current_num < self:GetDefaultCardsNum() then
+            if card_type and self.CardPools[card_type] and current_num < 5 then
                 table.insert(ret_cards,card_type)
                 current_num = current_num + 1
             end
@@ -272,7 +272,7 @@ nil,
         self.cards_data = ret_cards
         self:SendCardsToClient(ret_cards)
         self:SendInspectWarning()
-        self:SendPageRedDot()
+        -- self:SendPageRedDot()
         self:GetRPC():PushEvent("hoshino_event.pad_data_update",{
             default_page = "level_up",
         })

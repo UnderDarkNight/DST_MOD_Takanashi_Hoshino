@@ -251,9 +251,10 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_cards_sys:IsCardsSelectting())
 
         ThePlayer.components.hoshino_cards_sys:CreateCardsByForceCMD{
+            "card_golden",
             "card_white",
             "card_colourful",
-            "card_golden",
+            "card_colourful",
             "card_golden",
             "card_golden",
         }

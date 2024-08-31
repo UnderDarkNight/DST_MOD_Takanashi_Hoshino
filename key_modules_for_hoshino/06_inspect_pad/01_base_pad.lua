@@ -203,7 +203,7 @@ AddPrefabPostInit(
                 end
                 -------------------------------------------------------------------------------
                 --- 默认展示界面
-                    local default_page = inst.PAD_DATA.default_page or "level_up"
+                    local default_page = inst.PAD_DATA.default_page or "character"
                     inst.PAD_DATA.default_page = nil
                     pages[default_page]:Show()
                     root[page_swtich_buttons[default_page]].red_dot:Hide()
