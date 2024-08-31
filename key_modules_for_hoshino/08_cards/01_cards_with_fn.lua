@@ -278,6 +278,22 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 17、【白】【尤里卡】【获得一个随机物品蓝图】
+        ["random_blueprint"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local item = SpawnPrefab("blueprint")
+                inst.components.inventory:GiveItem(item)
+            end,
+            text = function(inst)
+                return "获得一个随机物品蓝图"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }
