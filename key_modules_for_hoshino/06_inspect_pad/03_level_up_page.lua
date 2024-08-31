@@ -205,6 +205,7 @@ local function page_create(front_root,MainScale)
                             if atlas and image then
                                 temp_card:SetTextures(atlas,image,image,image,image,image)
                             end
+                            temp_card.card_type = card_type
                             return temp_card
                         end
                         ------ 计算卡牌位置
@@ -295,16 +296,28 @@ local function page_create(front_root,MainScale)
         --- 刷新按钮事件服务器下发来的时候执行
             card_select_box.inst:ListenForEvent("hoshino_event.pad_data_update_by_refresh",function()
                 local current_cards = CreateCardsByData()
-                if current_cards and TheFrontEnd and TheFrontEnd:GetSound() then
+                if current_cards then
                     for index, card in pairs(current_cards) do
                         local refresh_fx = card:AddChild(UIAnim())
-                        refresh_fx:GetAnimState():SetBank("beefalo_fx")
-                        refresh_fx:GetAnimState():SetBuild("beefalo_fx")
-                        refresh_fx:GetAnimState():PlayAnimation("transform")
-                        TheFrontEnd:GetSound():PlaySound("dontstarve/ghost/ghost_haunt")
-                        refresh_fx:SetScale(0.3,0.3,0.3)
-                        refresh_fx:SetPosition(0,-50,0)
+                        if card.card_type == "card_white" then
+                            refresh_fx:GetAnimState():SetBank("halloween_embers_cold")
+                            refresh_fx:GetAnimState():SetBuild("halloween_embers_cold")
+                        else
+                            refresh_fx:GetAnimState():SetBank("halloween_embers")
+                            refresh_fx:GetAnimState():SetBuild("halloween_embers")
+                        end
+                        refresh_fx:GetAnimState():PlayAnimation("puff_"..math.random(3))
+                        refresh_fx:GetAnimState():SetBloomEffectHandle("shaders/anim.ksh")
+                        
+                        refresh_fx:SetScale(0.6,0.6,0.6)
+                        refresh_fx:SetPosition(0,-100,0)
                     end
+                    local sound_inst = CreateEntity()
+                    sound_inst.entity:AddSoundEmitter()
+                    sound_inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+                    sound_inst:DoTaskInTime(5,function()
+                        sound_inst:Remove()
+                    end)
                 end
                 local refresh_num = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.refresh_num or ThePlayer.replica.hoshino_cards_sys:Get_refresh_num()
                 refresh_num_text:SetString(tostring(refresh_num))

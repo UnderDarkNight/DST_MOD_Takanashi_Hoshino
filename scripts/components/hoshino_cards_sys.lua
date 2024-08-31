@@ -285,7 +285,7 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌点击后
     function hoshino_cards_sys:Card_Clicked(index)
-        print("card clicked")
+        -- print("card clicked")
         if not self:IsCardsSelectting() then
             print("card not IsCardsSelectting")
             return

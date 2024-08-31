@@ -369,6 +369,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 28、【金】【刷新】【赠送卡组刷新次数20】【可叠加】
+        ["cards_refresh_num"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_cards_sys:AddRefreshNum(20)
+            end,
+            text = function(inst)
+                return "赠送卡组刷新次数20"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }
