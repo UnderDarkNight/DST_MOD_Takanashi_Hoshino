@@ -3,7 +3,7 @@
 
     卡牌相关参数和执行函数
 
-    只有4种卡牌: card_black , card_colourful , card_golden , card_white
+    只有4种卡牌: card_black , card_colourful , card_golden , card_white  ， 【诅咒】 curse
 
     所有函数均在 server 上执行。和client端无关
 
@@ -291,6 +291,36 @@ local cards = {
             end,
             text = function(inst)
                 return "获得一个随机物品蓝图"
+            end,
+        },
+    --------------------------------------------------------------------------------
+    -- 20、【白】【汲取】【从食物获取的「正向」三维x2的同时，增加厨子的挑食机制】【从卡池移除】
+        ["warly_eater_modules_unlock"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_data:Get("Player_Unlocked_Warly_Eater_Modules") ~= true
+            end,
+            fn = function(inst)
+                inst:PushEvent("player_unlocked_warly_eater_modules")
+            end,
+            text = function(inst)
+                return "从食物获取的「正向」三维x2的同时，增加厨子的挑食机制"
+            end,
+        },
+    --------------------------------------------------------------------------------
+    -- 2、【诅咒】【消化不良】【从食物中获取的三维增加量减半，扣除的不减】【从诅咒池移除】
+        ["eater_indigestion"] = {
+            back = "curse",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_data:Get("Player_Indigestion") ~= true
+            end,
+            fn = function(inst)
+                inst:PushEvent("player_unlock_eater_indigestion")
+            end,
+            text = function(inst)
+                return "从食物中获取的三维增加量减半，扣除的不减"
             end,
         },
     --------------------------------------------------------------------------------
