@@ -41,5 +41,13 @@ return function(inst)
             end
             item.components.planardefense:SetBaseDefense(inst.components.hoshino_com_debuff:Get_Planar_Defense())
         ----------------------------------------------------------------------------------------
+        --- 阵营防御
+            if item.components.damagetyperesist == nil then
+                item:AddComponent("damagetyperesist")
+            end
+            local damagetyperesist_value = inst.components.hoshino_com_debuff:Get_Damage_Type_Resist()
+            item.components.damagetyperesist:AddResist("shadow_aligned", item, damagetyperesist_value)
+            item.components.damagetyperesist:AddResist("lunar_aligned", item, damagetyperesist_value)
+        ----------------------------------------------------------------------------------------
     end)
 end

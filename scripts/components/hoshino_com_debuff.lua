@@ -233,6 +233,16 @@
                 return self:Add("planar_defense_value",0)
             end
         --------------------------------------------------------------------------------
+        --- 阵营防御.最高100%
+            function self:Add_Damage_Type_Resist(value)
+                local old = self:Add("damage_type_resist_value",0)
+                local new = math.clamp(old+value,0,1)
+                self:Set("damage_type_resist_value",new)                
+            end
+            function self:Get_Damage_Type_Resist()
+                return 1 - self:Add("damage_type_resist_value",0)
+            end
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组
