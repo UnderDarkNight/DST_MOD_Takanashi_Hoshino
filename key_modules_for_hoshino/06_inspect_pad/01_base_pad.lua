@@ -30,6 +30,21 @@
 ---
     TUNING.HOSHINO_INSPECT_PAD_FNS = TUNING.HOSHINO_INSPECT_PAD_FNS or{}
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--
+    local function Check_Has_Selectting_Cards(inst)
+        inst.PAD_DATA = inst.PAD_DATA or {}
+        local cards_data = inst.PAD_DATA.cards
+        if type(cards_data) == "table" and #cards_data > 0 then
+            for _,v in pairs(cards_data) do
+                if type(v) == "table" then
+                    return false
+                end
+            end
+            return true
+        end
+        return false
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 AddPrefabPostInit(
     "hoshino",
@@ -203,7 +218,8 @@ AddPrefabPostInit(
                 end
                 -------------------------------------------------------------------------------
                 --- 默认展示界面
-                    local default_page = inst.PAD_DATA.default_page or "character"
+                    -- print("Check_Has_Selectting_Cards",Check_Has_Selectting_Cards(inst))
+                    local default_page = inst.PAD_DATA.default_page or Check_Has_Selectting_Cards(inst) and "level_up" or "character"
                     inst.PAD_DATA.default_page = nil
                     pages[default_page]:Show()
                     root[page_swtich_buttons[default_page]].red_dot:Hide()

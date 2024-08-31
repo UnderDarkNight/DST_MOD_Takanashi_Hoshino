@@ -246,7 +246,7 @@ local flg,error_code = pcall(function()
     --- 卡牌创建
         -- ThePlayer.components.hoshino_cards_sys:DefultCardsNum_Delta(1)
         -- ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
-        ThePlayer.components.hoshino_cards_sys:AddRefreshNum(100)
+        -- ThePlayer.components.hoshino_cards_sys:AddRefreshNum(100)
         -- print(ThePlayer.components.hoshino_cards_sys:GetDefaultCardsNum())
         -- print(ThePlayer.components.hoshino_cards_sys:IsCardsSelectting())
 
