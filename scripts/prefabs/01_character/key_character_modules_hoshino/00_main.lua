@@ -21,6 +21,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/03_cards_sys",                              ---- 卡牌相关系统
         "prefabs/01_character/key_character_modules_hoshino/04_level_sys",                              ---- 等级系统
         "prefabs/01_character/key_character_modules_hoshino/05_cards_debuff_sys",                       ---- 卡组debuff系统
+        "prefabs/01_character/key_character_modules_hoshino/06_armor_item",                             ---- 盔甲物品（用于卡牌的一些护甲参数赋予）
 
     }
     for k, lua_addr in pairs(modules) do

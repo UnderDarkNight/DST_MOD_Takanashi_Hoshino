@@ -28,7 +28,8 @@ local Prefabs_addr_base = string.sub(temp_addr,1,temp_str_index2) .. "/"    --- 
 local prefabs_name_list = {
 
 
-    "00_cards_debugger",                           --- 卡牌调试器
+    -- "00_cards_debugger",                           --- 卡牌调试器
+    "01_armor_item",                           --- 动态护甲
 
 }
 

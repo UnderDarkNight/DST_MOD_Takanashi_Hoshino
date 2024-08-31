@@ -222,7 +222,7 @@ local cards = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
-                return true
+                return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 1
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.05)
@@ -237,13 +237,28 @@ local cards = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
-                return true
+                return inst.components.hoshino_com_debuff:Get_Armor_Down_Blocker_Percent() < 1
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Armor_Down_Blocker_Percent(0.05)
             end,
             text = function(inst)
                 return "受伤时有5%的概率不损失盔甲耐久"
+            end,
+        },
+    --------------------------------------------------------------------------------
+    -- 【白】【防暴盾牌】【获得1点位面防御】【可叠加】
+        ["armor_planar_defense"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Planar_Defense(1)
+            end,
+            text = function(inst)
+                return "获得1点位面防御"
             end,
         },
     --------------------------------------------------------------------------------

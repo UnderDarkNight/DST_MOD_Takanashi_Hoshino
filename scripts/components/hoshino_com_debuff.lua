@@ -176,6 +176,9 @@
             function self:TheEyeOfHorus_Finiteuses_Down_Block(value)
                 self:Add("the_eye_of_horus_finiteuses_down_block",value)
             end
+            function self:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent()
+                return self:Add("the_eye_of_horus_finiteuses_down_block",0)
+            end
             function self:TheEyeOfHorus_Finiteuses_Down_Check()
                 if math.random(10000)/10000 < self:Add("the_eye_of_horus_finiteuses_down_block",0) then
                     return true
@@ -192,6 +195,9 @@
             function self:Add_Armor_Down_Blocker_Percent(value)
                 local ret = self:Add("armor_down_blocker_percent",value)
                 -- print("盔甲不消耗概率",ret)
+            end
+            function self:Get_Armor_Down_Blocker_Percent()
+                return self:Add("armor_down_blocker_percent",0)
             end
             local function Add_armor_down_mult()
                 for _, item in pairs(inst.components.inventory.equipslots) do
@@ -216,6 +222,15 @@
                 local origin_ret = {Armor_Down_Blocker_old_ApplyDamage(inv_com,...)} -- 执行原来的函数
                 Remove_armor_down_mult()    --- 移除倍增器
                 return unpack(origin_ret)
+            end
+        --------------------------------------------------------------------------------
+        -- 位面防御
+            function self:Add_Planar_Defense(value)
+                self:Add("planar_defense_value",value)
+                self.inst:PushEvent("hoshino_other_armor_item_param_refresh")
+            end
+            function self:Get_Planar_Defense()
+                return self:Add("planar_defense_value",0)
             end
         --------------------------------------------------------------------------------
     end
