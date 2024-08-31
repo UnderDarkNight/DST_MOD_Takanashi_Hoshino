@@ -23,6 +23,7 @@ AddReplicableComponent("hoshino_com_workable")  --- 通用workable组件
 AddReplicableComponent("hoshino_com_acceptable")  --- 通用acceptable组件
 
 AddReplicableComponent("hoshino_com_level_sys")  --- 等级系统组件
+AddReplicableComponent("hoshino_cards_sys")  --- 卡牌系统
 
 
 

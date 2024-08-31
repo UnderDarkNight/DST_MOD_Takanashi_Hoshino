@@ -241,7 +241,13 @@ local flg,error_code = pcall(function()
             -- print(ThePlayer.components.hoshino_com_debuff:Get_Probability_Of_Returning_Recipe())
     ----------------------------------------------------------------------------------------------------------------
     ---
-        ThePlayer.components.hoshino_com_debuff:Add_Death_Snapshot_Protector(1)
+        -- ThePlayer.components.hoshino_com_debuff:Add_Death_Snapshot_Protector(1)
+    ----------------------------------------------------------------------------------------------------------------
+    --- 卡牌创建
+        -- ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
+        ThePlayer.components.hoshino_cards_sys.refresh_num=100
+        -- print(ThePlayer.components.hoshino_cards_sys:GetDefaultCardsNum())
+        -- print(ThePlayer.components.hoshino_cards_sys:IsCardsSelectting())
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
