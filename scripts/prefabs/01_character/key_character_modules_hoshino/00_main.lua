@@ -23,7 +23,8 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/05_cards_debuff_sys",                       ---- 卡组debuff系统
         "prefabs/01_character/key_character_modules_hoshino/06_armor_item",                             ---- 盔甲物品（用于卡牌的一些护甲参数赋予）
         "prefabs/01_character/key_character_modules_hoshino/07_custom_eater",                           ---- 客制化食物组件
-        "prefabs/01_character/key_character_modules_hoshino/08_recipe_builder",                         ---- 配方制作
+        "prefabs/01_character/key_character_modules_hoshino/08_recipe_builder",                         ---- 配方制作和材料返还
+        "prefabs/01_character/key_character_modules_hoshino/09_death_snapshot_protector",               ---- 临死瞬间保护器
 
     }
     for k, lua_addr in pairs(modules) do

@@ -237,8 +237,11 @@ local flg,error_code = pcall(function()
             -- ThePlayer.components.hoshino_com_debuff:Add_Probability_Of_Returning_Recipe(0.1)
             -- ThePlayer.components.hoshino_com_debuff:Add_Returning_Recipe_By_Count(3)
             -- print(ThePlayer.components.hoshino_data:Add("Returning_Recipe_By_Count_Current",0))
-            print(ThePlayer.components.hoshino_com_debuff:Get_Returning_Recipe_By_Count())
+            -- print(ThePlayer.components.hoshino_com_debuff:Get_Returning_Recipe_By_Count())
             -- print(ThePlayer.components.hoshino_com_debuff:Get_Probability_Of_Returning_Recipe())
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        ThePlayer.components.hoshino_com_debuff:Add_Death_Snapshot_Protector(1)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

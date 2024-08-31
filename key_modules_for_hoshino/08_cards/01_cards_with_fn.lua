@@ -354,6 +354,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 27、【金】【救命稻草】【获取一层buff：死亡瞬间随机传送一次，恢复10%血量。触发后消耗一层】【叠加buff层数】
+        ["a_lifesaver"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Death_Snapshot_Protector(1)
+            end,
+            text = function(inst)
+                return "获取一层buff：死亡瞬间随机传送一次，恢复10%血量。触发后消耗一层"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }

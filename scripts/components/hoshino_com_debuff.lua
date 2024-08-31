@@ -259,6 +259,14 @@
                 return self:Add("returning_recipe_by_count_max",0)
             end
         --------------------------------------------------------------------------------
+        --- 临死瞬间保护器(计数器)
+            function self:Add_Death_Snapshot_Protector(value)
+                self:Add("death_snapshot_protector",value)
+            end
+            function self:Get_Death_Snapshot_Protector()
+                return self:Add("death_snapshot_protector",0)
+            end
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组
