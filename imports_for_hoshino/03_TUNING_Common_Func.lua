@@ -48,3 +48,53 @@ TUNING.HOSHINO_FNS = {}
         end
     end
 --------------------------------------------------------------------------------------------
+---- 给指定数量的物品（用来减少卡顿）
+    function TUNING.HOSHINO_FNS:GiveItemByPrefab(inst,prefab,num)
+        -- print("main info fwd_in_pdt_func:GiveItemByPrefab",prefab,num)
+        if type(prefab) ~= "string" or not PrefabExists(prefab) then
+            return {}
+        end
+
+        num = num or 1
+        if num == 1 then
+            local item = SpawnPrefab(prefab)
+            inst.components.inventory:GiveItem(item)
+            return {item}
+        end
+
+        local base_item_inst = SpawnPrefab(prefab)
+        if not base_item_inst.components.stackable then --- 不可叠堆的物品
+            local ret_items_table = {}
+            for i = 2, num, 1 do
+                local item = SpawnPrefab(prefab)
+                inst.components.inventory:GiveItem(item)
+                table.insert(ret_items_table,item)
+            end
+            table.insert(ret_items_table,base_item_inst)
+            inst.components.inventory:GiveItem(base_item_inst)
+            return ret_items_table
+        end
+        ---------------------------------- 
+        -- 叠堆计算
+        local ret_items_table = {}
+        local max_stack_num = base_item_inst.components.stackable.maxsize
+        local rest_num = math.floor( num % max_stack_num )      --- 不够一组的个数
+        local stack_groups = math.floor(   (num - rest_num)/max_stack_num    )  --- 够一组的个数
+        if rest_num > 0 then
+            base_item_inst.components.stackable.stacksize = rest_num
+            inst.components.inventory:GiveItem(base_item_inst)
+            table.insert(ret_items_table,base_item_inst)
+        else
+            base_item_inst:Remove()
+        end
+        if stack_groups > 0 then
+            for i = 1, stack_groups, 1 do
+                local items = SpawnPrefab(prefab)
+                items.components.stackable.stacksize = max_stack_num
+                inst.components.inventory:GiveItem(items)
+                table.insert(ret_items_table,items)
+            end
+        end
+        return ret_items_table
+    end
+--------------------------------------------------------------------------------------------

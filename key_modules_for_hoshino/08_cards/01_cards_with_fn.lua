@@ -324,6 +324,36 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 21、【白】【巧匠】【每次制作物品的时候，有1%概率返还制作材料，最高50%】【满概率后从卡池移除】
+        ["probability_of_returning_full_recipe"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Probability_Of_Returning_Recipe() < 0.5
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Probability_Of_Returning_Recipe(0.01)
+            end,
+            text = function(inst)
+                return "每次制作物品的时候，有1%概率返还制作材料，最高50%"
+            end,
+        },
+    --------------------------------------------------------------------------------
+    -- 25、【金】【星野的精算】【每天前3次制作返回一半的材料（向上取整，材料消耗1个的时候，直接返还1个）】【次数叠加】
+        ["returning_half_recipe_by_count"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Returning_Recipe_By_Count(3)
+            end,
+            text = function(inst)
+                return "每天前3次制作返回一半的材料"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }

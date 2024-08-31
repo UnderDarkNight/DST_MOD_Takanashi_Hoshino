@@ -243,6 +243,22 @@
                 return 1 - self:Add("damage_type_resist_value",0)
             end
         --------------------------------------------------------------------------------
+        --- 配方概率全部返回
+            function self:Add_Probability_Of_Returning_Recipe(value)
+                self:Add("probability_of_returning_recipe",value)
+            end
+            function self:Get_Probability_Of_Returning_Recipe()
+                return self:Add("probability_of_returning_recipe",0)
+            end
+        --------------------------------------------------------------------------------
+        --- 配方按次数返还一半
+            function self:Add_Returning_Recipe_By_Count(value)
+                self:Add("returning_recipe_by_count_max",value)
+            end
+            function self:Get_Returning_Recipe_By_Count()
+                return self:Add("returning_recipe_by_count_max",0)
+            end
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组

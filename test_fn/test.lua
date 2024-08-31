@@ -230,8 +230,15 @@ local flg,error_code = pcall(function()
 
     ----------------------------------------------------------------------------------------------------------------
     ---
-        local item = TheSim:FindFirstEntityWithTag("hoshino_other_armor_item")
-        print(item:GetDebugString())
+        -- local item = TheSim:FindFirstEntityWithTag("hoshino_other_armor_item")
+        -- print(item:GetDebugString())
+    ----------------------------------------------------------------------------------------------------------------
+    --- 配方返回
+            -- ThePlayer.components.hoshino_com_debuff:Add_Probability_Of_Returning_Recipe(0.1)
+            -- ThePlayer.components.hoshino_com_debuff:Add_Returning_Recipe_By_Count(3)
+            -- print(ThePlayer.components.hoshino_data:Add("Returning_Recipe_By_Count_Current",0))
+            print(ThePlayer.components.hoshino_com_debuff:Get_Returning_Recipe_By_Count())
+            -- print(ThePlayer.components.hoshino_com_debuff:Get_Probability_Of_Returning_Recipe())
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
