@@ -250,14 +250,17 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_cards_sys:GetDefaultCardsNum())
         -- print(ThePlayer.components.hoshino_cards_sys:IsCardsSelectting())
 
-        ThePlayer.components.hoshino_cards_sys:CreateCardsByForceCMD{
-            "card_golden",
-            "card_white",
-            "card_colourful",
-            "card_colourful",
-            "card_golden",
-            "card_golden",
-        }
+        -- ThePlayer.components.hoshino_cards_sys:CreateCardsByForceCMD({
+        --     "card_golden",
+        --     "card_white",
+        --     "card_colourful",
+        --     "card_colourful",
+        --     "card_golden",
+        --     "card_golden",
+        -- })
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        ThePlayer.components.hoshino_com_builder_blocker:SetDailyMax(10)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

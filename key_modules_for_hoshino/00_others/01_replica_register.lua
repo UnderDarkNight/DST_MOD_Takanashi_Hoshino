@@ -26,6 +26,8 @@ AddReplicableComponent("hoshino_com_level_sys")  --- 等级系统组件
 AddReplicableComponent("hoshino_cards_sys")  --- 卡牌系统
 AddReplicableComponent("hoshino_com_shop")  --- 商店系统
 
+AddReplicableComponent("hoshino_com_builder_blocker")  --- 制作栏屏蔽组件
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

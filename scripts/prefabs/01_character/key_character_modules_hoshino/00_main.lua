@@ -26,6 +26,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/08_recipe_builder",                         ---- 配方制作和材料返还
         "prefabs/01_character/key_character_modules_hoshino/09_death_snapshot_protector",               ---- 临死瞬间保护器
         "prefabs/01_character/key_character_modules_hoshino/10_shop_sys",                               ---- 商店系统
+        "prefabs/01_character/key_character_modules_hoshino/11_builder_blocker",                        ---- 制作栏制作次数
 
     }
     for k, lua_addr in pairs(modules) do
