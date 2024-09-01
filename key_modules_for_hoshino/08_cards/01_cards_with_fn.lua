@@ -415,6 +415,25 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 26、【金】【精选】【每天便利店免费刷新次数+1】【不可叠加】【选择后从卡组移除】
+        ["card_shop_refresh_count"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                if inst.components.hoshino_cards_sys:Add("card_shop_refresh_count",0) == 0 then
+                    return true
+                end
+                return false
+            end,
+            fn = function(inst)
+                inst.components.hoshino_cards_sys:Add("card_shop_refresh_count",1)
+                inst.components.hoshino_com_shop:RefreshDaily_Delta(1)
+            end,
+            text = function(inst)
+                return "每天便利店免费刷新次数+1"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }
