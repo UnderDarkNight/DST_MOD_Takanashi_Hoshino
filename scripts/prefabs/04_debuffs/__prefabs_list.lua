@@ -28,7 +28,8 @@ local Prefabs_addr_base = string.sub(temp_addr,1,temp_str_index2) .. "/"    --- 
 local prefabs_name_list = {
 
 
-    "01_card_debuff_damage_mult_and_sanity",                           --- 卡牌debuff
+    "01_01_card_debuff_damage_mult_and_sanity",                             --- 卡牌debuff: 伤害倍数和理智消耗惩罚
+    "01_02_card_debuff_health_down_and_coins_up",                           --- 卡牌debuff：生命值下降和金币增加
 
 
 }

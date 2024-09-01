@@ -434,6 +434,29 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 29、【金】【焉知非福】【每次失去生命值的时候，获得10点「信用点」，持续2天】【时间叠加】
+        ["buff_health_down_and_coins_up"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_data:Add("hoshino_card_debuff_health_down_and_coins_up",480*2) --- 计时器累加
+                local buff_prefab = "hoshino_card_debuff_health_down_and_coins_up"  -- 用while上BUFF
+                while true do
+                    local buff_inst = inst:GetDebuff(buff_prefab)
+                    if buff_inst and buff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(buff_prefab,buff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "每次失去生命值的时候，获得10点「信用点」，持续2天"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }
