@@ -3,7 +3,7 @@
 
     卡牌相关参数和执行函数
 
-    只有4种卡牌: card_black , card_colourful , card_golden , card_white  ， 【诅咒】 curse
+    只有4种卡牌: card_black , card_colourful , card_golden , card_white  ， 【诅咒】 curse - card_black
 
     所有函数均在 server 上执行。和client端无关
 
@@ -22,6 +22,60 @@
 
 local cards = {
 
+    --------------------------------------------------------------------------------
+    -- 测试缺省卡牌
+        ["test_card_black"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                print("test_card_black")
+            end,
+            text = function(inst)
+                return "test_card_black"
+            end,
+        },
+        ["test_card_colourful"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                print("test_card_colourful")
+            end,
+            text = function(inst)
+                return "test_card_colourful"
+            end,
+        },
+        ["test_card_golden"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                print("test_card_golden")
+            end,
+            text = function(inst)
+                return "test_card_golden"
+            end,
+        },
+        ["test_card_white"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                print("test_card_white")
+            end,
+            text = function(inst)
+                return "test_card_white"
+            end,
+        },
     --------------------------------------------------------------------------------
     -- 白：生命上限+15
         ["max_health_up_15"] = {
@@ -311,7 +365,7 @@ local cards = {
     --------------------------------------------------------------------------------
     -- 2、【诅咒】【消化不良】【从食物中获取的三维增加量减半，扣除的不减】【从诅咒池移除】
         ["eater_indigestion"] = {
-            back = "curse",
+            back = "card_black",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
                 return inst.components.hoshino_data:Get("Player_Indigestion") ~= true

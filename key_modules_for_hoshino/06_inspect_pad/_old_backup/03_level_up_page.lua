@@ -23,18 +23,6 @@
 ---
     TUNING.HOSHINO_INSPECT_PAD_FNS = TUNING.HOSHINO_INSPECT_PAD_FNS or{}    
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
----
-    local function GetCardTypeByName(card_name_index)
-        if card_name_index == nil then
-            return "card_white"
-        end
-        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
-        if all_data[card_name_index] and all_data[card_name_index].back then
-            return all_data[card_name_index].back
-        end
-        return "card_white"
-    end
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 local function page_create(front_root,MainScale)
         --------------------------------------------------------------------------------------
@@ -100,7 +88,7 @@ local function page_create(front_root,MainScale)
                 -- card_desc_text:SetSize(50)
                 -- print("卡牌描述加载",card_name)
                 if card_name == nil then
-                    card_desc_text:SetString("未找到卡牌描述")
+                    card_desc_text:SetString("测试卡牌描述")
                 end
                 local all_cards_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
                 local ret_card_data = all_cards_data[card_name]
@@ -109,17 +97,108 @@ local function page_create(front_root,MainScale)
                 else
                     card_desc_text:SetString("未找到卡牌描述")
                 end
-            end            
+            end
+        --------------------------------------------------------------------------------------
+        --- 卡牌区（调试）。1-5张牌
+            -- local current_cards = {}
+            -- local function CreateCard(card_type,x,y,index)
+            --     local png = card_type ..".tex"
+            --     local temp_card = card_select_box:AddChild(ImageButton(
+            --         "images/inspect_pad/page_level_up.xml",
+            --         png,png,png,png,png
+            --     ))
+            --     temp_card:SetPosition(x,y)
+            --     temp_card:SetOnClick(function()
+            --         print("card click",card_type,index)
+            --         --- 通过RPC上传
+            --         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.card_click",{
+            --             card_type = card_type,
+            --             index = index,
+            --         })
+            --         --- 屏蔽卡牌选择。
+            --         for k, v in pairs(current_cards) do
+            --             v:Disable()
+            --         end
+            --     end)
+            --     return temp_card
+            -- end
+            -- ------ 计算卡牌位置
+            --     local function Get_Card_Points(temp_card_num)
+            --         local full_start_x = -320
+            --         local full_end_x = 320
+            --         local full_mid_x = (full_start_x + full_end_x) / 2
+            --         local full_width = math.abs(full_end_x - full_start_x)
+            --         local card_y = 30
+                
+            --         local card_num = temp_card_num or 1
+            --         card_num = math.clamp(card_num, 1, 5)
+                
+            --         if card_num == 1 then
+            --             return {Vector3((full_start_x + full_end_x) / 2, card_y, 0)}
+            --         end
+                
+            --         if card_num == 2 then
+            --             local temp_length = full_width / 5
+            --             local ret_table = {}
+            --             table.insert(ret_table, Vector3(full_mid_x - temp_length, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x + temp_length, card_y, 0))
+            --             return ret_table
+            --         end
+                
+            --         if card_num == 3 then
+            --             local delta_x = full_width / 4
+            --             local ret_table = {}
+            --             table.insert(ret_table, Vector3(full_mid_x - delta_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x + delta_x, card_y, 0))
+            --             return ret_table
+            --         end
+                
+            --         if card_num == 4 then
+            --             local delta_x = full_width / 3.5
+            --             local ret_table = {}
+            --             table.insert(ret_table, Vector3(full_mid_x - 1.5 * delta_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x - 0.5 * delta_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x + 0.5 * delta_x, card_y, 0))
+            --             table.insert(ret_table, Vector3(full_mid_x + 1.5 * delta_x, card_y, 0))
+            --             return ret_table
+            --         end
+                
+            --         if card_num == 5 then
+            --             local delta_x = full_width / 4
+            --             local ret_table = {}
+            --             for i = 1, 5, 1 do
+            --                 table.insert(ret_table, Vector3(full_start_x + (i - 1) * delta_x, card_y, 0))
+            --             end
+            --             return ret_table
+            --         end
+                
+            --         return {}
+            --     end
+            
+            -- local card_num = 5
+            -- local ret_points = Get_Card_Points(card_num)
+            -- for i, pt in pairs(ret_points) do
+            --     current_cards[i] = CreateCard("card_black",pt.x,pt.y,i)
+            -- end
+            -- ---- 服务器返回下发的数据，然后更新卡牌正面。
+            -- page.inst:ListenForEvent("hoshino_event.card_display",function(_,_table)
+            --     local card_index = _table.index
+            --     local atlas = _table.atlas
+            --     local image = _table.image
+            --     current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
+            -- end,ThePlayer)
+            
         --------------------------------------------------------------------------------------
         --- 卡牌区。1-5张牌。数据从 ThePlayer.PAD_DATA.cards 获取。靠index返回。做决定，避免有MOD搞事。
             --[[                
                 数据结构: 只有4种卡牌: card_black , card_colourful , card_golden , card_white
                 {
-                    [1] = {atlas,image,card_name},
-                    [2] = {atlas,image,card_name},
-                    [3] = {atlas,image,card_name},
-                    [4] = {atlas,image,card_name},
-                    [5] = {atlas,image,card_name}, -- 卡牌正面
+                    [1] = "card_black",
+                    [2] = "card_colourful",
+                    [3] = "card_golden",
+                    [4] = "card_white",
+                    [5] = {atlas,image}, -- 卡牌正面
                 }
             ]]--
 
@@ -136,9 +215,12 @@ local function page_create(front_root,MainScale)
                         -----------------------------------------------------
 
                         local current_cards = {}
-                        local function CreateCard(x,y,index,atlas,image) --- 卡牌创建
-                            local temp_card = cards_button_box:AddChild(ImageButton())
-                            temp_card:SetTextures(atlas,image,image,image,image,image)
+                        local function CreateCard(card_type,x,y,index,atlas,image) --- 卡牌创建
+                            local png = card_type ..".tex"
+                            local temp_card = cards_button_box:AddChild(ImageButton(
+                                "images/inspect_pad/page_level_up.xml",
+                                png,png,png,png,png
+                            ))
                             temp_card:SetPosition(x,y)
                             temp_card:SetOnClick(function()
                                 --- 通过RPC上传
@@ -147,12 +229,13 @@ local function page_create(front_root,MainScale)
                                 for k, v in pairs(current_cards) do
                                     v:Disable()
                                 end
-                                ThePlayer.PAD_DATA.cards_selectting = false
                             end)
+                            if atlas and image then
+                                temp_card:SetTextures(atlas,image,image,image,image,image)
+                            end
+                            temp_card.card_type = card_type
                             return temp_card
                         end
-
-
                         ------ 计算卡牌位置
                             local function Get_Card_Points(temp_card_num)
                                 local full_start_x = -320
@@ -212,16 +295,16 @@ local function page_create(front_root,MainScale)
                         local card_clickable_flag = true
                         for i, pt in pairs(ret_points) do
                             --- 如果数据结构是卡牌背面index
-                            current_cards[i] = CreateCard(pt.x,pt.y,i,cards_data[i].atlas,cards_data[i].image)
-                            current_cards[i]:SetOnGainFocus(function()
-                                if current_cards[i]:IsEnabled() then
-                                    card_select_box:SetDescByCardName(cards_data[i].card_name)
-                                end
-                            end)
-                            current_cards[i].card_name = cards_data[i].card_name
+                            local card_back = type(cards_data[i]) == "string" and cards_data[i] or "card_black"
+                            local card_front = type(cards_data[i]) == "table" and cards_data[i] or {}
+                            if card_front.atlas and card_front.image then
+                                card_clickable_flag = false
+                                card_select_box:SetDescByCardName(card_front.card_name) -- 设置描述文本
+                            end
+                            current_cards[i] = CreateCard(card_back,pt.x,pt.y,i,card_front.atlas,card_front.image)
                         end
-                        ---- 如果已经选择过了，则不再允许点击
-                        if not ThePlayer.PAD_DATA.cards_selectting then
+                        ---- 如果正面选择过了，则卡牌不可点击。
+                        if not card_clickable_flag then
                             for k, v in pairs(current_cards) do
                                 v:Disable()
                             end                            
@@ -236,6 +319,7 @@ local function page_create(front_root,MainScale)
                             current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
                             card_select_box:SetDescByCardName(card_name) -- 设置描述文本
                         end,ThePlayer)
+
                         return current_cards
                 end
             end
@@ -247,7 +331,7 @@ local function page_create(front_root,MainScale)
                 if current_cards then
                     for index, card in pairs(current_cards) do
                         local refresh_fx = card:AddChild(UIAnim())
-                        if GetCardTypeByName(card.card_name)  == "card_white" then
+                        if card.card_type == "card_white" then
                             refresh_fx:GetAnimState():SetBank("halloween_embers_cold")
                             refresh_fx:GetAnimState():SetBuild("halloween_embers_cold")
                         else
@@ -269,22 +353,11 @@ local function page_create(front_root,MainScale)
                 end
                 local refresh_num = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.refresh_num or ThePlayer.replica.hoshino_cards_sys:Get_refresh_num()
                 refresh_num_text:SetString(tostring(refresh_num))
-                card_desc_text:SetString("     ")
             end,ThePlayer)
         --------------------------------------------------------------------------------------
         --- 当前状态区
             local current_phrase = page:AddChild(Image("images/inspect_pad/page_level_up.xml", "current_phrase.tex"))
             current_phrase:SetPosition(450,50-3)
-        --------------------------------------------------------------------------------------
-        --- 指示器激活
-            -- page.inst:DoPeriodicTask(0.1,function()
-            --     local current_mouse_over_inst = TheInput:GetHUDEntityUnderMouse()  -- 获取鼠标下的实体
-            --     if current_mouse_over_inst then
-            --         -- card_desc_text:SetString(current_mouse_over_inst.card_name)
-            --         print(current_mouse_over_inst,current_mouse_over_inst.card_name)
-            --     end
-
-            -- end)
         --------------------------------------------------------------------------------------
         ---
             return page

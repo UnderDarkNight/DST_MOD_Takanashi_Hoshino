@@ -33,16 +33,7 @@
 --
     local function Check_Has_Selectting_Cards(inst)
         inst.PAD_DATA = inst.PAD_DATA or {}
-        local cards_data = inst.PAD_DATA.cards
-        if type(cards_data) == "table" and #cards_data > 0 then
-            for _,v in pairs(cards_data) do
-                if type(v) == "table" then
-                    return false
-                end
-            end
-            return true
-        end
-        return false
+        return inst.PAD_DATA.cards_selectting
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

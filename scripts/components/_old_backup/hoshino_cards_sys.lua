@@ -5,17 +5,15 @@
     
     数据从 inst.PAD_DATA.cards 获取。靠index返回。
     
-    只有4种卡牌: card_black , card_colourful , card_golden , card_white
-
     界面模块的数据table。 使用RPC下发数据
 
-                数据结构: 
+                数据结构: 只有4种卡牌: card_black , card_colourful , card_golden , card_white
                 {
-                    [1] = {atlas,image,card_name},
-                    [2] = {atlas,image,card_name},
-                    [3] = {atlas,image,card_name},
-                    [4] = {atlas,image,card_name},
-                    [5] = {atlas,image,card_name}, -- 卡牌正面。
+                    [1] = "card_black",
+                    [2] = "card_colourful",
+                    [3] = "card_golden",
+                    [4] = "card_white",
+                    [5] = {atlas,image}, -- 卡牌正面。
                 }
 
 
@@ -46,23 +44,15 @@ local hoshino_cards_sys = Class(function(self, inst)
     ---------------------------------------------------------------------
     --- 卡牌数据
         self.cards_data = nil
-        self.need_to_send_to_client_data = nil
         self:AddOnSaveFn(function()
             self:Set("cards_data",self.cards_data)
-            self:Set("need_to_send_to_client_data",self.need_to_send_to_client_data)
         end)
         self:AddOnLoadFn(function()
             local cards_data = self:Get("cards_data")
-            local need_to_send_to_client_data = self:Get("need_to_send_to_client_data")
             if cards_data then
                 self.cards_data = cards_data
-                self.need_to_send_to_client_data = need_to_send_to_client_data
                 inst:DoTaskInTime(1,function() -- onload 的时候，加载上一次已经开过的卡牌数据
-                    -- self:SendCardsToClient(self.cards_data)
-                    self:SetClientSideData("cards", self.need_to_send_to_client_data)
-                    self:SetClientSideData("cards_selectting",self.selectting)
-                    self:SetClientSideData("refresh_num",self.refresh_num)  --- 下发刷新次数
-
+                    self:SendCardsToClient(self.cards_data)
                 end)
             end
         end)
@@ -79,7 +69,6 @@ local hoshino_cards_sys = Class(function(self, inst)
             ["card_white"] = 100,
             ["card_colourful"] = 1,
             ["card_golden"] = 10,
-            ["card_black"] = 10,
         }
         self:AddOnSaveFn(function()
             self:Set("card_pools",self.CardPools)
@@ -92,14 +81,14 @@ local hoshino_cards_sys = Class(function(self, inst)
         end)
     ---------------------------------------------------------------------
     --- 默认卡包数量
-        self.default_card_num = 3
+        self.defult_card_num = 3
         self:AddOnSaveFn(function()
-            self:Set("default_card_num",self.default_card_num)
+            self:Set("defult_card_num",self.defult_card_num)
         end)
         self:AddOnLoadFn(function()
-            local default_card_num = self:Get("default_card_num")
-            if default_card_num then
-                self.default_card_num = default_card_num
+            local defult_card_num = self:Get("defult_card_num")
+            if defult_card_num then
+                self.defult_card_num = defult_card_num
             end
         end)
     ---------------------------------------------------------------------
@@ -122,18 +111,6 @@ local hoshino_cards_sys = Class(function(self, inst)
                 inst:DoTaskInTime(1,function() -- 刷新冷却1秒
                     temp_refresh_cd_flag = true
                 end)
-            end
-        end)
-    ---------------------------------------------------------------------
-    --- selectting
-        self.selectting = false
-        self:AddOnSaveFn(function()
-            self:Set("selectting",self.selectting)
-        end)
-        self:AddOnLoadFn(function()
-            local selectting = self:Get("selectting")
-            if selectting then
-                self.selectting = selectting
             end
         end)
     ---------------------------------------------------------------------
@@ -199,15 +176,24 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 -- 判断是正在选择，还是已经打开
     function hoshino_cards_sys:IsCardsSelectting()
-        return self.selectting
+        local cards_data = self.cards_data
+        if type(cards_data) ~= "table" then
+            return false
+        end
+        for index_num, current_card_data in pairs(cards_data) do
+            if type(current_card_data) == "table" then
+                return false
+            end
+        end
+        return true
     end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 默认卡包里的卡牌数量
     function hoshino_cards_sys:GetDefaultCardsNum()
-        return self.default_card_num
+        return self.defult_card_num
     end
     function hoshino_cards_sys:DefultCardsNum_Delta(value)
-        self.default_card_num = math.clamp(self.default_card_num + value,1,5)
+        self.defult_card_num = math.clamp(self.defult_card_num + value,1,5)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 概率池修改
@@ -235,31 +221,34 @@ nil,
     function hoshino_cards_sys:GetRPC()
         return self.inst.components.hoshino_com_rpc_event
     end
+    function hoshino_cards_sys:SendCardsToClient(data) --- 界面未打卡的情况下，用这个下发。
+        self:GetRPC():PushEvent("hoshino_event.pad_data_update",{   --- 下发卡牌数据
+            cards = data,
+            refresh_num = self.refresh_num,
+        })
+    end
     function hoshino_cards_sys:SendInspectWarning()
         self:GetRPC():PushEvent("hoshino_event.inspect_hud_warning",true)  -- 下发HUD警告        
     end
     function hoshino_cards_sys:SendPageRedDot() -- 下发红点
-        -- self:GetRPC():PushEvent("hoshino_event.pad_data_update",{   --- 
-        --     button_level_up_red_dot = true,
-        -- })
-        self:SetClientSideData("button_level_up_red_dot",true)
-    end
-    function hoshino_cards_sys:SetClientSideData(index,data)
-        if self.SetClientSideData_Task then
-        
-        else
-            self.SetClientSideData_Task = self.inst:DoTaskInTime(0,function()
-                self:GetRPC():PushEvent("hoshino_event.pad_data_update",self.__temp_client_side_data)
-                self.__temp_client_side_data = nil
-                self.SetClientSideData_Task = nil
-            end)
-        end
-        self.__temp_client_side_data =  self.__temp_client_side_data or {}
-        self.__temp_client_side_data[index] = data
+        self:GetRPC():PushEvent("hoshino_event.pad_data_update",{   --- 
+            button_level_up_red_dot = true,
+        })    
     end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 创建卡牌
-    function hoshino_cards_sys:CreateCardsByPool(num) --- 从概率池中随机抽取卡牌
+    function hoshino_cards_sys:CreateWhiteCards(num)
+        num = num or 1
+        num = math.clamp(num,1,5)
+        local cards = {}
+        for i = 1,num do
+            cards[i] = "card_white"
+        end
+        self:SendCardsToClient(cards)
+        self:SendInspectWarning()
+        self:SendPageRedDot()
+    end
+    function hoshino_cards_sys:CreateCardsByPool(num)
         num = num or 1
         num = math.clamp(num,1,5)
         local cards = {}
@@ -268,123 +257,79 @@ nil,
         end
         return cards
     end
-    function hoshino_cards_sys:CreateCardsByPool_Default(temp_card_num)  --- 默认开卡包
-        if self:IsCardsSelectting() then
-            return
-        end
-        local cards_num = nil
-        if temp_card_num then
-            cards_num = math.clamp(temp_card_num,1,5)
-        else
-            cards_num = self:GetDefaultCardsNum()
-        end
-
-        local cards_back = self:CreateCardsByPool(cards_num or self:GetDefaultCardsNum())  --- 生成背面
-        --- 有诅咒卡的时候，全都显示卡牌背面
-        local has_curse_card = false
-        --- 生成正面
-        local cards_front = {}         
-        for i,card_type in ipairs(cards_back) do
-            local current_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
-            cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
-            cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
-            -- 当前数据结构 cards_front[i] = {atlas,image,card_name}
-            if card_type == "card_black" then
-                has_curse_card = true
-            end
-        end
-
-        self.cards_data = cards_front
-
-        local need_to_send_to_client_data = nil
-        if not has_curse_card then
-            need_to_send_to_client_data = cards_front
-        else
-            need_to_send_to_client_data = {}
-            for i, v in ipairs(cards_back) do
-                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex"}
-            end
-        end
-
-        self.need_to_send_to_client_data = need_to_send_to_client_data
-
-        self.selectting = true
-        self:SetClientSideData("cards",need_to_send_to_client_data)  --- 下发卡牌数据
-        self:SetClientSideData("refresh_num",self.refresh_num)  --- 下发刷新次数
-        self:SetClientSideData("cards_selectting",self.selectting) -- 下发正在选择标记
-        self:SetClientSideData("default_page","level_up") -- 下发默认界面
-        self:SendPageRedDot() -- 下发红点
+    function hoshino_cards_sys:CreateCardsByPool_Default()  --- 默认开卡包
+        local cards = self:CreateCardsByPool(self:GetDefaultCardsNum())
+        self.cards_data = cards
+        self:SendCardsToClient(cards)
+        self:SendInspectWarning()
+        -- self:SendPageRedDot()
     end
     function hoshino_cards_sys:CreateCardsByForceCMD(temp_cards_data)
-        --[[
-            temp_cards_data = {
-                "card_golden",
-                "card_white",
-                "card_colourful",
-                "card_colourful",
-            }
-        ]]--
-
-        local cards_num = math.clamp(#temp_cards_data or {},1,5)
-        local cards_back = {} -- 获取卡组背面
-        for i = 1,cards_num do 
-            cards_back[i] = temp_cards_data[i]
-        end
-        --- 有诅咒卡的时候，全都显示卡牌背面
-        local has_curse_card = false
-        --- 生成正面
-        local cards_front = {}         
-        for i,card_type in ipairs(cards_back) do
-            local current_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
-            cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
-            cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
-            -- 当前数据结构 cards_front[i] = {atlas,image,card_name}
-            if card_type == "card_black" then
-                has_curse_card = true
+        local ret_cards = {}
+        local current_num = 0
+        for i,card_type in ipairs(temp_cards_data) do
+            if card_type and self.CardPools[card_type] and current_num < 5 then
+                table.insert(ret_cards,card_type)
+                current_num = current_num + 1
             end
         end
-        self.cards_data = cards_front
-
-        local need_to_send_to_client_data = nil
-        if not has_curse_card then
-            need_to_send_to_client_data = cards_front
-        else
-            need_to_send_to_client_data = {}
-            for i, v in ipairs(cards_back) do
-                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex"}
-            end
+        if #ret_cards == 0 then
+            return
         end
-        self.need_to_send_to_client_data = need_to_send_to_client_data
-        self.selectting = true
-        self:SetClientSideData("cards",need_to_send_to_client_data)  --- 下发卡牌数据
-        self:SetClientSideData("refresh_num",self.refresh_num)  --- 下发刷新次数
-        self:SetClientSideData("cards_selectting",self.selectting) -- 下发正在选择标记
-        self:SetClientSideData("default_page","level_up") -- 下发默认界面
-        -- self:SendPageRedDot() -- 下发红点
+        self.cards_data = ret_cards
+        self:SendCardsToClient(ret_cards)
+        self:SendInspectWarning()
+        -- self:SendPageRedDot()
+        self:GetRPC():PushEvent("hoshino_event.pad_data_update",{
+            default_page = "level_up",
+        })
+        self.inst:DoTaskInTime(0.5,function()
+            self:GetRPC():PushEvent("hoshino_event.inspect_pad_open_by_force")
+        end)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- refresh 按钮点击后
     function hoshino_cards_sys:Refresh_Clicked()
-        if not self:IsCardsSelectting() or self.refresh_num <= 0 then
+        -- print("refresh clicked")
+        if not self:IsCardsSelectting() then
             return
         end
-        self.selectting = false
-        self:AddRefreshNum(-1)
-        local cards_num = #self.cards_data --- 获取当前卡牌数量
-        self:CreateCardsByPool_Default(cards_num)
-        self:SetClientSideData("default_page",nil) -- 下发默认界面
-        self:SetClientSideData("refresh_num",self.refresh_num)  --- 下发刷新次数
-        self.inst:DoTaskInTime(0.5,function()
-            self:GetRPC():PushEvent("hoshino_event.pad_data_update_by_refresh")            
+        if self.refresh_num <= 0 then
+            return
+        end
+        self.refresh_num = self.refresh_num - 1        
+        -- local cards_data = self:CreateCardsByPool(self:GetDefaultCardsNum())
+        local cards_data = self:CreateCardsByPool(#self.cards_data) --- 保留上一次的卡牌数量
+
+        self:SendCardsToClient(cards_data)
+        self.inst:DoTaskInTime(0.2,function()
+            self:GetRPC():PushEvent("hoshino_event.pad_data_update_by_refresh",{
+                cards = cards_data,
+                refresh_num = self.refresh_num
+            })
         end)
+        self.cards_data = cards_data
+        self:SetForceCardResult(nil) --清除强制结果
     end
     function hoshino_cards_sys:AddRefreshNum(num)
         self.refresh_num = self.refresh_num + num
-        self:SetClientSideData("refresh_num",self.refresh_num)  --- 下发刷新次数
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 强制卡牌结果
-
+    function hoshino_cards_sys:SetForceCardResult(force_result_index)
+        self:Set("force_result_index",force_result_index)
+    end
+    function hoshino_cards_sys:GetForceCardResult()
+        local origin_ret = self:Get("force_result_index")
+        if origin_ret then
+            ----- 检查唯一性。如果已经激活过，则返回nil触发随机结果。
+            local test_fn = self:GetTestFnByCardName(origin_ret)
+            if test_fn and test_fn(self.inst) then
+                return origin_ret
+            end
+        end
+        return nil
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌数据库加载、提取
     function hoshino_cards_sys:CardsInit(force)  -- 初始化函数
@@ -447,13 +392,6 @@ nil,
         end
         return nil
     end
-    function hoshino_cards_sys:GetCardTypeByName(card_name_index)  --- 获取卡牌类型
-        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
-        if all_data[card_name_index] and all_data[card_name_index].back then
-            return all_data[card_name_index].back
-        end
-        return "card_white"
-    end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌点击后
     function hoshino_cards_sys:Card_Clicked(index)
@@ -462,7 +400,6 @@ nil,
             -- print("card not IsCardsSelectting")
             return
         end
-        self.selectting = false
         -- print("crads selet index",index)
 
         local data = self.cards_data or {[1] = "card_white"}
@@ -470,47 +407,60 @@ nil,
         index = math.clamp(index,1,5)
 
         -----------------------------------------------------------------------------------------
-        --- 有诅咒卡
-            local has_black_card = false
-            for k,v in pairs(self.cards_data) do
-                if self:GetCardTypeByName(v.card_name) then
-                    has_black_card = true
-                    break
-                end
-            end
-        -----------------------------------------------------------------------------------------
         --- 抽取卡牌
-            local selected_card_data = self.cards_data[index]
-            local selected_card_name_index = selected_card_data.card_name
-            local selected_card_type = self:GetCardTypeByName(selected_card_name_index)
-            local selected_atlas = selected_card_data.atlas
-            local selected_image = selected_card_data.image
+            ---------------------------------------------------------------
+                    -- local temp_cards_front = {
+                    --     [1] = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+                    --     [2] = {atlas = "images/inspect_pad/card_excample_b.xml" ,image = "card_excample_b.tex"},
+                    --     [3] = {atlas = "images/inspect_pad/card_excample_c.xml" ,image = "card_excample_c.tex"},
+                    --     [4] = {atlas = "images/inspect_pad/card_excample_d.xml" ,image = "card_excample_d.tex"},
+                    -- }
+                    -- local ret_data = temp_cards_front[math.random(#temp_cards_front)]
 
-            print("+++ 玩家激活了卡牌",selected_card_type,selected_card_name_index)
-        -----------------------------------------------------------------------------------------
-        --- 
-            self:AcitveCardFnByIndex(selected_card_name_index)
-            self.inst:PushEvent("hoshino_cards_sys.card_activated",{
-                index = index,
-                card_name = selected_card_name_index,
-                card_type = selected_card_type,
-            })
-        -----------------------------------------------------------------------------------------
-        --- 
-            self:SetClientSideData("cards_selectting",self.selectting) -- 下发正在选择标记
-        -----------------------------------------------------------------------------------------
-        --- 如果是诅咒卡下发展示命令
-            if has_black_card then
-                self.inst:DoTaskInTime(0.2,function()
-                    self:GetRPC():PushEvent("hoshino_event.card_display",{
-                        index = index,
-                        atlas = selected_atlas,
-                        image = selected_image,
-                        card_name = selected_card_name_index
-                    })
-                end)
+                    -- self:GetForceCardResult() -- 获取强制结果
+
+            ---------------------------------------------------------------
+            local ret_data = nil
+            local selected_card_type = data[index] or "card_white"
+            print("抽取了卡牌",index,selected_card_type)
+            ---------------------------------------------------------------
+            local ret_card_name_index = nil
+            local force_card_name_result = self:GetForceCardResult()
+            if force_card_name_result ~= nil then   --- 如果有强制结果
+                local front_data = self:GetCardFrontByIndex(force_card_name_result) or {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"}
+                front_data.card_name = force_card_name_result
+                -- data[index] = front_data
+                ret_data = front_data
+                ret_card_name_index = force_card_name_result
+            else                                    --- 如果没有强制结果
+                local card_type = selected_card_type
+                ret_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
+                print("+++ 随机到了卡牌",ret_card_name_index)
+                local front_data = self:GetCardFrontByIndex(ret_card_name_index) or {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"}
+                front_data.card_name = ret_card_name_index
+                -- data[index] = front_data
+                ret_data = front_data
             end
         -----------------------------------------------------------------------------------------
+        --- 储存数据并下发
+            data[index] = ret_data
+            self.cards_data = data  --- 储存开卡数据
+            self:SendCardsToClient(self.cards_data)  --- 下发卡牌数据
+        -----------------------------------------------------------------------------------------
+        --- 激活卡牌功能函数。
+            self:AcitveCardFnByIndex(ret_card_name_index)
+        -----------------------------------------------------------------------------------------
+        --- 下发展示命令
+            self.inst:DoTaskInTime(0.2,function()
+                self:GetRPC():PushEvent("hoshino_event.card_display",{
+                    index = index,
+                    atlas = ret_data.atlas,
+                    image = ret_data.image,
+                    card_name = ret_data.card_name
+                })
+            end)
+        -----------------------------------------------------------------------------------------
+            self:SetForceCardResult(nil) --清除强制结果
         -----------------------------------------------------------------------------------------
     end
 ------------------------------------------------------------------------------------------------------------------------------

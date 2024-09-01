@@ -244,7 +244,7 @@ local flg,error_code = pcall(function()
         -- ThePlayer.components.hoshino_com_debuff:Add_Death_Snapshot_Protector(1)
     ----------------------------------------------------------------------------------------------------------------
     --- 卡牌创建
-        -- ThePlayer.components.hoshino_cards_sys:DefultCardsNum_Delta(1)
+        ThePlayer.components.hoshino_cards_sys:DefultCardsNum_Delta(1)
         -- ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
         -- ThePlayer.components.hoshino_cards_sys:AddRefreshNum(100)
         -- print(ThePlayer.components.hoshino_cards_sys:GetDefaultCardsNum())
@@ -258,21 +258,30 @@ local flg,error_code = pcall(function()
         --     "card_golden",
         --     "card_golden",
         -- })
+
+        ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
+
+        -- for k, v in pairs(ThePlayer.PAD_DATA) do
+        --     print(k,v)
+        -- end
+        -- for k, current_card_data in pairs(ThePlayer.PAD_DATA.cards) do
+        --     print(current_card_data.card_name)
+        -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer.components.hoshino_com_builder_blocker:SetDailyMax(10)
 
-        local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --     cards = {
-        --         "card_white",
-        --         "card_white",
-        --         "card_white",
-        --     },
-        --     -- force_result_index = "max_health_up_15"
-        -- })
-        item:PushEvent("SetName","3-1")
-        ThePlayer.components.inventory:GiveItem(item)
+        -- local item = SpawnPrefab("hoshino_item_cards_pack")
+        -- -- item:PushEvent("Set",{
+        -- --     cards = {
+        -- --         "card_white",
+        -- --         "card_white",
+        -- --         "card_white",
+        -- --     },
+        -- --     -- force_result_index = "max_health_up_15"
+        -- -- })
+        -- item:PushEvent("SetName","3-1")
+        -- ThePlayer.components.inventory:GiveItem(item)
 
         -- local ret = ThePlayer.components.hoshino_cards_sys:GetCardsIndexByType("card_golden")
         -- print(ret)

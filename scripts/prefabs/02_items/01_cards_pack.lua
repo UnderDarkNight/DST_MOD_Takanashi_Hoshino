@@ -16,7 +16,7 @@
                 "card_colourful",
                 "card_golden",
             },
-            force_result_index = nil, --- 强制赋予开卡结果
+            },
         })
 
 ]]--
@@ -67,7 +67,6 @@
         --- 非空的时候，下发卡牌数据
             local cards = CardsData.cards
             doer.components.hoshino_cards_sys:CreateCardsByForceCMD(cards)
-            doer.components.hoshino_cards_sys:SetForceCardResult(CardsData.force_result_index)  -- 强制结果
             inst:Remove()
         --------------------------------------------------------------------------
         return true
