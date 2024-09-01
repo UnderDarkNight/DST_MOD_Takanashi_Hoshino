@@ -49,6 +49,13 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
         --- 组件动作
            
         --------------------------------------------------------------------
+        --- 02_items
+            ["hoshino_item_cards_pack"] = {
+                ["name"] = "卡牌芯片",
+                ["inspect_str"] = "卡牌芯片",
+                ["recipe_desc"] = "卡牌芯片",                
+            },
+        --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
                 ["name"] = "测试鞋子",

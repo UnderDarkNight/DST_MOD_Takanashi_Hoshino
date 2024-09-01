@@ -20,5 +20,12 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             --     ["recipe_desc"] = " en 测试描述666",
             -- },        
         --------------------------------------------------------------------
+        --- 02_items
+            ["hoshino_item_cards_pack"] = {
+                ["name"] = "Cards Chip",
+                ["inspect_str"] = "Cards Chip",
+                ["recipe_desc"] = "Cards Chip",
+            },
+        --------------------------------------------------------------------
 
 }

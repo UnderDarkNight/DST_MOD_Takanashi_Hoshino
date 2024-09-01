@@ -262,7 +262,7 @@ nil,
         self.cards_data = cards
         self:SendCardsToClient(cards)
         self:SendInspectWarning()
-        self:SendPageRedDot()
+        -- self:SendPageRedDot()
     end
     function hoshino_cards_sys:CreateCardsByForceCMD(temp_cards_data)
         local ret_cards = {}
@@ -298,7 +298,8 @@ nil,
             return
         end
         self.refresh_num = self.refresh_num - 1        
-        local cards_data = self:CreateCardsByPool(self:GetDefaultCardsNum())
+        -- local cards_data = self:CreateCardsByPool(self:GetDefaultCardsNum())
+        local cards_data = self:CreateCardsByPool(#self.cards_data) --- 保留上一次的卡牌数量
 
         self:SendCardsToClient(cards_data)
         self.inst:DoTaskInTime(0.2,function()
@@ -308,9 +309,18 @@ nil,
             })
         end)
         self.cards_data = cards_data
+        self:SetForceCardResult(nil) --清除强制结果
     end
     function hoshino_cards_sys:AddRefreshNum(num)
         self.refresh_num = self.refresh_num + num
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 强制卡牌结果
+    function hoshino_cards_sys:SetForceCardResult(force_result_index)
+        self:Set("force_result_index",force_result_index)
+    end
+    function hoshino_cards_sys:GetForceCardResult()
+        return self:Get("force_result_index")
     end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌点击后
@@ -335,20 +345,27 @@ nil,
                 [4] = {atlas = "images/inspect_pad/card_excample_d.xml" ,image = "card_excample_d.tex"},
             }
             local ret_data = temp_cards_front[math.random(#temp_cards_front)]
+
+            -- self:GetForceCardResult() -- 获取强制结果
         -----------------------------------------------------------------------------------------
-        data[index] = ret_data
-        self:SendCardsToClient(data)  --- 下发卡牌数据
-        self.cards_data = data  --- 储存开卡数据
+        --- 储存数据并下发
+            data[index] = ret_data
+            self:SendCardsToClient(data)  --- 下发卡牌数据
+            self.cards_data = data  --- 储存开卡数据
         -----------------------------------------------------------------------------------------
         --- 激活卡牌功能函数。
         -----------------------------------------------------------------------------------------
-        self.inst:DoTaskInTime(0.2,function()
-            self:GetRPC():PushEvent("hoshino_event.card_display",{ --- 下发展示命令
-                index = index,
-                atlas = ret_data.atlas,
-                image = ret_data.image,
-            })
-        end)
+        --- 下发展示命令
+            self.inst:DoTaskInTime(0.2,function()
+                self:GetRPC():PushEvent("hoshino_event.card_display",{
+                    index = index,
+                    atlas = ret_data.atlas,
+                    image = ret_data.image,
+                })
+            end)
+        -----------------------------------------------------------------------------------------
+            self:SetForceCardResult(nil) --清除强制结果
+        -----------------------------------------------------------------------------------------
     end
 ------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------
