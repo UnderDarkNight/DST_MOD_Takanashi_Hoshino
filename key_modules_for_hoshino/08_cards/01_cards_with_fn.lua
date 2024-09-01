@@ -386,7 +386,7 @@ local cards = {
     --------------------------------------------------------------------------------
     -- 19、【白】【好运】【金卡和彩卡的出现权重都+0.1】【可叠加】
         ["rare_cards_appearance_weight"] = {
-            back = "card_golden",
+            back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
                 return true

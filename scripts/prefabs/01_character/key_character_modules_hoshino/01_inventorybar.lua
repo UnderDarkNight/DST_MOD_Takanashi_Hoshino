@@ -44,7 +44,7 @@
         root.button_close_fn = function()
             TheFrontEnd:PopScreen()
             TheCamera:PopScreenHOffset(root, Get_SCREEN_OFFSET())
-            SetAutopaused(false)
+            -- SetAutopaused(false)
             root:Kill()
         end
 
@@ -57,7 +57,7 @@
         root.inst:ListenForEvent("pad_close",root.button_close_fn)
 
         TheCamera:PushScreenHOffset(root, Get_SCREEN_OFFSET())
-        SetAutopaused(true)
+        -- SetAutopaused(true)
         inst.HUD:OpenScreenUnderPause(root)
 
         inst:PushEvent("hoshino_event.inspect_hud_open",root)
