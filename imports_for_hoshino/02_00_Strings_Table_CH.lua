@@ -53,7 +53,8 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             ["hoshino_item_cards_pack"] = {
                 ["name"] = "卡牌芯片",
                 ["inspect_str"] = "卡牌芯片",
-                ["recipe_desc"] = "卡牌芯片",                
+                ["recipe_desc"] = "卡牌芯片",
+                -- ["level_up_default"] = ""
             },
         --------------------------------------------------------------------
         --- 03_special_equipment

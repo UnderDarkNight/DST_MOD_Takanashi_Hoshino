@@ -327,7 +327,7 @@ nil,
     function hoshino_cards_sys:Card_Clicked(index)
         -- print("card clicked")
         if not self:IsCardsSelectting() then
-            print("card not IsCardsSelectting")
+            -- print("card not IsCardsSelectting")
             return
         end
         print("crads selet index",index)

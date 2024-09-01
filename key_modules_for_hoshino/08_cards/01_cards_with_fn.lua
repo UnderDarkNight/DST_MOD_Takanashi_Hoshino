@@ -457,6 +457,27 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
+    -- 30、【金】【荷鲁斯的抗争】【立即获得8个「升级卡包」，「升级卡包」选项-1】【升级卡包变成1选1的时候从卡池移除，后续会重新进卡池】
+        ["the_rsistance_of_horus"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                if inst.components.hoshino_cards_sys:GetDefaultCardsNum() == 1 then
+                    return false
+                end
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_cards_sys:DefultCardsNum_Delta(-1)
+                for i = 1,8 do
+                    inst.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
+                end
+            end,
+            text = function(inst)
+                return "立即获得8个「升级卡包」，「升级卡包」选项-1"
+            end,
+        },
+    --------------------------------------------------------------------------------
 
 
 }
