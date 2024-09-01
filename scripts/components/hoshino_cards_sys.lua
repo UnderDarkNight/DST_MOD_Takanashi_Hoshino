@@ -320,7 +320,11 @@ nil,
         self:Set("force_result_index",force_result_index)
     end
     function hoshino_cards_sys:GetForceCardResult()
-        return self:Get("force_result_index")
+        local origin_ret = self:Get("force_result_index")
+        if origin_ret then
+            ----- 检查唯一性。如果已经激活过，则返回nil触发随机结果。
+        end
+        return origin_ret
     end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌点击后
