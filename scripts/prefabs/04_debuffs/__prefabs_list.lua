@@ -31,6 +31,7 @@ local prefabs_name_list = {
     "01_01_card_debuff_damage_mult_and_sanity",                             --- 卡牌debuff: 伤害倍数和理智消耗惩罚
     "01_02_card_debuff_health_down_and_coins_up",                           --- 卡牌debuff：生命值下降和金币增加
     "01_03_card_debuff_builder_blocker",                                    --- 卡牌debuff：【诅咒】【凡庸】
+    "01_04_card_debuff_temperature_locker",                                 --- 卡牌debuff：温度锁定器
 
 
 }
