@@ -68,6 +68,7 @@
             local cards = CardsData.cards
             doer.components.hoshino_cards_sys:CreateCardsByForceCMD(cards)
             doer.components.hoshino_cards_sys:SetForceCardResult(CardsData.force_result_index)  -- 强制结果
+            inst:Remove()
         --------------------------------------------------------------------------
         return true
     end

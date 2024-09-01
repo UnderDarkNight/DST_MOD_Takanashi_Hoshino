@@ -260,7 +260,44 @@ local flg,error_code = pcall(function()
         -- })
     ----------------------------------------------------------------------------------------------------------------
     ---
-        ThePlayer.components.hoshino_com_builder_blocker:SetDailyMax(10)
+        -- ThePlayer.components.hoshino_com_builder_blocker:SetDailyMax(10)
+
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        -- item:PushEvent("Set",{
+        --     cards = {
+        --         "card_white",
+        --         "card_white",
+        --         "card_white",
+        --     },
+        --     -- force_result_index = "max_health_up_15"
+        -- })
+        item:PushEvent("SetName","3-1")
+        ThePlayer.components.inventory:GiveItem(item)
+
+        -- local ret = ThePlayer.components.hoshino_cards_sys:GetCardsIndexByType("card_golden")
+        -- print(ret)
+        -- for k, v in pairs(ret) do
+        --     print(k,v)
+        -- end
+        
+        -- local ret = ThePlayer.components.hoshino_cards_sys:SelectRandomCardFromPoolByType("card_golden")
+        -- print(ret)
+
+        -- local function GetCardsDesc()
+        --     -- local cards_data = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.cards
+        --     local cards_data = ThePlayer.components.hoshino_cards_sys.cards_data
+        --     if cards_data then
+        --         for index, data in pairs(cards_data) do
+        --             if type(data) == "table" then
+        --                 -- return data.card_name
+        --                 for k, v in pairs(data) do
+        --                     print(k,v)
+        --                 end
+        --             end
+        --         end
+        --     end
+        -- end
+        -- print("GetCardsDesc",GetCardsDesc())
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

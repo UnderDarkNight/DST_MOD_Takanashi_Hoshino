@@ -45,7 +45,7 @@ local function page_create(front_root,MainScale)
             ))
             button_info:SetPosition(-360,240)
             button_info:SetOnClick(function()
-                print("info button")
+                -- print("info button")
             end)
             button_info.focus_scale = button_info.normal_scale
         --------------------------------------------------------------------------------------
@@ -76,6 +76,28 @@ local function page_create(front_root,MainScale)
             local refresh_num_text = card_select_box:AddChild(Text(CODEFONT,40,"500",{ 126/255 , 133/255 ,143/255 , 1}))
             refresh_num_text:SetPosition(320,245)
             refresh_num_text:SetString(tostring(ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.refresh_num or ThePlayer.replica.hoshino_cards_sys:Get_refresh_num()))
+        --------------------------------------------------------------------------------------
+        --- 卡牌描述文本
+            local card_desc_text = card_select_box:AddChild(Text(CODEFONT,50,"500",{ 0/255 , 0/255 ,0/255 , 1}))
+            card_desc_text:SetPosition(0,-160)
+            card_desc_text:SetString("     ")
+            function card_select_box:SetDescByCardName(card_name)
+                -- card_desc_text:SetString("测试卡牌描述")
+                -- card_desc_text:SetColour({ 0/255 , 0/255 ,0/255 , 1})
+                -- card_desc_text:SetPosition(0,-160)
+                -- card_desc_text:SetSize(50)
+                -- print("卡牌描述加载",card_name)
+                if card_name == nil then
+                    card_desc_text:SetString("测试卡牌描述")
+                end
+                local all_cards_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+                local ret_card_data = all_cards_data[card_name]
+                if ret_card_data and ret_card_data.text then
+                    card_desc_text:SetString(ret_card_data.text(ThePlayer))
+                else
+                    card_desc_text:SetString("未找到卡牌描述")
+                end
+            end
         --------------------------------------------------------------------------------------
         --- 卡牌区（调试）。1-5张牌
             -- local current_cards = {}
@@ -277,6 +299,7 @@ local function page_create(front_root,MainScale)
                             local card_front = type(cards_data[i]) == "table" and cards_data[i] or {}
                             if card_front.atlas and card_front.image then
                                 card_clickable_flag = false
+                                card_select_box:SetDescByCardName(card_front.card_name) -- 设置描述文本
                             end
                             current_cards[i] = CreateCard(card_back,pt.x,pt.y,i,card_front.atlas,card_front.image)
                         end
@@ -284,14 +307,17 @@ local function page_create(front_root,MainScale)
                         if not card_clickable_flag then
                             for k, v in pairs(current_cards) do
                                 v:Disable()
-                            end
+                            end                            
                         end
                         ---- 服务器返回下发的数据，然后更新卡牌正面。
                         cards_button_box.inst:ListenForEvent("hoshino_event.card_display",function(_,_table)
                             local card_index = _table.index
                             local atlas = _table.atlas
                             local image = _table.image
+                            local card_name = _table.card_name
+                            -- print("hoshino_event.card_display",card_name)
                             current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
+                            card_select_box:SetDescByCardName(card_name) -- 设置描述文本
                         end,ThePlayer)
 
                         return current_cards

@@ -323,8 +323,74 @@ nil,
         local origin_ret = self:Get("force_result_index")
         if origin_ret then
             ----- 检查唯一性。如果已经激活过，则返回nil触发随机结果。
+            local test_fn = self:GetTestFnByCardName(origin_ret)
+            if test_fn and test_fn(self.inst) then
+                return origin_ret
+            end
         end
-        return origin_ret
+        return nil
+    end
+------------------------------------------------------------------------------------------------------------------------------
+-- 卡牌数据库加载、提取
+    function hoshino_cards_sys:CardsInit(force)  -- 初始化函数
+        if self.all_cards_data_and_fn and not force then
+            return
+        end
+        self.all_cards_data_and_fn = {}
+        for card_name_index, temp_data in pairs(TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}) do
+            local card_type = temp_data.back
+            self.all_cards_data_and_fn[card_type] = self.all_cards_data_and_fn[card_type] or {}
+            self.all_cards_data_and_fn[card_type][card_name_index] = temp_data
+        end
+    end
+    function hoshino_cards_sys:GetCardsIndexByType(card_type)   --- 获取通过test函数的卡牌
+        self:CardsInit()
+        if self.all_cards_data_and_fn[card_type] then
+            local ret_indexs = {}
+            for card_name_index, single_card_data in pairs(self.all_cards_data_and_fn[card_type]) do
+                local test_fn = single_card_data.test
+                if test_fn and test_fn(self.inst) then
+                    table.insert(ret_indexs,card_name_index)
+                end
+            end
+            return ret_indexs
+        end
+    end
+    function hoshino_cards_sys:GetCardFrontByIndex(card_name_index)  --- 获取卡牌的正面数据
+        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+        if all_data[card_name_index] then
+            return all_data[card_name_index].front
+        end
+        return nil
+    end
+    function hoshino_cards_sys:GetCardBackByIndex(card_name_index)  --- 获取卡牌的背面数据
+        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+        if all_data[card_name_index] then
+            return all_data[card_name_index].back
+        end
+        return nil
+    end
+    function hoshino_cards_sys:AcitveCardFnByIndex(card_name_index)  --- 获取卡牌的激活函数
+        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+        if all_data[card_name_index] and all_data[card_name_index].fn then
+            all_data[card_name_index].fn(self.inst)
+            print("+++ 成功激活卡牌",card_name_index)
+        end
+    end
+    function hoshino_cards_sys:SelectRandomCardFromPoolByType(card_type)  --- 从卡池中随机抽取一张卡牌
+        local all_cards_index = self:GetCardsIndexByType(card_type)
+        if all_cards_index == nil then
+            return
+        end
+        local ret_card_index = all_cards_index[math.random(#all_cards_index)]
+        return ret_card_index
+    end
+    function hoshino_cards_sys:GetTestFnByCardName(card_name_index)  --- 获取卡牌的test函数
+        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+        if all_data[card_name_index] and all_data[card_name_index].test then
+            return all_data[card_name_index].test
+        end
+        return nil
     end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌点击后
@@ -334,7 +400,7 @@ nil,
             -- print("card not IsCardsSelectting")
             return
         end
-        print("crads selet index",index)
+        -- print("crads selet index",index)
 
         local data = self.cards_data or {[1] = "card_white"}
         index = index or 1
@@ -342,22 +408,47 @@ nil,
 
         -----------------------------------------------------------------------------------------
         --- 抽取卡牌
-            local temp_cards_front = {
-                [1] = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
-                [2] = {atlas = "images/inspect_pad/card_excample_b.xml" ,image = "card_excample_b.tex"},
-                [3] = {atlas = "images/inspect_pad/card_excample_c.xml" ,image = "card_excample_c.tex"},
-                [4] = {atlas = "images/inspect_pad/card_excample_d.xml" ,image = "card_excample_d.tex"},
-            }
-            local ret_data = temp_cards_front[math.random(#temp_cards_front)]
+            ---------------------------------------------------------------
+                    -- local temp_cards_front = {
+                    --     [1] = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+                    --     [2] = {atlas = "images/inspect_pad/card_excample_b.xml" ,image = "card_excample_b.tex"},
+                    --     [3] = {atlas = "images/inspect_pad/card_excample_c.xml" ,image = "card_excample_c.tex"},
+                    --     [4] = {atlas = "images/inspect_pad/card_excample_d.xml" ,image = "card_excample_d.tex"},
+                    -- }
+                    -- local ret_data = temp_cards_front[math.random(#temp_cards_front)]
 
-            -- self:GetForceCardResult() -- 获取强制结果
+                    -- self:GetForceCardResult() -- 获取强制结果
+
+            ---------------------------------------------------------------
+            local ret_data = nil
+            local selected_card_type = data[index] or "card_white"
+            print("抽取了卡牌",index,selected_card_type)
+            ---------------------------------------------------------------
+            local ret_card_name_index = nil
+            local force_card_name_result = self:GetForceCardResult()
+            if force_card_name_result ~= nil then   --- 如果有强制结果
+                local front_data = self:GetCardFrontByIndex(force_card_name_result) or {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"}
+                front_data.card_name = force_card_name_result
+                -- data[index] = front_data
+                ret_data = front_data
+                ret_card_name_index = force_card_name_result
+            else                                    --- 如果没有强制结果
+                local card_type = selected_card_type
+                ret_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
+                print("+++ 随机到了卡牌",ret_card_name_index)
+                local front_data = self:GetCardFrontByIndex(ret_card_name_index) or {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"}
+                front_data.card_name = ret_card_name_index
+                -- data[index] = front_data
+                ret_data = front_data
+            end
         -----------------------------------------------------------------------------------------
         --- 储存数据并下发
             data[index] = ret_data
-            self:SendCardsToClient(data)  --- 下发卡牌数据
             self.cards_data = data  --- 储存开卡数据
+            self:SendCardsToClient(self.cards_data)  --- 下发卡牌数据
         -----------------------------------------------------------------------------------------
         --- 激活卡牌功能函数。
+            self:AcitveCardFnByIndex(ret_card_name_index)
         -----------------------------------------------------------------------------------------
         --- 下发展示命令
             self.inst:DoTaskInTime(0.2,function()
@@ -365,6 +456,7 @@ nil,
                     index = index,
                     atlas = ret_data.atlas,
                     image = ret_data.image,
+                    card_name = ret_data.card_name
                 })
             end)
         -----------------------------------------------------------------------------------------
