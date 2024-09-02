@@ -37,6 +37,7 @@
         doer:DoTaskInTime(0.5,function()
             GetRPC(doer):PushEvent("hoshino_event.inspect_pad_open_by_force")
         end)
+        doer.components.hoshino_cards_sys:SendInspectWarning()
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- workable 安装

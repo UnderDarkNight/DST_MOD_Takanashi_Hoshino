@@ -34,7 +34,7 @@ local cards = {
                 print("test_card_black")
             end,
             text = function(inst)
-                return "test_card_black"
+                return "测试用的空黑卡"
             end,
         },
         ["test_card_colourful"] = {
@@ -47,7 +47,7 @@ local cards = {
                 print("test_card_colourful")
             end,
             text = function(inst)
-                return "test_card_colourful"
+                return "测试用的空彩卡"
             end,
         },
         ["test_card_golden"] = {
@@ -60,7 +60,7 @@ local cards = {
                 print("test_card_golden")
             end,
             text = function(inst)
-                return "test_card_golden"
+                return "测试用的空金卡"
             end,
         },
         ["test_card_white"] = {
@@ -73,7 +73,7 @@ local cards = {
                 print("test_card_white")
             end,
             text = function(inst)
-                return "test_card_white"
+                return "测试用的空白卡"
             end,
         },
     --------------------------------------------------------------------------------
@@ -605,7 +605,7 @@ local cards = {
                 inst.components.inventory:GiveItem(item)
             end,
             text = function(inst)
-                return "恒温5天"
+                return "赠送1包金色3选1"
             end,
         },
     --------------------------------------------------------------------------------

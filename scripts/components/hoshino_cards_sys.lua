@@ -315,34 +315,89 @@ nil,
         self:SetClientSideData("default_page","level_up") -- 下发默认界面
         self:SendPageRedDot() -- 下发红点
     end
-    function hoshino_cards_sys:CreateCardsByForceCMD(temp_cards_data)
-        --[[
+    function hoshino_cards_sys:CreateCardsByForceCMD(temp_cards_data)  --- 靠卡背 和 卡牌名字，强制生成卡组
+        --[[  自动识别卡牌背面和正面。如果是正面，则强制结果。如果是背面，则随机抽取
             temp_cards_data = {
-                "card_golden",
+                "card_golden" or card_name_index,
                 "card_white",
                 "card_colourful",
                 "card_colourful",
             }
         ]]--
-
-        local cards_num = math.clamp(#temp_cards_data or {},1,5)
-        local cards_back = {} -- 获取卡组背面
-        for i = 1,cards_num do 
-            cards_back[i] = temp_cards_data[i]
-        end
-        --- 有诅咒卡的时候，全都显示卡牌背面
-        local has_curse_card = false
-        --- 生成正面
-        local cards_front = {}         
-        for i,card_type in ipairs(cards_back) do
-            local current_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
-            cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
-            cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
-            -- 当前数据结构 cards_front[i] = {atlas,image,card_name}
-            if card_type == "card_black" then
-                has_curse_card = true
+        -------------------------------------------------------------------------------------------
+        -- 
+            if self:IsCardsSelectting() then
+                return
             end
-        end
+        -------------------------------------------------------------------------------------------
+        --[[ AI 生成代码：
+                要在Lua中打乱两个表（cards_back和cards_front），
+                同时保持它们之间的一一对应关系，你可以使用Fisher-Yates洗牌算法（也称为Knuth shuffle）。
+                这个算法可以有效地随机化数组中的元素顺序，并且保证每个元素有均等的机会出现在任何位置上。
+            ]]--
+            local function shuffleCorrespondingPairs(cardsBack, cardsFront)
+                -- 确保两个表长度相同并且都多于一个元素
+                local n = #cardsBack
+                assert(n == #cardsFront and n > 1, "Both tables must have the same length and more than one element.")
+                
+                for i = n - 1, 1, -1 do
+                    local j = math.random(i)
+                    
+                    -- 交换cardsBack[i+1]和cardsBack[j+1]
+                    cardsBack[i+1], cardsBack[j+1] = cardsBack[j+1], cardsBack[i+1]
+                    
+                    -- 同样交换cardsFront[i+1]和cardsFront[j+1]
+                    cardsFront[i+1], cardsFront[j+1] = cardsFront[j+1], cardsFront[i+1]
+                end
+            end            
+            -- -- 示例使用
+            -- local cardsBack = {"back1"}
+            -- local cardsFront = {"front1"}
+            
+            -- shuffleCorrespondingPairs(cardsBack, cardsFront)
+            
+            -- -- 输出结果
+            -- print("Shuffled Cards Back:", unpack(cardsBack))
+            -- print("Shuffled Cards Front:", unpack(cardsFront))
+        -------------------------------------------------------------------------------------------
+        ---
+            local IsBack = {
+                ["card_black"] = true,
+                ["card_golden"] = true,
+                ["card_white"] = true,
+                ["card_colourful"] = true,
+            }
+            --- 有诅咒卡的时候，全都显示卡牌背面
+            local has_curse_card = false
+            local cards_num = math.clamp(#temp_cards_data or {},1,5)
+            local cards_back = {} -- 卡组背面
+            local cards_front = {} -- 卡组正面
+            for i = 1,cards_num do
+                local temp_cmd = temp_cards_data[i]
+                if IsBack[temp_cmd] then -- 背面则随机从卡池获取一张卡
+                    local card_type = temp_cmd
+                    cards_back[i] = card_type
+                    local current_card_name_index = self:SelectRandomCardFromPoolByType(card_type) -- 按类型从卡池抽一张
+                    cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
+                    cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
+                else
+                    local current_card_name_index = temp_cmd
+                    cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
+                    cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
+                    cards_back[i] = self:GetCardBackByIndex(current_card_name_index)  --- 获取卡牌背面数据
+                end
+            end
+
+            shuffleCorrespondingPairs(cards_back, cards_front) -- 洗牌。强制命令下的牌组必须洗牌保证随机性。
+
+            --- 检查黑卡
+            for k, v in pairs(cards_back) do
+                if v == "card_black" then
+                    has_curse_card = true
+                    break
+                end
+            end
+        -------------------------------------------------------------------------------------------
         self.cards_data = cards_front
 
         local need_to_send_to_client_data = nil
@@ -362,6 +417,7 @@ nil,
         self:SetClientSideData("default_page","level_up") -- 下发默认界面
         -- self:SendPageRedDot() -- 下发红点
     end
+
 ------------------------------------------------------------------------------------------------------------------------------
 --- refresh 按钮点击后
     function hoshino_cards_sys:Refresh_Clicked()
@@ -495,6 +551,8 @@ nil,
                 card_name = selected_card_name_index,
                 card_type = selected_card_type,
             })
+            self.cards_data = nil
+            self.need_to_send_to_client_data = nil
         -----------------------------------------------------------------------------------------
         --- 
             self:SetClientSideData("cards_selectting",self.selectting) -- 下发正在选择标记

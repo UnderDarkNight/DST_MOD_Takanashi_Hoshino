@@ -244,22 +244,22 @@ local flg,error_code = pcall(function()
         -- ThePlayer.components.hoshino_com_debuff:Add_Death_Snapshot_Protector(1)
     ----------------------------------------------------------------------------------------------------------------
     --- 卡牌创建
-        ThePlayer.components.hoshino_cards_sys:DefultCardsNum_Delta(1)
+        -- ThePlayer.components.hoshino_cards_sys:DefultCardsNum_Delta(1)
         -- ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
         -- ThePlayer.components.hoshino_cards_sys:AddRefreshNum(100)
         -- print(ThePlayer.components.hoshino_cards_sys:GetDefaultCardsNum())
         -- print(ThePlayer.components.hoshino_cards_sys:IsCardsSelectting())
 
-        -- ThePlayer.components.hoshino_cards_sys:CreateCardsByForceCMD({
-        --     "card_golden",
-        --     "card_white",
-        --     "card_colourful",
-        --     "card_colourful",
-        --     "card_golden",
-        --     "card_golden",
-        -- })
+        ThePlayer.components.hoshino_cards_sys:CreateCardsByForceCMD({
+            "test_card_black",
+            -- "card_white",
+            "card_colourful",
+            "card_colourful",
+            "card_golden",
+            "card_golden",
+        })
 
-        ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
+        -- ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
 
         -- for k, v in pairs(ThePlayer.PAD_DATA) do
         --     print(k,v)

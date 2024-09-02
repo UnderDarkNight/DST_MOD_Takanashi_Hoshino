@@ -148,6 +148,8 @@ local function page_create(front_root,MainScale)
                                     v:Disable()
                                 end
                                 ThePlayer.PAD_DATA.cards_selectting = false
+                                ThePlayer.PAD_DATA.cards = nil
+                                ThePlayer.PAD_DATA.button_level_up_red_dot = nil
                             end)
                             return temp_card
                         end
