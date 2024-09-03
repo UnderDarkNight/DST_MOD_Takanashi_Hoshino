@@ -87,7 +87,51 @@ local cards = {
                 inst.components.hoshino_cards_sys:Set("card_black.sleeping_bag_health_blocker",true)
             end,
             text = function(inst)
-                return "从食物中获取的三维增加量减半，扣除的不减"
+                return "无法通过睡觉恢复生命值"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 4、【诅咒】【凡庸】【每天最多只能制作10个物品】【从诅咒池移除】
+        ["mediocre"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_builder_blocker"
+                for i = 1, 5, 1 do
+                    local buff_inst = inst:GetDebuff(debuff_prefab)
+                    if buff_inst and buff_inst:IsValid() then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_builder_blocker"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "每天最多只能制作10个物品"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 5、【诅咒】【键山雏】【白卡的权重提升5】【可叠加】
+        ["keyhole_mountain_chick"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_white",5)
+            end,
+            text = function(inst)
+                return "白卡的权重提升5"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
