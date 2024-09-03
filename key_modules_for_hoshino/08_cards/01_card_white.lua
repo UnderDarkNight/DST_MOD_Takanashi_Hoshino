@@ -245,6 +245,238 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 11、【白】【邪咒】【基础攻击伤害+10%，然后获取debuff : 2天内San掉落的时候，同数值掉落血量】【debuff时间叠加】【攻击倍率也叠加】
+        ["damage_mult_up_10_percent_and_sanity_down"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.1)
+                local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+                inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
+            end,
+            text = function(inst)
+                return "攻击伤害+10%\n接下来两天内每次失去san时会流失等量生命"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 12、【白】【荆棘】【每次受到攻击时候，对伤害来源直接反伤3点（任何玩家都不会触发这个）】【可叠加】
+        ["counter_damage"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Counter_Damage(3)
+            end,
+            text = function(inst)
+                return "每次受到攻击时，对伤害来源造成3点伤害"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 13、【白】【节约风气】【使用专属武器「荷鲁斯之眼（枪）」的时候，有5%概率不消耗耐久，最高100%概率】【满概率后从卡池移除】
+        ["the_eye_of_horus_finiteuses_down_block"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 1
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.05)
+            end,
+            text = function(inst)
+                return "使用荷鲁斯之眼时有5%的概率不消耗耐久"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 14、【白】【白日梦】【选择之后传送到一个位置并开始睡觉，每一秒获得9点「信用点」，直到醒来】
+        ["sleep_and_coins"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                ----------------------------------------------------------------------------------------------------------
+                --- 随机传送一个位置
+                    local function GetRandomPos()
+                        local centers = {}
+                        for i, node in ipairs(TheWorld.topology.nodes) do
+                            if TheWorld.Map:IsPassableAtPoint(node.x, 0, node.y) and node.type ~= NODE_TYPE.SeparatedRoom then
+                                table.insert(centers, {x = node.x, z = node.y})
+                            end
+                        end
+                        if #centers > 0 then
+                            local pos = centers[math.random(#centers)]
+                            return Vector3(pos.x, 0, pos.z)
+                        else
+                            --- 上面失败，则返回绚丽之门位置
+                            local door = TheSim:FindFirstEntityWithTag("multiplayer_portal")
+                            if door then
+                                return Vector3(door.Transform:GetWorldPosition())
+                            end
+                        end
+                        return nil
+                    end
+                    local pos = GetRandomPos()
+                    if pos then
+                        inst.components.playercontroller:RemotePausePrediction(3)   --- 暂停远程预测。
+                        inst.Transform:SetPosition(pos.x,0,pos.z)
+                    end
+                ----------------------------------------------------------------------------------------------------------
+                --- 添加BUFF
+                    local debuff_prefab = "hoshino_card_debuff_sleep_and_coins"
+                    while true do
+                        local debuff_inst = inst:GetDebuff(debuff_prefab)
+                        if debuff_inst and debuff_inst:IsValid() then
+                            break
+                        end
+                        inst:AddDebuff(debuff_prefab,debuff_prefab)
+                    end
+                ----------------------------------------------------------------------------------------------------------
+                --- 来自 曼德拉草(mandrake) 的代码。
+                    local function start_sleep(inst)
+                        --- 来自 曼德拉草(mandrake) 的代码。
+                        local SLEEPTARGETS_CANT_TAGS = { "playerghost", "FX", "DECOR", "INLIMBO" }
+                        local SLEEPTARGETS_ONEOF_TAGS = { "sleeper", "player" }
+                        local function doareasleep(inst, range, time)
+                            local x, y, z = inst.Transform:GetWorldPosition()
+                            local ents = TheSim:FindEntities(x, y, z, range, nil, SLEEPTARGETS_CANT_TAGS, SLEEPTARGETS_ONEOF_TAGS)
+                            local canpvp = not inst:HasTag("player") or TheNet:GetPVPEnabled() or true
+                            for i, v in ipairs(ents) do
+                                if (v == inst or canpvp or not v:HasTag("player")) and
+                                    not (v.components.freezable ~= nil and v.components.freezable:IsFrozen()) and
+                                    not (v.components.pinnable ~= nil and v.components.pinnable:IsStuck()) and
+                                    not (v.components.fossilizable ~= nil and v.components.fossilizable:IsFossilized()) then
+                                    local mount = v.components.rider ~= nil and v.components.rider:GetMount() or nil
+                                    if mount ~= nil then
+                                        mount:PushEvent("ridersleep", { sleepiness = 7, sleeptime = time + math.random() })
+                                    end
+                                    if v:HasTag("player") then
+                                        v:PushEvent("yawn", { grogginess = 4, knockoutduration = time + math.random() })
+                                    elseif v.components.sleeper ~= nil then
+                                        v.components.sleeper:AddSleepiness(7, time + math.random())
+                                    elseif v.components.grogginess ~= nil then
+                                        v.components.grogginess:AddGrogginess(4, time + math.random())
+                                    else
+                                        v:PushEvent("knockedout")
+                                    end
+                                end
+                            end
+                        end
+                        doareasleep(inst,1,480)
+                    end
+                    start_sleep(inst)
+                ----------------------------------------------------------------------------------------------------------
+
+            end,
+            text = function(inst)
+                return "随机传送到一个位置然后睡觉\n每一秒获得9点「信用点」，直到醒来"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 15、【白】【避重就轻】【受到伤害的时候，有5%的概率不损失盔甲的耐久，最高100%】【满概率后从卡池移除】
+        ["armor_down_blocker_percent"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Armor_Down_Blocker_Percent() < 1
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Armor_Down_Blocker_Percent(0.05)
+            end,
+            text = function(inst)
+                return "受伤时有5%的概率不损失盔甲耐久"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 16、【白】【防暴盾牌】【获得1点位面防御】【可叠加】
+        ["armor_planar_defense"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Planar_Defense(1)
+            end,
+            text = function(inst)
+                return "获得1点位面防御"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 17、【白】【尤里卡】【获得一个随机物品蓝图】
+        ["random_blueprint"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local item = SpawnPrefab("blueprint")
+                inst.components.inventory:GiveItem(item)
+            end,
+            text = function(inst)
+                return "获得一个随机物品蓝图"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 19、【白】【好运】【金卡和彩卡的出现权重都+0.1】【可叠加】
+        ["rare_cards_appearance_weight"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_colourful",0.1)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_golden",0.1)
+            end,
+            text = function(inst)
+                return "金卡和彩卡的出现权重都+0.1"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 20、【白】【汲取】【从食物获取的「正向」三维x2的同时，增加厨子的挑食机制】【从卡池移除】
+        ["warly_eater_modules_unlock"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_data:Get("Player_Unlocked_Warly_Eater_Modules") ~= true
+            end,
+            fn = function(inst)
+                inst:PushEvent("player_unlocked_warly_eater_modules")
+            end,
+            text = function(inst)
+                return "从食物获取的「正向」三维x2的同时，增加厨子的挑食机制"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 21、【白】【巧匠】【每次制作物品的时候，有1%概率返还制作材料，最高50%】【满概率后从卡池移除】
+        ["probability_of_returning_full_recipe"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Probability_Of_Returning_Recipe() < 0.5
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Probability_Of_Returning_Recipe(0.01)
+            end,
+            text = function(inst)
+                return "每次制作物品的时候，有1%概率返还制作材料，最高50%"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

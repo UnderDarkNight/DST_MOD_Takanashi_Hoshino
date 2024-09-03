@@ -275,37 +275,13 @@ local flg,error_code = pcall(function()
         item:PushEvent("Set",{
             cards = {
                 "card_golden",
-                "overdraft",
+                "sleep_and_coins",
                 "card_white",
             },
         })
         -- item:PushEvent("SetName","3-1")
         ThePlayer.components.inventory:GiveItem(item)
 
-        -- local ret = ThePlayer.components.hoshino_cards_sys:GetCardsIndexByType("card_golden")
-        -- print(ret)
-        -- for k, v in pairs(ret) do
-        --     print(k,v)
-        -- end
-        
-        -- local ret = ThePlayer.components.hoshino_cards_sys:SelectRandomCardFromPoolByType("card_golden")
-        -- print(ret)
-
-        -- local function GetCardsDesc()
-        --     -- local cards_data = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.cards
-        --     local cards_data = ThePlayer.components.hoshino_cards_sys.cards_data
-        --     if cards_data then
-        --         for index, data in pairs(cards_data) do
-        --             if type(data) == "table" then
-        --                 -- return data.card_name
-        --                 for k, v in pairs(data) do
-        --                     print(k,v)
-        --                 end
-        --             end
-        --         end
-        --     end
-        -- end
-        -- print("GetCardsDesc",GetCardsDesc())
     ----------------------------------------------------------------------------------------------------------------
     --- 
         -- local inst = ThePlayer
@@ -317,6 +293,12 @@ local flg,error_code = pcall(function()
         --     end
         --     inst:AddDebuff(debuff_prefab,debuff_prefab)
         -- end
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        -- local inst = ThePlayer
+        -- -- inst:PushEvent("yawn", { grogginess = 4, knockoutduration = 10 + math.random() })
+
+        -- print(inst.sg:__tostring())
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
