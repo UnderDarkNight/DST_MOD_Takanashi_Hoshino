@@ -351,6 +351,29 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 14、【诅咒】【咒印】【你无法穿戴任何装备，持续2天】【时间叠加】
+        ["equipment_blocker"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_equipment_blocker"
+                inst.components.hoshino_com_debuff:Add(debuff_prefab,2*480)
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "你无法穿戴任何装备，持续2天"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 }
