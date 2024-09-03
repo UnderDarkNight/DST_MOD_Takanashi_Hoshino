@@ -220,7 +220,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 【诅咒】【定数】【血量的最高上限为1】【从诅咒池移除】
+    --- 9、【诅咒】【定数】【血量的最高上限为1】【从诅咒池移除】
         ["max_health_1"] = {
             back = "card_black",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
@@ -275,6 +275,35 @@ local cards = {
             end,
             text = function(inst)
                 return "每到晚上，立马原地睡觉"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 11、【诅咒】【斗争之心】【你只能从BOSS生物中获取经验值】【从诅咒池移除】
+        ["only_epic_exp"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "只能从BOSS生物中获取经验值"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

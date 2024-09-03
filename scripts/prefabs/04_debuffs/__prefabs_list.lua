@@ -36,6 +36,7 @@ local prefabs_name_list = {
     "01_06_card_debuff_bloodshed",                                          --- 卡牌debuff：流血
     "01_07_card_debuff_max_health_1",                                       --- 卡牌debuff：最大血量1
     "01_08_card_debuff_force_night_sleep",                                  --- 卡牌debuff：强制夜晚睡眠
+    "01_09_card_debuff_exp_and_epic",                                       --- 卡牌debuff：只能从史诗怪物身上获得经验
 
 
 }
