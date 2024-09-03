@@ -59,6 +59,9 @@ local hoshino_com_shop = Class(function(self, inst)
             end
         end)
     --------------------------------------------------------------
+    -- 价格倍增器
+        self.price_multiplier = SourceModifierList(self.inst)
+    --------------------------------------------------------------
 end,
 nil,
 {
@@ -131,6 +134,12 @@ nil,
             end)    
         end
         self.inst.HOSHINO_SHOP[index] = data
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 价格倍增器计算(向上取整)
+    function hoshino_com_shop:FixPriceWithMultiplier(origin_price)
+        local multiplier = self.price_multiplier:Get()
+        return math.ceil(origin_price * multiplier)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 金币变更，注意unit32上限。

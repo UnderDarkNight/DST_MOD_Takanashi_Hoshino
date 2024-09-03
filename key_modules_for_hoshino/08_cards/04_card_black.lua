@@ -153,6 +153,44 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 7、【诅咒】【泛社会悖论】【商店物品售价+5%（向上取整）】【可叠加】
+        ["shop_price_increase"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                --------------------------------------------------------------------------------------------
+                --- 设置倍增参数（包括初始化）
+                    local current = inst.components.hoshino_com_shop:Add("black_card_price_mult",0)
+                    --- 初始化
+                    if current == 0 then
+                        current = 1
+                    end
+                    current = current + 0.05
+                    inst.components.hoshino_com_shop:Set("black_card_price_mult",current)
+                --------------------------------------------------------------------------------------------
+                --- 没debuff就上debuff
+                    local debuff_prefab = "hoshino_card_debuff_price_mult"
+                    while true do
+                        local debuff_inst = inst:GetDebuff(debuff_prefab)
+                        if debuff_inst and debuff_inst:IsValid() then
+                            break
+                        end
+                        inst:AddDebuff(debuff_prefab,debuff_prefab)
+                    end
+                --------------------------------------------------------------------------------------------
+                --- 更新debuff的参数
+                    inst:PushEvent("hoshino_event.black_card_price_mult_update")
+                --------------------------------------------------------------------------------------------
+
+            end,
+            text = function(inst)
+                return "商店物品售价+5%（向上取整）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 }
