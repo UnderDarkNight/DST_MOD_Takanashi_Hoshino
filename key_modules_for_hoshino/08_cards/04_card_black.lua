@@ -318,7 +318,36 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Hunger_Down_Mult_2x_Times(1)
             end,
             text = function(inst)
-                return "饥饿值自然掉速进行2的X次幂"
+                return "饥饿值自然掉速进行2的X次幂\n当前X值+1"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 13、【诅咒】【黑星】【你的San永久为0】【从诅咒池移除】
+        ["sanity_ever_zero"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "San永久为0"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
