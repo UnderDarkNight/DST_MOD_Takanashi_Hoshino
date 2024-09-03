@@ -276,7 +276,7 @@ local flg,error_code = pcall(function()
             cards = {
                 -- "card_golden",
                 "summon_rocky",
-                -- "test_card_white",
+                "summon_tumbleweed",
                 -- "test_card_white",
                 -- "test_card_white",
             },

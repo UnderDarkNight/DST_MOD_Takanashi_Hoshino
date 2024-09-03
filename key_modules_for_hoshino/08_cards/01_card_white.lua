@@ -492,6 +492,31 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 23、【白】【滚草成灾】【立刻在玩家身边生成5个风滚草】
+        ["summon_tumbleweed"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local points = TUNING.HOSHINO_FNS:GetSurroundPoints({
+                    target = inst,
+                    range = 2,
+                    num = 5,
+                })
+                if points then
+                    for _,pt in ipairs(points) do
+                        SpawnPrefab("tumbleweed").Transform:SetPosition(pt.x,0,pt.z)
+                    end
+                end
+                inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_force_close")
+            end,
+            text = function(inst)
+                return "立刻在玩家身边生成5个风滚草"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

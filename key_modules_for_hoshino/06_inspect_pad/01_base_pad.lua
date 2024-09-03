@@ -76,7 +76,12 @@ AddPrefabPostInit(
                 local button_close_focus_scale = 1.02
                 button_close.focus_scale = {button_close_focus_scale,button_close_focus_scale,button_close_focus_scale}
             -----------------------------------------------------------------------------------
-            ---
+            --- 远程强制关闭界面
+                root.inst:ListenForEvent("hoshino_event.inspect_hud_force_close",function()
+                    front_root.inst:PushEvent("pad_close")
+                end,ThePlayer)
+            -----------------------------------------------------------------------------------
+            --- 主页
                 local button_main_page = root:AddChild(ImageButton(
                     "images/inspect_pad/inspect_pad.xml",
                     "button_main_page.tex",
@@ -103,7 +108,7 @@ AddPrefabPostInit(
                     button_main_page_red_dot:Hide()
                 end
             -----------------------------------------------------------------------------------
-            ---
+            --- 升级页面
                 local button_level_up = root:AddChild(ImageButton(
                     "images/inspect_pad/inspect_pad.xml",
                     "button_level_up.tex",
@@ -131,7 +136,7 @@ AddPrefabPostInit(
                     button_level_up_red_dot:Hide()
                 end
             -----------------------------------------------------------------------------------
-            ---
+            --- 角色页面
                 local button_character = root:AddChild(ImageButton(
                     "images/inspect_pad/inspect_pad.xml",
                     "button_character.tex",
@@ -186,7 +191,7 @@ AddPrefabPostInit(
                     front_root.inst:PushEvent("pad_close")
                 end,inst)
             -----------------------------------------------------------------------------------
-            ---
+            --- 默认展示页面和切换按钮
                 local pages_create_fn = {
                     ["character"] = TUNING.HOSHINO_INSPECT_PAD_FNS["character"],
                     ["level_up"] = TUNING.HOSHINO_INSPECT_PAD_FNS["level_up"],
