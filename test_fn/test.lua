@@ -309,34 +309,15 @@ local flg,error_code = pcall(function()
         -- print("GetCardsDesc",GetCardsDesc())
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        local front_root = ThePlayer.HUD
-
-        if front_root.test_mask then
-            front_root.test_mask:Kill()
+        local inst = ThePlayer
+        local debuff_prefab = "hoshino_card_debuff_bloodshed"
+        while true do
+            local debuff_inst = inst:GetDebuff(debuff_prefab)
+            if debuff_inst and debuff_inst:IsValid() then
+                break
+            end
+            inst:AddDebuff(debuff_prefab,debuff_prefab)
         end
-
-        --------------------------------------------------------------------------------
-        --- 根节点
-            local root = front_root:AddChild(Widget())
-            root:SetHAnchor(0) -- 设置原点x坐标位置，0、1、2分别对应屏幕中、左、右
-            root:SetVAnchor(0) -- 设置原点y坐标位置，0、1、2分别对应屏幕中、上、下
-            root:SetPosition(0,0)
-            root:MoveToBack()
-            root:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)   --- 缩放模式
-            root:SetClickable(false)
-        --------------------------------------------------------------------------------
-        --  
-            local scale = 0.7
-            local mask = root:AddChild(Image())
-            mask:SetTexture("images/widgets/hoshino_amblyopia_mask.xml","hoshino_amblyopia_mask.tex")
-            mask:SetPosition(0,0)
-            mask:Show()
-            mask:SetScale(scale,scale,scale)
-            mask:SetTint(1,1,1,0.9)
-        --------------------------------------------------------------------------------
-
-
-        front_root.test_mask = root
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

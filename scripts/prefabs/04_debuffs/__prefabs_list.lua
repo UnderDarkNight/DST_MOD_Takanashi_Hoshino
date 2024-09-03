@@ -33,6 +33,7 @@ local prefabs_name_list = {
     "01_03_card_debuff_builder_blocker",                                    --- 卡牌debuff：【诅咒】【凡庸】
     "01_04_card_debuff_temperature_locker",                                 --- 卡牌debuff：温度锁定器
     "01_05_card_debuff_price_mult",                                         --- 卡牌debuff：价格倍增器
+    "01_06_card_debuff_bloodshed",                                          --- 卡牌debuff：流血
 
 
 }

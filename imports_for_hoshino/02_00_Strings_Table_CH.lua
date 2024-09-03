@@ -74,5 +74,10 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["recipe_desc"] = "测试描述666",
             },
         --------------------------------------------------------------------
+        --- 04_debuffs
+            ["hoshino_card_debuff_bloodshed"] = {
+                ["name"] = "流血",
+            },
+        --------------------------------------------------------------------
 }
 
