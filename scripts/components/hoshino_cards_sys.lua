@@ -338,16 +338,16 @@ nil,
                 这个算法可以有效地随机化数组中的元素顺序，并且保证每个元素有均等的机会出现在任何位置上。
             ]]--
             local function shuffleCorrespondingPairs(cardsBack, cardsFront)
+                if #cardsBack == #cardsFront and #cardsBack == 1 then
+                    return
+                end
                 -- 确保两个表长度相同并且都多于一个元素
                 local n = #cardsBack
-                assert(n == #cardsFront and n > 1, "Both tables must have the same length and more than one element.")
-                
+                -- assert(n == #cardsFront and n > 1, "Both tables must have the same length and more than one element.")                
                 for i = n - 1, 1, -1 do
-                    local j = math.random(i)
-                    
+                    local j = math.random(i)                    
                     -- 交换cardsBack[i+1]和cardsBack[j+1]
-                    cardsBack[i+1], cardsBack[j+1] = cardsBack[j+1], cardsBack[i+1]
-                    
+                    cardsBack[i+1], cardsBack[j+1] = cardsBack[j+1], cardsBack[i+1]                    
                     -- 同样交换cardsFront[i+1]和cardsFront[j+1]
                     cardsFront[i+1], cardsFront[j+1] = cardsFront[j+1], cardsFront[i+1]
                 end

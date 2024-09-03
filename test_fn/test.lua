@@ -271,17 +271,16 @@ local flg,error_code = pcall(function()
     ---
         -- ThePlayer.components.hoshino_com_builder_blocker:SetDailyMax(10)
 
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- -- item:PushEvent("Set",{
-        -- --     cards = {
-        -- --         "card_white",
-        -- --         "card_white",
-        -- --         "card_white",
-        -- --     },
-        -- --     -- force_result_index = "max_health_up_15"
-        -- -- })
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+            cards = {
+                "card_golden",
+                "overdraft",
+                "card_white",
+            },
+        })
         -- item:PushEvent("SetName","3-1")
-        -- ThePlayer.components.inventory:GiveItem(item)
+        ThePlayer.components.inventory:GiveItem(item)
 
         -- local ret = ThePlayer.components.hoshino_cards_sys:GetCardsIndexByType("card_golden")
         -- print(ret)
@@ -309,15 +308,15 @@ local flg,error_code = pcall(function()
         -- print("GetCardsDesc",GetCardsDesc())
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        local inst = ThePlayer
-        local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
-        while true do
-            local debuff_inst = inst:GetDebuff(debuff_prefab)
-            if debuff_inst and debuff_inst:IsValid() then
-                break
-            end
-            inst:AddDebuff(debuff_prefab,debuff_prefab)
-        end
+        -- local inst = ThePlayer
+        -- local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
+        -- while true do
+        --     local debuff_inst = inst:GetDebuff(debuff_prefab)
+        --     if debuff_inst and debuff_inst:IsValid() then
+        --         break
+        --     end
+        --     inst:AddDebuff(debuff_prefab,debuff_prefab)
+        -- end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

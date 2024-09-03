@@ -31,13 +31,10 @@
         return doer.components.hoshino_com_rpc_event
     end
     local function Force_Open_Client_Side_Cards_Select_Box(doer) --- 强制下发界面打开命令
-        GetRPC(doer):PushEvent("hoshino_event.pad_data_update",{
-            default_page = "level_up",
-        })
         doer:DoTaskInTime(0.5,function()
             GetRPC(doer):PushEvent("hoshino_event.inspect_pad_open_by_force")
         end)
-        doer.components.hoshino_cards_sys:SendInspectWarning()
+        doer.components.hoshino_cards_sys:SendInspectWarning()  
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- workable 安装
@@ -68,6 +65,7 @@
         --- 非空的时候，下发卡牌数据
             local cards = CardsData.cards
             doer.components.hoshino_cards_sys:CreateCardsByForceCMD(cards)
+            Force_Open_Client_Side_Cards_Select_Box(doer)
             inst:Remove()
         --------------------------------------------------------------------------
         return true

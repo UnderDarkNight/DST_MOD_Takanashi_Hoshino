@@ -195,6 +195,56 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 10、【白】【透支】【根据当前剩余未选择的卡牌数量，给玩家N张1选1卡包，包括颜色对应，下三次升级不再赠送升级卡包。如果当前未翻开的剩余卡牌数量为0，则重新赠送一包1选1卡包】
+        ["overdraft"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                
+                local current_cards_data = inst.components.hoshino_cards_sys.cards_data     --- 获取当前卡组数据。
+                local ret_cards_type = {}
+                local same_overdraft_card_blocker = false
+                for index , single_card_data in pairs(current_cards_data) do
+                    local current_card_name_index = single_card_data.card_name
+                    -- print("+++ overdraft +++",current_card_name_index)
+                    local current_card_type = inst.components.hoshino_cards_sys:GetCardTypeByName(current_card_name_index) or "card_white"
+                    --- 得处理选择组里有多张 overdraft 。
+                    -- if current_card_name_index ~= "overdraft" then
+                    --     table.insert(ret_cards_type,current_card_type)
+                    -- end
+                    if current_card_name_index == "overdraft" then  --- 只屏蔽一张 overdraft
+                        if same_overdraft_card_blocker == false then
+                            same_overdraft_card_blocker = true
+                        else
+                            table.insert(ret_cards_type,current_card_type)
+                        end
+                    else
+                        table.insert(ret_cards_type,current_card_type)
+                    end                            
+                    
+                end
+                --- 如果当前卡组只有1张卡，赠送额外一张白卡包
+                if #ret_cards_type == 0 then
+                    ret_cards_type = {"card_white"}
+                end
+
+                --- 生成物品给玩家
+                for k, temp_card_type in pairs(ret_cards_type) do
+                    local item = SpawnPrefab("hoshino_item_cards_pack")
+                    item:PushEvent("Set",{ cards = {temp_card_type} })
+                    inst.components.inventory:GiveItem(item)
+                end
+                --- 上屏蔽器
+                inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",3)
+            end,
+            text = function(inst)
+                return "根据当前剩余未选择的卡牌数量，给玩家N张 1选1卡包。\n包括颜色对应。下三次升级不再赠送升级卡包"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
