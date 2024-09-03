@@ -26,6 +26,10 @@ local temp_assets = {
 	---------------------------------------------------------------------------
 	-- Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),	--- 单机声音集
 	---------------------------------------------------------------------------
+	--- 弱视遮罩
+		Asset("IMAGE", "images/widgets/hoshino_amblyopia_mask.tex"),
+		Asset("ATLAS", "images/widgets/hoshino_amblyopia_mask.xml"),
+	---------------------------------------------------------------------------
 	--- 平板电脑相关的素材
 		Asset("IMAGE", "images/inspect_pad/inspect_pad.tex"),			--- 平板电脑贴图
 		Asset("ATLAS", "images/inspect_pad/inspect_pad.xml"),

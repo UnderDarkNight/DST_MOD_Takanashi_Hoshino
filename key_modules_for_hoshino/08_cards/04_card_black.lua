@@ -135,6 +135,24 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 6、【诅咒】【弱视】【出现遮挡视线的遮罩】【不可叠加】
+        ["amblyopia"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                if inst.components.hoshino_cards_sys:Get("amblyopia_active") then
+                    return false
+                end
+                return true
+            end,
+            fn = function(inst)
+                inst:PushEvent("hoshino_event.amblyopia_active",true)
+            end,
+            text = function(inst)
+                return "视线将被遮挡"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 }

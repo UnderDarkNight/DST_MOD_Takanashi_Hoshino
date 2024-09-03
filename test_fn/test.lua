@@ -250,14 +250,14 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_cards_sys:GetDefaultCardsNum())
         -- print(ThePlayer.components.hoshino_cards_sys:IsCardsSelectting())
 
-        ThePlayer.components.hoshino_cards_sys:CreateCardsByForceCMD({
-            "test_card_black",
-            -- "card_white",
-            "card_colourful",
-            "card_colourful",
-            "card_golden",
-            "card_golden",
-        })
+        -- ThePlayer.components.hoshino_cards_sys:CreateCardsByForceCMD({
+        --     "test_card_black",
+        --     -- "card_white",
+        --     "card_colourful",
+        --     "card_colourful",
+        --     "card_golden",
+        --     "card_golden",
+        -- })
 
         -- ThePlayer.components.hoshino_cards_sys:CreateCardsByPool_Default()
 
@@ -307,6 +307,36 @@ local flg,error_code = pcall(function()
         --     end
         -- end
         -- print("GetCardsDesc",GetCardsDesc())
+    ----------------------------------------------------------------------------------------------------------------
+    --- 
+        local front_root = ThePlayer.HUD
+
+        if front_root.test_mask then
+            front_root.test_mask:Kill()
+        end
+
+        --------------------------------------------------------------------------------
+        --- 根节点
+            local root = front_root:AddChild(Widget())
+            root:SetHAnchor(0) -- 设置原点x坐标位置，0、1、2分别对应屏幕中、左、右
+            root:SetVAnchor(0) -- 设置原点y坐标位置，0、1、2分别对应屏幕中、上、下
+            root:SetPosition(0,0)
+            root:MoveToBack()
+            root:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)   --- 缩放模式
+            root:SetClickable(false)
+        --------------------------------------------------------------------------------
+        --  
+            local scale = 0.7
+            local mask = root:AddChild(Image())
+            mask:SetTexture("images/widgets/hoshino_amblyopia_mask.xml","hoshino_amblyopia_mask.tex")
+            mask:SetPosition(0,0)
+            mask:Show()
+            mask:SetScale(scale,scale,scale)
+            mask:SetTint(1,1,1,0.9)
+        --------------------------------------------------------------------------------
+
+
+        front_root.test_mask = root
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
