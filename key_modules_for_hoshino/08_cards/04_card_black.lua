@@ -307,6 +307,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 12、【诅咒】【饥饿值自然掉速进行2的X次幂】【可叠加】
+        ["hunger_auto_down_by_the_xth_power_of_2"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Hunger_Down_Mult_2x_Times(1)
+            end,
+            text = function(inst)
+                return "饥饿值自然掉速进行2的X次幂"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 }
