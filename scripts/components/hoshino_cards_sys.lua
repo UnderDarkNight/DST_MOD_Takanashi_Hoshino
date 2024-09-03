@@ -58,11 +58,13 @@ local hoshino_cards_sys = Class(function(self, inst)
                 self.cards_data = cards_data
                 self.need_to_send_to_client_data = need_to_send_to_client_data
                 inst:DoTaskInTime(1,function() -- onload 的时候，加载上一次已经开过的卡牌数据
-                    -- self:SendCardsToClient(self.cards_data)
                     self:SetClientSideData("cards", self.need_to_send_to_client_data)
                     self:SetClientSideData("cards_selectting",self.selectting)
                     self:SetClientSideData("refresh_num",self.refresh_num)  --- 下发刷新次数
-
+                    if self.selectting then
+                        self:SetClientSideData("default_page","level_up") -- 下发默认界面
+                        self:SendInspectWarning() -- 发送警告
+                    end
                 end)
             end
         end)
@@ -74,12 +76,12 @@ local hoshino_cards_sys = Class(function(self, inst)
     ---------------------------------------------------------------------
     --- 
     ---------------------------------------------------------------------
-    --- 卡牌概率池子。初始化白色能力权重100，金色能力权重10，彩色能力权重1
+    --- 卡牌概率池子。初始化白色权重100，金色权重10，彩色权重1，黑色权重1
         self.CardPools = {
             ["card_white"] = 100,
             ["card_colourful"] = 1,
             ["card_golden"] = 10,
-            ["card_black"] = 10,
+            ["card_black"] = 1,
         }
         self:AddOnSaveFn(function()
             self:Set("card_pools",self.CardPools)
@@ -382,9 +384,18 @@ nil,
                     cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
                 else
                     local current_card_name_index = temp_cmd
-                    cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
-                    cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
-                    cards_back[i] = self:GetCardBackByIndex(current_card_name_index)  --- 获取卡牌背面数据
+                    local test_fn = self:GetTestFnByCardName(current_card_name_index)
+                    if test_fn and test_fn(self.inst) then --- 卡牌测试通过
+                        cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
+                        cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
+                        cards_back[i] = self:GetCardBackByIndex(current_card_name_index)  --- 获取卡牌背面数据
+                    else    --- 卡牌测试不通过，选一张同类型卡牌
+                        local card_type = self:GetCardTypeByIndex(current_card_name_index)
+                        cards_back[i] = card_type
+                        current_card_name_index = self:SelectRandomCardFromPoolByType(card_type) -- 按类型从卡池抽一张
+                        cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
+                        cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
+                    end
                 end
             end
 

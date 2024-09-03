@@ -364,19 +364,19 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 2、【诅咒】【消化不良】【从食物中获取的三维增加量减半，扣除的不减】【从诅咒池移除】
-        ["eater_indigestion"] = {
-            back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
-            test = function(inst)
-                return inst.components.hoshino_data:Get("Player_Indigestion") ~= true
-            end,
-            fn = function(inst)
-                inst:PushEvent("player_unlock_eater_indigestion")
-            end,
-            text = function(inst)
-                return "从食物中获取的三维增加量减半，扣除的不减"
-            end,
-        },
+        -- ["eater_indigestion"] = {
+        --     back = "card_black",
+        --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+        --     test = function(inst)
+        --         return inst.components.hoshino_data:Get("Player_Indigestion") ~= true
+        --     end,
+        --     fn = function(inst)
+        --         inst:PushEvent("player_unlock_eater_indigestion")
+        --     end,
+        --     text = function(inst)
+        --         return "从食物中获取的三维增加量减半，扣除的不减"
+        --     end,
+        -- },
     --------------------------------------------------------------------------------
     -- 21、【白】【巧匠】【每次制作物品的时候，有1%概率返还制作材料，最高50%】【满概率后从卡池移除】
         ["probability_of_returning_full_recipe"] = {

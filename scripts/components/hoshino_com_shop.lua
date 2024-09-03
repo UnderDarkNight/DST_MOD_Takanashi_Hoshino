@@ -135,11 +135,17 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 --- 金币变更，注意unit32上限。
     function hoshino_com_shop:CoinDelta(num)
+        if self.__coin_delta_fn then
+            num = self.__coin_delta_fn(self,num)
+        end
         self.coins = math.clamp(self.coins + num,0,4000000000)
         self:ShopData_Set("coins",self.coins)
     end
     function hoshino_com_shop:GetCoins()
         return self.coins
+    end
+    function hoshino_com_shop:SetCoinDeltaFn(fn)
+        self.__coin_delta_fn = fn
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 每日刷新次数
