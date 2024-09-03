@@ -39,6 +39,7 @@ local prefabs_name_list = {
     "01_09_card_debuff_exp_and_epic",                                       --- 卡牌debuff：只能从史诗怪物身上获得经验
     "01_10_card_debuff_sanity_ever_zero",                                   --- 卡牌debuff：理智永远为0
     "01_11_card_debuff_equipment_blocker",                                  --- 卡牌debuff：屏蔽装备
+    "01_12_card_debuff_moisture_down_blocker",                              --- 卡牌debuff：湿度下降屏蔽
 
 }
 

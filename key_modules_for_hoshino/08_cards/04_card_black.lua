@@ -374,6 +374,35 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 15、【诅咒】【潮湿】【你的潮湿度永远无法降低】【从诅咒池移除】
+        ["moisture_down_blocker"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "你的潮湿度永远无法降低"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 }
