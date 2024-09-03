@@ -310,7 +310,7 @@ local flg,error_code = pcall(function()
     ----------------------------------------------------------------------------------------------------------------
     --- 
         local inst = ThePlayer
-        local debuff_prefab = "hoshino_card_debuff_max_health_1"
+        local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
         while true do
             local debuff_inst = inst:GetDebuff(debuff_prefab)
             if debuff_inst and debuff_inst:IsValid() then

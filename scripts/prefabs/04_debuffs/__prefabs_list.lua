@@ -35,6 +35,7 @@ local prefabs_name_list = {
     "01_05_card_debuff_price_mult",                                         --- 卡牌debuff：价格倍增器
     "01_06_card_debuff_bloodshed",                                          --- 卡牌debuff：流血
     "01_07_card_debuff_max_health_1",                                       --- 卡牌debuff：最大血量1
+    "01_08_card_debuff_force_night_sleep",                                  --- 卡牌debuff：强制夜晚睡眠
 
 
 }
