@@ -261,6 +261,37 @@ nil,
     end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 创建卡牌
+    function hoshino_cards_sys:Excluding_Duplicate_Options_And_Adding_New_Ones(cards_front)  -- 排除重复选项并添加新选项
+        --- 本段代码来自AI生成，用于排除重复选项并替换成同类型新选项
+        local seen_cards = {}  -- 用于存储已经出现过的卡片名称
+
+        for i, card_data in ipairs(cards_front) do
+            local card_name = card_data.card_name
+            local card_type = self:GetCardBackByIndex(card_name)
+
+            -- 检查这张卡片是否已经存在于 seen_cards 表中
+            if seen_cards[card_name] then
+                -- print("发现卡组里存在相同选项")
+                -- 生成新的同类型卡牌，确保新卡牌不是已经存在的卡牌
+                local new_card_found = false
+                while not new_card_found do
+                    local new_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
+                    if not seen_cards[new_card_name_index] then
+                        new_card_found = true
+                        local new_card_data = self:GetCardFrontByIndex(new_card_name_index)
+                        new_card_data.card_name = new_card_name_index
+                        -- 替换掉重复的卡片
+                        cards_front[i] = new_card_data
+                        -- 记录新卡片
+                        seen_cards[new_card_name_index] = true
+                    end
+                end
+            else
+                -- 如果没有重复，记录下这张卡片
+                seen_cards[card_name] = true
+            end
+        end
+    end
     function hoshino_cards_sys:CreateCardsByPool(num) --- 从概率池中随机抽取卡牌
         num = num or 1
         num = math.clamp(num,1,5)
@@ -295,6 +326,8 @@ nil,
                 has_curse_card = true
             end
         end
+
+        self:Excluding_Duplicate_Options_And_Adding_New_Ones(cards_front)  -- 排除重复选项并添加新选项
 
         self.cards_data = cards_front
 
@@ -409,6 +442,8 @@ nil,
                 end
             end
         -------------------------------------------------------------------------------------------
+        self:Excluding_Duplicate_Options_And_Adding_New_Ones(cards_front)  -- 排除重复选项并添加新选项
+
         self.cards_data = cards_front
 
         local need_to_send_to_client_data = nil

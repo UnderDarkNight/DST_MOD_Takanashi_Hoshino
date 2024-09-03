@@ -274,9 +274,11 @@ local flg,error_code = pcall(function()
         local item = SpawnPrefab("hoshino_item_cards_pack")
         item:PushEvent("Set",{
             cards = {
-                "card_golden",
-                "sleep_and_coins",
-                "card_white",
+                -- "card_golden",
+                "test_card_white",
+                "test_card_white",
+                "test_card_white",
+                "test_card_white",
             },
         })
         -- item:PushEvent("SetName","3-1")

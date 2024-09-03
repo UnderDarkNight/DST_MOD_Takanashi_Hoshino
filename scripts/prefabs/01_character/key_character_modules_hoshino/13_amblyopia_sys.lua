@@ -38,6 +38,9 @@ return function(inst)
                         root:MoveToBack()
                         root:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)   --- 缩放模式
                         root:SetClickable(false)
+                        root.inst:DoPeriodicTask(3,function()
+                            root:MoveToBack()
+                        end)
                     --------------------------------------------------------------------------------
                     --  
                         local scale = 0.7
