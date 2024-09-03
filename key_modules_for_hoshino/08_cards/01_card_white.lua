@@ -170,7 +170,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 9、【白】【神秘仪式】【随机召唤一只怪物（列表形式）】
-        ["random_monster_recall"] = {
+        ["random_monster_summon"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
@@ -474,6 +474,21 @@ local cards = {
             end,
             text = function(inst)
                 return "每次制作物品的时候，有1%概率返还制作材料，最高50%"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 22、【白】【石虾助我！】【生成一只永久石虾跟随】
+        ["summon_rocky"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:PushEvent("hoshino_event.create_rocky")
+            end,
+            text = function(inst)
+                return "生成一只永久石虾跟随"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

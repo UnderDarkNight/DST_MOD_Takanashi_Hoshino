@@ -275,10 +275,10 @@ local flg,error_code = pcall(function()
         item:PushEvent("Set",{
             cards = {
                 -- "card_golden",
-                "test_card_white",
-                "test_card_white",
-                "test_card_white",
-                "test_card_white",
+                "summon_rocky",
+                -- "test_card_white",
+                -- "test_card_white",
+                -- "test_card_white",
             },
         })
         -- item:PushEvent("SetName","3-1")
@@ -297,10 +297,7 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-        -- local inst = ThePlayer
-        -- -- inst:PushEvent("yawn", { grogginess = 4, knockoutduration = 10 + math.random() })
-
-        -- print(inst.sg:__tostring())
+        -- ThePlayer:PushEvent("hoshino_event.create_rocky")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

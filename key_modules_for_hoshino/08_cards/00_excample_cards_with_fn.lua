@@ -231,7 +231,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------
     -- 白：随机召唤一个非boss生物
-        ["random_monster_recall"] = {
+        ["random_monster_summon"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
