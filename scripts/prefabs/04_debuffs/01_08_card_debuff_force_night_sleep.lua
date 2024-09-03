@@ -38,7 +38,9 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     -----------------------------------------------------
     --- 上event
         inst:WatchWorldState("isnight",function()
-            doareasleep(target,1,20)
+            if TheWorld.state.isnight then
+                doareasleep(target,1,20)
+            end
         end)
     -----------------------------------------------------
 end

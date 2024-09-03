@@ -40,6 +40,7 @@ local prefabs_name_list = {
     "01_10_card_debuff_sanity_ever_zero",                                   --- 卡牌debuff：理智永远为0
     "01_11_card_debuff_equipment_blocker",                                  --- 卡牌debuff：屏蔽装备
     "01_12_card_debuff_moisture_down_blocker",                              --- 卡牌debuff：湿度下降屏蔽
+    "01_13_card_debuff_reduced_work_efficiency",                            --- 卡牌debuff：工作效率下降
 
 }
 
