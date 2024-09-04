@@ -547,6 +547,23 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 50、【金】【生命值上限，san值上限，饥饿上限+20】【可叠加】
+        ["halth_sanity_hunger_max_up_20"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Max_Helth(20)
+                inst.components.hoshino_com_debuff:Add_Max_Sanity(20)
+                inst.components.hoshino_com_debuff:Add_Max_Hunger(20)                
+            end,
+            text = function(inst)
+                return "生命值上限，San值上限，饥饿上限+20"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
