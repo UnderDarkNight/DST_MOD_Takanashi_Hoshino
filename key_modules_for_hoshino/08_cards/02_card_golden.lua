@@ -531,6 +531,22 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 49、【金】【抵抗】【各个阵营伤害防御 + 20%（暗影阵营、月亮阵营）】【满概率后从卡池移除】
+        ["armor_damage_type_resist"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Damage_Type_Resist() ~= 0
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Damage_Type_Resist(0.2)
+                inst:PushEvent("hoshino_other_armor_item_param_refresh")
+            end,
+            text = function(inst)
+                return "受到暗影、月亮阵营伤害减少20%"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
