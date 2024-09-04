@@ -288,7 +288,7 @@ local flg,error_code = pcall(function()
     --- 
         local inst = ThePlayer
         -- local inst = SpawnPrefab("bearger")
-        local debuff_prefab = "hoshino_card_debuff_direct_kill_target"
+        local debuff_prefab = "hoshino_card_debuff_kill_and_explode"
         while true do
             local debuff_inst = inst:GetDebuff(debuff_prefab)
             if debuff_inst and debuff_inst:IsValid() then
@@ -300,7 +300,10 @@ local flg,error_code = pcall(function()
         -- inst.Transform:SetPosition(x,y,z)
     ----------------------------------------------------------------------------------------------------------------
     ---
-        -- ThePlayer:PushEvent("hoshino_event.create_rocky")
+        -- SpawnPrefab("hoshino_sfx_explode"):PushEvent("Set",{
+        --     pt = Vector3(x,y,z),
+        --     scale = 2,
+        -- })
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

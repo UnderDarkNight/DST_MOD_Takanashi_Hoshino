@@ -46,6 +46,7 @@ local prefabs_name_list = {
     "01_16_card_debuff_health_penalty_blocker",                             --- 卡牌debuff：生命惩罚屏蔽
     "01_17_card_debuff_health_auto_up",                                     --- 卡牌debuff：生命自动上升
     "01_18_card_debuff_direct_kill_target",                                 --- 卡牌debuff：直接击杀目标(套给玩家和怪物)
+    "01_20_card_debuff_kill_and_explode",                                   --- 卡牌debuff：击杀爆炸
 }
 
 ---------------------------------------------------------------------------

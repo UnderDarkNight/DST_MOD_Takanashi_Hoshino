@@ -10,6 +10,7 @@ local file_folders = {
     "02_items",                         ---- 物品
     "03_special_equipment",             ---- 特殊装备
     "04_debuffs",                       ---- debuffs
+    "05_sfx",                           ---- 特效fx
 
     
 }
