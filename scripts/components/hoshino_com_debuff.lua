@@ -237,7 +237,8 @@
             function self:Add_Damage_Type_Resist(value)
                 local old = self:Add("damage_type_resist_value",0)
                 local new = math.clamp(old+value,0,1)
-                self:Set("damage_type_resist_value",new)                
+                self:Set("damage_type_resist_value",new)
+                self.inst:PushEvent("hoshino_other_armor_item_param_refresh")                
             end
             function self:Get_Damage_Type_Resist()
                 return 1 - self:Add("damage_type_resist_value",0)

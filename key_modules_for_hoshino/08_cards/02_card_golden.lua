@@ -291,6 +291,78 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 37、【金】【背水】【随机清空一项白卡能力（血、San、饥饿、移速、经验、攻击、护甲、反伤、位面防御），然后获得1500点「信用点」】
+        ["get_some_coins_and_delete_one_white_card_ability"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local active_fns = {
+                    [1] = function(inst) -- 血量
+                        local origin_max_health = TUNING[string.upper("hoshino").."_HEALTH"]
+                        local current_health = inst.components.health.currenthealth
+                        if current_health > origin_max_health then
+                            inst.components.health:SetMaxHealth(origin_max_health)
+                        else
+                            inst.components.health.maxhealth = origin_max_health
+                            inst.components.health:DoDelta(1)
+                        end
+                    end,
+                    [2] = function(inst) -- San值
+                        local origin_max_sanity = TUNING[string.upper("hoshino").."_SANITY"]
+                        local current_sanity = inst.components.sanity.current
+                        if current_sanity > origin_max_sanity then
+                            inst.components.sanity:SetMax(origin_max_sanity)
+                        else
+                            inst.components.sanity.max = origin_max_sanity
+                            inst.components.sanity:DoDelta(1)
+                        end
+                    end,
+                    [3] = function(inst) -- 饥饿
+                        local origin_max_hunger = TUNING[string.upper("hoshino").."_HUNGER"]
+                        local current_hunger = inst.components.hunger.current
+                        if current_hunger > origin_max_hunger then
+                            inst.components.hunger:SetMax(origin_max_hunger)
+                        else
+                            inst.components.hunger.max = origin_max_hunger
+                            inst.components.hunger:DoDelta(1)
+                        end
+                    end,
+                    [4] = function(inst) -- 移速
+                        inst.components.hoshino_com_debuff:Set("speed_mult",0) -- 清除数据
+                        inst.components.hoshino_com_debuff:Add_Speed_Mult(0) -- 刷新倍增器参数
+                    end,
+                    [5] = function(inst) -- 经验
+                        inst.components.hoshino_com_debuff:Set("exp_up_mult",0)
+                    end,
+                    [6] = function(inst) -- 攻击
+                        inst.components.hoshino_com_debuff:Set("damage_mult",0)
+                        inst.components.hoshino_com_debuff:Add_Damage_Mult(0)
+                    end,
+                    [7] = function(inst) -- 阵营减伤
+                        inst.components.hoshino_com_debuff:Add_Damage_Type_Resist(-100)
+                    end,
+                    [8] = function(inst) -- 反伤
+                        inst.components.hoshino_com_debuff:Set("counter_damage",0)
+                    end,
+                    [9] = function(inst) -- 位面防御
+                        local current = inst.components.hoshino_com_debuff:Add("planar_defense_value",0)
+                        inst.components.hoshino_com_debuff:Add("planar_defense_value",-current)
+                    end,
+                }
+                local ret_fn = active_fns[math.random(#active_fns)]
+                if ret_fn then
+                    ret_fn(inst)
+                end
+                inst.components.hoshino_com_shop:CoinDelta(1500)
+            end,
+            text = function(inst)
+                return "获得1500点「信用点」\n随机清空一项白卡能力:\n血、San、饥饿、移速、经验、攻击、阵营减伤、反伤、位面防御"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
