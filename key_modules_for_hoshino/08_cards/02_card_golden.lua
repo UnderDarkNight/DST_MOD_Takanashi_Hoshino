@@ -359,7 +359,7 @@ local cards = {
                 inst.components.hoshino_com_shop:CoinDelta(1500)
             end,
             text = function(inst)
-                return "获得1500点「信用点」\n随机清空一项白卡能力:\n血、San、饥饿、移速、经验、攻击、阵营减伤、反伤、位面防御"
+                return "获得1500点「信用点」\n随机清空以下的一项加成:\n血、San、饥饿、移速、经验、攻击、阵营减伤、反伤、位面防御"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -412,6 +412,29 @@ local cards = {
             end,
             text = function(inst)
                 return "每10s恢复1点生命值"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 40、【金】【最高神秘】【攻击任何血量低于70%的 生物，都有0.2%的概率造成99999999999999伤害】【概率叠加】
+        ["direct_kill_target"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_direct_kill_target",0.2/100)
+                local debuff_prefab = "hoshino_card_debuff_direct_kill_target"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "对于血量低于70%的目标，有0.2%的直接击杀概率\n重复卡牌则概率叠加"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -45,6 +45,7 @@ local prefabs_name_list = {
     "01_15_card_debuff_for_monster_drop_cards_pack",                        --- 卡牌debuff：怪物掉落卡包
     "01_16_card_debuff_health_penalty_blocker",                             --- 卡牌debuff：生命惩罚屏蔽
     "01_17_card_debuff_health_auto_up",                                     --- 卡牌debuff：生命自动上升
+    "01_18_card_debuff_direct_kill_target",                                 --- 卡牌debuff：直接击杀目标(套给玩家和怪物)
 }
 
 ---------------------------------------------------------------------------
