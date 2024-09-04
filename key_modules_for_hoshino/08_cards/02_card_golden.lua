@@ -469,7 +469,67 @@ local cards = {
             text = function(inst)
                 return "去除一个随机诅咒效果\n如果是层数叠加类型，则去除一层"
             end,
-        }
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 45、【金】解锁技能：普通EX
+        ["unlock_spell_normal_ex"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+
+            end,
+            text = function(inst)
+                return "解锁技能：普通EX"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 46、【金】解锁技能：泳装EX
+        ["unlock_spell_swimming_ex"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+
+            end,
+            text = function(inst)
+                return "解锁技能：泳装EX"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 47、【金】解锁普通形态所有普通技能
+        ["unlock_spell_all_normal"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+
+            end,
+            text = function(inst)
+                return "解锁普通形态所有普通技能"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 48、【金】解锁泳装形态所有普通技能
+        ["unlock_spell_all_swimming"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+
+            end,
+            text = function(inst)
+                return "解锁泳装形态所有普通技能"
+            end,
+        },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
