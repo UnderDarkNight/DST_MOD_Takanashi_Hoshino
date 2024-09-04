@@ -438,6 +438,39 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 44、【金】【甘露】去除一个诅咒效果【如果可以就设计为无诅咒时不会出现在池子里】
+        ["deactive_random_black_card"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local actived_black_cards = inst.components.hoshino_cards_sys:GetActivatedCards("card_black") or {}
+                local count = 0
+                for card_name_index, active_times in pairs(actived_black_cards) do
+                    if type(active_times) == "number" then
+                        count = count + 1
+                    end
+                end
+                return count > 0
+            end,
+            fn = function(inst)
+                local actived_black_cards = inst.components.hoshino_cards_sys:GetActivatedCards("card_black") or {}
+                --- 提取出激活次数大于等于1的卡牌
+                local black_cards = {}
+                for card_name_index, active_times in pairs(actived_black_cards) do
+                    if type(active_times) == "number" and active_times > 0 then
+                        table.insert(black_cards, card_name_index)
+                    end
+                end
+                --- 随机选择一个卡牌
+                local ret_card_name_index = black_cards[math.random(#black_cards)]
+                --- 移除卡牌
+                inst.components.hoshino_cards_sys:TryToDeactiveCardByName(ret_card_name_index)
+            end,
+            text = function(inst)
+                return "去除一个随机诅咒效果\n如果是层数叠加类型，则去除一层"
+            end,
+        }
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

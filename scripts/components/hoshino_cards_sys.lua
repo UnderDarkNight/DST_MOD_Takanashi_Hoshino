@@ -139,6 +139,18 @@ local hoshino_cards_sys = Class(function(self, inst)
             end
         end)
     ---------------------------------------------------------------------
+    --- 激活过的卡牌记录池
+        self.ActivatedCards = {}
+        self:AddOnSaveFn(function()
+            self:Set("activated_cards",self.ActivatedCards)
+        end)
+        self:AddOnLoadFn(function()
+            local activated_cards = self:Get("activated_cards")
+            if activated_cards then
+                self.ActivatedCards = activated_cards
+            end
+        end)
+    ---------------------------------------------------------------------
 end,
 nil,
 {
@@ -485,7 +497,45 @@ nil,
         self:SetClientSideData("refresh_num",self.refresh_num)  --- 下发刷新次数
     end
 ------------------------------------------------------------------------------------------------------------------------------
---- 强制卡牌结果
+--- 记忆激活过的卡牌和次数
+    function hoshino_cards_sys:RememberActivedCard(card_name_index,num)
+        local card_type = self:GetCardTypeByIndex(card_name_index)
+        self.ActivatedCards[card_type] = self.ActivatedCards[card_type] or {}
+        self.ActivatedCards[card_type][card_name_index] = self.ActivatedCards[card_type][card_name_index] or 0
+        self.ActivatedCards[card_type][card_name_index] = self.ActivatedCards[card_type][card_name_index] + (num or 1)
+    end
+    function hoshino_cards_sys:GetActivatedCards(card_type)
+        --[[
+            得到返回 {
+                ["card_name_index"] = actived_times
+            }
+        ]]
+        if card_type == nil then -- 如果是空参数，返回列表
+            local ret = {}
+            for temp_card_type, single_type_data in pairs(self.ActivatedCards) do
+                for temp_card_name_index, actived_times in pairs(single_type_data) do
+                    ret[temp_card_name_index] = actived_times or 0
+                end
+            end
+            return ret
+        else    --- 根据类型返回内部
+            return self.ActivatedCards[card_type] or {}
+        end
+    end
+    function hoshino_cards_sys:TryToDeactiveCardByName(card_name_index)
+        --- 先检查激活次数是否超过 1 或者nil
+        local card_type = self:GetCardTypeByIndex(card_name_index)
+        local actived_times = self:GetActivatedCards(card_type)[card_name_index] or 0
+        if actived_times <= 0 then
+            return
+        end
+        --- 检查控制表里是否有 deactive_fn 函数
+        local deactive_fn = self:GetDeactiveFnByCardName(card_name_index)
+        if type(deactive_fn) == "function" then
+            deactive_fn(self.inst)
+            self:RememberActivedCard(card_name_index,-1)
+        end
+    end
 
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌数据库加载、提取
@@ -549,6 +599,13 @@ nil,
         end
         return nil
     end
+    function hoshino_cards_sys:GetDeactiveFnByCardName(card_name_index)  --- 获取卡牌的deactive_fn函数
+        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+        if all_data[card_name_index] and all_data[card_name_index].deactive_fn then
+            return all_data[card_name_index].deactive_fn
+        end
+        return nil
+    end
     function hoshino_cards_sys:GetCardTypeByName(card_name_index)  --- 获取卡牌类型
         local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
         if all_data[card_name_index] and all_data[card_name_index].back then
@@ -591,7 +648,8 @@ nil,
             print("+++ 玩家激活了卡牌",selected_card_type,selected_card_name_index)
         -----------------------------------------------------------------------------------------
         --- 
-            self:AcitveCardFnByIndex(selected_card_name_index)
+            self:AcitveCardFnByIndex(selected_card_name_index) -- 激活卡牌
+            self:RememberActivedCard(selected_card_name_index) -- 记忆卡牌
             self.inst:PushEvent("hoshino_cards_sys.card_activated",{
                 index = index,
                 card_name = selected_card_name_index,

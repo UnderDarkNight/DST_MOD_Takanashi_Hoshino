@@ -35,6 +35,9 @@ local cards = {
                 fn = function(inst)
                     print("test_card_black")
                 end,
+                deactive_fn = function(inst) --- 诅咒去除（单次）
+                    
+                end,
                 text = function(inst)
                     return "测试用的空黑卡"
                 end,
@@ -53,6 +56,11 @@ local cards = {
             fn = function(inst)
                 inst:PushEvent("card_black_active.max_daily_earn")
             end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                inst.components.hoshino_com_shop:Set("card_black_active.max_daily_earn", nil)
+                inst.components.hoshino_com_shop:SetCoinDeltaFn(nil)
+                inst.components.hoshino_com_shop:Set("card_black_active.max_daily_earn.current",nil)
+            end,
             text = function(inst)
                 return "你每天至多获得300信用点"
             end,
@@ -67,6 +75,10 @@ local cards = {
             end,
             fn = function(inst)
                 inst:PushEvent("player_unlock_eater_indigestion")
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                -- inst.components.eater.preferseatingtags = nil  --- 移除喜好标签组
+                inst.components.hoshino_data:Set("Player_Indigestion",nil)
             end,
             text = function(inst)
                 return "从食物中获取的三维增加量减半，扣除的不减"
@@ -85,6 +97,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_cards_sys:Set("card_black.sleeping_bag_health_blocker",true)
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                inst.components.hoshino_cards_sys:Set("card_black.sleeping_bag_health_blocker",nil)
             end,
             text = function(inst)
                 return "无法通过睡觉恢复生命值"
@@ -115,6 +130,13 @@ local cards = {
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
                 end
             end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_builder_blocker"
+                for i = 1, 100, 1 do
+                    inst:RemoveDebuff("hoshino_card_debuff_builder_blocker")
+                end
+                inst.components.hoshino_com_builder_blocker:ResetDailyMax()
+            end,
             text = function(inst)
                 return "每天最多只能制作10个物品"
             end,
@@ -129,6 +151,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_cards_sys:Card_Pool_Delata("card_white",5)
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_white",-5)
             end,
             text = function(inst)
                 return "白卡的权重提升5"
@@ -147,6 +172,10 @@ local cards = {
             end,
             fn = function(inst)
                 inst:PushEvent("hoshino_event.amblyopia_active",true)
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                inst:PushEvent("hoshino_event.amblyopia_active",false)
+                inst.components.hoshino_cards_sys:Set("amblyopia_active",nil)
             end,
             text = function(inst)
                 return "视线将被遮挡"
@@ -186,6 +215,9 @@ local cards = {
                 --------------------------------------------------------------------------------------------
 
             end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                inst.components.hoshino_com_shop:Add("black_card_price_mult",-0.05)
+            end,
             text = function(inst)
                 return "商店物品售价+5%（向上取整）"
             end,
@@ -213,6 +245,15 @@ local cards = {
                         break
                     end
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_bloodshed"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        debuff_inst:Remove()
+                    end
                 end
             end,
             text = function(inst)
@@ -244,6 +285,15 @@ local cards = {
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
                 end
             end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_max_health_1"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        debuff_inst:Remove()
+                    end
+                end
+            end,
             text = function(inst)
                 return "血量的最高上限为1"
             end,
@@ -271,6 +321,15 @@ local cards = {
                         break
                     end
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        debuff_inst:Remove()
+                    end
                 end
             end,
             text = function(inst)
@@ -302,6 +361,15 @@ local cards = {
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
                 end
             end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        debuff_inst:Remove()
+                    end
+                end
+            end,
             text = function(inst)
                 return "只能从BOSS生物中获取经验值"
             end,
@@ -316,6 +384,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Hunger_Down_Mult_2x_Times(1)
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                inst.components.hoshino_com_debuff:Add_Hunger_Down_Mult_2x_Times(-1)
             end,
             text = function(inst)
                 return "饥饿值自然掉速进行2的X次幂\n当前X值+1"
@@ -346,6 +417,16 @@ local cards = {
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
                 end
             end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        debuff_inst:Remove()
+                    end
+                end
+                inst.components.sanity:DoDelta(100)
+            end,
             text = function(inst)
                 return "San永久为0"
             end,
@@ -368,6 +449,10 @@ local cards = {
                     end
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
                 end
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_equipment_blocker"
+                inst.components.hoshino_com_debuff:Add(debuff_prefab,-2*480)
             end,
             text = function(inst)
                 return "你无法穿戴任何装备，持续2天"
@@ -398,6 +483,15 @@ local cards = {
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
                 end
             end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        debuff_inst:Remove()
+                    end
+                end
+            end,
             text = function(inst)
                 return "你的潮湿度永远无法降低"
             end,
@@ -425,6 +519,15 @@ local cards = {
                         break
                     end
                     inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_reduced_work_efficiency"
+                for i = 1, 5, 1 do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        debuff_inst:Remove()
+                    end
                 end
             end,
             text = function(inst)

@@ -12,6 +12,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
         inst.__task = inst:DoPeriodicTask(1,function()
             target.components.inventory:DropEquipped()
             if target.components.hoshino_com_debuff:Add("hoshino_card_debuff_equipment_blocker",-1) <= 0 then
+                target.components.hoshino_com_debuff:Set("hoshino_card_debuff_equipment_blocker",0)
                 inst.__task:Cancel()
                 inst:Remove()
             end

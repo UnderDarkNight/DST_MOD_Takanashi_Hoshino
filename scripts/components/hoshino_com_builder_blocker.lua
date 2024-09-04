@@ -44,11 +44,18 @@ nil,
         self.daily_max = math.clamp(value, 0, self.daily_origin_max)
         self:DoDelta(0)
     end
+    function hoshino_com_builder_blocker:ResetDailyMax(value)
+        self.daily_max = self.daily_origin_max
+        self.count = self.daily_origin_max
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 ---- 
     function hoshino_com_builder_blocker:CanBuild()
         return self.count > 0
     end
+------------------------------------------------------------------------------------------------------------------------------
+---- 
+    
 ------------------------------------------------------------------------------------------------------------------------------
 ---- 
     function hoshino_com_builder_blocker:OnSave()
