@@ -363,6 +363,35 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 38、【金】【坚毅】【清除所有血量上限惩罚值（黑血），且永远不会出现惩罚】【从卡池移除】
+        ["health_penalty_blocker"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_health_penalty_blocker"
+                for i = 1, 5, 1 do
+                    local buff_inst = inst:GetDebuff(debuff_prefab)
+                    if buff_inst and buff_inst:IsValid() then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_health_penalty_blocker"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "清除所有血量上限惩罚值（黑血）\n永远不再出现惩罚"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
