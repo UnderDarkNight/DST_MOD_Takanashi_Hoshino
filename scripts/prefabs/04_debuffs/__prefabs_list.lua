@@ -42,7 +42,7 @@ local prefabs_name_list = {
     "01_12_card_debuff_moisture_down_blocker",                              --- 卡牌debuff：湿度下降屏蔽
     "01_13_card_debuff_reduced_work_efficiency",                            --- 卡牌debuff：工作效率下降
     "01_14_card_debuff_sleep_and_coins",                                    --- 卡牌debuff：睡眠和金币
-
+    "01_15_card_debuff_for_monster_drop_cards_pack",                        --- 卡牌debuff：怪物掉落卡包
 }
 
 ---------------------------------------------------------------------------
