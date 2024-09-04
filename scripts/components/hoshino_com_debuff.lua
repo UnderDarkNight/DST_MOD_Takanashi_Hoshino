@@ -286,6 +286,14 @@
                 return self:Add("death_snapshot_protector",0)
             end
         --------------------------------------------------------------------------------
+        -- health 下降减少器
+            function self:Add_Health_Down_Reduce(value)
+                self:Add("health_down_reduce",value)
+            end
+            function self:Get_Health_Down_Reduce()
+                return self:Add("health_down_reduce",0)
+            end
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组

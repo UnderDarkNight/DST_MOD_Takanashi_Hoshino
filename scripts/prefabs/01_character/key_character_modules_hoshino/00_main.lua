@@ -31,6 +31,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/13_amblyopia_sys",                          ---- 弱视系统
         "prefabs/01_character/key_character_modules_hoshino/14_moisture_hook",                          ---- 潮湿度组件HOOK
         "prefabs/01_character/key_character_modules_hoshino/15_rocky",                                  ---- 石虾
+        "prefabs/01_character/key_character_modules_hoshino/16_health_hook",                            ---- health组件HOOK
 
     }
     for k, lua_addr in pairs(modules) do

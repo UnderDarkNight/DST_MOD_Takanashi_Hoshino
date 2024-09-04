@@ -40,6 +40,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 53、【彩】【钨合金棍】【最终血量扣除结算的时候，所扣除点数减少1点】（未超过一点则免疫，选择后从池子内移除，无法叠加）【笔记】按照可叠加的形式写
+        ["final_health_down_value_reduce"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Health_Down_Reduce() == 0
+            end,
+            fn = function(inst)
+               inst.components.hoshino_com_debuff:Add_Health_Down_Reduce(1)
+            end,
+            text = function(inst)
+                return "最终血量扣除结算的时候，所扣除点数减少1点"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
