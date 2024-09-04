@@ -156,6 +156,24 @@
                 self:Add_Damage_Mult(0)
             end)
         --------------------------------------------------------------------------------
+        --- 受伤倍增器
+            function self:Add_Damage_Taken_Mult(value)
+                local ret = self:Add("damage_taken_mult",value)
+                ret = math.clamp(ret,0,0.99)
+                self:Set("damage_taken_mult",ret)
+                self:Active_Damage_Taken_Mult()
+            end
+            function self:Get_Damage_Taken_Mult()
+                return self:Add("damage_taken_mult",0)
+            end
+            function self:Active_Damage_Taken_Mult()
+                local mult = 1 - self:Add("damage_taken_mult",0)
+                inst.components.combat.externaldamagetakenmultipliers:SetModifier(GetSpeedMultInst(self),mult)
+            end
+            self:AddOnLoadFn(function()
+                self:Add_Damage_Taken_Mult(0)
+            end)
+        --------------------------------------------------------------------------------
         --- 反伤
             function self:Add_Counter_Damage(value)
                 self:Add("counter_damage",value)

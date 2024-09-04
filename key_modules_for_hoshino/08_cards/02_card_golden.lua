@@ -580,6 +580,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 52、【金】【基础减伤值增加3%】【所有减伤值总和无法超过99%，达到之后移除该卡片】
+        ["damage_taken_mult_3"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Damage_Taken_Mult() < 0.99
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Damage_Taken_Mult(3/100)
+            end,
+            text = function(inst)
+                return "基础基础伤害减免+3%\n最高到达99%"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
