@@ -246,6 +246,27 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 34、【金】【七弦】【赠送7包结果注定一样的白色1选1卡包】
+        ["7_identical_white_card_packs"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local card_name_index = inst.components.hoshino_cards_sys:SelectRandomCardFromPoolByType("card_white")
+                for i = 1, 7, 1 do
+                    local item = SpawnPrefab("hoshino_item_cards_pack")
+                    item:PushEvent("Set",{cards = {card_name_index},})
+                    item:PushEvent("SetName","White 1-1")
+                    inst.components.inventory:GiveItem(item)
+                end
+            end,
+            text = function(inst)
+                return "赠送7包结果注定一样的白色1选1卡包"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
