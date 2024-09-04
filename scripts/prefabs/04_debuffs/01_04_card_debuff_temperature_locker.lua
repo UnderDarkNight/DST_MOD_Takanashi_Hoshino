@@ -8,7 +8,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     ---
         inst:DoPeriodicTask(0.5,function()
             
-            if target.components.hoshino_data:Add("hoshino_card_debuff_temperature_locker",-0.5) <= 0 then
+            if target.components.hoshino_com_debuff:Add("hoshino_card_debuff_temperature_locker",-0.5) <= 0 then
                 inst:Remove()
             end
             if target.components.temperature then

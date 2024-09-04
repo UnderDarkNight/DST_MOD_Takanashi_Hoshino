@@ -223,6 +223,29 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 33、【金】【寒暑不侵】【恒温5天】【叠加时间】
+        ["card_temperature_locker"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_temperature_locker",5*480)
+                local debuff_prefab = "hoshino_card_debuff_temperature_locker"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "恒温5天"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
