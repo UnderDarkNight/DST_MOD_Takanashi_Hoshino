@@ -44,6 +44,7 @@ local prefabs_name_list = {
     "01_14_card_debuff_sleep_and_coins",                                    --- 卡牌debuff：睡眠和金币
     "01_15_card_debuff_for_monster_drop_cards_pack",                        --- 卡牌debuff：怪物掉落卡包
     "01_16_card_debuff_health_penalty_blocker",                             --- 卡牌debuff：生命惩罚屏蔽
+    "01_17_card_debuff_health_auto_up",                                     --- 卡牌debuff：生命自动上升
 }
 
 ---------------------------------------------------------------------------
