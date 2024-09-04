@@ -55,6 +55,39 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 54、【彩】【我已膨胀】【三维+300/300/300，基础攻击力倍增器2（2倍原始基础伤害，不算卡牌加成），受伤倍增器0.2（80%减伤）】【此后无法再获取经验】【选择之后从卡池移除】
+        ["i_have_expanded"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_i_have_expanded"
+                for i = 1, 5, 1 do
+                    local buff_inst = inst:GetDebuff(debuff_prefab)
+                    if buff_inst and buff_inst:IsValid() then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_i_have_expanded"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+                inst.components.hoshino_com_debuff:Add_Max_Helth(300)
+                inst.components.hoshino_com_debuff:Add_Max_Sanity(300)
+                inst.components.hoshino_com_debuff:Add_Max_Hunger(300)
+
+            end,
+            text = function(inst)
+                return "三维+300/300/300\n基础攻击力X2\n基础伤害减免80%"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
