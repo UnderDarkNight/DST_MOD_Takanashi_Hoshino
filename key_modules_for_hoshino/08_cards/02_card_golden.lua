@@ -267,6 +267,30 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 35、【金】【点金之手】【赠送1包金色3选1】
+        ["hand_of_midas"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local item = SpawnPrefab("hoshino_item_cards_pack")
+                item:PushEvent("Set",{
+                    cards = {
+                        "card_golden",
+                        "card_golden",
+                        "card_golden",
+                    }
+                })
+                item:PushEvent("SetName","Golden 3-1")
+                inst.components.inventory:GiveItem(item)
+            end,
+            text = function(inst)
+                return "赠送1包金色3选1"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
