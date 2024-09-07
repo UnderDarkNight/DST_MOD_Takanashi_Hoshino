@@ -104,7 +104,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 28、【金】【刷新】【赠送卡组刷新次数20】【可叠加】
+    --- 28、【金】【刷新】【赠送卡组刷新次数10】【可叠加】
         ["cards_refresh_num"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
@@ -112,10 +112,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_cards_sys:AddRefreshNum(20)
+                inst.components.hoshino_cards_sys:AddRefreshNum(10)
             end,
             text = function(inst)
-                return "赠送卡组刷新次数20"
+                return "赠送卡组刷新次数10"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -564,34 +564,34 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 51、【金】【移动速度+3%，基础攻击伤害+5%】【可叠加】
-        ["speed_up_and_damage_up_3_5"] = {
+    --- 51、【金】【移动速度+6%，基础攻击伤害+10%】【可叠加】
+        ["speed_up_and_damage_up_6_10"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Speed_Mult(3/100)
-                inst.components.hoshino_com_debuff:Add_Damage_Mult(5/100)
+                inst.components.hoshino_com_debuff:Add_Speed_Mult(6/100)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(10/100)
             end,
             text = function(inst)
-                return "移动速度+3%，基础攻击伤害+5%"
+                return "移动速度+6%，基础攻击伤害+10%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 52、【金】【基础减伤值增加3%】【所有减伤值总和无法超过99%，达到之后移除该卡片】
-        ["damage_taken_mult_3"] = {
+    --- 52、【金】【基础减伤值增加6%】【所有减伤值总和无法超过99%，达到之后移除该卡片】
+        ["damage_taken_mult_6"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
                 return inst.components.hoshino_com_debuff:Get_Damage_Taken_Mult() < 0.99
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Damage_Taken_Mult(3/100)
+                inst.components.hoshino_com_debuff:Add_Damage_Taken_Mult(6/100)
             end,
             text = function(inst)
-                return "基础基础伤害减免+3%\n最高到达99%"
+                return "基础基础伤害减免+6%\n最高到达99%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

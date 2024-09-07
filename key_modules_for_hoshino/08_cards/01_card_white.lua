@@ -229,19 +229,20 @@ local cards = {
                 --- 如果当前卡组只有1张卡，赠送额外一张白卡包
                 if #ret_cards_type == 0 then
                     ret_cards_type = {"card_white"}
+                    ret_cards_type = {"card_white"}
                 end
 
                 --- 生成物品给玩家
                 for k, temp_card_type in pairs(ret_cards_type) do
                     local item = SpawnPrefab("hoshino_item_cards_pack")
-                    item:PushEvent("Set",{ cards = {temp_card_type} })
+                    item:PushEvent("Set",{ cards = {temp_card_type,temp_card_type} })
                     inst.components.inventory:GiveItem(item)
                 end
                 --- 上屏蔽器
                 inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",3)
             end,
             text = function(inst)
-                return "根据当前剩余未选择的卡牌数量，给玩家N张 1选1卡包。\n包括颜色对应。下三次升级不再赠送升级卡包"
+                return "根据当前剩余未选择的卡牌数量，给玩家N张 2选1卡包。\n包括颜色对应。下三次升级不再赠送升级卡包"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

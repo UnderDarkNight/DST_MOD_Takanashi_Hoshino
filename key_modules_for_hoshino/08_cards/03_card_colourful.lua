@@ -45,7 +45,8 @@ local cards = {
             back = "card_colourful",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
-                return inst.components.hoshino_com_debuff:Get_Health_Down_Reduce() == 0
+                -- return inst.components.hoshino_com_debuff:Get_Health_Down_Reduce() == 0
+                return true
             end,
             fn = function(inst)
                inst.components.hoshino_com_debuff:Add_Health_Down_Reduce(1)
@@ -88,7 +89,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 55、【彩】【照我以火】【击杀任意生物会产生半径6伤害200的爆炸，被爆炸炸死的也一样触发】【从卡池移除】
+    --- 55、【彩】【照我以火】【击杀任意生物会产生半径12伤害200的爆炸，被爆炸炸死的也一样触发】【从卡池移除】
         ["kill_and_explode"] = {
             back = "card_colourful",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
@@ -113,7 +114,7 @@ local cards = {
                 end
             end,
             text = function(inst)
-                return "击杀任意生物会产生半径6伤害200的爆炸\n被爆炸炸死的也一样触发"
+                return "击杀任意生物会产生半径12伤害200的爆炸\n被爆炸炸死的也一样触发"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

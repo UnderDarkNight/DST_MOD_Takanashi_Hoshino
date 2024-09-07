@@ -38,7 +38,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 return
             end
             local pt = Vector3(killed_monster.Transform:GetWorldPosition())
-            local ents = TheSim:FindEntities(pt.x,0,pt.z,TUNING.HOSHINO_DEBUGGING_MODE and 12 or 6,musthavetags,canthavetags,musthaveoneoftags)
+            local ents = TheSim:FindEntities(pt.x,0,pt.z,12,musthavetags,canthavetags,musthaveoneoftags)
             for k, temp_monster in pairs(ents) do
                 -- print("fake error searching",temp_monster,CanBeAttack(temp_monster,target))
                 if temp_monster and temp_monster ~= target and CanBeAttack(temp_monster,target) then

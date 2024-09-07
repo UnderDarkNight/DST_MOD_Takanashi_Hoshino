@@ -32,6 +32,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
         if target.components.health then
             local old_max = target.components.health.maxhealth
             target.components.health.maxhealth = old_max * 3
+            target.components.health:SetPercent(1)
         end
         if target.components.combat then
             local origin_dmg = target.components.combat.defaultdamage or 0

@@ -271,32 +271,32 @@ local flg,error_code = pcall(function()
     ---
         -- ThePlayer.components.hoshino_com_builder_blocker:SetDailyMax(10)
 
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --     cards = {
-        --         -- "card_golden",
-        --         "7_identical_white_card_packs",
-        --         -- "summon_tumbleweed",
-        --         -- "test_card_white",
-        --         -- "test_card_white",
-        --     },
-        -- })
-        -- -- item:PushEvent("SetName","3-1")
-        -- ThePlayer.components.inventory:GiveItem(item)
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+            cards = {
+                -- "card_golden",
+                "give_me_some_money",
+                -- "summon_tumbleweed",
+                -- "test_card_white",
+                -- "test_card_white",
+            },
+        })
+        -- item:PushEvent("SetName","3-1")
+        ThePlayer.components.inventory:GiveItem(item)
 
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        local inst = ThePlayer
-        -- local inst = SpawnPrefab("bearger")
-        local debuff_prefab = "hoshino_card_debuff_kill_and_explode"
-        while true do
-            local debuff_inst = inst:GetDebuff(debuff_prefab)
-            if debuff_inst and debuff_inst:IsValid() then
-                print("test 成功安装debuff",debuff_inst)
-                break
-            end
-            inst:AddDebuff(debuff_prefab,debuff_prefab)
-        end
+        -- local inst = ThePlayer
+        -- -- local inst = SpawnPrefab("bearger")
+        -- local debuff_prefab = "hoshino_card_debuff_kill_and_explode"
+        -- while true do
+        --     local debuff_inst = inst:GetDebuff(debuff_prefab)
+        --     if debuff_inst and debuff_inst:IsValid() then
+        --         print("test 成功安装debuff",debuff_inst)
+        --         break
+        --     end
+        --     inst:AddDebuff(debuff_prefab,debuff_prefab)
+        -- end
         -- inst.Transform:SetPosition(x,y,z)
     ----------------------------------------------------------------------------------------------------------------
     ---
