@@ -28,27 +28,25 @@
                 widget =
                 {
                     slotpos = {},
-                    animbank = "ui_fish_box_7x5",   --- 格子背景动画
-                    animbuild = "ui_fish_box_7x5",  --- 格子背景动画
-                    pos = Vector3(0, 220, 0),       --- 基点坐标
-                    side_align_tip = 160,
-                },
-                slotbg =
-                {
-                    { image = "hoshino_shop24_slot_bg.tex", atlas = "images/widgets/hoshino_shop24_slot_bg.xml" },
-                    { image = "hoshino_shop24_slot_bg.tex", atlas = "images/widgets/hoshino_shop24_slot_bg.xml" },
-                    { image = "hoshino_shop24_slot_bg.tex", atlas = "images/widgets/hoshino_shop24_slot_bg.xml" },
+                    animbank = "hoshino_building_shop24_hud",   --- 格子背景动画
+                    animbuild = "hoshino_building_shop24_hud",  --- 格子背景动画
+                    pos = Vector3(0, 0, 0),       --- 基点坐标
+                    -- side_align_tip = 160,
                 },
                 type = "chest",
-                acceptsstacks = true,               --- 是否允许叠堆 
+                acceptsstacks = true,               --- 是否允许叠堆
+                -- opensound = "meta4/mermery/open",
+                -- closesound = "meta4/mermery/close",
             }
 
             ------ 格子的布局
-            for y = 2.5, -0.5, -1 do
-                for x = -1, 3 do
-                    table.insert(params[container_widget_name].widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
+                local slot_start_x, slot_start_y = -700,-300
+                local slot_delta = 70
+                for y = 1,4 do
+                    for x = 1,4 do
+                        table.insert(params[container_widget_name].widget.slotpos, Vector3(slot_start_x + slot_delta * (x), slot_start_y + slot_delta * (y), 0))
+                    end
                 end
-            end
             -------------------------------------------------------------------------------------------
             -- 判断能烧的进来（组件是fuel）
             params[container_widget_name].itemtestfn =  function(container_com, item, slot)
@@ -60,10 +58,10 @@
         theContainer:WidgetSetup(container_widget_name)
         ------------------------------------------------------------------------
         --- 开关声音。如果注释掉，则是默认的开关声音。
-            -- if theContainer.widget then
-            --     theContainer.widget.closesound = "turnoftides/common/together/water/splash/small"
-            --     theContainer.widget.opensound = "turnoftides/common/together/water/splash/small"
-            -- end
+            if theContainer.widget then
+                theContainer.widget.closesound = "turnoftides/common/together/water/splash/small"
+                theContainer.widget.opensound = "turnoftides/common/together/water/splash/small"
+            end
         ------------------------------------------------------------------------
     end
 
@@ -83,6 +81,40 @@
         -------------------------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- widget event组件
+    local function widget_open_event_install(inst)
+        inst:ListenForEvent("hoshino_event.container_widget_open",function(inst,front_root)
+            ------------------------------------------------------------------------
+            -- 修改格子的透明度
+                local slot_start_x, slot_start_y = -668,-260
+                local slot_delta = 64
+                -- local slot_scale = 0.9
+                local slot_scale = 1
+                local num = 1
+                for y = 1, 4, 1 do
+                    for x = 1, 4, 1 do
+                        local current_itemtile = front_root.inv[num]
+                        current_itemtile:SetPosition(slot_start_x + slot_delta*(x-1), slot_start_y + slot_delta*(y-1))
+                        current_itemtile:SetScale(slot_scale,slot_scale,slot_scale)
+                        if current_itemtile.bgimage then
+                            current_itemtile.bgimage:SetTint(1,1,1,0.8)
+                            current_itemtile.bgimage:SetTexture("images/widgets/hoshino_shop24_slot_bg.xml", "hoshino_shop24_slot_bg.tex")
+                        end
+                        current_itemtile:SetOnGainFocus(function()
+                            current_itemtile:MoveToFront()
+                        end)                    
+                        num = num + 1
+                    end
+                end
+            ------------------------------------------------------------------------
+            ---- 
+                if ThePlayer.___test_container_fn then
+                    ThePlayer.___test_container_fn(inst,front_root)
+                end
+            ------------------------------------------------------------------------
+        end)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -99,14 +131,14 @@ local function fn()
 
     MakeObstaclePhysics(inst, 0.5)---设置一下距离
 
-    inst.AnimState:SetBank("cane")
-    inst.AnimState:SetBuild("swap_cane")
+    inst.AnimState:SetBank("madscience_lab")
+    inst.AnimState:SetBuild("madscience_lab")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("structure")
 
     add_container_before_not_ismastersim_return(inst)
-
+    widget_open_event_install(inst)
     if not TheWorld.ismastersim then
         return inst
     end
