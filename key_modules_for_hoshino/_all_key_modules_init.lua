@@ -19,4 +19,7 @@ modimport("key_modules_for_hoshino/07_actions/__all_actions_init.lua")
 modimport("key_modules_for_hoshino/08_cards/__all_cards_init.lua") 
 -- 所有卡牌
 
+modimport("key_modules_for_hoshino/09_widgets/__all_widget_init.lua") 
+-- 界面相关的组件和修改
+
 

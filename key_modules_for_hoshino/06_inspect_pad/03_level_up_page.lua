@@ -38,7 +38,7 @@
         local cards_data = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.cards
         if cards_data then
             for k, temp_data in pairs(cards_data) do
-                if temp_data.card_black then
+                if temp_data.card_name == "card_black" then
                     return true
                 end
             end
@@ -319,7 +319,7 @@ local function page_create(front_root,MainScale)
                         end)
                     end
                 elseif card_select_box.cards_button_box and Has_Black_Card() then
-                    card_desc_text:SetString("诅咒期间不允许回收")
+                    card_desc_text:SetString("诅咒卡存在，不允许回收")
                 end
             end)
         --------------------------------------------------------------------------------------

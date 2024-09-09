@@ -275,7 +275,8 @@ local flg,error_code = pcall(function()
         item:PushEvent("Set",{
             cards = {
                 -- "card_golden",
-                "ruins_sheild_and_vengeance",
+                "sanity_ever_zero",
+                -- "card_black",
                 -- "summon_tumbleweed",
                 -- "test_card_white",
                 -- "test_card_white",
@@ -304,6 +305,8 @@ local flg,error_code = pcall(function()
         --     pt = Vector3(x,y,z),
         --     scale = 2,
         -- })
+    ----------------------------------------------------------------------------------------------------------------
+            
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -7,10 +7,13 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.target = target
     -----------------------------------------------------
     --- 
+        local temp_lock_flag = false
         inst:ListenForEvent("sanitydelta",function()            
-            if target.components.sanity then
+            if target.components.sanity and not temp_lock_flag then
                 target.components.sanity.current = 0
+                temp_lock_flag = true
                 target.components.sanity:DoDelta(-1,true)
+                temp_lock_flag = false
             end
         end,target)
     -----------------------------------------------------

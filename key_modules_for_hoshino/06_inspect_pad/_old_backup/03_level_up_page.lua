@@ -315,7 +315,7 @@ local function page_create(front_root,MainScale)
                             local atlas = _table.atlas
                             local image = _table.image
                             local card_name = _table.card_name
-                            -- print("hoshino_event.card_display",card_name)
+                            print("hoshino_event.card_display",card_name,card_index)
                             current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
                             card_select_box:SetDescByCardName(card_name) -- 设置描述文本
                         end,ThePlayer)

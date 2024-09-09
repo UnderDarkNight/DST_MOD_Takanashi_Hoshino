@@ -679,19 +679,13 @@ nil,
         self.selectting = false
         -- print("crads selet index",index)
 
-        local data = self.cards_data or {[1] = "card_white"}
+        local data = self.cards_data
         index = index or 1
         index = math.clamp(index,1,5)
 
         -----------------------------------------------------------------------------------------
         --- 有诅咒卡
-            local has_black_card = false
-            for k,v in pairs(self.cards_data) do
-                if self:GetCardTypeByName(v.card_name) then
-                    has_black_card = true
-                    break
-                end
-            end
+            local has_black_card = self:HasBlackCard()
         -----------------------------------------------------------------------------------------
         --- 抽取卡牌
             local selected_card_data = self.cards_data[index]
@@ -700,7 +694,19 @@ nil,
             local selected_atlas = selected_card_data.atlas
             local selected_image = selected_card_data.image
 
-            print("+++ 玩家激活了卡牌",selected_card_type,selected_card_name_index)
+            print("+玩家选择了卡牌",selected_card_type,selected_card_name_index)
+        -----------------------------------------------------------------------------------------
+        --- 如果是诅咒卡下发展示命令
+            if has_black_card then
+                self.inst:DoTaskInTime(0.2,function()
+                    self:GetRPC():PushEvent("hoshino_event.card_display",{
+                        index = index,
+                        atlas = selected_atlas,
+                        image = selected_image,
+                        card_name = selected_card_name_index
+                    })
+                end)
+            end 
         -----------------------------------------------------------------------------------------
         --- 
             self:AcitveCardFnByIndex(selected_card_name_index) -- 激活卡牌
@@ -716,17 +722,7 @@ nil,
         --- 
             self:SetClientSideData("cards_selectting",self.selectting) -- 下发正在选择标记
         -----------------------------------------------------------------------------------------
-        --- 如果是诅咒卡下发展示命令
-            if has_black_card then
-                self.inst:DoTaskInTime(0.2,function()
-                    self:GetRPC():PushEvent("hoshino_event.card_display",{
-                        index = index,
-                        atlas = selected_atlas,
-                        image = selected_image,
-                        card_name = selected_card_name_index
-                    })
-                end)
-            end
+
         -----------------------------------------------------------------------------------------
         -----------------------------------------------------------------------------------------
     end
