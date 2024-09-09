@@ -562,8 +562,11 @@ nil,
             if self.cards_data == nil then
                 return
             end
+            if self:HasBlackCard() then
+                return
+            end
         ------------------------------------------------------------------
-        --- 卡牌回收次数按类型增加
+        --- 卡牌回收、按最高类型回收次数。最高的是金卡则+2 。最高是白卡则 +1
             local cards_data = self.cards_data
             local num = 0
             local type_with_num = {
@@ -572,12 +575,16 @@ nil,
                 ["card_golden"] = 2,
                 ["card_colourful"] = 3,
             }
+            local ret_num = 0
             for _,single_card_data in pairs(cards_data) do
                 local card_name_index = single_card_data.card_name
                 local card_type = self:GetCardTypeByName(card_name_index)
-                num = num + (type_with_num[card_type] or 0)
+                local temp_num =  (type_with_num[card_type] or 0)
+                if temp_num > 0 then
+                    ret_num = temp_num
+                end
             end
-            self:AddRefreshNum(num)
+            self:AddRefreshNum(ret_num)
         ------------------------------------------------------------------
         ---
             self.cards_data = nil

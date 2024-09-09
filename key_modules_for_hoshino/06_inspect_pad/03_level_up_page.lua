@@ -70,7 +70,7 @@ local function page_create(front_root,MainScale)
             button_recycle:SetOnClick(function()
                 -- print("info button")
             end)
-            button_recycle.focus_scale = button_recycle.normal_scale
+            -- button_recycle.focus_scale = button_recycle.normal_scale
             local button_info_text = button_recycle:AddChild(Text(CODEFONT,50,"回收",{ 126/255 , 133/255 ,143/255 , 1}))
             button_info_text:SetPosition(80,-20)
         --------------------------------------------------------------------------------------
@@ -314,7 +314,8 @@ local function page_create(front_root,MainScale)
                             page.inst:PushEvent("refresh_num_update")   -- 刷新次数显示更新
                         end)
                     end
-
+                elseif card_select_box.cards_button_box and Has_Black_Card() then
+                    card_desc_text:SetString("诅咒期间不允许回收")
                 end
             end)
         --------------------------------------------------------------------------------------

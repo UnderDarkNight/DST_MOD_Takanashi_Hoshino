@@ -229,13 +229,12 @@ local cards = {
                 --- 如果当前卡组只有1张卡，赠送额外一张白卡包
                 if #ret_cards_type == 0 then
                     ret_cards_type = {"card_white"}
-                    ret_cards_type = {"card_white"}
                 end
 
                 --- 生成物品给玩家
                 for k, temp_card_type in pairs(ret_cards_type) do
                     local item = SpawnPrefab("hoshino_item_cards_pack")
-                    item:PushEvent("Set",{ cards = {temp_card_type,temp_card_type} })
+                    item:PushEvent("Set",{ cards = {temp_card_type} })
                     inst.components.inventory:GiveItem(item)
                 end
                 --- 上屏蔽器
