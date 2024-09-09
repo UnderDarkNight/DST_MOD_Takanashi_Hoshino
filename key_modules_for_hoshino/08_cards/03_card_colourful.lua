@@ -118,6 +118,35 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 56、【彩】【每次升级额外获得一包「升级卡包」，同时每次升级 20%概率获得随机诅咒】【不可叠加，选择后从卡组移除】
+        ["level_up_and_double_card_pack"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_level_up_and_double_card_pack"
+                for i = 1, 5, 1 do
+                    local buff_inst = inst:GetDebuff(debuff_prefab)
+                    if buff_inst and buff_inst:IsValid() then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_level_up_and_double_card_pack"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "每次升级额外获得一包「升级卡包」\n同时每次升级 20%概率获得随机诅咒"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

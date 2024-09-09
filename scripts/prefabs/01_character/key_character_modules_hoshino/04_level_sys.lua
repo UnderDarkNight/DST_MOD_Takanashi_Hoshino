@@ -36,11 +36,12 @@ return function(inst)
         --- 清空经验并等级+1
             inst.components.hoshino_com_level_sys:SetExp(0)
             inst.components.hoshino_com_level_sys:Level_DoDelta(1)
+            inst:PushEvent("hoshino_event.level_up")
         -----------------------------------------------------------------------------
         --- 送玩家升级卡包(注意屏蔽器)
             if inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",0) == 0 then
                 local item = SpawnPrefab("hoshino_item_cards_pack")
-                item.components.inventory:GiveItem(item)
+                inst.components.inventory:GiveItem(item)
             else
                 -- print("当前升级卡包被屏蔽")    
             end
