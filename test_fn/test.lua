@@ -308,9 +308,182 @@ local flg,error_code = pcall(function()
     ----------------------------------------------------------------------------------------------------------------
     --- 
         ThePlayer.___test_container_fn = function(inst,front_root)
-            print("open",front_root)
+            -- print("open",front_root)
+            ------------------------------------------------------------------------------
+            --- 
+                local root = front_root:AddChild(Widget())
+                local atlas = "images/widgets/hoshino_shop_widget.xml"
+            ------------------------------------------------------------------------------
+            --- 关闭按钮
+                local button_close = root:AddChild(ImageButton(
+                    atlas,
+                    "close_button.tex",
+                    "close_button.tex",
+                    "close_button.tex",
+                    "close_button.tex",
+                    "close_button.tex"
+                ))
+                button_close:SetPosition(730,340)
+                button_close:SetOnClick(function()
+                    root.inst:PushEvent("container_widget_close")
+                end)
+            ------------------------------------------------------------------------------
+            --- 售卖box
+                local sell_box = root:AddChild(Widget())
+                local price_box = sell_box:AddChild(Image(atlas,"sell_price.tex"))
+                local price_text = price_box:AddChild(Text(CODEFONT,35,"500",{ 255/255 , 255/255 ,255/255 , 1}))
+                price_text:SetPosition(0,-19)
+                local button_sell = sell_box:AddChild(ImageButton(
+                    atlas,
+                    "buttom_sell_items.tex",
+                    "buttom_sell_items.tex",
+                    "buttom_sell_items.tex",
+                    "buttom_sell_items.tex",
+                    "buttom_sell_items.tex"
+                ))
+                button_sell:SetPosition(132,-15)
+                button_sell:SetOnClick(function()
+                    print("sell")
+                end)
+                button_sell.focus_scale = {1.05, 1.05, 1.05}
+                sell_box:SetPosition(-623,-352)
+            ------------------------------------------------------------------------------
+            --- 货币按钮组
+                local coin_box = root:AddChild(Widget())
+                coin_box:SetPosition(-600,250)
+                local credit_coins_button = coin_box:AddChild(ImageButton(
+                    atlas,"button_credit_coins.tex",
+                    "button_credit_coins.tex",
+                    "button_credit_coins.tex",
+                    "button_credit_coins.tex",
+                    "button_credit_coins.tex"))
+                credit_coins_button:SetPosition(0,0)
+                credit_coins_button.focus_scale = {1.05, 1.05, 1.05}
+                local credit_coins_text = credit_coins_button:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
 
-            
+                local green_coins_button = coin_box:AddChild(ImageButton(
+                    atlas,"button_empty_num.tex",
+                    "button_empty_num.tex",
+                    "button_empty_num.tex",
+                    "button_empty_num.tex",
+                    "button_empty_num.tex"))
+                green_coins_button:SetPosition(0,-70)
+                green_coins_button.focus_scale = {1.05, 1.05, 1.05}
+                local green_coins_text = green_coins_button:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
+
+                local refresh_button = coin_box:AddChild(ImageButton(
+                    atlas,"button_refresh.tex",
+                    "button_refresh.tex",
+                    "button_refresh.tex",
+                    "button_refresh.tex",
+                    "button_refresh.tex"))
+                refresh_button:SetPosition(0,-140)
+                refresh_button.focus_scale = {1.05, 1.05, 1.05}
+                local refresh_cost_text = refresh_button:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
+
+            ------------------------------------------------------------------------------
+            --- 商店物品盒子
+                local items_box = root:AddChild(Image(atlas,"items_background.tex"))
+                items_box:SetPosition(170,-100)
+
+                local items_pages_button = items_box:AddChild(Widget())
+                items_pages_button:SetPosition(-400,350)
+
+                items_pages_button.buttons = {}
+                
+                local button_special_items = items_pages_button:AddChild(ImageButton(
+                    atlas,"button_special_items_white.tex",
+                    "button_special_items_white.tex",
+                    "button_special_items_white.tex",
+                    "button_special_items_white.tex",
+                    "button_special_items_white.tex"))
+                button_special_items:SetPosition(0,0)
+                button_special_items.focus_scale = {1.02, 1.02, 1.02}
+                local button_special_items_icon = button_special_items.image:AddChild(Image(atlas,"button_icon_special_item.tex"))
+                button_special_items_icon:SetPosition(-140,30)
+                -- items_box.button_special_items = button_special_items   --- 挂载节点
+                table.insert(items_pages_button.buttons,button_special_items)
+                function button_special_items:SetBlack()                --- 变黑函数
+                    local image = "button_special_items_black.tex"
+                    self:SetTextures(atlas,image,image,image,image,image)
+                end
+                function button_special_items:SetWhite()                --- 变白函数
+                    local image = "button_special_items_white.tex"
+                    self:SetTextures(atlas,image,image,image,image,image)
+                end
+                button_special_items:SetOnClick(function()
+                    for i, temp_button in ipairs(items_pages_button.buttons) do
+                        if temp_button == button_special_items then
+                            button_special_items:SetBlack()
+                        elseif temp_button.SetWhite then
+                            temp_button:SetWhite()
+                        end
+                    end
+                    items_box.inst:PushEvent("items_page_switch", "special_items")
+                end)
+
+                local button_normal_items = items_pages_button:AddChild(ImageButton(
+                    atlas,"button_normal_items_white.tex",
+                    "button_normal_items_white.tex",
+                    "button_normal_items_white.tex",
+                    "button_normal_items_white.tex",
+                    "button_normal_items_white.tex"))
+                button_normal_items:SetPosition(290,0)
+                button_normal_items.focus_scale = {1.02, 1.02, 1.02}
+                local button_normal_items_icon = button_normal_items.image:AddChild(Image(atlas,"button_icon_normal_item.tex"))
+                button_normal_items_icon:SetPosition(-140,30)
+                -- items_box.button_normal_items = button_normal_items     --- 挂载节点
+                table.insert(items_pages_button.buttons,button_normal_items)
+                function button_normal_items:SetBlack()                 --- 变黑函数
+                    local image = "button_normal_items_black.tex"
+                    self:SetTextures(atlas,image,image,image,image,image)
+                end
+                function button_normal_items:SetWhite()                 --- 变白函数
+                    local image = "button_normal_items_white.tex"
+                    self:SetTextures(atlas,image,image,image,image,image)
+                end
+                button_normal_items:SetOnClick(function()
+                    for i, temp_button in ipairs(items_pages_button.buttons) do
+                        if temp_button == button_normal_items then
+                            button_normal_items:SetBlack()
+                        elseif temp_button.SetWhite then
+                            temp_button:SetWhite()
+                        end
+                    end
+                    items_box.inst:PushEvent("items_page_switch", "normal_items")
+                end)
+
+            ------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------
+            --- 关闭事件
+                local fast_close_keys = {
+                    [MOVE_UP] = true,
+                    [MOVE_DOWN] = true,
+                    [MOVE_LEFT] = true,
+                    [MOVE_RIGHT] = true,
+                    [KEY_ESCAPE] = true,
+                    [KEY_W] = true,
+                    [KEY_S] = true,
+                    [KEY_A] = true,
+                    [KEY_D] = true,
+                }
+                local key_handler = TheInput:AddKeyHandler(function(key,down)
+                    if down and fast_close_keys[key] then
+                        root.inst:PushEvent("container_widget_close")
+                    end
+                end)
+                root.inst:ListenForEvent("onremove",function()
+                    key_handler:Remove()
+                end)
+                root.inst:ListenForEvent("container_widget_close",function()
+                    inst.replica.container:Close()
+                end)
+            ------------------------------------------------------------------------------
+            ---
+            ------------------------------------------------------------------------------
         end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")

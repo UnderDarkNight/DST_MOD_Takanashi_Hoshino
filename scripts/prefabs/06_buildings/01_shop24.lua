@@ -11,6 +11,9 @@
         Asset("ANIM", "anim/hoshino_building_shop24_hud.zip"),
         Asset("IMAGE", "images/widgets/hoshino_shop24_slot_bg.tex"),
 		Asset("ATLAS", "images/widgets/hoshino_shop24_slot_bg.xml"),
+        
+        Asset("IMAGE", "images/widgets/hoshino_shop_widget.tex"),
+		Asset("ATLAS", "images/widgets/hoshino_shop_widget.xml"),
     }
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- 安装容器界面
@@ -81,12 +84,12 @@
         -------------------------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---- widget event组件
+--- widget event组件。同时触发商店相关的数据加载和图形元素显示。
     local function widget_open_event_install(inst)
         inst:ListenForEvent("hoshino_event.container_widget_open",function(inst,front_root)
             ------------------------------------------------------------------------
             -- 修改格子的透明度
-                local slot_start_x, slot_start_y = -668,-260
+                local slot_start_x, slot_start_y = -668,-68
                 local slot_delta = 64
                 -- local slot_scale = 0.9
                 local slot_scale = 1
@@ -94,7 +97,7 @@
                 for y = 1, 4, 1 do
                     for x = 1, 4, 1 do
                         local current_itemtile = front_root.inv[num]
-                        current_itemtile:SetPosition(slot_start_x + slot_delta*(x-1), slot_start_y + slot_delta*(y-1))
+                        current_itemtile:SetPosition(slot_start_x + slot_delta*(x-1), slot_start_y - slot_delta*(y-1))
                         current_itemtile:SetScale(slot_scale,slot_scale,slot_scale)
                         if current_itemtile.bgimage then
                             current_itemtile.bgimage:SetTint(1,1,1,0.8)

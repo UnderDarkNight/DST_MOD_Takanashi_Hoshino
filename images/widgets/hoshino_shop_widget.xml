@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="hoshino_shop_widget.tex" />
+	<Elements>
+		<Element name="buttom_sell_items.tex" u1="0.001" u2="0.06198828125" v2="0.9130625" v1="0.8496328125" variant="" />
+		<Element name="button_credit_coins.tex" u1="0.001" u2="0.1152109375" v2="0.499" v1="0.4511953125" variant="" />
+		<Element name="button_empty_num.tex" u1="0.001" u2="0.1113046875" v2="0.4491953125" v1="0.3984609375" variant="" />
+		<Element name="button_icon_normal_item.tex" u1="0.001" u2="0.04441015625" v2="0.8476328125" v1="0.768578125" variant="" />
+		<Element name="button_icon_special_item.tex" u1="0.06398828125" u2="0.1113046875" v2="0.9130625" v1="0.8086171875" variant="" />
+		<Element name="button_item_buy.tex" u1="0.1133046875" u2="0.2206796875" v2="0.999" v1="0.913109375" variant="" />
+		<Element name="button_normal_items_black.tex" u1="0.001" u2="0.15183203125" v2="0.766578125" v1="0.694359375" variant="" />
+		<Element name="button_normal_items_white.tex" u1="0.001" u2="0.15183203125" v2="0.692359375" v1="0.627953125" variant="" />
+		<Element name="button_refresh.tex" u1="0.001" u2="0.1113046875" v2="0.551734375" v1="0.501" variant="" />
+		<Element name="button_special_items_black.tex" u1="0.001" u2="0.15183203125" v2="0.625953125" v1="0.553734375" variant="" />
+		<Element name="button_special_items_white.tex" u1="0.1133046875" u2="0.26413671875" v2="0.911109375" v1="0.846703125" variant="" />
+		<Element name="close_button.tex" u1="0.1133046875" u2="0.133765625" v2="0.844703125" v1="0.8008046875" variant="" />
+		<Element name="item_slot_bg.tex" u1="0.26613671875" u2="0.39694921875" v2="0.999" v1="0.6992421875" variant="" />
+		<Element name="item_slot_blue.tex" u1="0.15383203125" u2="0.20603125" v2="0.844703125" v1="0.7461171875" variant="" />
+		<Element name="item_slot_colourful.tex" u1="0.15383203125" u2="0.20603125" v2="0.7441171875" v1="0.64553125" variant="" />
+		<Element name="item_slot_golden.tex" u1="0.20803125" u2="0.26023046875" v2="0.844703125" v1="0.7461171875" variant="" />
+		<Element name="item_slot_gray.tex" u1="0.15383203125" u2="0.20603125" v2="0.64353125" v1="0.5449453125" variant="" />
+		<Element name="items_background.tex" u1="0.20803125" u2="0.7568125" v2="0.6972421875" v1="0.0722890625" variant="" />
+		<Element name="sell_price.tex" u1="0.001" u2="0.09275" v2="0.999" v1="0.9150625" variant="" />
+	</Elements>
+</Atlas>
