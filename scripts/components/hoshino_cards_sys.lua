@@ -441,7 +441,7 @@ nil,
                         cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
                         cards_back[i] = self:GetCardBackByIndex(current_card_name_index)  --- 获取卡牌背面数据
                     else    --- 卡牌测试不通过，选一张同类型卡牌
-                        local card_type = self:GetCardTypeByIndex(current_card_name_index)
+                        local card_type = self:GetCardTypeByName(current_card_name_index)
                         cards_back[i] = card_type
                         current_card_name_index = self:SelectRandomCardFromPoolByType(card_type) -- 按类型从卡池抽一张
                         cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
@@ -506,10 +506,10 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 --- 记忆激活过的卡牌和次数
     function hoshino_cards_sys:RememberActivedCard(card_name_index,num)
-        local card_type = self:GetCardTypeByIndex(card_name_index)
+        local card_type = self:GetCardTypeByName(card_name_index) or "none"
         self.ActivatedCards[card_type] = self.ActivatedCards[card_type] or {}
-        self.ActivatedCards[card_type][card_name_index] = self.ActivatedCards[card_type][card_name_index] or 0
-        self.ActivatedCards[card_type][card_name_index] = self.ActivatedCards[card_type][card_name_index] + (num or 1)
+        self.ActivatedCards[card_type][card_name_index] = (self.ActivatedCards[card_type][card_name_index] or 0) + (num or 1)
+        -- print("card rememberd",card_name_index,self.ActivatedCards[card_type][card_name_index])
     end
     function hoshino_cards_sys:GetActivatedCards(card_type)
         --[[
@@ -531,7 +531,7 @@ nil,
     end
     function hoshino_cards_sys:TryToDeactiveCardByName(card_name_index)
         --- 先检查激活次数是否超过 1 或者nil
-        local card_type = self:GetCardTypeByIndex(card_name_index)
+        local card_type = self:GetCardTypeByName(card_name_index)
         local actived_times = self:GetActivatedCards(card_type)[card_name_index] or 0
         if actived_times <= 0 then
             return
@@ -719,10 +719,10 @@ nil,
             self.cards_data = nil
             self.need_to_send_to_client_data = nil
         -----------------------------------------------------------------------------------------
-        --- 
+        ---             
             self:SetClientSideData("cards_selectting",self.selectting) -- 下发正在选择标记
         -----------------------------------------------------------------------------------------
-
+            -- print("66666666666666666666")
         -----------------------------------------------------------------------------------------
         -----------------------------------------------------------------------------------------
     end

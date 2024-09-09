@@ -306,7 +306,48 @@ local flg,error_code = pcall(function()
         --     scale = 2,
         -- })
     ----------------------------------------------------------------------------------------------------------------
-            
+    --- 商店界面调试
+        -- local container_widget_name = "hoshino_building_shop24_widget"
+
+        -- -----------------------------------------------------------------------------------
+        -- ----- 检查和注册新的容器界面
+        -- local all_container_widgets = require("containers")  --- 所有容器的总表
+        -- local params = all_container_widgets.params             ---- 总参数表。 index 为该界面名字。
+        -- -- params[container_widget_name] = nil
+
+        -- -- if params[container_widget_name] == nil then            ---- 如果该界面不存在总表，则按以下规则注册。
+        --     params[container_widget_name] = {
+        --         widget =
+        --         {
+        --             slotpos = {},
+        --             animbank = "hoshino_building_shop24_hud",   --- 格子背景动画
+        --             animbuild = "hoshino_building_shop24_hud",  --- 格子背景动画
+        --             pos = Vector3(0, -500, 0),       --- 基点坐标
+        --             side_align_tip = 160,
+        --         },
+        --         slotbg =
+        --         {
+        --             { image = "hoshino_shop24_slot_bg.tex", atlas = "images/widgets/hoshino_shop24_slot_bg.xml" },
+        --             { image = "hoshino_shop24_slot_bg.tex", atlas = "images/widgets/hoshino_shop24_slot_bg.xml" },
+        --             { image = "hoshino_shop24_slot_bg.tex", atlas = "images/widgets/hoshino_shop24_slot_bg.xml" },
+        --         },
+        --         type = "chest",
+        --         acceptsstacks = true,               --- 是否允许叠堆 
+        --     }
+
+        --     ------ 格子的布局
+        --     for y = 2.5, -0.5, -1 do
+        --         for x = -1, 3 do
+        --             table.insert(params[container_widget_name].widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
+        --         end
+        --     end
+        --     -------------------------------------------------------------------------------------------
+        --     -- 判断能烧的进来（组件是fuel）
+        --     params[container_widget_name].itemtestfn =  function(container_com, item, slot)
+        --         return true
+        --     end
+        -------------------------------------------------------------------------------------------
+        -- end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
