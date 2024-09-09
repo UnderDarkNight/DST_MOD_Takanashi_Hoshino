@@ -34,6 +34,17 @@
         end
         return "card_white"
     end
+    local function Has_Black_Card()
+        local cards_data = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.cards
+        if cards_data then
+            for k, temp_data in pairs(cards_data) do
+                if temp_data.card_black then
+                    return true
+                end
+            end
+        end
+        return false
+    end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 local function page_create(front_root,MainScale)
@@ -47,7 +58,7 @@ local function page_create(front_root,MainScale)
             card_select_box:SetPosition(-270,50)
         --------------------------------------------------------------------------------------
         --- info button
-            local button_info = card_select_box:AddChild(ImageButton(
+            local button_recycle = card_select_box:AddChild(ImageButton(
                 "images/inspect_pad/page_level_up.xml",
                 "button_info.tex",
                 "button_info.tex",
@@ -55,11 +66,13 @@ local function page_create(front_root,MainScale)
                 "button_info.tex",
                 "button_info.tex"
             ))
-            button_info:SetPosition(-360,240)
-            button_info:SetOnClick(function()
+            button_recycle:SetPosition(-360,240)
+            button_recycle:SetOnClick(function()
                 -- print("info button")
             end)
-            button_info.focus_scale = button_info.normal_scale
+            button_recycle.focus_scale = button_recycle.normal_scale
+            local button_info_text = button_recycle:AddChild(Text(CODEFONT,50,"回收",{ 126/255 , 133/255 ,143/255 , 1}))
+            button_info_text:SetPosition(80,-20)
         --------------------------------------------------------------------------------------
         --- 刷新按钮
             local button_refresh = card_select_box:AddChild(ImageButton(
@@ -87,7 +100,10 @@ local function page_create(front_root,MainScale)
         --- 刷新次数
             local refresh_num_text = card_select_box:AddChild(Text(CODEFONT,40,"500",{ 126/255 , 133/255 ,143/255 , 1}))
             refresh_num_text:SetPosition(320,245)
-            refresh_num_text:SetString(tostring(ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.refresh_num or ThePlayer.replica.hoshino_cards_sys:Get_refresh_num()))
+            page.inst:ListenForEvent("refresh_num_update",function(inst)
+                refresh_num_text:SetString(tostring(ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.refresh_num or ThePlayer.replica.hoshino_cards_sys:Get_refresh_num()))
+            end)
+            page.inst:PushEvent("refresh_num_update")
         --------------------------------------------------------------------------------------
         --- 卡牌描述文本
             local card_desc_text = card_select_box:AddChild(Text(CODEFONT,50,"500",{ 0/255 , 0/255 ,0/255 , 1}))
@@ -278,15 +294,29 @@ local function page_create(front_root,MainScale)
             local current_phrase = page:AddChild(Image("images/inspect_pad/page_level_up.xml", "current_phrase.tex"))
             current_phrase:SetPosition(450,50-3)
         --------------------------------------------------------------------------------------
-        --- 指示器激活
-            -- page.inst:DoPeriodicTask(0.1,function()
-            --     local current_mouse_over_inst = TheInput:GetHUDEntityUnderMouse()  -- 获取鼠标下的实体
-            --     if current_mouse_over_inst then
-            --         -- card_desc_text:SetString(current_mouse_over_inst.card_name)
-            --         print(current_mouse_over_inst,current_mouse_over_inst.card_name)
-            --     end
+        ---  回收按钮
+            button_recycle:SetOnClick(function()
+                if card_select_box.cards_button_box and not Has_Black_Card() then
+                    local PAD_DATA = ThePlayer.PAD_DATA or {}
+                    PAD_DATA.cards_selectting = false
+                    PAD_DATA.cards = nil                    -- 清除卡牌数据
+                    PAD_DATA.button_level_up_red_dot = nil  -- 清除红点
+                    card_desc_text:SetString("     ")       -- 清除描述文本
+                    PAD_DATA.refresh_num = ( PAD_DATA.refresh_num or 0 )+ 1 -- 刷新次数加一
+                    page.inst:PushEvent("refresh_num_update")   -- 刷新次数显示更新
+                    ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.card_recycle_button_clicked")
+                    card_select_box.cards_button_box:Kill() -- 清除卡牌选择按钮
+                    card_select_box.cards_button_box = nil
 
-            -- end)
+                    ---- 服务器可能会下发来数据，做刷新处理
+                    for i = 1, 60, 1 do
+                        page.inst:DoTaskInTime(0.2*i,function()
+                            page.inst:PushEvent("refresh_num_update")   -- 刷新次数显示更新
+                        end)
+                    end
+
+                end
+            end)
         --------------------------------------------------------------------------------------
         ---
             return page

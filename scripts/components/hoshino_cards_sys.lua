@@ -151,6 +151,11 @@ local hoshino_cards_sys = Class(function(self, inst)
             end
         end)
     ---------------------------------------------------------------------
+    --- 卡牌回收
+        inst:ListenForEvent("hoshino_event.card_recycle_button_clicked",function()
+            self:Card_Recycle_Clicked()
+        end)
+    ---------------------------------------------------------------------
 end,
 nil,
 {
@@ -350,6 +355,7 @@ nil,
             need_to_send_to_client_data = {}
             for i, v in ipairs(cards_back) do
                 need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex"}
+                need_to_send_to_client_data[i].card_name = "card_black"
             end
         end
 
@@ -465,6 +471,7 @@ nil,
             need_to_send_to_client_data = {}
             for i, v in ipairs(cards_back) do
                 need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex"}
+                need_to_send_to_client_data[i].card_name = "card_black"
             end
         end
         self.need_to_send_to_client_data = need_to_send_to_client_data
@@ -536,7 +543,48 @@ nil,
             self:RememberActivedCard(card_name_index,-1)
         end
     end
+    function hoshino_cards_sys:HasBlackCard()
+        local cards_data = self.cards_data or {}
+        for _,single_card_data in pairs(cards_data) do
+            local card_name_index = single_card_data.card_name
+            if self:GetCardTypeByName(card_name_index) == "card_black" then
+                return true
+            end
+        end
+        return false
+    end
+------------------------------------------------------------------------------------------------------------------------------
+-- 卡牌回收。 黑卡+0。白+1。金+2。彩色+3
+    function hoshino_cards_sys:Card_Recycle_Clicked()
 
+        ------------------------------------------------------------------
+        --- 
+            if self.cards_data == nil then
+                return
+            end
+        ------------------------------------------------------------------
+        --- 卡牌回收次数按类型增加
+            local cards_data = self.cards_data
+            local num = 0
+            local type_with_num = {
+                ["card_black"] = 0,
+                ["card_white"] = 1,
+                ["card_golden"] = 2,
+                ["card_colourful"] = 3,
+            }
+            for _,single_card_data in pairs(cards_data) do
+                local card_name_index = single_card_data.card_name
+                local card_type = self:GetCardTypeByName(card_name_index)
+                num = num + (type_with_num[card_type] or 0)
+            end
+            self:AddRefreshNum(num)
+        ------------------------------------------------------------------
+        ---
+            self.cards_data = nil
+            self.need_to_send_to_client_data = nil
+            self.selectting = false
+        ------------------------------------------------------------------
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌数据库加载、提取
     function hoshino_cards_sys:CardsInit(force)  -- 初始化函数

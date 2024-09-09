@@ -176,6 +176,31 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 59、【彩】【金色传说】【赠送5包金色的2选1】
+        ["the_golden_legend"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                for i = 1, 5, 1 do
+                    local item = SpawnPrefab("hoshino_item_cards_pack")
+                    item:PushEvent("Set",{
+                        cards = {
+                            "card_golden",
+                            "card_golden",
+                        },
+                    })
+                    item:PushEvent("SetName","Golden 2-1")
+                    inst.components.inventory:GiveItem(item)
+                end
+            end,
+            text = function(inst)
+                return "赠送5包金色的2选1"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
