@@ -147,6 +147,35 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 58、【彩】【绝对防御】【受到任何伤害之后的20s内，受到「血量扣除结算值」不会超过20点】【从卡池移除】
+        ["absolute_defense"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_absolute_defense"
+                for i = 1, 5, 1 do
+                    local buff_inst = inst:GetDebuff(debuff_prefab)
+                    if buff_inst and buff_inst:IsValid() then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_absolute_defense"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "受到任何伤害之后的20s内\n受到「血量扣除结算值」不会超过20点"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

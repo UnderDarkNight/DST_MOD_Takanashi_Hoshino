@@ -49,6 +49,7 @@ local prefabs_name_list = {
     "01_19_card_debuff_i_have_expanded",                                    --- 卡牌debuff：我已膨胀
     "01_20_card_debuff_kill_and_explode",                                   --- 卡牌debuff：击杀爆炸
     "01_21_card_debuff_level_up_and_double_card_pack",                      --- 卡牌debuff：升级和双倍卡包
+    "01_22_card_debuff_absolute_defense",                                   --- 卡牌debuff：绝对防御
 }
 
 ---------------------------------------------------------------------------

@@ -12,6 +12,8 @@ return function(inst)
     if not TheWorld.ismastersim then
         return
     end
+
+    inst:AddComponent("hoshino_com_health_hooker")
     inst:ListenForEvent("master_postinit_hoshino",function()
         
         if inst.components.health == nil then
@@ -30,6 +32,7 @@ return function(inst)
                     num = num + reduce_num
                 end
             end
+            num = inst.components.hoshino_com_health_hooker:Active(num) or num
             return old_DoDelta(self,num,...)
         end
 
