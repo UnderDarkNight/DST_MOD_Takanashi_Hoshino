@@ -196,7 +196,32 @@ local cards = {
                 end
             end,
             text = function(inst)
-                return "赠送5包金色的2选1"
+                return "赠送5包金色的1选1"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 60、【彩】【壁垒】【受到攻击后，获得一个10s的铥矿冒效果，效果持续期间，攻击伤害的1%转换为玩家血量】【吸血叠加】
+        ["ruins_sheild_and_vengeance"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                if inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_ruins_sheild_and_vengeance",0.01) > 1 then
+                    inst.components.hoshino_com_debuff:Set("hoshino_card_debuff_ruins_sheild_and_vengeance",1)
+                end
+                local debuff_prefab = "hoshino_card_debuff_ruins_sheild_and_vengeance"
+                while true do
+                    local debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                end
+            end,
+            text = function(inst)
+                return "受到攻击后，获得一个10s的护盾\n效果持续期间，攻击伤害的1%转换为玩家血量\n吸血百分比叠加"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

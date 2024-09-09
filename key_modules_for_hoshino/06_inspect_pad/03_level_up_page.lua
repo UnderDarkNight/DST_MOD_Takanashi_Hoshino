@@ -125,6 +125,7 @@ local function page_create(front_root,MainScale)
                 else
                     card_desc_text:SetString("未找到卡牌描述")
                 end
+                card_desc_text:MoveToFront()
             end            
         --------------------------------------------------------------------------------------
         --- 卡牌区。1-5张牌。数据从 ThePlayer.PAD_DATA.cards 获取。靠index返回。做决定，避免有MOD搞事。

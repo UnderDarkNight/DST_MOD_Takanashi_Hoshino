@@ -275,7 +275,7 @@ local flg,error_code = pcall(function()
         item:PushEvent("Set",{
             cards = {
                 -- "card_golden",
-                "the_golden_legend",
+                "ruins_sheild_and_vengeance",
                 -- "summon_tumbleweed",
                 -- "test_card_white",
                 -- "test_card_white",

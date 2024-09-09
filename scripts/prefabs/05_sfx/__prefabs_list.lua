@@ -29,6 +29,7 @@ local prefabs_name_list = {
 
 
     "01_explode",                             --- 烟花爆炸
+    "02_ruins_sheild",                        --- 铥矿护盾
 
 }
 
