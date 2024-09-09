@@ -14,7 +14,7 @@ return function(inst)
 
     ---- 加载的时候初始化下发全部数据。
     inst:DoTaskInTime(0,function()
-        inst.components.hoshino_com_shop:CoinDelta(0)
+        inst.components.hoshino_com_shop:CreditCoinDelta(0)
     end)
 
     ---------------------------------------------------------------------------
@@ -42,12 +42,12 @@ return function(inst)
             return delta_num
         end
         inst:ListenForEvent("card_black_active.max_daily_earn",function(inst)
-            inst.components.hoshino_com_shop:SetCoinDeltaFn(test_fn)
+            inst.components.hoshino_com_shop:SetCreditCoinDeltaFn(test_fn)
             inst.components.hoshino_com_shop:Set("card_black_active.max_daily_earn",true)
         end)
         inst.components.hoshino_com_shop:AddOnLoadFn(function()
             if inst.components.hoshino_com_shop:Get("card_black_active.max_daily_earn") then
-                inst.components.hoshino_com_shop:SetCoinDeltaFn(test_fn)
+                inst.components.hoshino_com_shop:SetCreditCoinDeltaFn(test_fn)
             end
         end)
     ---------------------------------------------------------------------------

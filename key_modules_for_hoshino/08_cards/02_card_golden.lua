@@ -174,7 +174,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_shop:CoinDelta(9999)
+                inst.components.hoshino_com_shop:CreditCoinDelta(9999)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
                 while true do
                     local debuff_inst = inst:GetDebuff(debuff_prefab)
@@ -356,7 +356,7 @@ local cards = {
                 if ret_fn then
                     ret_fn(inst)
                 end
-                inst.components.hoshino_com_shop:CoinDelta(1500)
+                inst.components.hoshino_com_shop:CreditCoinDelta(1500)
             end,
             text = function(inst)
                 return "获得1500点「信用点」\n随机清空以下的一项加成:\n血、San、饥饿、移速、经验、攻击、阵营减伤、反伤、位面防御"

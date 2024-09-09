@@ -547,7 +547,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_shop:CoinDelta(9999)
+                inst.components.hoshino_com_shop:CreditCoinDelta(9999)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
                 while true do
                     local debuff_inst = inst:GetDebuff(debuff_prefab)

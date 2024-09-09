@@ -10,7 +10,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             local oldpercent = _table.oldpercent
             local newpercent = _table.newpercent
             if oldpercent > newpercent then
-                target.components.hoshino_com_shop:CoinDelta(10)
+                target.components.hoshino_com_shop:CreditCoinDelta(10)
             end
         end,target)
     -----------------------------------------------------

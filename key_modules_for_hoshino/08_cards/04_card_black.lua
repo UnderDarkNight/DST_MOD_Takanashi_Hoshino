@@ -58,7 +58,7 @@ local cards = {
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 inst.components.hoshino_com_shop:Set("card_black_active.max_daily_earn", nil)
-                inst.components.hoshino_com_shop:SetCoinDeltaFn(nil)
+                inst.components.hoshino_com_shop:SetCreditCoinDeltaFn(nil)
                 inst.components.hoshino_com_shop:Set("card_black_active.max_daily_earn.current",nil)
             end,
             text = function(inst)

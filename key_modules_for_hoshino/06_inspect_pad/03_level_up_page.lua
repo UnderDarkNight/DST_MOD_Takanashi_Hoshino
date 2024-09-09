@@ -125,6 +125,9 @@ local function page_create(front_root,MainScale)
                 else
                     card_desc_text:SetString("未找到卡牌描述")
                 end
+                if Has_Black_Card() then
+                    card_desc_text:SetString("这可能是诅咒卡牌，请谨慎选择")
+                end
                 card_desc_text:MoveToFront()
             end            
         --------------------------------------------------------------------------------------

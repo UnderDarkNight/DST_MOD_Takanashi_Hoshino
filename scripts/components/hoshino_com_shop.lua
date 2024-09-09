@@ -21,16 +21,19 @@ local hoshino_com_shop = Class(function(self, inst)
     self._onsave_fns = {}
 
     --------------------------------------------------------------
+    -- 32位整数最大值
+        self.u32_max = 4000000000
+    --------------------------------------------------------------
     -- 数据初始化
         inst.HOSHINO_SHOP = inst.HOSHINO_SHOP or {}
     --------------------------------------------------------------
-    -- 金币
-        self.coins = 0
+    -- 信用金币
+        self.credit_coins = 0
         self:AddOnLoadFn(function()
-            self:Set("coins", self.coins)
+            self:Set("credit_coins", self.credit_coins)
         end)
         self:AddOnSaveFn(function()
-            self.coins = self:Get("coins") or 0
+            self.credit_coins = self:Get("credit_coins") or 0
         end)
     --------------------------------------------------------------
     -- 刷新次数 ： 当前剩余次数，每天更新次数
@@ -67,12 +70,12 @@ nil,
 {
     --------------------------------------------------------------
     --- 同步
-        coins = function(self,value)
-            local replica_com = GetReplicaCom(self)
-            if replica_com then
-                replica_com:SetCoins(value)
-            end
-        end,
+        -- credit_coins = function(self,value)
+        --     local replica_com = GetReplicaCom(self)
+        --     if replica_com then
+        --         replica_com:SetCreditCoins(value)
+        --     end
+        -- end,
     --------------------------------------------------------------
 })
 ------------------------------------------------------------------------------------------------------------------------------
@@ -142,19 +145,19 @@ nil,
         return math.ceil(origin_price * multiplier)
     end
 ------------------------------------------------------------------------------------------------------------------------------
---- 金币变更，注意unit32上限。
-    function hoshino_com_shop:CoinDelta(num)
-        if self.__coin_delta_fn then
-            num = self.__coin_delta_fn(self,num)
+--- 信用金币变更，注意unit32上限。
+    function hoshino_com_shop:CreditCoinDelta(num)
+        if self.__credit_coin_delta_fn then
+            num = self.__credit_coin_delta_fn(self,num)
         end
-        self.coins = math.clamp(self.coins + num,0,4000000000)
-        self:ShopData_Set("coins",self.coins)
+        self.credit_coins = math.clamp(self.credit_coins + num,0,self.u32_max)
+        self:ShopData_Set("credit_coins",self.credit_coins)
     end
-    function hoshino_com_shop:GetCoins()
-        return self.coins
+    function hoshino_com_shop:GetCreditCoins()
+        return self.credit_coins
     end
-    function hoshino_com_shop:SetCoinDeltaFn(fn)
-        self.__coin_delta_fn = fn
+    function hoshino_com_shop:SetCreditCoinDeltaFn(fn)
+        self.__credit_coin_delta_fn = fn
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 每日刷新次数
