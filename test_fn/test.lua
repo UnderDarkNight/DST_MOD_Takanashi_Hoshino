@@ -12,6 +12,8 @@
     local Menu = require "widgets/menu"
     local Text = require "widgets/text"
     local TEMPLATES = require "widgets/redux/templates"
+
+    local ScrollableList = require "widgets/scrollablelist"
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local flg,error_code = pcall(function()
     print("WARNING:PCALL START +++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -389,73 +391,206 @@ local flg,error_code = pcall(function()
                 local items_pages_button = items_box:AddChild(Widget())
                 items_pages_button:SetPosition(-400,350)
 
-                items_pages_button.buttons = {}
-                
-                local button_special_items = items_pages_button:AddChild(ImageButton(
-                    atlas,"button_special_items_white.tex",
-                    "button_special_items_white.tex",
-                    "button_special_items_white.tex",
-                    "button_special_items_white.tex",
-                    "button_special_items_white.tex"))
-                button_special_items:SetPosition(0,0)
-                button_special_items.focus_scale = {1.02, 1.02, 1.02}
-                local button_special_items_icon = button_special_items.image:AddChild(Image(atlas,"button_icon_special_item.tex"))
-                button_special_items_icon:SetPosition(-140,30)
-                -- items_box.button_special_items = button_special_items   --- 挂载节点
-                table.insert(items_pages_button.buttons,button_special_items)
-                function button_special_items:SetBlack()                --- 变黑函数
-                    local image = "button_special_items_black.tex"
-                    self:SetTextures(atlas,image,image,image,image,image)
-                end
-                function button_special_items:SetWhite()                --- 变白函数
-                    local image = "button_special_items_white.tex"
-                    self:SetTextures(atlas,image,image,image,image,image)
-                end
-                button_special_items:SetOnClick(function()
-                    for i, temp_button in ipairs(items_pages_button.buttons) do
-                        if temp_button == button_special_items then
-                            button_special_items:SetBlack()
-                        elseif temp_button.SetWhite then
-                            temp_button:SetWhite()
-                        end
+                items_pages_button.buttons = {} -- 方便做今后的类型拓展
+                --------------------------------------------------------------------------------
+                ---- 特殊物品按钮
+                    local button_special_items = items_pages_button:AddChild(ImageButton(
+                        atlas,"button_special_items_white.tex",
+                        "button_special_items_white.tex",
+                        "button_special_items_white.tex",
+                        "button_special_items_white.tex",
+                        "button_special_items_white.tex"))
+                    button_special_items:SetPosition(0,0)
+                    button_special_items.focus_scale = {1.02, 1.02, 1.02}
+                    local button_special_items_icon = button_special_items.image:AddChild(Image(atlas,"button_icon_special_item.tex"))
+                    button_special_items_icon:SetPosition(-140,30)
+                    table.insert(items_pages_button.buttons,button_special_items)
+                    function button_special_items:SetBlack()                --- 变黑函数
+                        local image = "button_special_items_black.tex"
+                        self:SetTextures(atlas,image,image,image,image,image)
                     end
-                    items_box.inst:PushEvent("items_page_switch", "special_items")
-                end)
-
-                local button_normal_items = items_pages_button:AddChild(ImageButton(
-                    atlas,"button_normal_items_white.tex",
-                    "button_normal_items_white.tex",
-                    "button_normal_items_white.tex",
-                    "button_normal_items_white.tex",
-                    "button_normal_items_white.tex"))
-                button_normal_items:SetPosition(290,0)
-                button_normal_items.focus_scale = {1.02, 1.02, 1.02}
-                local button_normal_items_icon = button_normal_items.image:AddChild(Image(atlas,"button_icon_normal_item.tex"))
-                button_normal_items_icon:SetPosition(-140,30)
-                -- items_box.button_normal_items = button_normal_items     --- 挂载节点
-                table.insert(items_pages_button.buttons,button_normal_items)
-                function button_normal_items:SetBlack()                 --- 变黑函数
-                    local image = "button_normal_items_black.tex"
-                    self:SetTextures(atlas,image,image,image,image,image)
-                end
-                function button_normal_items:SetWhite()                 --- 变白函数
-                    local image = "button_normal_items_white.tex"
-                    self:SetTextures(atlas,image,image,image,image,image)
-                end
-                button_normal_items:SetOnClick(function()
-                    for i, temp_button in ipairs(items_pages_button.buttons) do
-                        if temp_button == button_normal_items then
-                            button_normal_items:SetBlack()
-                        elseif temp_button.SetWhite then
-                            temp_button:SetWhite()
-                        end
+                    function button_special_items:SetWhite()                --- 变白函数
+                        local image = "button_special_items_white.tex"
+                        self:SetTextures(atlas,image,image,image,image,image)
                     end
-                    items_box.inst:PushEvent("items_page_switch", "normal_items")
-                end)
+                    button_special_items:SetOnClick(function()
+                        for i, temp_button in ipairs(items_pages_button.buttons) do
+                            if temp_button == button_special_items then
+                                button_special_items:SetBlack()
+                            elseif temp_button.SetWhite then
+                                temp_button:SetWhite()
+                            end
+                        end
+                        items_box.inst:PushEvent("items_page_switch", "special_items")
+                    end)
+                --------------------------------------------------------------------------------
+                ---- 普通物品按钮
+                    local button_normal_items = items_pages_button:AddChild(ImageButton(
+                        atlas,"button_normal_items_white.tex",
+                        "button_normal_items_white.tex",
+                        "button_normal_items_white.tex",
+                        "button_normal_items_white.tex",
+                        "button_normal_items_white.tex"))
+                    button_normal_items:SetPosition(290,0)
+                    button_normal_items.focus_scale = {1.02, 1.02, 1.02}
+                    local button_normal_items_icon = button_normal_items.image:AddChild(Image(atlas,"button_icon_normal_item.tex"))
+                    button_normal_items_icon:SetPosition(-140,30)
+                    table.insert(items_pages_button.buttons,button_normal_items)
+                    function button_normal_items:SetBlack()                 --- 变黑函数
+                        local image = "button_normal_items_black.tex"
+                        self:SetTextures(atlas,image,image,image,image,image)
+                    end
+                    function button_normal_items:SetWhite()                 --- 变白函数
+                        local image = "button_normal_items_white.tex"
+                        self:SetTextures(atlas,image,image,image,image,image)
+                    end
+                    button_normal_items:SetOnClick(function()
+                        for i, temp_button in ipairs(items_pages_button.buttons) do
+                            if temp_button == button_normal_items then
+                                button_normal_items:SetBlack()
+                            elseif temp_button.SetWhite then
+                                temp_button:SetWhite()
+                            end
+                        end
+                        items_box.inst:PushEvent("items_page_switch", "normal_items")
+                    end)
+                --------------------------------------------------------------------------------
+                --- 默认显示第一页
+                    items_box.inst:DoTaskInTime(0.1,function()
+                        pcall(function()
+                            local temp_button = items_pages_button.buttons[1]
+                            temp_button:SetBlack()
+                            temp_button.onclick()
+                        end)
 
+                    end)
+                --------------------------------------------------------------------------------
             ------------------------------------------------------------------------------
+            --- 滚动条区域. 单个盒子尺寸 272x309 .示例
+                -- local single_items_box = {}
+                -- local num = 1
+                -- local lines = {}
+                -- local slot_width = 270
+                -- local slot_height = 309
+                -- local function create_line()
+                --     local line = Widget()
+                --     local slot_1 = line:AddChild(Image(atlas,"item_slot_bg.tex"))
+                --     slot_1:SetPosition(-1.5*slot_width,0)
+                --     local slot_2 = line:AddChild(Image(atlas,"item_slot_bg.tex"))
+                --     slot_2:SetPosition(-0.5*slot_width,0)
+                --     local slot_3 = line:AddChild(Image(atlas,"item_slot_bg.tex"))
+                --     slot_3:SetPosition(0.5*slot_width,0)
+                --     local slot_4 = line:AddChild(Image(atlas,"item_slot_bg.tex"))
+                --     slot_4:SetPosition(1.5*slot_width,0)
+                --     local text = line:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
+                --     text:SetString("第"..num.."行")
+                --     num = num + 1
+                --     table.insert(lines,line)
+                --     return line
+                -- end
+                -- for i = 1, 40, 1 do
+                --     table.insert(single_items_box,create_line() )
+                -- end
+                -- local listwidth = 800
+                -- local listheight = 620
+                -- local itemheight = 10
+                -- local itempadding = 300
+                -- local updatefn = function() end
+                -- local widgetstoupdate = nil
+                -- local scroll_bar_area = items_box:AddChild(ScrollableList(single_items_box,listwidth, listheight, itemheight, itempadding,updatefn,widgetstoupdate))
+                -- scroll_bar_area:SetPosition(390,-135) -- 设置滚动区域位置
+                -- scroll_bar_area.scroll_bar_container:SetPosition(-245,130)  --- 设置滚动条位置
             ------------------------------------------------------------------------------
+            --- 滚动条区域创建函数。得到区域位置，和所有slot
+                local function create_scroll_box_and_get_slots(slots_num)
+                    --------------------------------------------------------------------------
+                    ---- 行数计算
+                        local lines_num = 10
+                        if slots_num then
+                            --- 取4倍的整数，向上取整。
+                            lines_num = math.ceil(slots_num/4)
+                        end
+                    --------------------------------------------------------------------------
+                    --- 单行操作
+                        local line_items_box = {}
+                        local num = 1
+                        local lines = {}
+                        local all_slots = {}
+                        local slot_width = 270
+                        local slot_height = 309
+                        local function create_line()
+                            local line = Widget()
+                            local slot_1 = line:AddChild(Image(atlas,"item_slot_bg.tex"))
+                            slot_1:SetPosition(-1.5*slot_width,0)
+                            table.insert(all_slots,slot_1)
+                            local slot_2 = line:AddChild(Image(atlas,"item_slot_bg.tex"))
+                            slot_2:SetPosition(-0.5*slot_width,0)
+                            table.insert(all_slots,slot_2)
+                            local slot_3 = line:AddChild(Image(atlas,"item_slot_bg.tex"))
+                            slot_3:SetPosition(0.5*slot_width,0)
+                            table.insert(all_slots,slot_3)
+                            local slot_4 = line:AddChild(Image(atlas,"item_slot_bg.tex"))
+                            slot_4:SetPosition(1.5*slot_width,0)
+                            table.insert(all_slots,slot_4)
+                            local text = line:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
+                            text:SetString("第"..num.."行")
+                            num = num + 1
+                            return line
+                        end
+                    --------------------------------------------------------------------------
+                    --- 滚动条区域创建
+                        for i = 1, lines_num, 1 do
+                            table.insert(line_items_box,create_line())
+                        end
+                        local listwidth = 800
+                        local listheight = 620
+                        local itemheight = 10
+                        local itempadding = 300
+                        local updatefn = function() end
+                        local widgetstoupdate = nil
+                        local scroll_bar_area = items_box:AddChild(ScrollableList(line_items_box,listwidth, listheight, itemheight, itempadding,updatefn,widgetstoupdate))
+                        scroll_bar_area:SetPosition(390,-135) -- 设置滚动区域位置
+                        scroll_bar_area.scroll_bar_container:SetPosition(-245,130)  --- 设置滚动条位置
+                    --------------------------------------------------------------------------
+                    --- 单个格子函数添加
+                        for k, single_slot in pairs(all_slots) do
+                            function single_slot:SetBlue()
+                                self:SetTexture(atlas,"item_slot_bg.tex")
+                            end
+                            function single_slot:SetGray()
+                                self:SetTexture(atlas,"item_slot_bg_gray.tex")
+                            end
+                            single_slot:SetGray()
+                        end
+                    --------------------------------------------------------------------------
+
+                    return scroll_bar_area,all_slots
+                end
             ------------------------------------------------------------------------------
+            --- 普通物品区域
+                local normal_items_page,normal_item_slots = create_scroll_box_and_get_slots(300)
+                normal_items_page:Hide()
+                items_box.inst:ListenForEvent("items_page_switch",function(_,page)
+                    if page == "normal_items" then
+                        normal_items_page:Show()
+                    else
+                        normal_items_page:Hide()
+                    end
+                end)
+            ------------------------------------------------------------------------------
+            --- 特殊物品区域
+                local special_items_page,special_item_slots = create_scroll_box_and_get_slots(300)
+                special_items_page:Hide()
+                items_box.inst:ListenForEvent("items_page_switch",function(_,page)
+                    if page == "special_items" then
+                        special_items_page:Show()
+                    else
+                        special_items_page:Hide()
+                    end
+                end)
+                for k, v in pairs(special_item_slots) do
+                    v:SetBlue()
+                end
             ------------------------------------------------------------------------------
             ------------------------------------------------------------------------------
             --- 关闭事件
@@ -485,6 +620,10 @@ local flg,error_code = pcall(function()
             ---
             ------------------------------------------------------------------------------
         end
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        -- local inst = TheInput:GetHUDEntityUnderMouse()
+        -- print(inst)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
