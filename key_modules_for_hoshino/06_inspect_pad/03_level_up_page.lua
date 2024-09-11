@@ -300,8 +300,8 @@ local function page_create(front_root,MainScale)
         --------------------------------------------------------------------------------------
         ---  回收按钮
             button_recycle:SetOnClick(function()
-                if card_select_box.cards_button_box and not Has_Black_Card() then
-                    local PAD_DATA = ThePlayer.PAD_DATA or {}
+                local PAD_DATA = ThePlayer.PAD_DATA or {}
+                if card_select_box.cards_button_box and not Has_Black_Card() and PAD_DATA.cards_selectting then
                     PAD_DATA.cards_selectting = false
                     PAD_DATA.cards = nil                    -- 清除卡牌数据
                     PAD_DATA.button_level_up_red_dot = nil  -- 清除红点

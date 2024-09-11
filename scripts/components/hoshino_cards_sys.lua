@@ -565,6 +565,9 @@ nil,
             if self:HasBlackCard() then
                 return
             end
+            if not self:IsCardsSelectting() then
+                return
+            end
         ------------------------------------------------------------------
         --- 卡牌回收、按最高类型回收次数。最高的是金卡则+2 。最高是白卡则 +1
             local cards_data = self.cards_data
