@@ -33,6 +33,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/15_rocky",                                  ---- 石虾
         "prefabs/01_character/key_character_modules_hoshino/16_health_hook",                            ---- health组件HOOK
         "prefabs/01_character/key_character_modules_hoshino/17_combat_hook",                            ---- combat组件HOOK
+        "prefabs/01_character/key_character_modules_hoshino/18_the_camera",                             ---- TheCamera HOOK
 
     }
     for k, lua_addr in pairs(modules) do
