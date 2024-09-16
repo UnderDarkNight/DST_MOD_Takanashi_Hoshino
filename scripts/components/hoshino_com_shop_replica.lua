@@ -12,10 +12,7 @@ local hoshino_com_shop = Class(function(self, inst)
 
     if not TheNet:IsDedicated() then
         -----------------------------------------------------------------------------
-        -- --- net_vars 更新。
-        --     inst:ListenForEvent("hoshino_com_shop_net_update",function()
-        --         inst.HOSHINO_SHOP.credit_coins = self.__credit_coins:value()
-        --     end)
+
         -----------------------------------------------------------------------------
         ---- RPC 瞬时批量更新数据。
             inst:ListenForEvent("hoshino_com_shop_rpc_update",function(_,_table)

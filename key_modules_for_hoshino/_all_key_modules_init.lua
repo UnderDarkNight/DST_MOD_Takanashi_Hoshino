@@ -10,6 +10,9 @@ modimport("key_modules_for_hoshino/00_others/__all_others_init.lua")
 modimport("key_modules_for_hoshino/01_character/__all_character_modules_init.lua") 
 -- 角色模块
 
+modimport("key_modules_for_hoshino/02_theworld/__all_theworld_init.lua") 
+-- 世界模块更新
+
 modimport("key_modules_for_hoshino/06_inspect_pad/__inspect_pad_init.lua") 
 -- 角色平板电脑
 
@@ -21,5 +24,8 @@ modimport("key_modules_for_hoshino/08_cards/__all_cards_init.lua")
 
 modimport("key_modules_for_hoshino/09_widgets/__all_widget_init.lua") 
 -- 界面相关的组件和修改
+
+modimport("key_modules_for_hoshino/10_shop_items_pool/__shop_items_pool_init.lua") 
+-- 商品物品数据池。
 
 

@@ -111,8 +111,12 @@
                 end
             ------------------------------------------------------------------------
             ---- 
-                if ThePlayer.___test_container_fn then
-                    ThePlayer.___test_container_fn(inst,front_root)
+                -- if ThePlayer.___test_container_fn then
+                --     ThePlayer.___test_container_fn(inst,front_root)
+                -- end
+		        local fn = require("prefabs/06_buildings/01_02_shop24_widget")
+                if type(fn) == "function" then
+                    fn(inst,front_root)
                 end
             ------------------------------------------------------------------------
         end)
