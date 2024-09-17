@@ -74,7 +74,11 @@
             if TheWorld.ismastersim then
                 inst:AddComponent("container")
                 inst.components.container.openlimit = 1  ---- 限制1个人打开
+                inst.components.container.canbeopened = false
                 container_Widget_change(inst.components.container)
+                inst:ListenForEvent("onclose",function()
+                    inst.components.container.canbeopened = false                    
+                end)
             else
                 ------- 在客户端必须执行容器界面注册。不能像科雷那样只在服务端注册。
                 inst.OnEntityReplicated = function(inst)
@@ -122,6 +126,32 @@
         end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- workable
+    local function workable_com_install(inst)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
+            replica_com:SetTestFn(function(inst,doer,right_click)
+                if doer.replica.hoshino_com_shop or doer.replica._.hoshino_com_shop then
+                    return true
+                end
+                return false
+            end)
+            replica_com:SetSGAction("give")
+            replica_com:SetText("hoshino_building_shop24",STRINGS.ACTIONS.ACTIVATE.OPEN)
+
+        end)
+        
+        if not TheWorld.ismastersim then
+            return
+        end
+
+        inst:AddComponent("hoshino_com_workable")
+        inst.components.hoshino_com_workable:SetOnWorkFn(function(inst,doer)
+            doer.components.hoshino_com_shop:EnterShop(inst)
+            return true
+        end)
+    end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -146,6 +176,8 @@ local function fn()
 
     add_container_before_not_ismastersim_return(inst)
     widget_open_event_install(inst)
+    workable_com_install(inst)
+
     if not TheWorld.ismastersim then
         return inst
     end

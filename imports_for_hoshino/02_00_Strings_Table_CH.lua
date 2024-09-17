@@ -45,6 +45,14 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["name"] = "激活5张卡牌选择",
                 ["inspect_str"] = "激活5张卡牌选择",
             },
+            ["hoshino_other_shop_debugger_refresh"] = {
+                ["name"] = "商店刷新次数",
+                ["inspect_str"] = "商店刷新次数",
+            },
+            ["hoshino_other_shop_debugger_coins"] = {
+                ["name"] = "100信用币",
+                ["inspect_str"] = "100信用币",
+            },
         --------------------------------------------------------------------
         --- 组件动作
            
@@ -77,6 +85,13 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
         --- 04_debuffs
             ["hoshino_card_debuff_bloodshed"] = {
                 ["name"] = "流血",
+            },
+        --------------------------------------------------------------------
+        --- 06_buildings
+            ["hoshino_building_shop24"] = {
+                ["name"] = "24小时商店",
+                ["inspect_str"] = "商店",
+                ["recipe_desc"] = "商店",
             },
         --------------------------------------------------------------------
 }

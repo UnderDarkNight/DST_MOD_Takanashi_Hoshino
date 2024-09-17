@@ -46,14 +46,14 @@ local hoshino_com_shop_items_pool = Class(function(self, inst)
     -------------------------------------------
     --- item_nums 物品数量：
         self.item_nums  = {
-            -- ["gray"] = 20,
-            -- ["blue"] = 10,
-            -- ["golden"] = 5,
-            -- ["colourful"] = 1,
-            ["gray"] = 1,
-            ["blue"] = 1,
-            ["golden"] = 1,
+            ["gray"] = 20,
+            ["blue"] = 10,
+            ["golden"] = 5,
             ["colourful"] = 1,
+            -- ["gray"] = 1,
+            -- ["blue"] = 1,
+            -- ["golden"] = 1,
+            -- ["colourful"] = 1,
         }
         local item_nums_mult = 1 -- 物品份数倍率(按照上面份数倍增成具体物品数量)
         for index, num in pairs(self.item_nums) do
@@ -67,11 +67,6 @@ local hoshino_com_shop_items_pool = Class(function(self, inst)
         end)
         self:AddOnLoadFn(function(self)
             self.day = self:Get("day") or 0
-        end)
-        inst:WatchWorldState("cycles",function()
-            inst:DoTaskInTime(1,function()
-                self.day = TheWorld.state.cycles
-            end)
         end)
     -------------------------------------------
 end,
@@ -173,11 +168,10 @@ nil,
     function hoshino_com_shop_items_pool:GetItemsList(new_force)
         local today = TheWorld.state.cycles
         if today ~= self.day or new_force then
-            if new_force then
-                self.pool = {}
-            end
+            self.pool = {}
             self:SpawnNewListByLevel(self.level)
             self.day = today
+            print("刷新商店物品池")
         end
         --- 洗掉index
         local ret = {}

@@ -115,11 +115,34 @@ local hoshino_com_shop = Class(function(self, inst)
             end
         end)
     --------------------------------------------------------------
+    --- 玩家回环任务。用来打开商店
+        self.shop_building = nil    --- 商店建筑
+        self.shop_opening_flag = false  --- 正在打开标记位，用来避免多次event添加。
+        self.___player_open_shop_widget_event = function(player)
+            self.shop_building.components.container.canbeopened = true
+            self.shop_building.components.container:Open(player)
+            self.shop_building = nil
+            self.inst:RemoveEventCallback("hoshino_com_shop_client_side_data_updated",self.___player_open_shop_widget_event)
+            self.shop_opening_flag = false
+        end
+    --------------------------------------------------------------
 end,
 nil,
 {
 
 })
+------------------------------------------------------------------------------------------------------------------------------
+--- 商店打开关键API
+    function hoshino_com_shop:EnterShop(shop_building)
+        if self.shop_opening_flag then
+            self.inst:RemoveEventCallback("hoshino_com_shop_client_side_data_updated",self.___player_open_shop_widget_event)
+        end
+        shop_building.components.container:Close()
+        self.shop_opening_flag = true
+        self.shop_building = shop_building
+        self:Spawn_Items_List_And_Send_2_Client()
+        self.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated",self.___player_open_shop_widget_event)
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数
     function hoshino_com_shop:AddOnLoadFn(fn)
@@ -251,6 +274,8 @@ nil,
         end
         self:ShopData_Set("normal_items",normal_items)
         self:ShopData_Set("special_items",special_items)
+        self:Refresh_Delta(0)
+        self:CreditCoinDelta(0)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 物品购买 event
