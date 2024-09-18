@@ -18,6 +18,8 @@
 import pandas as pd
 import openpyxl
 import os
+import sys
+import time
 
 #分裂成4个文件名：
 output_file_names = {}
@@ -38,7 +40,8 @@ except:
     try:
         xlsx_file = pd.read_excel(xlsx_file_front_addr + xlsx_file_name)
     except:
-        print("文件不存在")
+        print(" shop_items_list.xlsx 文件不存在")
+        time.sleep(30)
         exit(0)
 
 
@@ -73,7 +76,7 @@ data_rows_count = len(xlsx_file) # 获取行数(pandas已经默认排除掉首�
 print(data_rows_count)
 data = []
 for i in range(0, data_rows_count):
-    print(i)
+    # print(i)
     try:
         row_data = {}
         row_data["prefab"] = xlsx_file.iloc[i, 1]
@@ -141,7 +144,51 @@ for single_data in data:
 
 """
 # 获取当前脚本所在的目录
-script_dir = os.path.dirname(os.path.abspath(__file__))
+# script_dir = os.path.dirname(os.path.abspath(__file__))
+#--------------------------------------------------------------------------------------------------
+def get_resource_path(relative_path):
+    """
+    获取资源文件的绝对路径。这个函数会根据程序是作为一个.py文件还是一个.exe文件来调整路径。
+    
+    参数:
+    relative_path (str): 相对于.py文件或.exe文件的相对路径。
+    
+    返回:
+    str: 资源文件的绝对路径。
+    """
+    if hasattr(sys, '_MEIPASS'):
+        # 我们是在使用 PyInstaller 创建的 .exe 文件环境下运行
+        base_path = sys._MEIPASS
+    else:
+        # 我们是在普通的.py文件环境下运行
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+def get_current_dir():
+    """
+    获取当前工作目录的绝对路径。这个函数会返回程序（无论是.py还是.exe）的目录。
+    
+    返回:
+    str: 当前工作目录的绝对路径。
+    """
+    if getattr(sys, 'frozen', False):
+        # 如果我们是冻结的应用程序，则使用 sys.executable
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        # 否则，使用包含当前脚本的目录
+        application_path = os.path.dirname(__file__)
+    
+    return application_path
+
+resource_path = get_resource_path('example.txt')
+print(f"资源文件的位置: {resource_path}")
+
+current_dir = get_current_dir()
+print(f"当前工作目录的位置: {current_dir}")
+#--------------------------------------------------------------------------------------------------
+
+script_dir = current_dir
 
 # 设置输出文件夹路径为当前脚本所在目录下的output文件夹
 output_folder = os.path.join(script_dir, 'output')

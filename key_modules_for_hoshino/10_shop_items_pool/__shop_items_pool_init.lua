@@ -20,3 +20,7 @@ for bg_type, single_pool in pairs(TUNING.HOSHINO_SHOP_ITEMS_POOL) do
         single_item_data.index = index
     end
 end
+
+
+modimport("key_modules_for_hoshino/10_shop_items_pool/05_recycle_items.lua") 
+--- 商品回收列表。

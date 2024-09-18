@@ -2,6 +2,10 @@
 /exported+
 /exported++
 /.vscode
+/shop_sys_tool/__pycache__
+/shop_sys_tool/dist
+/shop_sys_tool/build
+/shop_sys_tool/output
 
 # Compiled Lua sources
 luac.out
@@ -44,4 +48,6 @@ anim/*.autosave.zip
 *.i*86
 *.x86_64
 *.hex
+*.exe
+*.spec
 
