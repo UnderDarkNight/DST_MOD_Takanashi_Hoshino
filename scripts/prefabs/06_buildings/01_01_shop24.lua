@@ -152,6 +152,17 @@
     end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 回收系统
+    local function recycle_sys_install(inst)
+        if not TheWorld.ismastersim then
+            return
+        end
+        local fn = require("prefabs/06_buildings/01_03_recycle_sys")
+        if type(fn) == "function" then
+            fn(inst)
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -177,7 +188,7 @@ local function fn()
     add_container_before_not_ismastersim_return(inst)
     widget_open_event_install(inst)
     workable_com_install(inst)
-
+    recycle_sys_install(inst)
     if not TheWorld.ismastersim then
         return inst
     end

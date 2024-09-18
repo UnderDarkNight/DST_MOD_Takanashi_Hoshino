@@ -61,10 +61,20 @@ return function(inst,front_root)
             ))
             button_sell:SetPosition(132,-15)
             button_sell:SetOnClick(function()
-                print("sell")
+                ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.shop_item_sell_button_clicked")
+                print("sell button clicked in widget")
             end)
             button_sell.focus_scale = {1.05, 1.05, 1.05}
             sell_box:SetPosition(-623,-352)
+
+            price_text.inst:ListenForEvent("refresh_sell_price",function()
+                local price = ThePlayer.HOSHINO_SHOP and ThePlayer.HOSHINO_SHOP.recycle_coins or 0
+                price_text:SetString(tostring(price))
+            end)
+            price_text.inst:PushEvent("refresh_sell_price")
+            price_text.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated_for_widget",function()
+                price_text.inst:PushEvent("refresh_sell_price")
+            end,ThePlayer)
         ------------------------------------------------------------------------------
         --- 货币按钮组
             --- 信用币按钮

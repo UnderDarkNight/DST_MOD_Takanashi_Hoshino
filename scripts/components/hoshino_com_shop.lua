@@ -115,6 +115,12 @@ local hoshino_com_shop = Class(function(self, inst)
             end
         end)
     --------------------------------------------------------------
+    --- 物品出售
+        inst:ListenForEvent("hoshino_event.shop_item_sell_button_clicked",function()
+            self:RecycleButtonClicked()
+            print("+++++++++++++++shop_item_sell_button_clicked")
+        end)
+    --------------------------------------------------------------
     --- 玩家回环任务。用来打开商店
         self.shop_building = nil    --- 商店建筑
         self.shop_opening_flag = false  --- 正在打开标记位，用来避免多次event添加。
@@ -142,6 +148,9 @@ nil,
         self.shop_building = shop_building
         self:Spawn_Items_List_And_Send_2_Client()
         self.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated",self.___player_open_shop_widget_event)
+    end
+    function hoshino_com_shop:SetRecycleBuilding(shop_building)
+        self.recycle_building = shop_building
     end
 ------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数
@@ -211,8 +220,8 @@ nil,
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 信用金币变更，注意unit32上限。
-    function hoshino_com_shop:CreditCoinDelta(num)
-        if self.__credit_coin_delta_fn then
+    function hoshino_com_shop:CreditCoinDelta(num,skip_delta_fn)
+        if self.__credit_coin_delta_fn and not skip_delta_fn then
             num = self.__credit_coin_delta_fn(self,num)
         end
         self.credit_coins = math.clamp(self.credit_coins + num,0,self.u32_max)
@@ -333,6 +342,17 @@ nil,
 --- item spawn
     function hoshino_com_shop:GiveItemByPrefab(prefab,num)
         TUNING.HOSHINO_FNS:GiveItemByPrefab(self.inst,prefab,num)
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 回收价下发函数
+    function hoshino_com_shop:RecycleCoinsRefresh(num)
+        self:ShopData_Set("recycle_coins",num or 0)
+    end
+    function hoshino_com_shop:RecycleButtonClicked()
+        if self.recycle_building then
+            self.recycle_building:PushEvent("recycle_button_clicked",{doer = self.inst})
+        end
+        print("API : hoshino_com_shop:RecycleButtonClicked",self.recycle_building)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 底层官方API
