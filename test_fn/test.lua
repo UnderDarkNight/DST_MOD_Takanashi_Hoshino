@@ -273,37 +273,37 @@ local flg,error_code = pcall(function()
     ---
         -- ThePlayer.components.hoshino_com_builder_blocker:SetDailyMax(10)
 
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --     cards = {
-        --         -- "card_golden",
-        --         "overdraft",
-        --         -- "card_black",
-        --         -- "summon_tumbleweed",
-        --         -- "test_card_white",
-        --         -- "test_card_white",
-        --     },
-        -- })
-        -- -- item:PushEvent("SetName","3-1")
-        -- ThePlayer.components.inventory:GiveItem(item)
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+            cards = {
+                -- "card_golden",
+                "overdraft",
+                -- "card_black",
+                -- "summon_tumbleweed",
+                -- "test_card_white",
+                -- "test_card_white",
+            },
+        })
+        -- item:PushEvent("SetName","3-1")
+        ThePlayer.components.inventory:GiveItem(item)
 
     ----------------------------------------------------------------------------------------------------------------
     --- 
         -- local inst = ThePlayer
-        local inst = SpawnPrefab("moonhound")
-        local debuff_prefab = "hoshino_card_debuff_for_monster_drop_cards_pack"
-        while true do
-            local debuff_inst = inst:GetDebuff(debuff_prefab)
-            if debuff_inst and debuff_inst:IsValid() then
-                print("test 成功安装debuff",debuff_inst)
-                break
-            end
-            inst:AddDebuff(debuff_prefab,debuff_prefab)
-        end
-        inst.Transform:SetPosition(x,y,z)
-        inst:DoTaskInTime(2,function()
-            inst.components.health:Kill()
-        end)
+        -- -- local inst = SpawnPrefab("moonhound")
+        -- local debuff_prefab = "hoshino_card_debuff_absolute_defense"
+        -- while true do
+        --     local debuff_inst = inst:GetDebuff(debuff_prefab)
+        --     if debuff_inst and debuff_inst:IsValid() then
+        --         print("test 成功安装debuff",debuff_inst)
+        --         break
+        --     end
+        --     inst:AddDebuff(debuff_prefab,debuff_prefab)
+        -- end
+        -- inst.Transform:SetPosition(x,y,z)
+        -- inst:DoTaskInTime(2,function()
+        --     inst.components.health:Kill()
+        -- end)
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- SpawnPrefab("hoshino_sfx_explode"):PushEvent("Set",{

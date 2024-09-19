@@ -24,8 +24,9 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 num_pool = num_max
                 return 0
             elseif num_pool < num_max and num_pool + num > num_max then -- 如果没满，但这一瞬会满
+                local ret = -(num_max - num_pool)
                 num_pool = num_max
-                return num_max - num_pool
+                return ret
             else -- 如果没满，且这一瞬不会满
                 num_pool = num_pool + num
                 return -num
