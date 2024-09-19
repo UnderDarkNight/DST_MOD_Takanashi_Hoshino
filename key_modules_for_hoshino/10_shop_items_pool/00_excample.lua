@@ -22,6 +22,9 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["gray"] = {
 
             -- index = "log_credit_coins_100_1_blue",  --- 自动合并下发，用于相应购买事件，并索引到本参数表。
 
+            -- is_permanent = true, --- 常驻标记位
+
+
         },
     ------------------------------------------------------------------
 

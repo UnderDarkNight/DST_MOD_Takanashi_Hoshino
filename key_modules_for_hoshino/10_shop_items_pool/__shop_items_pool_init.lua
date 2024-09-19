@@ -15,8 +15,15 @@ for bg_type, single_pool in pairs(TUNING.HOSHINO_SHOP_ITEMS_POOL) do
     for k, single_item_data in pairs(single_pool) do
         single_item_data.num_to_give = single_item_data.num_to_give or 1
         single_item_data.level = single_item_data.level or 0
+        --- 常驻标记位
+        local is_permanent = single_item_data.is_permanent or false
+        if is_permanent then
+            is_permanent = "permanent"
+        else
+            is_permanent = ""
+        end
         --- index 合并。
-        local index = single_item_data.type .. "_" .. single_item_data.prefab .. "_" .. single_item_data.price_type .. "_" .. single_item_data.price .. "_" .. single_item_data.num_to_give .. "_" .. bg_type
+        local index = single_item_data.type .. "_" .. single_item_data.prefab .. "_" .. single_item_data.price_type .. "_" .. single_item_data.price .. "_" .. single_item_data.num_to_give .. "_" .. bg_type.."_"..is_permanent
         single_item_data.index = index
     end
 end

@@ -67,6 +67,7 @@ except:
     第H列为物品标签归属，为文本。暂时只有【 特殊资源 special 】   【 基础物资 normal 】 。index 为 type
     第I列为物品贴图atlas 。为文本。如果字段为official，则按照prefab 合并成 文本 'GetInventoryItemAtlas("log.tex")' 。index 为 atlas
     第J列为物品贴图tex。为文本。index 为 image。如果字段是 official 则进行prefab合并:  prefab + ".tex" 。
+    第K列为常驻标记位，强制转换为文本。并且如果是 yes 则为 true ，否则为 false 。index 为 is_permanent
 
     额外归类 index 为 belong 。直接读取C列，为文本，不进行任何合并。
 
@@ -97,6 +98,13 @@ for i in range(0, data_rows_count):
             row_data["image"] = row_data["prefab"] + ".tex"
         else:
             row_data["image"] = image
+
+        is_permanent = str(xlsx_file.iloc[i, 10])
+        if is_permanent == "yes":
+            row_data["is_permanent"] = True
+        else:
+            row_data["is_permanent"] = False
+
 
         row_data["belong"] = xlsx_file.iloc[i, 2]
 
@@ -223,6 +231,7 @@ for rarity, items in data_departed.items():
             f.write('  price_type = "{}", -- 货币需求。\n'.format(item["price_type"]))
             f.write('  level = {}, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。\n'.format(item["level"]))
             f.write('  type = "{}", -- 类型。normal special 。这个可以不下发。\n'.format(item["type"]))
+            f.write('  is_permanent = {}, -- 是否永久。0 非永久 1 永久\n'.format("true" if item["is_permanent"] else "false"))
             
             f.write('},\n')  # 结束物品描述
         

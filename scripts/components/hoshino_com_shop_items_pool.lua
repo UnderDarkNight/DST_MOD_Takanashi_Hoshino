@@ -135,7 +135,8 @@ nil,
         for i = 1, 300, 1 do -- 做上限，避免物品列表不足或者为空的时候无限循环
             local ret_item_data = items_pool[math.random(#items_pool)]
             local index = ret_item_data.index
-            if self.pool[index] == nil then
+            local is_permanent = ret_item_data.is_permanent -- 常驻标记位
+            if self.pool[index] == nil and not is_permanent then
                 return ret_item_data
             end
         end
@@ -151,7 +152,7 @@ nil,
             end
         end
     end
-    function hoshino_com_shop_items_pool:SpawnNewListByLevel(level)
+    function hoshino_com_shop_items_pool:SpawnNewListByLevel(level) --- 创建新的物品池
         level = level or 0
         for item_type, num in pairs(self.item_nums) do
             for i = 1, num, 1 do
@@ -165,7 +166,19 @@ nil,
             end
         end
     end
-    function hoshino_com_shop_items_pool:GetItemsList(new_force)
+    function hoshino_com_shop_items_pool:GetPermanentList() --- 获取常驻物品列表
+        local ret = {}
+        for colour_type, v in pairs(self.item_nums) do
+            local current_items_pool = TUNING.HOSHINO_SHOP_ITEMS_POOL[colour_type] or {} -- 防止物品池为空
+            for k, single_item_data in pairs(current_items_pool) do
+                if single_item_data and single_item_data.is_permanent then
+                    table.insert(ret, single_item_data)
+                end
+            end
+        end
+        return ret
+    end
+    function hoshino_com_shop_items_pool:GetItemsList(new_force)    --- 外部获取物品池的入口API
         local today = TheWorld.state.cycles
         if today ~= self.day or new_force then
             self.pool = {}
@@ -177,6 +190,11 @@ nil,
         local ret = {}
         for index, item_data in pairs(self.pool) do
             table.insert(ret, item_data)
+        end
+        --- 添加常驻物品
+        local permanent_list = self:GetPermanentList()
+        for k, v in pairs(permanent_list) do
+            table.insert(ret, v)
         end
         return ret
     end

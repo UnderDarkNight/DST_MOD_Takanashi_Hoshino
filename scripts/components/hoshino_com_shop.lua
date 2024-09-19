@@ -35,6 +35,8 @@
 
                 index = "log_credit_coins_100_1_blue",  --- 自动合并下发，用于相应购买事件，并索引到本参数表。
 
+                is_permanent = true, --- 常驻标记位
+
             },
         },
         inst.HOSHINO_SHOP["special_items"] = {
@@ -268,6 +270,27 @@ nil,
         end
         return items_list
     end
+    --- 按稀有度排序。
+    function hoshino_com_shop:SortItemsList(items_list)
+        --[[
+            根据bg 参数，按照稀有度排序进来的列表。
+            按照顺序：item_slot_colourful.tex item_slot_golden.tex item_slot_blue.tex item_slot_gray.tex
+        ]]--
+        -- 定义稀有度优先级表
+        local rarity_priority = {
+            ["item_slot_gray.tex"] = 4,
+            ["item_slot_blue.tex"] = 3,
+            ["item_slot_golden.tex"] = 2,
+            ["item_slot_colourful.tex"] = 1,
+        }
+    
+        -- 使用table.sort函数对列表进行排序
+        table.sort(items_list, function(a, b)
+            return rarity_priority[a.bg] < rarity_priority[b.bg]
+        end)
+    
+        return items_list
+    end
     function hoshino_com_shop:Spawn_Items_List_And_Send_2_Client(new_force)
         local items_list = self:GetItemsList(new_force)
         self.items_list = items_list
@@ -281,6 +304,10 @@ nil,
                 table.insert(special_items,single_data)
             end                    
         end
+
+        normal_items = self:SortItemsList(normal_items)
+        special_items = self:SortItemsList(special_items)
+
         self:ShopData_Set("normal_items",normal_items)
         self:ShopData_Set("special_items",special_items)
         self:Refresh_Delta(0)
@@ -308,6 +335,7 @@ nil,
         -- print("buy item : ",prefab," price : ",price," num : ",num_to_give," price_type : ",price_type)
         if right_click then
             num_to_give = num_to_give * 10
+            price = price * 10
         end
 
         -----------------------------------------------------------------
