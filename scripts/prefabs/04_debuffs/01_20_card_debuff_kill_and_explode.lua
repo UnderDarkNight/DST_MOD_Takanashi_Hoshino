@@ -7,13 +7,13 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local musthavetags = {"_combat"}
-    local canthavetags = {"companion","player", "brightmare", "playerghost", "INLIMBO","flight","chester","hutch","DECOR", "FX","structure","wall","engineering","eyeturret"}
+    local canthavetags = {"companion","player", "playerghost", "INLIMBO","chester","hutch","DECOR", "FX","structure","wall","engineering","eyeturret"}
     local musthaveoneoftags = nil
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
     local function CanBeAttack(monster,player)
         if monster.components.health and not monster.components.health:IsDead() 
-        and monster.components.combat and monster.components.combat:CanBeAttacked(player) 
+        and monster.components.combat -- and monster.components.combat:CanBeAttacked(player) 
         and player.components.combat:ShouldAggro(monster) --- 鲨鱼、梦魇疯猪 这类击杀不死亡的目标，靠这个判断是否可以继续被攻击。
         then
             return true

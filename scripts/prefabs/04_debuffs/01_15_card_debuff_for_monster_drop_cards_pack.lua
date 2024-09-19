@@ -25,7 +25,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                     item:PushEvent("SetName","Golden 3-1")
                 end
             end
-            inst:Remove()
+            -- inst:Remove()
         end,TheWorld)
     -----------------------------------------------------
     --- 血量，攻击力是普通的3倍

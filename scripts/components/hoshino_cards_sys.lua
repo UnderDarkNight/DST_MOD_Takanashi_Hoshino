@@ -583,7 +583,7 @@ nil,
                 local card_name_index = single_card_data.card_name
                 local card_type = self:GetCardTypeByName(card_name_index)
                 local temp_num =  (type_with_num[card_type] or 0)
-                if temp_num > 0 then
+                if temp_num > ret_num then
                     ret_num = temp_num
                 end
             end

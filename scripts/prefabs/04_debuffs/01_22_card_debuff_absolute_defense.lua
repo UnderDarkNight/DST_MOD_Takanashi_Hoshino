@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
-58、【彩】【绝对防御】【受到任何伤害之后的20s内，受到「血量扣除结算值」不会超过20点】【从卡池移除】
+58、【彩】【绝对防御】【每10s内，受到的总【血量扣除值】超过20以后，变成0】【从卡池移除】
 
 ]]--
 ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -13,47 +13,36 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.Network:SetClassifiedTarget(target)
     inst.target = target
     -----------------------------------------------------
-    --- 
+    --- 计数池 每10s内，受到的总【血量扣除值】超过20以后，变成0
         local num_max = 20 --- 最大值
         local num_pool = 0 --- 计数池
+        local cd_task = nil --- 定时器
         local function health_delata_num_fx(num)
-            if num_pool >= num_max then -- 如果计数池 >= 最大值
-                return num,false
-            end
-            --- 注意 num 值 小于 0。
-            num = math.abs(num) -- 先取绝对值
-            if num_pool + num > num_max then --（计数池不够） 如果计数池 + 当前伤害值 大于 最大值
-                local absorbed = num_max - num_pool  --- 能够吸收的最大伤害值
-                num_pool = num_max                   --- 计数池达到最大值
-                num = num - absorbed                 --- 剩余的未被吸收的伤害值
-                return -num,true                          --- 返回剩余的伤害值
-            else
-                num_pool = num_pool + num -- (计数池充足) 计数池 = 计数池 + 当前伤害值
-                return 0,true
+            -- num 进来是负数，注意处理。
+            num = math.abs(num)
+            if num_pool >= num_max then -- 如果已经满了
+                num_pool = num_max
+                return 0
+            elseif num_pool < num_max and num_pool + num > num_max then -- 如果没满，但这一瞬会满
+                num_pool = num_max
+                return num_max - num_pool
+            else -- 如果没满，且这一瞬不会满
+                num_pool = num_pool + num
+                return -num
             end
         end
     -----------------------------------------------------
     --- 
-        local cd_task = nil
-
         target.components.hoshino_com_health_hooker:Add_Modifier(inst,function(num)
             if num >= 0 then
                 return num
             end
-            if cd_task then
-                local ret_num,active_flag = health_delata_num_fx(num)
-                num = ret_num
-                if active_flag then
-                    -- print("++ 成功格挡")
-                else
-                    -- print("## 格挡失败")
-                end
-            else
-                cd_task = inst:DoTaskInTime(20,function()
-                    cd_task = nil
+            if cd_task == nil then
+                cd_task = inst:DoPeriodicTask(10,function()
                     num_pool = 0
-                end)                
+                end)              
             end
+            num = health_delata_num_fx(num)
             return num
         end)
     -----------------------------------------------------
