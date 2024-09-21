@@ -29,6 +29,7 @@ local prefabs_name_list = {
 
 
     "00_excample",                           --- 示例装备
+    "01_shoes_t1",                           --- 示例装备
 
 
 }

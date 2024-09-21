@@ -28,4 +28,7 @@ modimport("key_modules_for_hoshino/09_widgets/__all_widget_init.lua")
 modimport("key_modules_for_hoshino/10_shop_items_pool/__shop_items_pool_init.lua") 
 -- 商品物品数据池。
 
+modimport("key_modules_for_hoshino/11_recipes/__all_recipes_init.lua") 
+-- 物品合成配方
+
 

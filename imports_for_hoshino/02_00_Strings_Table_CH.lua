@@ -89,6 +89,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "inspect单纯的测试皮肤",
                 ["recipe_desc"] = "测试描述666",
             },
+            ["hoshino_special_equipment_shoes_t1"] = {
+                ["name"] = "T1: 粉色休闲鞋",
+                ["inspect_str"] = "T1: 粉色休闲鞋",
+                ["recipe_desc"] = "移动速度+5%",
+            },
         --------------------------------------------------------------------
         --- 04_debuffs
             ["hoshino_card_debuff_bloodshed"] = {
