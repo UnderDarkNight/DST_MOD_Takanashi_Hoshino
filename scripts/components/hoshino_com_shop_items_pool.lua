@@ -137,17 +137,19 @@ nil,
     function hoshino_com_shop_items_pool:GetRandomItem(item_type)
         item_type = item_type or "gray"
         local items_pool = TUNING.HOSHINO_SHOP_ITEMS_POOL[item_type]
-        -- print(item_type,items_pool)
-        for i = 1, 300, 1 do -- 做上限，避免物品列表不足或者为空的时候无限循环
-            local ret_item_data = items_pool[math.random(#items_pool)]
-            local index = ret_item_data.index
-            local is_permanent = ret_item_data.is_permanent -- 常驻标记位
-            local level = ret_item_data.level or 0
+        local temp_pool = {}
+        for _,item_data in pairs(items_pool) do
+            local index = item_data.index
+            local is_permanent = item_data.is_permanent -- 常驻标记位
+            local level = item_data.level or 0
             if self.pool[index] == nil and self.level >= level and not is_permanent then
-                return ret_item_data
+                table.insert(temp_pool,item_data)
             end
         end
-        return nil
+        if #temp_pool == 0 then
+            return nil
+        end
+        return temp_pool[math.random(#temp_pool)]
     end
     function hoshino_com_shop_items_pool:GetRandomTypeFromPool()    -- 从 self.item_probability_pool 中随机获取一个物品类型
         local total_probability = 0
