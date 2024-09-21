@@ -44,8 +44,8 @@ local hoshino_com_shop_items_pool = Class(function(self, inst)
             --- 每天重置列表。
         end)
     -------------------------------------------
-    --- item_nums 物品数量：
-        self.item_nums  = {
+    --- item_probability_pool 物品概率权重池：
+        self.item_probability_pool  = {
             ["gray"] = 20,
             ["blue"] = 10,
             ["golden"] = 5,
@@ -55,10 +55,11 @@ local hoshino_com_shop_items_pool = Class(function(self, inst)
             -- ["golden"] = 1,
             -- ["colourful"] = 1,
         }
-        local item_nums_mult = 1 -- 物品份数倍率(按照上面份数倍增成具体物品数量)
-        for index, num in pairs(self.item_nums) do
-            self.item_nums[index] = num * item_nums_mult
-        end
+    -------------------------------------------
+    --- 获取个数。
+        self.items_default_num = 20 -- 默认获取个数。
+        self.items_num_per_level = 5 -- 每级增加个数。
+
     -------------------------------------------
     --- 天数
         self.day = -1
@@ -122,9 +123,14 @@ nil,
 ---- level
     function hoshino_com_shop_items_pool:LevelDoDelta(num)
         self.level = math.clamp(self.level + ( num or 0 ),0,10000000)
+        self.day = -1
     end
     function hoshino_com_shop_items_pool:GetLevel()
         return self.level
+    end
+    function hoshino_com_shop_items_pool:LevelSet(num)
+        self.level = math.clamp(num or 0,0,10000000)
+        self.day = -1
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 数据池获取
@@ -136,43 +142,51 @@ nil,
             local ret_item_data = items_pool[math.random(#items_pool)]
             local index = ret_item_data.index
             local is_permanent = ret_item_data.is_permanent -- 常驻标记位
-            if self.pool[index] == nil and not is_permanent then
+            local level = ret_item_data.level or 0
+            if self.pool[index] == nil and self.level >= level and not is_permanent then
                 return ret_item_data
             end
         end
         return nil
     end
-    function hoshino_com_shop_items_pool:SpawnNewListWithoutLevel()
-        for item_type, num in pairs(self.item_nums) do
-            for i = 1, num, 1 do
-                local ret_item_data = self:GetRandomItem(item_type)
-                if ret_item_data then
-                    self.pool[ret_item_data.index] = ret_item_data
-                end
-            end
+    function hoshino_com_shop_items_pool:GetRandomTypeFromPool()    -- 从 self.item_probability_pool 中随机获取一个物品类型
+        local total_probability = 0
+        for item_type, probability in pairs(self.item_probability_pool) do
+            total_probability = total_probability + probability
         end
+        local random_value = math.random(10, total_probability*10)/10
+        for item_type, probability in pairs(self.item_probability_pool) do
+            if random_value <= probability then
+                return item_type
+            end
+            random_value = random_value - probability
+        end
+        return nil
     end
-    function hoshino_com_shop_items_pool:SpawnNewListByLevel(level) --- 创建新的物品池
-        level = level or 0
-        for item_type, num in pairs(self.item_nums) do
-            for i = 1, num, 1 do
-                local ret_item_data = self:GetRandomItem(item_type)
-                if ret_item_data then
-                    local item_level = ret_item_data.level or 0
-                    if item_level <= level then
-                        self.pool[ret_item_data.index] = ret_item_data
-                    end
-                end
+    function hoshino_com_shop_items_pool:GetItemsNum() --- 获取商品数量
+        return self.items_default_num + self.level * self.items_num_per_level
+    end
+    function hoshino_com_shop_items_pool:SpawnNewList() --- 创建新的物品池
+        local items_num = self:GetItemsNum()
+        for i = 1, items_num, 1 do
+            local item_type = self:GetRandomTypeFromPool() or "gray"
+            local ret_item_data = self:GetRandomItem(item_type)
+            if ret_item_data then
+                self.pool[ret_item_data.index] = ret_item_data                    
             end
         end
     end
     function hoshino_com_shop_items_pool:GetPermanentList() --- 获取常驻物品列表
         local ret = {}
-        for colour_type, v in pairs(self.item_nums) do
+        for colour_type, v in pairs(self.item_probability_pool) do
             local current_items_pool = TUNING.HOSHINO_SHOP_ITEMS_POOL[colour_type] or {} -- 防止物品池为空
             for k, single_item_data in pairs(current_items_pool) do
-                if single_item_data and single_item_data.is_permanent then
-                    table.insert(ret, single_item_data)
+                if single_item_data then
+                    local is_permanent = single_item_data.is_permanent -- 常驻标记位
+                    local level = single_item_data.level or 0
+                    if is_permanent and self.level >= level then
+                        table.insert(ret, single_item_data)
+                    end
                 end
             end
         end
@@ -182,7 +196,7 @@ nil,
         local today = TheWorld.state.cycles
         if today ~= self.day or new_force then
             self.pool = {}
-            self:SpawnNewListByLevel(self.level)
+            self:SpawnNewList(self.level)
             self.day = today
             print("刷新商店物品池")
         end
