@@ -128,6 +128,10 @@ return function(inst,front_root)
             refresh_button.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated_for_widget",function()
                 ThePlayer:PushEvent("hoshino_event.shop_refresh_count")
             end,ThePlayer)
+            --- 等级显示
+            local level_text = root:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
+            level_text:SetString("Level."..tostring(ThePlayer.HOSHINO_SHOP and ThePlayer.HOSHINO_SHOP.level or 0))
+            level_text:SetPosition(0,340)
         ------------------------------------------------------------------------------
         --- 商店物品盒子
             local items_box = root:AddChild(Image(atlas,"items_background.tex"))

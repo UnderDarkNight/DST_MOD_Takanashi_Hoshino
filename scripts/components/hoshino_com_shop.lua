@@ -262,6 +262,12 @@ nil,
         -----------------------------------------------
     end
 ------------------------------------------------------------------------------------------------------------------------------
+--- 商店等级
+    function hoshino_com_shop:GetLevel()
+        local level = TheWorld.components.hoshino_com_shop_items_pool:GetLevel() or 0
+        return level
+    end
+------------------------------------------------------------------------------------------------------------------------------
 --- 获取物品列表并修正价格。
     function hoshino_com_shop:GetItemsList(new_force)
         local items_list = TheWorld.components.hoshino_com_shop_items_pool:GetItemsList(new_force)
@@ -308,6 +314,7 @@ nil,
         normal_items = self:SortItemsList(normal_items)
         special_items = self:SortItemsList(special_items)
 
+        self:ShopData_Set("level",self:GetLevel())
         self:ShopData_Set("normal_items",normal_items)
         self:ShopData_Set("special_items",special_items)
         self:Refresh_Delta(0)
