@@ -8,10 +8,10 @@ local assets =
 {
     Asset("ANIM", "anim/swap_cane.zip"),
 
-    Asset( "IMAGE", "images/inventoryimages/hoshino_special_equipment_shoes_t1.tex" ),
-    Asset( "ATLAS", "images/inventoryimages/hoshino_special_equipment_shoes_t1.xml" ),
-    Asset( "IMAGE", "images/inspect_pad/hoshino_pad_equipment_shoes_t1.tex" ),
-    Asset( "ATLAS", "images/inspect_pad/hoshino_pad_equipment_shoes_t1.xml" ),
+    Asset( "IMAGE", "images/inventoryimages/hoshino_special_equipment_shoes_t8.tex" ),
+    Asset( "ATLAS", "images/inventoryimages/hoshino_special_equipment_shoes_t8.xml" ),
+    Asset( "IMAGE", "images/inspect_pad/hoshino_pad_equipment_shoes_t8.tex" ),
+    Asset( "ATLAS", "images/inspect_pad/hoshino_pad_equipment_shoes_t8.xml" ),
 
 
 }
@@ -20,11 +20,9 @@ local assets =
 --- 特殊函数激活、反激活
     local function Special_Fn_Active(inst,owner)
         -- print("激活",inst,owner)
-        owner.components.locomotor:SetExternalSpeedMultiplier(inst,"hoshino_special_equipment_shoes_t1",1.05)
     end
     local function Special_Fn_Deactive(inst,owner)
         -- print("反激活",inst,owner)
-        owner.components.locomotor:RemoveExternalSpeedMultiplier(inst,"hoshino_special_equipment_shoes_t1")
     end
     local function onequip(inst, owner)
         inst.owner = owner
@@ -100,9 +98,10 @@ local function fn()
     -----------------------------------------------------------------------------------
     --- 给平板电脑的数据
         inst.pad_data = {
-            atlas = "images/inspect_pad/hoshino_pad_equipment_shoes_t1.xml",
-            image = "hoshino_pad_equipment_shoes_t1.tex",
-            inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t1","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t1","recipe_desc"),
+            atlas = "images/inspect_pad/hoshino_pad_equipment_shoes_t8.xml",
+            image = "hoshino_pad_equipment_shoes_t8.tex",
+            inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t8","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t8","recipe_desc"),
+
         }
     -----------------------------------------------------------------------------------
     if not TheWorld.ismastersim then
@@ -110,8 +109,8 @@ local function fn()
     end
     inst.components.equippable.equipslot = EQUIPSLOTS.HOSHINO_SHOES
     -- inst.components.inventoryitem:ChangeImageName("tillweedsalve")
-    inst.components.inventoryitem.imagename = "hoshino_special_equipment_shoes_t1"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_special_equipment_shoes_t1.xml"
+    inst.components.inventoryitem.imagename = "hoshino_special_equipment_shoes_t8"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_special_equipment_shoes_t8.xml"
 
 
     -----------------------------------------------------------------------------------
@@ -127,4 +126,4 @@ local function fn()
     return inst
 end
 
-return Prefab("hoshino_special_equipment_shoes_t1", fn, assets)
+return Prefab("hoshino_special_equipment_shoes_t8", fn, assets)

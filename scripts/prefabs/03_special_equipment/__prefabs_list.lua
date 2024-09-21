@@ -28,8 +28,17 @@ local Prefabs_addr_base = string.sub(temp_addr,1,temp_str_index2) .. "/"    --- 
 local prefabs_name_list = {
 
 
-    "00_excample",                           --- 示例装备
-    "01_shoes_t1",                           --- 示例装备
+    "_excample",                           --- 示例装备
+    "00_equipment_clear",                  --- 清除装备
+    "01_shoes_t1",                           --- T1 鞋子
+    "02_shoes_t2",                           --- T2 鞋子
+    "03_shoes_t3",                           --- T3 鞋子
+    "04_shoes_t4",                           --- T4 鞋子
+    "05_shoes_t5",                           --- T5 鞋子
+    "06_shoes_t6",                           --- T6 鞋子
+    "07_shoes_t7",                           --- T7 鞋子
+    "08_shoes_t8",                           --- T8 鞋子
+    "09_shoes_t9",                           --- T9 鞋子
 
 
 }

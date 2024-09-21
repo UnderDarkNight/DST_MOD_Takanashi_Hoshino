@@ -23,7 +23,19 @@ local files_name = {
 		"hoshino_item_cards_pack",										--- 卡牌芯片
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
+		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子
+		"hoshino_special_equipment_amulet_clear",								--- 清除护符
+		"hoshino_special_equipment_backpack_clear",								--- 清除背包
+
 		"hoshino_special_equipment_shoes_t1",								--- 1级鞋子
+		"hoshino_special_equipment_shoes_t2",								--- 2级鞋子
+		"hoshino_special_equipment_shoes_t3",								--- 3级鞋子
+		"hoshino_special_equipment_shoes_t4",								--- 4级鞋子
+		"hoshino_special_equipment_shoes_t5",								--- 5级鞋子
+		"hoshino_special_equipment_shoes_t6",								--- 6级鞋子
+		"hoshino_special_equipment_shoes_t7",								--- 7级鞋子
+		"hoshino_special_equipment_shoes_t8",								--- 8级鞋子
+		"hoshino_special_equipment_shoes_t9",								--- 9级鞋子
 	---------------------------------------------------------------------------------------
 
 }
