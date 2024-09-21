@@ -163,6 +163,14 @@
         end
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 物品升级系统
+    local function shop_level_up_sys_install(inst)
+        local fn = require("prefabs/06_buildings/01_04_shop_level_up")
+        if type(fn) == "function" then
+            fn(inst)
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -189,6 +197,7 @@ local function fn()
     widget_open_event_install(inst)
     workable_com_install(inst)
     recycle_sys_install(inst)
+    shop_level_up_sys_install(inst)
     if not TheWorld.ismastersim then
         return inst
     end

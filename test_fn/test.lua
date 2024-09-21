@@ -19,9 +19,23 @@ local flg,error_code = pcall(function()
     print("WARNING:PCALL START +++++++++++++++++++++++++++++++++++++++++++++++++")
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
+    --- 卡牌调试
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+                cards = {
+                    -- "card_golden",
+                    -- "card_white",
+                    -- "card_colourful",
+                    -- "card_colourful",
+                    -- "card_golden",
+                    "ruins_sheild_and_vengeance",
+                },
+            }
+        )
+        ThePlayer.components.inventory:GiveItem(item)
+    ----------------------------------------------------------------------------------------------------------------
     ---
-        ThePlayer.__level_tx = 0
-        ThePlayer.__level_ty = 340
+        
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -53,6 +53,14 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["name"] = "100信用币",
                 ["inspect_str"] = "100信用币",
             },
+            ["hoshino_other_shop_debugger_level_up"] = {
+                ["name"] = "商店升级套件",
+                ["inspect_str"] = "商店升级套件",
+            },
+            ["hoshino_other_shop_debugger_reset_level"] = {
+                ["name"] = "商店等级重置",
+                ["inspect_str"] = "商店等级重置",
+            },
         --------------------------------------------------------------------
         --- 组件动作
            

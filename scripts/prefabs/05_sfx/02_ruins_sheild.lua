@@ -1,6 +1,7 @@
 local assets =
 {
    Asset("ANIM", "anim/forcefield.zip"),
+   Asset("ANIM", "anim/hoshino_sfx_ruiins_sheild.zip"),
 }
 
 local MAX_LIGHT_FRAME = 6
@@ -50,16 +51,18 @@ local function fn()
     inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("forcefield")
-    inst.AnimState:SetBuild("forcefield")
+    inst.AnimState:SetBuild("hoshino_sfx_ruiins_sheild")
     inst.AnimState:PlayAnimation("open")
     inst.AnimState:PushAnimation("idle_loop", true)
+    inst.AnimState:SetFinalOffset(1)
 
     inst.SoundEmitter:PlaySound("dontstarve/wilson/forcefield_LP", "loop")
 
     inst.Light:SetRadius(0)
     inst.Light:SetIntensity(.9)
     inst.Light:SetFalloff(.9)
-    inst.Light:SetColour(1, 1, 1)
+    -- inst.Light:SetColour(1, 1, 1)
+    inst.Light:SetColour(100/255, 255/255, 255/255)
     inst.Light:Enable(true)
     inst.Light:EnableClientModulation(true)
 
