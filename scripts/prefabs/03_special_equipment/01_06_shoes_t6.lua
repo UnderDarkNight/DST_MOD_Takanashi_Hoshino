@@ -8,10 +8,10 @@ local assets =
 {
     Asset("ANIM", "anim/swap_cane.zip"),
 
-    Asset( "IMAGE", "images/inventoryimages/hoshino_special_equipment_shoes_t2.tex" ),
-    Asset( "ATLAS", "images/inventoryimages/hoshino_special_equipment_shoes_t2.xml" ),
-    Asset( "IMAGE", "images/inspect_pad/hoshino_pad_equipment_shoes_t2.tex" ),
-    Asset( "ATLAS", "images/inspect_pad/hoshino_pad_equipment_shoes_t2.xml" ),
+    Asset( "IMAGE", "images/inventoryimages/hoshino_special_equipment_shoes_t6.tex" ),
+    Asset( "ATLAS", "images/inventoryimages/hoshino_special_equipment_shoes_t6.xml" ),
+    Asset( "IMAGE", "images/inspect_pad/hoshino_pad_equipment_shoes_t6.tex" ),
+    Asset( "ATLAS", "images/inspect_pad/hoshino_pad_equipment_shoes_t6.xml" ),
 
 
 }
@@ -20,9 +20,13 @@ local assets =
 --- 特殊函数激活、反激活
     local function Special_Fn_Active(inst,owner)
         -- print("激活",inst,owner)
+        inst:PushEvent("Special_Fn_Active",owner)
     end
     local function Special_Fn_Deactive(inst,owner)
         -- print("反激活",inst,owner)
+        if owner then
+            inst:PushEvent("Special_Fn_Deactive",owner)
+        end
     end
     local function onequip(inst, owner)
         inst.owner = owner
@@ -98,9 +102,10 @@ local function fn()
     -----------------------------------------------------------------------------------
     --- 给平板电脑的数据
         inst.pad_data = {
-            atlas = "images/inspect_pad/hoshino_pad_equipment_shoes_t2.xml",
-            image = "hoshino_pad_equipment_shoes_t2.tex",
-            inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t2","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t2","recipe_desc"),
+            atlas = "images/inspect_pad/hoshino_pad_equipment_shoes_t6.xml",
+            image = "hoshino_pad_equipment_shoes_t6.tex",
+            -- inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t6","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t6","recipe_desc"),
+
         }
     -----------------------------------------------------------------------------------
     if not TheWorld.ismastersim then
@@ -108,8 +113,8 @@ local function fn()
     end
     inst.components.equippable.equipslot = EQUIPSLOTS.HOSHINO_SHOES
     -- inst.components.inventoryitem:ChangeImageName("tillweedsalve")
-    inst.components.inventoryitem.imagename = "hoshino_special_equipment_shoes_t2"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_special_equipment_shoes_t2.xml"
+    inst.components.inventoryitem.imagename = "hoshino_special_equipment_shoes_t6"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_special_equipment_shoes_t6.xml"
 
 
     -----------------------------------------------------------------------------------
@@ -122,7 +127,14 @@ local function fn()
             doer.components.hoshino_cards_sys:SendInspectWarning()  -- 通知平板电脑
         end
     -----------------------------------------------------------------------------------
+    --- 激活/反激活 相关的 事件安装
+        inst.level = 6
+        local active_event_install_fn = require("prefabs/03_special_equipment/01_00_shoes_fn_by_level")
+        if active_event_install_fn then
+            active_event_install_fn(inst)
+        end
+    -----------------------------------------------------------------------------------
     return inst
 end
 
-return Prefab("hoshino_special_equipment_shoes_t2", fn, assets)
+return Prefab("hoshino_special_equipment_shoes_t6", fn, assets)

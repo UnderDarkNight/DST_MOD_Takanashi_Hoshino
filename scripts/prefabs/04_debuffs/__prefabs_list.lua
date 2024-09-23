@@ -51,6 +51,9 @@ local prefabs_name_list = {
     "01_21_card_debuff_level_up_and_double_card_pack",                      --- 卡牌debuff：升级和双倍卡包
     "01_22_card_debuff_absolute_defense",                                   --- 卡牌debuff：绝对防御
     "01_23_card_debuff_ruins_sheild_and_vengeance",                         --- 卡牌debuff：铥矿护盾和吸血
+
+
+    "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
 }
 
 ---------------------------------------------------------------------------

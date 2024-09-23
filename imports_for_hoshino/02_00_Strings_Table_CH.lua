@@ -107,47 +107,47 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             ["hoshino_special_equipment_shoes_t1"] = {
                 ["name"] = "T1: 粉色休闲鞋",
                 ["inspect_str"] = "T1: 粉色休闲鞋",
-                ["recipe_desc"] = "移动速度+5%",
+                -- ["recipe_desc"] = "移动速度+5%",
             },
             ["hoshino_special_equipment_shoes_t2"] = {
                 ["name"] = "T2:雪地靴",
                 ["inspect_str"] = "T2:雪地靴",
-                ["recipe_desc"] = "保暖+120\nSan+6/min\n移动速度+10%",
+                -- ["recipe_desc"] = "保暖+120\nSan+6/min\n移动速度+10%",
             },
             ["hoshino_special_equipment_shoes_t3"] = {
                 ["name"] = "T3:粉色羊驼拖鞋",
                 ["inspect_str"] = "T3:粉色羊驼拖鞋",
-                ["recipe_desc"] = "免疫雷电\n免疫麻痹\n基础攻击伤害+15%",
+                -- ["recipe_desc"] = "免疫雷电\n免疫麻痹\n基础攻击伤害+15%",
             },
             ["hoshino_special_equipment_shoes_t4"] = {
                 ["name"] = "T4:中古漆制学生鞋",
                 ["inspect_str"] = "T4:中古漆制学生鞋",
-                ["recipe_desc"] = "免疫火焰伤害\n移动速度+10%",
+                -- ["recipe_desc"] = "免疫火焰伤害\n移动速度+10%",
             },
             ["hoshino_special_equipment_shoes_t5"] = {
                 ["name"] = "T5:战术长靴",
                 ["inspect_str"] = "T5:战术长靴",
-                ["recipe_desc"] = "特殊快捷键瞬移去鼠标位置\n消耗20San",
+                -- ["recipe_desc"] = "特殊快捷键瞬移去鼠标位置\n消耗20San",
             },
             ["hoshino_special_equipment_shoes_t6"] = {
                 ["name"] = "T6:高跟鞋",
                 ["inspect_str"] = "T6:高跟鞋",
-                ["recipe_desc"] = "无视地形行走\n移动速度+10%",
+                -- ["recipe_desc"] = "无视地形行走\n移动速度+10%",
             },
             ["hoshino_special_equipment_shoes_t7"] = {
                 ["name"] = "T7:休闲运动鞋",
                 ["inspect_str"] = "T7:休闲运动鞋",
-                ["recipe_desc"] = "无视碰撞体积",
+                -- ["recipe_desc"] = "无视碰撞体积",
             },
             ["hoshino_special_equipment_shoes_t8"] = {
                 ["name"] = "T8:防水登山靴",
                 ["inspect_str"] = "T8:防水登山靴",
-                ["recipe_desc"] = "无视碰撞体积",
+                -- ["recipe_desc"] = "无视碰撞体积",
             },
             ["hoshino_special_equipment_shoes_t9"] = {
                 ["name"] = "T9:???",
                 ["inspect_str"] = "T8:???",
-                ["recipe_desc"] = "???",
+                -- ["recipe_desc"] = "???",
             },
         --------------------------------------------------------------------
         --- 04_debuffs

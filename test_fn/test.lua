@@ -20,22 +20,27 @@ local flg,error_code = pcall(function()
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        local item = SpawnPrefab("hoshino_item_cards_pack")
-        item:PushEvent("Set",{
-                cards = {
-                    -- "card_golden",
-                    -- "card_white",
-                    -- "card_colourful",
-                    -- "card_colourful",
-                    -- "card_golden",
-                    "ruins_sheild_and_vengeance",
-                },
-            }
-        )
-        ThePlayer.components.inventory:GiveItem(item)
+        -- local item = SpawnPrefab("hoshino_item_cards_pack")
+        -- item:PushEvent("Set",{
+        --         cards = {
+        --             -- "card_golden",
+        --             -- "card_white",
+        --             -- "card_colourful",
+        --             -- "card_colourful",
+        --             -- "card_golden",
+        --             "ruins_sheild_and_vengeance",
+        --         },
+        --     }
+        -- )
+        -- ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
     ---
-        
+        ThePlayer:ListenForEvent("newstate",function(inst,_table)
+            local statename = _table and _table.statename
+            if statename then
+                print("newstate:",statename)
+            end
+        end)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

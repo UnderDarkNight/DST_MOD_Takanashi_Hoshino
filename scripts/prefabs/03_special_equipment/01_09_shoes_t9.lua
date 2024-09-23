@@ -20,9 +20,13 @@ local assets =
 --- 特殊函数激活、反激活
     local function Special_Fn_Active(inst,owner)
         -- print("激活",inst,owner)
+        inst:PushEvent("Special_Fn_Active",owner)
     end
     local function Special_Fn_Deactive(inst,owner)
         -- print("反激活",inst,owner)
+        if owner then
+            inst:PushEvent("Special_Fn_Deactive",owner)
+        end
     end
     local function onequip(inst, owner)
         inst.owner = owner
@@ -100,7 +104,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_shoes_t9.xml",
             image = "hoshino_pad_equipment_shoes_t9.tex",
-            inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t9","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t9","recipe_desc"),
+            -- inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t9","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t9","recipe_desc"),
 
         }
     -----------------------------------------------------------------------------------
@@ -121,6 +125,13 @@ local function fn()
                 old_item:Remove()
             end
             doer.components.hoshino_cards_sys:SendInspectWarning()  -- 通知平板电脑
+        end
+    -----------------------------------------------------------------------------------
+    --- 激活/反激活 相关的 事件安装
+        inst.level = 9
+        local active_event_install_fn = require("prefabs/03_special_equipment/01_00_shoes_fn_by_level")
+        if active_event_install_fn then
+            active_event_install_fn(inst)
         end
     -----------------------------------------------------------------------------------
     return inst
