@@ -317,6 +317,7 @@ nil,
         self:ShopData_Set("level",self:GetLevel())
         self:ShopData_Set("normal_items",normal_items)
         self:ShopData_Set("special_items",special_items)
+        self:ShopData_Set("new_spawn_list_flags",{normal_items = true, special_items = true}) -- 标记新列表
         self:Refresh_Delta(0)
         self:CreditCoinDelta(0)
     end

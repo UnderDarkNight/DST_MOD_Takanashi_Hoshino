@@ -353,7 +353,9 @@ return function(inst,front_root)
                                     local buy_btn_OnControl = self.buy_btn.OnControl
                                     self.buy_btn.OnControl = function(btn_self,control,down)
                                         -- print("click",control)
-                                        btn_self.control = control  --- 确保鼠标右键、左键都能点击。 右键 control = 1, 左键 control = 29
+                                        if control == 1 or control == 29 then
+                                            btn_self.control = control  --- 确保鼠标右键、左键都能点击。 右键 control = 1, 左键 control = 29
+                                        end
                                         if buy_btn_OnControl(btn_self,control,down) then
                                             if not down then
                                                 -- print("shop button click",btn_self.index)
@@ -411,12 +413,24 @@ return function(inst,front_root)
                 return scroll_bar_area,all_slots
             end
         ------------------------------------------------------------------------------
-        --- 数据格式获取。
+        --- 时间戳记录器，用来记录上次刷新的时间
+            local function CheckIsNewItemList(item_list_name)
+                local new_spawn_list_flags = ThePlayer.HOSHINO_SHOP.new_spawn_list_flags or {}
+                if new_spawn_list_flags[item_list_name] then
+                    return true
+                else
+                    return false
+                end
+            end
+            local function ClearNewItemListFlag(item_list_name)
+                local new_spawn_list_flags = ThePlayer.HOSHINO_SHOP.new_spawn_list_flags or {}
+                new_spawn_list_flags[item_list_name] = false
+            end
         ------------------------------------------------------------------------------
         --- 普通物品区域
             root.inst:ListenForEvent("create_normal_items_page",function()
                 local normal_items = ThePlayer.HOSHINO_SHOP["normal_items"] or {}
-                if #normal_items > 0 and root.normal_items_page_last_data ~= normal_items then
+                if #normal_items > 0 and CheckIsNewItemList("normal_items") then
                     root.normal_items_page_last_data = normal_items
                     if root.normal_items_page then
                         root.normal_items_page:Kill()
@@ -435,8 +449,8 @@ return function(inst,front_root)
                     for index, item_slot in pairs(normal_items) do
                         normal_item_slots[index]:SetData(normal_items[index])
                     end
+                    ClearNewItemListFlag("normal_items")
                 end
-
             end)
             root.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated_for_widget",function()
                 --- 服务器下发新数据的时候刷新
@@ -450,7 +464,7 @@ return function(inst,front_root)
         --- 特殊物品区域                
             root.inst:ListenForEvent("create_special_items_page",function()
                 local special_items = ThePlayer.HOSHINO_SHOP["special_items"] or {}
-                if #special_items > 0 and root.special_items_page_data ~= special_items then
+                if #special_items > 0 and CheckIsNewItemList("special_items") then
                     root.special_items_page_data = special_items
                     if root.special_items_page then
                         root.special_items_page:Kill()
@@ -469,6 +483,7 @@ return function(inst,front_root)
                     for index, item_slot in pairs(special_items) do
                         special_item_slots[index]:SetData(special_items[index])
                     end
+                    ClearNewItemListFlag("special_items")
                 end
             end)
             root.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated_for_widget",function()
@@ -479,7 +494,6 @@ return function(inst,front_root)
                 end
             end,ThePlayer)
             root.inst:PushEvent("create_special_items_page") -- 初始化特殊物品页面
-        ------------------------------------------------------------------------------
         ------------------------------------------------------------------------------
         --- 关闭事件
             local fast_close_keys = {

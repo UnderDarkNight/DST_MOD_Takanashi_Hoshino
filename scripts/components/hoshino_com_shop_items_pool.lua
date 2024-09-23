@@ -46,9 +46,9 @@ local hoshino_com_shop_items_pool = Class(function(self, inst)
     -------------------------------------------
     --- item_probability_pool 物品概率权重池：
         self.item_probability_pool  = {
-            ["gray"] = 20,
-            ["blue"] = 10,
-            ["golden"] = 5,
+            ["gray"] = 200,
+            ["blue"] = 100,
+            ["golden"] = 10,
             ["colourful"] = 1,
             -- ["gray"] = 1,
             -- ["blue"] = 1,
@@ -57,8 +57,8 @@ local hoshino_com_shop_items_pool = Class(function(self, inst)
         }
     -------------------------------------------
     --- 获取个数。
-        self.items_default_num = 20 -- 默认获取个数。
-        self.items_num_per_level = 5 -- 每级增加个数。
+        self.items_default_num = 8 -- 默认获取个数。
+        self.items_num_per_level = 8 -- 每级增加个数。
 
     -------------------------------------------
     --- 天数
@@ -156,7 +156,7 @@ nil,
         for item_type, probability in pairs(self.item_probability_pool) do
             total_probability = total_probability + probability
         end
-        local random_value = math.random(10, total_probability*10)/10
+        local random_value = math.random(1, total_probability)
         for item_type, probability in pairs(self.item_probability_pool) do
             if random_value <= probability then
                 return item_type
@@ -170,11 +170,18 @@ nil,
     end
     function hoshino_com_shop_items_pool:SpawnNewList() --- 创建新的物品池
         local items_num = self:GetItemsNum()
-        for i = 1, items_num, 1 do
+        local temp_num = 0 --- 当前已经生成的物品数量
+        local temp_test_num = 5000  --- 最多尝试生成5000次
+        while true do
             local item_type = self:GetRandomTypeFromPool() or "gray"
             local ret_item_data = self:GetRandomItem(item_type)
             if ret_item_data then
-                self.pool[ret_item_data.index] = ret_item_data                    
+                self.pool[ret_item_data.index] = ret_item_data
+                temp_num = temp_num + 1                    
+            end
+            temp_test_num = temp_test_num - 1
+            if temp_num >= items_num or temp_test_num <= 0 then
+                break
             end
         end
     end
@@ -200,18 +207,20 @@ nil,
             self.pool = {}
             self:SpawnNewList(self.level)
             self.day = today
-            print("刷新商店物品池")
+            -- print("刷新商店物品池")
         end
         --- 洗掉index
         local ret = {}
         for index, item_data in pairs(self.pool) do
             table.insert(ret, item_data)
         end
+        -- print("随机物品数量", #ret)
         --- 添加常驻物品
         local permanent_list = self:GetPermanentList()
         for k, v in pairs(permanent_list) do
             table.insert(ret, v)
         end
+        -- print("常驻物品数量", #permanent_list)
         return ret
     end
 ------------------------------------------------------------------------------------------------------------------------------
