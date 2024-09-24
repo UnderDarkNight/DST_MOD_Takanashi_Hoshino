@@ -276,7 +276,54 @@ return function(inst)
             end)
         end
     ----------------------------------------------------------------------------------
+    --- 快捷键技能
+        if inst.level >= 9 then
+            local function trans2pt(inst,pt)
+                if inst.Physics then
+                    inst.Physics:Teleport(pt.x,pt.y,pt.z)
+                else
+                    inst.Transform:SetPosition(pt.x,pt.y,pt.z)
+                end
+            end
+            local cd_task = nil
+            local function hotkey_event_for_player(player,_table)
+                local pt = _table and _table.pt or {}                
+                if pt.x and pt.y and pt.z then
+                    if not cd_task then
+                        if player.components.playercontroller ~= nil then
+                            player.components.playercontroller:RemotePausePrediction(3)   --- 暂停远程预测。
+                            player.components.playercontroller:Enable(false)
+                        end
 
+                        local origin_pt = Vector3(player.Transform:GetWorldPosition())
+                        trans2pt(player,pt)
+
+                        if player.components.playercontroller ~= nil then
+                            player.components.playercontroller:Enable(true)
+                        end
+                        cd_task = player:DoTaskInTime(2,function()
+                            cd_task = nil
+                        end)
+                        ----------------------------------------------------------
+                        --- 特效
+                            SpawnPrefab("shock_fx").Transform:SetPosition(origin_pt.x,origin_pt.y,origin_pt.z)
+                            SpawnPrefab("shock_fx").Transform:SetPosition(pt.x,pt.y,pt.z)
+                        ----------------------------------------------------------
+
+                    else
+                        player.components.hoshino_com_rpc_event:PushEvent("hoshino_event.hotkey.fail")
+                    end
+
+                end
+            end
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                inst:ListenForEvent("hoshino_event.special_equipment.shoes",hotkey_event_for_player,owner)
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                inst:RemoveEventCallback("hoshino_event.special_equipment.shoes",hotkey_event_for_player,owner)
+            end)
+
+        end
     ----------------------------------------------------------------------------------
 end
 

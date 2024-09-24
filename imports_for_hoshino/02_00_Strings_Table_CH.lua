@@ -145,8 +145,8 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 -- ["recipe_desc"] = "无视碰撞体积",
             },
             ["hoshino_special_equipment_shoes_t9"] = {
-                ["name"] = "T9:???",
-                ["inspect_str"] = "T8:???",
+                ["name"] = "T9:闪闪鞋",
+                ["inspect_str"] = "T9:闪闪鞋",
                 -- ["recipe_desc"] = "???",
             },
         --------------------------------------------------------------------

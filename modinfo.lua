@@ -210,6 +210,15 @@ configuration_options = {
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
+  {name = "AAAA",label = IsChinese() and GetTitle("特殊装备快捷键") or GetTitle("Special Equipment Hotkey"),hover = "",options = {{description = "",data = 0}},default = 0},
+  {
+    name = "SPECIAL_EQUIPMENT_SHOES_HOTKEY",
+    label = IsChinese() and "鞋子快捷键" or "Shoes Hotkey",
+    hover = IsChinese() and "鞋子快捷键" or "Shoes Hotkey",
+    options = keys_option,
+    default = "KEY_Z"
+  },
+------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("其他设置") or GetTitle("Other Settings"),hover = "",options = {{description = "",data = 0}},default = 0},
   {
     name = "DEBUGGING_MOD",
