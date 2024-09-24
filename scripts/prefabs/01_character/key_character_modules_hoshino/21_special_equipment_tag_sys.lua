@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
-
+    本模块用来刷新 特殊装备的 升级 tag 。
 
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,4 +49,7 @@ return function(inst)
     inst:DoTaskInTime(0,tag_sys_refresh)
     inst:ListenForEvent("hoshino_event.special_equipment_tags_force_refresh",tag_sys_refresh)
 
+    inst:DoPeriodicTask(5,function()
+        inst.components.hoshino_com_rpc_event:PushEvent("refreshcrafting")
+    end)
 end

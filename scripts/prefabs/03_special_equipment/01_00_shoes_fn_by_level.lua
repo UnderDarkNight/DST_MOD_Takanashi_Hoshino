@@ -327,12 +327,21 @@ return function(inst)
                 if pt.x and pt.y and pt.z then
                     if not cd_task then
                         if player.components.playercontroller ~= nil then
-                            player.components.playercontroller:RemotePausePrediction(3)   --- 暂停远程预测。
+                            player.components.playercontroller:RemoteStopWalking()
+                            player.components.playercontroller:RemotePausePrediction(8)   --- 暂停远程预测。
                             player.components.playercontroller:Enable(false)
+                        end
+                        if player.components.locomotor ~= nil then
+                            player.components.locomotor:StopMoving()
+                            player.components.locomotor:Stop()
                         end
 
                         local origin_pt = Vector3(player.Transform:GetWorldPosition())
-                        trans2pt(player,pt)
+                        for i = 0, 3, 1 do
+                            player:DoTaskInTime(0.1*i,function()
+                                trans2pt(player,pt)
+                            end)
+                        end
 
                         if player.components.playercontroller ~= nil then
                             player.components.playercontroller:Enable(true)
