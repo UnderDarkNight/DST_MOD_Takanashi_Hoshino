@@ -10,9 +10,6 @@ return function(inst)
         if inst.components.hoshino_com_rpc_event == nil then
             inst:AddComponent("hoshino_com_rpc_event")
         end
-        -- if inst.components.hoshino_cards_sys == nil then
-        --     inst:AddComponent("hoshino_cards_sys")
-        -- end
     end
 
     local modules = {
@@ -35,6 +32,8 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/17_combat_hook",                            ---- combat组件HOOK
         "prefabs/01_character/key_character_modules_hoshino/18_the_camera",                             ---- TheCamera HOOK
         "prefabs/01_character/key_character_modules_hoshino/19_special_equipment_hotkey_listener",      ---- 特殊装备快捷键
+        "prefabs/01_character/key_character_modules_hoshino/20_custom_tag_sys",                         ---- 客制化tag组件
+        "prefabs/01_character/key_character_modules_hoshino/21_special_equipment_tag_sys",              ---- 特殊装备tag系统
 
     }
     for k, lua_addr in pairs(modules) do

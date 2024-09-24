@@ -1,0 +1,52 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--[[
+
+
+
+]]--
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+return function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+
+
+    local function tag_sys_refresh()
+        inst:DoTaskInTime(0,function()
+            --------------------------------------------------------------------
+            --- 鞋子
+                local max_shoes_level = 9 --- 最多只有9个鞋子等级
+                local shoes_name_base = "hoshino_special_equipment_shoes_t"
+                local shoes_item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HOSHINO_SHOES)
+                local shoes_level = 0
+                if shoes_item then
+                    shoes_level = shoes_item.level or 1
+                else
+                    shoes_level = 0
+                end
+                for i = 0, max_shoes_level, 1 do  -- 移除tag
+                    if i ~= shoes_level then
+                        inst.components.hoshino_com_tag_sys:RemoveTag(shoes_name_base..i)
+                    else
+                        inst.components.hoshino_com_tag_sys:AddTag(shoes_name_base..i)
+                    end
+                end
+            --------------------------------------------------------------------
+            --------------------------------------------------------------------
+            --- 刷新制作栏
+                for i = 1, 10, 1 do
+                    inst:DoTaskInTime(i*0.2,function()
+                        inst:PushEvent("refreshcrafting")
+                    end)
+                end
+            --------------------------------------------------------------------
+        end)
+    end
+
+    inst:ListenForEvent("unequip", tag_sys_refresh)
+    inst:ListenForEvent("equip", tag_sys_refresh)
+    inst:DoTaskInTime(0,tag_sys_refresh)
+    inst:ListenForEvent("hoshino_event.special_equipment_tags_force_refresh",tag_sys_refresh)
+
+end

@@ -183,7 +183,7 @@ local function fn()
     inst.entity:AddSoundEmitter()
 
     inst.entity:AddMiniMapEntity()
-    -- inst.MiniMapEntity:SetIcon("fwd_in_pdt_firewood_container.tex")
+    -- inst.MiniMapEntity:SetIcon("hoshino_firewood_container.tex")
 
     MakeObstaclePhysics(inst, 0.5)---设置一下距离
 

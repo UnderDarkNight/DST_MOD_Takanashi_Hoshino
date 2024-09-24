@@ -1,7 +1,7 @@
 local assets = {
     -- Asset("IMAGE", "images/inventoryimages/spell_reject_the_npc.tex"),
 	-- Asset("ATLAS", "images/inventoryimages/spell_reject_the_npc.xml"),
-	-- Asset("ANIM", "anim/fwd_in_pdt_fx_red_bats.zip"),
+	-- Asset("ANIM", "anim/hoshino_fx_red_bats.zip"),
 }
 
 

@@ -7,7 +7,7 @@
 AddRecipeToFilter("hoshino_special_equipment_amulet_clear","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_amulet_clear",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
@@ -25,7 +25,7 @@ RemoveRecipeFromFilter("hoshino_special_equipment_amulet_clear","MODS")         
 AddRecipeToFilter("hoshino_special_equipment_backpack_clear","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_backpack_clear",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
@@ -44,7 +44,7 @@ RemoveRecipeFromFilter("hoshino_special_equipment_backpack_clear","MODS")       
 AddRecipeToFilter("hoshino_special_equipment_shoes_clear","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_clear",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
@@ -66,12 +66,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_clear","MODS")          
 AddRecipeToFilter("hoshino_special_equipment_shoes_t1","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t1",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t0",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t1.xml",
         image = "hoshino_special_equipment_shoes_t1.tex",
     },
@@ -85,12 +85,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t1","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_shoes_t2","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t2",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t1",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t2.xml",
         image = "hoshino_special_equipment_shoes_t2.tex",
     },
@@ -104,12 +104,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t2","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_shoes_t3","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t3",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t2",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t3.xml",
         image = "hoshino_special_equipment_shoes_t3.tex",
     },
@@ -123,12 +123,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t3","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_shoes_t4","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t4",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t3",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t4.xml",
         image = "hoshino_special_equipment_shoes_t4.tex",
     },
@@ -142,12 +142,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t4","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_shoes_t5","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t5",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t4",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t5.xml",
         image = "hoshino_special_equipment_shoes_t5.tex",
     },
@@ -161,12 +161,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t5","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_shoes_t6","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t6",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t5",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t6.xml",
         image = "hoshino_special_equipment_shoes_t6.tex",
     },
@@ -180,12 +180,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t6","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_shoes_t7","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t7",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t6",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t7.xml",
         image = "hoshino_special_equipment_shoes_t7.tex",
     },
@@ -199,12 +199,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t7","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_shoes_t8","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t8",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t7",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t8.xml",
         image = "hoshino_special_equipment_shoes_t8.tex",
     },
@@ -218,12 +218,12 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t8","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_shoes_t9","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_shoes_t9",            --  --  inst.prefab  实体名字
-    {} ,--{ Ingredient("fwd_in_pdt_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_shoes_t8",    
         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_t9.xml",
         image = "hoshino_special_equipment_shoes_t9.tex",
     },

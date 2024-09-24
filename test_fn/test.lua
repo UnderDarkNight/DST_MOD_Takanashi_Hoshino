@@ -35,12 +35,15 @@ local flg,error_code = pcall(function()
         -- ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
     ---
-        ThePlayer:ListenForEvent("newstate",function(inst,_table)
-            local statename = _table and _table.statename
-            if statename then
-                print("newstate:",statename)
-            end
-        end)
+        -- ThePlayer:ListenForEvent("newstate",function(inst,_table)
+        --     local statename = _table and _table.statename
+        --     if statename then
+        --         print("newstate:",statename)
+        --     end
+        -- end)
+    ----------------------------------------------------------------------------------------------------------------
+    --- custom tag sys debug
+            -- ThePlayer.components.hoshino_com_tag_sys:AddTag("66666")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

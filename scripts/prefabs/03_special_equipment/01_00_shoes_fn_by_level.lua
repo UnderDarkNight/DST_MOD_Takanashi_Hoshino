@@ -48,12 +48,38 @@ return function(inst)
             inst.owner = owner
         end)
     ----------------------------------------------------------------------------------
+    --- 给玩家上tag
+        -- inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+        --     owner:DoTaskInTime(0.5,function()
+        --         if owner.components.hoshino_com_tag_sys then
+        --             owner.components.hoshino_com_tag_sys:AddTag("hoshino_special_equipment_shoes_t"..tostring(inst.level))
+        --         end
+        --     end)
+        --     owner:DoTaskInTime(1,function()
+        --         owner:PushEvent("refreshcrafting")
+        --     end)
+        -- end)
+        -- inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+        --     if owner.components.hoshino_com_tag_sys then
+        --         owner.components.hoshino_com_tag_sys:RemoveTag("hoshino_special_equipment_shoes_t"..tostring(inst.level))
+        --     end
+        -- end)
+    ----------------------------------------------------------------------------------
     --- ms_playerreroll 处理玩家重选时候造成的崩溃
         -- inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
         --     inst:ListenForEvent("ms_playerreroll",function(player)
         --         inst.Ready = false
         --     end,owner)
         -- end)
+    ----------------------------------------------------------------------------------
+    --- 刷新制作栏（用最笨的方法）
+        inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+            for i = 1, 10, 1 do
+                owner:DoTaskInTime(i,function()
+                    owner:PushEvent("refreshcrafting")
+                end)
+            end
+        end)
     ----------------------------------------------------------------------------------
     --- 复活重新激活功能 ms_respawnedfromghost
         inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
@@ -251,6 +277,16 @@ return function(inst)
                 ----------------------------------------------------------------------------------
             end)
 
+        end
+    ----------------------------------------------------------------------------------
+    --- 蜘蛛网减速免疫
+        if inst.level >= 6 then
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                owner.components.locomotor:SetTriggersCreep(false)
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                owner.components.locomotor:SetTriggersCreep(true)
+            end)
         end
     ----------------------------------------------------------------------------------
     --- 防水
