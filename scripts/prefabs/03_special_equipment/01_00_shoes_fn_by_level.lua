@@ -37,12 +37,32 @@
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 return function(inst)
-    inst.level = inst.level or 1
+    inst.level = math.clamp(inst.level or 1,1,9)
     ----------------------------------------------------------------------------------
     --- AddTag
         inst:AddTag("hoshino_special_equipment_shoes_t"..tostring(inst.level))
         inst:DoTaskInTime(0,function() -- 某些特殊情况下 必须使用的成功加载标记位
             inst.Ready = true
+        end)
+        inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+            inst.owner = owner
+        end)
+    ----------------------------------------------------------------------------------
+    --- ms_playerreroll 处理玩家重选时候造成的崩溃
+        -- inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+        --     inst:ListenForEvent("ms_playerreroll",function(player)
+        --         inst.Ready = false
+        --     end,owner)
+        -- end)
+    ----------------------------------------------------------------------------------
+    --- 复活重新激活功能 ms_respawnedfromghost
+        inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+            if not inst.ms_respawnedfromghost_event_flag then
+                inst:ListenForEvent("ms_respawnedfromghost",function(player)
+                    inst:PushEvent("Special_Fn_Active",owner)     
+                end,owner)
+                inst.ms_respawnedfromghost_event_flag = true
+            end
         end)
     ----------------------------------------------------------------------------------
     --- 速度控制器
@@ -177,6 +197,9 @@ return function(inst)
     ----------------------------------------------------------------------------------
     --- 6、7 水上行走 和 碰撞体积
         if inst.level >= 6 then
+            local function player_ms_leave_fn_for_theworld(world,player)
+                inst.Ready = false
+            end
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 if owner.components.drownable and owner.components.drownable.enabled ~= false then
                     owner.components.drownable.enabled = false
@@ -193,17 +216,39 @@ return function(inst)
                     owner.Physics:CollidesWith(COLLISION.GIANTS)
                     owner.Physics:Teleport(owner.Transform:GetWorldPosition())
                 end
+                ----------------------------------------------------------------------------------
+                --- 防崩溃处理
+                    -- inst:ListenForEvent("ms_playerleft",player_ms_leave_fn_for_theworld,TheWorld)
+                ----------------------------------------------------------------------------------
+
             end)
 
+            local function _MakeCharacterPhysics(inst, mass, rad)   --- 设置正常角色物理参数
+                local phys = inst.Physics
+                phys:SetMass(mass)
+                phys:SetFriction(0)
+                phys:SetDamping(5)
+                phys:SetCollisionGroup(COLLISION.CHARACTERS)
+                phys:ClearCollisionMask()
+                phys:CollidesWith(COLLISION.WORLD)
+                phys:CollidesWith(COLLISION.OBSTACLES)
+                phys:CollidesWith(COLLISION.SMALLOBSTACLES)
+                phys:CollidesWith(COLLISION.CHARACTERS)
+                phys:CollidesWith(COLLISION.GIANTS)
+                phys:SetCapsule(rad, 1)
+                return phys
+            end
+
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
-                if not inst.Ready then
-                    return
-                end
-                MakeCharacterPhysics(owner, 75, .5)
-                if owner.components.drownable then
-                    owner.components.drownable.enabled = true
-                end
-                owner.Physics:Teleport(owner.Transform:GetWorldPosition())
+                ----------------------------------------------------------------------------------
+                --- 防崩溃处理
+                ----------------------------------------------------------------------------------
+                    _MakeCharacterPhysics(owner, 75, .5)
+                    if owner.components.drownable then
+                        owner.components.drownable.enabled = true
+                    end
+                    owner.Physics:Teleport(owner.Transform:GetWorldPosition())
+                ----------------------------------------------------------------------------------
             end)
 
         end
