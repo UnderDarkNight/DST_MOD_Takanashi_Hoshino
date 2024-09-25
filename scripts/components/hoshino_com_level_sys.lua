@@ -46,6 +46,9 @@ local hoshino_com_level_sys = Class(function(self, inst)
         self.max_exp = 10
         self.full_max_exp = 4000000000  -- 最大经验值上限，避免net溢出崩溃。net_uint
     --------------------------------------------------
+    -- 倍增器
+        self.external_exp_multipliers = SourceModifierList(self.inst) -- exp multiplier
+    --------------------------------------------------
 
 
 end,
@@ -100,6 +103,17 @@ nil,
         return 0
     end
 ------------------------------------------------------------------------------------------------------------------------------
+-- 倍增器
+    function hoshino_com_level_sys:GetExpMult()
+        return self.external_exp_multipliers:Get()
+    end
+    function hoshino_com_level_sys:EXP_SetModifier(src,value)
+        self.external_exp_multipliers:SetModifier(src,value)
+    end
+    function hoshino_com_level_sys:EXP_RemoveModifier(src)
+        self.external_exp_multipliers:RemoveModifier(src)
+    end
+------------------------------------------------------------------------------------------------------------------------------
 -- 数值设置
     function hoshino_com_level_sys:SetExp(value)
         self.exp = math.clamp(value or 0,0,self.max_exp)
@@ -111,6 +125,9 @@ nil,
         return self.exp
     end
     function hoshino_com_level_sys:Exp_DoDelta(value)
+        if value > 0 then
+            value = value * self:GetExpMult()
+        end
         self:SetExp(self.exp + value)
     end
     function hoshino_com_level_sys:Exp_DoDelta_LockCheck(value)

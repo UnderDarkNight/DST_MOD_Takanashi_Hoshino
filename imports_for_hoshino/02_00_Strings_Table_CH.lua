@@ -244,6 +244,9 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             ["hoshino_card_debuff_bloodshed"] = {
                 ["name"] = "流血",
             },
+            ["hoshino_buff_special_equipment_backpack_t8"] = {
+                ["name"] = "伤害分摊",
+            },
         --------------------------------------------------------------------
         --- 06_buildings
             ["hoshino_building_shop24"] = {

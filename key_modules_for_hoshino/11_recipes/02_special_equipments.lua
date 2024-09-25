@@ -242,7 +242,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t0",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t1.xml",
         image = "hoshino_special_equipment_backpack_t1.tex",
     },
@@ -261,7 +261,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t1",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t2.xml",
         image = "hoshino_special_equipment_backpack_t2.tex",
     },
@@ -280,7 +280,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t2",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t3.xml",
         image = "hoshino_special_equipment_backpack_t3.tex",
     },
@@ -299,7 +299,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t3",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t4.xml",
         image = "hoshino_special_equipment_backpack_t4.tex",
     },
@@ -318,7 +318,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t4",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t5.xml",
         image = "hoshino_special_equipment_backpack_t5.tex",
     },
@@ -337,7 +337,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t5",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t6.xml",
         image = "hoshino_special_equipment_backpack_t6.tex",
     },
@@ -356,7 +356,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t6",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t7.xml",
         image = "hoshino_special_equipment_backpack_t7.tex",
     },
@@ -375,7 +375,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t7",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t8.xml",
         image = "hoshino_special_equipment_backpack_t8.tex",
     },
@@ -394,7 +394,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_backpack_t8",    
         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_t9.xml",
         image = "hoshino_special_equipment_backpack_t9.tex",
     },
@@ -413,7 +413,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t0",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t1.xml",
         image = "hoshino_special_equipment_amulet_t1.tex",
     },
@@ -432,7 +432,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t1",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t2.xml",
         image = "hoshino_special_equipment_amulet_t2.tex",
     },
@@ -451,7 +451,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t2",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t3.xml",
         image = "hoshino_special_equipment_amulet_t3.tex",
     },
@@ -470,7 +470,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t3",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t4.xml",
         image = "hoshino_special_equipment_amulet_t4.tex",
     },
@@ -489,7 +489,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t4",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t5.xml",
         image = "hoshino_special_equipment_amulet_t5.tex",
     },
@@ -508,7 +508,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t5",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t6.xml",
         image = "hoshino_special_equipment_amulet_t6.tex",
     },
@@ -527,7 +527,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t6",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t7.xml",
         image = "hoshino_special_equipment_amulet_t7.tex",
     },
@@ -546,7 +546,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t7",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t8.xml",
         image = "hoshino_special_equipment_amulet_t8.tex",
     },
@@ -565,7 +565,7 @@ AddRecipe2(
     {
         -- nounlock=true,
         no_deconstruction=false,
-        builder_tag = "hoshino",    
+        builder_tag = "hoshino_special_equipment_amulet_t8",    
         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_t9.xml",
         image = "hoshino_special_equipment_amulet_t9.tex",
     },

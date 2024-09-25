@@ -11,23 +11,23 @@
     相关API:
 
 
-    1：获得50%防水
+    1：免疫钢羊的控制效果
 
-    2：生命上限+30，cost恢复速度+0.01/s
+    2：免疫冰冻，半径30码内所有玩家获得15%减伤
 
-    3：隔热+180，cost恢复速度+0.01/s
+    3：金卡权重+5，彩卡权重+0.5，移动速度+10%
 
-    4：基础伤害减免+20%，免疫击飞
+    4：免疫精神控制（织影者那种），免疫催眠
 
-    5：位面防御+10，经验值获取速率增加200%
+    5：半径30码内所有玩家基础攻击伤害+20%，且每次攻击恢复5点san值（启蒙状态改为降低5启蒙值）
 
-    6：基础攻击伤害+50%，cost恢复+0.02/s
+    6：每次造成伤害都会 额外 直接扣除敌人最大生命值1%的。每有一个诅咒效果，基础攻击伤害增加50%。
 
-    7：商店所有物品打折20%，每次击杀单位可以获得3信用点，传奇单位则获得300信用点
+    7：半径30码内的枯萎植物会恢复，半径30码内的玩家会每10s恢复3点生命值
 
-    8：30码内的所有其他玩家受到伤害的60%会由自己承担，cost恢复+0.05/s
+    8：每次睡觉时获得一包升级卡包，此效果每一天仅可触发1次。
 
-    9：每15s检索30码内的所有其他玩家，若其没有护盾，则为其提供一个能抵挡50点伤害的护盾
+    9：每次攻击会恢复造成伤害1%的生命值，被攻击到的生物获得debuff：受到的最终伤害增加100%，持续10s。
 
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,5 +37,26 @@
 return function(inst)
     inst.level = math.clamp(inst.level or 1,1,9)
 
-
+    ----------------------------------------------------------------------------------
+    --- 免疫钢羊鼻涕的控制效果
+        if inst.level >= 1 then
+            local sg_state = {
+                ["pinned_hit"] = true,
+                ["pinned"] = true,
+                ["pinned_pre"] = true,
+            }
+            local player_pinned_block_state_event_fn = function(player,_table)
+                local statename = _table and _table.statename
+                if sg_state[statename] then
+                    player.sg:GoToState("idle")
+                end
+            end
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                inst:ListenForEvent("newstate",player_pinned_block_state_event_fn,owner)
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                inst:RemoveEventCallback("newstate",player_pinned_block_state_event_fn,owner)
+            end)
+        end
+    ----------------------------------------------------------------------------------
 end

@@ -13,28 +13,28 @@ return function(inst)
         return
     end
 
-    inst:AddComponent("hoshino_com_health_hooker")
-    inst:ListenForEvent("master_postinit_hoshino",function()
+    -- inst:AddComponent("hoshino_com_health_hooker")
+    -- inst:ListenForEvent("master_postinit_hoshino",function()
         
-        if inst.components.health == nil then
-            return
-        end
+    --     if inst.components.health == nil then
+    --         return
+    --     end
 
 
-        local old_DoDelta = inst.components.health.DoDelta
-        inst.components.health.DoDelta = function(self, num,...)
-            if num < 0 then
-                -- num 是负数
-                local reduce_num = self.inst.components.hoshino_com_debuff:Get_Health_Down_Reduce()  -- 这个是正数
-                if num + reduce_num > 0 then
-                    num = 0
-                else
-                    num = num + reduce_num
-                end
-            end
-            num = inst.components.hoshino_com_health_hooker:Active(num) or num
-            return old_DoDelta(self,num,...)
-        end
+    --     local old_DoDelta = inst.components.health.DoDelta
+    --     inst.components.health.DoDelta = function(self, num,...)
+    --         if num < 0 then
+    --             -- num 是负数
+    --             local reduce_num = self.inst.components.hoshino_com_debuff:Get_Health_Down_Reduce()  -- 这个是正数
+    --             if num + reduce_num > 0 then
+    --                 num = 0
+    --             else
+    --                 num = num + reduce_num
+    --             end
+    --         end
+    --         num = inst.components.hoshino_com_health_hooker:Active(num) or num
+    --         return old_DoDelta(self,num,...)
+    --     end
 
-    end)
+    -- end)
 end

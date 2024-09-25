@@ -13,6 +13,9 @@ modimport("key_modules_for_hoshino/01_character/__all_character_modules_init.lua
 modimport("key_modules_for_hoshino/02_theworld/__all_theworld_init.lua") 
 -- 世界模块更新
 
+modimport("key_modules_for_hoshino/03_player/__all_player_init.lua") 
+-- 所有玩家通用更新
+
 modimport("key_modules_for_hoshino/05_components/__all_com_init.lua") 
 -- 官方组件 更新器
 

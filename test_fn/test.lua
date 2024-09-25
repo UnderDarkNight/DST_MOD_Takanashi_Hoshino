@@ -42,8 +42,18 @@ local flg,error_code = pcall(function()
         --     end
         -- end)
     ----------------------------------------------------------------------------------------------------------------
-    --- custom tag sys debug
-            -- ThePlayer.components.hoshino_com_tag_sys:AddTag("66666")
+    --- 
+            -- print( ThePlayer.components.hoshino_com_level_sys:GetExpMult() )
+
+            local debuff_prefab = "hoshino_buff_special_equipment_backpack_t9"
+            while true do
+                local debuff_inst = ThePlayer:GetDebuff(debuff_prefab)
+                if debuff_inst and debuff_inst:IsValid() then
+                    debuff_inst:PushEvent("reset_pool")
+                    break
+                end
+                ThePlayer:AddDebuff(debuff_prefab,debuff_prefab)
+            end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
