@@ -40,6 +40,16 @@ local prefabs_name_list = {
     "01_08_shoes_t8",                           --- T8 鞋子
     "01_09_shoes_t9",                           --- T9 鞋子
 
+    "02_01_backpack_t1",                           --- T1 背包
+    "02_02_backpack_t2",                           --- T2 背包
+    "02_03_backpack_t3",                           --- T3 背包
+    "02_04_backpack_t4",                           --- T4 背包
+    "02_05_backpack_t5",                           --- T5 背包
+    "02_06_backpack_t6",                           --- T6 背包
+    "02_07_backpack_t7",                           --- T7 背包
+    "02_08_backpack_t8",                           --- T8 背包
+    "02_09_backpack_t9",                           --- T9 背包
+
 
 }
 

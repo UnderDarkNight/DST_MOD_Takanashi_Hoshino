@@ -149,6 +149,51 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "T9:闪闪鞋",
                 -- ["recipe_desc"] = "???",
             },
+            ["hoshino_special_equipment_backpack_t1"] = {
+                ["name"] = "T1:防水运动包",
+                ["inspect_str"] = "T1:防水运动包",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_backpack_t2"] = {
+                ["name"] = "T2:防寒斜挎包",
+                ["inspect_str"] = "T2:防寒斜挎包",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_backpack_t3"] = {
+                ["name"] = "T3:佩洛洛书包",
+                ["inspect_str"] = "T3:佩洛洛书包",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_backpack_t4"] = {
+                ["name"] = "T4:藏蓝书包",
+                ["inspect_str"] = "T4:藏蓝书包",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_backpack_t5"] = {
+                ["name"] = "T5:战术双肩包",
+                ["inspect_str"] = "T5:战术双肩包",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_backpack_t6"] = {
+                ["name"] = "T6:恶魔之翼挎包",
+                ["inspect_str"] = "T6:恶魔之翼挎包",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_backpack_t7"] = {
+                ["name"] = "T7:街头包",
+                ["inspect_str"] = "T7:街头包",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_backpack_t8"] = {
+                ["name"] = "T8:蝴蝶单肩包",
+                ["inspect_str"] = "T8:蝴蝶单肩包",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_backpack_t9"] = {
+                ["name"] = "T9:斜挎式防水袋",
+                ["inspect_str"] = "T9:斜挎式防水袋",
+                -- ["recipe_desc"] = "???",
+            },
         --------------------------------------------------------------------
         --- 04_debuffs
             ["hoshino_card_debuff_bloodshed"] = {

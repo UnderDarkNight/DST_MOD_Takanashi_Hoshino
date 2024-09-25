@@ -119,6 +119,7 @@ return function(inst)
         if inst.level >= 2 then
             inst:AddComponent("insulator")
             inst.components.insulator:SetInsulation(120)
+            inst.components.equippable.insulated = true
         end
     ----------------------------------------------------------------------------------
     --- San
