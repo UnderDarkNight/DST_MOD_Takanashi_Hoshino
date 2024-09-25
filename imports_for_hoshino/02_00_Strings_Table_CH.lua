@@ -194,6 +194,51 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "T9:斜挎式防水袋",
                 -- ["recipe_desc"] = "???",
             },
+            ["hoshino_special_equipment_amulet_t1"] = {
+                ["name"] = "T1:交通安全护符",
+                ["inspect_str"] = "T1:交通安全护符",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_amulet_t2"] = {
+                ["name"] = "T2:暖手贴",
+                ["inspect_str"] = "T2:暖手贴",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_amulet_t3"] = {
+                ["name"] = "T3:佩洛洛羽毛",
+                ["inspect_str"] = "T3:佩洛洛羽毛",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_amulet_t4"] = {
+                ["name"] = "T4:十字架",
+                ["inspect_str"] = "T4:十字架",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_amulet_t5"] = {
+                ["name"] = "T5:迷彩不倒翁",
+                ["inspect_str"] = "T5:迷彩不倒翁",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_amulet_t6"] = {
+                ["name"] = "T6:诅咒娃娃",
+                ["inspect_str"] = "T6:诅咒娃娃",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_amulet_t7"] = {
+                ["name"] = "T7:便携式除臭剂",
+                ["inspect_str"] = "T7:便携式除臭剂",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_amulet_t8"] = {
+                ["name"] = "T8:捕梦网",
+                ["inspect_str"] = "T8:捕梦网",
+                -- ["recipe_desc"] = "???",
+            },
+            ["hoshino_special_equipment_amulet_t9"] = {
+                ["name"] = "T9:鲨齿御守",
+                ["inspect_str"] = "T9:鲨齿御守",
+                -- ["recipe_desc"] = "???",
+            },
         --------------------------------------------------------------------
         --- 04_debuffs
             ["hoshino_card_debuff_bloodshed"] = {

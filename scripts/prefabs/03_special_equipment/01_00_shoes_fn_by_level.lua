@@ -119,7 +119,6 @@ return function(inst)
         if inst.level >= 2 then
             inst:AddComponent("insulator")
             inst.components.insulator:SetInsulation(120)
-            inst.components.equippable.insulated = true
         end
     ----------------------------------------------------------------------------------
     --- San
@@ -159,6 +158,7 @@ return function(inst)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
                 inst:RemoveEventCallback("newstate",player_electrocute_block_state_event_fn,owner)
             end)
+            inst.components.equippable.insulated = true
         end
     ----------------------------------------------------------------------------------
     --- 基础伤害倍增

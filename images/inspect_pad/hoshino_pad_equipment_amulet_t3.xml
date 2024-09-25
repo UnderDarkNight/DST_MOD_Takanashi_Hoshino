@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="hoshino_pad_equipment_amulet_t3.tex" />
+	<Elements>
+		<Element name="hoshino_pad_equipment_amulet_t3.tex" u1="0.001" u2="0.874" v2="0.999" v1="0.1885" variant="" />
+	</Elements>
+</Atlas>

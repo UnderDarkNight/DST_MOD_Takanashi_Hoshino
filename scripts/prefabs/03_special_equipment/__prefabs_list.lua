@@ -50,6 +50,16 @@ local prefabs_name_list = {
     "02_08_backpack_t8",                           --- T8 背包
     "02_09_backpack_t9",                           --- T9 背包
 
+    "03_01_amulet_t1",                           --- T1 项链
+    "03_02_amulet_t2",                           --- T2 项链
+    "03_03_amulet_t3",                           --- T3 项链
+    "03_04_amulet_t4",                           --- T4 项链
+    "03_05_amulet_t5",                           --- T5 项链
+    "03_06_amulet_t6",                           --- T6 项链
+    "03_07_amulet_t7",                           --- T7 项链
+    "03_08_amulet_t8",                           --- T8 项链
+    "03_09_amulet_t9",                           --- T9 项链
+
 
 }
 
