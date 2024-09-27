@@ -5,24 +5,39 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.Network:SetClassifiedTarget(target)
     inst.player = target
     -----------------------------------------------------
-    --- 计时器
-        inst:DoPeriodicTask(1,function()
-            inst.time = inst.time - 1
-            if inst.time <= 0 then
-                inst:Remove()
+    --- 
+    -----------------------------------------------------
+    --- 每次攻击怪物，怪物额外掉血
+        inst:ListenForEvent("onhitother",function(player,_table)
+            local monster = _table and _table.target
+            if not (monster and monster.brainfn and monster.components.health) then
+                return
             end
-        end)
+
+            local max_health = monster.components.health.maxhealth
+            local delta_value = max_health*0.01
+            monster.components.health:DoDelta(-delta_value)
+        end,target)
     -----------------------------------------------------
-    --- 伤害倍增器
-        -- if target.components.combat then
-        --     target.components.health.externalfiredamagemultipliers:SetModifier(inst, 0.3)            
-        -- end
-    -----------------------------------------------------
-    --- 速度倍增器
-        if target.components.locomotor then
-            target.components.locomotor:SetExternalSpeedMultiplier(inst,"hoshino_debuff_monster_damage_down",0.3)
+    --- 诅咒增伤
+        local function GetCurseNum()
+            local active_curse_cards_data = target.components.hoshino_cards_sys:GetActivatedCards("card_black") or {}
+            local active_cards_num = 0
+            for temp_card_name_index, actived_times in pairs(active_curse_cards_data) do
+                actived_times = actived_times or 0
+                if actived_times > 0 then
+                    active_cards_num = active_cards_num + 1
+                end
+            end
+            return active_cards_num
         end
+        local function fix_dmage_mult()
+            target.components.combat.externaldamagemultipliers:SetModifier(inst, 1 + GetCurseNum()*0.5 )            
+        end
+        fix_dmage_mult()
+        inst:DoPeriodicTask(5,fix_dmage_mult)
     -----------------------------------------------------
+    
 end
 
 local function OnDetached(inst) -- 被外部命令  inst:RemoveDebuff 移除debuff 的时候 执行
@@ -62,10 +77,10 @@ local function fn()
     -- inst.components.debuff:SetExtendedFn(ExtendDebuff)
     -- ExtendDebuff(inst)
 
-    -- inst:DoPeriodicTask(1, OnUpdate, nil, TheWorld.ismastersim)  -- 定时执行任务
+    inst:DoPeriodicTask(1, OnUpdate, nil, TheWorld.ismastersim)  -- 定时执行任务
 
 
     return inst
 end
 
-return Prefab("hoshino_debuff_monster_damage_down", fn)
+return Prefab("hoshino_buff_special_equipment_amulet_t6", fn)

@@ -352,8 +352,10 @@ return function(inst)
                         end)
                         ----------------------------------------------------------
                         --- 特效
-                            SpawnPrefab("shock_fx").Transform:SetPosition(origin_pt.x,origin_pt.y,origin_pt.z)
-                            SpawnPrefab("shock_fx").Transform:SetPosition(pt.x,pt.y,pt.z)
+                            -- SpawnPrefab("shock_fx").Transform:SetPosition(origin_pt.x,origin_pt.y,origin_pt.z)
+                            -- SpawnPrefab("shock_fx").Transform:SetPosition(pt.x,pt.y,pt.z)
+                            SpawnPrefab("crab_king_shine").Transform:SetPosition(pt.x,pt.y,pt.z)
+                            SpawnPrefab("crab_king_shine").Transform:SetPosition(origin_pt.x,origin_pt.y,origin_pt.z)
                         ----------------------------------------------------------
 
                     else

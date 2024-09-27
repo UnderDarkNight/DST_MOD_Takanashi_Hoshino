@@ -38,6 +38,10 @@ return function(inst)
     inst.level = math.clamp(inst.level or 1,1,9)
 
     ----------------------------------------------------------------------------------
+    --- tag
+        inst:AddTag("hoshino_special_equipment_backpack_t"..tostring(inst.level))
+
+    ----------------------------------------------------------------------------------
     --- 储存器
         inst:AddComponent("hoshino_data")
     ----------------------------------------------------------------------------------

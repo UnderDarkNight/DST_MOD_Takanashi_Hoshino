@@ -18,7 +18,7 @@ AddPlayerPostInit(function(inst)
         if inst.components.health then
             local old_DoDelta = inst.components.health.DoDelta
             inst.components.health.DoDelta = function(self, num,...)
-                if num < 0 then
+                if num < 0 and self.inst.components.hoshino_com_debuff then
                     -- num 是负数
                     local reduce_num = self.inst.components.hoshino_com_debuff:Get_Health_Down_Reduce()  -- 这个是正数
                     if num + reduce_num > 0 then

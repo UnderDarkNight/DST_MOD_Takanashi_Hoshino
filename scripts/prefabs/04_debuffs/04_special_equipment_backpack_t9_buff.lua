@@ -12,27 +12,35 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
         end)
     -----------------------------------------------------
     --- 
+        local sheild_inst = target:SpawnChild("hoshino_sfx_ruiins_sheild")
+    -----------------------------------------------------
+    --- 
         if target.components.hoshino_com_combat_hooker then
             target.components.hoshino_com_combat_hooker:Add_Modifier(inst,function(player,attacker, damage, weapon, stimuli, spdamage)
                 -- print("特殊装备背包T9 BUFF 函数 开始")
                 --------------------------------------------
                 -- 
-                    player:SpawnChild("wanda_attack_shadowweapon_old_fx")
+                    -- player:SpawnChild("wanda_attack_shadowweapon_old_fx")
                 --------------------------------------------
                 -- 
                     if damage <= inst.damage_block_pool then --- 池子充足，伤害格挡
                         inst.damage_block_pool = inst.damage_block_pool - damage
                         damage = 0
                         spdamage = nil
+                        player.SoundEmitter:PlaySound("dontstarve/impacts/impact_forcefield_armour_dull")
                     else    -- 池子不足，伤害减少
                         damage = damage - inst.damage_block_pool
                         inst.damage_block_pool = 0
                         spdamage = nil
+                        player.SoundEmitter:PlaySound("dontstarve/impacts/impact_forcefield_armour_dull")
                     end
                 --------------------------------------------
                 -- 池子枯竭，移除控制器
                     if inst.damage_block_pool <= 0 then
                         inst:Remove()
+                        if sheild_inst then
+                            sheild_inst:Remove()
+                        end
                         -- print("池子枯竭，移除控制器")
                     else
                         -- print("池子剩余"..inst.damage_block_pool)
@@ -75,7 +83,7 @@ local function fn()
 
     inst:AddComponent("debuff")
     inst.components.debuff:SetAttachedFn(OnAttached)
-    inst.components.debuff.keepondespawn = true -- 是否保持debuff 到下次登陆
+    inst.components.debuff.keepondespawn = false -- 是否保持debuff 到下次登陆
     -- inst.components.debuff:SetDetachedFn(inst.Remove)
     inst.components.debuff:SetDetachedFn(OnDetached)
     -- inst.components.debuff:SetExtendedFn(ExtendDebuff)

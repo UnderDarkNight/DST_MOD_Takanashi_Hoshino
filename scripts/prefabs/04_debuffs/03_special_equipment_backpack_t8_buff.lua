@@ -87,7 +87,7 @@ local function fn()
 
     inst:AddComponent("debuff")
     inst.components.debuff:SetAttachedFn(OnAttached)
-    inst.components.debuff.keepondespawn = true -- 是否保持debuff 到下次登陆
+    inst.components.debuff.keepondespawn = false -- 是否保持debuff 到下次登陆
     -- inst.components.debuff:SetDetachedFn(inst.Remove)
     inst.components.debuff:SetDetachedFn(OnDetached)
     -- inst.components.debuff:SetExtendedFn(ExtendDebuff)

@@ -56,6 +56,9 @@ local prefabs_name_list = {
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
     "03_special_equipment_backpack_t8_buff",                 --- 特殊装备：T8背包 的 buff
     "04_special_equipment_backpack_t9_buff",                 --- 特殊装备：T9背包 的 buff
+    "05_special_equipment_amulet_t2_buff",                   --- 特殊装备：T2护身符 的 buff
+    "05_special_equipment_amulet_t5_buff",                   --- 特殊装备：T5护身符 的 buff
+    "06_special_equipment_amulet_t6_buff",                   --- 特殊装备：T6护身符 的 buff
 }
 
 ---------------------------------------------------------------------------

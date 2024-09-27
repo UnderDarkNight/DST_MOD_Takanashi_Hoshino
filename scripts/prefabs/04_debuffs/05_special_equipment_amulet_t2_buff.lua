@@ -5,23 +5,17 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.Network:SetClassifiedTarget(target)
     inst.player = target
     -----------------------------------------------------
-    --- 计时器
-        inst:DoPeriodicTask(1,function()
-            inst.time = inst.time - 1
-            if inst.time <= 0 then
+    --- 
+        target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 1-0.15)
+    -----------------------------------------------------
+    ---
+        inst:DoPeriodicTask(1.5,function()
+            local x,y,z = target.Transform:GetWorldPosition()
+            local ents = TheSim:FindEntities(x,y,z,30,{"hoshino_special_equipment_amulet_t2_damage_mult"}) or {}
+            if #ents == 0 then
                 inst:Remove()
             end
         end)
-    -----------------------------------------------------
-    --- 伤害倍增器
-        -- if target.components.combat then
-        --     target.components.health.externalfiredamagemultipliers:SetModifier(inst, 0.3)            
-        -- end
-    -----------------------------------------------------
-    --- 速度倍增器
-        if target.components.locomotor then
-            target.components.locomotor:SetExternalSpeedMultiplier(inst,"hoshino_debuff_monster_damage_down",0.3)
-        end
     -----------------------------------------------------
 end
 
@@ -62,10 +56,10 @@ local function fn()
     -- inst.components.debuff:SetExtendedFn(ExtendDebuff)
     -- ExtendDebuff(inst)
 
-    -- inst:DoPeriodicTask(1, OnUpdate, nil, TheWorld.ismastersim)  -- 定时执行任务
+    inst:DoPeriodicTask(1, OnUpdate, nil, TheWorld.ismastersim)  -- 定时执行任务
 
 
     return inst
 end
 
-return Prefab("hoshino_debuff_monster_damage_down", fn)
+return Prefab("hoshino_buff_special_equipment_amulet_t2", fn)
