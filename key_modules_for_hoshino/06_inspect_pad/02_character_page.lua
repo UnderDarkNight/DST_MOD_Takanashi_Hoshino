@@ -23,6 +23,71 @@
 ---
     TUNING.HOSHINO_INSPECT_PAD_FNS = TUNING.HOSHINO_INSPECT_PAD_FNS or{}    
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 装备强化配方页面
+    local current_display_recipes_page = 1
+    local function Create_Special_Equipment_Recipes_Box(page,MainScale)
+        local atlas = "images/inspect_pad/special_equipment_recipes.xml"
+        local recipe_box = page:AddChild(Image())
+        recipe_box:SetTexture(atlas,"background.tex")
+        recipe_box:SetPosition(270,-28)
+        recipe_box:SetScale(MainScale,MainScale,MainScale)
+
+        ----------------------------------------------------------------------------------------
+        --- 关闭按钮
+            local button_close = recipe_box:AddChild(ImageButton(
+                    atlas,"button_close.tex","button_close.tex","button_close.tex",
+                    "button_close.tex","button_close.tex"))
+                button_close:SetPosition(140,190)
+                button_close:SetOnClick(function()
+                    recipe_box:Kill()
+                end)
+            local close_button_focus_scale = 1.02
+            button_close.focus_scale = {close_button_focus_scale,close_button_focus_scale,close_button_focus_scale}
+        ----------------------------------------------------------------------------------------
+        --- 页面
+            local recipe_image = recipe_box:AddChild(Image())
+            recipe_image:SetTexture(atlas,"page_1.tex")
+            recipe_image:SetPosition(0,-5)                
+        ----------------------------------------------------------------------------------------
+        --- 上下页面
+
+            local page_switch_box = recipe_box:AddChild(Widget())
+            page_switch_box:SetPosition(0,-185)
+            local page_text = page_switch_box:AddChild(Text(CODEFONT,50,"1",{ 0/255 , 0/255 ,0/255 , 1}))
+            local button_last = page_switch_box:AddChild(ImageButton(
+                    atlas,"button_last.tex","button_last.tex","button_last.tex",
+                    "button_last.tex","button_last.tex"))
+            button_last:SetPosition(-40,0)
+            local button_next = page_switch_box:AddChild(ImageButton(
+                    atlas,"button_next.tex","button_next.tex","button_next.tex",
+                    "button_next.tex","button_next.tex"))
+            button_next:SetPosition(40,0)
+
+            local function set_recipe_page(page_num)
+                recipe_image:SetTexture(atlas,"page_"..page_num..".tex")
+                page_text:SetString(page_num)
+            end
+            local function recipe_page_switch(num)
+                current_display_recipes_page = current_display_recipes_page + num
+                if current_display_recipes_page > 9 then
+                    current_display_recipes_page = 1
+                end
+                if current_display_recipes_page < 1 then
+                    current_display_recipes_page = 9
+                end
+                set_recipe_page(current_display_recipes_page)
+            end
+            set_recipe_page(current_display_recipes_page)
+
+            button_last:SetOnClick(function()
+                recipe_page_switch(-1)
+            end)
+            button_next:SetOnClick(function()
+                recipe_page_switch(1)
+            end)
+        ----------------------------------------------------------------------------------------
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 local function page_create(front_root,MainScale)
             --------------------------------------------------------------------------------------
@@ -207,7 +272,7 @@ local function page_create(front_root,MainScale)
                 button_enhancement:SetPosition(163,10)
                 button_enhancement:SetOnClick(function()
                     -- front_root.inst:PushEvent("pad_close")
-                    -- print("++++++++++")
+                    Create_Special_Equipment_Recipes_Box(page,MainScale)
                 end)
                 local button_enhancement_focus_scale = 1.02
                 button_enhancement.focus_scale = {button_enhancement_focus_scale,button_enhancement_focus_scale,button_enhancement_focus_scale}

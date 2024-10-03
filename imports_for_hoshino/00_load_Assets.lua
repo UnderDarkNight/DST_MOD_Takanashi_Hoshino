@@ -37,6 +37,8 @@ local temp_assets = {
 		Asset("ATLAS", "images/inspect_pad/page_level_up.xml"),		
 		Asset("IMAGE", "images/inspect_pad/page_character.tex"),		--- 玩家信息界面贴图
 		Asset("ATLAS", "images/inspect_pad/page_character.xml"),		
+		Asset("IMAGE", "images/inspect_pad/special_equipment_recipes.tex"),		--- 特殊装备配方
+		Asset("ATLAS", "images/inspect_pad/special_equipment_recipes.xml"),		
 		Asset("ANIM", "anim/hoshino_exp_bar.zip"),						--- 经验条
 		Asset("ANIM", "anim/hoshino_self_inspect_button_warning.zip"),	--- 自检按钮
 	---------------------------------------------------------------------------

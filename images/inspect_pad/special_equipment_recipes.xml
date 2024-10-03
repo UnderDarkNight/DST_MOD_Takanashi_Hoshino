@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="special_equipment_recipes.tex" />
+	<Elements>
+		<Element name="background.tex" u1="0.4511953125" u2="0.6865" v2="0.999" v1="0.5761953125" variant="" />
+		<Element name="button_close.tex" u1="0.22609765625" u2="0.3261484375" v2="0.6913828125" v1="0.6347890625" variant="" />
+		<Element name="button_last.tex" u1="0.22609765625" u2="0.23679296875" v2="0.6327890625" v1="0.600609375" variant="" />
+		<Element name="button_next.tex" u1="0.23879296875" u2="0.24948828125" v2="0.6327890625" v1="0.600609375" variant="" />
+		<Element name="page_1.tex" u1="0.22805078125" u2="0.4511484375" v2="0.5741953125" v1="0.2695546875" variant="" />
+		<Element name="page_2.tex" u1="0.4531484375" u2="0.67624609375" v2="0.5741953125" v1="0.268578125" variant="" />
+		<Element name="page_3.tex" u1="0.6885" u2="0.91159765625" v2="0.999" v1="0.6933828125" variant="" />
+		<Element name="page_4.tex" u1="0.6885" u2="0.91159765625" v2="0.6913828125" v1="0.385765625" variant="" />
+		<Element name="page_5.tex" u1="0.67824609375" u2="0.90134375" v2="0.383765625" v1="0.0781484375" variant="" />
+		<Element name="page_6.tex" u1="0.001" u2="0.22409765625" v2="0.999" v1="0.6933828125" variant="" />
+		<Element name="page_7.tex" u1="0.22609765625" u2="0.4491953125" v2="0.999" v1="0.6933828125" variant="" />
+		<Element name="page_8.tex" u1="0.001" u2="0.22409765625" v2="0.6913828125" v1="0.385765625" variant="" />
+		<Element name="page_9.tex" u1="0.001" u2="0.22605078125" v2="0.383765625" v1="0.0781484375" variant="" />
+	</Elements>
+</Atlas>
