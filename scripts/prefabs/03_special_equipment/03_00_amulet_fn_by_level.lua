@@ -222,4 +222,151 @@ return function(inst)
             end)
         end
     ----------------------------------------------------------------------------------
+    --- t7 回复血量 半径30码内的玩家会每10s恢复3点生命值
+        if inst.level >= 7 then
+            local area_health_heal_task = nil
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                if area_health_heal_task == nil then
+                    area_health_heal_task = inst:DoPeriodicTask(10,function()
+                        local x,y,z = owner.Transform:GetWorldPosition()
+                        local ents = TheSim:FindEntities(x,y,z,30,{"player"},{"playerghost"})
+                        for k,temp_player in pairs(ents) do
+                            if temp_player and temp_player:IsValid() and temp_player.components.health and not temp_player.components.health:IsDead() then
+                                temp_player.components.health:DoDelta(3,true)
+                            end
+                        end
+                    end)
+                end
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                if area_health_heal_task ~= nil then
+                    area_health_heal_task:Cancel()
+                    area_health_heal_task = nil
+                end
+            end)
+        end
+    ----------------------------------------------------------------------------------
+    --- t7 施肥?  半径30码内的枯萎植物会恢复
+        if inst.level >= 7 then
+            --------------------------------------------------------------------------
+            --- 水花爆炸
+                inst:AddComponent("wateryprotection")
+                inst.components.wateryprotection.extinguishheatpercent = TUNING.FIRESUPPRESSOR_EXTINGUISH_HEAT_PERCENT
+                inst.components.wateryprotection.temperaturereduction = TUNING.FIRESUPPRESSOR_TEMP_REDUCTION
+                inst.components.wateryprotection.witherprotectiontime = TUNING.FIRESUPPRESSOR_PROTECTION_TIME
+                inst.components.wateryprotection.addcoldness = 0
+                inst.components.wateryprotection:AddIgnoreTag("player")
+                inst.components.wateryprotection:AddIgnoreTag("companion")
+            --------------------------------------------------------------------------
+            local area_fertilize_task = nil
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                if area_fertilize_task == nil then
+                    area_fertilize_task = inst:DoPeriodicTask(5,function()
+                                local x,y,z = owner.Transform:GetWorldPosition()
+                                local ents = TheSim:FindEntities(x,y,z,30,nil,{"burnt"})
+                                for i, temp_plant in pairs(ents) do
+                                    if temp_plant and temp_plant:IsValid() and temp_plant.components.pickable and temp_plant.components.pickable:IsBarren() and temp_plant.__hoshino_t7_barren_task == nil then
+                                        temp_plant.__hoshino_t7_barren_task = true
+                                        inst:DoTaskInTime(math.random(0,50)/10,function()
+                                            inst.components.wateryprotection:SpreadProtection(temp_plant)
+                                            temp_plant.__hoshino_t7_barren_task = nil
+                                            SpawnPrefab("glass_fx").Transform:SetPosition(temp_plant.Transform:GetWorldPosition())
+                                        end)
+                                    end
+                                end
+                    end)
+                end
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                if area_fertilize_task ~= nil then
+                    area_fertilize_task:Cancel()
+                    area_fertilize_task = nil
+                end
+            end)
+        end
+    ----------------------------------------------------------------------------------
+    --- t8 每次睡觉时获得一包升级卡包，此效果每一天仅可触发1次。检查周期 30s
+        if inst.level >= 8 then
+            local function player_is_sleeping(player)
+                if player and player.sg then
+                    if player.sg:HasStateTag("sleeping") or player.sg:HasStateTag("yawn") then
+                        return true
+                    end
+                    if player.sg.currentstate and player.sg.currentstate.name == "knockout" then
+                        return true
+                    end
+                end
+                return false
+            end
+
+            local t8_sleep_task = nil
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                if t8_sleep_task == nil then
+                    t8_sleep_task = inst:DoPeriodicTask(30,function()
+                        local last_day_flag = owner.components.hoshino_data:Get("special_equipment_amulet_t8_daily_flag")
+                        if last_day_flag ~= TheWorld.state.cycles and player_is_sleeping(owner) then
+                            owner.components.hoshino_data:Set("special_equipment_amulet_t8_daily_flag",TheWorld.state.cycles)
+                            ------------------------------------------------------------------------
+                            --- 创建卡牌包
+                                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
+                            ------------------------------------------------------------------------
+                        end
+                    end)
+                end
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                if t8_sleep_task ~= nil then
+                    t8_sleep_task:Cancel()
+                    t8_sleep_task = nil
+                end
+            end)
+
+        end
+    ----------------------------------------------------------------------------------
+    --- t9 onhitother event
+        if inst.level >= 9 then
+            local function onhitother_event_fn_for_player(player,_table)
+                local target = _table and _table.target
+                local damage = _table and _table.damage or 0
+                local spdamage = _table and _table.spdamage
+                if target and target:IsValid() then
+                    --------------------------------------------------------
+                    --- 上debuff
+                        local debuff_prefab = "hoshino_debuff_special_equipment_amulet_t9"
+                        local debuff_inst = nil
+                        while true do
+                            debuff_inst = target:GetDebuff(debuff_prefab)
+                            if debuff_inst and debuff_inst:IsValid() then
+                                debuff_inst:PushEvent("reset")
+                                break
+                            end
+                            target:AddDebuff(debuff_prefab,debuff_prefab)
+                        end
+                    --------------------------------------------------------
+                    --- 计算伤害 . 每次攻击会恢复造成伤害1%的生命值
+                        local ret_dmg = 0
+                        ret_dmg = ret_dmg + damage
+                        if type(spdamage) == "table" then
+                            for i,v in pairs(spdamage) do   --- 无法确定 index 和 value 哪个是伤害值，所以一起检测和添加。
+                                if type(v) == "number" then
+                                    ret_dmg = ret_dmg + v
+                                elseif type(i) == "number" then
+                                    ret_dmg = ret_dmg + i
+                                end                                        
+                            end
+                        end
+                        if ret_dmg > 0 then
+                            player.components.health:DoDelta(ret_dmg/100,true)
+                        end
+                    --------------------------------------------------------
+                end
+            end
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                inst:ListenForEvent("onhitother",onhitother_event_fn_for_player,owner)
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                inst:RemoveEventCallback("onhitother",onhitother_event_fn_for_player,owner)
+            end)
+        end
+    ----------------------------------------------------------------------------------
 end

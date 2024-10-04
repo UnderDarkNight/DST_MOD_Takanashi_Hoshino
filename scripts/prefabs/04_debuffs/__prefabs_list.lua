@@ -59,6 +59,7 @@ local prefabs_name_list = {
     "05_special_equipment_amulet_t2_buff",                   --- 特殊装备：T2护身符 的 buff
     "05_special_equipment_amulet_t5_buff",                   --- 特殊装备：T5护身符 的 buff
     "06_special_equipment_amulet_t6_buff",                   --- 特殊装备：T6护身符 的 buff
+    "07_special_equipment_amulet_t9_debuff",                 --- 特殊装备：T9护身符 的 debuff
 }
 
 ---------------------------------------------------------------------------

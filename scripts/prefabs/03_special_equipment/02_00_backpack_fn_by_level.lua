@@ -214,4 +214,32 @@ return function(inst)
             end)
         end        
     ----------------------------------------------------------------------------------
+    --- cost 回复器 lv2 +0.01/s  ，lv3 +0.01/s ， lv8 +0.05/s
+        if inst.level >= 2 then
+            --------------------------------------------------------------------------
+            --- cost 值计算，根据等级
+                local cost_value_delta_per_second = 0.01 -- lv2 +0.01/s            
+                if inst.level >= 3 then
+                    cost_value_delta_per_second = cost_value_delta_per_second + 0.01
+                end
+                if inst.level >= 8 then
+                    cost_value_delta_per_second = cost_value_delta_per_second + 0.05
+                end
+            --------------------------------------------------------------------------
+            local cost_value_delta_task = nil
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                if cost_value_delta_per_second == nil then
+                    cost_value_delta_per_second = inst:DoPeriodicTask(1,function()
+                        owner.components.hoshino_com_power_cost:DoDelta(cost_value_delta_per_second)
+                    end)
+                end
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                if cost_value_delta_task ~= nil then
+                    cost_value_delta_task:Cancel()
+                    cost_value_delta_task = nil
+                end
+            end)
+        end
+    ----------------------------------------------------------------------------------
 end

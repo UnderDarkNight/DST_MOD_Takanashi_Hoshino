@@ -56,9 +56,10 @@ local flg,error_code = pcall(function()
             -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-        ThePlayer.____recipe_box_fn = function(page,MainScale)
-            
-        end
+        -- local Ball = SpawnPrefab("waterballoon")
+        local Ball = SpawnPrefab("snowball")
+        Ball.Transform:SetPosition(x,y,z)
+        Ball.components.complexprojectile.onhitfn(Ball,ThePlayer, ThePlayer)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
