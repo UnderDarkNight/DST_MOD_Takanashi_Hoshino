@@ -29,6 +29,8 @@ AddReplicableComponent("hoshino_com_shop")  --- 商店系统
 AddReplicableComponent("hoshino_com_builder_blocker")  --- 制作栏屏蔽组件
 AddReplicableComponent("hoshino_com_tag_sys")  --- 自制tag系统
 
+AddReplicableComponent("hoshino_com_power_cost")  --- 能量条系统
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

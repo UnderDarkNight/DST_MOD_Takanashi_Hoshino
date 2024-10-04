@@ -36,6 +36,8 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/21_special_equipment_tag_sys",              ---- 特殊装备tag系统
         "prefabs/01_character/key_character_modules_hoshino/22_freezable",                              ---- 冰冻控制器
         "prefabs/01_character/key_character_modules_hoshino/23_debuff_blocker",                         ---- 官方的debuff 屏蔽器
+        "prefabs/01_character/key_character_modules_hoshino/24_power_bar_cost_hud_install",             ---- cost 能量条 HUD
+        "prefabs/01_character/key_character_modules_hoshino/25_cost_power_module_install",              ---- cost 能量条 模块安装等
 
     }
     for k, lua_addr in pairs(modules) do
