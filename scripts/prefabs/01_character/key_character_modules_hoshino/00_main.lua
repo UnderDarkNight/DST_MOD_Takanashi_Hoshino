@@ -38,6 +38,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/23_debuff_blocker",                         ---- 官方的debuff 屏蔽器
         "prefabs/01_character/key_character_modules_hoshino/24_power_bar_cost_hud_install",             ---- cost 能量条 HUD
         "prefabs/01_character/key_character_modules_hoshino/25_cost_power_module_install",              ---- cost 能量条 模块安装等
+        "prefabs/01_character/key_character_modules_hoshino/26_gun_eye_of_horus",                       ---- 枪械的范围攻击
 
     }
     for k, lua_addr in pairs(modules) do

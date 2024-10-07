@@ -30,6 +30,8 @@ local prefabs_name_list = {
 
     "01_explode",                             --- 烟花爆炸
     "02_ruins_sheild",                        --- 铥矿护盾
+    "03_spell_flame",                         --- 火焰特效
+    "04_explode2",                            --- 爆炸特效2
 
 }
 

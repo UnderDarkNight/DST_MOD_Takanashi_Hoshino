@@ -21,6 +21,7 @@ local files_name = {
 	---------------------------------------------------------------------------------------
 	-- 02_items
 		"hoshino_item_cards_pack",										--- 卡牌芯片
+		"hoshino_weapon_gun_eye_of_horus",								--- 专属武器
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

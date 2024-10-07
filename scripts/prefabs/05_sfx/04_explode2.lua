@@ -13,9 +13,9 @@ local function fx()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
     -- inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-    inst.AnimState:SetBank("explode")
-    inst.AnimState:SetBuild("explode")
-    inst.AnimState:PlayAnimation("small_firecrackers",false)
+    inst.AnimState:SetBank("die_fx")
+    inst.AnimState:SetBuild("die")
+    inst.AnimState:PlayAnimation("small",false)
 
 
 
@@ -27,6 +27,7 @@ local function fx()
     inst:AddTag("NOCLICK")
 
     inst:ListenForEvent("animqueueover",inst.Remove)
+    inst:ListenForEvent("animover",inst.Remove)
 
     inst.entity:SetPristine()
 
@@ -95,4 +96,4 @@ local function fx()
     return inst
 end
 
-return Prefab("hoshino_sfx_explode",fx,assets)
+return Prefab("hoshino_sfx_explode2",fx,assets)

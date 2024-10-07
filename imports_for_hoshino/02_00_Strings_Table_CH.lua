@@ -72,6 +72,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["recipe_desc"] = "卡牌芯片",
                 -- ["level_up_default"] = ""
             },
+            ["hoshino_weapon_gun_eye_of_horus"] = {
+                ["name"] = "荷鲁斯之眼",
+                ["inspect_str"] = "荷鲁斯之眼",
+                ["recipe_desc"] = "荷鲁斯之眼",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

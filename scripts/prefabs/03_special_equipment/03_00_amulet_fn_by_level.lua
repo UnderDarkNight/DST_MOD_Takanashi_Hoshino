@@ -334,13 +334,15 @@ return function(inst)
                     --- 上debuff
                         local debuff_prefab = "hoshino_debuff_special_equipment_amulet_t9"
                         local debuff_inst = nil
-                        while true do
+                        local temp_i = 10
+                        while true and temp_i > 0 do
                             debuff_inst = target:GetDebuff(debuff_prefab)
                             if debuff_inst and debuff_inst:IsValid() then
                                 debuff_inst:PushEvent("reset")
                                 break
                             end
                             target:AddDebuff(debuff_prefab,debuff_prefab)
+                            temp_i = temp_i - 1
                         end
                     --------------------------------------------------------
                     --- 计算伤害 . 每次攻击会恢复造成伤害1%的生命值

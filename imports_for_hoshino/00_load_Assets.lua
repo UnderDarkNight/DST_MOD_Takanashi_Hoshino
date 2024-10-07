@@ -20,9 +20,7 @@ local temp_assets = {
 
 
 	---------------------------------------------------------------------------
-	-- Asset("ANIM", "anim/hoshino_mutant_frog.zip"),	--- 变异青蛙贴图包
-	-- Asset("ANIM", "anim/hoshino_animal_frog_hound.zip"),	--- 变异青蛙狗贴图包
-
+		Asset("ANIM", "anim/hoshino_atk.zip"),	--- 独特枪击动作
 	---------------------------------------------------------------------------
 	-- Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),	--- 单机声音集
 	---------------------------------------------------------------------------
