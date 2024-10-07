@@ -15,9 +15,28 @@ return function(inst)
     end
 
     ----------------------------------------------------------------------------------------
+    --- 制作配方和相关tag。用来激活制作栏 图标
+        local level_index = "weapon_gun_eye_of_horus_level"
+        inst:DoTaskInTime(0,function()
+            local level = inst.components.hoshino_data:Get(level_index) or 1
+            inst:PushEvent("weapon_gun_eye_of_horus_level_set",level)
+        end)
+        inst:ListenForEvent("weapon_gun_eye_of_horus_level_set",function(inst,level)
+            inst.components.hoshino_data:Set(level_index,level)
+            for i = 1, 10, 1 do
+                if i == level then
+                    inst.components.hoshino_com_tag_sys:AddTag("weapon_gun_eye_of_horus_level_"..i)
+                else
+                    inst.components.hoshino_com_tag_sys:RemoveTag("weapon_gun_eye_of_horus_level_"..i)
+                end
+            end
+        end)
+    ----------------------------------------------------------------------------------------
     --- 等级切换。
         local function GetGunLevel()
-            return 3
+            local level = inst.components.hoshino_data:Get(level_index) or 1
+            return level
+            -- return 1
         end
     ----------------------------------------------------------------------------------------
     --- 攻击距离+攻击角度 动态返回 预留的接口
@@ -109,6 +128,9 @@ return function(inst)
         end
     ----------------------------------------------------------------------------------------
     --- 扇形特效
+        local function get_offset_pt_by_angle(angle,distance) -- 为了节省解析计算量，放外面。
+            return Vector3(math.cos(math.rad(angle))*distance,0,math.sin(math.rad(angle))*distance )                    
+        end
         inst:ListenForEvent("eye_of_horus_shoot_fx",function(inst,_table)
             local target = _table and _table.target
             local pt = _table and _table.pt
@@ -138,9 +160,9 @@ return function(inst)
                 local angle = math.deg(math.atan2(delta_z, delta_x))
                 -- local distance = 4
 
-                local function get_offset_pt_by_angle(angle,distance)
-                    return Vector3(math.cos(math.rad(angle))*distance,0,math.sin(math.rad(angle))*distance )                    
-                end
+                -- local function get_offset_pt_by_angle(angle,distance)
+                --     return Vector3(math.cos(math.rad(angle))*distance,0,math.sin(math.rad(angle))*distance )                    
+                -- end
             ------------------------------------------------------------------------------------
             ---- 扇形火焰特效。
                 local delta_range = 1
@@ -291,11 +313,11 @@ return function(inst)
             ------------------------------------------------------------------------------------
         end)
     ----------------------------------------------------------------------------------------
-    inst:ListenForEvent("hoshino_sg_action_gun_shoot_active",function(inst,target)
-        inst:PushEvent("eye_of_horus_shoot_fx",{target = target})
-        inst:PushEvent("eye_of_horus_shoot_damage",{target = target})
-    end)
-
+    --- 外部攻击调用。
+        inst:ListenForEvent("hoshino_sg_action_gun_shoot_active",function(inst,target)
+            inst:PushEvent("eye_of_horus_shoot_fx",{target = target})
+            inst:PushEvent("eye_of_horus_shoot_damage",{target = target})
+        end)
     ----------------------------------------------------------------------------------------
     --- 穿戴武器的时候触发
         inst:ListenForEvent("hoshino_weapon_gun_eye_of_horus_equipped",function(inst,weapon)

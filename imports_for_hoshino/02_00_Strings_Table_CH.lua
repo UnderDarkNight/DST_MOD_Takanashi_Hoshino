@@ -260,5 +260,17 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["recipe_desc"] = "商店",
             },
         --------------------------------------------------------------------
+        --- 07_spell
+            ["hoshino_spell_gun_eye_of_horus_level_1_to_2"] = {
+                ["name"] = "荷鲁斯之眼 升到2级",
+                ["inspect_str"] = "商店",
+                ["recipe_desc"] = "升级到2级",
+            },
+            ["hoshino_spell_gun_eye_of_horus_level_2_to_3"] = {
+                ["name"] = "荷鲁斯之眼 升到3级",
+                ["inspect_str"] = "商店",
+                ["recipe_desc"] = "升级到3级",
+            },
+        --------------------------------------------------------------------
 }
 
