@@ -22,6 +22,7 @@ anim/*.autosave.zip
 *.ko
 *.obj
 *.elf
+*.xlsx
 
 # Precompiled Headers
 *.gch

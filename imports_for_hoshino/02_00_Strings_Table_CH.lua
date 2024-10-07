@@ -77,6 +77,16 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "荷鲁斯之眼",
                 ["recipe_desc"] = "荷鲁斯之眼",
             },
+            ["hoshino_item_abydos_high_purity_alloy"] = {
+                ["name"] = "阿拜索斯高纯度合金",
+                ["inspect_str"] = "阿拜索斯高纯度合金",
+                ["recipe_desc"] = "阿拜索斯高纯度合金",
+            },
+            ["hoshino_item_blue_schist"] = {
+                ["name"] = "青辉石",
+                ["inspect_str"] = "青辉石",
+                ["recipe_desc"] = "青辉石",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
