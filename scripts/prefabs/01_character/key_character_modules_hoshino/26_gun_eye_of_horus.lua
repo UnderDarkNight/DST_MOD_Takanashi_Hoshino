@@ -21,52 +21,42 @@ return function(inst)
         end
     ----------------------------------------------------------------------------------------
     --- 攻击距离+攻击角度 动态返回 预留的接口
+        local attack_angle = {
+            [1] = 30,
+            [2] = 45,
+            [3] = 60
+        }
+        local attack_range = {
+            [1] = 5,
+            [2] = 7,
+            [3] = 9,
+        }
         local function Get_Attack_Angle()
-            local level = GetGunLevel()
-            if level == 1 then
-                return 30
-            elseif level == 2 then
-                return 45
-            elseif level == 3 then
-                return 60
-            end
-            return 60
+            return attack_angle[GetGunLevel()] or 60
         end
         local function Get_Attack_Range()
-            local level = GetGunLevel()
-            if level == 1 then
-                return 5
-            elseif level == 2 then
-                return 7
-            elseif level == 3 then
-                return 9
-            end
-            return 9
+            return attack_range[GetGunLevel()] or 9
         end
     ----------------------------------------------------------------------------------------
-    --- 伤害执行函数
-        local function GetDMG()
-            if GetGunLevel() < 3 then
+    --- 伤害执行函数 。 lv3 的情况下，一半普通伤害一半真实伤害。
+        local function GetDMG(is_real_damage) 
+            if not is_real_damage then
+                --- 普通伤害
+                if GetGunLevel() >= 3 then
+                    return 34/2
+                else
+                    return 34
+                end
+            else
+                --- 真实伤害
                 return 34/2
             end
-            return 34
         end
         local function DoRealDamage(target,weapon,value) -- 真实伤害
             if target.components.health == nil then
                 return
             end
-            local damage, spdamage = inst.components.combat:CalcReflectedDamage(target, GetDMG(), weapon)
-            ---- 其他伤害直接结算为真实伤害。
-            spdamage = spdamage or {}
-            for k, v in pairs(spdamage) do
-                if type(v) == "number" then
-                    damage = damage + v
-                elseif type(k) == "number" then
-                    damage = damage + k
-                end                        
-            end
-            --- 直接扣血
-            target.components.health:DoDelta(-damage)
+            target.components.health:DoDelta(-GetDMG(true))
         end
         local function SetWeaponParam(weapon) --- 配置攻击距离 和 伤害。
             weapon.components.weapon:SetDamage(GetDMG())
@@ -287,7 +277,7 @@ return function(inst)
                     -- print(" ++++ target",temp_target)
                     if temp_target and temp_target:IsValid() and doer.components.combat:CanHitTarget(temp_target) then
                         if Check_In_Area(Vector3(temp_target.Transform:GetWorldPosition()),start_pt,mid_line_max_pt) then
-                            doer.components.combat:DoAttack(temp_target,weapon)
+                            -- doer.components.combat:DoAttack(temp_target,weapon)
                             -- temp_target.components.combat:GetAttacked(doer,34,weapon)
                             DoGunDamage(temp_target,weapon)
                         else
