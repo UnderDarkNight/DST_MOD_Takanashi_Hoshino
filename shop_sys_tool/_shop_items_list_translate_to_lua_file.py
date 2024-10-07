@@ -91,7 +91,7 @@ for i in range(0, data_rows_count):
         if atlas == "official":
             row_data["atlas"] = 'GetInventoryItemAtlas("' + row_data["prefab"] + '.tex")'
         else:
-            row_data["atlas"] = atlas
+            row_data["atlas"] = '"' + atlas + '"'
 
         image = xlsx_file.iloc[i, 9]
         if image == "official":

@@ -6,6 +6,7 @@
 /shop_sys_tool/dist
 /shop_sys_tool/build
 /shop_sys_tool/output
+/shop_sys_tool/*.xlsx
 
 # Compiled Lua sources
 luac.out
