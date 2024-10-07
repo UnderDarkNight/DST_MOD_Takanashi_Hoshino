@@ -34,7 +34,7 @@ return function(inst)
     ----------------------------------------------------------------------------------------
     --- 等级切换。
         local function GetGunLevel()
-            local level = inst.components.hoshino_data:Get(level_index) or 1
+            local level = inst.components.hoshino_data and inst.components.hoshino_data:Get(level_index) or 1
             return level
             -- return 1
         end
