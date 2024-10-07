@@ -101,7 +101,7 @@ local function fn()
         inst:AddComponent("equippable")
         inst.components.equippable:SetOnEquip(onequip)
         inst.components.equippable:SetOnUnequip(onunequip)
-        -- inst.components.equippable.walkspeedmult = TUNING.CANE_SPEED_MULT
+        inst.components.equippable.restrictedtag = "hoshino"
     ---------------------------------------------------------------------------------------------------
     ---
         MakeHauntableLaunch(inst)

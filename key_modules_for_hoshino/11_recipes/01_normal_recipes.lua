@@ -7,7 +7,7 @@
     AddRecipeToFilter("hoshino_weapon_gun_eye_of_horus","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_weapon_gun_eye_of_horus",            --  --  inst.prefab  实体名字
-        {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+        { Ingredient("gears", 5),Ingredient("transistor", 5),Ingredient("orangegem", 2),Ingredient("bluegem", 2),Ingredient("nitre", 10) }, 
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
@@ -25,7 +25,7 @@
     AddRecipeToFilter("hoshino_spell_gun_eye_of_horus_level_1_to_2","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_spell_gun_eye_of_horus_level_1_to_2",            --  --  inst.prefab  实体名字
-        {Ingredient("hoshino_weapon_gun_eye_of_horus", 0)} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+        {Ingredient("hoshino_weapon_gun_eye_of_horus", 0),Ingredient("thulecite", 5),Ingredient("moonrocknugget", 5),Ingredient("dreadstone", 5)} ,
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
@@ -44,7 +44,7 @@
     AddRecipeToFilter("hoshino_spell_gun_eye_of_horus_level_2_to_3","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_spell_gun_eye_of_horus_level_2_to_3",            --  --  inst.prefab  实体名字
-        {Ingredient("hoshino_weapon_gun_eye_of_horus", 0)} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+        {Ingredient("hoshino_weapon_gun_eye_of_horus", 0),Ingredient("opalpreciousgem", 2),Ingredient("moonrocknugget", 5),Ingredient("dreadstone", 5)} ,
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
