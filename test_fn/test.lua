@@ -78,18 +78,36 @@ local flg,error_code = pcall(function()
         end
 
 
-        local function Check_In_Area(target, start_pt, end_pt)
-            -- 检查是否在扇形攻击区域内。 start_pt:起始点，end_pt:扇形中线最远点。target:目标实体。
-            local angle = Get_Attack_Angle()    -- 扇形角度. 单位：弧度。
-            local range = Get_Attack_Range()    -- 扇形最远距离
-
-            if not target or not target.Transform then
+        local function Check_In_Area(target_pt, start_pt, mid_line_max_pt)
+            -- 检查是否在扇形攻击区域内。start_pt: 起始点，mid_line_max_pt: 扇形中线最远点。target: 目标实体。
+            local angle = Get_Attack_Angle()    -- 扇形角度. 单位：角度
+            local range = Get_Attack_Range()    -- 扇形最远距离。
+        
+            -- 先判定距离
+            local dst_sq = target_pt:DistSq(start_pt)
+            if dst_sq > range * range then
                 return false
             end
-
-            local target_pt = Vector3(target.Transform:GetWorldPosition())
-
-            return false
+        
+            -- 中线向量并归一化
+            local mid_line_vec = (mid_line_max_pt - start_pt):GetNormalized()
+        
+            -- 目标向量并归一化
+            local target_vec = (target_pt - start_pt):GetNormalized()
+        
+            -- 两个向量的点积
+            local cos_theta = mid_line_vec:Dot(target_vec)
+        
+            -- 计算半角的余弦值
+            local angle_in_radians = math.rad(angle / 2)
+            local cos_half_angle = math.cos(angle_in_radians)
+        
+            -- 判断是否在扇形范围内
+            if cos_theta < cos_half_angle then
+                return false
+            end
+        
+            return true
         end
 
         ThePlayer.___eye_of_horus_shoot_fn = function(inst,target,pt)
@@ -104,7 +122,7 @@ local flg,error_code = pcall(function()
                 end
                 if not x or not y or not z then
                     return
-                end                
+                end
             ------------------------------------------------------------------------------------
             ---
                 local doer = inst
@@ -121,11 +139,11 @@ local flg,error_code = pcall(function()
                 local angle = math.deg(math.atan2(delta_z, delta_x))
                 -- local distance = 4
             ------------------------------------------------------------------------------------
-            --- 搜索范围内合适的目标。 扇形目标，距离8，角度60度
+            --- 搜索范围内合适的目标。 扇形目标
                 --- 计算扫描中点
-                    local end_pt = (start_pt + (Vector3(x,y,z) - start_pt):GetNormalized() * 8)
+                    local mid_line_max_pt = (start_pt + (Vector3(x,y,z) - start_pt):GetNormalized() * Get_Attack_Range())
 
-                    local center_pt = Vector3((end_pt.x+start_pt.x)/2,0,(end_pt.z+start_pt.z)/2)
+                    local center_pt = Vector3((mid_line_max_pt.x+start_pt.x)/2,0,(mid_line_max_pt.z+start_pt.z)/2)
 
                     -- SpawnPrefab("log").Transform:SetPosition(center_pt.x,0,center_pt.z)
             ------------------------------------------------------------------------------------
@@ -133,14 +151,15 @@ local flg,error_code = pcall(function()
                 local weapon = doer.components.combat:GetWeapon()
 
                 local musthavetags = {"_combat"}
-                local canthavetags = {"companion","player", "playerghost", "INLIMBO","chester","hutch","DECOR", "FX","structure","wall"}
+                local canthavetags = {"companion","player", "playerghost", "INLIMBO","chester","hutch","DECOR", "FX",}
                 local musthaveoneoftags = nil
                 local ents = TheSim:FindEntities(center_pt.x,0,center_pt.z,15,musthavetags,canthavetags,musthaveoneoftags)
                 for k, temp_target in pairs(ents) do
+                    print(" ++++ target",temp_target)
                     if temp_target and temp_target:IsValid() and doer.components.combat:CanHitTarget(temp_target) then
-                        if Check_In_Area(target,start_pt,end_pt) then
-                            doer.components.combat:DoAttack(temp_target,weapon)
-                            -- temp_target.components.combat:GetAttacked(doer,34,weapon)
+                        if Check_In_Area(Vector3(temp_target.Transform:GetWorldPosition()),start_pt,mid_line_max_pt) then
+                            -- doer.components.combat:DoAttack(temp_target,weapon)
+                            temp_target.components.combat:GetAttacked(doer,34,weapon)
                         else
                             print("ERROR: target is not in area",temp_target)
                         end

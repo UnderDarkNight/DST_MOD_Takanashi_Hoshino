@@ -20,7 +20,8 @@ local attack_bamboo_cane_change = function(self)    ----- 修改 wilson 和 wils
         if inst:HasTag("hoshino") then
             local weapon = inst.replica.combat:GetWeapon()
             if weapon and weapon:HasTag("hoshino_weapon_gun_eye_of_horus") and check_weapon_can_shoot(weapon) then
-                return "hoshino_sg_action_gun_shoot"
+                -- return "hoshino_sg_action_gun_shoot"
+                return "hoshino_sg_action_gun_shoot_attack"
             end
         end
         return old_ATTACK(inst, action)

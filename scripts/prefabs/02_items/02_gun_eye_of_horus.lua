@@ -122,7 +122,7 @@ local function fn()
     --- 耐久度
         inst:AddComponent("finiteuses")
         if TUNING.HOSHINO_DEBUGGING_MODE then
-            inst.components.finiteuses:SetMaxUses(10)
+            inst.components.finiteuses:SetMaxUses(200)
             inst.components.finiteuses:SetPercent(1)
         else            
             inst.components.finiteuses:SetMaxUses(200)
@@ -134,6 +134,10 @@ local function fn()
         inst:ListenForEvent("percentusedchange",function()
             inst:PushEvent("attack_range_update")
         end)
+        --- 避免AOE的时候造成 多次 耐久度消耗
+        inst.components.finiteuses.Use_Hoshino = inst.components.finiteuses.Use
+        inst.components.finiteuses.Use = function(self,...)
+        end
     ---------------------------------------------------------------------------------------------------
     --- 等级和攻击距离
         inst:ListenForEvent("attack_range_update",function(inst)

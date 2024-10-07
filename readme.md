@@ -20,9 +20,9 @@ git bash 黑框技巧：
     5、 输入 命令   ：     
         git clone https://github.com/UnderDarkNight/DST_MOD_Takanashi_Hoshino.git
 
-    6、 等待下载完成。这个时候会多出个文件夹【DST_MOD_hoshino】。这个就是MOD的所有东西。
+    6、 等待下载完成。这个时候会多出个文件夹【DST_MOD_Takanashi_Hoshino】。这个就是MOD的所有东西。
 
-    7、 进入【DST_MOD_hoshino】文件夹，重新右键【Git Bash Here】
+    7、 进入【DST_MOD_Takanashi_Hoshino】文件夹，重新右键【Git Bash Here】
 
     8、 输入以下命令：
         git reset --hard
@@ -31,18 +31,18 @@ git bash 黑框技巧：
         git pull
     
     10、 输入以下命令：
-        git pull origin main
+        git pull origin master
 
 更新步骤：
     1、启用 Watt Toolkit 。加速选项里  勾选 【Github】  和 【国外验证码平台】、【公共CDN】
 
-    2、进入【DST_MOD_hoshino】文件夹，重新右键【Git Bash Here】
+    2、进入【DST_MOD_Takanashi_Hoshino】文件夹，重新右键【Git Bash Here】
 
     3、 输入命令： 【注意！！！】最后那个  【点】不能漏掉。
         git checkout .
     
     4、 输入以下命令：
-        git pull origin main
+        git pull origin master
 
     5、进入 modinfo.lua 文件，修改版本号后再上传steam。版本号不能和steam上页面的一样。
 
@@ -51,6 +51,6 @@ git bash 黑框技巧：
 
 强制完全同步远程版本：
     git fetch --all
-    git reset --hard origin/main
+    git reset --hard origin/master
     git pull 
-    git pull origin main
+    git pull origin master
