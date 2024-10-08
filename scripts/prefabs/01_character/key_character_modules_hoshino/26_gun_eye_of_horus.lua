@@ -216,13 +216,13 @@ return function(inst)
             ---- 扇形火焰特效。
                 local delta_range = 1
                 local function GetFxTime(i)
-                    if ThePlayer.__time_fn then
-                        return ThePlayer.__time_fn(i)
+                    if doer.__time_fn then
+                        return doer.__time_fn(i)
                     end
                 end
                 for i = 1, Get_Attack_Range(), 1 do
                     -- local color = Vector3(255,0,0)
-                    local color = ThePlayer.__test_color or Vector3(90/255, 66/255, 41/255)
+                    local color = doer.__test_color or Vector3(90/255, 66/255, 41/255)
                     local scale = ((0.5/3)*i+0.5)*0.5
                     local MultColour_Flag = true
                     local remain_time = 0.2

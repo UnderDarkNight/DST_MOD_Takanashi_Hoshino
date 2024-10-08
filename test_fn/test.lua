@@ -72,7 +72,7 @@ local flg,error_code = pcall(function()
         ThePlayer.__time_fn = function(i)
             return (i-1)*0.02
         end
-        ThePlayer.__test_color = Vector3(255/255, 255/255, 255/255)
+        ThePlayer.__test_color = Vector3(255/255, 255/255, 0/255)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
