@@ -147,24 +147,32 @@ return function(inst)
                 return false
             end
         
-            -- 中线向量并归一化
-            local mid_line_vec = (mid_line_max_pt - start_pt):GetNormalized()
-        
-            -- 目标向量并归一化
-            local target_vec = (target_pt - start_pt):GetNormalized()
-        
-            -- 两个向量的点积
-            local cos_theta = mid_line_vec:Dot(target_vec)
-        
-            -- 计算半角的余弦值
-            local angle_in_radians = math.rad(angle / 2)
-            local cos_half_angle = math.cos(angle_in_radians)
-        
-            -- 判断是否在扇形范围内
-            if cos_theta < cos_half_angle then
-                return false
-            end
-        
+            -----------------------------------------------------------------------------------
+            --- 尝试包含玩家近距离正面区域
+                if dst_sq <= 1.2*1.2 then
+                    return true
+                end
+            -----------------------------------------------------------------------------------
+            --- 扇形区域判定
+                -- 中线向量并归一化
+                local mid_line_vec = (mid_line_max_pt - start_pt):GetNormalized()
+            
+                -- 目标向量并归一化
+                local target_vec = (target_pt - start_pt):GetNormalized()
+            
+                -- 两个向量的点积
+                local cos_theta = mid_line_vec:Dot(target_vec)
+            
+                -- 计算半角的余弦值
+                local angle_in_radians = math.rad(angle / 2)
+                local cos_half_angle = math.cos(angle_in_radians)
+            
+                -- 判断是否在扇形范围内
+                if cos_theta < cos_half_angle then
+                    return false
+                end
+            -----------------------------------------------------------------------------------
+            
             return true
         end
     ----------------------------------------------------------------------------------------
@@ -207,16 +215,21 @@ return function(inst)
             ------------------------------------------------------------------------------------
             ---- 扇形火焰特效。
                 local delta_range = 1
+                local function GetFxTime(i)
+                    if ThePlayer.__time_fn then
+                        return ThePlayer.__time_fn(i)
+                    end
+                end
                 for i = 1, Get_Attack_Range(), 1 do
                     -- local color = Vector3(255,0,0)
-                    local color = Vector3(90/255, 66/255, 41/255)
+                    local color = ThePlayer.__test_color or Vector3(90/255, 66/255, 41/255)
                     local scale = ((0.5/3)*i+0.5)*0.5
                     local MultColour_Flag = true
                     local remain_time = 0.2
                     -- inst:DoTaskInTime((i-1)*0.05/2,function()
                     inst:DoTaskInTime(0,function()
                         local offset_pt = get_offset_pt_by_angle(angle,i*delta_range)
-                        inst:DoTaskInTime(math.random(0,5)/30,function()                            
+                        inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()                            
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt,
                                 -- time = 5,
@@ -228,7 +241,7 @@ return function(inst)
                                 remain_time = remain_time,
                             })
                         end)
-                        inst:DoTaskInTime(math.random(0,5)/30,function()
+                        inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()
                             local offset_pt2 = get_offset_pt_by_angle(angle+Get_Attack_Angle()/2,i*delta_range)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt2,
@@ -241,7 +254,7 @@ return function(inst)
                                 remain_time = remain_time,
                             })
                         end)
-                        inst:DoTaskInTime(math.random(0,5)/30,function()
+                        inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()
                             local offset_pt3 = get_offset_pt_by_angle(angle-Get_Attack_Angle()/2,i*delta_range)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt3,
@@ -254,7 +267,7 @@ return function(inst)
                                 remain_time = remain_time,
                             })
                         end)
-                        inst:DoTaskInTime(math.random(0,5)/30,function()
+                        inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()
                             local offset_pt2 = get_offset_pt_by_angle(angle+Get_Attack_Angle()/3,i*delta_range)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt2,
@@ -267,7 +280,7 @@ return function(inst)
                                 remain_time = remain_time,
                             })
                         end)
-                        inst:DoTaskInTime(math.random(0,5)/30,function()
+                        inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()
                             local offset_pt3 = get_offset_pt_by_angle(angle-Get_Attack_Angle()/3,i*delta_range)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt3,

@@ -69,8 +69,10 @@ local flg,error_code = pcall(function()
             -- weapon.components.finiteuses:SetPercent(1)
     ----------------------------------------------------------------------------------------------------------------
     ---
-        -- ThePlayer.sg:GoToState("hoshino_ex_skill_pre")
-        ThePlayer.sg:GoToState("hoshino_gun_ex_skill")
+        ThePlayer.__time_fn = function(i)
+            return (i-1)*0.02
+        end
+        ThePlayer.__test_color = Vector3(255/255, 255/255, 255/255)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
