@@ -18,3 +18,6 @@ modimport("key_modules_for_hoshino/07_actions/05_sg_hook_for_attack.lua")
 
 modimport("key_modules_for_hoshino/07_actions/06_sg_gun_shoot_action_for_eye_of_horus__replace.lua") 
 --- 荷鲁斯之眼 专属攻击动作（替代普通攻击用）
+
+modimport("key_modules_for_hoshino/07_actions/07_sg_gun_shoot_with_walking.lua") 
+--- 荷鲁斯之眼 专属攻击动作（技能攻击动作）

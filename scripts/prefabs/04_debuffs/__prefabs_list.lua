@@ -60,6 +60,8 @@ local prefabs_name_list = {
     "05_special_equipment_amulet_t5_buff",                   --- 特殊装备：T5护身符 的 buff
     "06_special_equipment_amulet_t6_buff",                   --- 特殊装备：T6护身符 的 buff
     "07_special_equipment_amulet_t9_debuff",                 --- 特殊装备：T9护身符 的 debuff
+
+    "08_gun_eye_of_horus_spell_monster_brain_stop",                 --- 荷鲁斯之眼 战术镇压 的笨怪deubff
 }
 
 ---------------------------------------------------------------------------

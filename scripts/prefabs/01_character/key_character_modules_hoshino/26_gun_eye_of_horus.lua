@@ -57,6 +57,26 @@ return function(inst)
             return attack_range[GetGunLevel()] or 9
         end
     ----------------------------------------------------------------------------------------
+    --- 上笨怪debuff
+        local debuff_prefab = "hoshino_debuff_gun_eye_of_horus_spell_monster_brain_stop"
+        local function Add_Debuff_To_Monster(monster)
+            local i = 10
+            while i > 0 do
+                local debuff_inst = monster:GetDebuff(debuff_prefab)
+                if debuff_inst and debuff_inst:IsValid() then
+                    debuff_inst:PushEvent("reset")
+                    break
+                end
+                monster:AddDebuff(debuff_prefab,debuff_prefab)
+                i = i - 1
+            end
+        end
+        local function Remove_Debuff_From_Monster(monster)
+            for i = 1, 3, 1 do
+                monster:RemoveDebuff(debuff_prefab)
+            end
+        end
+    ----------------------------------------------------------------------------------------
     --- 伤害执行函数 。 lv3 的情况下，一半普通伤害一半真实伤害。
         local function GetDMG(is_real_damage) 
             if not is_real_damage then
@@ -75,7 +95,7 @@ return function(inst)
             if target.components.health == nil then
                 return
             end
-            target.components.health:DoDelta(-GetDMG(true))
+            target.components.health:DoDelta(-value)
         end
         local function SetWeaponParam(weapon) --- 配置攻击距离 和 伤害。
             weapon.components.weapon:SetDamage(GetDMG())
@@ -88,10 +108,31 @@ return function(inst)
                 DoRealDamage(target,weapon,GetDMG())
             end
         end
-        local function ResetWeaponParam(weapon) --- 重置攻击距离和伤害。
+        local function ResetWeaponParam(weapon,ignore_finiteuses_use) --- 重置攻击距离和伤害。
             weapon.components.weapon:SetRange(Get_Attack_Range())
             weapon.components.weapon:SetDamage(0)
-            weapon.components.finiteuses:Use_Hoshino(1)
+            if not ignore_finiteuses_use then
+                weapon.components.finiteuses:Use_Hoshino(1)
+            end
+        end
+    ----------------------------------------------------------------------------------------
+    --- 技能射击伤害. 1-4 为 mult * 100 + 10*level 。 5 为 mult * 200 + 20*level
+        local function DoSpellDamage(target,weapon,spell)
+            -- print("DoSpellDamage",target,spell)
+            local mult = inst.components.combat.externaldamagemultipliers:Get()
+            local ret_damage = 100*mult
+            if spell >= 5 then
+                ret_damage = 2*ret_damage
+            end
+            DoRealDamage(target,weapon,ret_damage-1)
+            if target.components.combat then
+                target.components.combat:GetAttacked(inst,1,weapon)
+            end
+            if spell < 5 then
+                Add_Debuff_To_Monster(target)
+            else
+                Remove_Debuff_From_Monster(target)
+            end
         end
     ----------------------------------------------------------------------------------------
     --- 检查是否在扇形攻击区域内
@@ -171,6 +212,7 @@ return function(inst)
                     local color = Vector3(90/255, 66/255, 41/255)
                     local scale = ((0.5/3)*i+0.5)*0.5
                     local MultColour_Flag = true
+                    local remain_time = 0.2
                     -- inst:DoTaskInTime((i-1)*0.05/2,function()
                     inst:DoTaskInTime(0,function()
                         local offset_pt = get_offset_pt_by_angle(angle,i*delta_range)
@@ -183,6 +225,7 @@ return function(inst)
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
                                 -- nosound = true,
+                                remain_time = remain_time,
                             })
                         end)
                         inst:DoTaskInTime(math.random(0,5)/30,function()
@@ -195,6 +238,7 @@ return function(inst)
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
                                 nosound = true,
+                                remain_time = remain_time,
                             })
                         end)
                         inst:DoTaskInTime(math.random(0,5)/30,function()
@@ -207,6 +251,7 @@ return function(inst)
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
                                 nosound = true,
+                                remain_time = remain_time,
                             })
                         end)
                         inst:DoTaskInTime(math.random(0,5)/30,function()
@@ -219,6 +264,7 @@ return function(inst)
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
                                 nosound = true,
+                                remain_time = remain_time,
                             })
                         end)
                         inst:DoTaskInTime(math.random(0,5)/30,function()
@@ -231,10 +277,10 @@ return function(inst)
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
                                 nosound = true,
+                                remain_time = remain_time,
                             })
                         end)
                     end)
-
                 end
             ------------------------------------------------------------------------------------
             --- 音效
@@ -248,6 +294,7 @@ return function(inst)
             local pt = _table and _table.pt
             local weapon = inst.components.combat:GetWeapon()
             local doer = inst
+            local spell_flag = _table and _table.spell
             ------------------------------------------------------------------------------------
             --- 预检查
                 if weapon == nil or not weapon:HasTag("hoshino_weapon_gun_eye_of_horus") then
@@ -265,6 +312,8 @@ return function(inst)
                 if not x or not y or not z then
                     return
                 end
+                -- print(math.floor(x),math.floor(y),math.floor(z))
+                y = 0 -- 使用技能的伤害，y轴坐标出现了奇怪的偏差
             ------------------------------------------------------------------------------------
             ---
             ------------------------------------------------------------------------------------
@@ -286,6 +335,7 @@ return function(inst)
                     local center_pt = Vector3((mid_line_max_pt.x+start_pt.x)/2,0,(mid_line_max_pt.z+start_pt.z)/2)
 
                     -- SpawnPrefab("log").Transform:SetPosition(center_pt.x,0,center_pt.z)
+                    -- SpawnPrefab("lightbulb").Transform:SetPosition(mid_line_max_pt.x,0,mid_line_max_pt.z)
             ------------------------------------------------------------------------------------
             --- 预设值武器参数
                 SetWeaponParam(weapon)
@@ -296,12 +346,17 @@ return function(inst)
                 local musthaveoneoftags = nil
                 local ents = TheSim:FindEntities(center_pt.x,0,center_pt.z,15,musthavetags,canthavetags,musthaveoneoftags)
                 for k, temp_target in pairs(ents) do
-                    -- print(" ++++ target",temp_target)
-                    if temp_target and temp_target:IsValid() and doer.components.combat:CanHitTarget(temp_target) then
-                        if Check_In_Area(Vector3(temp_target.Transform:GetWorldPosition()),start_pt,mid_line_max_pt) then
+                    if temp_target and temp_target:IsValid() and Check_In_Area(Vector3(temp_target.Transform:GetWorldPosition()),start_pt,mid_line_max_pt) then                        
+                        if temp_target.components.combat and doer.components.combat:CanHitTarget(temp_target) then
                             -- doer.components.combat:DoAttack(temp_target,weapon)
                             -- temp_target.components.combat:GetAttacked(doer,34,weapon)
-                            DoGunDamage(temp_target,weapon)
+                            if spell_flag == nil then
+                                DoGunDamage(temp_target,weapon)
+                            else
+                                DoSpellDamage(temp_target,weapon,spell_flag)
+                            end
+                        elseif temp_target.components.workable then
+
                         else
                             -- print("ERROR: target is not in area",temp_target)
                         end
@@ -317,6 +372,10 @@ return function(inst)
         inst:ListenForEvent("hoshino_sg_action_gun_shoot_active",function(inst,target)
             inst:PushEvent("eye_of_horus_shoot_fx",{target = target})
             inst:PushEvent("eye_of_horus_shoot_damage",{target = target})
+        end)
+        inst:ListenForEvent("hoshino_sg_action_gun_shoot_active_spell",function(inst,_table)
+            inst:PushEvent("eye_of_horus_shoot_fx",{pt = _table.pt})
+            inst:PushEvent("eye_of_horus_shoot_damage",{pt = _table.pt,spell = _table.num})
         end)
     ----------------------------------------------------------------------------------------
     --- 穿戴武器的时候触发

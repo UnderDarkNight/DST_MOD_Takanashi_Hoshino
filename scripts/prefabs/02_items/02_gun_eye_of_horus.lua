@@ -11,6 +11,7 @@
 
     local function onequip(inst, owner)
         owner.AnimState:OverrideSymbol("swap_object", "hoshino_atk", "swap_object")
+
         owner.AnimState:Show("ARM_carry")
         owner.AnimState:Hide("ARM_normal")
 
@@ -31,8 +32,8 @@
         inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_point_and_target_spell_caster",function(inst,replica_com)
             replica_com:SetAllowCanCastOnImpassable(true) --- 允许朝海中射击
             replica_com:SetDistance(9)
-            replica_com:SetText("eye_of_horus","")
-            replica_com:SetSGAction("hoshino_sg_action_gun_shoot")
+            replica_com:SetText("eye_of_horus","战术镇压")
+            replica_com:SetSGAction("hoshino_gun_ex_skill_pre")
             replica_com:SetTestFn(function(inst,doer,target,pt,right_click)
                 if not right_click or target == doer then
                     return false
@@ -47,11 +48,7 @@
 
 
         inst:AddComponent("hoshino_com_point_and_target_spell_caster")
-        inst.components.hoshino_com_point_and_target_spell_caster:SetSpellFn(function(inst,doer,target,pt)
-            doer:PushEvent("eye_of_horus_shoot",{
-                target = target,
-                pt = pt
-            })            
+        inst.components.hoshino_com_point_and_target_spell_caster:SetSpellFn(function(inst,doer,target,pt)                
             return true
         end)
 
@@ -79,7 +76,7 @@ local function fn()
 
 
     inst.entity:SetPristine()
-    -- special_attack_module_install(inst)
+    special_attack_module_install(inst)
     if not TheWorld.ismastersim then
         return inst
     end
