@@ -528,9 +528,9 @@ return function(inst,front_root)
             -- mouse_indicator_img:SetTexture("images/inspect_pad/page_character.xml","page_character_status.tex")
             -- mouse_indicator_img:SetScale(MainScale,MainScale,MainScale)
             mouse_indicator.img = mouse_indicator_img
-            local mouse_indicator_txt = mouse_indicator:AddChild(Text(TALKINGFONT,50,"",{ 0/255 , 255/255 ,0/255 , 1})) --- 纯粹绿色
+            -- local mouse_indicator_txt = mouse_indicator:AddChild(Text(TALKINGFONT,50,"",{ 0/255 , 255/255 ,0/255 , 1})) --- 纯粹绿色
             -- local mouse_indicator_txt = mouse_indicator:AddChild(Text(TALKINGFONT,50,"",{ 255/255 , 255/255 ,255/255 , 1})) --- 白色
-            -- local mouse_indicator_txt = mouse_indicator:AddChild(Text(TALKINGFONT,50,"",{ 51/255 , 255/255 ,255/255 , 1})) --- 天蓝色
+            local mouse_indicator_txt = mouse_indicator:AddChild(Text(TALKINGFONT,50,"",{ 51/255 , 255/255 ,255/255 , 1})) --- 天蓝色
             mouse_indicator.txt = mouse_indicator_txt
 
             local dx,dy = -40,40
