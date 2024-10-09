@@ -46,7 +46,7 @@
 --- server side
     AddStategraphState("wilson", State{
         name = "hoshino_gun_ex_skill_pre",
-        tags = {"notalking", "abouttoattack", "busy"},
+        tags = {"notalking", "abouttoattack", "busy","nointerrupt" },
 
         onenter = function(inst)
             inst.components.locomotor:Stop()
@@ -89,7 +89,7 @@
 
     AddStategraphState("wilson", State{
         name = "hoshino_gun_ex_skill",
-        tags = {"notalking", "attack", "busy"},
+        tags = {"notalking", "attack", "busy","nointerrupt" },
 
         onenter = function(inst)
             inst.components.locomotor:Stop()
@@ -161,7 +161,7 @@
 --- client side
     AddStategraphState('wilson_client', State{
         name = "hoshino_gun_ex_skill_pre",
-        tags = {"notalking", "abouttoattack", "busy"},
+        tags = {"notalking", "abouttoattack", "busy","nointerrupt" },
 
         onenter = function(inst)
             inst.components.locomotor:Stop()

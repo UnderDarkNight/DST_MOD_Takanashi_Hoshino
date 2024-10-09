@@ -2,9 +2,11 @@
 --[[
 
 武器攻击范围
-    1级：30度，5距离范围
-    2级：45度，7距离范围
-    3级：60度，9距离范围
+
+
+    1级：范围7，角度45，攻击45
+    2级：范围9，角度60，攻击45*2
+    3级：范围11，角度60，攻击45*3，此时增加效果：专武范围攻击会追加等额直伤
 
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,14 +43,14 @@ return function(inst)
     ----------------------------------------------------------------------------------------
     --- 攻击距离+攻击角度 动态返回 预留的接口
         local attack_angle = {
-            [1] = 30,
-            [2] = 45,
+            [1] = 45,
+            [2] = 60,
             [3] = 60
         }
         local attack_range = {
-            [1] = 5,
-            [2] = 7,
-            [3] = 9,
+            [1] = 7,
+            [2] = 9,
+            [3] = 11,
         }
         local function Get_Attack_Angle()
             return attack_angle[GetGunLevel()] or 60
@@ -82,13 +84,13 @@ return function(inst)
             if not is_real_damage then
                 --- 普通伤害
                 if GetGunLevel() >= 3 then
-                    return 34/2*GetGunLevel()
+                    return 45/2*GetGunLevel()
                 else
-                    return 34*GetGunLevel()
+                    return 45*GetGunLevel()
                 end
             else
                 --- 真实伤害
-                return 34/2*GetGunLevel()
+                return 45/2*GetGunLevel()
             end
         end
         local function DoRealDamage(target,weapon,value) -- 真实伤害
