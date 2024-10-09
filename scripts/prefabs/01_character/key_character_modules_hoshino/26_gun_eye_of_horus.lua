@@ -239,7 +239,7 @@ return function(inst)
 
                 local startColor = Vector3(90/255, 66/255, 41/255) -- 深棕色
                 local midColor = Vector3(255/255,125/255, 0/255)  -- 中点颜色
-                local endColor = Vector3(255/255, 200/255, 0/255) -- 尽头颜色
+                local endColor = Vector3(255/255, 255/255, 255/255) -- 尽头颜色
                 local function LerpColor(colorA, colorB, t)
                     return Vector3(
                         colorA.x + t * (colorB.x - colorA.x),
@@ -271,7 +271,7 @@ return function(inst)
                     if i <= Get_Attack_Range()*1/3 then
                         return "hoshino_sfx_explode2"
                     elseif i <= Get_Attack_Range()*2/3 then
-                        return "hoshino_sfx_explode"
+                        return "hoshino_sfx_explode2"
                     else
                         return "hoshino_sfx_explode"
                     end
