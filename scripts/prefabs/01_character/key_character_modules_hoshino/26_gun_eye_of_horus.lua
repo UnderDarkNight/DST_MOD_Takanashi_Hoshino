@@ -260,7 +260,13 @@ return function(inst)
                         -- return LerpColor(inst.midColor or midColor, inst.endColor or endColor, (t - midPoint) / (1 - midPoint))
                     end
                 end
-                -- local fx_prefab = "hoshino_fx_spell_flame"
+                local function GetFxPrefab(i)
+                    if i < Get_Attack_Range()*2/3 then
+                        return "hoshino_sfx_explode2"
+                    else
+                        return "hoshino_sfx_explode"
+                    end
+                end
                 for i = 1, Get_Attack_Range(), 1 do
                     -- local color = Vector3(255,0,0)
                     local color = doer.__test_color or Vector3(90/255, 66/255, 41/255)
@@ -271,7 +277,7 @@ return function(inst)
                     inst:DoTaskInTime(0,function()
                         local offset_pt = get_offset_pt_by_angle(angle,i*delta_range)
                         inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()                            
-                            SpawnPrefab(fx_prefab or "hoshino_sfx_explode2"):PushEvent("Set",{
+                            SpawnPrefab(GetFxPrefab(i) or "hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt,
                                 -- time = 5,
                                 color = GetFxColor(i),
@@ -284,7 +290,7 @@ return function(inst)
                         end)
                         inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()
                             local offset_pt2 = get_offset_pt_by_angle(angle+Get_Attack_Angle()/2,i*delta_range)
-                            SpawnPrefab(fx_prefab or "hoshino_sfx_explode2"):PushEvent("Set",{
+                            SpawnPrefab(GetFxPrefab(i) or "hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt2,
                                 -- time = 5,
                                 color = GetFxColor(i),
@@ -297,7 +303,7 @@ return function(inst)
                         end)
                         inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()
                             local offset_pt3 = get_offset_pt_by_angle(angle-Get_Attack_Angle()/2,i*delta_range)
-                            SpawnPrefab(fx_prefab or "hoshino_sfx_explode2"):PushEvent("Set",{
+                            SpawnPrefab(GetFxPrefab(i) or "hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt3,
                                 -- time = 5,
                                 color = GetFxColor(i),
@@ -310,7 +316,7 @@ return function(inst)
                         end)
                         inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()
                             local offset_pt2 = get_offset_pt_by_angle(angle+Get_Attack_Angle()/3,i*delta_range)
-                            SpawnPrefab(fx_prefab or "hoshino_sfx_explode2"):PushEvent("Set",{
+                            SpawnPrefab(GetFxPrefab(i) or "hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt2,
                                 -- time = 5,
                                 color = GetFxColor(i),
