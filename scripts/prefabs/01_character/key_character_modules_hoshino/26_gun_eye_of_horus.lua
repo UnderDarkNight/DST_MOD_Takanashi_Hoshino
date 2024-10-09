@@ -222,32 +222,21 @@ return function(inst)
             ---- 扇形火焰特效。
                 local delta_range = 1
                 local function GetFxTime(i)
-                    -- if doer.__time_fn then
-                    --     return doer.__time_fn(i)
-                    -- end
-                end
-                -- local function GetFxColor(i)
-                --     if i < Get_Attack_Range()*2/3 then
-                --         return Vector3(90/255, 66/255, 41/255)
-                --     else
-                --         return Vector3(255/255, 128/255, 0/255)
-                --     end
-                -- end
-                -- 定义两个颜色端点
+                    return nil
+                end 
                 -- local startColor = Vector3(90/255, 66/255, 41/255) -- 深棕色
                 -- local endColor = Vector3(255/255, 128/255, 0/255) -- 橙色
 
-                local startColor = Vector3(90/255, 66/255, 41/255) -- 深棕色
-                local midColor = Vector3(255/255,125/255, 0/255)  -- 中点颜色
-                local endColor = Vector3(255/255, 255/255, 255/255) -- 尽头颜色
+                local startColor = Vector3(180/255, 180/255, 100/255)
+                local midColor = Vector3(180/255, 180/255, 100/255)
+                local endColor = Vector3(255/255, 128/255, 0/255) -- 黄色
                 local function LerpColor(colorA, colorB, t)
                     return Vector3(
                         colorA.x + t * (colorB.x - colorA.x),
                         colorA.y + t * (colorB.y - colorA.y),
                         colorA.z + t * (colorB.z - colorA.z)
                     )
-                end
-                
+                end                
                 local function GetFxColor(i)
                     -- 计算从 0 到 1 的插值比例
                     local t = i / Get_Attack_Angle()

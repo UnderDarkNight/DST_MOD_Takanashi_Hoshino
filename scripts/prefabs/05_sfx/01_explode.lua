@@ -69,9 +69,9 @@ local function fx()
         ------------------------------------------------------------------------------------------------------------------------------------
         if not _table.nosound then
             if _table.sound then
-                inst.SoundEmitter:PlaySound(_table.sound)
+                inst.SoundEmitter:PlaySound(_table.sound,"explode")
             else
-                inst.SoundEmitter:PlaySound("dontstarve/common/together/fire_cracker")
+                inst.SoundEmitter:PlaySound("dontstarve/common/together/fire_cracker","explode")
             end
         end
 
@@ -81,6 +81,13 @@ local function fx()
 
         if type(_table.scale) == "number" then
             inst.AnimState:SetScale(_table.scale,_table.scale,_table.scale)
+        end
+
+        if type(_table.remain_time) == "number" then
+            inst:DoTaskInTime(_table.remain_time,function()
+                inst.SoundEmitter:KillSound("explode")
+                inst:Remove()
+            end)
         end
 
         inst.Ready = true
