@@ -15,7 +15,7 @@
 
     1：移动速度+5%
 
-    2：保暖+120，san+6，移动速度+10%
+    2：保暖/隔热+120，san+6，移动速度+10%
 
     3：免疫雷电，免疫麻痹，基础攻击伤害+15%
 
@@ -118,7 +118,26 @@ return function(inst)
     --- 保暖
         if inst.level >= 2 then
             inst:AddComponent("insulator")
-            inst.components.insulator:SetInsulation(120)
+            -- inst.components.insulator:SetInsulation(120)
+            local temperature_check_task = nil
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                temperature_check_task = inst:DoPeriodicTask(10,function()
+                    local temperature = owner.components.temperature:GetCurrent()
+                    if temperature > 40 then
+                        inst.components.insulator:SetInsulation(120)
+                        inst.components.insulator:SetSummer()
+                    elseif temperature < 20 then
+                        inst.components.insulator:SetInsulation(120)
+                        inst.components.insulator:SetWinter()
+                    end
+                end)
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                if temperature_check_task then
+                    temperature_check_task:Cancel()
+                    temperature_check_task = nil
+                end
+            end)
         end
     ----------------------------------------------------------------------------------
     --- San

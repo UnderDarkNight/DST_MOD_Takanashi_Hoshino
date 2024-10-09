@@ -54,7 +54,7 @@ return function(inst)
             return attack_angle[GetGunLevel()] or 60
         end
         local function Get_Attack_Range()
-            return attack_range[GetGunLevel()] or 9
+            return (attack_range[GetGunLevel()] or 9) + 1
         end
     ----------------------------------------------------------------------------------------
     --- 上笨怪debuff
@@ -82,13 +82,13 @@ return function(inst)
             if not is_real_damage then
                 --- 普通伤害
                 if GetGunLevel() >= 3 then
-                    return 34/2
+                    return 34/2*GetGunLevel()
                 else
-                    return 34
+                    return 34*GetGunLevel()
                 end
             else
                 --- 真实伤害
-                return 34/2
+                return 34/2*GetGunLevel()
             end
         end
         local function DoRealDamage(target,weapon,value) -- 真实伤害

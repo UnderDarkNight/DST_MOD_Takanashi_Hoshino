@@ -15,7 +15,7 @@
 
     2：生命上限+30，cost恢复速度+0.01/s
 
-    3：隔热+180，cost恢复速度+0.01/s
+    3：使人物身上的所有带有新鲜度的物品获得75%的保鲜效果（腐烂速度为1/4），cost恢复速度+0.01/s
 
     4：基础伤害减免+20%，免疫击飞
 
@@ -68,11 +68,14 @@ return function(inst)
             end)
         end
     ----------------------------------------------------------------------------------
-    --- 隔热
+    --- 使人物身上的所有带有新鲜度的物品获得75%的保鲜效果（腐烂速度为1/4）
         if inst.level >= 3 then
-            inst:AddComponent("insulator")
-            inst.components.insulator:SetInsulation(180)
-            inst.components.insulator:SetSummer()
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                owner.components.preserver:SetPerishRateMultiplier(0.25)
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                owner.components.preserver:SetPerishRateMultiplier(1)
+            end)
         end
     ----------------------------------------------------------------------------------
     --- 基础伤害减免+20%

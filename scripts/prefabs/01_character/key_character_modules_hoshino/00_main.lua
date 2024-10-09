@@ -41,6 +41,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/26_gun_eye_of_horus",                       ---- 枪械的范围攻击
         "prefabs/01_character/key_character_modules_hoshino/27_gun_eye_of_horus_ex_spell",              ---- 枪械的范围攻击（ex技能）
         "prefabs/01_character/key_character_modules_hoshino/28_player_reroll_data_save",                ---- 重选玩家保存数据。
+        "prefabs/01_character/key_character_modules_hoshino/29_preserver",                              ---- 食物保鲜器
 
     }
     for k, lua_addr in pairs(modules) do

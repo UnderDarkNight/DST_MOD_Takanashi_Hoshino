@@ -6,6 +6,9 @@
 
 ]]--
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
+---- 技能时间轴倍速。
+    local time_mult = 2
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 ----
 
 
@@ -19,12 +22,14 @@
         return EventHandler("equip", function(inst)
             inst.sg:GoToState("idle")
             Push_DMG_Blocker_End_Event(inst)
+            inst.AnimState:SetDeltaTimeMultiplier(1)
         end) 
     end
     local function CommonUnequip()
         return EventHandler("unequip", function(inst)
             inst.sg:GoToState("idle")
             Push_DMG_Blocker_End_Event(inst)
+            inst.AnimState:SetDeltaTimeMultiplier(1)
         end)
     end
 
@@ -64,19 +69,21 @@
             inst.sg.statemem.weapon = weapon
             inst.AnimState:PlayAnimation("hoshino_ex_pre")
             Push_DMG_Blocker_Start_Event(inst)
+            inst.AnimState:SetDeltaTimeMultiplier(time_mult)
         end,
 
         events = 
         {
             EventHandler("animover", function(inst)
                 inst.sg:GoToState("hoshino_gun_ex_skill")
+                inst.AnimState:SetDeltaTimeMultiplier(1)
             end),
             CommonEquip(),
             CommonUnequip(),
         },    
 
         onexit = function(inst)
-            
+            inst.AnimState:SetDeltaTimeMultiplier(1)            
         end,
     })
 
@@ -95,36 +102,41 @@
             inst.AnimState:PlayAnimation("hoshino_ex_walk_loop", true)
             inst.Physics:SetMotorVel(1, 0, 0)
             -- inst.sg:AddStateTag("busy")
+
+            inst.AnimState:SetDeltaTimeMultiplier(time_mult)
+
         end,
 
         timeline = {
-            TimeEvent(20*FRAMES, function(inst)
+            TimeEvent(20*FRAMES/time_mult, function(inst)
                 Shoot(inst,1)
             end),
-            TimeEvent(40*FRAMES, function(inst)
+            TimeEvent(40*FRAMES/time_mult, function(inst)
                 Shoot(inst,2)
             end),
-            TimeEvent(55*FRAMES, function(inst)
+            TimeEvent(55*FRAMES/time_mult, function(inst)
                 Shoot(inst,3)
             end),
-            TimeEvent(70*FRAMES, function(inst)
+            TimeEvent(70*FRAMES/time_mult, function(inst)
                 Shoot(inst,4)
             end),
-            TimeEvent(72*FRAMES, function(inst)
+            TimeEvent(72*FRAMES/time_mult, function(inst)
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("hoshino_ex_loop")
                 -- inst.AnimState:Pause()
             end),
-            TimeEvent(90*FRAMES, function(inst)
+            TimeEvent(90*FRAMES/time_mult, function(inst)
                 inst.SoundEmitter:PlaySound("summerevent2022/carnivalgame_puckdrop/hit_bumper")
             end),
-            TimeEvent(120*FRAMES, function(inst)
+            TimeEvent(120*FRAMES/time_mult, function(inst)
                 Shoot(inst,5)
             end),
-            TimeEvent(130*FRAMES, function(inst)
+            TimeEvent(130*FRAMES/time_mult, function(inst)
                 inst.sg:RemoveStateTag("busy")
                 inst.AnimState:Resume()
                 inst.sg:GoToState("idle")
+                inst.AnimState:SetDeltaTimeMultiplier(1)
+
             end),
         },
 
@@ -140,6 +152,8 @@
         onexit = function(inst)
             inst.AnimState:Resume()
             Push_DMG_Blocker_End_Event(inst)
+            inst.AnimState:SetDeltaTimeMultiplier(1)
+
         end,
     })
 
