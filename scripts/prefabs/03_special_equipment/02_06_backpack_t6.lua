@@ -87,7 +87,7 @@ local function common_fn()
         local temp_deactive_fn = function(inst)
             Special_Fn_Deactive(inst,inst.owner)            
         end
-        inst:ListenForEvent("onremove",temp_deactive_fn)
+        -- inst:ListenForEvent("onremove",temp_deactive_fn)
         inst:ListenForEvent("on_landed",temp_deactive_fn)
         inst:ListenForEvent("ondropped",temp_deactive_fn)
         inst:ListenForEvent("unequipped",inst.Remove)

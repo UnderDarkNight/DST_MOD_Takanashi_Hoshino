@@ -220,6 +220,15 @@ configuration_options = {
   },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("其他设置") or GetTitle("Other Settings"),hover = "",options = {{description = "",data = 0}},default = 0},
+  -- {
+  --   name = "PLAYER_REROLL_DATA_SAVE",
+  --   label = IsChinese() and "角色重选数据保存" or "Player Reroll Data Save",
+  --   hover = IsChinese() and "角色重选数据保存" or "Player Reroll Data Save",
+  --   options = {
+  --     {description = "OFF",data = false}, 
+  --     {description = "ON",data = true}},
+  --   default = false
+  -- },
   {
     name = "DEBUGGING_MOD",
     label = "开发者模式",
