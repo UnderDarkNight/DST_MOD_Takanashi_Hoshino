@@ -79,6 +79,11 @@ local hoshino_com_shop = Class(function(self, inst)
     -- 刷新次数 ： 当前剩余次数，每天更新次数
         self.refresh_count_daily = 1
         self.refresh_count = 1
+
+        self.refresh_cost = 50  --- 消耗货币刷新 （每天第一次）
+        self.refresh_cost_default = 50  --- 消耗货币刷新 （每天第一次）
+        self.refresh_cost_max = 500
+        self.refresh_cost_delta = 50
         self:AddOnSaveFn(function()
             self:Set("refresh_count_daily", self.refresh_count_daily)
             self:Set("refresh_count", self.refresh_count)
@@ -88,8 +93,11 @@ local hoshino_com_shop = Class(function(self, inst)
             self.refresh_count = self:Get("refresh_count") or 0
         end)
         inst:WatchWorldState("cycles",function()
-            self.refresh_count = self.refresh_count_daily
+            self.refresh_count = self.refresh_count_daily            
             self:ShopData_Set("refresh_count",self.refresh_count)
+
+            self.refresh_cost = self.refresh_cost_default
+            self:ShopData_Set("refresh_cost",self.refresh_cost)
         end)
         local refresh_cmd_lock_flag = true
         inst:ListenForEvent("hoshino_com_shop_refresh_button_clicked",function()
@@ -236,7 +244,7 @@ nil,
         self.__credit_coin_delta_fn = fn
     end
 ------------------------------------------------------------------------------------------------------------------------------
---- 每日刷新次数
+--- 刷新次数。每日刷新次数
     function hoshino_com_shop:RefreshDaily_Delta(value)
         self.refresh_count_daily = math.clamp(self.refresh_count_daily + value,0,1000000)
         self.refresh_count = math.clamp(self.refresh_count + value,0,self.refresh_count_daily)
@@ -249,17 +257,32 @@ nil,
     function hoshino_com_shop:GetRefreshCount()
         return self.refresh_count
     end
+    function hoshino_com_shop:Has_Enough_Coins_For_Refresh()
+        if self.credit_coins >= self.refresh_cost then
+            return true
+        end
+        return false
+    end
+    function hoshino_com_shop:Cost_Coins_For_Refresh()
+        self:CreditCoinDelta(-self.refresh_cost)
+        self.refresh_cost = math.clamp(self.refresh_cost + self.refresh_cost_delta,0,self.refresh_cost_max)
+        self:ShopData_Set("refresh_cost",self.refresh_cost)
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 刷新按键点击后执行。
     function hoshino_com_shop:Refresh_Clicked()
-        if self:GetRefreshCount() <= 0 then
-            return
-        end
-        self:Refresh_Delta(-1)
-        -----------------------------------------------
-        --- 执行刷新内容逻辑。
+
+        if self:GetRefreshCount() > 0 then
+            self:Refresh_Delta(-1)
+            self:Spawn_Items_List_And_Send_2_Client(true)            
+        elseif self:Has_Enough_Coins_For_Refresh() then
+            self:Cost_Coins_For_Refresh()
             self:Spawn_Items_List_And_Send_2_Client(true)
-        -----------------------------------------------
+        end
+        -- -----------------------------------------------
+        -- --- 执行刷新内容逻辑。
+        --     self:Spawn_Items_List_And_Send_2_Client(true)
+        -- -----------------------------------------------
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 商店等级
@@ -320,6 +343,7 @@ nil,
         self:ShopData_Set("new_spawn_list_flags",{normal_items = true, special_items = true}) -- 标记新列表
         self:Refresh_Delta(0)
         self:CreditCoinDelta(0)
+        self:ShopData_Set("refresh_cost",self.refresh_cost)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 物品购买 event

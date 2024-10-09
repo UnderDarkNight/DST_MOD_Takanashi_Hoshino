@@ -28,7 +28,7 @@ local flg,error_code = pcall(function()
         --             -- "card_colourful",
         --             -- "card_colourful",
         --             -- "card_golden",
-        --             "ruins_sheild_and_vengeance",
+        --             "kill_and_explode",
         --         },
         --     }
         -- )
@@ -69,10 +69,16 @@ local flg,error_code = pcall(function()
             -- weapon.components.finiteuses:SetPercent(1)
     ----------------------------------------------------------------------------------------------------------------
     ---
-        ThePlayer.__time_fn = function(i)
-            return (i-1)*0.02
-        end
-        ThePlayer.__test_color = Vector3(255/255, 255/255, 0/255)
+        -- ThePlayer.__time_fn = function(i)
+        --     return (i-1)*0.02
+        -- end
+        -- ThePlayer.__test_color = Vector3(255/255, 255/255, 0/255)
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+            -- for k, v in pairs(ThePlayer.HOSHINO_SHOP) do
+            --     print(k,v)
+            -- end
+            ThePlayer.components.hoshino_com_shop:CreditCoinDelta(1000)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

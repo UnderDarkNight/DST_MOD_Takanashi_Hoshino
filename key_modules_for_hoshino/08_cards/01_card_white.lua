@@ -238,7 +238,7 @@ local cards = {
                     inst.components.inventory:GiveItem(item)
                 end
                 --- 上屏蔽器
-                inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",2)
+                inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",1)
             end,
             text = function(inst)
                 return "根据当前剩余未选择的卡牌数量，给玩家N张 1选1卡包。\n包括颜色对应。下2次升级不再赠送升级卡包"

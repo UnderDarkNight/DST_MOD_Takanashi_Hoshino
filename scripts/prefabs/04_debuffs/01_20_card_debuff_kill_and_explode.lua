@@ -42,7 +42,8 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             for k, temp_monster in pairs(ents) do
                 -- print("fake error searching",temp_monster,CanBeAttack(temp_monster,target))
                 if temp_monster and temp_monster ~= target and CanBeAttack(temp_monster,target) then
-                    target.components.combat:DoAttack(temp_monster,inst)
+                    -- target.components.combat:DoAttack(temp_monster,inst)
+                    temp_monster.components.combat:GetAttacked(target,200,inst)
                 end
             end
             SpawnPrefab("hoshino_sfx_explode"):PushEvent("Set",{
