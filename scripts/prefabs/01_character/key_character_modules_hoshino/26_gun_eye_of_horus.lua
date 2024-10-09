@@ -232,9 +232,10 @@ return function(inst)
                 -- 定义两个颜色端点
                 -- local startColor = Vector3(90/255, 66/255, 41/255) -- 深棕色
                 -- local endColor = Vector3(255/255, 128/255, 0/255) -- 橙色
-                local startColor = Vector3(90*2/255, 66*2/255, 41*2/255) -- 深棕色
-                local midColor = Vector3(255/255,125/255, 0/255)
-                local endColor = Vector3(255/255, 255/255, 255/255) -- 黄色
+
+                local startColor = Vector3(90/255, 66/255, 41/255) -- 深棕色
+                local midColor = Vector3(255/255,125/255, 0/255)  -- 中点颜色
+                local endColor = Vector3(255/255, 255/255, 255/255) -- 尽头颜色
                 local function LerpColor(colorA, colorB, t)
                     return Vector3(
                         colorA.x + t * (colorB.x - colorA.x),
