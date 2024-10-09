@@ -261,10 +261,15 @@ return function(inst)
                     end
                 end
                 local function GetFxPrefab(i)
-                    if i < Get_Attack_Range()*2/3 then
+                     -- hoshino_sfx_explode2  可以设置棕色的爆炸
+                     -- hoshino_sfx_explode  可以设置橙色的爆炸
+                     -- hoshino_fx_spell_flame 火焰特效。
+                    if i <= Get_Attack_Range()*1/3 then
                         return "hoshino_sfx_explode2"
-                    else
+                    elseif i <= Get_Attack_Range()*2/3 then
                         return "hoshino_sfx_explode"
+                    else
+                        return "hoshino_fx_spell_flame"
                     end
                 end
                 for i = 1, Get_Attack_Range(), 1 do
@@ -329,7 +334,7 @@ return function(inst)
                         end)
                         inst:DoTaskInTime(GetFxTime(i) or math.random(0,5)/30,function()
                             local offset_pt3 = get_offset_pt_by_angle(angle-Get_Attack_Angle()/3,i*delta_range)
-                            SpawnPrefab(fx_prefab or "hoshino_sfx_explode2"):PushEvent("Set",{
+                            SpawnPrefab(GetFxPrefab(i) or "hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt3,
                                 -- time = 5,
                                 color = GetFxColor(i),
