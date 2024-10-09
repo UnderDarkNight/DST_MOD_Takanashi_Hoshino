@@ -55,8 +55,12 @@ return function(inst)
         local function Get_Attack_Angle()
             return attack_angle[GetGunLevel()] or 60
         end
-        local function Get_Attack_Range()
-            return (attack_range[GetGunLevel()] or 9) + 1
+        local function Get_Attack_Range(for_weapon_param)
+            if for_weapon_param then
+                return ( (attack_range[GetGunLevel()] or 9) - 1)
+            else
+                return (attack_range[GetGunLevel()] or 9)
+            end
         end
     ----------------------------------------------------------------------------------------
     --- 上笨怪debuff
@@ -101,7 +105,7 @@ return function(inst)
         end
         local function SetWeaponParam(weapon) --- 配置攻击距离 和 伤害。
             weapon.components.weapon:SetDamage(GetDMG())
-            weapon.components.weapon:SetRange(Get_Attack_Range())
+            weapon.components.weapon:SetRange(Get_Attack_Range(true))
         end
         local function DoGunDamage(target,weapon)            
             inst.components.combat:DoAttack(target,weapon)
@@ -111,7 +115,7 @@ return function(inst)
             end
         end
         local function ResetWeaponParam(weapon,ignore_finiteuses_use) --- 重置攻击距离和伤害。
-            weapon.components.weapon:SetRange(Get_Attack_Range())
+            weapon.components.weapon:SetRange(Get_Attack_Range(true))
             weapon.components.weapon:SetDamage(0)
             if not ignore_finiteuses_use then
                 weapon.components.finiteuses:Use_Hoshino(1)
@@ -448,7 +452,7 @@ return function(inst)
             -- weapon.components.weapon:SetRange(Get_Attack_Range())
         end)
         inst:ListenForEvent("hoshino_weapon_gun_eye_of_horus_attack_range_update",function(inst,weapon)
-            weapon.components.weapon:SetRange(Get_Attack_Range())
+            weapon.components.weapon:SetRange(Get_Attack_Range(true))
         end)
     ----------------------------------------------------------------------------------------
 
