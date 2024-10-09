@@ -8,6 +8,28 @@
         Asset("ANIM", "anim/hoshino_atk.zip"),
         Asset("ANIM", "anim/hoshino_weapon_gun_eye_of_horus.zip"),
     }
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 催眠屏蔽器
+    -- local function knockout_sg_event_block_for_player(player,_table)
+    --     local statename = _table and _table.statename
+    --     print("++++",statename)
+    --     if statename == "knockout" or statename == "yawn" and player.sg then
+    --         player.sg:GoToState("idle")
+    --     end
+    -- end
+    local function Add_kockout_blocker_2_player(owner,inst)
+        if owner.components.grogginess then
+            owner.components.grogginess:AddResistanceSource(inst,1000)
+        end
+        -- inst:ListenForEvent("newstate",knockout_sg_event_block_for_player,owner)
+    end
+    local function Remove_kockout_blocker_from_player(owner,inst)
+        if owner.components.grogginess then
+            owner.components.grogginess:RemoveResistanceSource(inst)
+        end
+        -- inst:RemoveEventCallback("newstate",knockout_sg_event_block_for_player,owner)
+    end
+------------------------------------------------------------------------------------------------------------------------------------------------------
 
     local function onequip(inst, owner)
         owner.AnimState:OverrideSymbol("swap_object", "hoshino_atk", "swap_object")
@@ -18,6 +40,8 @@
         owner:PushEvent("hoshino_weapon_gun_eye_of_horus_equipped",inst)
         owner:PushEvent("hoshino_weapon_gun_eye_of_horus_attack_range_update",inst)
         inst.owner = owner
+
+        Add_kockout_blocker_2_player(owner,inst)
     end
 
     local function onunequip(inst, owner)
@@ -25,6 +49,7 @@
         owner.AnimState:Hide("ARM_carry")
         owner.AnimState:Show("ARM_normal")
         inst.owner = nil
+        Remove_kockout_blocker_from_player(owner,inst)
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 特殊攻击动作

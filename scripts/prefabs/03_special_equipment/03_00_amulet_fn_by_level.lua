@@ -151,18 +151,18 @@ return function(inst)
         end
     ----------------------------------------------------------------------------------
     --- 昏睡屏蔽
-        if inst.level >= 4 then
-            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                if owner.components.grogginess then
-                    owner.components.grogginess:AddResistanceSource(inst,0)
-                end
-            end)
-            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
-                if owner.components.grogginess then
-                    owner.components.grogginess:RemoveResistanceSource(inst)
-                end
-            end)
-        end
+        -- if inst.level >= 4 then
+        --     inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+        --         if owner.components.grogginess then
+        --             owner.components.grogginess:AddResistanceSource(inst,0)
+        --         end
+        --     end)
+        --     inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+        --         if owner.components.grogginess then
+        --             owner.components.grogginess:RemoveResistanceSource(inst)
+        --         end
+        --     end)
+        -- end
     ----------------------------------------------------------------------------------
     --- 免疫精神控制（织影者那种）
         if inst.level >= 4 then
