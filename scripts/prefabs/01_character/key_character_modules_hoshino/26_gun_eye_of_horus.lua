@@ -218,8 +218,45 @@ return function(inst)
             ---- 扇形火焰特效。
                 local delta_range = 1
                 local function GetFxTime(i)
-                    if doer.__time_fn then
-                        return doer.__time_fn(i)
+                    -- if doer.__time_fn then
+                    --     return doer.__time_fn(i)
+                    -- end
+                end
+                -- local function GetFxColor(i)
+                --     if i < Get_Attack_Range()*2/3 then
+                --         return Vector3(90/255, 66/255, 41/255)
+                --     else
+                --         return Vector3(255/255, 128/255, 0/255)
+                --     end
+                -- end
+                -- 定义两个颜色端点
+                -- local startColor = Vector3(90/255, 66/255, 41/255) -- 深棕色
+                -- local endColor = Vector3(255/255, 128/255, 0/255) -- 橙色
+                local startColor = Vector3(90*2/255, 66*2/255, 41*2/255) -- 深棕色
+                local midColor = Vector3(255/255,125/255, 0/255)
+                local endColor = Vector3(255/255, 255/255, 255/255) -- 黄色
+                local function LerpColor(colorA, colorB, t)
+                    return Vector3(
+                        colorA.x + t * (colorB.x - colorA.x),
+                        colorA.y + t * (colorB.y - colorA.y),
+                        colorA.z + t * (colorB.z - colorA.z)
+                    )
+                end
+                
+                local function GetFxColor(i)
+                    -- 计算从 0 到 1 的插值比例
+                    local t = i / Get_Attack_Angle()
+                    local midPoint = 0.5 -- 可以根据需要调整这个值
+                    
+                    if t < midPoint then
+                        -- 当 t 小于 midPoint 时，在 startColor 和 midColor 之间插值
+                        return LerpColor(startColor, midColor, t / midPoint)
+                        -- return LerpColor(inst.startColor or startColor, inst.midColor or midColor, t / (midPoint))
+                    else
+                        -- 当 t 大于或等于 midPoint 时，在 midColor 和 endColor 之间插值
+                        -- 注意这里的 (t - midPoint) / (1 - midPoint)，它确保了 t 在 midPoint 和 1 之间的变化映射到 0 和 1 之间
+                        return LerpColor(midColor, endColor, (t - midPoint) / (1 - midPoint))
+                        -- return LerpColor(inst.midColor or midColor, inst.endColor or endColor, (t - midPoint) / (1 - midPoint))
                     end
                 end
                 for i = 1, Get_Attack_Range(), 1 do
@@ -235,7 +272,7 @@ return function(inst)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt,
                                 -- time = 5,
-                                color = color,
+                                color = GetFxColor(i),
                                 scale = scale,
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
@@ -248,7 +285,7 @@ return function(inst)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt2,
                                 -- time = 5,
-                                color = color,
+                                color = GetFxColor(i),
                                 scale = scale,
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
@@ -261,7 +298,7 @@ return function(inst)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt3,
                                 -- time = 5,
-                                color = color,
+                                color = GetFxColor(i),
                                 scale = scale,
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
@@ -274,7 +311,7 @@ return function(inst)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt2,
                                 -- time = 5,
-                                color = color,
+                                color = GetFxColor(i),
                                 scale = scale,
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,
@@ -287,7 +324,7 @@ return function(inst)
                             SpawnPrefab("hoshino_sfx_explode2"):PushEvent("Set",{
                                 pt = start_pt+offset_pt3,
                                 -- time = 5,
-                                color = color,
+                                color = GetFxColor(i),
                                 scale = scale,
                                 type = math.random(3),
                                 MultColour_Flag = MultColour_Flag,

@@ -78,8 +78,12 @@ local flg,error_code = pcall(function()
             -- for k, v in pairs(ThePlayer.HOSHINO_SHOP) do
             --     print(k,v)
             -- end
-            ThePlayer.components.hoshino_com_shop:CreditCoinDelta(1000)
-            ThePlayer.components.hoshino_com_shop:BlueSchistDelta(15)
+            -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(1000)
+            -- ThePlayer.components.hoshino_com_shop:BlueSchistDelta(15)
+
+            ThePlayer.startColor = Vector3(90*2/255, 66*2/255, 41*2/255) -- 深棕色
+            ThePlayer.midColor = Vector3(255/255,125/255, 0/255)
+            ThePlayer.endColor = Vector3(255/255, 255/255, 255/255) -- 黄色
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
