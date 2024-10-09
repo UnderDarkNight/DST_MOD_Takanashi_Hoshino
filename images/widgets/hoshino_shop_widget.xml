@@ -2,32 +2,36 @@
 <Atlas>
 	<Texture filename="hoshino_shop_widget.tex" />
 	<Elements>
-		<Element name="arrow_scrollbar_down.tex" u1="0.1914296875" u2="0.2050546875" v2="0.999" v1="0.985375" variant="" />
-		<Element name="arrow_scrollbar_up.tex" u1="0.2070546875" u2="0.2206796875" v2="0.999" v1="0.985375" variant="" />
-		<Element name="buttom_sell_items.tex" u1="0.1758046875" u2="0.23679296875" v2="0.94040625" v1="0.90969140625" variant="" />
-		<Element name="button_credit_coins.tex" u1="0.2695546875" u2="0.383765625" v2="0.999" v1="0.97609765625" variant="" />
-		<Element name="button_empty_num.tex" u1="0.2695546875" u2="0.379859375" v2="0.97409765625" v1="0.94973046875" variant="" />
-		<Element name="button_icon_normal_item.tex" u1="0.23879296875" u2="0.282203125" v2="0.94040625" v1="0.90187890625" variant="" />
-		<Element name="button_icon_special_item.tex" u1="0.385765625" u2="0.43308203125" v2="0.999" v1="0.94777734375" variant="" />
-		<Element name="button_item_buy.tex" u1="0.284203125" u2="0.329078125" v2="0.94773046875" v1="0.92824609375" variant="" />
-		<Element name="button_normal_items_black.tex" u1="0.331078125" u2="0.48191015625" v2="0.94577734375" v1="0.91066796875" variant="" />
-		<Element name="button_normal_items_white.tex" u1="0.55715234375" u2="0.707984375" v2="0.999" v1="0.967796875" variant="" />
-		<Element name="button_refresh.tex" u1="0.43508203125" u2="0.54538671875" v2="0.999" v1="0.9746328125" variant="" />
-		<Element name="button_special_items_black.tex" u1="0.55715234375" u2="0.707984375" v2="0.965796875" v1="0.9306875" variant="" />
-		<Element name="button_special_items_white.tex" u1="0.55715234375" u2="0.707984375" v2="0.9286875" v1="0.897484375" variant="" />
-		<Element name="close_button.tex" u1="0.284203125" u2="0.3046640625" v2="0.92624609375" v1="0.905296875" variant="" />
-		<Element name="hoshino_shop24_slot_bg.tex" u1="0.48391015625" u2="0.51413671875" v2="0.9726328125" v1="0.94240625" variant="" />
-		<Element name="item_slot_bg.tex" u1="0.55715234375" u2="0.62155859375" v2="0.895484375" v1="0.82180078125" variant="" />
-		<Element name="item_slot_bg_gray.tex" u1="0.001" u2="0.06540625" v2="0.999" v1="0.92531640625" variant="" />
-		<Element name="item_slot_blue.tex" u1="0.06740625" u2="0.11960546875" v2="0.999" v1="0.95070703125" variant="" />
-		<Element name="item_slot_colourful.tex" u1="0.06740625" u2="0.11960546875" v2="0.94870703125" v1="0.9004140625" variant="" />
-		<Element name="item_slot_golden.tex" u1="0.12160546875" u2="0.1738046875" v2="0.999" v1="0.95070703125" variant="" />
-		<Element name="item_slot_gray.tex" u1="0.12160546875" u2="0.1738046875" v2="0.94870703125" v1="0.9004140625" variant="" />
-		<Element name="items_background.tex" u1="0.001" u2="0.54978125" v2="0.8984140625" v1="0.5869375" variant="" />
-		<Element name="price_slot.tex" u1="0.001" u2="0.05124609375" v2="0.92331640625" v1="0.91066796875" variant="" />
-		<Element name="scrollbarbox.tex" u1="0.1758046875" u2="0.1894296875" v2="0.999" v1="0.985375" variant="" />
+		<Element name="arrow_scrollbar_down.tex" u1="0.1035390625" u2="0.1171640625" v2="0.983375" v1="0.96975" variant="" />
+		<Element name="arrow_scrollbar_up.tex" u1="0.1035390625" u2="0.1171640625" v2="0.96775" v1="0.954125" variant="" />
+		<Element name="blue_schist_price_slot.tex" u1="0.2168203125" u2="0.26706640625" v2="0.999" v1="0.9863515625" variant="" />
+		<Element name="buttom_sell_items.tex" u1="0.2168203125" u2="0.27780859375" v2="0.9843515625" v1="0.95363671875" variant="" />
+		<Element name="button_blue_schist.tex" u1="0.27980859375" u2="0.39011328125" v2="0.999" v1="0.9746328125" variant="" />
+		<Element name="button_credit_coins.tex" u1="0.39211328125" u2="0.50632421875" v2="0.999" v1="0.97609765625" variant="" />
+		<Element name="button_empty_num.tex" u1="0.55715234375" u2="0.66745703125" v2="0.999" v1="0.9746328125" variant="" />
+		<Element name="button_icon_normal_item.tex" u1="0.55715234375" u2="0.6005625" v2="0.9726328125" v1="0.93410546875" variant="" />
+		<Element name="button_icon_special_item.tex" u1="0.55715234375" u2="0.60446875" v2="0.93210546875" v1="0.8808828125" variant="" />
+		<Element name="button_item_buy.tex" u1="0.27980859375" u2="0.32468359375" v2="0.9726328125" v1="0.9531484375" variant="" />
+		<Element name="button_normal_items_black.tex" u1="0.6025625" u2="0.75339453125" v2="0.9726328125" v1="0.9375234375" variant="" />
+		<Element name="button_normal_items_white.tex" u1="0.60646875" u2="0.75730078125" v2="0.9355234375" v1="0.9043203125" variant="" />
+		<Element name="button_refresh.tex" u1="0.66945703125" u2="0.77976171875" v2="0.999" v1="0.9746328125" variant="" />
+		<Element name="button_special_items_black.tex" u1="0.55715234375" u2="0.707984375" v2="0.8788828125" v1="0.8437734375" variant="" />
+		<Element name="button_special_items_white.tex" u1="0.55715234375" u2="0.707984375" v2="0.8417734375" v1="0.8105703125" variant="" />
+		<Element name="close_button.tex" u1="0.32668359375" u2="0.34714453125" v2="0.9726328125" v1="0.95168359375" variant="" />
+		<Element name="credit_coins_price_slot.tex" u1="0.34914453125" u2="0.399390625" v2="0.9726328125" v1="0.959984375" variant="" />
+		<Element name="hoshino_shop24_slot_bg.tex" u1="0.50832421875" u2="0.53855078125" v2="0.999" v1="0.9687734375" variant="" />
+		<Element name="item_slot_bg.tex" u1="0.55178125" u2="0.6161875" v2="0.8085703125" v1="0.73488671875" variant="" />
+		<Element name="item_slot_bg_gray.tex" u1="0.78176171875" u2="0.84616796875" v2="0.999" v1="0.92531640625" variant="" />
+		<Element name="item_slot_blue.tex" u1="0.001" u2="0.05319921875" v2="0.207984375" v1="0.15969140625" variant="" />
+		<Element name="item_slot_colourful.tex" u1="0.6181875" u2="0.67038671875" v2="0.8085703125" v1="0.76027734375" variant="" />
+		<Element name="item_slot_golden.tex" u1="0.55178125" u2="0.60398046875" v2="0.73288671875" v1="0.68459375" variant="" />
+		<Element name="item_slot_gray.tex" u1="0.001" u2="0.05319921875" v2="0.999" v1="0.95070703125" variant="" />
+		<Element name="items_background.tex" u1="0.001" u2="0.54978125" v2="0.94870703125" v1="0.63723046875" variant="" />
+		<Element name="price_slot.tex" u1="0.05519921875" u2="0.1054453125" v2="0.999" v1="0.9863515625" variant="" />
+		<Element name="sale.tex" u1="0.05519921875" u2="0.1015390625" v2="0.9843515625" v1="0.9590078125" variant="" />
+		<Element name="scrollbarbox.tex" u1="0.1074453125" u2="0.1210703125" v2="0.999" v1="0.985375" variant="" />
 		<Element name="scrollbarline.tex" u1="0.55178125" u2="0.55515234375" v2="0.999" v1="0.8164296875" variant="" />
-		<Element name="sell_price.tex" u1="0.1758046875" u2="0.2675546875" v2="0.983375" v1="0.94240625" variant="" />
-		<Element name="shop_hud.tex" u1="0.001" u2="0.77390234375" v2="0.5849375" v1="0.15969140625" variant="" />
+		<Element name="sell_price.tex" u1="0.1230703125" u2="0.2148203125" v2="0.999" v1="0.95803125" variant="" />
+		<Element name="shop_hud.tex" u1="0.001" u2="0.77390234375" v2="0.63523046875" v1="0.209984375" variant="" />
 	</Elements>
 </Atlas>

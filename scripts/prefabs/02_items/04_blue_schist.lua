@@ -1,6 +1,8 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
+    青辉石
+
 ]]--
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -9,7 +11,31 @@ local assets = {
     Asset( "IMAGE", "images/inventoryimages/hoshino_item_blue_schist.tex" ),  -- 背包贴图
     Asset( "ATLAS", "images/inventoryimages/hoshino_item_blue_schist.xml" ),
 }
+----------------------------------------------------------------------------------------------------------------------------------------------------
+-- workable install
 
+    local function workable_install(inst)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
+            replica_com:SetTestFn(function(inst,doer,right_click)
+                if doer.prefab == "hoshino" then
+                    return true
+                end
+            end)
+            replica_com:SetText("hoshino_item_blue_schist","储蓄")
+            replica_com:SetSGAction("give")
+        end)
+        if not TheWorld.ismastersim then
+            return
+        end
+        inst:AddComponent("hoshino_com_workable")
+        inst.components.hoshino_com_workable:SetOnWorkFn(function(inst,doer)
+            local num = inst.components.stackable:StackSize() or 0
+            inst:Remove()
+            doer.components.hoshino_com_shop:BlueSchistDelta(num)
+            return true
+        end)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
 
     local inst = CreateEntity() -- 创建实体
@@ -29,7 +55,7 @@ local function fn()
     -- inst:AddTag("preparedfood")
 
     inst.entity:SetPristine()
-    
+    workable_install(inst)
     if not TheWorld.ismastersim then
         return inst
     end

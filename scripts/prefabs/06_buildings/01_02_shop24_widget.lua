@@ -77,6 +77,7 @@ return function(inst,front_root)
             end,ThePlayer)
         ------------------------------------------------------------------------------
         --- 货币按钮组
+            --------------------------------------------------------------------------
             --- 信用币按钮
             local coin_box = root:AddChild(Widget())
             coin_box:SetPosition(-600,250)
@@ -97,16 +98,44 @@ return function(inst,front_root)
             credit_coins_button.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated_for_widget",function()
                 ThePlayer:PushEvent("hoshino_event.shop_credit_coins_refresh")
             end,ThePlayer)
-            --- 绿币按钮
-            local green_coins_button = coin_box:AddChild(ImageButton(
-                atlas,"button_empty_num.tex",
-                "button_empty_num.tex",
-                "button_empty_num.tex",
-                "button_empty_num.tex",
-                "button_empty_num.tex"))
-            green_coins_button:SetPosition(0,-70)
-            green_coins_button.focus_scale = {1.05, 1.05, 1.05}
-            local green_coins_text = green_coins_button:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
+            --------------------------------------------------------------------------
+            --- 青辉石按钮
+            local blue_schist_button = coin_box:AddChild(ImageButton(
+                atlas,"button_blue_schist.tex",
+                "button_blue_schist.tex",
+                "button_blue_schist.tex",
+                "button_blue_schist.tex",
+                "button_blue_schist.tex"))
+            blue_schist_button:SetPosition(0,-70)
+            blue_schist_button.focus_scale = {1.05, 1.05, 1.05}
+            local blue_schist_text = blue_schist_button:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
+            blue_schist_button.inst:ListenForEvent("hoshino_event.shop_blue_schist_refresh",function()
+                local blue_schist = ThePlayer.HOSHINO_SHOP and ThePlayer.HOSHINO_SHOP.blue_schist or 0
+                blue_schist_text:SetString(tostring(blue_schist))
+            end,ThePlayer)
+            ThePlayer:PushEvent("hoshino_event.shop_blue_schist_refresh")
+            blue_schist_button.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated_for_widget",function()
+                ThePlayer:PushEvent("hoshino_event.shop_blue_schist_refresh")
+            end,ThePlayer)
+            local blue_schist_button_OnControl = blue_schist_button.OnControl
+            blue_schist_button.OnControl = function(btn_self,control,down)
+                if control == 1 or control == 29 then
+                    btn_self.control = control  --- 确保鼠标右键、左键都能点击。 右键 control = 1, 左键 control = 29
+                end
+                if blue_schist_button_OnControl(btn_self,control,down) then
+                    if not down then
+                        -- print("shop button click",btn_self.index)
+                        if control == 1 then
+                            ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.shop_blue_schist_clicked",{right_click = true})
+                        elseif control == 29 then
+                            ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.shop_blue_schist_clicked",{ right_click = false})
+                        end
+                    end
+                    return true
+                end
+                return false
+            end
+            --------------------------------------------------------------------------
             --- 刷新按钮
             local refresh_button = coin_box:AddChild(ImageButton(
                 atlas,"button_refresh.tex",
@@ -136,6 +165,7 @@ return function(inst,front_root)
                 ThePlayer:PushEvent("hoshino_event.shop_refresh_count")
                 ThePlayer:PushEvent("hoshino_event.shop_refresh_cost")
             end,ThePlayer)
+            --------------------------------------------------------------------------
             --- 等级显示
             local level_text = root:AddChild(Text(CODEFONT,35,"500",{ 0/255 , 0/255 ,0/255 , 1}))
             level_text:SetString("Level."..tostring(ThePlayer.HOSHINO_SHOP and ThePlayer.HOSHINO_SHOP.level or 0))
@@ -341,7 +371,9 @@ return function(inst,front_root)
                                     self.price_bg:SetPosition(0,-25)
                                 end
                                 if price_type == "credit_coins" then
-                                    self.price_bg:SetTexture(atlas,"price_slot.tex")
+                                    self.price_bg:SetTexture(atlas,"credit_coins_price_slot.tex")
+                                elseif price_type == "laplite" or price_type == "blue_schist" then -- 青辉石有两个名字。所以用or
+                                    self.price_bg:SetTexture(atlas,"blue_schist_price_slot.tex")                                        
                                 else
                                     --- 预留给其他货币
                                 end
@@ -356,6 +388,18 @@ return function(inst,front_root)
                                 end
                                 self.price_text.inst.mouseover_text = name -- 给mouseover调用。
                                 self.price_text:SetString(tostring(price))
+                            --- 特价标记
+                                if self.special_price_img == nil then
+                                    self.special_price_img = self:AddChild(Image())
+                                    self.special_price_img:SetTexture(atlas,"sale.tex")
+                                    self.special_price_img:SetPosition(-30,60)
+                                    self.special_price_img:SetScale(0.7,0.7,0.7)
+                                end
+                                if special_price then
+                                    self.special_price_img:Show()
+                                else
+                                    self.special_price_img:Hide()
+                                end
                             --- 购买按钮。
                                 if self.buy_btn == nil then
                                     local buy_btn_image = "button_item_buy.tex"

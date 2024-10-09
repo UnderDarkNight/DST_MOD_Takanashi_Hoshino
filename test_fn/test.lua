@@ -79,6 +79,7 @@ local flg,error_code = pcall(function()
             --     print(k,v)
             -- end
             ThePlayer.components.hoshino_com_shop:CreditCoinDelta(1000)
+            ThePlayer.components.hoshino_com_shop:BlueSchistDelta(15)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

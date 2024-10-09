@@ -76,6 +76,22 @@ local hoshino_com_shop = Class(function(self, inst)
             self:Set("credit_coins", self.credit_coins)
         end)
     --------------------------------------------------------------
+    --- 青辉石  有两个翻译 ：部分字段可能有不同 "laplite" "blue_schist" 
+        self.blue_schist = 0
+        self:AddOnLoadFn(function()
+            self.blue_schist = self:Get("blue_schist") or 0
+        end)
+        self:AddOnSaveFn(function()
+            self:Set("blue_schist", self.blue_schist)
+        end)
+        inst:ListenForEvent("hoshino_event.shop_blue_schist_clicked",function(inst,_table)
+            if _table and _table.right_click then
+                self:Blue_Schist_Trans_2_Item(10)
+            else
+                self:Blue_Schist_Trans_2_Item(1)
+            end
+        end)
+    --------------------------------------------------------------
     -- 刷新次数 ： 当前剩余次数，每天更新次数
         self.refresh_count_daily = 1
         self.refresh_count = 1
@@ -244,6 +260,28 @@ nil,
         self.__credit_coin_delta_fn = fn
     end
 ------------------------------------------------------------------------------------------------------------------------------
+--- 青辉石变更，注意unit32上限。
+    function hoshino_com_shop:BlueSchistDelta(num)
+        self.blue_schist = math.clamp(self.blue_schist + num,0,self.u32_max)
+        self:ShopData_Set("blue_schist",self.blue_schist)
+    end
+    function hoshino_com_shop:GetBlueSchist()
+        return self.blue_schist
+    end
+    function hoshino_com_shop:IsBlueSchist(price_type)
+        if price_type == "laplite" or price_type == "blue_schist" then
+            return true
+        end
+        return false
+    end
+    function hoshino_com_shop:Blue_Schist_Trans_2_Item(num) -- 青辉石转换成物品。
+        if num > self.blue_schist then
+            num = self.blue_schist
+        end
+        self:BlueSchistDelta(-num)
+        TUNING.HOSHINO_FNS:GiveItemByPrefab(self.inst,"hoshino_item_blue_schist",num)
+    end
+------------------------------------------------------------------------------------------------------------------------------
 --- 刷新次数。每日刷新次数
     function hoshino_com_shop:RefreshDaily_Delta(value)
         self.refresh_count_daily = math.clamp(self.refresh_count_daily + value,0,1000000)
@@ -343,6 +381,7 @@ nil,
         self:ShopData_Set("new_spawn_list_flags",{normal_items = true, special_items = true}) -- 标记新列表
         self:Refresh_Delta(0)
         self:CreditCoinDelta(0)
+        self:BlueSchistDelta(0)
         self:ShopData_Set("refresh_cost",self.refresh_cost)
     end
 ------------------------------------------------------------------------------------------------------------------------------
@@ -379,7 +418,7 @@ nil,
             end
         -----------------------------------------------------------------
         -- 货币消耗
-            if price_type == "credit_coins" then
+            if price_type == "credit_coins" then --- 信用币
                 print("current credit coins : ",self:GetCreditCoins(),price)
                 if self:GetCreditCoins() < price then
                     print("error : hoshino_com_shop item price not enough")
@@ -388,6 +427,15 @@ nil,
                     --- 扣除钱数
                     -- print("扣除钱数",price)
                     self:CreditCoinDelta(-price)
+                end
+            elseif self:IsBlueSchist(price_type) then -- 青辉石
+                if self:GetBlueSchist(price_type) < price then
+                    print("error : hoshino_com_shop item price not enough")
+                    return
+                else
+                    --- 扣除钱数
+                    -- print("扣除钱数",price)
+                    self:BlueSchistDelta(-price)
                 end
             else
                 print("error : hoshino_com_shop item price type not found")
