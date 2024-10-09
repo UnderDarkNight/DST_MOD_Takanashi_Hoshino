@@ -56,8 +56,8 @@ return function(inst)
             return attack_angle[GetGunLevel()] or 60
         end
         local function Get_Attack_Range(for_weapon_param)
-            if for_weapon_param then
-                return ( (attack_range[GetGunLevel()] or 9) - 1)
+            if for_weapon_param then                
+                return ( (attack_range[GetGunLevel()] or 9) - 1.5) -- 给武器上的攻击距离参数需要修正，以匹配特效显示范围
             else
                 return (attack_range[GetGunLevel()] or 9)
             end
@@ -239,7 +239,7 @@ return function(inst)
 
                 local startColor = Vector3(90/255, 66/255, 41/255) -- 深棕色
                 local midColor = Vector3(255/255,125/255, 0/255)  -- 中点颜色
-                local endColor = Vector3(255/255, 255/255, 255/255) -- 尽头颜色
+                local endColor = Vector3(255/255, 200/255, 0/255) -- 尽头颜色
                 local function LerpColor(colorA, colorB, t)
                     return Vector3(
                         colorA.x + t * (colorB.x - colorA.x),
@@ -273,7 +273,7 @@ return function(inst)
                     elseif i <= Get_Attack_Range()*2/3 then
                         return "hoshino_sfx_explode"
                     else
-                        return "hoshino_fx_spell_flame"
+                        return "hoshino_sfx_explode"
                     end
                 end
                 for i = 1, Get_Attack_Range(), 1 do
@@ -450,6 +450,7 @@ return function(inst)
     --- 穿戴武器的时候触发
         inst:ListenForEvent("hoshino_weapon_gun_eye_of_horus_equipped",function(inst,weapon)
             -- weapon.components.weapon:SetRange(Get_Attack_Range())
+            inst:PushEvent("hoshino_weapon_gun_eye_of_horus_attack_range_update",weapon)
         end)
         inst:ListenForEvent("hoshino_weapon_gun_eye_of_horus_attack_range_update",function(inst,weapon)
             weapon.components.weapon:SetRange(Get_Attack_Range(true))
