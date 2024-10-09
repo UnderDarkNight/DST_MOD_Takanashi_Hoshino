@@ -214,6 +214,17 @@ nil,
         for index, item_data in pairs(self.pool) do
             table.insert(ret, item_data)
         end
+        ----------------------------------------------------------
+        -- 特价商品处理
+            if math.random(1000)/1000 <= 0.3 or TUNING.HOSHINO_DEBUGGING_MODE then
+                --- 需要深度复制，避免污染原始数据池
+                ret = deepcopy(ret)
+                --- 随机一个商品
+                local temp_item_data = ret[math.random(#ret)]
+                temp_item_data.price = math.ceil(temp_item_data.price * 0.5)
+                temp_item_data.special_price = true
+            end
+        ----------------------------------------------------------
         -- print("随机物品数量", #ret)
         --- 添加常驻物品
         local permanent_list = self:GetPermanentList()

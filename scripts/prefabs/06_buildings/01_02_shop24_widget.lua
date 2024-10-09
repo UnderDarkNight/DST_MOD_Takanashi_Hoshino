@@ -303,6 +303,7 @@ return function(inst,front_root)
                                 price = 100, --- 价格
                                 price_type = "credit_coins"  -- 货币需求。
                                 index = "log_credit_coins_100",  --- 自动合并上传，用于相应购买事件.
+                                special_price = false, --- 特价商品
                             }
 
                         ]]--
@@ -314,6 +315,7 @@ return function(inst,front_root)
                             local price = _table.price or 0                         --- 显示的价格
                             local index = _table.index                              --- 购买index
                             local price_type = _table.price_type or "credit_coins"  --- 货币类型
+                            local special_price = _table.special_price or false  --- 特价商品
 
                             self.index = index
                             self.prefab = prefab
@@ -348,6 +350,9 @@ return function(inst,front_root)
                                 if self.price_text == nil then
                                     self.price_text = self:AddChild(Text(CODEFONT,30,"500",{ 255/255 , 255/255 ,255/255 , 1}))
                                     self.price_text:SetPosition(10,-27)
+                                    if special_price then
+                                        self.price_text:SetColour({ 0/255 , 255/255 ,0/255 , 1})
+                                    end
                                 end
                                 self.price_text.inst.mouseover_text = name -- 给mouseover调用。
                                 self.price_text:SetString(tostring(price))
