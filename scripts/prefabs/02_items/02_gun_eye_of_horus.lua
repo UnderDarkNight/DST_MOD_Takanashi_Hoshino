@@ -53,17 +53,45 @@
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 特殊攻击动作
+    local spell_display_name = "战术镇压"
+    local com_str_index = "eye_of_horus"
+    local spell_name = "gun_eye_of_horus_ex"
     local function special_attack_module_install(inst)
         inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_point_and_target_spell_caster",function(inst,replica_com)
             replica_com:SetAllowCanCastOnImpassable(true) --- 允许朝海中射击
             replica_com:SetDistance(9)
-            replica_com:SetText("eye_of_horus","战术镇压")
+            replica_com:SetText(com_str_index,spell_display_name)
             replica_com:SetSGAction("hoshino_gun_ex_skill_pre")
             replica_com:SetTestFn(function(inst,doer,target,pt,right_click)
-                if not right_click or target == doer then
+                if not right_click or target == doer and doer.prefab ~= "hoshino" then
                     return false
                 end
+                -- if doer.replica.hoshino_com_spell_cd_timer and doer.replica.hoshino_com_spell_cd_timer:IsReady(spell_name) then
+                --     return true
+                -- end
                 return true
+            end)
+            replica_com:SetTextUpdateFn(function(inst,doer,target,pt)
+                if ThePlayer and ThePlayer.prefab == "hoshino" and ThePlayer.replica.hoshino_com_spell_cd_timer then
+                    local time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime(spell_name) or 0
+                    local cost_value = ThePlayer.replica.hoshino_com_power_cost:GetCurrent()
+                    local ret_str = spell_display_name
+                    -- if time > 0 then
+                    --     replica_com:SetText(com_str_index,spell_display_name.." 【 "..time.." 】")
+                    -- else                
+                    --     replica_com:SetText(com_str_index,spell_display_name)
+                    -- end
+
+                    if time > 0 then
+                        ret_str = ret_str.." 【 "..time.." 】"
+                    end
+
+                    if cost_value < 4 then
+                        ret_str = ret_str.." 【 COST 4 】"
+                    end
+
+                    replica_com:SetText(com_str_index,ret_str)
+                end
             end)
 
         end)
@@ -73,7 +101,8 @@
 
 
         inst:AddComponent("hoshino_com_point_and_target_spell_caster")
-        inst.components.hoshino_com_point_and_target_spell_caster:SetSpellFn(function(inst,doer,target,pt)                
+        inst.components.hoshino_com_point_and_target_spell_caster:SetSpellFn(function(inst,doer,target,pt)
+            -- doer.components.hoshino_com_spell_cd_timer:StartCDTimer("gun_eye_of_horus_ex",20)
             return true
         end)
 

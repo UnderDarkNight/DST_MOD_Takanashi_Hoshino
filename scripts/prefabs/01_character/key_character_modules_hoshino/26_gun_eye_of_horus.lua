@@ -125,8 +125,9 @@ return function(inst)
     --- 技能射击伤害. 1-4 为 mult * 100 + 10*level 。 5 为 mult * 200 + 20*level
         local function DoSpellDamage(target,weapon,spell)
             -- print("DoSpellDamage",target,spell)
+            local player_level = inst.components.hoshino_com_level_sys:GetLevel()
             local mult = inst.components.combat.externaldamagemultipliers:Get()
-            local ret_damage = 100*mult
+            local ret_damage = 100*mult + 10*player_level
             if spell >= 5 then
                 ret_damage = 2*ret_damage
             end

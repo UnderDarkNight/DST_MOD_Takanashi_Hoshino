@@ -83,13 +83,18 @@ local flg,error_code = pcall(function()
 
                 -- ThePlayer.components.hoshino_com_level_sys:Exp_DoDelta(1000)
 
-                local TEMP = ThePlayer.components.builder:GetIngredients("pighouse")
-                for k, v in pairs(TEMP) do
-                    print(k)
-                    for k2, v2 in pairs(v) do
-                        print(k2,v2)
-                    end
-                end
+                -- local TEMP = ThePlayer.components.builder:GetIngredients("pighouse")
+                -- for k, v in pairs(TEMP) do
+                --     print(k)
+                --     for k2, v2 in pairs(v) do
+                --         print(k2,v2)
+                --     end
+                -- end
+    ----------------------------------------------------------------------------------------------------------------
+    --- 技能名和CD
+                    -- ThePlayer.components.hoshino_com_spell_cd_timer:StartCDTimer("gun_eye_of_horus_ex",30)
+                    -- ThePlayer.components.hoshino_com_spell_cd_timer:StartCDTimer("gun_eye_of_horus_ex_test",5)
+                    ThePlayer.components.hoshino_com_power_cost:SetMax(11)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

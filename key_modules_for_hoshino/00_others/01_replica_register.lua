@@ -33,6 +33,8 @@ AddReplicableComponent("hoshino_com_power_cost")  --- 能量条系统
 
 AddReplicableComponent("hoshino_com_point_and_target_spell_caster")  --- 通用 点/目标 施法器
 
+AddReplicableComponent("hoshino_com_spell_cd_timer")  --- 统一技能CD计时器
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

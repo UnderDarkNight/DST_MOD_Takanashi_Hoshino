@@ -10,6 +10,17 @@
     local time_mult = 1.7
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 ----
+    local function Check_Can_Cast_Ex_Spell(inst)
+        if not (inst.replica.hoshino_com_spell_cd_timer and inst.replica.hoshino_com_spell_cd_timer:IsReady("gun_eye_of_horus_ex") )then
+            return false
+        end
+        if not (inst.replica.hoshino_com_power_cost and inst.replica.hoshino_com_power_cost:GetCurrent() >= 4) then
+            return false
+        end
+        return true
+    end
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 
 
     local function Push_DMG_Blocker_Start_Event(inst)   --- 启动伤害屏蔽器
@@ -49,6 +60,13 @@
         tags = {"notalking", "abouttoattack", "busy","nointerrupt" },
 
         onenter = function(inst)
+            -----------------------------------------------------------------------
+            --- CD 检查器
+                if not Check_Can_Cast_Ex_Spell(inst) then
+                    inst.sg:GoToState("idle")
+                    return
+                end
+            -----------------------------------------------------------------------
             inst.components.locomotor:Stop()
             local action = inst:GetBufferedAction()
             local weapon = inst.components.combat:GetWeapon()
@@ -164,6 +182,13 @@
         tags = {"notalking", "abouttoattack", "busy","nointerrupt" },
 
         onenter = function(inst)
+            ----------------------------------------------------------------------
+            ---- CD 检查器
+                if not Check_Can_Cast_Ex_Spell(inst) then
+                    inst.sg:GoToState("idle")
+                    return
+                end
+            ----------------------------------------------------------------------
             inst.components.locomotor:Stop()
             local action = inst:GetBufferedAction()
             local weapon = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)

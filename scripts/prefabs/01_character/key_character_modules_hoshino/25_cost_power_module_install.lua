@@ -14,8 +14,9 @@ return function(inst)
 
 
     inst:AddComponent("hoshino_com_power_cost")
-
-    inst.components.hoshino_com_power_cost:SetMax(10)
+    inst:DoTaskInTime(0.1, function() -- 不知道为什么，出现了bug，所以延迟一下
+        inst.components.hoshino_com_power_cost:SetMax(10)
+    end)
 
     -- inst:DoPeriodicTask(0.5,function()
     --     inst.components.hoshino_com_power_cost:DoDelta(0.1)
