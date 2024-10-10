@@ -25,6 +25,9 @@ local prefab_black_list = {
     ["abigail"] = true, -- 阿比盖尔
 }
 local function check_can_broadcast_exp(inst,percent)
+    if inst.sg == nil then
+        return false
+    end
     if inst:HasOneOfTags({"player"}) then
         return false
     end
