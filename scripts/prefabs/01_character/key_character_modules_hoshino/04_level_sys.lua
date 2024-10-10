@@ -11,6 +11,8 @@
 
     经验额外增加量： + inst.components.hoshino_com_debuff:GetExpMult()
 
+    --- 为了保证显示数据的初始化成功，初始等级为0，升级经验为10.
+
 
     最大经验函数曲线：
         E(n)=50+60×(n−1)     n∈[0,10)
@@ -37,8 +39,19 @@ return function(inst)
 
     inst:AddComponent("hoshino_com_level_sys")
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 为了保证显示数据的初始化成功，初始等级为0，升级经验为10.
+        inst:DoTaskInTime(0,function()
+            if not inst.components.hoshino_com_level_sys:Get("0_level_inited") then
+                inst.components.hoshino_com_level_sys:Set("0_level_inited",true)
+                inst.components.hoshino_com_level_sys:Exp_DoDelta(10)                
+            end
+        end)
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
     ---
-        inst:ListenForEvent("hoshino_com_level_sys.level_up",function(inst,level)            
+        inst:ListenForEvent("hoshino_com_level_sys.level_up",function(inst,level)
+            if level <= 1 then
+                return
+            end
             --- 送玩家升级卡包(注意屏蔽器)
                 if inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",0) == 0 then
                     local item = SpawnPrefab("hoshino_item_cards_pack")

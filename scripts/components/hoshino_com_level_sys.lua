@@ -43,7 +43,7 @@ local hoshino_com_level_sys = Class(function(self, inst)
 
     --------------------------------------------------
     --
-        self.level = 1
+        self.level = 0
         self.max_level = 999999  -- 为了避免UI溢出，最大等级是这个
 
         self.exp = 0
