@@ -95,7 +95,9 @@ return function(inst)
                 inst.components.hoshino_com_level_sys:EXP_SetModifier(inst,mult_from_debuff)
             -------------------------------------------------------------------------------
         end)
-        inst:PushEvent("hoshino_event.exp_mult_update")
+        inst:DoTaskInTime(1,function()
+            inst:PushEvent("hoshino_event.exp_mult_update")
+        end)
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 经验广播触发监听
         inst:ListenForEvent("hoshino_event.exp_broadcast",function(inst,_table)
