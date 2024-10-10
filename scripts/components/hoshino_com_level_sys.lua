@@ -127,30 +127,39 @@ nil,
     function hoshino_com_level_sys:GetExp()
         return self.exp
     end
+
+    local STATE_LEVEL_UP = 1
+    local STATE_EXPERIENCE_UPDATE = 2
     function hoshino_com_level_sys:Exp_DoDelta(value)
         if value <= 0 then
             return
         end
         value = value * self:GetExpMult()
         self.exp_temp_pool = self.exp + value  --- 进入经验池。
-        ----------------------------------------------------------------------
-        ---
-            while self.exp_temp_pool > 0 do
-                local max_exp = self:GetMaxExp()
-                if self.exp_temp_pool < max_exp then --- 经验不满
-                    self:SetExp(self.exp_temp_pool)
-                    self.exp_temp_pool = 0
-                    break
-                else --- 经验满
-                    self.exp_temp_pool = self.exp_temp_pool - max_exp
-                    self:Level_DoDelta(1)
-                    self.inst:PushEvent("hoshino_com_level_sys.level_up",self:GetLevel()) -- Max Exp 靠这里进行更新。
-                    print("玩家升级到",self:GetLevel())
-                    self:ActiveMaxExpUpdate() -- 更新经验上限。
-                end
+
+        local state = STATE_EXPERIENCE_UPDATE
+        while self.exp_temp_pool > 0 do
+            local max_exp = self:GetMaxExp()
+
+            if self.exp_temp_pool < max_exp then --- 经验不满
+                self:SetExp(self.exp_temp_pool)
+                self.exp_temp_pool = 0
+                state = STATE_EXPERIENCE_UPDATE
+                break
+            else --- 经验满
+                self.exp_temp_pool = self.exp_temp_pool - max_exp
+                self:Level_DoDelta(1)
+                self.inst:PushEvent("hoshino_com_level_sys.level_up", self:GetLevel())
+                print("玩家升级到", self:GetLevel())
+                self:ActiveMaxExpUpdate()
+                state = STATE_LEVEL_UP
             end
-            self.exp_temp_pool = 0
-        ----------------------------------------------------------------------
+        end
+        -- 根据状态更新经验或清空临时池
+        if state == STATE_EXPERIENCE_UPDATE then
+            self:SetExp(self.exp_temp_pool)
+        end
+        self.exp_temp_pool = 0
     end
     -------
     function hoshino_com_level_sys:SetMaxExp(value)
