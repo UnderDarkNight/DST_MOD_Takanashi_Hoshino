@@ -81,9 +81,15 @@ local flg,error_code = pcall(function()
             -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(1000)
             -- ThePlayer.components.hoshino_com_shop:BlueSchistDelta(15)
 
-            ThePlayer.startColor = Vector3(180/255, 180/255, 100/255) -- 深棕色
-            ThePlayer.midColor = ThePlayer.startColor -- Vector3(90/255,66/255, 41/255)
-            ThePlayer.endColor = Vector3(255/255, 255/255, 0/255) -- 黄色
+                -- ThePlayer.components.hoshino_com_level_sys:Exp_DoDelta(1000)
+
+                local TEMP = ThePlayer.components.builder:GetIngredients("pighouse")
+                for k, v in pairs(TEMP) do
+                    print(k)
+                    for k2, v2 in pairs(v) do
+                        print(k2,v2)
+                    end
+                end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

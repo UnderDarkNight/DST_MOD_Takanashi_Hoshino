@@ -10,6 +10,14 @@
     注意处理：54、【彩】【我已膨胀】【三维+300/300/300，基础攻击力倍增器2（2倍原始基础伤害，不算卡牌加成），受伤倍增器0.2（80%减伤）】【此后无法再获取经验】【选择之后从卡池移除】
 
     经验额外增加量： + inst.components.hoshino_com_debuff:GetExpMult()
+
+
+    最大经验函数曲线：
+        E(n)=50+60×(n−1)     n∈[0,10)
+        E(n)=590+20×(n−10)   n∈[11,40)
+        E(n)=1100+10×(n−40 )  n∈[41,200)
+        E(n)=2100+5×(n−200）   n∈[201,400)
+        E(n)=3100+10×(n−400)  n≥401
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -28,31 +36,102 @@ return function(inst)
     end
 
     inst:AddComponent("hoshino_com_level_sys")
-
-    inst:ListenForEvent("hoshino_com_level_sys.exp_full",function()
-        local current_level = inst.components.hoshino_com_level_sys:GetLevel()
-
-        -----------------------------------------------------------------------------
-        --- 清空经验并等级+1
-            inst.components.hoshino_com_level_sys:SetExp(0)
-            inst.components.hoshino_com_level_sys:Level_DoDelta(1)
-            inst:PushEvent("hoshino_event.level_up")
-        -----------------------------------------------------------------------------
-        --- 送玩家升级卡包(注意屏蔽器)
-            if inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",0) == 0 then
-                local item = SpawnPrefab("hoshino_item_cards_pack")
-                inst.components.inventory:GiveItem(item)
-            else
-                -- print("当前升级卡包被屏蔽")    
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    ---
+        inst:ListenForEvent("hoshino_com_level_sys.level_up",function(inst,level)            
+            --- 送玩家升级卡包(注意屏蔽器)
+                if inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",0) == 0 then
+                    local item = SpawnPrefab("hoshino_item_cards_pack")
+                    inst.components.inventory:GiveItem(item)
+                else
+                    print("当前升级卡包被屏蔽")
+                end
+                local num = inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",-1)
+                if num < 0 then
+                    inst.components.hoshino_com_debuff:Set("level_up_card_pack_gift_blocker",0)
+                end
+            --- 系统广播
+                TheNet:Announce("恭喜玩家【"..inst:GetDisplayName().."】升级到"..level.."级")
+        end)
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 经验值上限更新函数。模块初始化的时候也会执行一次。
+        inst.components.hoshino_com_level_sys:SetMaxExpUpdateFn(function(self)
+            local level = self:GetLevel()
+            --- 更新经验曲线（修改max_exp）
+                if level < 10 then
+                    self:SetMaxExp(50+60*(level-1))
+                elseif level < 40 then
+                    self:SetMaxExp(590+20*(level-10))
+                elseif level < 200 then
+                    self:SetMaxExp(1100+10*(level-40))
+                elseif level < 400 then
+                    self:SetMaxExp(2100+5*(level-200))
+                else
+                    self:SetMaxExp(3100+10*(level-400))
+                end
+        end)
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 经验广播触发监听
+        inst:ListenForEvent("hoshino_event.exp_broadcast",function(inst,_table)
+            local max_health = _table.max_health
+            local prefab = _table.prefab -- 暂时预留，给某些特殊经验爆表的怪。
+            local exp = max_health/100
+            if exp > 0.1 then
+                inst.components.hoshino_com_level_sys:Exp_DoDelta(exp)
+                if TUNING.HOSHINO_DEBUGGING_MODE then
+                    print("获得经验",exp,prefab)
+                end
             end
-            local num = inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",-1)
-            if num < 0 then
-                inst.components.hoshino_com_debuff:Set("level_up_card_pack_gift_blocker",0)
+        end)
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 砍树，制作，采集，挖矿，吃东西等
+        -----------------------------------------------------------------------------------------
+        --- 砍树、挖矿
+            inst:ListenForEvent("finishedwork",function(inst,_table)
+                local action = _table and _table.action
+                if action == ACTIONS.CHOP or action == ACTIONS.MINE then
+                    inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
+                end
+            end)
+        -----------------------------------------------------------------------------------------
+        --- 采集
+            inst:ListenForEvent("picksomething",function(inst,_table)
+                inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
+            end)
+        -----------------------------------------------------------------------------------------
+        --- 吃东西
+            inst:ListenForEvent("oneat",function(inst,_table)
+                inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
+            end)
+        -----------------------------------------------------------------------------------------
+        --- 制作东西(消耗物品的才算数)
+            local function check_recipe_can_create_exp(recipe) -- 消耗材料的配方才给经验
+                local final_cost = 0
+                for k,single_cmd in pairs(recipe.ingredients) do
+                    local material = single_cmd and single_cmd.type
+                    local cost = single_cmd and single_cmd.amount or 0
+                    if material ~= nil then
+                        final_cost = final_cost + cost
+                    end
+                end
+                return final_cost > 0
             end
-        -----------------------------------------------------------------------------
-        --- 更新经验曲线（修改max_exp）
-        -----------------------------------------------------------------------------
+            local build_fn = function(inst,_table) --- 预留一些API ，可以实现建造指定的东西得到更多经验。
+                local item = _table.item
+                local recipe = _table.recipe or {}
+                -- inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
+                -- print("build",item)
+                -- for k,single_cmd in pairs(recipe.ingredients) do
+                --     local material = single_cmd.type
+                --     local cost = single_cmd.amount
+                -- end
+                if check_recipe_can_create_exp(recipe) then
+                    inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
+                end
+            end
+            inst:ListenForEvent("builditem",build_fn)
+            inst:ListenForEvent("buildstructure",build_fn)
+        -----------------------------------------------------------------------------------------
 
-    end)
-
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
 end

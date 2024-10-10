@@ -116,6 +116,10 @@ local function page_create(front_root,MainScale)
             --------------------------------------------------------------------------------------
             --- API
                 page.SetExp = function(page,exp,exp_max)
+                    --- exp 和 exp_max 最多保留一位小数
+                    exp = math.floor(exp*10)/10
+                    exp_max = math.floor(exp_max*10)/10
+                    ---
                     local display_txt = tostring(exp) .. "/" .. tostring(exp_max)
                     exp_txt:SetString(display_txt)
                     exp_bar_anim:SetPercent("idle",exp/exp_max)

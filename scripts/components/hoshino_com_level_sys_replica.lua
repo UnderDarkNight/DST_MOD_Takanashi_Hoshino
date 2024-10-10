@@ -16,8 +16,8 @@ local hoshino_com_level_sys = Class(function(self, inst)
     ------------------------------------------------------------------
     --
         self.__net_level = net_uint(inst.GUID,"hoshino_com_level_sys_level","hoshino_com_level_sys_net_update")
-        self.__net_exp = net_uint(inst.GUID,"hoshino_com_level_sys_exp","hoshino_com_level_sys_net_update")
-        self.__net_max_exp = net_uint(inst.GUID,"hoshino_com_level_sys_max_exp","hoshino_com_level_sys_net_update")
+        self.__net_exp = net_float(inst.GUID,"hoshino_com_level_sys_exp","hoshino_com_level_sys_net_update")
+        self.__net_max_exp = net_float(inst.GUID,"hoshino_com_level_sys_max_exp","hoshino_com_level_sys_net_update")
         if not TheNet:IsDedicated() then
             self.inst:ListenForEvent("hoshino_com_level_sys_net_update",function()
                 self.level = self.__net_level:value()

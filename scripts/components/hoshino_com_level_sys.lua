@@ -36,15 +36,21 @@ local hoshino_com_level_sys = Class(function(self, inst)
     self._onload_fns = {}
     self._onsave_fns = {}
 
+    inst:AddTag("hoshino_com_level_sys")
+    --------------------------------------------------
+    --
+        local max_32bit_float = 3.402823e+38
 
     --------------------------------------------------
     --
-        self.level = 0
+        self.level = 1
         self.max_level = 999999  -- 为了避免UI溢出，最大等级是这个
 
         self.exp = 0
         self.max_exp = 10
-        self.full_max_exp = 4000000000  -- 最大经验值上限，避免net溢出崩溃。net_uint
+        self.full_max_exp = max_32bit_float  -- 最大经验值上限，避免net溢出崩溃。net_float
+
+        self.exp_temp_pool = 0 -- 经验临时池，用于 单次获取经验 时，如果经验值不够升级，则将剩余经验值存入临时池中
     --------------------------------------------------
     -- 倍增器
         self.external_exp_multipliers = SourceModifierList(self.inst) -- exp multiplier
@@ -117,24 +123,34 @@ nil,
 -- 数值设置
     function hoshino_com_level_sys:SetExp(value)
         self.exp = math.clamp(value or 0,0,self.max_exp)
-        if self.exp == self.max_exp then
-            self.inst:PushEvent("hoshino_com_level_sys.exp_full")
-        end
     end
     function hoshino_com_level_sys:GetExp()
         return self.exp
     end
     function hoshino_com_level_sys:Exp_DoDelta(value)
-        if value > 0 then
-            value = value * self:GetExpMult()
-        end
-        self:SetExp(self.exp + value)
-    end
-    function hoshino_com_level_sys:Exp_DoDelta_LockCheck(value)
-        if true then
+        if value <= 0 then
             return
         end
-        self:Exp_DoDelta(value)
+        value = value * self:GetExpMult()
+        self.exp_temp_pool = self.exp + value  --- 进入经验池。
+        ----------------------------------------------------------------------
+        ---
+            while self.exp_temp_pool > 0 do
+                local max_exp = self:GetMaxExp()
+                if self.exp_temp_pool < max_exp then --- 经验不满
+                    self:SetExp(self.exp_temp_pool)
+                    self.exp_temp_pool = 0
+                    break
+                else --- 经验满
+                    self.exp_temp_pool = self.exp_temp_pool - max_exp
+                    self:Level_DoDelta(1)
+                    self.inst:PushEvent("hoshino_com_level_sys.level_up",self:GetLevel()) -- Max Exp 靠这里进行更新。
+                    print("玩家升级到",self:GetLevel())
+                    self:ActiveMaxExpUpdate() -- 更新经验上限。
+                end
+            end
+            self.exp_temp_pool = 0
+        ----------------------------------------------------------------------
     end
     -------
     function hoshino_com_level_sys:SetMaxExp(value)
@@ -145,6 +161,16 @@ nil,
     end
     function hoshino_com_level_sys:MaxExp_DoDelta(value)
         self:SetMaxExp(self.max_exp + value)
+    end
+    function hoshino_com_level_sys:SetMaxExpUpdateFn(fn)
+        if type(fn) == "function" then
+            self.max_exp_update_fn = fn
+        end
+    end
+    function hoshino_com_level_sys:ActiveMaxExpUpdate()
+        if self.max_exp_update_fn then
+            self.max_exp_update_fn(self)
+        end
     end
     --------
     function hoshino_com_level_sys:SetLevel(value)
@@ -183,6 +209,7 @@ nil,
             self.max_exp = data.max_exp
         end
         self:ActiveOnLoadFns()
+        self:ActiveMaxExpUpdate()
     end
 ------------------------------------------------------------------------------------------------------------------------------
 return hoshino_com_level_sys
