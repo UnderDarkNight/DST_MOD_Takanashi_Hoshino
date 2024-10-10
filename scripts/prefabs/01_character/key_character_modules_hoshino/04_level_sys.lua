@@ -89,7 +89,12 @@ return function(inst)
             local max_health = _table.max_health
             local prefab = _table.prefab -- 暂时预留，给某些特殊经验爆表的怪。
             local exp = max_health/100
-            if exp > 0.1 then
+            if exp > 0.001 then
+                -------------------------------------------------------------------------------
+                --- 来自 hoshino_com_debuff 模块的倍增器
+                    local mult_from_debuff = inst.components.hoshino_com_debuff:GetExpMult() + 1
+                    exp = exp * mult_from_debuff
+                -------------------------------------------------------------------------------
                 inst.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 if TUNING.HOSHINO_DEBUGGING_MODE then
                     print("获得经验",exp,prefab)
