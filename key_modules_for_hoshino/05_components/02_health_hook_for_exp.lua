@@ -28,7 +28,7 @@ local function check_can_broadcast_exp(inst,percent)
     if inst.sg == nil then
         return false
     end
-    if inst:HasOneOfTags({"player"}) then
+    if inst:HasOneOfTags({"player","hoshino_exp_pass"}) then
         return false
     end
     if prefab_black_list[inst.prefab] then
@@ -59,6 +59,11 @@ AddComponentPostInit("health", function(self)
                             max_health = max_health,
                         })
                     end
+                end)
+                --- 屏蔽重复多次获取经验。
+                self.inst:AddTag("hoshino_exp_pass")
+                self.inst:DoTaskInTime(10,function()
+                    self.inst:RemoveTag("hoshino_exp_pass")                    
                 end)
             end
         -----------------------------------------------------------------------------------

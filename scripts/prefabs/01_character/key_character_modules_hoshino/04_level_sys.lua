@@ -84,17 +84,26 @@ return function(inst)
                 end
         end)
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 经验倍增器更新
+        inst:ListenForEvent("hoshino_event.exp_mult_update",function(inst)
+            -------------------------------------------------------------------------------
+            --- 来自 hoshino_com_debuff 模块的倍增器
+                local mult_from_debuff = inst.components.hoshino_com_debuff:GetExpMult() + 1
+
+            -------------------------------------------------------------------------------
+            ---
+                inst.components.hoshino_com_level_sys:EXP_SetModifier(inst,mult_from_debuff)
+            -------------------------------------------------------------------------------
+        end)
+        inst:PushEvent("hoshino_event.exp_mult_update")
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 经验广播触发监听
         inst:ListenForEvent("hoshino_event.exp_broadcast",function(inst,_table)
+            inst:PushEvent("hoshino_event.exp_mult_update")
             local max_health = _table.max_health
             local prefab = _table.prefab -- 暂时预留，给某些特殊经验爆表的怪。
-            local exp = max_health/100
-            if exp > 0.001 then
-                -------------------------------------------------------------------------------
-                --- 来自 hoshino_com_debuff 模块的倍增器
-                    local mult_from_debuff = inst.components.hoshino_com_debuff:GetExpMult() + 1
-                    exp = exp * mult_from_debuff
-                -------------------------------------------------------------------------------
+            local exp = max_health/10
+            if max_health >= 100 then
                 inst.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 if TUNING.HOSHINO_DEBUGGING_MODE then
                     print("获得经验",exp,prefab)
@@ -106,6 +115,7 @@ return function(inst)
         -----------------------------------------------------------------------------------------
         --- 砍树、挖矿
             inst:ListenForEvent("finishedwork",function(inst,_table)
+                inst:PushEvent("hoshino_event.exp_mult_update")
                 local action = _table and _table.action
                 if action == ACTIONS.CHOP or action == ACTIONS.MINE then
                     inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
@@ -114,11 +124,13 @@ return function(inst)
         -----------------------------------------------------------------------------------------
         --- 采集
             inst:ListenForEvent("picksomething",function(inst,_table)
+                inst:PushEvent("hoshino_event.exp_mult_update")
                 inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
             end)
         -----------------------------------------------------------------------------------------
         --- 吃东西
             inst:ListenForEvent("oneat",function(inst,_table)
+                inst:PushEvent("hoshino_event.exp_mult_update")
                 inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
             end)
         -----------------------------------------------------------------------------------------
@@ -144,6 +156,7 @@ return function(inst)
                 --     local cost = single_cmd.amount
                 -- end
                 if check_recipe_can_create_exp(recipe) then
+                    inst:PushEvent("hoshino_event.exp_mult_update")
                     inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
                 end
             end
