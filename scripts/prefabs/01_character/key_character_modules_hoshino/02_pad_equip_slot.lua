@@ -19,7 +19,7 @@ return function(inst)
     inst:ListenForEvent("master_postinit_hoshino",function()
         local old_DropItem = inst.components.inventory.DropItem
         inst.components.inventory.DropItem = function(self,item,...)
-            if item and item:HasTag("hoshino_special_equipment") then
+            if item and item:HasOneOfTags({"hoshino_special_equipment","hoshino_spell_item"}) then
                 return
             end
             return old_DropItem(self,item,...)

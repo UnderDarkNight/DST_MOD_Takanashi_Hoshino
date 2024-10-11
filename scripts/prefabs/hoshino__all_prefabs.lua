@@ -12,7 +12,8 @@ local file_folders = {
     "04_debuffs",                       ---- debuffs
     "05_sfx",                           ---- 特效fx
     "06_buildings",                     ---- 建筑
-    "07_spell",                         ---- 技能
+    "07_spell",                         ---- 技能(常用于制作栏)
+    "08_hoshino_spell",                 ---- 星野专属技能、包括技能物品、制作栏
 
     
 }

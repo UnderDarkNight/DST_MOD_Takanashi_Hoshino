@@ -35,6 +35,8 @@ AddReplicableComponent("hoshino_com_point_and_target_spell_caster")  --- 通用 
 
 AddReplicableComponent("hoshino_com_spell_cd_timer")  --- 统一技能CD计时器
 
+AddReplicableComponent("hoshino_com_item_spell")  --- 物品技能控制器
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
