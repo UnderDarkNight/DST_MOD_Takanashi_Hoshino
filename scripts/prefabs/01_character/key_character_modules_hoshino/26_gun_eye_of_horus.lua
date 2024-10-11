@@ -400,9 +400,9 @@ return function(inst)
                 SetWeaponParam(weapon)
             ------------------------------------------------------------------------------------
             --- 简易攻击
-                local musthavetags = {"_combat"}
+                local musthavetags = nil
                 local canthavetags = {"companion","player", "playerghost", "INLIMBO","chester","hutch","DECOR", "FX",}
-                local musthaveoneoftags = nil
+                local musthaveoneoftags = {"_combat","CHOP_workable","MINE_workable"}
                 local ents = TheSim:FindEntities(center_pt.x,0,center_pt.z,15,musthavetags,canthavetags,musthaveoneoftags)
                 for k, temp_target in pairs(ents) do
                     if temp_target and temp_target:IsValid() and Check_In_Area(Vector3(temp_target.Transform:GetWorldPosition()),start_pt,mid_line_max_pt) then                        
@@ -414,8 +414,11 @@ return function(inst)
                             else
                                 DoSpellDamage(temp_target,weapon,spell_flag)
                             end
-                        elseif temp_target.components.workable then
-
+                        elseif spell_flag ~= nil and temp_target.components.workable and temp_target.components.workable:CanBeWorked() then
+                            --- 技能损坏 植物、矿物。
+                            pcall(function()
+                                temp_target.components.workable:Destroy(inst)
+                            end)
                         else
                             -- print("ERROR: target is not in area",temp_target)
                         end
