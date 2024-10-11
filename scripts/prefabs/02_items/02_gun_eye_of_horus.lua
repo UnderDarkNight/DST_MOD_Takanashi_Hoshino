@@ -74,6 +74,8 @@
             replica_com:SetTextUpdateFn(function(inst,doer,target,pt)
                 if ThePlayer and ThePlayer.prefab == "hoshino" and ThePlayer.replica.hoshino_com_spell_cd_timer then
                     local time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime(spell_name) or 0
+                    --- 取小数点后一位
+                    -- time = math.floor(time*10)/10
                     local cost_value = ThePlayer.replica.hoshino_com_power_cost:GetCurrent()
                     local ret_str = spell_display_name
                     -- if time > 0 then
@@ -83,7 +85,7 @@
                     -- end
 
                     if time > 0 then
-                        ret_str = ret_str.." 【 "..time.." 】"
+                        ret_str = "【 "..string.format("%.1f", time).." 】 " .. ret_str
                     end
 
                     if cost_value < 4 then

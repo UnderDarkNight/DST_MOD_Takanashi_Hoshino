@@ -94,8 +94,8 @@ local flg,error_code = pcall(function()
     --- 技能名和CD
                     -- ThePlayer.components.hoshino_com_spell_cd_timer:StartCDTimer("gun_eye_of_horus_ex",30)
                     -- ThePlayer.components.hoshino_com_spell_cd_timer:StartCDTimer("gun_eye_of_horus_ex_test",5)
-                    -- ThePlayer.components.hoshino_com_power_cost:DoDelta(10)
-                    ThePlayer.components.hoshino_com_level_sys:Exp_DoDelta(30)
+                    ThePlayer.components.hoshino_com_power_cost:DoDelta(10)
+                    -- ThePlayer.components.hoshino_com_level_sys:Exp_DoDelta(10000000)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

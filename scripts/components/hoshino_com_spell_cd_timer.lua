@@ -60,11 +60,15 @@ local hoshino_com_spell_cd_timer = Class(function(self, inst)
         end)
     ---------------------------------------------------------------------------
     --- 刷计时器。
-        inst:DoPeriodicTask(1,function()
-            for temp_spell_name, v in pairs(all_spell_names) do
-                self[temp_spell_name] = math.clamp(self[temp_spell_name] - 1,0,max_spell_cd_time)
-            end
+        -- inst:DoPeriodicTask(1,function()
+        --     for temp_spell_name, v in pairs(all_spell_names) do
+        --         self[temp_spell_name] = math.clamp(self[temp_spell_name] - 1,0,max_spell_cd_time)
+        --     end
+        -- end)
+        inst:DoTaskInTime(0,function()
+            self:StartAllTimer()
         end)
+        self.timer_delta_time = 0.1 -- 计时器的递减速度。
     ---------------------------------------------------------------------------
 end,
 nil,
@@ -79,6 +83,31 @@ Creating_Synchronization_Controllers() or {}
         if self[spell_name] then
             self[spell_name] = time or all_spell_names[spell_name] or 30
         end
+        self:StartAllTimer()
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 为了保证计时器 不是常开状态。所以需要手动启动计时器。    
+    function hoshino_com_spell_cd_timer:StartAllTimer()
+        if self.__all_timer_task ~= nil then
+            return
+        end
+        -------------------------------------------------------------------------------------
+        --- 定时循环的函数
+            self.__all_timer_task_fn = self.__all_timer_task_fn or function()
+                    local need_to_stop_timer_flag_num = 0
+                    for temp_spell_name, v in pairs(all_spell_names) do
+                        self[temp_spell_name] = math.clamp(self[temp_spell_name] - (self.timer_delta_time or 0.5),0,max_spell_cd_time)
+
+                        need_to_stop_timer_flag_num = need_to_stop_timer_flag_num + (self[temp_spell_name] or 0)
+                    end
+                    if need_to_stop_timer_flag_num == 0 and self.__all_timer_task then
+                        self.__all_timer_task:Cancel()
+                        self.__all_timer_task = nil
+                        -- print("hoshino_com_spell_cd_timer : all timer stop")
+                    end
+            end
+        -------------------------------------------------------------------------------------
+        self.__all_timer_task = self.inst:DoPeriodicTask(self.timer_delta_time or 0.5,self.__all_timer_task_fn)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数
