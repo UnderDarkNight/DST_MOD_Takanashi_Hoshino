@@ -66,13 +66,16 @@
                 if not right_click or target == doer and doer.prefab ~= "hoshino" then
                     return false
                 end
+                if not doer:HasTag("hoshino_spell_type_normal") then
+                    return false
+                end
                 -- if doer.replica.hoshino_com_spell_cd_timer and doer.replica.hoshino_com_spell_cd_timer:IsReady(spell_name) then
                 --     return true
                 -- end
                 return true
             end)
             replica_com:SetTextUpdateFn(function(inst,doer,target,pt)
-                if ThePlayer and ThePlayer.prefab == "hoshino" and ThePlayer.replica.hoshino_com_spell_cd_timer then
+                if ThePlayer and ThePlayer.prefab == "hoshino" and ThePlayer.replica.hoshino_com_spell_cd_timer and doer:HasTag("hoshino_spell_type_normal") then
                     local time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime(spell_name) or 0
                     --- 取小数点后一位
                     -- time = math.floor(time*10)/10
@@ -86,13 +89,13 @@
 
                     if time > 0 then
                         ret_str = "【 "..string.format("%.1f", time).." 】 " .. ret_str
-                    end
-
+                    end                    
                     if cost_value < 4 then
                         ret_str = ret_str.." 【 COST 4 】"
                     end
-
                     replica_com:SetText(com_str_index,ret_str)
+                else
+                    replica_com:SetText(com_str_index,"")
                 end
             end)
 

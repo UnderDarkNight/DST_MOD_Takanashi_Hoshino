@@ -169,10 +169,40 @@ local function page_create(front_root,MainScale)
             --- 
             --------------------------------------------------------------------------------------
             --- 立绘
-                local c_pic = page:AddChild(Image())
-                c_pic:SetTexture("images/inspect_pad/page_character.xml","page_character_picture2.tex")
-                c_pic:SetScale(MainScale,MainScale,MainScale)
+                -- local c_pic = page:AddChild(Image())
+                -- c_pic:SetTexture("images/inspect_pad/page_character.xml","page_character_picture2.tex")
+                -- c_pic:SetScale(MainScale,MainScale,MainScale)
+                -- c_pic:SetPosition(0,30)
+                local c_pic = page:AddChild(ImageButton())
                 c_pic:SetPosition(0,30)
+                c_pic:SetScale(MainScale,MainScale,MainScale)
+                local function update_character_pic()
+                    local character_spell_type = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.character_spell_type or "hoshino_spell_type_normal"
+                    local temp_img = "page_character_picture2.tex"
+                    if character_spell_type == "hoshino_spell_type_normal" then
+                        temp_img = "page_character_picture_normal.tex"
+                    elseif character_spell_type == "hoshino_spell_type_swimming" then
+                        temp_img = "page_character_picture_swimming.tex"                            
+                    end
+                    c_pic:SetTextures( "images/inspect_pad/page_character.xml", temp_img, temp_img, temp_img, temp_img)
+                end
+                update_character_pic()
+                local switch_cd_task = nil
+                c_pic:SetOnClick(function()
+                    if switch_cd_task == nil then
+                        c_pic:OnDisable()
+                        ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_type_change")
+                        switch_cd_task = c_pic.inst:DoTaskInTime(3,function()
+                            switch_cd_task = nil
+                            c_pic:OnEnable()
+                        end)
+                    end
+                end)
+                c_pic.inst:ListenForEvent("hoshino_event.pad_data_update",update_character_pic,ThePlayer)
+                c_pic.inst:DoTaskInTime(0,function()
+                    c_pic:MoveToFront()
+                end)
+                c_pic.focus_scale = {1.1, 1.1, 1.1}
             --------------------------------------------------------------------------------------
             --- 状态栏
                 local status_box = page:AddChild(Image())

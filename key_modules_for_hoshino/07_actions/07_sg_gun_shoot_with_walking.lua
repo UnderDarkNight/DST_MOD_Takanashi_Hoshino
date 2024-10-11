@@ -11,12 +11,15 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 ----
     local function Check_Can_Cast_Ex_Spell(inst)
+        if not inst:HasTag("hoshino_spell_type_normal") then
+            return false
+        end
         if not (inst.replica.hoshino_com_spell_cd_timer and inst.replica.hoshino_com_spell_cd_timer:IsReady("gun_eye_of_horus_ex") )then
             return false
         end
         if not (inst.replica.hoshino_com_power_cost and inst.replica.hoshino_com_power_cost:GetCurrent() >= 4) then
             return false
-        end
+        end        
         return true
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------

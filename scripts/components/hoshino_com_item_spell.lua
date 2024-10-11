@@ -45,6 +45,17 @@ nil,
         self.inst:ListenForEvent("onremove",function()
             owner.components.playercontroller:Enable(true)  --- 屏蔽鼠标点击移动            
         end)
+        owner:AddChild(self.inst)
+    end
+    function hoshino_com_item_spell:GetOwner()
+        return self.owner
+    end
+    --- 保留两套。
+    function hoshino_com_item_spell:SetCaster(doer)
+        self:SetOwner(doer)
+    end
+    function hoshino_com_item_spell:GetCaster()
+        return self:GetOwner()
     end
 ------------------------------------------------------------------------------------------------------------------------------
 return hoshino_com_item_spell
