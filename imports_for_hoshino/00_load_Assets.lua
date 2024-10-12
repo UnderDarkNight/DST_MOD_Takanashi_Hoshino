@@ -56,6 +56,12 @@ local temp_assets = {
 		Asset("IMAGE", "images/inspect_pad/card_excample_d.tex"),
 		Asset("ATLAS", "images/inspect_pad/card_excample_d.xml"),
 	---------------------------------------------------------------------------
+	--- 技能环素材
+		Asset("IMAGE", "images/widgets/hoshino_spell_ring.tex"),
+		Asset("ATLAS", "images/widgets/hoshino_spell_ring.xml"),
+		Asset("IMAGE", "images/widgets/gesture_bg.tex"),
+		Asset("ATLAS", "images/widgets/gesture_bg.xml"),
+	---------------------------------------------------------------------------
 
 
 }

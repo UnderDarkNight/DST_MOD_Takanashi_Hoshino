@@ -210,7 +210,14 @@ configuration_options = {
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  {name = "AAAA",label = IsChinese() and GetTitle("特殊装备快捷键") or GetTitle("Special Equipment Hotkey"),hover = "",options = {{description = "",data = 0}},default = 0},
+  {name = "AAAA",label = IsChinese() and GetTitle("快捷键") or GetTitle("Hotkeys"),hover = "",options = {{description = "",data = 0}},default = 0},
+  {
+    name = "SPELL_RING_HOTKEY",
+    label = IsChinese() and "技能环快捷键" or "Spell Ring Hotkey",
+    hover = IsChinese() and "技能环快捷键" or "Spell Ring Hotkey",
+    options = keys_option,
+    default = "KEY_R",
+  },
   {
     name = "SPECIAL_EQUIPMENT_SHOES_HOTKEY",
     label = IsChinese() and "鞋子快捷键" or "Shoes Hotkey",

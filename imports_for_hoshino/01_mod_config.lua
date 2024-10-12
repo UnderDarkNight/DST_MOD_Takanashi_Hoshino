@@ -11,8 +11,9 @@ TUNING["hoshino.Config"].Language = GetModConfigData("LANGUAGE")
     TUNING["hoshino.Config"].DIFFICULTY_MODE = GetModConfigData("DIFFICULTY_MODE")     --- 认真模式
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
---- 特殊装备快捷键
-    TUNING["hoshino.Config"].SPECIAL_EQUIPMENT_SHOES_HOTKEY = GetModConfigData("SPECIAL_EQUIPMENT_SHOES_HOTKEY")     --- 鞋子
+--- 快捷键 类
+    TUNING["hoshino.Config"].SPELL_RING_HOTKEY = GetModConfigData("SPELL_RING_HOTKEY")     --- 技能环快捷键
+    TUNING["hoshino.Config"].SPECIAL_EQUIPMENT_SHOES_HOTKEY = GetModConfigData("SPECIAL_EQUIPMENT_SHOES_HOTKEY")     --- 特殊装备快捷键 T9鞋子
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="hoshino_spell_ring.tex" />
+	<Elements>
+		<Element name="test_img.tex" u1="0.001" u2="0.6865" v2="0.999" v1="0.3135" variant="" />
+	</Elements>
+</Atlas>
