@@ -94,7 +94,7 @@ local flg,error_code = pcall(function()
     --- 技能名和CD
                     -- ThePlayer.components.hoshino_com_spell_cd_timer:StartCDTimer("gun_eye_of_horus_ex",30)
                     -- ThePlayer.components.hoshino_com_spell_cd_timer:StartCDTimer("gun_eye_of_horus_ex_test",5)
-                    ThePlayer.components.hoshino_com_power_cost:DoDelta(10)
+                    -- ThePlayer.components.hoshino_com_power_cost:DoDelta(10)
                     -- ThePlayer.components.hoshino_com_level_sys:Exp_DoDelta(10000000)
     ----------------------------------------------------------------------------------------------------------------
     --- 技能圈圈指示器
@@ -104,6 +104,16 @@ local flg,error_code = pcall(function()
         -- local spell_item = ThePlayer:SpawnChild("hoshino_spell_excample_mouse_radius")
         -- spell_item.components.hoshino_com_item_spell:SetOwner(ThePlayer)
 
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        -- ThePlayer.AnimState:PlayAnimation("wortox_portal_jumpin")
+        -- ThePlayer.AnimState:PlayAnimation("wortox_portal_jumpout")
+
+        -- ThePlayer.sg:GoToState("hoshino_portal_jump_out",{
+        --     pt = Vector3(x+10,0,z)
+        -- })
+        local doer = ThePlayer
+        doer.components.playercontroller:DoAction(BufferedAction(doer, nil, ACTIONS.HOSHINO_SG_JUMP_OUT,nil,Vector3(x+10,0,z)))
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -21,3 +21,6 @@ modimport("key_modules_for_hoshino/07_actions/06_sg_gun_shoot_action_for_eye_of_
 
 modimport("key_modules_for_hoshino/07_actions/07_sg_gun_shoot_with_walking.lua") 
 --- 荷鲁斯之眼 专属攻击动作（技能攻击动作）
+
+modimport("key_modules_for_hoshino/07_actions/08_sg_jump_out.lua") 
+--- 跳出技能动作

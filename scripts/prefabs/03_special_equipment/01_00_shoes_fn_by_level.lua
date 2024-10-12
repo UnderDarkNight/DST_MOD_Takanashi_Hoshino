@@ -164,9 +164,9 @@ return function(inst)
         if inst.level >= 3 then
             local player_electrocute_block_state_event_fn = function(player,_table)
                 local statename = _table and _table.statename
-                if TUNING.HOSHINO_DEBUGGING_MODE then
-                    print("++++++++ state name = "..statename)
-                end
+                -- if TUNING.HOSHINO_DEBUGGING_MODE then
+                --     print("++++++++ state name = "..statename)
+                -- end
                 if statename == "electrocute" then
                     player.sg:GoToState("idle")
                 end
@@ -343,39 +343,43 @@ return function(inst)
             end
             local cd_task = nil
             local function hotkey_event_for_player(player,_table)
-                local pt = _table and _table.pt or {}                
-                if pt.x and pt.y and pt.z then
+                local pt = _table and _table.pt or Vector3(0,0,0)
+                if pt.x and pt.y and pt.z and player.sg then
                     if not cd_task then
-                        if player.components.playercontroller ~= nil then
-                            player.components.playercontroller:RemoteStopWalking()
-                            player.components.playercontroller:RemotePausePrediction(8)   --- 暂停远程预测。
-                            player.components.playercontroller:Enable(false)
-                        end
-                        if player.components.locomotor ~= nil then
-                            player.components.locomotor:StopMoving()
-                            player.components.locomotor:Stop()
-                        end
-
-                        local origin_pt = Vector3(player.Transform:GetWorldPosition())
-                        for i = 0, 3, 1 do
-                            player:DoTaskInTime(0.1*i,function()
-                                trans2pt(player,pt)
-                            end)
-                        end
-
-                        if player.components.playercontroller ~= nil then
-                            player.components.playercontroller:Enable(true)
-                        end
                         cd_task = player:DoTaskInTime(2,function()
                             cd_task = nil
                         end)
-                        ----------------------------------------------------------
-                        --- 特效
-                            -- SpawnPrefab("shock_fx").Transform:SetPosition(origin_pt.x,origin_pt.y,origin_pt.z)
-                            -- SpawnPrefab("shock_fx").Transform:SetPosition(pt.x,pt.y,pt.z)
-                            SpawnPrefab("crab_king_shine").Transform:SetPosition(pt.x,pt.y,pt.z)
-                            SpawnPrefab("crab_king_shine").Transform:SetPosition(origin_pt.x,origin_pt.y,origin_pt.z)
-                        ----------------------------------------------------------
+
+                                    -- if player.components.playercontroller ~= nil then
+                                    --     player.components.playercontroller:RemoteStopWalking()
+                                    --     player.components.playercontroller:RemotePausePrediction(8)   --- 暂停远程预测。
+                                    --     player.components.playercontroller:Enable(false)
+                                    -- end
+                                    -- if player.components.locomotor ~= nil then
+                                    --     player.components.locomotor:StopMoving()
+                                    --     player.components.locomotor:Stop()
+                                    -- end
+
+                                    -- local origin_pt = Vector3(player.Transform:GetWorldPosition())
+                                    -- for i = 0, 3, 1 do
+                                    --     player:DoTaskInTime(0.1*i,function()
+                                    --         trans2pt(player,pt)
+                                    --     end)
+                                    -- end
+
+                                    -- if player.components.playercontroller ~= nil then
+                                    --     player.components.playercontroller:Enable(true)
+                                    -- end
+                                    
+                                    -- ----------------------------------------------------------
+                                    -- --- 特效
+                                    --     -- SpawnPrefab("shock_fx").Transform:SetPosition(origin_pt.x,origin_pt.y,origin_pt.z)
+                                    --     -- SpawnPrefab("shock_fx").Transform:SetPosition(pt.x,pt.y,pt.z)
+                                    --     SpawnPrefab("crab_king_shine").Transform:SetPosition(pt.x,pt.y,pt.z)
+                                    --     SpawnPrefab("crab_king_shine").Transform:SetPosition(origin_pt.x,origin_pt.y,origin_pt.z)
+                                    -- ----------------------------------------------------------
+
+                                    player.components.playercontroller:DoAction(BufferedAction(player, nil, ACTIONS.HOSHINO_SG_JUMP_OUT,nil,Vector3(pt.x,0,pt.z)))
 
                     else
                         player.components.hoshino_com_rpc_event:PushEvent("hoshino_event.hotkey.fail")
