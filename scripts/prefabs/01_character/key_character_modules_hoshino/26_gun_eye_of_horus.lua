@@ -101,7 +101,8 @@ return function(inst)
             if target.components.health == nil then
                 return
             end
-            target.components.health:DoDelta(-value,nil, nil, nil, nil, true)
+            local mult = inst.components.combat.externaldamagemultipliers:Get() -- 伤害倍增器。
+            target.components.health:DoDelta(-value*mult,nil, nil, nil, nil, true)
         end
         local function SetWeaponParam(weapon) --- 配置攻击距离 和 伤害。
             weapon.components.weapon:SetDamage(GetDMG())

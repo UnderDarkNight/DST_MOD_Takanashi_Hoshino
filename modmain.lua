@@ -6,21 +6,23 @@ GLOBAL.setmetatable(env,{__index=function(t,k) return GLOBAL.rawget(GLOBAL,k) en
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 TUNING["hoshino.Language"] = TUNING["hoshino.Language"] or function()
-	-- return "en"
-	local language = "en"
-	pcall(function()
-		language = TUNING["hoshino.Config"].Language
-		if language == "auto" then
-			if LOC.GetLanguage() == LANGUAGE.CHINESE_S or LOC.GetLanguage() == LANGUAGE.CHINESE_S_RAIL or LOC.GetLanguage() == LANGUAGE.CHINESE_T then
-				language = "ch"
-			elseif  LOC.GetLanguage() == LANGUAGE.JAPANESE then
-				language = "jp"
-			else
-				language = "en"
-			end
-		end
-	end)
-	return language
+	-- -- return "en"
+	-- local language = "en"
+	-- pcall(function()
+	-- 	language = TUNING["hoshino.Config"].Language
+	-- 	if language == "auto" then
+	-- 		if LOC.GetLanguage() == LANGUAGE.CHINESE_S or LOC.GetLanguage() == LANGUAGE.CHINESE_S_RAIL or LOC.GetLanguage() == LANGUAGE.CHINESE_T then
+	-- 			language = "ch"
+	-- 		elseif  LOC.GetLanguage() == LANGUAGE.JAPANESE then
+	-- 			language = "jp"
+	-- 		else
+	-- 			language = "en"
+	-- 		end
+	-- 	end
+	-- end)
+	-- return language
+
+	return "ch" --- 暂时只做中文。
 end
 ---------------------------------------------------------------------
 

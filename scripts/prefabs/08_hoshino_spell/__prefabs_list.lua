@@ -30,6 +30,8 @@ local prefabs_name_list = {
 
     "00_excample_mouse_radius_spell",                             --- 测试用的技能指示圈圈物品
 
+    "01_normal_heal_buff",                             --- 普通状态 回血buff
+
 }
 
 ---------------------------------------------------------------------------

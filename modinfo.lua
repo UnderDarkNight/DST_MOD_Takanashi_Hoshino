@@ -183,17 +183,17 @@ priority = 0 -- MOD加载优先级 影响某些功能的兼容性，比如官方
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 configuration_options = {
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  {
-    name = "LANGUAGE",
-    label = "Language/语言",
-    hover = "Set Language/设置语言",
-    options = {
-      {        description = "Auto/自动",        data = "auto"    }, 
-      {        description = "English",        data = "en"    }, 
-      {        description = "中文",        data = "ch"    }
-    },
-    default = "auto"
-  }, 
+  -- {
+  --   name = "LANGUAGE",
+  --   label = "Language/语言",
+  --   hover = "Set Language/设置语言",
+  --   options = {
+  --     {        description = "Auto/自动",        data = "auto"    }, 
+  --     {        description = "English",        data = "en"    }, 
+  --     {        description = "中文",        data = "ch"    }
+  --   },
+  --   default = "auto"
+  -- }, 
   {name = "AAAA",label = IsChinese() and GetTitle("角色") or GetTitle("Character"),hover = "",options = {{description = "",data = 0}},default = 0},
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------

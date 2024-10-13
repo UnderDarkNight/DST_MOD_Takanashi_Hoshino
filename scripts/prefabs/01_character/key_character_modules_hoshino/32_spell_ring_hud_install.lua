@@ -101,9 +101,26 @@
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("疗愈",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
-                        spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        -- spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        local function button_info_update_fn()
+                            local can_click_button = true
+                            local info_txt = ""
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 3 then
+                                info_txt = info_txt.."【 COST 3 】"
+                                can_click_button = false
+                            end
+                            if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_heal") then
+                                local cd_time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime("normal_heal")
+                                info_txt = info_txt.."【"..string.format("%.1f",cd_time).."】"
+                                can_click_button = false
+                            end
+                            spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
+                            temp_button:SetClickable(can_click_button)
+                        end
+                        temp_button.inst:DoPeriodicTask(FRAMES,button_info_update_fn)
                     end,function()
                         --- 按钮点击
+                        ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "normal_heal"})
                         root:CloseSpellRing()                            
                     end)
                     ----
@@ -175,7 +192,7 @@
         --- 布局刷新检查.用来HUD打开后,玩家类型切换时,自动关闭界面
             root.inst:DoPeriodicTask(0.5,function()
                 local temp_character_spell_type = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.character_spell_type or "hoshino_spell_type_normal"
-                if temp_character_spell_type ~= character_spell_type then
+                if temp_character_spell_type ~= character_spell_type or ThePlayer:HasTag("playerghost") then
                     root:CloseSpellRing()
                     return
                 end
@@ -269,7 +286,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function key_event_fn(inst,key)
-        if TUNING.HOSHINO_FNS:IsKeyPressed(TUNING["hoshino.Config"].SPELL_RING_HOTKEY,key) then
+        if TUNING.HOSHINO_FNS:IsKeyPressed(TUNING["hoshino.Config"].SPELL_RING_HOTKEY,key) and not ThePlayer:HasTag("playerghost") then
             -- print("key_down SPELL_RING_HOTKEY")
             ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.spell_ring_active")
             CreateSpellButtons(ThePlayer)

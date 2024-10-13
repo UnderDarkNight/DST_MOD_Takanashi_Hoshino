@@ -108,6 +108,18 @@
         end,
     })
 
+    -- local function GetRemotePausePredictionTimeLines()
+    --     local ret_table = {}
+    --     local max_frams_num = 130
+    --     for i = 1, max_frams_num/2 do
+    --         table.insert(ret_table,TimeEvent(2*i*FRAMES/time_mult, function(inst)
+    --             if inst.components.playercontroller then
+    --                 inst.components.playercontroller:RemotePausePrediction(7)
+    --             end
+    --         end))
+    --     end
+    --     return unpack(ret_table)
+    -- end
     AddStategraphState("wilson", State{
         name = "hoshino_gun_ex_skill",
         tags = {"notalking", "attack", "busy","nointerrupt" },
@@ -129,6 +141,7 @@
         end,
 
         timeline = {
+            -- GetRemotePausePredictionTimeLines(),
             TimeEvent(20*FRAMES/time_mult, function(inst)
                 Shoot(inst,1)
             end),
@@ -212,6 +225,8 @@
             end
 
             inst.sg:SetTimeout(2)
+            inst.AnimState:PlayAnimation("hoshino_ex_pre")
+
         end,
 
         onupdate = function(inst)
