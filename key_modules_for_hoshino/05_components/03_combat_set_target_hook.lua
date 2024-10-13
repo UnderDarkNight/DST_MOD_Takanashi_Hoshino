@@ -15,7 +15,7 @@ AddComponentPostInit("combat", function(self)
         if target and target:HasTag("hoshino_tag.combat_set_target_block") then
             return
         end
-        old_SetTarget(self, target,...)
+        return old_SetTarget(self, target,...)
     end
 
     local old_EngageTarget = self.EngageTarget
@@ -23,7 +23,7 @@ AddComponentPostInit("combat", function(self)
         if target and target:HasTag("hoshino_tag.combat_set_target_block") then
             return
         end
-        old_EngageTarget(self, target,...)
+        return old_EngageTarget(self, target,...)
     end
 
     local old_SuggestTarget = self.SuggestTarget

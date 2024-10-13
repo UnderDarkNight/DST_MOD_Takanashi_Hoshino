@@ -102,6 +102,7 @@ local flg,error_code = pcall(function()
     --- 技能圈圈指示器
         -- ThePlayer.components.inventory:Equip(SpawnPrefab("hoshino_spell_excample_mouse_radius"))
 
+        -- local spell_item = SpawnPrefab("hoshino_spell_normal_breakthrough")
         -- local spell_item = SpawnPrefab("hoshino_spell_excample_mouse_radius")
         -- local spell_item = ThePlayer:SpawnChild("hoshino_spell_excample_mouse_radius")
         -- spell_item.components.hoshino_com_item_spell:SetOwner(ThePlayer)

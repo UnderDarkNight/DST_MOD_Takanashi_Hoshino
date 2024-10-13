@@ -15,7 +15,7 @@ local hoshino_com_item_spell = Class(function(self, inst)
     if not TheNet:IsDedicated() then       
         inst:ListenForEvent("hoshino_com_item_spell.owner",function(inst)
             local temp_owner = self._owner:value()
-            if temp_owner and self.owner == nil and temp_owner ~= inst and temp_owner == ThePlayer and TheInput then
+            if temp_owner and temp_owner ~= inst and temp_owner == ThePlayer and TheInput then
                 self.owner = temp_owner
                 self:Client_Create_Mouse_Event_Listener()
                 self:Client_Create_Dotted_Circle()

@@ -32,6 +32,7 @@ local prefabs_name_list = {
 
     "01_normal_heal_buff",                             --- 普通状态 回血buff
     "02_normal_covert_operation_buff",                 --- 普通状态 隐秘行动
+    "03_normal_breakthrough",                          --- 普通状态 突破
 
 }
 

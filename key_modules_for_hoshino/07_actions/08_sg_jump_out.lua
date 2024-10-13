@@ -39,7 +39,7 @@ AddStategraphState("wilson",State{
     tags = { "busy", "nopredict", "nomorph", "noattack", "nointerrupt" },
 
     onenter = function(inst, data)
-        print("hoshino_portal_jump_out onenter")
+        -- print("hoshino_portal_jump_out onenter")
 
         inst.components.locomotor:Stop()
         inst.AnimState:PlayAnimation("wortox_portal_jumpout")
@@ -58,6 +58,7 @@ AddStategraphState("wilson",State{
             inst.Physics:Teleport(pt:Get())
             SpawnPrefab("crab_king_shine").Transform:SetPosition(pt:Get())
         end
+        inst.sg.statemem.target_pt = pt
     end,
     timeline =
     {
@@ -69,7 +70,10 @@ AddStategraphState("wilson",State{
         end),
         TimeEvent(7 * FRAMES, function(inst)
             -- inst.sg:RemoveStateTag("noattack")
-            inst.SoundEmitter:PlaySound("dontstarve/movement/bodyfall_dirt")
+            inst.SoundEmitter:PlaySound("dontstarve/movement/bodyfall_dirt")            
+            inst:PushEvent("hoshino_portal_jump_out_end",inst.sg.statemem.target_pt)            
+            -- print("hoshino_portal_jump_out_end event push",inst.sg.statemem.target_pt)
+            inst.sg.statemem.target_pt = nil
         end),
         TimeEvent(8 * FRAMES, function(inst)
             inst.sg:GoToState("idle")
