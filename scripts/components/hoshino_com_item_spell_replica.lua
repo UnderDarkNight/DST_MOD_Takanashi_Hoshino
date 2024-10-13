@@ -14,8 +14,16 @@ local hoshino_com_item_spell = Class(function(self, inst)
 
     if not TheNet:IsDedicated() then       
         inst:ListenForEvent("hoshino_com_item_spell.owner",function(inst)
-            self.owner = self._owner:value()
-            if self.owner and self.owner ~= inst and self.owner == ThePlayer and TheInput then
+            local temp_owner = self._owner:value()
+            if temp_owner and self.owner == nil and temp_owner ~= inst and temp_owner == ThePlayer and TheInput then
+                self.owner = temp_owner
+                self:Client_Create_Mouse_Event_Listener()
+                self:Client_Create_Dotted_Circle()
+            end
+        end)
+        inst:ListenForEvent("owner_rpc_set_by_userid",function(inst,userid)
+            if userid and userid == ThePlayer.userid and self.owner == nil then
+                self.owner = inst
                 self:Client_Create_Mouse_Event_Listener()
                 self:Client_Create_Dotted_Circle()
             end

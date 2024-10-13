@@ -46,6 +46,7 @@ nil,
             owner.components.playercontroller:Enable(true)  --- 屏蔽鼠标点击移动            
         end)
         owner:AddChild(self.inst)
+        owner.components.hoshino_com_rpc_event:PushEvent("owner_rpc_set_by_userid",owner.userid,self.inst) --- 走RPC管道做备用，避免NET延迟造成 技能放不出来。
     end
     function hoshino_com_item_spell:GetOwner()
         return self.owner

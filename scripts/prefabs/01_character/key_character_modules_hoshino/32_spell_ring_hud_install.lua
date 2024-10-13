@@ -132,7 +132,7 @@
                     local button_spell_text_pt = Vector3(60,25,0)
                     CreateButton(nil,base_x - delta_x,base_y + 1.5*delta_y,function(temp_button)
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
-                        spell_name:CustomSetStr("高效率工作",button_spell_text_pt.x,button_spell_text_pt.y)
+                        spell_name:CustomSetStr("水上支援",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
                     end,function()
@@ -140,6 +140,15 @@
                         root:CloseSpellRing()  
                     end)
                     CreateButton(nil,base_x,base_y + delta_y/2,function(temp_button)
+                        local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
+                        spell_name:CustomSetStr("高效率工作",button_spell_text_pt.x,button_spell_text_pt.y)
+                        local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
+                        spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                    end,function()
+                        --- 按钮点击
+                        root:CloseSpellRing()
+                    end)
+                    CreateButton(nil,base_x,base_y - delta_y/2,function(temp_button)
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("急援",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -151,9 +160,8 @@
                             root.emote_box:Show()
                         end
                         button_box:Hide()
-
                     end)
-                    CreateButton(nil,base_x,base_y - delta_y/2,function(temp_button)
+                    CreateButton(nil,base_x -delta_x,base_y - 1.5*delta_y,function(temp_button)
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("晓之荷鲁斯",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -162,16 +170,16 @@
                         --- 按钮点击
                         root:CloseSpellRing()  
                     end)
-                    CreateButton(nil,base_x -delta_x,base_y - 1.5*delta_y,function(temp_button)
-                        local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
-                        spell_name:CustomSetStr("水上支援",button_spell_text_pt.x,button_spell_text_pt.y)
-                        local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
-                        spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
-                    end,function()
-                        --- 按钮点击
-                        root:CloseSpellRing()  
-                    end)
             end                            
+        --------------------------------------------------------------------------
+        --- 布局刷新检查.用来HUD打开后,玩家类型切换时,自动关闭界面
+            root.inst:DoPeriodicTask(0.5,function()
+                local temp_character_spell_type = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.character_spell_type or "hoshino_spell_type_normal"
+                if temp_character_spell_type ~= character_spell_type then
+                    root:CloseSpellRing()
+                    return
+                end
+            end)
         --------------------------------------------------------------------------
         --------------------------------------------------------------------------
         ------------------- 角色选择界面            -------------------------------
@@ -262,7 +270,7 @@
 ---
     local function key_event_fn(inst,key)
         if TUNING.HOSHINO_FNS:IsKeyPressed(TUNING["hoshino.Config"].SPELL_RING_HOTKEY,key) then
-            print("key_down SPELL_RING_HOTKEY")
+            -- print("key_down SPELL_RING_HOTKEY")
             ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.spell_ring_active")
             CreateSpellButtons(ThePlayer)
         end
