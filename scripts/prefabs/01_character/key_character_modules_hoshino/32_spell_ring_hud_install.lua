@@ -111,7 +111,7 @@
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_heal") then
                                 local cd_time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime("normal_heal")
-                                info_txt = info_txt.."【"..string.format("%.1f",cd_time).."】"
+                                info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
                                 can_click_button = false
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
@@ -128,9 +128,26 @@
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("隐秘行动",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
-                        spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        -- spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        local function button_info_update_fn()
+                            local can_click_button = true
+                            local info_txt = ""
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 4 then
+                                info_txt = info_txt.."【 COST 4 】"
+                                can_click_button = false
+                            end
+                            if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_covert_operation") then
+                                local cd_time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime("normal_covert_operation")
+                                info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
+                                can_click_button = false
+                            end
+                            spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
+                            temp_button:SetClickable(can_click_button)
+                        end
+                        temp_button.inst:DoPeriodicTask(FRAMES,button_info_update_fn)
                     end,function()
                         --- 按钮点击
+                        ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "normal_covert_operation"})
                         root:CloseSpellRing()  
                     end)
                     ----

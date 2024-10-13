@@ -9,6 +9,7 @@
     local all_spell_names = {
         ["gun_eye_of_horus_ex"] = 20,       --- 【普通模式】枪，EX技能
         ["normal_heal"] = 30,               --- 【普通模式】疗愈
+        ["normal_covert_operation"] = 8*60,               --- 【普通模式】隐秘行动
         ["gun_eye_of_horus_ex_test"] = 30,
     }
     local max_spell_cd_time = 500000
