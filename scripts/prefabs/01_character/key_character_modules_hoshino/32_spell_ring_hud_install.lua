@@ -49,10 +49,21 @@
             end
         --------------------------------------------------------------------------
         --- 根节点参数
-            root:SetHAnchor(0) -- 设置原点x坐标位置，0、1、2分别对应屏幕中、左、右
-            root:SetVAnchor(0) -- 设置原点y坐标位置，0、1、2分别对应屏幕中、上、下
+            -- root:SetHAnchor(0) -- 设置原点x坐标位置，0、1、2分别对应屏幕中、左、右
+            -- root:SetVAnchor(0) -- 设置原点y坐标位置，0、1、2分别对应屏幕中、上、下
+            root:SetHAnchor(1) -- 设置原点x坐标位置，0、1、2分别对应屏幕中、左、右
+            root:SetVAnchor(2) -- 设置原点y坐标位置，0、1、2分别对应屏幕中、上、下
             root:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)   --- 缩放模式
-            local MainScale = 0.6                
+            local MainScale = 0.6
+        --------------------------------------------------------------------------
+        --- 坐标跟随 角色中心修正
+            local function root_position_update_fn()
+                local s_pt_x,s_pt_y= TheSim:GetScreenPos(ThePlayer.Transform:GetWorldPosition()) -- 左下角为原点。
+                -- print("player in screen",s_pt_x,s_pt_y)
+                root:SetPosition(s_pt_x,s_pt_y+60,0)
+            end
+            root.inst:DoPeriodicTask(FRAMES,root_position_update_fn)
+            root_position_update_fn()
         --------------------------------------------------------------------------
         --- 按钮盒子
             local button_box = root:AddChild(Widget())
@@ -90,7 +101,7 @@
             local character_spell_type = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.character_spell_type or "hoshino_spell_type_normal"
 
         --------------------------------------------------------------------------
-        --- 3 个布局
+        --- 3 + 4 个布局
             local txt_font = CODEFONT
             if character_spell_type == "hoshino_spell_type_normal" then
                     local base_x,base_y = 200,0
@@ -117,7 +128,7 @@
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
-                        temp_button.inst:DoPeriodicTask(FRAMES,button_info_update_fn)
+                        temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
                         --- 按钮点击
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "normal_heal"})
@@ -144,7 +155,7 @@
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
-                        temp_button.inst:DoPeriodicTask(FRAMES,button_info_update_fn)
+                        temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
                         --- 按钮点击
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "normal_covert_operation"})
@@ -171,24 +182,41 @@
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
-                        temp_button.inst:DoPeriodicTask(FRAMES,button_info_update_fn)
+                        temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
                         --- 按钮点击
                         root:CloseSpellRing()
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "normal_breakthrough"})
                     end)
             elseif character_spell_type == "hoshino_spell_type_swimming" then
-                    local base_x,base_y = 200,0
-                    local delta_x,delta_y = 40,120
+                    local base_x,base_y = 240,0
+                    local delta_x,delta_y = 80,120
                     local button_spell_text_pt = Vector3(60,25,0)
                     CreateButton(nil,base_x - delta_x,base_y + 1.5*delta_y,function(temp_button)
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("水上支援",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
-                        spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        -- spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        local function button_info_update_fn()
+                            local can_click_button = true
+                            local info_txt = ""
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 5 then
+                                info_txt = info_txt.."【 COST 5 】"
+                                can_click_button = false
+                            end
+                            if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("swimming_ex_support") then
+                                local cd_time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime("swimming_ex_support")
+                                info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
+                                can_click_button = false
+                            end
+                            spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
+                            temp_button:SetClickable(can_click_button)
+                        end
+                        temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
                         --- 按钮点击
-                        root:CloseSpellRing()  
+                        root:CloseSpellRing()
+                        ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "swimming_ex_support"})
                     end)
                     CreateButton(nil,base_x,base_y + delta_y/2,function(temp_button)
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -312,7 +340,7 @@
                     end)
                 end
             end
-        --------------------------------------------------------------------------
+        --------------------------------------------------------------------------        
 
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

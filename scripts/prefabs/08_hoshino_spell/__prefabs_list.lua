@@ -34,6 +34,9 @@ local prefabs_name_list = {
     "02_normal_covert_operation_buff",                 --- 普通状态 隐秘行动
     "03_normal_breakthrough",                          --- 普通状态 突破
 
+    "04_01_swimming_ex_support",                       --- 游泳状态 EX 水上支援
+    "04_02_swimming_ex_support_buff",                   --- 游泳状态 EX 水上支援BUFF
+
 }
 
 ---------------------------------------------------------------------------

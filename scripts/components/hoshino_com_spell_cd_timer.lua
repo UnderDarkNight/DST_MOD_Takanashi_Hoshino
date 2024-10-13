@@ -11,6 +11,7 @@
         ["normal_heal"] = 30,                               --- 【普通模式】疗愈
         ["normal_covert_operation"] = 8*60,                 --- 【普通模式】隐秘行动
         ["normal_breakthrough"] = 0,                        --- 【普通模式】突破
+        ["swimming_ex_support"] = 60,                       --- 【游泳模式】EX支援
         ["gun_eye_of_horus_ex_test"] = 30,
     }
     local max_spell_cd_time = 50000000

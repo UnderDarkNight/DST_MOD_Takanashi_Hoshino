@@ -13,6 +13,7 @@
         ["normal_heal"] = 30,                               --- 【普通模式】疗愈
         ["normal_covert_operation"] = 8*60,                 --- 【普通模式】隐秘行动
         ["normal_breakthrough"] = 0,                        --- 【普通模式】突破
+        ["swimming_ex_support"] = 60,                       --- 【游泳模式】EX支援
         ["gun_eye_of_horus_ex_test"] = 30,
     }
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,6 +37,9 @@
                         inst:AddDebuff(debuff_prefab,debuff_prefab)
                         test_num = test_num - 1
                     end
+                ----------------------------------------------------------------------------
+                --- 反馈
+                    inst.SoundEmitter:PlaySound("dontstarve/common/together/celestial_orb/active")
                 ----------------------------------------------------------------------------
 
         end
@@ -62,6 +66,9 @@
                         test_num = test_num - 1
                     end
                 ----------------------------------------------------------------------------
+                --- 反馈
+                    inst.SoundEmitter:PlaySound("dontstarve/common/together/celestial_orb/active")
+                ----------------------------------------------------------------------------
         end
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,28 +90,107 @@
             end
         end
     end
-    local function normal_breakthrough_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
-        local cost_value = 2
+    local function normal_breakthrough_test(inst,spell_name,cost_value)
         if not inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) then
-            return
+            return false
         end
         if inst.components.hoshino_com_power_cost:GetCurrent() < cost_value then
+            return false
+        end
+        return true
+    end
+    local function normal_breakthrough_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
+        local cost_value = 2
+        if not normal_breakthrough_test(inst,spell_name,cost_value) then
             return
         end
-        inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
-        inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
-
         local spell_inst = AddSpellInstByPrefab("hoshino_spell_normal_breakthrough")
         -- print("fake error normal_breakthrough_fn",spell_inst)
         spell_inst.components.hoshino_com_item_spell:SetOwner(inst)
         spell_inst:ListenForEvent("right_clicked",RemoveSpellInst)
         spell_inst:ListenForEvent("left_clicked",function(_,_table)
             local pt = _table and _table.pt
-            if pt then
+            if pt and normal_breakthrough_test(inst,spell_name,cost_value) then
+                inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
+                inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
+
                 inst.components.playercontroller:DoAction(BufferedAction(inst, nil, ACTIONS.HOSHINO_SG_JUMP_OUT,nil,Vector3(pt.x,0,pt.z)))
                 spell_inst:ListenForEvent("hoshino_portal_jump_out_end",function()                    
                     -- SpawnPrefab("log").Transform:SetPosition(pt.x,0,pt.z)
                     do_aoe_dmage(inst,pt)
+                    RemoveSpellInst()
+                end,inst)
+            else
+                RemoveSpellInst()
+            end
+        end)
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 【游泳模式】EX支援
+    local musthavetags = {"player"}
+    local canthavetags = {"playerghost",}
+    local musthaveoneoftags = nil
+    local function do_aoe_swimming_ex(inst,pt)
+        local x,y,z = pt.x,0,pt.z
+        local ents = TheSim:FindEntities(x,0, z,16,musthavetags, canthavetags, musthaveoneoftags)
+
+        local player_level = inst.components.hoshino_com_level_sys:GetLevel()
+        local heal_num = 5 +player_level * 0.05
+        local speed_mult = 1.5
+        local damage_mult = (50+player_level)/100 + 1
+        local cost_value_num = 0.04 + player_level*0.005
+        local time = 30 + player_level*0.3
+
+        local debuff_prefab = "hoshino_spell_swimming_ex_support_buff"
+        for k,player in pairs(ents) do
+            local test_num = 100
+            while test_num > 0 do
+                local debuff_inst = player:GetDebuff(debuff_prefab)
+                if debuff_inst and debuff_inst:IsValid() then
+                    SpawnPrefab("crab_king_shine").Transform:SetPosition(player.Transform:GetWorldPosition())
+                    debuff_inst:PushEvent("Set",{
+                        heal_num = heal_num,
+                        speed_mult = speed_mult,
+                        damage_mult = damage_mult,
+                        cost_value_num = cost_value_num,
+                        time = time,
+                    })
+                    break
+                end
+                player:AddDebuff(debuff_prefab,debuff_prefab)
+                test_num = test_num - 1
+            end
+        end
+    end
+    local function swimming_ex_support_test(inst,spell_name,cost_value)
+        if not inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) then
+            return false
+        end
+        if inst.components.hoshino_com_power_cost:GetCurrent() < cost_value then
+            return false
+        end
+        return true
+    end
+    local function swimming_ex_support_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
+        local cost_value = 5
+        if not swimming_ex_support_test(inst,spell_name,cost_value) then
+            return
+        end
+        
+        local spell_inst = AddSpellInstByPrefab("hoshino_spell_swimming_ex_support")
+        -- print("fake error normal_breakthrough_fn",spell_inst)
+        spell_inst.components.hoshino_com_item_spell:SetOwner(inst)
+        spell_inst:ListenForEvent("right_clicked",RemoveSpellInst)
+        spell_inst:ListenForEvent("left_clicked",function(_,_table)
+            local pt = _table and _table.pt
+            if pt and swimming_ex_support_test(inst,spell_name,cost_value) then
+                inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
+                inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
+
+                inst.components.playercontroller:DoAction(BufferedAction(inst, nil, ACTIONS.HOSHINO_SG_JUMP_OUT,nil,Vector3(pt.x,0,pt.z)))
+                spell_inst:ListenForEvent("hoshino_portal_jump_out_end",function()                    
+                    -- SpawnPrefab("log").Transform:SetPosition(pt.x,0,pt.z)
+                    do_aoe_swimming_ex(inst,pt)
                     RemoveSpellInst()
                 end,inst)
             else
@@ -174,6 +260,12 @@ return function(inst)
         --- 【普通模式】突破
             if spell_name == "normal_breakthrough" then
                 normal_breakthrough_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
+                return
+            end
+        ---------------------------------------------------------------------------------------------------
+        --- 【游泳模式】EX支援
+            if spell_name == "swimming_ex_support" then
+                swimming_ex_support_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
                 return
             end
         ---------------------------------------------------------------------------------------------------
