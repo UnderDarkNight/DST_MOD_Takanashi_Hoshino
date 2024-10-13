@@ -9,14 +9,15 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 技能名和CD时间
     local all_spell_names = {
-        ["gun_eye_of_horus_ex"] = 20,                       --- 【普通模式】枪，EX技能
-        ["normal_heal"] = 30,                               --- 【普通模式】疗愈
-        ["normal_covert_operation"] = 8*60,                 --- 【普通模式】隐秘行动
-        ["normal_breakthrough"] = 0,                        --- 【普通模式】突破
-        ["swimming_ex_support"] = 60,                       --- 【游泳模式】EX支援
-        ["swimming_efficient_work"] = 16*60,                --- 【游泳模式】高效作业
-        ["swimming_emergency_assistance"] = 0,              --- 【游泳模式】紧急支援
-        ["gun_eye_of_horus_ex_test"] = 30,
+        ["gun_eye_of_horus_ex"] = 20,                                                               --- 【普通模式】枪，EX技能
+        ["normal_heal"] = 30,                                                                       --- 【普通模式】疗愈
+        ["normal_covert_operation"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 8*60,                 --- 【普通模式】隐秘行动
+        ["normal_breakthrough"] = 0,                                                                --- 【普通模式】突破
+        ["swimming_ex_support"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or  60,                      --- 【游泳模式】EX支援
+        ["swimming_efficient_work"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60,                --- 【游泳模式】高效作业
+        ["swimming_emergency_assistance"] = 0,                                                      --- 【游泳模式】紧急支援
+        ["swimming_dawn_of_horus"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 100*60,                --- 【游泳模式】晓之荷鲁斯
+        -- ["gun_eye_of_horus_ex_test"] = 30,
     }
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 【普通模式】疗愈
@@ -248,6 +249,59 @@
 
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 【游泳模式】晓之荷鲁斯
+    local musthavetags = {"_combat"}
+    local canthavetags = nil
+    local musthaveoneoftags = nil
+    local can_not_be_freands = {
+        ["abigail"] = true,
+    }
+    local function make_aoe_frends(inst,pt)
+        local x,y,z = pt.x,0,pt.z
+        local ents = TheSim:FindEntities(x,0,z,7,musthavetags, canthavetags, musthaveoneoftags)
+        for k, temp_monster in pairs(ents) do
+            if not can_not_be_freands[temp_monster.prefab] and temp_monster.components.health and not temp_monster.components.health:IsDead() then
+                pcall(function() -- 做免崩溃处理
+                    inst:PushEvent("makefriend")
+                    inst.components.leader:AddFollower(temp_monster)
+                    SpawnPrefab("crab_king_shine").Transform:SetPosition(temp_monster.Transform:GetWorldPosition())
+                end)                
+            end
+        end
+        SpawnPrefab("crab_king_shine").Transform:SetPosition(x,y,z)
+        -- print("make_aoe_frends")
+    end
+    local function swimming_dawn_of_horus_test(inst,spell_name,cost_value)
+        if not inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) then
+            return false
+        end
+        if inst.components.hoshino_com_power_cost:GetCurrent() < cost_value then
+            return false
+        end
+        return true
+    end
+    local function swimming_dawn_of_horus_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
+        local cost_value = 10
+        if not swimming_dawn_of_horus_test(inst,spell_name,cost_value) then
+            return
+        end
+        local spell_inst = AddSpellInstByPrefab("hoshino_spell_swimming_dawn_of_horus")
+        -- print("fake error normal_breakthrough_fn",spell_inst)
+        spell_inst.components.hoshino_com_item_spell:SetOwner(inst)
+        spell_inst:ListenForEvent("right_clicked",RemoveSpellInst)
+        spell_inst:ListenForEvent("left_clicked",function(_,_table)
+            local pt = _table and _table.pt
+            if pt and swimming_dawn_of_horus_test(inst,spell_name,cost_value) then
+                inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
+                inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
+                make_aoe_frends(inst,pt)
+                RemoveSpellInst()
+            else
+                RemoveSpellInst()
+            end
+        end)
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
     if not TheWorld.ismastersim then
@@ -327,6 +381,12 @@ return function(inst)
         --- 【游泳模式】紧急支援
             if spell_name == "swimming_emergency_assistance" then
                 swimming_emergency_assistance_fn(inst,spell_name,data)
+                return
+            end
+        ---------------------------------------------------------------------------------------------------
+        --- 【游泳模式】晓之荷鲁斯
+            if spell_name == "swimming_dawn_of_horus" then
+                swimming_dawn_of_horus_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
                 return
             end
         ---------------------------------------------------------------------------------------------------

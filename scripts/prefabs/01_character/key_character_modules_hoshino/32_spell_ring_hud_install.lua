@@ -277,10 +277,27 @@
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("晓之荷鲁斯",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
-                        spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        -- spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        local function button_info_update_fn()
+                            local can_click_button = true
+                            local info_txt = ""
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 10 then
+                                info_txt = info_txt.."【 COST 10 】"
+                                can_click_button = false
+                            end
+                            if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("swimming_dawn_of_horus") then
+                                local cd_time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime("swimming_dawn_of_horus")
+                                info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
+                                can_click_button = false
+                            end
+                            spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
+                            temp_button:SetClickable(can_click_button)
+                        end
+                        temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
                         --- 按钮点击
-                        root:CloseSpellRing()  
+                        root:CloseSpellRing()
+                        ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "swimming_dawn_of_horus"})
                     end)
             end                            
         --------------------------------------------------------------------------

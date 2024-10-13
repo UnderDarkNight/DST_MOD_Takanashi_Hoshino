@@ -7,16 +7,17 @@
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 技能名和CD
     local all_spell_names = {
-        ["gun_eye_of_horus_ex"] = 20,                       --- 【普通模式】枪，EX技能
-        ["normal_heal"] = 30,                               --- 【普通模式】疗愈
-        ["normal_covert_operation"] = 8*60,                 --- 【普通模式】隐秘行动
-        ["normal_breakthrough"] = 0,                        --- 【普通模式】突破
-        ["swimming_ex_support"] = 60,                       --- 【游泳模式】EX支援
-        ["swimming_efficient_work"] = 16*60,                --- 【游泳模式】高效作业
-        ["swimming_emergency_assistance"] = 0,              --- 【游泳模式】紧急支援
-        ["gun_eye_of_horus_ex_test"] = 30,
+        ["gun_eye_of_horus_ex"] = 20,                                                               --- 【普通模式】枪，EX技能
+        ["normal_heal"] = 30,                                                                       --- 【普通模式】疗愈
+        ["normal_covert_operation"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 8*60,                 --- 【普通模式】隐秘行动
+        ["normal_breakthrough"] = 0,                                                                --- 【普通模式】突破
+        ["swimming_ex_support"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or  60,                      --- 【游泳模式】EX支援
+        ["swimming_efficient_work"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60,                --- 【游泳模式】高效作业
+        ["swimming_emergency_assistance"] = 0,                                                      --- 【游泳模式】紧急支援
+        ["swimming_dawn_of_horus"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 100*60,                --- 【游泳模式】晓之荷鲁斯
+        -- ["gun_eye_of_horus_ex_test"] = 30,
     }
-    local max_spell_cd_time = 500000
+    local max_spell_cd_time = 50000000
 ----------------------------------------------------------------------------------------------------------------------------------
 local hoshino_com_spell_cd_timer = Class(function(self, inst)
     self.inst = inst
