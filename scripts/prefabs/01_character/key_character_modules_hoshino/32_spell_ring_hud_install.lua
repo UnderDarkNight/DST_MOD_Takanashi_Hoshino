@@ -222,10 +222,27 @@
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("高效率工作",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
-                        spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        -- spell_info:CustomSetStr("7777777774444444444",button_spell_text_pt.x,-button_spell_text_pt.y)
+                        local function button_info_update_fn()
+                            local can_click_button = true
+                            local info_txt = ""
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 4 then
+                                info_txt = info_txt.."【 COST 4 】"
+                                can_click_button = false
+                            end
+                            if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("swimming_efficient_work") then
+                                local cd_time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime("swimming_efficient_work")
+                                info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
+                                can_click_button = false
+                            end
+                            spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
+                            temp_button:SetClickable(can_click_button)
+                        end
+                        temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
                         --- 按钮点击
                         root:CloseSpellRing()
+                        ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "swimming_efficient_work"})
                     end)
                     CreateButton(nil,base_x,base_y - delta_y/2,function(temp_button)
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -340,6 +357,20 @@
                     end)
                 end
             end
+        --------------------------------------------------------------------------
+        --- 鼠标右键点击关闭UI
+            root.temp_mouse_handler = TheInput:AddMouseButtonHandler(function(button, down, x, y) 
+                if button == MOUSEBUTTON_RIGHT and down == false then
+                    root.temp_mouse_handler:Remove()
+                    root.temp_mouse_handler = nil
+                    root:CloseSpellRing()
+                end
+            end)
+            root.inst:ListenForEvent("onremove",function()
+                if root.temp_mouse_handler then
+                    root.temp_mouse_handler:Remove()
+                end
+            end)
         --------------------------------------------------------------------------        
 
     end

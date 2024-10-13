@@ -36,6 +36,7 @@ local prefabs_name_list = {
 
     "04_01_swimming_ex_support",                       --- 游泳状态 EX 水上支援
     "04_02_swimming_ex_support_buff",                   --- 游泳状态 EX 水上支援BUFF
+    "05_swimming_fast_pciker_buff",                   --- 游泳状态 快速采集
 
 }
 

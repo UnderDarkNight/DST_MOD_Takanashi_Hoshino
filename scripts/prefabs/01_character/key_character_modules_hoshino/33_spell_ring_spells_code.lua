@@ -14,6 +14,7 @@
         ["normal_covert_operation"] = 8*60,                 --- 【普通模式】隐秘行动
         ["normal_breakthrough"] = 0,                        --- 【普通模式】突破
         ["swimming_ex_support"] = 60,                       --- 【游泳模式】EX支援
+        ["swimming_efficient_work"] = 16*60,                --- 【游泳模式】高效作业
         ["gun_eye_of_horus_ex_test"] = 30,
     }
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -176,7 +177,7 @@
         if not swimming_ex_support_test(inst,spell_name,cost_value) then
             return
         end
-        
+
         local spell_inst = AddSpellInstByPrefab("hoshino_spell_swimming_ex_support")
         -- print("fake error normal_breakthrough_fn",spell_inst)
         spell_inst.components.hoshino_com_item_spell:SetOwner(inst)
@@ -197,6 +198,34 @@
                 RemoveSpellInst()
             end
         end)
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 【游泳模式】高效作业
+    local function swimming_efficient_work_fn(inst,spell_name)
+        local cost_value = 4
+        if inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) 
+            and inst.components.hoshino_com_power_cost:GetCurrent() >= cost_value then
+                inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
+                inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
+                ----------------------------------------------------------------------------
+                --- 上debuff
+                    local debuff_prefab = "hoshino_spell_swimming_fast_pciker_buff"
+                    local test_num = 100
+                    while test_num > 0 do
+                        local debuff_inst = inst:GetDebuff(debuff_prefab)
+                        if debuff_inst and debuff_inst:IsValid() then
+                            debuff_inst:PushEvent("SetTime",16*60)
+                            break
+                        end
+                        inst:AddDebuff(debuff_prefab,debuff_prefab)
+                        test_num = test_num - 1
+                    end
+                ----------------------------------------------------------------------------
+                --- 反馈
+                    inst.SoundEmitter:PlaySound("dontstarve/common/together/celestial_orb/active")
+                ----------------------------------------------------------------------------
+
+        end
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -266,6 +295,12 @@ return function(inst)
         --- 【游泳模式】EX支援
             if spell_name == "swimming_ex_support" then
                 swimming_ex_support_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
+                return
+            end
+        ---------------------------------------------------------------------------------------------------
+        --- 【游泳模式】高效作业
+            if spell_name == "swimming_efficient_work" then
+                swimming_efficient_work_fn(inst,spell_name)
                 return
             end
         ---------------------------------------------------------------------------------------------------
