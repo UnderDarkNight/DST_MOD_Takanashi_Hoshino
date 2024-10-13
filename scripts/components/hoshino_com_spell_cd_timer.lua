@@ -13,6 +13,7 @@
         ["normal_breakthrough"] = 0,                        --- 【普通模式】突破
         ["swimming_ex_support"] = 60,                       --- 【游泳模式】EX支援
         ["swimming_efficient_work"] = 16*60,                --- 【游泳模式】高效作业
+        ["swimming_emergency_assistance"] = 0,              --- 【游泳模式】紧急支援
         ["gun_eye_of_horus_ex_test"] = 30,
     }
     local max_spell_cd_time = 50000000

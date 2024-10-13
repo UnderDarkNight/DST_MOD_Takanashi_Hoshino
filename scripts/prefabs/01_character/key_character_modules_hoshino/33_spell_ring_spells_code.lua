@@ -15,6 +15,7 @@
         ["normal_breakthrough"] = 0,                        --- 【普通模式】突破
         ["swimming_ex_support"] = 60,                       --- 【游泳模式】EX支援
         ["swimming_efficient_work"] = 16*60,                --- 【游泳模式】高效作业
+        ["swimming_emergency_assistance"] = 0,              --- 【游泳模式】紧急支援
         ["gun_eye_of_horus_ex_test"] = 30,
     }
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -228,6 +229,25 @@
         end
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 【游泳模式】紧急支援
+    local function swimming_emergency_assistance_fn(inst,spell_name,_table)
+        local cost_value = 4
+        if not inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) then
+            return
+        end
+        if inst.components.hoshino_com_power_cost:GetCurrent() < cost_value then
+            return
+        end
+        local pt = _table.pt
+        if not (type(pt) == "table" and pt.x) then
+            return
+        end
+        inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
+        inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
+        inst.components.playercontroller:DoAction(BufferedAction(inst, nil, ACTIONS.HOSHINO_SG_JUMP_OUT,nil,Vector3(pt.x,0,pt.z)))
+
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
     if not TheWorld.ismastersim then
@@ -301,6 +321,12 @@ return function(inst)
         --- 【游泳模式】高效作业
             if spell_name == "swimming_efficient_work" then
                 swimming_efficient_work_fn(inst,spell_name)
+                return
+            end
+        ---------------------------------------------------------------------------------------------------
+        --- 【游泳模式】紧急支援
+            if spell_name == "swimming_emergency_assistance" then
+                swimming_emergency_assistance_fn(inst,spell_name,data)
                 return
             end
         ---------------------------------------------------------------------------------------------------
