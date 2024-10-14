@@ -33,6 +33,7 @@ local prefabs_name_list = {
     "03_spell_flame",                         --- 火焰特效
     "04_explode2",                            --- 爆炸特效2
     "05_dotted_circle",                       --- 虚线指示器
+    "06_icelance_ping",                       --- 冰圈特效
 
 }
 
