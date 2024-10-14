@@ -23,7 +23,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
         inst:DoPeriodicTask(1,function()
             -- print(" +++ sg ",target.sg:__tostring())
             if target and player_is_sleeping(target) then
-                target.components.hoshino_com_shop:CreditCoinDelta(9)
+                target.components.hoshino_com_shop:CreditCoinDelta(4)
                 -- print(" +++++ 睡觉 buff 获得 9 金币")
             else
                 inst:Remove()

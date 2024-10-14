@@ -209,7 +209,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                if inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_ruins_sheild_and_vengeance",0.01) > 1 then
+                if inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_ruins_sheild_and_vengeance",0.05) > 1 then
                     inst.components.hoshino_com_debuff:Set("hoshino_card_debuff_ruins_sheild_and_vengeance",1)
                 end
                 local debuff_prefab = "hoshino_card_debuff_ruins_sheild_and_vengeance"
@@ -222,7 +222,7 @@ local cards = {
                 end
             end,
             text = function(inst)
-                return "受到攻击后，获得一个10s的护盾\n效果持续期间，攻击伤害的1%转换为玩家血量\n吸血百分比叠加"
+                return "受到攻击后，获得一个10s的护盾\n效果持续期间，攻击伤害的5%转换为玩家血量\n吸血百分比叠加"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

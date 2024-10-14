@@ -381,11 +381,11 @@ local cards = {
 
             end,
             text = function(inst)
-                return "随机传送到一个位置然后睡觉\n每一秒获得9点「信用点」，直到醒来"
+                return "随机传送到一个位置然后睡觉\n每一秒获得4点「信用点」，直到醒来"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 15、【白】【避重就轻】【受到伤害的时候，有5%的概率不损失盔甲的耐久，最高100%】【满概率后从卡池移除】
+    --- 15、【白】【避重就轻】【受到伤害的时候，有10%的概率不损失盔甲的耐久，最高100%】【满概率后从卡池移除】
         ["armor_down_blocker_percent"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
@@ -393,10 +393,10 @@ local cards = {
                 return inst.components.hoshino_com_debuff:Get_Armor_Down_Blocker_Percent() < 1
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Armor_Down_Blocker_Percent(0.05)
+                inst.components.hoshino_com_debuff:Add_Armor_Down_Blocker_Percent(0.1)
             end,
             text = function(inst)
-                return "受伤时有5%的概率不损失盔甲耐久"
+                return "受伤时有10%的概率不损失盔甲耐久"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
