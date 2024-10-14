@@ -14,7 +14,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.target = target
     -----------------------------------------------------
     --- event
-        inst:ListenForEvent("hoshino_event.level_up",function()            
+        inst:ListenForEvent("hoshino_com_level_sys.level_up",function()            
             ---------------------------------------------
             --- 给个卡包
                 local item = SpawnPrefab("hoshino_item_cards_pack")

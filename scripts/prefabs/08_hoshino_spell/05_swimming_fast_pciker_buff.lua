@@ -13,6 +13,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 if time <= 0 then
                     target:RemoveTag("farmplantfastpicker")
                     target:RemoveTag("fastpicker")
+                    target:RemoveTag("fastbuilder")
                     inst:Remove()
                 end
             -------------------------------------------
@@ -26,6 +27,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     ---
         target:AddTag("farmplantfastpicker")
         target:AddTag("fastpicker")
+        target:AddTag("fastbuilder")
     -----------------------------------------------------
 end
 

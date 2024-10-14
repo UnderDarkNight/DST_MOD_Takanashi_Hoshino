@@ -83,6 +83,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Max_Sanity(300)
                 inst.components.hoshino_com_debuff:Add_Max_Hunger(300)
 
+                inst.components.health:ForceUpdateHUD(true)
             end,
             text = function(inst)
                 return "三维+300/300/300\n基础攻击力X2\n基础伤害减免80%"

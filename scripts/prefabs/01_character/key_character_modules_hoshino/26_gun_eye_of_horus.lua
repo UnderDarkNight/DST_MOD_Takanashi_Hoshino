@@ -119,7 +119,9 @@ return function(inst)
             weapon.components.weapon:SetRange(Get_Attack_Range(true))
             weapon.components.weapon:SetDamage(0)
             if not ignore_finiteuses_use then
-                weapon.components.finiteuses:Use_Hoshino(1)
+                if not inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Check_Need_2_Block() then --- 卡牌BUFF
+                    weapon.components.finiteuses:Use_Hoshino(1)
+                end
             end
         end
     ----------------------------------------------------------------------------------------

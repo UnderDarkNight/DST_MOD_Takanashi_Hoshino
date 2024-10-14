@@ -14,7 +14,7 @@
         ["normal_covert_operation"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 8*60,                 --- 【普通模式】隐秘行动
         ["normal_breakthrough"] = 0,                                                                --- 【普通模式】突破
         ["swimming_ex_support"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or  60,                      --- 【游泳模式】EX支援
-        ["swimming_efficient_work"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60,                --- 【游泳模式】高效作业
+        ["swimming_efficient_work"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 24*60,                --- 【游泳模式】高效作业
         ["swimming_emergency_assistance"] = 0,                                                      --- 【游泳模式】紧急支援
         ["swimming_dawn_of_horus"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 100*60,                --- 【游泳模式】晓之荷鲁斯
         -- ["gun_eye_of_horus_ex_test"] = 30,
@@ -92,6 +92,7 @@
                 SpawnPrefab("crab_king_shine").Transform:SetPosition(temp_monster.Transform:GetWorldPosition())
             end
         end
+        SpawnPrefab("bomb_lunarplant_explode_fx").Transform:SetPosition(x,y,z)
     end
     local function normal_breakthrough_test(inst,spell_name,cost_value)
         if not inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) then

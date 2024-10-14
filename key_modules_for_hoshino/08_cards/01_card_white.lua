@@ -284,7 +284,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 13、【白】【节约风气】【使用专属武器「荷鲁斯之眼（枪）」的时候，有5%概率不消耗耐久，最高100%概率】【满概率后从卡池移除】
+    --- 13、【白】【节约风气】【使用专属武器「荷鲁斯之眼（枪）」的时候，有10%概率不消耗耐久，最高100%概率】【满概率后从卡池移除】
         ["the_eye_of_horus_finiteuses_down_block"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
@@ -292,10 +292,10 @@ local cards = {
                 return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 1
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.05)
+                inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.1)
             end,
             text = function(inst)
-                return "使用荷鲁斯之眼时有5%的概率不消耗耐久"
+                return "使用荷鲁斯之眼时有10%的概率不消耗耐久"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

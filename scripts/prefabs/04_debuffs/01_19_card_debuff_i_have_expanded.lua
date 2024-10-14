@@ -17,7 +17,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     --- 
         target.components.combat.externaldamagemultipliers:SetModifier(inst,2) -- 2倍伤害加成
         target.components.combat.externaldamagetakenmultipliers:SetModifier(inst,0.2) -- 0.2倍受伤加成
-        target.components.hoshino_com_level_sys:SetModifier(inst,0) -- 0倍经验。
+        target.components.hoshino_com_level_sys:EXP_SetModifier(inst,0) -- 0倍经验。
     -----------------------------------------------------
 end
 

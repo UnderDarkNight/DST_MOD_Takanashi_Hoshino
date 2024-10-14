@@ -32,6 +32,8 @@ local hoshino_com_item_spell = Class(function(self, inst)
         end
     end)
 
+    self.need_to_close_controller = true
+
 end,
 nil,
 {
@@ -41,9 +43,11 @@ nil,
 ---
     function hoshino_com_item_spell:SetOwner(owner)
         self.owner = owner
-        owner.components.playercontroller:Enable(false)  --- 恢复鼠标点击移动
+        -- owner.components.playercontroller:Enable(false)  --- 屏蔽鼠标点击移动
+        self:TurnOffController()
         self.inst:ListenForEvent("onremove",function()
-            owner.components.playercontroller:Enable(true)  --- 屏蔽鼠标点击移动            
+            -- owner.components.playercontroller:Enable(true)  --- 恢复鼠标点击移动
+            self:TurnOnController()
         end)
         owner:AddChild(self.inst)
         owner.components.hoshino_com_rpc_event:PushEvent("owner_rpc_set_by_userid",owner.userid,self.inst) --- 走RPC管道做备用，避免NET延迟造成 技能放不出来。
@@ -57,6 +61,21 @@ nil,
     end
     function hoshino_com_item_spell:GetCaster()
         return self:GetOwner()
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 设置是否关闭控制器
+    function hoshino_com_item_spell:SetNeed2CloseController(flag)
+        self.need_to_close_controller = flag
+    end
+    function hoshino_com_item_spell:TurnOnController()
+        if self.need_to_close_controller then
+            self.owner.components.playercontroller:Enable(true)  --- 恢复鼠标点击移动
+        end
+    end
+    function hoshino_com_item_spell:TurnOffController()
+        if self.need_to_close_controller then
+            self.owner.components.playercontroller:Enable(false)  --- 屏蔽鼠标点击移动
+        end
     end
 ------------------------------------------------------------------------------------------------------------------------------
 return hoshino_com_item_spell
