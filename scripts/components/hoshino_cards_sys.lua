@@ -156,6 +156,20 @@ local hoshino_cards_sys = Class(function(self, inst)
             self:Card_Recycle_Clicked()
         end)
     ---------------------------------------------------------------------
+    --- 平板指示器外部调用event
+        local valid_pages = {
+            ["level_up"] = true,
+            ["character"] = true,
+            ["main_page"] = true,
+        }
+        inst:ListenForEvent("hoshino_event.pad_warnning",function(_,page)
+            -- default_page
+            if page and valid_pages[page] then
+                self:SetClientSideData("default_page",page) -- 下发默认界面
+            end
+            self:SendInspectWarning()
+        end)
+    ---------------------------------------------------------------------
 end,
 nil,
 {

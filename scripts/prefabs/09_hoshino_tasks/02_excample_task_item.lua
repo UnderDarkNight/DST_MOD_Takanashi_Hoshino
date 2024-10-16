@@ -36,27 +36,35 @@
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于平板显示的API，返回Widget图像。client端调用
+    local function CreateGiveUpButton(root,x,y,fn)
+        local button_give_up = root:AddChild(ImageButton(button_atlas,button_give_up_img,button_give_up_img,
+        button_give_up_img,button_give_up_img,button_give_up_img))
+        button_give_up:SetPosition(x,y)
+        button_give_up.focus_scale = {1.1, 1.1, 1.1}
+        button_give_up:SetScale(0.5,0.5,0.5)
+        button_give_up:SetOnClick(fn)
+        return button_give_up
+    end
+    local function CreateDeliveryButton(root,x,y,fn)
+        local button_delivery = root:AddChild(ImageButton(button_atlas,button_delivery_img,button_delivery_img,
+        button_delivery_img,button_delivery_img,button_delivery_img))
+        button_delivery:SetPosition(x,y)
+        button_delivery.focus_scale = {1.1, 1.1, 1.1}
+        button_delivery:SetOnClick(fn)
+        return button_delivery
+    end
     local GetPadDisplayBox = function(inst,box)
         local bg = box:AddChild(Image("images/inspect_pad/page_main.xml","task_box_excample.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
-            local button_give_up = bg:AddChild(ImageButton(button_atlas,button_give_up_img,button_give_up_img,
-            button_give_up_img,button_give_up_img,button_give_up_img))
-            button_give_up:SetPosition(button_give_up_location.x,button_give_up_location.y)
-            button_give_up.focus_scale = {1.1, 1.1, 1.1}
-            button_give_up:SetScale(0.5,0.5,0.5)
-            button_give_up:SetOnClick(function()
+            local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
                 ThePlayer.replica.hoshino_com_rpc_event:PushEvent("task_give_up",{},inst)
                 bg:Hide()
             end)
         --------------------------------------------------------------------------
         --- 提交按钮
-            local button_delivery = bg:AddChild(ImageButton(button_atlas,button_delivery_img,button_delivery_img,
-            button_delivery_img,button_delivery_img,button_delivery_img))
-            button_delivery:SetPosition(button_delivery_location.x,button_delivery_location.y)
-            button_delivery.focus_scale = {1.1, 1.1, 1.1}
-            button_delivery:SetOnClick(function()
-                ThePlayer.replica.hoshino_com_rpc_event:PushEvent("task_delivery",{},inst)            
+            local button_delivery = CreateDeliveryButton(bg,button_delivery_location.x,button_delivery_location.y,function()
+                ThePlayer.replica.hoshino_com_rpc_event:PushEvent("task_delivery",{},inst)
             end)
         --------------------------------------------------------------------------
         ---
@@ -92,7 +100,7 @@
             if owner then
 
                 owner.components.inventory:ForEachItem(function(item)
-                    if not (item and item.prefab == "honey" )then
+                    if not (item and item.prefab == "honey" ) or need_num <= 0 then
                         return
                     end
                     local this_stack_num = item.components.stackable:StackSize()
@@ -117,6 +125,19 @@
             inst:Remove()
             if owner then
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
+            end
+        end)
+
+        --- 定时检查
+        inst:DoPeriodicTask(10,function()
+            -- 
+            local owner = inst:GetOwner()
+            if owner == nil then
+                return
+            end
+            local flag,num = owner.replica.inventory:Has("honey",10,true)
+            if flag then
+                owner:PushEvent("hoshino_event.pad_warnning","main_page")
             end
         end)
 

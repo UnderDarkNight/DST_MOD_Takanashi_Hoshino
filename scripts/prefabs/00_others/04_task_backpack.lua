@@ -65,7 +65,7 @@ local function add_container_before_not_ismastersim_return(inst)
         if TheWorld.ismastersim then
             inst:AddComponent("container")
             -- inst.components.container.openlimit = 1  ---- 限制1个人打开
-            inst.components.container.canbeopened = false
+            inst.components.container.canbeopened = true
             -- inst.components.container:WidgetSetup(container_WidgetSetup)
             container_Widget_change(inst.components.container)
         else
@@ -80,7 +80,9 @@ end
 
 
 local function onequip(inst, owner)
-
+    inst:DoTaskInTime(1,function()
+        inst.components.container:Open(owner)
+    end)
 end
 
 local function onunequip(inst, owner)
@@ -110,6 +112,13 @@ local function fn()
     inst.entity:SetPristine()
 
     
+    --------------------------------------------------------------------
+    --- 
+        inst:ListenForEvent("hoshino_event.container_widget_open",function(inst,container_widget)
+            if container_widget then
+                container_widget:Hide()
+            end
+        end)
     --------------------------------------------------------------------
     --- 容器安装
         add_container_before_not_ismastersim_return(inst)

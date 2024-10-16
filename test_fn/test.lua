@@ -58,6 +58,19 @@ local flg,error_code = pcall(function()
         local inst = ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_item")
         -- print("+++++++++",inst)
         -- print(inst:GetDebugString())
+
+        -- local container = ThePlayer.components.hoshino_com_task_sys_for_player:GetContainer()
+        -- local items = container:GetAllItems()
+        -- for i = 1, 5, 1 do
+        --     print("+++++++++",items[i])
+        -- end
+
+
+        -- local task_backpack = ThePlayer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HOSHINO_TASK_BACKPACK)
+        -- local items = task_backpack.replica.container:GetItems()
+        -- for i = 1, 5, 1 do
+        --     print("+++++++++",items[i])
+        -- end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
