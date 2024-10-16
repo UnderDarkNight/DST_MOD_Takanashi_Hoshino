@@ -68,6 +68,7 @@ nil,
         local item = SpawnPrefab(prefab)
         if item then
             self:GetContainer():GiveItem(item)
+            self:GetContainer():Open(self.inst)
             return item
         end
         return nil

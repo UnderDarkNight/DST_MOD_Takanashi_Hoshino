@@ -182,7 +182,9 @@ local function page_create(front_root,MainScale)
             --------------------------------------------------------------------------------------
             ---
                 local task_backpack = ThePlayer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HOSHINO_TASK_BACKPACK)
-                task_backpack.replica.container:Open(ThePlayer)
+                if task_backpack ~= nil then
+                    task_backpack.replica.container:Open(ThePlayer)
+                end
             --------------------------------------------------------------------------------------
             ---
                 return page
