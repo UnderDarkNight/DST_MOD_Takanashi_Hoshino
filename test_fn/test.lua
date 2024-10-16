@@ -54,8 +54,8 @@ local flg,error_code = pcall(function()
     ---
         -- ThePlayer.components.hoshino_com_shop:BlueSchistDelta(123)
         -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(222)
-        local inst = ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_kill")
-        local inst = ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_item")
+        ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_kill")
+        ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_item")
         -- print("+++++++++",inst)
         -- print(inst:GetDebugString())
 
