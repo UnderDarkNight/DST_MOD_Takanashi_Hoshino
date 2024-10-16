@@ -57,7 +57,7 @@ return function(inst)
         end
         local function Get_Attack_Range(for_weapon_param)
             if for_weapon_param then                
-                return ( (attack_range[GetGunLevel()] or 9) - 2.0) -- 给武器上的攻击距离参数需要修正，以匹配特效显示范围
+                return ( (attack_range[GetGunLevel()] or 9) - 3.4) -- 给武器上的攻击距离参数需要修正，以匹配特效显示范围
             else
                 return (attack_range[GetGunLevel()] or 9)
             end
