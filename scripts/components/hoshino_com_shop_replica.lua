@@ -40,6 +40,11 @@ nil,
         return self.inst.HOSHINO_SHOP.credit_coins or 0
     end
 ------------------------------------------------------------------------------------------------------------------------------
+--- 青辉石
+    function hoshino_com_shop:GetBlueSchist()
+        return self.inst.HOSHINO_SHOP.blue_schist or 0
+    end
+------------------------------------------------------------------------------------------------------------------------------
 ---
     function hoshino_com_shop:GetRefreshCount()
         return self.inst.HOSHINO_SHOP.refresh_count or 0

@@ -2,11 +2,14 @@
 <Atlas>
 	<Texture filename="inspect_pad.tex" />
 	<Elements>
-		<Element name="button_character.tex" u1="0.001" u2="0.02194921875" v2="0.999" v1="0.9394765625" variant="" />
-		<Element name="button_close.tex" u1="0.02394921875" u2="0.05710546875" v2="0.999" v1="0.9306875" variant="" />
-		<Element name="button_level_up.tex" u1="0.05910546875" u2="0.08444921875" v2="0.999" v1="0.9453359375" variant="" />
-		<Element name="button_main_page.tex" u1="0.001" u2="0.0234140625" v2="0.9286875" v1="0.8769765625" variant="" />
-		<Element name="main_background.tex" u1="0.0254140625" u2="0.832984375" v2="0.9286875" v1="0.0234609375" variant="" />
-		<Element name="red_dot.tex" u1="0.001" u2="0.016578125" v2="0.8749765625" v1="0.8418203125" variant="" />
+		<Element name="background_color.tex" u1="0.001" u2="0.7265390625" v2="0.999" v1="0.58547265625" variant="" />
+		<Element name="button_character.tex" u1="0.001" u2="0.02194921875" v2="0.58347265625" v1="0.5547109375" variant="" />
+		<Element name="button_close.tex" u1="0.02394921875" u2="0.05759375" v2="0.58347265625" v1="0.549828125" variant="" />
+		<Element name="button_info_bg.tex" u1="0.001" u2="0.65378515625" v2="0.547828125" v1="0.51808984375" variant="" />
+		<Element name="button_level_up.tex" u1="0.05959375" u2="0.0849375" v2="0.58347265625" v1="0.557640625" variant="" />
+		<Element name="button_main_page.tex" u1="0.0869375" u2="0.1093515625" v2="0.58347265625" v1="0.5586171875" variant="" />
+		<Element name="main_background.tex" u1="0.001" u2="0.8085703125" v2="0.51608984375" v1="0.0644765625" variant="" />
+		<Element name="red_dot.tex" u1="0.1113515625" u2="0.1269296875" v2="0.58347265625" v1="0.56789453125" variant="" />
+		<Element name="slime_emoji.tex" u1="0.7285390625" u2="0.9355234375" v2="0.999" v1="0.8301015625" variant="" />
 	</Elements>
 </Atlas>

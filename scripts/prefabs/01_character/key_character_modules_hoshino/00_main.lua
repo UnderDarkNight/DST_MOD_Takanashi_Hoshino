@@ -46,6 +46,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/31_spell_type_swticher",                    ---- 玩家技能类型切换器（pad 切换那个）
         "prefabs/01_character/key_character_modules_hoshino/32_spell_ring_hud_install",                 ---- 技能环的UI安装器(监听+布局)
         "prefabs/01_character/key_character_modules_hoshino/33_spell_ring_spells_code",                 ---- 技能环的技能。
+        "prefabs/01_character/key_character_modules_hoshino/34_task_sys_install",                       ---- 任务系统安装器
 
     }
     for k, lua_addr in pairs(modules) do

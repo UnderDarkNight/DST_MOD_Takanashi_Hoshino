@@ -71,6 +71,7 @@ local hoshino_com_shop = Class(function(self, inst)
         self.credit_coins = 0
         self:AddOnLoadFn(function()
             self.credit_coins = self:Get("credit_coins") or 0
+            self:ShopData_Set("credit_coins",self.credit_coins)
         end)
         self:AddOnSaveFn(function()
             self:Set("credit_coins", self.credit_coins)
@@ -80,6 +81,7 @@ local hoshino_com_shop = Class(function(self, inst)
         self.blue_schist = 0
         self:AddOnLoadFn(function()
             self.blue_schist = self:Get("blue_schist") or 0
+            self:ShopData_Set("blue_schist",self.blue_schist)
         end)
         self:AddOnSaveFn(function()
             self:Set("blue_schist", self.blue_schist)

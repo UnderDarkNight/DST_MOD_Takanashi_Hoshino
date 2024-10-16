@@ -16,4 +16,4 @@ EQUIPSLOTS["HOSHINO_BACKPACK"] = "hoshino_backpack" -- 背包
 EQUIPSLOTS["HOSHINO_AMULET"] = "hoshino_amulet" -- 项链
 EQUIPSLOTS["HOSHINO_ARMOR_ITEM"] = "hoshino_armor_item" -- 护甲物品
 
-EQUIPSLOTS["HOSHINO_SPELL_ITEM"] = "hoshino_spell_item" -- 技能释放物品
+EQUIPSLOTS["HOSHINO_TASK_BACKPACK"] = "hoshino_task_backpack" -- 任务背包

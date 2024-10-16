@@ -54,9 +54,35 @@ AddPrefabPostInit(
                 local MainScale = 0.6
             -----------------------------------------------------------------------------------
             --- 背景
+                --- 平板外框
                 local bg = root:AddChild(Image())
                 bg:SetTexture("images/inspect_pad/inspect_pad.xml","main_background.tex")
                 bg:SetScale(MainScale,MainScale,MainScale)
+                --- 背景颜色
+                local bg_color = root:AddChild(Image())
+                bg_color:SetTexture("images/inspect_pad/inspect_pad.xml","background_color.tex")
+                bg_color:MoveToBack()
+                bg_color:SetScale(MainScale,MainScale,MainScale)
+                --- 史莱姆Emoji
+                local slime_emoji = root:AddChild(Image())
+                slime_emoji:SetTexture("images/inspect_pad/inspect_pad.xml","slime_emoji.tex")
+                slime_emoji:SetScale(MainScale,MainScale,MainScale)
+                slime_emoji:SetPosition(-330,-160)
+                slime_emoji:Hide()
+                --- button_info_bg
+                local button_info_bg = root:AddChild(Image())
+                button_info_bg:SetTexture("images/inspect_pad/inspect_pad.xml","button_info_bg.tex")
+                button_info_bg:SetScale(MainScale,MainScale,MainScale)
+                button_info_bg:SetPosition(10,-222)
+
+                bg:MoveToFront()
+
+                function root:HideSlime()
+                    slime_emoji:Hide()
+                end
+                function root:ShowSlime()
+                    slime_emoji:Show()
+                end
             -----------------------------------------------------------------------------------
             --- button_close
                 local button_close = root:AddChild(ImageButton(
@@ -195,9 +221,10 @@ AddPrefabPostInit(
                 local pages_create_fn = {
                     ["character"] = TUNING.HOSHINO_INSPECT_PAD_FNS["character"],
                     ["level_up"] = TUNING.HOSHINO_INSPECT_PAD_FNS["level_up"],
+                    ["main_page"] = TUNING.HOSHINO_INSPECT_PAD_FNS["main_page"],
                 }
                 local page_swtich_buttons = {
-                    ["character"] = "button_main_page",
+                    ["character"] = "button_character",
                     ["level_up"] = "button_level_up",
                     ["main_page"] = "button_main_page",
                 }
@@ -215,7 +242,7 @@ AddPrefabPostInit(
                 -------------------------------------------------------------------------------
                 --- 默认展示界面
                     -- print("Check_Has_Selectting_Cards",Check_Has_Selectting_Cards(inst))
-                    local default_page = inst.PAD_DATA.default_page or Check_Has_Selectting_Cards(inst) and "level_up" or "character"
+                    local default_page = inst.PAD_DATA.default_page or Check_Has_Selectting_Cards(inst) and "level_up" or "main_page"
                     inst.PAD_DATA.default_page = nil
                     pages[default_page]:Show()
                     root[page_swtich_buttons[default_page]].red_dot:Hide()
@@ -226,11 +253,18 @@ AddPrefabPostInit(
                         for index, temp_page in pairs(pages) do
                             if index == page_index then
                                 temp_page:Show()
+                                temp_page.inst:PushEvent("page_show")
+                                root.inst:PushEvent("page_show",index)
                             else
                                 temp_page:Hide()
+                                temp_page.inst:PushEvent("page_hide")
+                                root.inst:PushEvent("page_hide",index)
                             end
                         end
                     end)
+                -------------------------------------------------------------------------------
+                ---- 
+                    root.inst:PushEvent("on_loaded",default_page)
                 -------------------------------------------------------------------------------
 
                 -- if ThePlayer.___test then
