@@ -83,6 +83,12 @@ local function onequip(inst, owner)
     inst:DoTaskInTime(1,function()
         inst.components.container:Open(owner)
     end)
+    --- 定时检查任务包的打开状态，避免客户端 看不见任务内容
+    inst:DoPeriodicTask(5,function()
+        if not inst.components.container:IsOpen() then
+            inst.components.container:Open(owner)
+        end
+    end)
 end
 
 local function onunequip(inst, owner)
