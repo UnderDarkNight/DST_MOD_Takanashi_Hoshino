@@ -31,7 +31,7 @@ local function container_Widget_change(theContainer)
                 side_align_tip = 160,
             },
             -- type = "chest",
-            type = "pack",
+            type = "pack_hoshino_task",
             -- acceptsstacks = true,
         }
 
