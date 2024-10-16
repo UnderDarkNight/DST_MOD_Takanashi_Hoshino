@@ -180,6 +180,9 @@ nil,
     function hoshino_com_shop:SetRecycleBuilding(shop_building)
         self.recycle_building = shop_building
     end
+    function hoshino_com_shop:IsShopOpening()
+        return self.shop_opening_flag or false
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数
     function hoshino_com_shop:AddOnLoadFn(fn)

@@ -30,8 +30,9 @@ local function container_Widget_change(theContainer)
                 pos = Vector3(0, 220, 0),
                 side_align_tip = 160,
             },
-            type = "chest",
-            acceptsstacks = true,                
+            -- type = "chest",
+            type = "pack",
+            -- acceptsstacks = true,
         }
 
         for y = 2.5, -0.5, -1 do
@@ -85,7 +86,7 @@ local function onequip(inst, owner)
     end)
     --- 定时检查任务包的打开状态，避免客户端 看不见任务内容
     inst:DoPeriodicTask(5,function()
-        if not inst.components.container:IsOpen() then
+        if not inst.components.container:IsOpen() and not owner.components.hoshino_com_shop:IsShopOpening() then
             inst.components.container:Open(owner)
         end
     end)
