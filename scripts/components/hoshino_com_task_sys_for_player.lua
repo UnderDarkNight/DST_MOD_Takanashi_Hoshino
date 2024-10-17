@@ -16,9 +16,21 @@ local hoshino_com_task_sys_for_player = Class(function(self, inst)
     self.max_task_num = 5  -- 最大可接数量
     self.slots = {}
 
-    self.inst:DoTaskInTime(0,function()
-        self:Init()
-    end)
+    ------------------------------------------------
+    --- 刷新次数。
+        self.refresh_num = 0
+        self:AddOnLoadFn(function()
+            self.refresh_num = self:Get("refresh_num") or 0
+        end)
+        self:AddOnSaveFn(function()
+            self:Set("refresh_num", self.refresh_num)
+        end)
+    ------------------------------------------------
+    --- 初始化
+        self.inst:DoTaskInTime(0,function()
+            self:Init()
+        end)
+    ------------------------------------------------
 
 end,
 nil,
@@ -42,7 +54,7 @@ nil,
         return self.backpack_item.components.container
     end
 ------------------------------------------------------------------------------------------------------------------------------
--- 
+-- 任务给予。
     function hoshino_com_task_sys_for_player:GetCurrentTaskNum()
         if self.backpack_item == nil then
             self:Init()
@@ -67,9 +79,14 @@ nil,
         end
         local item = SpawnPrefab(prefab)
         if item then
-            self:GetContainer():GiveItem(item)
-            self:GetContainer():Open(self.inst)
-            return item
+            if item:HasTag("hoshino_task_item") then
+                self:GetContainer():GiveItem(item)
+                self:GetContainer():Open(self.inst)
+                return item
+            else
+                item:Remove()
+                return nil
+            end
         end
         return nil
     end
@@ -89,6 +106,14 @@ nil,
                 })
             end
         end)
+    end
+------------------------------------------------------------------------------------------------------------------------------
+-- 刷新次数
+    function hoshino_com_task_sys_for_player:Get_Refresh_Num()
+        return self.refresh_num
+    end
+    function hoshino_com_task_sys_for_player:Refresh_DoDelta(num)
+        self.refresh_num = math.clamp(self.refresh_num + num,0,10000000)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数

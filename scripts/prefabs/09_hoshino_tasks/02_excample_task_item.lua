@@ -87,7 +87,12 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        
+        local bg = box:AddChild(Image("images/widgets/hoshino_building_task_board_widget.xml","excample_task.tex"))
+
+        ------- 任务描述
+        local display_text = bg:AddChild(Text(CODEFONT,40,"提交10个蜂蜜",{ 0/255 , 0/255 ,0/255 , 1}))
+
+        return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 检查和提交
@@ -132,10 +137,10 @@
         inst:DoPeriodicTask(10,function()
             -- 
             local owner = inst:GetOwner()
-            if owner == nil then
+            if owner == nil or owner.components.inventory == nil then
                 return
             end
-            local flag,num = owner.replica.inventory:Has("honey",10,true)
+            local flag,num = owner.components.inventory:Has("honey",10,true)
             if flag then
                 owner:PushEvent("hoshino_event.pad_warnning","main_page")
             end
@@ -160,7 +165,9 @@ local function fn()
     inst.entity:SetPristine()
     --------------------------------------------------------------------------------------------
     --- 
+        inst:AddTag("nosteal")
         inst:AddTag("hoshino_task_item")
+        inst.type = "golden"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
     --------------------------------------------------------------------------------------------
     --- 数据组件
         if TheWorld.ismastersim then

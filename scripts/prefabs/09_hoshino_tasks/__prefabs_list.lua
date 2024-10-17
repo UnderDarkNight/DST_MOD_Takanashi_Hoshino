@@ -28,6 +28,7 @@ local Prefabs_addr_base = string.sub(temp_addr,1,temp_str_index2) .. "/"    --- 
 local prefabs_name_list = {
 
 
+    "00_00_task_board",                                  --- 任务公告栏
     "01_excample_task_kill",                             --- 测试用的卷轴(击杀)
     "02_excample_task_item",                             --- 测试用的卷轴（物品）
 

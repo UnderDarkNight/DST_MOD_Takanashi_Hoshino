@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="hoshino_building_task_board_widget.tex" />
+	<Elements>
+		<Element name="background.tex" u1="0.001" u2="0.81296484375" v2="0.999" v1="0.59035546875" variant="" />
+		<Element name="button_accept.tex" u1="0.001" u2="0.07175390625" v2="0.58835546875" v1="0.56008203125" variant="" />
+		<Element name="button_close.tex" u1="0.001" u2="0.03269140625" v2="0.55808203125" v1="0.52785546875" variant="" />
+		<Element name="button_refresh.tex" u1="0.001" u2="0.05319921875" v2="0.52585546875" v1="0.50539453125" variant="" />
+		<Element name="excample_task.tex" u1="0.07375390625" u2="0.31687109375" v2="0.58835546875" v1="0.41359765625" variant="" />
+	</Elements>
+</Atlas>

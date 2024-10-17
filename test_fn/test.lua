@@ -46,16 +46,10 @@ local flg,error_code = pcall(function()
     ---
     ----------------------------------------------------------------------------------------------------------------
     ---
-            ThePlayer.___main_page_fn = function(root,MainScale,front_root)                
-                
-            end
-
-    ----------------------------------------------------------------------------------------------------------------
-    ---
         -- ThePlayer.components.hoshino_com_shop:BlueSchistDelta(123)
         -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(222)
-        ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_kill")
-        ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_item")
+        -- ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_kill")
+        -- ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_item")
         -- print("+++++++++",inst)
         -- print(inst:GetDebugString())
 
@@ -71,6 +65,21 @@ local flg,error_code = pcall(function()
         -- for i = 1, 5, 1 do
         --     print("+++++++++",items[i])
         -- end
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        -- ThePlayer.___task_board_widget_fn = function(inst,front_root)
+            
+        -- end
+        ThePlayer.components.hoshino_com_task_sys_for_player:Refresh_DoDelta(10)
+
+
+
+
+
+
+
+
+
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

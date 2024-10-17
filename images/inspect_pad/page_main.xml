@@ -3,13 +3,15 @@
 	<Texture filename="page_main.tex" />
 	<Elements>
 		<Element name="blue_schist_icon.tex" u1="0.001" u2="0.0370859375" v2="0.999" v1="0.9609609375" variant="" />
-		<Element name="button_delivery.tex" u1="0.0390859375" u2="0.18259375" v2="0.999" v1="0.940453125" variant="" />
-		<Element name="button_give_up.tex" u1="0.001" u2="0.1445078125" v2="0.938453125" v1="0.87990625" variant="" />
+		<Element name="button_accept.tex" u1="0.0390859375" u2="0.18259375" v2="0.999" v1="0.940453125" variant="" />
+		<Element name="button_delivery.tex" u1="0.001" u2="0.1445078125" v2="0.938453125" v1="0.87990625" variant="" />
+		<Element name="button_give_up.tex" u1="0.001" u2="0.1445078125" v2="0.87790625" v1="0.819359375" variant="" />
+		<Element name="button_refresh.tex" u1="0.001" u2="0.1073984375" v2="0.817359375" v1="0.7744375" variant="" />
 		<Element name="credit_coin_icon.tex" u1="0.18459375" u2="0.2304453125" v2="0.999" v1="0.95803125" variant="" />
-		<Element name="empty_box.tex" u1="0.001" u2="0.231421875" v2="0.87790625" v1="0.8301015625" variant="" />
-		<Element name="level_box_background.tex" u1="0.001" u2="0.297828125" v2="0.8281015625" v1="0.7383046875" variant="" />
-		<Element name="task_box_background.tex" u1="0.001" u2="0.6855234375" v2="0.7363046875" v1="0.14553125" variant="" />
-		<Element name="task_box_excample.tex" u1="0.2324453125" u2="0.907203125" v2="0.999" v1="0.8847890625" variant="" />
-		<Element name="task_box_tile.tex" u1="0.001" u2="0.3007578125" v2="0.14353125" v1="0.03615625" variant="" />
+		<Element name="empty_box.tex" u1="0.1465078125" u2="0.3769296875" v2="0.938453125" v1="0.8906484375" variant="" />
+		<Element name="level_box_background.tex" u1="0.1465078125" u2="0.4433359375" v2="0.8886484375" v1="0.7988515625" variant="" />
+		<Element name="task_box_background.tex" u1="0.001" u2="0.6855234375" v2="0.7724375" v1="0.1816640625" variant="" />
+		<Element name="task_box_excample.tex" u1="0.001" u2="0.6757578125" v2="0.1796640625" v1="0.065453125" variant="" />
+		<Element name="task_box_tile.tex" u1="0.4453359375" u2="0.74509375" v2="0.999" v1="0.891625" variant="" />
 	</Elements>
 </Atlas>

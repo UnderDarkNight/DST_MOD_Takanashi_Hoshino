@@ -37,6 +37,9 @@ AddReplicableComponent("hoshino_com_spell_cd_timer")  --- 统一技能CD计时�
 
 AddReplicableComponent("hoshino_com_item_spell")  --- 物品技能控制器
 
+AddReplicableComponent("hoshino_com_task_sys_for_player")  --- 任务系统
+AddReplicableComponent("hoshino_com_task_sys_for_building")  --- 任务系统
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -269,6 +269,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "商店",
                 ["recipe_desc"] = "商店",
             },
+            ["hoshino_building_task_board"] = {
+                ["name"] = "任务公告栏",
+                ["inspect_str"] = "任务公告栏",
+                ["recipe_desc"] = "任务公告栏",
+            },
         --------------------------------------------------------------------
         --- 07_spell
             ["hoshino_spell_gun_eye_of_horus_level_1_to_2"] = {

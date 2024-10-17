@@ -174,10 +174,21 @@ local function page_create(front_root,MainScale)
                 end
                 update_task_box()
                 task_box.inst:ListenForEvent("update_task_box",update_task_box)
+                task_box._updatting_flag_num = 5
+                task_box._updatting_task = nil
                 task_box.inst:ListenForEvent("hoshino_event.update_task_box",function()
-                    for i = 0, 10, 1 do
-                        task_box.inst:DoTaskInTime(i/10,update_task_box)
+                    task_box._updatting_flag_num = 5
+                    if task_box._updatting_task == nil then
+                        task_box._updatting_task = task_box.inst:DoPeriodicTask(0.2,function()
+                            task_box._updatting_flag_num = task_box._updatting_flag_num - 1
+                            if task_box._updatting_flag_num <= 0 then
+                                task_box._updatting_task:Cancel()
+                                task_box._updatting_task = nil
+                            end
+                            update_task_box()
+                        end)
                     end
+                    update_task_box()
                 end,ThePlayer)
             --------------------------------------------------------------------------------------
             ---
