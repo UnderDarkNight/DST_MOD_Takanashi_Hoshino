@@ -42,6 +42,11 @@ local hoshino_com_task_sys_for_building = Class(function(self, inst)
             self.inst.components.container.canbeopened = false
         end)
     --------------------------------------------------------------------------------------
+    --- 刷新次数。
+        inst:WatchWorldState("cycles",function()
+            self:Refresh_Num_Init()
+        end)
+    --------------------------------------------------------------------------------------
 
 end,
 nil,

@@ -118,15 +118,17 @@
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner.components.inventory:GiveItem(SpawnPrefab("eyebrellahat"))
+                owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
             end
         end)
         inst:ListenForEvent("task_give_up", function()
             print("放弃任务")
             local owner = inst:GetOwner()
-            inst:Remove()
             if owner then
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
+                owner:PushEvent("hoshino_event.give_up_task",inst.prefab) -- 放弃任务广播
             end
+            inst:Remove()
         end)
 
         inst:ListenForEvent("killed",function(_,_table) --- 广播来的事件
