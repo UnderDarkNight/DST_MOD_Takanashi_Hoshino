@@ -130,6 +130,7 @@ local function fn()
     --weapon (from weapon component) added to pristine state for optimization
     inst:AddTag("weapon")
     inst:AddTag("hoshino_weapon_gun_eye_of_horus")
+    inst:AddTag("nosteal")
 
     MakeInventoryFloatable(inst, "med", 0.05, {0.85, 0.45, 0.85})
 

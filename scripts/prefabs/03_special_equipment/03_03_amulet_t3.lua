@@ -58,6 +58,7 @@ local function common_fn()
 
     -- inst:AddTag("weapon")
     inst:AddTag("hoshino_special_equipment")
+    inst:AddTag("nosteal")
 
     -- MakeInventoryFloatable(inst)
 

@@ -115,6 +115,7 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("hoshino_special_equipment")
+    inst:AddTag("nosteal")
 
     inst.entity:SetPristine()
 

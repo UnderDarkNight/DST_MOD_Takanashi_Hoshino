@@ -37,6 +37,7 @@ local function fn()
 
     inst:AddTag("hoshino_other_armor_item")
     inst:AddTag("hoshino_special_equipment")
+    inst:AddTag("nosteal")
 
 
     inst.entity:SetPristine()

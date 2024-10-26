@@ -51,6 +51,7 @@ local function common_fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
+    inst:AddTag("nosteal")
 
     -- inst.AnimState:SetBank("cane")
     -- inst.AnimState:SetBuild("swap_cane")
