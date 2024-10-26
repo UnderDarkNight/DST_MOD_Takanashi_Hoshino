@@ -81,11 +81,26 @@ return function(inst,front_root)
                         Vector3(-550,145,0) , Vector3(0,145,0) ,Vector3(550,145,0),
                         Vector3(-550,-233,0) , Vector3(0,-233,0) ,Vector3(550,-233,0),
                     }
+        ------- 底部刷新按钮
+        for index, pt in pairs(points) do
+            local empty_refresh_button = root:AddChild(ImageButton(atlas,"button_refresh.tex","button_refresh.tex","button_refresh.tex","button_refresh.tex","button_refresh.tex"))
+            empty_refresh_button.focus_scale = {1.1, 1.1, 1.1}
+            empty_refresh_button:SetScale(1.5,1.5,1.5)
+            empty_refresh_button:SetOnClick(function()
+                ThePlayer.replica.hoshino_com_rpc_event:PushEvent("refresh_button_click",index,inst)
+                empty_refresh_button:Hide()
+                empty_refresh_button.inst:DoTaskInTime(2,function()
+                    empty_refresh_button:Show()
+                end)
+            end)
+            empty_refresh_button:SetPosition(pt.x+20,pt.y)
+        end
+        ------- 任务盒子                    
         for index, pt in pairs(points) do
             local box = root:AddChild(Widget())
             task_box[index] = box
             box:SetPosition(pt.x,pt.y)
-
+            ------ 背景图片
             local bg = box:AddChild(Image(atlas,"excample_task.tex"))
             box.bg = bg
             ------- 刷新按钮
