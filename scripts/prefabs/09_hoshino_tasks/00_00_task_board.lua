@@ -16,6 +16,16 @@ local assets =
 }
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- 安装容器界面
+    local empty_fn = function()    end
+    local function hook_container(inst)
+        local container = inst.components.container
+        container.DropItemBySlot = empty_fn
+        container.DropEverythingWithTag = empty_fn
+        container.DropEverything = empty_fn
+        container.DropEverythingUpToMaxStacks = empty_fn
+        container.DropItem = empty_fn
+        container.DropItemAt = empty_fn
+    end
     local function container_Widget_change(theContainer)
         -----------------------------------------------------------------------------------
         ----- 容器界面名 --- 要独特一点，避免冲突
@@ -77,6 +87,7 @@ local assets =
                 end)
                 inst.components.container.skipopensnd = false
                 inst.components.container.skipclosesnd = false
+                hook_container(inst)
             else
                 ------- 在客户端必须执行容器界面注册。不能像科雷那样只在服务端注册。
                 inst.OnEntityReplicated = function(inst)
@@ -145,6 +156,7 @@ local assets =
         --     fn(inst)
         -- end
         inst:DoTaskInTime(0,function()
+            inst:PushEvent("load_data_from_theworld")
             if not inst.components.hoshino_data:Get("inited") then
                 inst.components.hoshino_data:Set("inited",true)
                 inst.components.hoshino_com_task_sys_for_building:Refresh_All()
@@ -192,6 +204,59 @@ local assets =
         end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 摧毁
+    local function official_workable_install(inst)
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+        inst.components.workable:SetWorkLeft(4)
+        inst.components.workable:SetOnFinishCallback(function()
+            inst:PushEvent("save_data_to_theworld")
+            local fx = SpawnPrefab("collapse_big")
+            fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            inst:Remove()
+        end)
+        inst.components.workable:SetOnWorkCallback(nil)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 储存任务物品给 世界
+    local function data_2_world_fn_install(inst)
+        
+
+        inst:ListenForEvent("save_data_to_theworld",function()
+        
+            local data = {}
+            for i = 1, 6, 1 do
+                local item = inst.components.container.slots[i]
+                if item then
+                    data[i] = item:GetSaveRecord()
+                else
+                    data[i] = nil
+                end
+            end
+
+            TheWorld.components.hoshino_data:Set("hoshino_building_task_board_data",data)
+        end)
+
+        inst:ListenForEvent("load_data_from_theworld",function()
+            local data = TheWorld.components.hoshino_data:Get("hoshino_building_task_board_data")
+            if data then
+                for i = 1, 6, 1 do
+                    local item_code = data[i]
+                    if item_code then
+                        local item = SpawnSaveRecord(item_code)
+                        inst.components.container:GiveItem(item,i)
+                    end
+                end
+                TheWorld.components.hoshino_data:Set("hoshino_building_task_board_data",nil)
+                inst.components.hoshino_data:Set("inited",true)
+            end
+        end)
+
+    end
+    -- local function OnBuilt(inst,builder)
+    --     local old_building = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+    -- end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -215,6 +280,7 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("structure")
+    inst:AddTag("hoshino_building_task_board")
 
     add_container_before_not_ismastersim_return(inst)
     widget_open_event_install(inst)
@@ -235,9 +301,11 @@ local function fn()
     -- 外观更新
         anim_display_update_fn_install(inst)
     -------------------------------------------------------------------------------------
-
+    -- 摧毁
+        official_workable_install(inst)
     -------------------------------------------------------------------------------------
-
+    -- 储存任务物品给 世界
+        data_2_world_fn_install(inst)
     -------------------------------------------------------------------------------------
     ---- 积雪检查
         --[[ 
@@ -262,5 +330,37 @@ local function fn()
     return inst
 end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local function pre_build_fn()
+    
+    local inst = CreateEntity()
 
-return Prefab("hoshino_building_task_board", fn, assets)
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.OnBuilt = function(inst,builder)
+        local old_building = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+        if old_building then
+            old_building:PushEvent("save_data_to_theworld")
+            old_building:Remove()
+        end
+        SpawnPrefab("hoshino_building_task_board").Transform:SetPosition(inst.Transform:GetWorldPosition())
+        inst:Remove()
+    end
+    return inst
+end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local function placer_postinit_fn(inst)
+    -- local scale = 1.5
+    -- inst.AnimState:SetScale(scale,scale,scale)
+    -- inst.AnimState:Hide("SNOW")
+end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+return Prefab("hoshino_building_task_board", fn, assets),
+    Prefab("hoshino_building_task_board_pre", pre_build_fn, assets),
+    MakePlacer("hoshino_building_task_board_pre_placer", "hoshino_building_task_board", "hoshino_building_task_board", "idle", nil, nil, nil, nil, nil, nil, placer_postinit_fn, nil, nil)

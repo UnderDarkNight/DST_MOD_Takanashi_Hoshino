@@ -57,3 +57,23 @@
         {"CHARACTER",}
     )
     RemoveRecipeFromFilter("hoshino_spell_gun_eye_of_horus_level_2_to_3","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 任务看板
+--------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_building_task_board_pre","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_building_task_board_pre",            --  --  inst.prefab  实体名字
+        {} ,
+        TECH.NONE, --- 魔法三本
+        {
+            -- nounlock=true,
+            no_deconstruction=false,
+            builder_tag = "hoshino",
+            atlas = "images/map_icons/hoshino_building_task_board.xml",
+            image = "hoshino_building_task_board.tex",
+            placer = "hoshino_building_task_board_pre_placer",                       -------- 建筑放置器
+            -- sg_state="carvewood",
+        },
+        {"CHARACTER",}
+    )
+    RemoveRecipeFromFilter("hoshino_building_task_board_pre","MODS")

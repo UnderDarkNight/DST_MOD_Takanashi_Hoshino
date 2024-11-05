@@ -116,6 +116,7 @@ local function test_shoes()
         return inst
     end
     inst.components.equippable.equipslot = EQUIPSLOTS.HOSHINO_SHOES
+    inst.components.equippable.restrictedtag = "hoshino"
     -- inst.components.inventoryitem:ChangeImageName("tillweedsalve")
     inst.components.inventoryitem.imagename = "hoshino_equipment_excample_shoes"
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_excample_shoes.xml"
@@ -136,6 +137,7 @@ local function test_backpack()
         return inst
     end
     inst.components.equippable.equipslot = EQUIPSLOTS.HOSHINO_BACKPACK
+    inst.components.equippable.restrictedtag = "hoshino"
     -- inst.components.inventoryitem:ChangeImageName("piggyback")
     inst.components.inventoryitem.imagename = "hoshino_equipment_excample_backpack"
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_excample_backpack.xml"
@@ -155,6 +157,7 @@ local function test_amulet()
         return inst
     end
     inst.components.equippable.equipslot = EQUIPSLOTS.HOSHINO_AMULET
+    inst.components.equippable.restrictedtag = "hoshino"
     -- inst.components.inventoryitem:ChangeImageName("greenamulet")
     inst.components.inventoryitem.imagename = "hoshino_equipment_excample_amulet"
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_excample_amulet.xml"

@@ -113,6 +113,7 @@ local function fn()
         return inst
     end
     inst.components.equippable.equipslot = EQUIPSLOTS.HOSHINO_BACKPACK
+    inst.components.equippable.restrictedtag = "hoshino"
     -- inst.components.inventoryitem:ChangeImageName("tillweedsalve")
     inst.components.inventoryitem.imagename = "hoshino_special_equipment_backpack_t7"
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_special_equipment_backpack_t7.xml"
