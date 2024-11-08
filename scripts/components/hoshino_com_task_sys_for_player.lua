@@ -50,6 +50,13 @@ nil,
             self.inst.components.inventory:Equip(self.backpack_item)
         end
         self.slots = self.backpack_item.components.container.slots
+        for i = 1, 6, 1 do
+            local item = self.slots[i]
+            if item ~= nil then
+                item.owner = self.inst
+                item:PushEvent("active",self.inst)
+            end
+        end
     end
     function hoshino_com_task_sys_for_player:GetContainer()
         if self.backpack_item == nil then
@@ -86,6 +93,8 @@ nil,
             if item:HasTag("hoshino_task_item") then
                 self:GetContainer():GiveItem(item)
                 self:GetContainer():Open(self.inst)
+                item.owner = self.inst
+                item:PushEvent("active",self.inst)
                 return item
             else
                 item:Remove()

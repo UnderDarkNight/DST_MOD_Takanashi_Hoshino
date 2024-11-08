@@ -32,6 +32,8 @@ local prefabs_name_list = {
     "01_excample_task_kill",                             --- 测试用的卷轴(击杀)
     "02_excample_task_item",                             --- 测试用的卷轴（物品）
 
+    "white_01",                             --- 白色01
+
 
 }
 

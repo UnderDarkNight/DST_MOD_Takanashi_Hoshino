@@ -70,11 +70,12 @@ local flg,error_code = pcall(function()
         -- ThePlayer.___task_board_widget_fn = function(inst,front_root)
             
         -- end
-        ThePlayer.components.hoshino_com_task_sys_for_player:Refresh_DoDelta(10)
+        -- ThePlayer.components.hoshino_com_task_sys_for_player:Refresh_DoDelta(10)
 
 
 
-
+        local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+        box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_01"))
 
 
 

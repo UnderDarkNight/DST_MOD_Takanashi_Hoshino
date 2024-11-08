@@ -26,7 +26,7 @@
     local button_delivery_img = "button_delivery.tex"           --- 交付按钮
 
     local button_give_up_location = Vector3(290,40,0)          --- 放弃按钮位置
-    local button_delivery_location = Vector3(260,-20,0)         --- 交付按钮位置
+    local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
@@ -62,6 +62,7 @@
         local button_delivery = root:AddChild(ImageButton(button_atlas,button_delivery_img,button_delivery_img,
         button_delivery_img,button_delivery_img,button_delivery_img))
         button_delivery:SetPosition(x,y)
+        button_delivery:SetScale(0.9,0.9,0.9)
         button_delivery.focus_scale = {1.1, 1.1, 1.1}
         button_delivery:SetOnClick(fn)
         return button_delivery
