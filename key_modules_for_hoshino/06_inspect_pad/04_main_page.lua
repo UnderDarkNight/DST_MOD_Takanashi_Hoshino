@@ -64,11 +64,12 @@ local function page_create(front_root,MainScale)
                 end
                 -- level_text.inst:DoPeriodicTask(0.5,level_text_update_fn)
                 level_text_update_fn()
+                level_box.inst:ListenForEvent("hoshino_com_level_sys_client_side_data_update",level_text_update_fn,ThePlayer)
             --------------------------------------------------------------------------------------
             --- 信用币
                 local credit_coins_box = root:AddChild(Image("images/inspect_pad/page_main.xml","empty_box.tex"))
                 credit_coins_box:SetScale(MainScale,MainScale,MainScale)
-                credit_coins_box:SetPosition(-320,150-30)                    
+                credit_coins_box:SetPosition(-320,120-30)                    
                 local credit_coins_icon = credit_coins_box:AddChild(Image("images/inspect_pad/page_main.xml","credit_coin_icon.tex"))
                 -- credit_coins_icon:SetScale(MainScale,MainScale,MainScale)
                 credit_coins_icon:SetPosition(-90,0)
@@ -83,7 +84,7 @@ local function page_create(front_root,MainScale)
             --- 青辉石
                 local blue_schist_box = root:AddChild(Image("images/inspect_pad/page_main.xml","empty_box.tex"))
                 blue_schist_box:SetScale(MainScale,MainScale,MainScale)
-                blue_schist_box:SetPosition(-320,110-30)                    
+                blue_schist_box:SetPosition(-320,80-30)                    
                 local blue_schist_icon = blue_schist_box:AddChild(Image("images/inspect_pad/page_main.xml","blue_schist_icon.tex"))
                 -- credit_coins_icon:SetScale(MainScale,MainScale,MainScale)
                 blue_schist_icon:SetPosition(-90,0)
@@ -95,11 +96,29 @@ local function page_create(front_root,MainScale)
                     blue_schist_text:SetString(tostring(blue_schists))
                 end
             --------------------------------------------------------------------------------------
+            --- exp
+                local exp_box = root:AddChild(Image("images/inspect_pad/page_main.xml","empty_box.tex"))
+                exp_box:SetScale(MainScale,MainScale,MainScale)
+                -- exp_box:SetPosition(-320,40)
+                exp_box:SetPosition(-320,160-30)
+                local exp_box_icon = exp_box:AddChild(Text(CODEFONT,40,"Exp",{ 0/255 , 0/255 ,0/255 , 1}))
+                exp_box_icon:SetScale(0.7,1,1)
+                exp_box_icon:SetPosition(-90,0)
+                local exp_box_text = exp_box:AddChild(Text(CODEFONT,40,"30",{ 0/255 , 0/255 ,0/255 , 1}))
+                exp_box_text:SetPosition(10,0)
+                exp_box_text:SetString("9999")
+                local function exp_update_fn()
+                    local exp = ThePlayer.replica.hoshino_com_level_sys:GetExp()
+                    exp_box_text:SetString(tostring(exp))
+                end
+                exp_box.inst:ListenForEvent("hoshino_com_level_sys_client_side_data_update",exp_update_fn,ThePlayer)
+            --------------------------------------------------------------------------------------
             --- 货币更新 update
                 local function update_coins()
                     credit_coins_update_fn()
                     blue_schist_update_fn()
                     level_text_update_fn()
+                    exp_update_fn()
                 end
                 update_coins()
                 root.inst:DoPeriodicTask(0.1,update_coins)
