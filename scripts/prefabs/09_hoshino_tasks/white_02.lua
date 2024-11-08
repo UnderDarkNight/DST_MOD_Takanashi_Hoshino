@@ -29,10 +29,49 @@
     local button_give_up_location = Vector3(290,40,0)          --- 放弃按钮位置
     local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 
+    local function Has_Enough_Items(owner,prefab,num)
+        local flag,num = owner.replica.inventory:Has(prefab,num,true)
+        return flag or false,num
+    end
+    local function Remove_Items_By_Prefab(owner,prefab,num)
+        if not Has_Enough_Items(owner,prefab,num) then
+            return
+        end
+
+        local ask_num = num
+        owner.components.inventory:ForEachItem(function(item)
+            if not (item and item.prefab == prefab) then
+                return
+            end
+            if ask_num <= 0 then
+                return
+            end
+
+            if item.components.stackable == nil then
+                item:Remove()
+                ask_num = ask_num - 1
+            else
+               local current_stack_num = item.components.stackable:StackSize()
+               if current_stack_num >= ask_num then
+                    --- 叠堆数量充足
+                    item.components.stackable:Get(ask_num):Remove()
+                    ask_num = 0
+               else
+                    --- 叠堆数量不足
+                    item:Remove()
+                    ask_num = ask_num - current_stack_num
+               end
+            end
+
+        end)
+
+    end
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_01","hoshino_mission_white_01")
-        inst:ListenForEvent("hoshino_mission_white_01",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_02","hoshino_mission_white_02")
+        inst:ListenForEvent("hoshino_mission_white_02",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
@@ -70,7 +109,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_01_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_02_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -98,14 +137,14 @@
                 display_text:SetString(""..num.."/5")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_01",update_fn)
+            inst:ListenForEvent("hoshino_mission_white_02",update_fn)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_01_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_02_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -117,17 +156,15 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and inst.components.hoshino_data:Add("num",0) >= 5 then
+            if owner and Has_Enough_Items(owner,"drumstick",5) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
-                local item = SpawnPrefab("marblebean")
-                item.components.stackable.stacksize = 2
-                owner.components.inventory:GiveItem(item)
+                owner.components.hoshino_com_level_sys:Exp_DoDelta(400) -- 400 经验
+                owner.components.hoshino_com_shop:CreditCoinDelta(150) -- 150 信用币
 
-                owner.components.hoshino_com_level_sys:Exp_DoDelta(600)
-
+                Remove_Items_By_Prefab(owner,"drumstick",5)
 
             end
         end)
@@ -140,16 +177,31 @@
             end
             inst:Remove()
         end)
+        --- 检查任务内容
+        local function mission_check()
+            local owner = inst:GetOwner()
+            local item_num = 0
+            local prefab = "drumstick"
+            if owner then
+                local flag,num = Has_Enough_Items(owner,prefab,item_num)
+
+                item_num = math.clamp(num,0,5)
+                inst.__num:set(item_num)
+                if item_num >= 5 then
+                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                end
+
+            end        
+        end
         --- 激活任务
         inst:ListenForEvent("active",function(inst,owner)
-            inst:ListenForEvent("attacked",function()
-                
-                local num = inst.components.hoshino_data:Add("num",1)
-                num = math.clamp(num,0,5)
-                inst.components.hoshino_data:Set("num",num)
-                inst.__num:set(num)
 
-            end,owner)
+            inst:DoPeriodicTask(5,mission_check)
+            inst:ListenForEvent("itemlose",mission_check,owner)
+            inst:ListenForEvent("dropitem",mission_check,owner)
+            inst:ListenForEvent("itemget",mission_check,owner)
+            inst:ListenForEvent("gotnewitem",mission_check,owner)
+            inst:ListenForEvent("itemget",mission_check,owner)
         end)
 
         --- 加载检查
@@ -157,20 +209,6 @@
             local num = com:Add("num",0)
             inst.__num:set(num)
         end)
-
-        --- 定时检查
-        inst:DoPeriodicTask(10,function()
-            -- 
-            local owner = inst:GetOwner()
-            if owner == nil then
-                return
-            end
-            local num = inst.components.hoshino_data:Add("num",0)
-            if num >= 5 then
-                owner:PushEvent("hoshino_event.pad_warnning","main_page")
-            end
-        end)
-
 
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -223,4 +261,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_white_01", fn, assets)
+return Prefab("hoshino_mission_white_02", fn, assets)

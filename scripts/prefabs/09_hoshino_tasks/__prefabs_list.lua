@@ -33,6 +33,7 @@ local prefabs_name_list = {
     "02_excample_task_item",                             --- 测试用的卷轴（物品）
 
     "white_01",                             --- 白色01
+    "white_02",                             --- 白色02
 
 
 }

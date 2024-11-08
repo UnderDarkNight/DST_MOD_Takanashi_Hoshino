@@ -75,7 +75,7 @@ local flg,error_code = pcall(function()
 
 
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
-        box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_01"))
+        box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_02"))
 
 
 
