@@ -70,21 +70,13 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_04","hoshino_mission_white_04")
-        inst:ListenForEvent("hoshino_mission_white_04",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_05","hoshino_mission_white_05")
+        inst:ListenForEvent("hoshino_mission_white_05",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
             return
         end
-
-
-        -- inst.components.hoshino_data:AddOnSaveFn(function(com)
-
-        -- end)
-        -- inst:DoTaskInTime(1,function()
-            
-        -- end)
 
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -109,7 +101,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_04_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_05_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -129,22 +121,22 @@
         --- 检查任务是否完成
             local update_fn = function()
                 local num = inst.num or inst.__num:value() or 0
-                if num >= 1 then
+                if num >= 20 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/1")
+                display_text:SetString(""..num.."/20")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_04",update_fn)
+            inst:ListenForEvent("hoshino_mission_white_05",update_fn)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_04_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_05_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -156,20 +148,19 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"reviver",1) then
+            if owner and Has_Enough_Items(owner,"log",20) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.15 -- 15% 经验
+                local exp = current_max_exp*0.20 -- 20% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(150) -- 150 信用币
+                -- owner.components.hoshino_com_shop:CreditCoinDelta(150) -- 150 信用币
 
-                Remove_Items_By_Prefab(owner,"reviver",1)
-                owner.components.inventory:GiveItem(SpawnPrefab("wetgoop")) -- 给予物品
+                Remove_Items_By_Prefab(owner,"log",20)
             end
         end)
         inst:ListenForEvent("task_give_up", function()
@@ -185,13 +176,13 @@
         local function mission_check()
             local owner = inst:GetOwner()
             local item_num = 0
-            local prefab = "reviver"
+            local prefab = "log"
             if owner then
                 local flag,num = Has_Enough_Items(owner,prefab,item_num)
 
-                item_num = math.clamp(num,0,1)
+                item_num = math.clamp(num,0,20)
                 inst.__num:set(item_num)
-                if item_num >= 1 then
+                if item_num >= 20 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 
@@ -265,4 +256,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_white_04", fn, assets)
+return Prefab("hoshino_mission_white_05", fn, assets)

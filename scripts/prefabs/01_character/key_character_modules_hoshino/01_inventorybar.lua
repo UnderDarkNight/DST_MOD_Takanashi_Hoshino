@@ -61,6 +61,11 @@
         inst.HUD:OpenScreenUnderPause(root)
 
         inst:PushEvent("hoshino_event.inspect_hud_open",root)
+        --- opening flag
+        inst.hoshino_inspect_hud_opening = true
+        root.inst:ListenForEvent("pad_close",function()
+            inst.hoshino_inspect_hud_opening = false
+        end)
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
@@ -79,7 +84,7 @@
                         arrow_anim:PlayAnimation("idle",true)
                         arrow:Hide()
                         inst:ListenForEvent("hoshino_event.inspect_hud_warning",function(_,flag)
-                            if flag then
+                            if flag and not ThePlayer.hoshino_inspect_hud_opening then
                                 arrow:Show()
                             else
                                 arrow:Hide()

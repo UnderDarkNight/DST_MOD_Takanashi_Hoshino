@@ -71,10 +71,10 @@
 --- net install
     local function Net_Vars_Install(inst)
 
-        inst.__red_num = net_uint(inst.GUID, "hoshino_mission_white_02.red","hoshino_mission_white_02")
-        inst.__blue_num = net_uint(inst.GUID, "hoshino_mission_white_02.blue","hoshino_mission_white_02")
-        inst.__purple_num = net_uint(inst.GUID, "hoshino_mission_white_02.purple","hoshino_mission_white_02")
-        inst:ListenForEvent("hoshino_mission_white_02",function()
+        inst.__red_num = net_uint(inst.GUID, "hoshino_mission_white_03.red","hoshino_mission_white_03")
+        inst.__blue_num = net_uint(inst.GUID, "hoshino_mission_white_03.blue","hoshino_mission_white_03")
+        inst.__purple_num = net_uint(inst.GUID, "hoshino_mission_white_03.purple","hoshino_mission_white_03")
+        inst:ListenForEvent("hoshino_mission_white_03",function()
             inst.red_num = inst.__red_num:value()
             inst.blue_num = inst.__blue_num:value()
             inst.purple_num = inst.__purple_num:value()
@@ -153,7 +153,7 @@
                 purple_text:SetString(""..purple_num.."/1")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_02",update_fn)
+            inst:ListenForEvent("hoshino_mission_white_03",update_fn)
         --------------------------------------------------------------------------
         return bg
     end
