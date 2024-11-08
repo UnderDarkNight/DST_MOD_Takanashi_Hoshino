@@ -31,8 +31,8 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_07","hoshino_mission_white_07")
-        inst:ListenForEvent("hoshino_mission_white_07",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_08","hoshino_mission_white_08")
+        inst:ListenForEvent("hoshino_mission_white_08",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
@@ -70,7 +70,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_07_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_08_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -98,14 +98,14 @@
                 display_text:SetString(""..num.."/1")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_07",update_fn)
+            inst:ListenForEvent("hoshino_mission_white_08",update_fn)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_07_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_08_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -122,12 +122,25 @@
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
-                local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.05 -- 5% 经验
+                -- local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
+                -- local exp = current_max_exp*0.05 -- 5% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
-                owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(600) -- 600 信用币
+                owner.components.hoshino_com_level_sys:Exp_DoDelta(300)
+                -- owner.components.hoshino_com_shop:CreditCoinDelta(600) -- 600 信用币
+
+                local item = nil
+
+                item = SpawnPrefab("cutgrass")
+                item.components.stackable.stacksize = 10
+                owner.components.inventory:GiveItem(item)
+                item = SpawnPrefab("twigs")
+                item.components.stackable.stacksize = 10
+                owner.components.inventory:GiveItem(item)
+                item = SpawnPrefab("log")
+                item.components.stackable.stacksize = 10
+                owner.components.inventory:GiveItem(item)
+
 
 
             end
@@ -145,19 +158,22 @@
         inst:ListenForEvent("active",function(inst,owner)
 
             inst:DoPeriodicTask(5,function()
-                local lunacy_mode = owner.components.sanity:IsLunacyMode()
-                local x,y,z = owner.Transform:GetWorldPosition()
-                local tile = TheWorld.Map:GetTileAtPoint(x,y,z)
-                if lunacy_mode and tile == 43 then
-                    local num = inst.components.hoshino_data:Add("num",1)
-                    num = math.clamp(num,0,1)
-                    inst.components.hoshino_data:Set("num",num)
-                    inst.__num:set(num)
-                end
                 if inst.components.hoshino_data:Add("num",0) >= 1 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
             end)
+
+            inst:ListenForEvent("buildstructure",function(_,_table)
+                _table = _table or {}
+                if _table.item and _table.item.prefab == "researchlab" then
+                    local num = inst.components.hoshino_data:Add("num",1)
+                    num = math.clamp(num,0,1)
+                    inst.components.hoshino_data:Set("num",num)
+                    inst.__num:set(num)
+                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                end
+            end,owner)
+
         end)
 
         --- 加载检查
@@ -165,20 +181,6 @@
             local num = com:Add("num",0)
             inst.__num:set(num)
         end)
-
-        -- --- 定时检查
-        -- inst:DoPeriodicTask(10,function()
-        --     -- 
-        --     local owner = inst:GetOwner()
-        --     if owner == nil then
-        --         return
-        --     end
-        --     local num = inst.components.hoshino_data:Add("num",0)
-        --     if num >= 1 then
-        --         owner:PushEvent("hoshino_event.pad_warnning","main_page")
-        --     end
-        -- end)
-
 
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -231,4 +233,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_white_07", fn, assets)
+return Prefab("hoshino_mission_white_08", fn, assets)
