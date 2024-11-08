@@ -220,6 +220,11 @@ nil,
         self:ActiveMaxExpUpdate()
     end
 ------------------------------------------------------------------------------------------------------------------------------
+--  debug
+    function hoshino_com_level_sys:GetDebugString()
+        return string.format("level:%d exp:%d max_exp:%d",self.level,self.exp,self.max_exp)
+    end
+------------------------------------------------------------------------------------------------------------------------------
 return hoshino_com_level_sys
 
 
