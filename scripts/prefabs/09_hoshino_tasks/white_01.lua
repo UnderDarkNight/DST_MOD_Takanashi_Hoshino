@@ -192,6 +192,14 @@ local function fn()
     inst.entity:SetPristine()
     --------------------------------------------------------------------------------------------
     --- 
+        function inst:GetOwner()
+            local owner = self.owner or self.replica.inventoryitem:GetGrandOwner()
+            if owner and owner:HasTag("player") then
+                return owner
+            end
+        end
+    --------------------------------------------------------------------------------------------
+    --- 
         inst:AddTag("nosteal")
         inst:AddTag("hoshino_task_item")
         inst.type = "gray"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
@@ -216,9 +224,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem:ChangeImageName("cane")
-    function inst:GetOwner()
-        return inst.owner or inst.components.inventoryitem:GetGrandOwner()
-    end
+
 
     Task_Delivery_Event_Install(inst)
 

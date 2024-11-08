@@ -169,6 +169,14 @@ local function fn()
     inst.entity:SetPristine()
     --------------------------------------------------------------------------------------------
     --- 
+        function inst:GetOwner()
+            local owner = self.owner or self.replica.inventoryitem:GetGrandOwner()
+            if owner and owner:HasTag("player") then
+                return owner
+            end
+        end
+    --------------------------------------------------------------------------------------------
+    --- 
         inst:AddTag("nosteal")
         inst:AddTag("hoshino_task_item")
         inst.type = "golden"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
