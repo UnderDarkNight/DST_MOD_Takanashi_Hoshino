@@ -195,10 +195,13 @@ local function fn()
     --------------------------------------------------------------------------------------------
     --- 
         function inst:GetOwner()
-            local owner = self.owner or self.replica.inventoryitem:GetGrandOwner()
-            if owner and owner:HasTag("player") then
-                return owner
+            if ThePlayer and self.replica.inventoryitem:IsGrandOwner(ThePlayer) then
+                return ThePlayer
             end
+            if self.components.inventoryitem then
+                return self.components.inventoryitem:GetGrandOwner()
+            end
+            return self.owner
         end
     --------------------------------------------------------------------------------------------
     --- 
