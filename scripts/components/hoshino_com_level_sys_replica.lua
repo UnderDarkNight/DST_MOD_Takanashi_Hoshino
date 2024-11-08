@@ -57,6 +57,11 @@ nil,
     function hoshino_com_level_sys:GetLevel()
         return self.level
     end
+    function hoshino_com_level_sys:GetExpForDisplay()
+        local exp = self:GetExp()
+        --- 只返回小数点后一位，string
+        return string.format("%.1f",exp)
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 return hoshino_com_level_sys
 

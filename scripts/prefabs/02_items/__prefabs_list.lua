@@ -32,6 +32,7 @@ local prefabs_name_list = {
     "02_gun_eye_of_horus",                      --- 专属武器 荷鲁斯之眼
     "03_abydos_high_purity_alloy",              --- 阿拜索斯高纯度合金
     "04_blue_schist",                           --- 青辉石
+    "05_12mm_shotgun_shells",                   --- 12mm霰弹
 
 }
 

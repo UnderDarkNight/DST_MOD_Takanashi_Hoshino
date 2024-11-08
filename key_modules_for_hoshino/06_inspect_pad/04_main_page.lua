@@ -108,8 +108,8 @@ local function page_create(front_root,MainScale)
                 exp_box_text:SetPosition(10,0)
                 exp_box_text:SetString("9999")
                 local function exp_update_fn()
-                    local exp = ThePlayer.replica.hoshino_com_level_sys:GetExp()
-                    exp_box_text:SetString(tostring(exp))
+                    local exp = ThePlayer.replica.hoshino_com_level_sys:GetExpForDisplay()
+                    exp_box_text:SetString(exp)
                 end
                 exp_box.inst:ListenForEvent("hoshino_com_level_sys_client_side_data_update",exp_update_fn,ThePlayer)
             --------------------------------------------------------------------------------------

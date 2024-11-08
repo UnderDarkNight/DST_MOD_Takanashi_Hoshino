@@ -87,6 +87,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "青辉石",
                 ["recipe_desc"] = "青辉石",
             },
+            ["hoshino_item_12mm_shotgun_shells"] = {
+                ["name"] = "12mm霰弹",
+                ["inspect_str"] = "12mm霰弹",
+                ["recipe_desc"] = "12mm霰弹",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

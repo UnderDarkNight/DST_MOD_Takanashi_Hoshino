@@ -24,6 +24,7 @@ local files_name = {
 		"hoshino_weapon_gun_eye_of_horus",								--- 专属武器
 		"hoshino_item_abydos_high_purity_alloy",						--- 阿拜索斯高纯度合金
 		"hoshino_item_blue_schist",										--- 青辉石
+		"hoshino_item_12mm_shotgun_shells",								--- 12mm霰弹
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

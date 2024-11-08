@@ -201,7 +201,27 @@ nil,
         return 0
     end
 ------------------------------------------------------------------------------------------------------------------------------
-
+--- debug
+    function hoshino_com_task_sys_for_building:Debug_Set_Mission(prefab,slot)
+        local container_com = self:GetContainer()
+        if container_com == nil then
+            return
+        end
+        container_com:Close()
+        slot = math.clamp(slot or 1,1,6)
+        local old_item = container_com.slots[slot]
+        if old_item then
+            old_item:Remove()
+        end
+        local new_item = SpawnPrefab(prefab)
+        if new_item then
+            if new_item:HasTag("hoshino_task_item") then
+                container_com:GiveItem(new_item,slot)
+            else
+                new_item:Remove()
+            end
+        end        
+    end
 ------------------------------------------------------------------------------------------------------------------------------
     function hoshino_com_task_sys_for_building:OnSave()
         self:ActiveOnSaveFns()
