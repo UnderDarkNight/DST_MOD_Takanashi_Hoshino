@@ -81,6 +81,7 @@
         --- 提交按钮
             local button_delivery = CreateDeliveryButton(bg,button_delivery_location.x,button_delivery_location.y,function()
                 ThePlayer.replica.hoshino_com_rpc_event:PushEvent("task_delivery",{},inst)
+                TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
             end)
         --------------------------------------------------------------------------
         ---  91,112,136

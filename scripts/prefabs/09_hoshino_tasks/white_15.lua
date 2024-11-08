@@ -30,54 +30,52 @@
     local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
-    local function Has_Enough_Items(owner,prefab,num)
-        local flag,num = owner.replica.inventory:Has(prefab,num,true)
-        return flag or false,num
-    end
-    local function Remove_Items_By_Prefab(owner,prefab,num)
-        if not Has_Enough_Items(owner,prefab,num) then
-            return
+    local function Get_Chesspiece(owner)
+        local inv_items = owner.replica.inventory:GetItems() or {}
+        local equip_items = owner.replica.inventory:GetEquips() or {}
+        local keyword = "chesspiece_"
+        for k, temp_item in pairs(inv_items) do
+            if temp_item and temp_item.prefab  then
+                -- 使用 string.find 查找子串
+                local start, end_pos = string.find(temp_item.prefab, keyword, 1, true) -- 第四个参数设置为true以执行简单模式匹配
+                if start then
+                    return temp_item
+                end
+            end
         end
-
-        local ask_num = num
-        owner.components.inventory:ForEachItem(function(item)
-            if not (item and item.prefab == prefab) then
-                return
+        for k, temp_item in pairs(equip_items) do
+            if temp_item and temp_item.prefab  then
+                -- 使用 string.find 查找子串
+                local start, end_pos = string.find(temp_item.prefab, keyword, 1, true) -- 第四个参数设置为true以执行简单模式匹配
+                if start then
+                    return temp_item
+                end
             end
-            if ask_num <= 0 then
-                return
-            end
-
-            if item.components.stackable == nil then
-                item:Remove()
-                ask_num = ask_num - 1
-            else
-               local current_stack_num = item.components.stackable:StackSize()
-               if current_stack_num >= ask_num then
-                    --- 叠堆数量充足
-                    item.components.stackable:Get(ask_num):Remove()
-                    ask_num = 0
-               else
-                    --- 叠堆数量不足
-                    item:Remove()
-                    ask_num = ask_num - current_stack_num
-               end
-            end
-
-        end)
-
+        end
+        return nil
+    end
+    local function Has_Chesspiece(owner)
+        local item = Get_Chesspiece(owner)
+        return item ~= nil
+    end
+    local function Remove_Chesspiece(owner)
+        local item = Get_Chesspiece(owner)
+        if item then
+            item:Remove()
+        end
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_05","hoshino_mission_white_05")
-        inst:ListenForEvent("hoshino_mission_white_05",function()
-            inst.num = inst.__num:value()
+
+        inst.__chesspiece_num = net_uint(inst.GUID, "hoshino_mission_white_15.chesspiece","hoshino_mission_white_15")
+        inst:ListenForEvent("hoshino_mission_white_15",function()
+            inst.chesspiece_num = inst.__chesspiece_num:value()
         end)
+
         if not TheWorld.ismastersim then
             return
         end
-
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于平板显示的API，返回Widget图像。client端调用
@@ -101,7 +99,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_05_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_15_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -115,29 +113,33 @@
                 TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
             end)
         --------------------------------------------------------------------------
-        ---  91,112,136
-            local display_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
-            display_text:SetPosition(-300,-30)
+        ---       
+        --------------------------------------------------------------------------
+        ---
+            local chesspiece_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
+            chesspiece_text:SetPosition(-300,-30)
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
-                local num = inst.num or inst.__num:value() or 0
-                if num >= 20 then
+
+                if inst:GetOwner() and Has_Chesspiece(inst:GetOwner()) then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/20")
+                local chesspiece_num = math.clamp(inst.__chesspiece_num:value(),0,1)
+
+                chesspiece_text:SetString(""..chesspiece_num.."/1")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_05",update_fn)
+            inst:ListenForEvent("hoshino_mission_white_15",update_fn)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_05_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_15_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -149,19 +151,18 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"log",20) then
+            if owner and Has_Chesspiece(owner) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.20 -- 20% 经验
-                -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
-                -- print("获得经验",exp)
+                local exp = current_max_exp*0.05 -- 05% 经验
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                -- owner.components.hoshino_com_shop:CreditCoinDelta(150) -- 150 信用币
+                owner.components.hoshino_com_shop:CreditCoinDelta(600)
 
-                Remove_Items_By_Prefab(owner,"log",20)
+                Remove_Chesspiece(owner)
+
             end
         end)
         inst:ListenForEvent("task_give_up", function()
@@ -176,14 +177,15 @@
         --- 检查任务内容
         local function mission_check()
             local owner = inst:GetOwner()
-            local item_num = 0
-            local prefab = "log"
-            if owner then
-                local flag,num = Has_Enough_Items(owner,prefab,item_num)
 
-                item_num = math.clamp(num,0,20)
-                inst.__num:set(item_num)
-                if item_num >= 20 then
+            if owner then
+
+                local chesspiece_num = 0
+                if Has_Chesspiece(owner) then
+                    chesspiece_num = 1
+                end
+                inst.__chesspiece_num:set(chesspiece_num)
+                if chesspiece_num >= 1 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 
@@ -198,6 +200,8 @@
             inst:ListenForEvent("itemget",mission_check,owner)
             inst:ListenForEvent("gotnewitem",mission_check,owner)
             inst:ListenForEvent("itemget",mission_check,owner)
+            inst:ListenForEvent("unequip",mission_check,owner)
+            inst:ListenForEvent("equip",mission_check,owner)
         end)
 
         -- --- 加载检查
@@ -257,4 +261,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_white_05", fn, assets)
+return Prefab("hoshino_mission_white_15", fn, assets)

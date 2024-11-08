@@ -207,3 +207,22 @@ TUNING.HOSHINO_FNS = {}
         return false
     end
 --------------------------------------------------------------------------------------------
+-- 声音播放
+    local sound_inst = nil
+    function TUNING.HOSHINO_FNS:Client_PlaySound(sound_name,flag)
+        if sound_inst == nil then
+            sound_inst = CreateEntity()
+            sound_inst.entity:AddSoundEmitter()
+            sound_inst.entity:AddTransform()
+        end
+        if ThePlayer then
+            sound_inst.Transform:SetPosition(ThePlayer.Transform:GetWorldPosition())
+        end
+        sound_inst.SoundEmitter:PlaySound(sound_name,flag)
+    end
+    function TUNING.HOSHINO_FNS:Client_KillSound(flag)
+        if sound_inst ~= nil and flag then
+            sound_inst.SoundEmitter:KillSound(flag)
+        end
+    end
+--------------------------------------------------------------------------------------------
