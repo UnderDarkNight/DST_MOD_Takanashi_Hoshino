@@ -75,10 +75,23 @@ local flg,error_code = pcall(function()
 
 
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
-        box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_02"))
+        box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_03"))
 
 
+        -- ThePlayer.__test_fn = function(bg)
+        --     local x = -210
+        --     local y = 2
+        --     local delta_y = -22
+        --     local front_size = 25
+        --     local red_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+        --     red_text:SetPosition(x,y)
 
+        --     local blue_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+        --     blue_text:SetPosition(x,y+delta_y)
+
+        --     local purple_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+        --     purple_text:SetPosition(x,y+delta_y*2)
+        -- end
 
 
     ----------------------------------------------------------------------------------------------------------------
