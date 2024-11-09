@@ -155,7 +155,7 @@
                 dug_sapling_text:SetString(""..dug_sapling_num.."/10")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_14",update_fn)
+            dug_grass_text.inst:ListenForEvent("hoshino_mission_white_14",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end

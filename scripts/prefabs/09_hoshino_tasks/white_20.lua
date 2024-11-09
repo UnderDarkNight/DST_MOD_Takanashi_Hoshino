@@ -70,16 +70,10 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-
-        inst.__red_num = net_uint(inst.GUID, "hoshino_mission_white_03.red","hoshino_mission_white_03")
-        inst.__blue_num = net_uint(inst.GUID, "hoshino_mission_white_03.blue","hoshino_mission_white_03")
-        inst.__purple_num = net_uint(inst.GUID, "hoshino_mission_white_03.purple","hoshino_mission_white_03")
-        inst:ListenForEvent("hoshino_mission_white_03",function()
-            inst.red_num = inst.__red_num:value()
-            inst.blue_num = inst.__blue_num:value()
-            inst.purple_num = inst.__purple_num:value()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_20","hoshino_mission_white_20")
+        inst:ListenForEvent("hoshino_mission_white_20",function()
+            inst.num = inst.__num:value()
         end)
-
         if not TheWorld.ismastersim then
             return
         end
@@ -106,7 +100,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_03_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_20_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -120,48 +114,29 @@
                 TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
             end)
         --------------------------------------------------------------------------
-        ---       
-        --------------------------------------------------------------------------
-        ---
-            local x = -210
-            local y = 2
-            local delta_y = -22
-            local front_size = 25
-            local red_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-            red_text:SetPosition(x,y)
-
-            local blue_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-            blue_text:SetPosition(x,y+delta_y)
-
-            local purple_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-            purple_text:SetPosition(x,y+delta_y*2)
+        ---  91,112,136
+            local display_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
+            display_text:SetPosition(-300,-30)
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
-                local red_flag,red_num = Has_Enough_Items(ThePlayer,"redgem",1)
-                local blue_flag,blue_num = Has_Enough_Items(ThePlayer,"bluegem",1)
-                local purple_flag,purple_num = Has_Enough_Items(ThePlayer,"purplegem",1)
-                if red_flag and blue_flag and purple_flag then
+                local num = inst.num or inst.__num:value() or 0
+                if num >= 2 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                red_num = math.clamp(red_num,0,1)
-                blue_num = math.clamp(blue_num,0,1)
-                purple_num = math.clamp(purple_num,0,1)
-                red_text:SetString(""..red_num.."/1")
-                blue_text:SetString(""..blue_num.."/1")
-                purple_text:SetString(""..purple_num.."/1")
+                display_text:SetString(""..num.."/2")
             end
             update_fn()
-            red_text.inst:ListenForEvent("hoshino_mission_white_03",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_white_20",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_03_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_20_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -169,21 +144,49 @@
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 检查和提交
+    local function Get_4_Type_Fishes()
+        --- 随机获取4种类型不同的鱼
+        local fish_list = {
+            "pondfish","pondeel","oceanfish_medium_1_inv","oceanfish_medium_2_inv","oceanfish_medium_3_inv",
+            "oceanfish_medium_4_inv","oceanfish_medium_5_inv","oceanfish_medium_6_inv","oceanfish_medium_7_inv",
+            "oceanfish_medium_8_inv","oceanfish_small_1_inv","oceanfish_small_2_inv","oceanfish_small_3_inv",
+            "oceanfish_small_4_inv","oceanfish_small_5_inv","oceanfish_small_6_inv","oceanfish_small_7_inv",
+            "oceanfish_small_8_inv","oceanfish_small_9_inv",
+        }
+        local result = {}
+        for i=1,4 do
+            local index = math.random(1,#fish_list)
+            table.insert(result,fish_list[index])
+            table.remove(fish_list,index)
+        end
+        return result
+    end
     local function Task_Delivery_Event_Install(inst)
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"redgem",1) and Has_Enough_Items(owner,"bluegem",1) and Has_Enough_Items(owner,"purplegem",1) then
+            if owner and Has_Enough_Items(owner,"fishingrod",2) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
-                owner.components.hoshino_com_level_sys:Exp_DoDelta(200)
-                owner.components.hoshino_com_shop:CreditCoinDelta(800)
+                local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
+                local exp = current_max_exp*0.05 -- 5% 经验
+                -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
+                -- print("获得经验",exp)
+                owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
+                -- owner.components.hoshino_com_shop:CreditCoinDelta(150) -- 150 信用币
 
-                Remove_Items_By_Prefab(owner,"redgem",1)
-                Remove_Items_By_Prefab(owner,"bluegem",1)
-                Remove_Items_By_Prefab(owner,"purplegem",1)
+                Remove_Items_By_Prefab(owner,"fishingrod",2)
+
+                local item = SpawnPrefab("saltrock")
+                item.components.stackable.stacksize = 5
+                owner.components.inventory:GiveItem(item) -- 给予物品
+
+                local fish_list = Get_4_Type_Fishes()
+                for i,prefab in ipairs(fish_list) do
+                    owner.components.inventory:GiveItem(SpawnPrefab(prefab)) -- 给予物品                    
+                end
 
             end
         end)
@@ -199,22 +202,14 @@
         --- 检查任务内容
         local function mission_check()
             local owner = inst:GetOwner()
-
+            local item_num = 0
+            local prefab = "fishingrod"
             if owner then
+                local flag,num = Has_Enough_Items(owner,prefab,item_num)
 
-                local red_flag,red_num = Has_Enough_Items(owner,"redgem",1)
-                local blue_flag,blue_num = Has_Enough_Items(owner,"bluegem",1)
-                local purple_flag,purple_num = Has_Enough_Items(owner,"purplegem",1)
-
-                red_num = math.clamp(red_num,0,1)
-                blue_num = math.clamp(blue_num,0,1)
-                purple_num = math.clamp(purple_num,0,1)
-
-                inst.__red_num:set(red_num)
-                inst.__blue_num:set(blue_num)
-                inst.__purple_num:set(purple_num)
-
-                if red_num >= 1 and blue_num >= 1 and purple_num >= 1 then
+                item_num = math.clamp(num,0,2)
+                inst.__num:set(item_num)
+                if item_num >= 2 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 
@@ -297,4 +292,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_white_03", fn, assets)
+return Prefab("hoshino_mission_white_20", fn, assets)
