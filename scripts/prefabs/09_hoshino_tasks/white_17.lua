@@ -150,7 +150,7 @@
                 wagpunk_bits_text:SetString(""..wagpunk_bits_num.."/3")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_17",update_fn)
+            wagpunk_bits_text.inst:ListenForEvent("hoshino_mission_white_17",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
@@ -175,9 +175,9 @@
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.25 -- 25% 经验
+                local exp = current_max_exp*0.20 -- 20% 经验
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(150)
+                owner.components.hoshino_com_shop:CreditCoinDelta(200)
 
                 Remove_Items_By_Prefab(owner,"gears",3)
                 Remove_Items_By_Prefab(owner,"wagpunk_bits",3)

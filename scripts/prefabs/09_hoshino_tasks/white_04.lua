@@ -138,7 +138,7 @@
                 display_text:SetString(""..num.."/1")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_04",update_fn)
+            display_text.inst:ListenForEvent("hoshino_mission_white_04",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end

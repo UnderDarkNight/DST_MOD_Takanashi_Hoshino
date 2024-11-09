@@ -154,7 +154,7 @@
                 purple_text:SetString(""..purple_num.."/1")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_03",update_fn)
+            red_text.inst:ListenForEvent("hoshino_mission_white_03",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end

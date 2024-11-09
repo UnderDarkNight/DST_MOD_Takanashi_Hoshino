@@ -99,7 +99,7 @@
                 display_text:SetString(""..num.."/5")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_01",update_fn)
+            display_text.inst:ListenForEvent("hoshino_mission_white_01",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end

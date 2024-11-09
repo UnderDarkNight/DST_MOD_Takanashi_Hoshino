@@ -153,7 +153,7 @@
                 trinket_1_text:SetString(""..trinket_1_num.."/3")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_12",update_fn)
+            trinket_1_text.inst:ListenForEvent("hoshino_mission_white_12",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end

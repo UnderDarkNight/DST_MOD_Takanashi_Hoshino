@@ -94,6 +94,34 @@ nil,
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 获取任务物品
+    local one_time_list = {
+        ["hoshino_task_excample_kill_excample"] = true,
+    }
+    function hoshino_com_task_sys_for_building:OneTimeRemember(prefab)
+        if one_time_list[prefab] then
+            local remembered_list = TheWorld.components.hoshino_data:Get("hoshino_com_task_sys_for_building.one_time_list") or {}
+            remembered_list[prefab] = true
+            TheWorld.components.hoshino_data:Set("hoshino_com_task_sys_for_building.one_time_list",remembered_list)
+        end
+    end
+    function hoshino_com_task_sys_for_building:One_Time_Remembered_Check_Succeed(prefab)
+        if one_time_list[prefab] then
+            local remembered_list = TheWorld.components.hoshino_data:Get("hoshino_com_task_sys_for_building.one_time_list") or {}
+            if remembered_list[prefab] then
+                return false
+            end
+        end
+        return true
+    end
+    function hoshino_com_task_sys_for_building:Get_White_Mission_Prefabs()
+        local ret_table = {}
+        for i = 1, 47 do
+            -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
+            local formatted_number = string.format("%02d", i)
+            table.insert(ret_table, "hoshino_mission_white_" .. formatted_number)
+        end
+        return ret_table
+    end
     function hoshino_com_task_sys_for_building:GetNewTaskItem()
         local list = {
             "hoshino_task_excample_kill",

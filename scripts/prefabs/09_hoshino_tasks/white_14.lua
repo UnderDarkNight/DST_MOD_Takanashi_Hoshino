@@ -133,10 +133,6 @@
             dug_sapling_text:SetPosition(x,y+delta_y)
 
 
-
-
-
-
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
@@ -155,7 +151,7 @@
                 dug_sapling_text:SetString(""..dug_sapling_num.."/10")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_14",update_fn)
+            dug_sapling_text.inst:ListenForEvent("hoshino_mission_white_14",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end

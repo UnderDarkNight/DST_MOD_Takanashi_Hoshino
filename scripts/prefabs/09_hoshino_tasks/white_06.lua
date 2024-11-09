@@ -130,7 +130,7 @@
                 display_text:SetString(""..num.."/4")
             end
             update_fn()
-            inst:ListenForEvent("hoshino_mission_white_06",update_fn)
+            display_text.inst:ListenForEvent("hoshino_mission_white_06",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
