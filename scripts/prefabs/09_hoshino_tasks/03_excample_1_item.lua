@@ -202,6 +202,7 @@
         inst:ListenForEvent("active",function(inst,owner)
 
             inst:DoPeriodicTask(5,mission_check)
+            inst:DoTaskInTime(0,mission_check)
             inst:ListenForEvent("itemlose",mission_check,owner)
             inst:ListenForEvent("dropitem",mission_check,owner)
             inst:ListenForEvent("itemget",mission_check,owner)

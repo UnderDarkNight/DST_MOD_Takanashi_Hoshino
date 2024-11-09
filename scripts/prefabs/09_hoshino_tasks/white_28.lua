@@ -67,17 +67,98 @@
         end)
 
     end
+    local function GetStackNum(item)
+        if item.replica.stackable then
+            return item.replica.stackable:StackSize()
+        end
+        return 1
+    end
+    local cooking = require("cooking")
+    local cooking_ingredients = cooking.ingredients
+    local function has_cooked_field(s)
+        -- 使用 string.find 查找 '_cooked' 子字符串
+        local start, stop = string.find(s, "_cooked", 1, true)  -- 第四个参数为 true 表示进行精确匹配
+        return start ~= nil  -- 如果找到，则返回 true；否则返回 false
+    end
+    local function IsVeggie(item)
+        if item and not has_cooked_field(item.prefab) then
+            local food_base_prefab = item.prefab
+            if cooking_ingredients[food_base_prefab] and cooking_ingredients[food_base_prefab].tags 
+                and cooking_ingredients[food_base_prefab].tags["veggie"] then
+                return true
+            end
+        end
+        return false
+    end
+    local function Has_Veggie(owner,num)
+        local count_num = 0
+        local ret_veggie_inst = {}
+
+        --- 玩家身上
+        local inv_slots = owner.replica.inventory:GetItems()
+        for i = 1, 50, 1 do
+            if IsVeggie(inv_slots[i]) and ret_veggie_inst[inv_slots[i]] == nil then
+                count_num = count_num + GetStackNum(inv_slots[i])
+                ret_veggie_inst[inv_slots[i]] = true
+            end
+        end
+        --- 遍历打开的背包
+        local openning_containers = owner.replica.inventory:GetOpenContainers() or {}
+        for temp_container_inst, flag in pairs(openning_containers) do
+            if temp_container_inst and flag and temp_container_inst.replica.inventoryitem and temp_container_inst.replica.container:IsOpenedBy(owner) then
+                --- 只算正在打开的背包，不算箱子。
+                local max_slots_num = temp_container_inst.replica.container:GetNumSlots()
+                -- local container_slots = temp_container_inst.replica.container
+                for i = 1, max_slots_num, 1 do
+                    local temp_item = temp_container_inst.replica.container:GetItemInSlot(i)
+                    if IsVeggie(temp_item) and ret_veggie_inst[temp_item] == nil then
+                        count_num = count_num + GetStackNum(temp_item)
+                        ret_veggie_inst[temp_item] = true
+                    end
+                end
+            end
+        end
+        --- 返回计算结果
+        return count_num >= num,ret_veggie_inst
+    end
+    local function Remove_Veggie(owner,num)
+        local enough_flag, ret_veggie_inst = Has_Veggie(owner,num)
+        if not enough_flag then
+            return false
+        end
+        for temp_item, flag in pairs(ret_veggie_inst) do
+            if num <= 0 then
+                break
+            end
+            if temp_item.components.stackable == nil then
+                temp_item:Remove()
+                num = num - 1
+            else
+               local current_stack_num = temp_item.components.stackable:StackSize()
+               if current_stack_num >= num then
+                    --- 叠堆数量充足
+                    temp_item.components.stackable:Get(num):Remove()
+                    num = 0
+               else
+                    --- 叠堆数量不足
+                    temp_item:Remove()
+                    num = num - current_stack_num
+               end
+            end
+        end
+
+        return true
+    end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_06","hoshino_mission_white_06")
-        inst:ListenForEvent("hoshino_mission_white_06",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_28","hoshino_mission_white_28")
+        inst:ListenForEvent("hoshino_mission_white_28",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
             return
         end
-
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于平板显示的API，返回Widget图像。client端调用
@@ -101,7 +182,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_06_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_28_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -117,27 +198,27 @@
         --------------------------------------------------------------------------
         ---  91,112,136
             local display_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
-            display_text:SetPosition(-300,-30)
+            display_text:SetPosition(-300+10,-30)
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
                 local num = inst.num or inst.__num:value() or 0
-                if num >= 4 then
+                if num >= 15 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/4")
+                display_text:SetString(""..num.."/15")
             end
             update_fn()
-            display_text.inst:ListenForEvent("hoshino_mission_white_06",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_white_28",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_06_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_28_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -149,19 +230,19 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"meat",4) then
+            if owner and Has_Veggie(owner,15) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.20 -- 20% 经验
+                local exp = current_max_exp*0.25 -- 25% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                -- owner.components.hoshino_com_shop:CreditCoinDelta(150) -- 150 信用币
+                owner.components.hoshino_com_shop:CreditCoinDelta(200)
 
-                Remove_Items_By_Prefab(owner,"meat",4)
+                Remove_Veggie(owner,15)
             end
         end)
         inst:ListenForEvent("task_give_up", function()
@@ -176,18 +257,24 @@
         --- 检查任务内容
         local function mission_check()
             local owner = inst:GetOwner()
-            local item_num = 0
-            local prefab = "meat"
-            if owner then
-                local flag,num = Has_Enough_Items(owner,prefab,item_num)
 
-                item_num = math.clamp(num,0,4)
+            if owner then
+                local enough_flag,item_list = Has_Veggie(owner,15)
+                local item_num = 0
+
+                for temp_item, v in pairs(item_list) do
+                    if temp_item and v then
+                        item_num = item_num + GetStackNum(temp_item)
+                    end
+                end
+
+                item_num = math.clamp(item_num,0,15)
                 inst.__num:set(item_num)
-                if item_num >= 4 then
+                if item_num >= 15 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 
-            end        
+            end
         end
         --- 激活任务
         inst:ListenForEvent("active",function(inst,owner)
@@ -267,4 +354,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_white_06", fn, assets)
+return Prefab("hoshino_mission_white_28", fn, assets)
