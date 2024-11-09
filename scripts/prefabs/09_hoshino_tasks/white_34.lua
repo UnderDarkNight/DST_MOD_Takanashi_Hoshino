@@ -30,8 +30,8 @@
     local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 专属参数
-    local MISSION_REQUIRE_NUM = 10
-    local MISSION_REQUIRE_PREFAB = "item_tentacles"
+    local MISSION_REQUIRE_NUM = 5
+    local MISSION_REQUIRE_PREFAB = "boatpatch"
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
     local function Has_Enough_Items(owner,prefab,num)
@@ -74,8 +74,8 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_04","hoshino_mission_white_04")
-        inst:ListenForEvent("hoshino_mission_white_04",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_34","hoshino_mission_white_34")
+        inst:ListenForEvent("hoshino_mission_white_34",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
@@ -104,7 +104,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_04_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_34_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -133,14 +133,14 @@
                 display_text:SetString(""..num.."/"..MISSION_REQUIRE_NUM)
             end
             update_fn()
-            display_text.inst:ListenForEvent("hoshino_mission_white_04",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_white_34",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_04_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_34_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -165,7 +165,10 @@
                 owner.components.hoshino_com_shop:CreditCoinDelta(150) -- 150 信用币
 
                 Remove_Items_By_Prefab(owner,MISSION_REQUIRE_PREFAB,MISSION_REQUIRE_NUM)
-                owner.components.inventory:GiveItem(SpawnPrefab("wetgoop")) -- 给予物品
+
+                local item = SpawnPrefab("townportaltalisman")
+                item.components.stackable.stacksize = 3
+                owner.components.inventory:GiveItem(item) -- 给予物品
             end
         end)
         inst:ListenForEvent("task_give_up", function()
@@ -271,4 +274,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_white_04", fn, assets)
+return Prefab("hoshino_mission_white_34", fn, assets)
