@@ -15,6 +15,7 @@ local file_folders = {
     "07_spell",                         ---- 技能(常用于制作栏)
     "08_hoshino_spell",                 ---- 星野专属技能、包括技能物品、制作栏
     "09_hoshino_tasks",                 ---- 任务物品
+    "10_foods",                         ---- 食物
 
     
 }

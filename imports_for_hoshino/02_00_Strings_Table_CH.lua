@@ -299,5 +299,12 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["recipe_desc"] = "任务公告栏",
             },
         --------------------------------------------------------------------
+        --- 10_foods
+            ["hoshino_food_shiba_seki_ramen"] = {
+                ["name"] = "柴关拉面",
+                ["inspect_str"] = "柴关拉面",
+                ["recipe_desc"] = "柴关拉面",
+            },
+        --------------------------------------------------------------------
 }
 
