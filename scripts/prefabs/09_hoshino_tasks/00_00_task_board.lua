@@ -279,6 +279,7 @@ local function fn()
     inst.AnimState:SetBuild("hoshino_building_task_board")
     inst.AnimState:PlayAnimation("idle")
 
+    inst:AddTag("irreplaceable")
     inst:AddTag("structure")
     inst:AddTag("hoshino_building_task_board")
 

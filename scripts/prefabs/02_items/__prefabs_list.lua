@@ -33,6 +33,7 @@ local prefabs_name_list = {
     "03_abydos_high_purity_alloy",              --- 阿拜索斯高纯度合金
     "04_blue_schist",                           --- 青辉石
     "05_12mm_shotgun_shells",                   --- 12mm霰弹
+    "06_special_packer",                        --- 特殊打包盒
 
 }
 

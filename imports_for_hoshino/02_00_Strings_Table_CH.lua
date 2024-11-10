@@ -92,6 +92,16 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "12mm霰弹",
                 ["recipe_desc"] = "12mm霰弹",
             },
+            ["hoshino_item_special_packer"] = {
+                ["name"] = "超级打包盒",
+                ["inspect_str"] = "超级打包盒",
+                ["recipe_desc"] = "超级打包盒",
+            },
+            ["hoshino_item_special_wraped_box"] = {
+                ["name"] = "超级打包盒（已经打包）",
+                ["inspect_str"] = "超级打包盒（已经打包）",
+                ["recipe_desc"] = "超级打包盒（已经打包）",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

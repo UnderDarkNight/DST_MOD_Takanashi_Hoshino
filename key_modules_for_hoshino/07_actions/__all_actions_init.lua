@@ -24,3 +24,6 @@ modimport("key_modules_for_hoshino/07_actions/07_sg_gun_shoot_with_walking.lua")
 
 modimport("key_modules_for_hoshino/07_actions/08_sg_jump_out.lua") 
 --- 跳出技能动作
+
+modimport("key_modules_for_hoshino/07_actions/09_com_special_packer.lua") 
+--- 特殊打包器
