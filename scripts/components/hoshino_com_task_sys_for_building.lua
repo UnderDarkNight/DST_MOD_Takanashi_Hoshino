@@ -118,7 +118,10 @@ nil,
         for i = 1, 47 do
             -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
             local formatted_number = string.format("%02d", i)
-            table.insert(ret_table, "hoshino_mission_white_" .. formatted_number)
+            local ret_prefab = "hoshino_mission_white_" .. formatted_number
+            if PrefabExists(ret_prefab) then
+                table.insert(ret_table,ret_prefab)
+            end
         end
         return ret_table
     end
