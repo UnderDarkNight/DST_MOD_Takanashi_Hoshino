@@ -75,6 +75,7 @@ local prefabs_name_list = {
     "white_41",                             --- 白色41
     "white_42",                             --- 白色42
     "white_43",                             --- 白色43
+    "white_44",                             --- 白色44
 
 
 }
