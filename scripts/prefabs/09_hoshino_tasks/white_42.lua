@@ -162,9 +162,7 @@
                 local prefab = tostring(_table and _table.prefab)
                 local num = _table and _table.num
                 local other_data = _table and _table.other_data or {}
-                local num = inst.components.hoshino_data:Add("num",num or 1)
-                num = math.clamp(num,0,20)
-                inst.components.hoshino_data:Set("num",num)
+                local num = inst.components.hoshino_data:Add("num",num or 1,0,20)
                 inst.__num:set(num)
                 if num >= 20 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")

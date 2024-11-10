@@ -167,9 +167,7 @@
             inst:ListenForEvent("buildstructure",function(_,_table)
                 _table = _table or {}
                 if _table.item and _table.item.prefab == "researchlab" then
-                    local num = inst.components.hoshino_data:Add("num",1)
-                    num = math.clamp(num,0,1)
-                    inst.components.hoshino_data:Set("num",num)
+                    local num = inst.components.hoshino_data:Add("num",1,0,1)
                     inst.__num:set(num)
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end

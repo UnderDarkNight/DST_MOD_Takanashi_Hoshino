@@ -169,9 +169,7 @@
                 local target = _table and _table.target
                 local item = _table and _table.item
                 if target and target.prefab == "birdcage" and item and is_meat(item) and (TheWorld.state.isnight or TUNING.HOSHINO_DEBUGGING_MODE) then
-                    local num = inst.components.hoshino_data:Add("num",1)
-                    num = math.clamp(num,0,10)
-                    inst.components.hoshino_data:Set("num",num)
+                    local num = inst.components.hoshino_data:Add("num",1,0,10)
                     inst.__num:set(num)
                     if num >= 10 then
                         owner:PushEvent("hoshino_event.pad_warnning","main_page")

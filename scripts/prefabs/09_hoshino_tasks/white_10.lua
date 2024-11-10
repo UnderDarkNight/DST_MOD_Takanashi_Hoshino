@@ -157,9 +157,7 @@
                 local target = _table and _table.target
                 local prefab = target and target.prefab
                 if prefab == "punchingbag" or prefab == "punchingbag_shadow" or prefab == "punchingbag_lunar" then
-                    local num = inst.components.hoshino_data:Add("num",1)
-                    num = math.clamp(num,0,1)
-                    inst.components.hoshino_data:Set("num",num)
+                    local num = inst.components.hoshino_data:Add("num",1,0,1)
                     inst.__num:set(num)
                     if num >= 1 then
                         owner:PushEvent("hoshino_event.pad_warnning","main_page")

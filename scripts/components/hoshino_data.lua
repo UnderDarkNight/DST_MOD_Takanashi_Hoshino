@@ -54,10 +54,15 @@ nil,
         end
     end
 
-    function hoshino_data:Add(index,num)
+    function hoshino_data:Add(index,num,min,max)
         if index then
-            self.DataTable[index] = (self.DataTable[index] or 0) + ( num or 0 )
-            return self.DataTable[index]
+            if max == nil and min == nil then
+                self.DataTable[index] = (self.DataTable[index] or 0) + ( num or 0 )
+                return self.DataTable[index]
+            elseif type(max) == "number" and type(min) == "number" then
+                self.DataTable[index] = math.clamp( (self.DataTable[index] or 0) + ( num or 0 ) , min , max )
+                return self.DataTable[index]
+            end                    
         end
         return 0
     end

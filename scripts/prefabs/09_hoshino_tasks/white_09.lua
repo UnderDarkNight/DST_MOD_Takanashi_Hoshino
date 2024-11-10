@@ -148,9 +148,7 @@
 
             inst:DoPeriodicTask(5,function()
                 if owner.sg and owner.sg:HasStateTag("sleeping") then
-                    local num = inst.components.hoshino_data:Add("num",1)
-                    num = math.clamp(num,0,1)
-                    inst.components.hoshino_data:Set("num",num)
+                    local num = inst.components.hoshino_data:Add("num",1,0,1)
                     inst.__num:set(num)
                 end
                 if inst.components.hoshino_data:Add("num",0) >= 1 then

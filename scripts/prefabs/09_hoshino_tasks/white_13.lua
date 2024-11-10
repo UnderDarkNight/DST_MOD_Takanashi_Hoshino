@@ -186,10 +186,8 @@
 
             inst:ListenForEvent("fishingcollect",function(_,_table)
                 if _table and _table.fish and _table.fish.prefab == "pondfish" then
-                    local num = inst.components.hoshino_data:Add("num",1)
-                    num = math.clamp(num,0,1)
+                    local num = inst.components.hoshino_data:Add("num",1,0,1)
                     inst.__num:set(num)
-                    inst.components.hoshino_data:Set("num",num)
                     if num >= 1 then
                         owner:PushEvent("hoshino_event.pad_warnning","main_page")
                     end

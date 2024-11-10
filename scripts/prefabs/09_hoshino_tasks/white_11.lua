@@ -163,9 +163,7 @@
                 -- 使用 string.find 查找子串
                 local start, end_pos = string.find(prefab, keyword, 1, true) -- 第四个参数设置为true以执行简单模式匹配
                 if start then
-                    local num = inst.components.hoshino_data:Add("num",num or 1)
-                    num = math.clamp(num,0,5)
-                    inst.components.hoshino_data:Set("num",num)
+                    local num = inst.components.hoshino_data:Add("num",num or 1,0,5)
                     inst.__num:set(num)
                     if num >= 5 then
                         owner:PushEvent("hoshino_event.pad_warnning","main_page")

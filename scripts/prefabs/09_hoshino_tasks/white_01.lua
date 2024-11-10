@@ -145,9 +145,7 @@
         inst:ListenForEvent("active",function(inst,owner)
             inst:ListenForEvent("attacked",function()
                 
-                local num = inst.components.hoshino_data:Add("num",1)
-                num = math.clamp(num,0,5)
-                inst.components.hoshino_data:Set("num",num)
+                local num = inst.components.hoshino_data:Add("num",1,0,5)
                 inst.__num:set(num)
 
             end,owner)

@@ -150,9 +150,7 @@
                 local x,y,z = owner.Transform:GetWorldPosition()
                 local tile = TheWorld.Map:GetTileAtPoint(x,y,z)
                 if lunacy_mode and tile == 43 then
-                    local num = inst.components.hoshino_data:Add("num",1)
-                    num = math.clamp(num,0,1)
-                    inst.components.hoshino_data:Set("num",num)
+                    local num = inst.components.hoshino_data:Add("num",1,0,1)
                     inst.__num:set(num)
                 end
                 if inst.components.hoshino_data:Add("num",0) >= 1 then

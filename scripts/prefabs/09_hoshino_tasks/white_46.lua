@@ -147,9 +147,7 @@
 
                 if is_spell and inst.__spell_casting and target and target.prefab == "butterfly" and inst.butterfles[target] == nil then
                     inst.butterfles[target] = true
-                    local num = inst.components.hoshino_data:Add("num",1)
-                    num = math.clamp(num,0,2)
-                    inst.components.hoshino_data:Set("num",num)
+                    local num = inst.components.hoshino_data:Add("num",1,0,2)
                     inst.__num:set(num)
                     if num >= 2 then
                         owner:PushEvent("hoshino_event.pad_warnning","main_page")
