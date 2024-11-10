@@ -305,6 +305,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "柴关拉面",
                 ["recipe_desc"] = "柴关拉面",
             },
+            ["hoshino_food_mandrake_concentrate"] = {
+                ["name"] = "曼德拉草浓缩液",
+                ["inspect_str"] = "曼德拉草浓缩液",
+                ["recipe_desc"] = "曼德拉草浓缩液",
+            },
         --------------------------------------------------------------------
 }
 
