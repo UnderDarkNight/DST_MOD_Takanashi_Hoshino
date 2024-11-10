@@ -226,3 +226,57 @@ TUNING.HOSHINO_FNS = {}
         end
     end
 --------------------------------------------------------------------------------------------
+-- 随机坐标
+    function TUNING.HOSHINO_FNS:Get_Random_Point(x_or_vect3,y_or_radius,_z,_radius)
+        ---------------------------------------------------------------
+        --- 做自适应,输入 x,y,z,radius    或者 输入 Vector3,radius
+            local x,y,z
+            local radius
+            if type(x_or_vect3) == type(Vector3(0,0,0)) and type(y_or_radius) == "number" then
+                x = x_or_vect3.x
+                y = x_or_vect3.y
+                z = x_or_vect3.z
+                radius = y_or_radius
+            elseif type(x_or_vect3) == "number" and type(y_or_radius) == "number" and type(_z) == "number" and type(_radius) == "number" then
+                x = x_or_vect3
+                y = y_or_radius
+                z = _z
+                radius = _radius
+            end
+        ---------------------------------------------------------------
+        --- 避免崩溃处理。
+            if x == nil or y == nil or z == nil or radius == nil then
+                return Vector3(0,0,0)
+            end
+        ---------------------------------------------------------------
+        ---
+            local surround_points = self:GetSurroundPoints({
+                target = Vector3(x,y,z),
+                range = radius or 1,
+                num = radius * 3
+            })
+            --- 随机坐标
+            for i = 1, radius*3*10, 1 do
+                local temp_ret = surround_points[math.random(#surround_points)]
+                if TheWorld.Map:IsAboveGroundAtPoint(temp_ret.x,temp_ret.y,temp_ret.z) then
+                    return temp_ret
+                end
+            end
+            --- 第一次失败，则半径减半
+            radius = math.ceil(radius / 2)
+            surround_points = self:GetSurroundPoints({
+                target = Vector3(x,y,z),
+                range = radius or 1,
+                num = radius * 3
+            })
+            for i = 1, radius*3*10, 1 do
+                local temp_ret = surround_points[math.random(#surround_points)]
+                if TheWorld.Map:IsAboveGroundAtPoint(temp_ret.x,temp_ret.y,temp_ret.z) then
+                    return temp_ret
+                end
+            end
+            --- 如果随机坐标失败，则返回原点
+            return Vector3(x,y,z)
+        ---------------------------------------------------------------
+    end
+--------------------------------------------------------------------------------------------

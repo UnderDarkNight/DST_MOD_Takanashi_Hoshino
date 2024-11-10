@@ -173,8 +173,9 @@
                         for i = 1, 32, 1 do
                             owner:DoTaskInTime(0.2*i,function()
                                 local x,y,z = owner.Transform:GetWorldPosition()
+                                local random_pt = TUNING.HOSHINO_FNS:Get_Random_Point(x,y,z,10)
                                 local monster = SpawnPrefab(math.random() < 0.3 and "spider_warrior" or "spider")
-                                monster.Transform:SetPosition(x,y,z)
+                                monster.Transform:SetPosition(random_pt.x,0,random_pt.z)
                                 monster.components.combat:SuggestTarget(owner)
                                 monster:DoPeriodicTask(3,function()
                                     monster.components.combat:SuggestTarget(monster:GetNearestPlayer(true))
