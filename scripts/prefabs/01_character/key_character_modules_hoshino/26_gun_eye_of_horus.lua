@@ -417,6 +417,10 @@ return function(inst)
                             else
                                 DoSpellDamage(temp_target,weapon,spell_flag)
                             end
+                            inst:PushEvent("hoshino_event.gun_eye_of_horus_attacked",{
+                                target = temp_target,
+                                is_spell = spell_flag
+                            })
                         elseif spell_flag ~= nil and temp_target.components.workable and temp_target.components.workable:CanBeWorked() then
                             --- 技能损坏 植物、矿物。
                             pcall(function()
