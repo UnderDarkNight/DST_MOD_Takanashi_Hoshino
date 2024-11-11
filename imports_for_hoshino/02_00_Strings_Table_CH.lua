@@ -102,6 +102,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "超级打包盒（已经打包）",
                 ["recipe_desc"] = "超级打包盒（已经打包）",
             },
+            ["hoshino_item_yi"] = {
+                ["name"] = "镒",
+                ["inspect_str"] = "镒",
+                ["recipe_desc"] = "镒",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

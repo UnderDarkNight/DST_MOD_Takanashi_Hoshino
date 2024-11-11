@@ -27,6 +27,7 @@ local files_name = {
 		"hoshino_item_12mm_shotgun_shells",								--- 12mm霰弹
 		"hoshino_item_special_packer",									--- 超级打包盒
 		"hoshino_item_special_wraped_box",								--- 超级打包盒（已经打包）
+		"hoshino_item_yi",												--- 镒
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

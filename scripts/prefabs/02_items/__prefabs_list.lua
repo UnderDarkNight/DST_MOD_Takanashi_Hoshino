@@ -34,6 +34,7 @@ local prefabs_name_list = {
     "04_blue_schist",                           --- 青辉石
     "05_12mm_shotgun_shells",                   --- 12mm霰弹
     "06_special_packer",                        --- 特殊打包盒
+    "07_yi",                                    --- 镒
 
 }
 
