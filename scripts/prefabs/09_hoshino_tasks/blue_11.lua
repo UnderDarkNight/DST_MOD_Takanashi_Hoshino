@@ -19,8 +19,8 @@
 --- 素材
     local assets =
     {
-        Asset("IMAGE", "images/hoshino_mission/white_mission.tex"),
-        Asset("ATLAS", "images/hoshino_mission/white_mission.xml"),
+        Asset("IMAGE", "images/hoshino_mission/blue_mission.tex"),
+        Asset("ATLAS", "images/hoshino_mission/blue_mission.xml"),
     }
     local button_atlas = "images/inspect_pad/page_main.xml"     --- 按钮图集
     local button_give_up_img = "button_give_up.tex"             --- 放弃按钮
@@ -31,8 +31,8 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_white_46","hoshino_mission_white_46")
-        inst:ListenForEvent("hoshino_mission_white_46",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_blue_11","hoshino_mission_blue_11")
+        inst:ListenForEvent("hoshino_mission_blue_11",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
@@ -61,7 +61,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_46_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_11_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -90,14 +90,14 @@
                 display_text:SetString(""..num.."/1")
             end
             update_fn()
-            display_text.inst:ListenForEvent("hoshino_mission_white_46",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_blue_11",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/white_mission.xml","white_mission_46_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_11_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -115,17 +115,15 @@
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.15 -- 15% 经验
+                local exp = current_max_exp*0.20 -- 20% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
+                -- owner.components.hoshino_com_shop:CreditCoinDelta(200)
 
-
-                local item = SpawnPrefab("butterflymuffin")
-                item.components.stackable.stacksize = 2
+                local item = SpawnPrefab("compost")
+                item.components.stackable.stacksize = 5
                 owner.components.inventory:GiveItem(item)
-
-
 
             end
         end)
@@ -140,28 +138,27 @@
         end)
         --- 激活任务
         inst:ListenForEvent("active",function(inst,owner)
-            inst.butterfles = {}
-            inst:ListenForEvent("hoshino_event.gun_eye_of_horus_attacked",function(_,_table) --- 广播来的事件
-                local target = _table and _table.target
-                local is_spell = _table and _table.is_spell
-
-                if is_spell and inst.__spell_casting and target and target.prefab == "butterfly" and inst.butterfles[target] == nil then
-                    inst.butterfles[target] = true
-                    local num = inst.components.hoshino_data:Add("num",1,0,1)
-                    inst.__num:set(num)
-                    if num >= 1 then
-                        owner:PushEvent("hoshino_event.pad_warnning","main_page")
-                    end
+            --- 定时检查
+            inst:DoPeriodicTask(10,function()
+                -- 
+                local owner = inst:GetOwner()
+                if owner == nil then
+                    return
                 end
+                local num = inst.components.hoshino_data:Add("num",0)
+                if num >= 1 then
+                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                end
+            end)            
 
-            end,owner)
-
-            --- 战术镇压 期间 的判断。
-            inst:ListenForEvent("hoshino_sg_action_gun_shoot_with_walking_dmg_blocker_start",function()
-                inst.__spell_casting = true
-            end,owner)
-            inst:ListenForEvent("hoshino_sg_action_gun_shoot_with_walking_dmg_blocker_end",function()
-                inst.__spell_casting = false
+            --- 种植
+            inst:ListenForEvent("hoshino_event.farmplantable_on_planted",function(_,_table)
+                print("种植",_table.prefab)
+                if _table and _table.in_soil then
+                    inst.__num:set(1)
+                    inst.components.hoshino_data:Set("num",1)
+                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                end
             end,owner)
 
         end)
@@ -172,18 +169,7 @@
             inst.__num:set(num)
         end)
 
-        --- 定时检查
-        inst:DoPeriodicTask(10,function()
-            -- 
-            local owner = inst:GetOwner()
-            if owner == nil then
-                return
-            end
-            local num = inst.components.hoshino_data:Add("num",0)
-            if num >= 5 then
-                owner:PushEvent("hoshino_event.pad_warnning","main_page")
-            end
-        end)
+
 
 
     end
@@ -218,7 +204,7 @@ local function fn()
     --- 
         inst:AddTag("nosteal")
         inst:AddTag("hoshino_task_item")
-        inst.type = "gray"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
+        inst.type = "blue"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
     --------------------------------------------------------------------------------------------
     --- 数据组件
         if TheWorld.ismastersim then
@@ -246,4 +232,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_white_46", fn, assets)
+return Prefab("hoshino_mission_blue_11", fn, assets)

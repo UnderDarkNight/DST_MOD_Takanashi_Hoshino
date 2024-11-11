@@ -10,3 +10,6 @@ modimport("key_modules_for_hoshino/05_components/03_combat_set_target_hook.lua")
 
 modimport("key_modules_for_hoshino/05_components/04_trader_hook.lua") 
 --- trader 组件 的 额外hook
+
+modimport("key_modules_for_hoshino/05_components/05_farmplantable_hook.lua") 
+--- farmplantable 组件 的 额外hook
