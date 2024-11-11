@@ -109,6 +109,7 @@ local function wrap_fn()
                 build = build,
                 anim = anim,
                 name = name,
+                prefab = target.prefab,
             })
             box.Transform:SetPosition(x, y, z)
             target:Remove()
@@ -183,6 +184,7 @@ local function box_fn()
             --     anim = "",  ---
             --     name = "",  --- 显示名字
             --     save_record = "",  --- 储存代码
+            --     prefab = "",  --- 物品代码
             -- }
             if _table.save_record == nil then
                 inst:Remove()
@@ -194,6 +196,7 @@ local function box_fn()
                     bank = _table.bank,
                     build = _table.build,
                     anim = _table.anim,
+                    prefab = _table.prefab,
                 }
                 -- inst.__net_string_json:set(json.encode(deploy_placer_data)) --- 下发placer 用的数据
                 inst.components.hoshino_data:Set("deploy_placer_data",deploy_placer_data)
@@ -233,13 +236,28 @@ local function box_fn()
 end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- placer 相关的 hook
+    local function Is_Official_Skin_Displaying(prefab,build)
+        --- 官方的皮肤会导致无法显示，所以这里需要判断一下
+        if prefab and PREFAB_SKINS and PREFAB_SKINS[prefab] then
+            for index, skin_name in pairs(PREFAB_SKINS[prefab]) do
+                if build == skin_name or index == build then
+                    return true
+                end
+            end
+        end
+        return false
+    end
     local function placer_postinit_fn(inst)
 
             local old_SetBuilder_fn = inst.components.placer.SetBuilder
             inst.components.placer.SetBuilder = function(self,builder, recipe, invobject) --- 玩家准备放置预览的时候，会执行这个
                 if invobject and invobject.deploy_placer_data then
                     local temp_table = invobject.deploy_placer_data
-                    if temp_table.bank and temp_table.build and temp_table.anim then
+                    local bank = temp_table.bank
+                    local build = temp_table.build
+                    local anim = temp_table.anim
+                    local prefab = temp_table.prefab
+                    if bank and build and anim and not Is_Official_Skin_Displaying(prefab,build) then
                         inst.AnimState:SetBank(temp_table.bank)
                         inst.AnimState:SetBuild(temp_table.build)
                         inst.AnimState:PlayAnimation(temp_table.anim,true)
@@ -248,6 +266,7 @@ end
                         else
                             inst.AnimState:Hide("snow")
                         end
+                        inst.AnimState:SetScale(2,2,2)
                     end
                 end
                 return old_SetBuilder_fn(self,builder, recipe, invobject)
