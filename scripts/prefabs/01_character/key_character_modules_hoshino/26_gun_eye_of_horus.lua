@@ -52,12 +52,17 @@ return function(inst)
             [2] = 9,
             [3] = 11,
         }
+        local attack_range_offset_fix = {
+            [1] = 3.4,
+            [2] = 3.4,
+            [3] = 3.4,
+        }
         local function Get_Attack_Angle()
             return attack_angle[GetGunLevel()] or 60
         end
         local function Get_Attack_Range(for_weapon_param)
             if for_weapon_param then                
-                return ( (attack_range[GetGunLevel()] or 9) - 3.4) -- 给武器上的攻击距离参数需要修正，以匹配特效显示范围
+                return ( (attack_range[GetGunLevel()] or 9) - (attack_range_offset_fix[GetGunLevel()] or 0)) -- 给武器上的攻击距离参数需要修正，以匹配特效显示范围
             else
                 return (attack_range[GetGunLevel()] or 9)
             end
