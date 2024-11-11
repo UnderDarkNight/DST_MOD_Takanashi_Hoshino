@@ -97,6 +97,7 @@ local prefabs_name_list = {
     "blue_15",                             --- 蓝色15
     "blue_16",                             --- 蓝色16
     "blue_17",                             --- 蓝色17
+    "blue_18",                             --- 蓝色18
 
 
 }
