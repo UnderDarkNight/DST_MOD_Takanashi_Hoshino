@@ -243,6 +243,11 @@ end
                         inst.AnimState:SetBank(temp_table.bank)
                         inst.AnimState:SetBuild(temp_table.build)
                         inst.AnimState:PlayAnimation(temp_table.anim,true)
+                        if TheWorld.state.issnowcovered then
+                            inst.AnimState:Show("snow")
+                        else
+                            inst.AnimState:Hide("snow")
+                        end
                     end
                 end
                 return old_SetBuilder_fn(self,builder, recipe, invobject)
