@@ -48,14 +48,14 @@ return function(inst)
             [3] = 60
         }
         local attack_range = {
-            [1] = 7,
-            [2] = 9,
-            [3] = 11,
+            [1] = 7+3,
+            [2] = 9+3,
+            [3] = 11+3,
         }
         local attack_range_offset_fix = {
-            [1] = 3.4,
-            [2] = 3.4,
-            [3] = 3.4,
+            [1] = 3.0,
+            [2] = 3.0,
+            [3] = 3.0,
         }
         local function Get_Attack_Angle()
             return attack_angle[GetGunLevel()] or 60
