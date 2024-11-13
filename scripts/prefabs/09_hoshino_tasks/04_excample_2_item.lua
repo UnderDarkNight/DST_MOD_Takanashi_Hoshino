@@ -29,6 +29,12 @@
     local button_give_up_location = Vector3(290,40,0)          --- 放弃按钮位置
     local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 专属参数
+    local MISSION_ITEM_1 = "dug_grass"
+    local MISSION_ITEM_1_NUM = 10
+    local MISSION_ITEM_2 = "dug_sapling"
+    local MISSION_ITEM_2_NUM = 5
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
     local function Has_Enough_Items(owner,prefab,num)
         local flag,num = owner.replica.inventory:Has(prefab,num,true)
@@ -140,19 +146,19 @@
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
-                local dug_grass_flag,dug_grass_num = Has_Enough_Items(ThePlayer,"dug_grass",10)
-                local dug_sapling_flag,dug_sapling_num = Has_Enough_Items(ThePlayer,"dug_sapling",10)
+                local dug_grass_flag,dug_grass_num = Has_Enough_Items(ThePlayer,"dug_grass",MISSION_ITEM_1_NUM)
+                local dug_sapling_flag,dug_sapling_num = Has_Enough_Items(ThePlayer,"dug_sapling",MISSION_ITEM_2_NUM)
 
                 if dug_grass_flag and dug_sapling_flag then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                dug_grass_num = math.clamp(dug_grass_num,0,10)
-                dug_sapling_num = math.clamp(dug_sapling_num,0,10)
+                dug_grass_num = math.clamp(dug_grass_num,0,MISSION_ITEM_1_NUM)
+                dug_sapling_num = math.clamp(dug_sapling_num,0,MISSION_ITEM_2_NUM)
 
-                dug_grass_text:SetString(""..dug_grass_num.."/10")
-                dug_sapling_text:SetString(""..dug_sapling_num.."/10")
+                dug_grass_text:SetString(""..dug_grass_num.."/"..MISSION_ITEM_1_NUM)
+                dug_sapling_text:SetString(""..dug_sapling_num.."/"..MISSION_ITEM_2_NUM)
             end
             update_fn()
             dug_grass_text.inst:ListenForEvent("hoshino_mission_white_14",update_fn,inst)
@@ -174,7 +180,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"dug_grass",10) and Has_Enough_Items(owner,"dug_sapling",10) then
+            if owner and Has_Enough_Items(owner,"dug_grass",MISSION_ITEM_1_NUM) and Has_Enough_Items(owner,"dug_sapling",MISSION_ITEM_2_NUM) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
@@ -184,8 +190,8 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 owner.components.hoshino_com_shop:CreditCoinDelta(150)
 
-                Remove_Items_By_Prefab(owner,"dug_grass",10)
-                Remove_Items_By_Prefab(owner,"dug_sapling",10)
+                Remove_Items_By_Prefab(owner,"dug_grass",MISSION_ITEM_1_NUM)
+                Remove_Items_By_Prefab(owner,"dug_sapling",MISSION_ITEM_2_NUM)
 
 
             end
@@ -205,16 +211,16 @@
 
             if owner then
 
-                local dug_grass_flag,dug_grass_num = Has_Enough_Items(owner,"dug_grass",10)
-                local dug_sapling_flag,dug_sapling_num = Has_Enough_Items(owner,"dug_sapling",10)
+                local dug_grass_flag,dug_grass_num = Has_Enough_Items(owner,"dug_grass",MISSION_ITEM_1_NUM)
+                local dug_sapling_flag,dug_sapling_num = Has_Enough_Items(owner,"dug_sapling",MISSION_ITEM_2_NUM)
 
-                dug_grass_num = math.clamp(dug_grass_num,0,10)
-                dug_sapling_num = math.clamp(dug_sapling_num,0,10)
+                dug_grass_num = math.clamp(dug_grass_num,0,MISSION_ITEM_1_NUM)
+                dug_sapling_num = math.clamp(dug_sapling_num,0,MISSION_ITEM_2_NUM)
 
                 inst.__dug_grass_num:set(dug_grass_num)
                 inst.__dug_sapling_num:set(dug_sapling_num)
 
-                if dug_grass_num >= 10 and dug_sapling_num >= 10 then
+                if dug_grass_num >= MISSION_ITEM_1_NUM and dug_sapling_num >= MISSION_ITEM_2_NUM then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 
