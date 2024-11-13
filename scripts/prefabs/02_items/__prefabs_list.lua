@@ -35,6 +35,7 @@ local prefabs_name_list = {
     "05_12mm_shotgun_shells",                   --- 12mm霰弹
     "06_special_packer",                        --- 特殊打包盒
     "07_yi",                                    --- 镒
+    "08_fragments_of_divine_script",            --- 神明文字碎片
 
 }
 

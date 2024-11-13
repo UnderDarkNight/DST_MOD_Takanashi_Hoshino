@@ -107,6 +107,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "镒",
                 ["recipe_desc"] = "镒",
             },
+            ["hoshino_item_fragments_of_divine_script"] = {
+                ["name"] = "神明文字碎片",
+                ["inspect_str"] = "神明文字碎片",
+                ["recipe_desc"] = "神明文字碎片",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
