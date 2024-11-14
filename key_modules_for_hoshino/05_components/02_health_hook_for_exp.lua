@@ -43,7 +43,7 @@ end
 
 AddComponentPostInit("health", function(self)
 
-    self.inst:ListenForEvent("minhealth",function()
+    self.inst:ListenForEvent("minhealth",function(_,_table)
         -----------------------------------------------------------------------------------
         --- 
             local max_health = self.maxhealth
@@ -59,6 +59,7 @@ AddComponentPostInit("health", function(self)
                             max_health = max_health,
                             epic = self.inst:HasTag("epic"),
                             target = self.inst,
+                            cause = _table and _table.cause,
                         })
                     end
                 end)

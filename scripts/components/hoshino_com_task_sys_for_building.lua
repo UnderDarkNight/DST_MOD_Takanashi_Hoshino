@@ -125,6 +125,18 @@ nil,
         end
         return ret_table
     end
+    function hoshino_com_task_sys_for_building:Get_Blue_Mission_Prefabs()
+        local ret_table = {}
+        for i = 1, 45 do
+            -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
+            local formatted_number = string.format("%02d", i)
+            local ret_prefab = "hoshino_mission_blue_" .. formatted_number
+            if PrefabExists(ret_prefab) then
+                table.insert(ret_table,ret_prefab)
+            end
+        end
+        return ret_table
+    end
     function hoshino_com_task_sys_for_building:GetNewTaskItem()
         local list = {
             "hoshino_task_excample_kill",
