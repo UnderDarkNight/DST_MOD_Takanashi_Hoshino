@@ -17,7 +17,7 @@ end
 local musthavetags = {"player","hoshino_com_level_sys"}
 local canthavetags = {"playerghost"}
 local musthaveoneoftags = nil
-local radius = 16
+local radius = 20
 
 ---------------------------------------------------------------------------------------------------------
 local prefab_black_list = {
@@ -57,6 +57,8 @@ AddComponentPostInit("health", function(self)
                         player:PushEvent("hoshino_event.exp_broadcast",{
                             prefab = prefab,
                             max_health = max_health,
+                            epic = self.inst:HasTag("epic"),
+                            target = self.inst,
                         })
                     end
                 end)
