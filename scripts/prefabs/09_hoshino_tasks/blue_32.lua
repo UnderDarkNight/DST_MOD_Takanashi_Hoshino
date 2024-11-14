@@ -29,57 +29,12 @@
     local button_give_up_location = Vector3(290,40,0)          --- 放弃按钮位置
     local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---- 
-    local function Has_Enough_Items(owner,prefab,num)
-        local flag,num = owner.replica.inventory:Has(prefab,num,true)
-        return flag or false,num
-    end
-    local function Remove_Items_By_Prefab(owner,prefab,num)
-        if not Has_Enough_Items(owner,prefab,num) then
-            return
-        end
-
-        local ask_num = num
-        owner.components.inventory:ForEachItem(function(item)
-            if not (item and item.prefab == prefab) then
-                return
-            end
-            if ask_num <= 0 then
-                return
-            end
-
-            if item.components.stackable == nil then
-                item:Remove()
-                ask_num = ask_num - 1
-            else
-               local current_stack_num = item.components.stackable:StackSize()
-               if current_stack_num >= ask_num then
-                    --- 叠堆数量充足
-                    item.components.stackable:Get(ask_num):Remove()
-                    ask_num = 0
-               else
-                    --- 叠堆数量不足
-                    item:Remove()
-                    ask_num = ask_num - current_stack_num
-               end
-            end
-
-        end)
-
-    end
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-
-        inst.__archive_resonator_item_num = net_uint(inst.GUID, "hoshino_mission_blue_27.archive_resonator_item","hoshino_mission_blue_27")
-        inst.__mapscroll_num = net_uint(inst.GUID, "hoshino_mission_blue_27.mapscroll","hoshino_mission_blue_27")
-        inst.__nightmare_timepiece_num = net_uint(inst.GUID, "hoshino_mission_blue_27.nightmare_timepiece","hoshino_mission_blue_27")
-        inst:ListenForEvent("hoshino_mission_blue_27",function()
-            inst.archive_resonator_item_num = inst.__archive_resonator_item_num:value()
-            inst.mapscroll_num = inst.__mapscroll_num:value()
-            inst.nightmare_timepiece_num = inst.__nightmare_timepiece_num:value()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_blue_32","hoshino_mission_blue_32")
+        inst:ListenForEvent("hoshino_mission_blue_32",function()
+            inst.num = inst.__num:value()
         end)
-
         if not TheWorld.ismastersim then
             return
         end
@@ -106,7 +61,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_27_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_32_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -120,48 +75,29 @@
                 TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
             end)
         --------------------------------------------------------------------------
-        ---       
-        --------------------------------------------------------------------------
-        ---
-            local x = -210+30
-            local y = 2
-            local delta_y = -22
-            local front_size = 25
-            local archive_resonator_item_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-            archive_resonator_item_text:SetPosition(x,y)
-
-            local mapscroll_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-            mapscroll_text:SetPosition(x,y+delta_y)
-
-            local nightmare_timepiece_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-            nightmare_timepiece_text:SetPosition(x,y+delta_y*2)
+        ---  91,112,136
+            local display_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
+            display_text:SetPosition(-300+10,-30)
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
-                local archive_resonator_item_flag,archive_resonator_item_num = Has_Enough_Items(ThePlayer,"archive_resonator_item",1)
-                local mapscroll_flag,mapscroll_num = Has_Enough_Items(ThePlayer,"mapscroll",1)
-                local nightmare_timepiece_flag,nightmare_timepiece_num = Has_Enough_Items(ThePlayer,"nightmare_timepiece",1)
-                if archive_resonator_item_flag and mapscroll_flag and nightmare_timepiece_flag then
+                local num = inst.num or inst.__num:value() or 0
+                if num >= 5 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                archive_resonator_item_num = math.clamp(archive_resonator_item_num,0,1)
-                mapscroll_num = math.clamp(mapscroll_num,0,1)
-                nightmare_timepiece_num = math.clamp(nightmare_timepiece_num,0,1)
-                archive_resonator_item_text:SetString(""..archive_resonator_item_num.."/1")
-                mapscroll_text:SetString(""..mapscroll_num.."/1")
-                nightmare_timepiece_text:SetString(""..nightmare_timepiece_num.."/1")
+                display_text:SetString(""..num.."/5")
             end
             update_fn()
-            archive_resonator_item_text.inst:ListenForEvent("hoshino_mission_blue_27",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_blue_32",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_27_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_32_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -173,28 +109,18 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"archive_resonator_item",1) and Has_Enough_Items(owner,"mapscroll",1) and Has_Enough_Items(owner,"nightmare_timepiece",1) then
+            if owner and inst.components.hoshino_data:Add("num",0) >= 5 then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.30 -- 30% 经验
+                local exp = current_max_exp*0.05 -- 5% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-
-                -- owner.components.hoshino_com_shop:Carchive_resonator_itemitCoinDelta(800)
-
-                Remove_Items_By_Prefab(owner,"archive_resonator_item",1)
-                Remove_Items_By_Prefab(owner,"mapscroll",1)
-                Remove_Items_By_Prefab(owner,"nightmare_timepiece",1)
-
-                -- local item = SpawnPrefab("hoshino_item_12mm_shotgun_shells")
-                -- item.components.stackable.stacksize = 5
-                -- owner.components.inventory:GiveItem(item) -- 给予物品
-
-                owner.components.inventory:GiveItem(SpawnPrefab("yellowstaff")) -- 给予物品
+                owner.components.hoshino_com_shop:CreditCoinDelta(300)
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
 
             end
         end)
@@ -207,47 +133,47 @@
             end
             inst:Remove()
         end)
-        --- 检查任务内容
-        local function mission_check()
-            local owner = inst:GetOwner()
-
-            if owner then
-
-                local archive_resonator_item_flag,archive_resonator_item_num = Has_Enough_Items(owner,"archive_resonator_item",1)
-                local mapscroll_flag,mapscroll_num = Has_Enough_Items(owner,"mapscroll",1)
-                local nightmare_timepiece_flag,nightmare_timepiece_num = Has_Enough_Items(owner,"nightmare_timepiece",1)
-
-                archive_resonator_item_num = math.clamp(archive_resonator_item_num,0,1)
-                mapscroll_num = math.clamp(mapscroll_num,0,1)
-                nightmare_timepiece_num = math.clamp(nightmare_timepiece_num,0,1)
-
-                inst.__archive_resonator_item_num:set(archive_resonator_item_num)
-                inst.__mapscroll_num:set(mapscroll_num)
-                inst.__nightmare_timepiece_num:set(nightmare_timepiece_num)
-
-                if archive_resonator_item_num >= 1 and mapscroll_num >= 1 and nightmare_timepiece_num >= 1 then
-                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
-                end
-
-            end        
-        end
         --- 激活任务
         inst:ListenForEvent("active",function(inst,owner)
+            --- 定时检查
+            inst:DoPeriodicTask(10,function()
+                -- 
+                local owner = inst:GetOwner()
+                if owner == nil then
+                    return
+                end
+                local num = inst.components.hoshino_data:Add("num",0)
+                if num >= 5 then
+                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                end
+            end)
+            --- 吃东西
+            inst:ListenForEvent("oneat",function(_,_table)
+                local food = _table and _table.food
+                if food and food.components.edible then
+                    local food_base_prefab = food.nameoverride or food.prefab  -- 带调味料的食物通过这个获取基础食物名字
+                    if not food_base_prefab == "goatmilk" then
+                        return
+                    end
+                    local num = inst.components.hoshino_data:Add("num",1,0,5)
+                    inst.__num:set(num)
+                    if num >= 5 then
+                        owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                    end
 
-            inst:DoPeriodicTask(5,mission_check)
-            inst:DoTaskInTime(0,mission_check)
-            inst:ListenForEvent("itemlose",mission_check,owner)
-            inst:ListenForEvent("dropitem",mission_check,owner)
-            inst:ListenForEvent("itemget",mission_check,owner)
-            inst:ListenForEvent("gotnewitem",mission_check,owner)
-            inst:ListenForEvent("itemget",mission_check,owner)
+                end
+            end,owner)
+
         end)
 
-        -- --- 加载检查
-        -- inst.components.hoshino_data:AddOnLoadFn(function(com)
-        --     local num = com:Add("num",0)
-        --     inst.__num:set(num)
-        -- end)
+        --- 加载检查
+        inst.components.hoshino_data:AddOnLoadFn(function(com)
+            local num = com:Add("num",0)
+            inst.__num:set(num)
+        end)
+
+
+
 
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -309,4 +235,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_blue_27", fn, assets)
+return Prefab("hoshino_mission_blue_32", fn, assets)

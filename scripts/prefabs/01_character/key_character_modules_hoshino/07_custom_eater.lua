@@ -74,6 +74,15 @@ return function(inst)
                 end
             end)
         ------------------------------------------------------------------------
+        --- Say 屏蔽 only_used_by_warly  疑似来自components.wisecracker进行的判断
+            local old_Say = inst.components.talker.Say
+            inst.components.talker.Say = function(self,str,...)
+                if str == "only_used_by_warly" then
+                    return
+                end
+                return old_Say(self,str,...)
+            end
+        ------------------------------------------------------------------------
     end)
 
     inst:ListenForEvent("player_unlocked_warly_eater_modules", function(inst)  --- 靠触发这个事件激活模块【汲取】
