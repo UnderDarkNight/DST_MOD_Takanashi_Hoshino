@@ -16,3 +16,6 @@ modimport("key_modules_for_hoshino/05_components/05_farmplantable_hook.lua")
 
 modimport("key_modules_for_hoshino/05_components/06_cookable_hook.lua") 
 --- cookable 组件 的 额外hook
+
+modimport("key_modules_for_hoshino/05_components/07_drawable_hook.lua") 
+--- drawable 组件 的 额外hook
