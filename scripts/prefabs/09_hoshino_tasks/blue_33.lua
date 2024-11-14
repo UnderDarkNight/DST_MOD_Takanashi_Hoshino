@@ -29,12 +29,67 @@
     local button_give_up_location = Vector3(290,40,0)          --- 放弃按钮位置
     local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 专属参数
+    local MISSION_TYPE = "blue" -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
+
+    local MISSION_ITEM_1 = "bunnyman"
+    local MISSION_ITEM_1_NUM = 1
+    local MISSION_ITEM_2 = "pigman"
+    local MISSION_ITEM_2_NUM = 1
+    local MISSION_ITEM_3 = "beefalo"
+    local MISSION_ITEM_3_NUM = 1
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 
+    local function Has_Enough_Items(owner,prefab,num)
+        local flag,num = owner.replica.inventory:Has(prefab,num,true)
+        return flag or false,num
+    end
+    local function Remove_Items_By_Prefab(owner,prefab,num)
+        if not Has_Enough_Items(owner,prefab,num) then
+            return
+        end
+
+        local ask_num = num
+        owner.components.inventory:ForEachItem(function(item)
+            if not (item and item.prefab == prefab) then
+                return
+            end
+            if ask_num <= 0 then
+                return
+            end
+
+            if item.components.stackable == nil then
+                item:Remove()
+                ask_num = ask_num - 1
+            else
+               local current_stack_num = item.components.stackable:StackSize()
+               if current_stack_num >= ask_num then
+                    --- 叠堆数量充足
+                    item.components.stackable:Get(ask_num):Remove()
+                    ask_num = 0
+               else
+                    --- 叠堆数量不足
+                    item:Remove()
+                    ask_num = ask_num - current_stack_num
+               end
+            end
+
+        end)
+
+    end
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_blue_32","hoshino_mission_blue_32")
-        inst:ListenForEvent("hoshino_mission_blue_32",function()
-            inst.num = inst.__num:value()
+
+        inst.__bunnyman_num = net_uint(inst.GUID, "hoshino_mission_blue_33.bunnyman","hoshino_mission_blue_33")
+        inst.__pigman_num = net_uint(inst.GUID, "hoshino_mission_blue_33.pigman","hoshino_mission_blue_33")
+        inst.__beefalo_num = net_uint(inst.GUID, "hoshino_mission_blue_33.beefalo","hoshino_mission_blue_33")
+        inst:ListenForEvent("hoshino_mission_blue_33",function()
+            inst.bunnyman_num = inst.__bunnyman_num:value()
+            inst.pigman_num = inst.__pigman_num:value()
+            inst.beefalo_num = inst.__beefalo_num:value()
         end)
+
         if not TheWorld.ismastersim then
             return
         end
@@ -61,7 +116,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_32_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_33_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -75,29 +130,48 @@
                 TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
             end)
         --------------------------------------------------------------------------
-        ---  91,112,136
-            local display_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
-            display_text:SetPosition(-300,-30)
+        ---       
+        --------------------------------------------------------------------------
+        ---
+            local x = -210+60
+            local y = 2
+            local delta_y = -22
+            local front_size = 25
+            local bunnyman_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+            bunnyman_text:SetPosition(x,y)
+
+            local pigman_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+            pigman_text:SetPosition(x,y+delta_y)
+
+            local beefalo_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+            beefalo_text:SetPosition(x,y+delta_y*2)
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
-                local num = inst.num or inst.__num:value() or 0
-                if num >= 5 then
+
+                local bunnyman_num = inst.__bunnyman_num:value()
+                local pigman_num = inst.__pigman_num:value()
+                local beefalo_num = inst.__beefalo_num:value()
+
+                if bunnyman_num + pigman_num + beefalo_num >= 3 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/5")
+
+                bunnyman_text:SetString(""..bunnyman_num.."/1")
+                pigman_text:SetString(""..pigman_num.."/1")
+                beefalo_text:SetString(""..beefalo_num.."/1")
             end
             update_fn()
-            display_text.inst:ListenForEvent("hoshino_mission_blue_32",update_fn,inst)
+            bunnyman_text.inst:ListenForEvent("hoshino_mission_blue_33",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_32_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_33_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -108,19 +182,26 @@
     local function Task_Delivery_Event_Install(inst)
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
-            local owner = inst:GetOwner()            
-            if owner and inst.components.hoshino_data:Add("num",0) >= 5 then
+            local owner = inst:GetOwner()
+
+            local bunnyman_num = inst.components.hoshino_data:Add("bunnyman",0)
+            local pigman_num = inst.components.hoshino_data:Add("pigman",0)
+            local beefalo_num = inst.components.hoshino_data:Add("beefalo",0)
+            
+            if owner and bunnyman_num + pigman_num + beefalo_num >= 3 then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.05 -- 5% 经验
+                local exp = current_max_exp*0.25 -- 25% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(300)
-                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
+
+                local item = SpawnPrefab("goldnugget")
+                item.components.stackable.stacksize = 10
+                owner.components.inventory:GiveItem(item) -- 给予物品
 
             end
         end)
@@ -133,47 +214,61 @@
             end
             inst:Remove()
         end)
-        --- 激活任务
+        -- --- 激活任务
         inst:ListenForEvent("active",function(inst,owner)
-            --- 定时检查
-            inst:DoPeriodicTask(10,function()
-                -- 
-                local owner = inst:GetOwner()
-                if owner == nil then
-                    return
-                end
-                local num = inst.components.hoshino_data:Add("num",0)
-                if num >= 5 then
+
+            local function warnning_checker()
+                local bunnyman_num = inst.components.hoshino_data:Add("bunnyman",0)
+                inst.__bunnyman_num:set(bunnyman_num)
+                local pigman_num = inst.components.hoshino_data:Add("pigman",0)
+                inst.__pigman_num:set(pigman_num)
+                local beefalo_num = inst.components.hoshino_data:Add("beefalo",0)
+                inst.__beefalo_num:set(beefalo_num)
+
+                if bunnyman_num + pigman_num + beefalo_num >= 3 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
-            end)
-            --- 吃东西
-            inst:ListenForEvent("oneat",function(_,_table)
-                local food = _table and _table.food
-                if food and food.components.edible then
-                    local food_base_prefab = food.nameoverride or food.prefab  -- 带调味料的食物通过这个获取基础食物名字
-                    if not food_base_prefab == "goatmilk" then
+            end
+
+            --- 火堆烹饪
+            inst:ListenForEvent("hoshino_event.cookable_cooked",function(_,_table)
+                local product = _table and _table.product
+                -- print("cookable_cooked+++",product)
+                if product and product.prefab == "cookedmeat" then
+                    local x,y,z = owner.Transform:GetWorldPosition()
+                    local ents = TheSim:FindEntities(x,0,z,12,{"_health"})
+                    local succeed_flag = false
+                    for k, temp_target in pairs(ents) do
+                        if temp_target then
+                            if temp_target.prefab == "bunnyman" then
+                                inst.components.hoshino_data:Add("bunnyman",1,0,1)
+                                succeed_flag = true
+                            elseif temp_target.prefab == "pigman" then
+                                inst.components.hoshino_data:Add("pigman",1,0,1)
+                                succeed_flag = true
+                            elseif temp_target.prefab == "beefalo" then
+                                inst.components.hoshino_data:Add("beefalo",1,0,1)
+                                succeed_flag = true
+                            end
+                        end
+                    end
+                    if not succeed_flag then
                         return
                     end
-                    local num = inst.components.hoshino_data:Add("num",1,0,5)
-                    inst.__num:set(num)
-                    if num >= 5 then
-                        owner:PushEvent("hoshino_event.pad_warnning","main_page")
-                    end
 
+                    warnning_checker()
                 end
             end,owner)
 
+            inst:DoPeriodicTask(5,warnning_checker)
+
         end)
 
-        --- 加载检查
-        inst.components.hoshino_data:AddOnLoadFn(function(com)
-            local num = com:Add("num",0)
-            inst.__num:set(num)
-        end)
-
-
-
+        -- --- 加载检查
+        -- inst.components.hoshino_data:AddOnLoadFn(function(com)
+        --     local num = com:Add("num",0)
+        --     inst.__num:set(num)
+        -- end)
 
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -207,7 +302,7 @@ local function fn()
     --- 
         inst:AddTag("nosteal")
         inst:AddTag("hoshino_task_item")
-        inst.type = "blue"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
+        inst.type = MISSION_TYPE or "gray"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
     --------------------------------------------------------------------------------------------
     --- 数据组件
         if TheWorld.ismastersim then
@@ -235,4 +330,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_blue_32", fn, assets)
+return Prefab("hoshino_mission_blue_33", fn, assets)
