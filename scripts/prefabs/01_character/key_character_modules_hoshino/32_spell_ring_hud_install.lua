@@ -62,7 +62,7 @@
                 -- print("player in screen",s_pt_x,s_pt_y)
                 root:SetPosition(s_pt_x,s_pt_y+60,0)
             end
-            root.inst:DoPeriodicTask(FRAMES,root_position_update_fn)
+            root.inst:DoPeriodicTask(FRAMES/2,root_position_update_fn)
             root_position_update_fn()
         --------------------------------------------------------------------------
         --- 按钮盒子
