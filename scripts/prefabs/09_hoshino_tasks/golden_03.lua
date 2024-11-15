@@ -193,7 +193,7 @@
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CpigskinitCoinDelta(500)
+                owner.components.hoshino_com_shop:CreditCoinDelta(500)
 
                 Remove_Items_By_Prefab(owner,"pigskin",MISSION_ITEM_1_NUM)
                 Remove_Items_By_Prefab(owner,"slurper_pelt",MISSION_ITEM_2_NUM)

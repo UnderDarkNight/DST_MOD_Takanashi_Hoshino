@@ -194,7 +194,7 @@
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
 
-                -- owner.components.hoshino_com_shop:Csewing_kititCoinDelta(800)
+                -- owner.components.hoshino_com_shop:CreditCoinDelta(800)
 
                 Remove_Items_By_Prefab(owner,"sewing_kit",MISSION_ITEM_1_NUM)
                 Remove_Items_By_Prefab(owner,"gears",MISSION_ITEM_2_NUM)
