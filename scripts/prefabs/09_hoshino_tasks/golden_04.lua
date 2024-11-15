@@ -147,22 +147,22 @@
                         local pt = TUNING.HOSHINO_FNS:Get_Random_Point(Vector3(owner.Transform:GetWorldPosition()),20)
                         if type(pt) == type(Vector3(0,0,0)) then
 
-                            local klaus = SpawnPrefab("klaus")
-                            klaus.Transform:SetPosition(pt.x,0,pt.z)
-                            klaus:SpawnDeer()
+                            local krampus = SpawnPrefab("krampus")
+                            krampus.Transform:SetPosition(pt.x,0,pt.z)
+                            -- klaus:SpawnDeer()
                             -- override the spawn point so klaus comes to his sack
-                            klaus.components.knownlocations:RememberLocation("spawnpoint", pt, false)
-                            klaus.components.spawnfader:FadeIn()
+                            -- klaus.components.knownlocations:RememberLocation("spawnpoint", pt, false)
+                            -- klaus.components.spawnfader:FadeIn()
 
                             local test_num = 100
                             local debuff_prefab = "hoshino_mission_golden_04_debuff"
                             while test_num > 0 do
-                                local debuff_inst = klaus:GetDebuff(debuff_prefab)
+                                local debuff_inst = krampus:GetDebuff(debuff_prefab)
                                 if debuff_inst and debuff_inst:IsValid() then
                                     inst.components.hoshino_data:Set("boss_spawned",true)
                                     return
                                 end
-                                klaus:AddDebuff(debuff_prefab,debuff_prefab)
+                                krampus:AddDebuff(debuff_prefab,debuff_prefab)
                                 test_num = test_num - 1
                             end
                         end

@@ -221,16 +221,16 @@ local function fn()
         Net_Vars_Install(inst)
     --------------------------------------------------------------------------------------------
     --- spawn_test
-        -- function inst:SpawnTest()
-        --     if TUNING.HOSHINO_DEBUGGING_MODE then
-        --         return true
-        --     end
-        --     if TheWorld.state.cycles > 40 then
-        --         return true
-        --     else
-        --         return "hoshino_mission_golden_0"..math.random(8)
-        --     end
-        -- end
+        function inst:SpawnTest()
+            if TUNING.HOSHINO_DEBUGGING_MODE then
+                return true
+            end
+            if TheWorld.state.cycles > 40 then
+                return true
+            else
+                return "hoshino_mission_golden_0"..math.random(8)
+            end
+        end
     --------------------------------------------------------------------------------------------
     --- 引导API
         inst.GetPadDisplayBox = GetPadDisplayBox    -- 平板显示
