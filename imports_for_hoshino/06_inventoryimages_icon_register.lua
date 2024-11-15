@@ -48,6 +48,7 @@ local files_name = {
 	-- 10_foods
 		"hoshino_food_shiba_seki_ramen",								--- 柴关拉面
 		"hoshino_food_mandrake_concentrate",								--- 曼德拉草浓缩液
+		"hoshino_food_energy_drink",								--- 能量饮料
 	---------------------------------------------------------------------------------------
 
 }

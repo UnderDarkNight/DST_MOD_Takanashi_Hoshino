@@ -330,6 +330,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "曼德拉草浓缩液",
                 ["recipe_desc"] = "曼德拉草浓缩液",
             },
+            ["hoshino_food_energy_drink"] = {
+                ["name"] = "能量饮料",
+                ["inspect_str"] = "能量饮料",
+                ["recipe_desc"] = "能量饮料",
+            },
         --------------------------------------------------------------------
 }
 

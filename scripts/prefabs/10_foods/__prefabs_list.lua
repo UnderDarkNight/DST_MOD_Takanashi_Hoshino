@@ -30,6 +30,7 @@ local prefabs_name_list = {
 
     "01_shiba_seki_ramen",                             --- 柴关拉面
     "02_mandrake_concentrate",                             --- 曼德拉草浓缩液
+    "03_energy_drink",                             --- 能量饮料
 
 
 }

@@ -121,7 +121,9 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 -- owner.components.hoshino_com_shop:CreditCoinDelta(300)
 
-                -- owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
+                local item = SpawnPrefab("hoshino_food_energy_drink")
+                item.components.stackable.stacksize = 3
+                owner.components.inventory:GiveItem(item)
 
             end
         end)
