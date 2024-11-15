@@ -31,8 +31,8 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_golden_10","hoshino_mission_golden_10")
-        inst:ListenForEvent("hoshino_mission_golden_10",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_golden_11","hoshino_mission_golden_11")
+        inst:ListenForEvent("hoshino_mission_golden_11",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
@@ -61,7 +61,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_10_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_11_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -77,27 +77,28 @@
         --------------------------------------------------------------------------
         ---  91,112,136
             local display_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
-            display_text:SetPosition(-300+10,-30)
+            display_text:SetPosition(-300,-30)
+            display_text:Hide()
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
                 local num = inst.num or inst.__num:value() or 0
-                if num >= 20 then
+                if num >= 1 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/20")
+                display_text:SetString(""..num.."/1")
             end
             update_fn()
-            display_text.inst:ListenForEvent("hoshino_mission_golden_10",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_golden_11",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_10_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_11_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -109,20 +110,20 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and inst.components.hoshino_data:Add("num",0) >= 20 then
+            if owner and inst.components.hoshino_data:Add("num",0) >= 1 then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.10 -- 10% 经验
+                local exp = current_max_exp*0.05 -- 5% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(500)
+                owner.components.hoshino_com_shop:CreditCoinDelta(1000)
 
-                local item = SpawnPrefab("hoshino_item_12mm_shotgun_shells")
-                item.components.stackable.stacksize = 10
+                local item = SpawnPrefab("hoshino_item_abydos_high_purity_alloy")
+                -- item.components.stackable.stacksize = 10
                 owner.components.inventory:GiveItem(item)
 
             end
@@ -141,18 +142,30 @@
             --- 定时检查
             inst:DoPeriodicTask(10,function()
                 local num = inst.components.hoshino_data:Add("num",0)
-                if num >= 20 then
+                if num >= 1 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
-            end)            
-            --- 虫洞跳成功事件
-            inst:ListenForEvent("wormholespit",function()
-                local num = inst.components.hoshino_data:Add("num",1,0,20)
-                inst.__num:set(num)
-                if num >= 20 then
-                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
+            end)
+
+            local function coins_checker()
+                local current = owner.components.hoshino_com_shop:GetCreditCoins()
+                if current < 100 then
+                    local num = inst.components.hoshino_data:Add("num",1,0,1)
+                    inst.__num:set(num)
+                    if num >= 1 then
+                        owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                    end
                 end
+            end
+
+            inst:ListenForEvent("hoshino_com_shop.credit_coins_updated",function()
+                if TheWorld.state.cycles < 40 and not TUNING.HOSHINO_DEBUGGING_MODE then
+                    return
+                end
+                coins_checker()
             end,owner)
+
+            inst:DoPeriodicTask(5,coins_checker)
 
         end)
 
@@ -236,4 +249,4 @@ local function fn()
     return inst
 end
 
-return Prefab("hoshino_mission_golden_10", fn, assets)
+return Prefab("hoshino_mission_golden_11", fn, assets)

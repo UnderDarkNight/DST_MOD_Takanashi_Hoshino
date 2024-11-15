@@ -257,6 +257,7 @@ nil,
         end
         self.credit_coins = math.clamp(self.credit_coins + num,0,self.u32_max)
         self:ShopData_Set("credit_coins",self.credit_coins)
+        self.inst:PushEvent("hoshino_com_shop.credit_coins_updated")
     end
     function hoshino_com_shop:GetCreditCoins()
         return self.credit_coins
