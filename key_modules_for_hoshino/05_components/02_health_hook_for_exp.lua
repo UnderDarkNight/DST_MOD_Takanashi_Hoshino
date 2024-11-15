@@ -41,7 +41,10 @@ local function check_can_broadcast_exp(inst,percent)
     return true
 end
 ---------------------------------------------------------------------------------------------------------
-
+-- 延迟广播经验
+local exp_broadcast_delay = {
+    ["klaus"] = 10, -- 克劳斯
+}
 ---------------------------------------------------------------------------------------------------------
 
 AddComponentPostInit("health", function(self)
@@ -49,7 +52,7 @@ AddComponentPostInit("health", function(self)
     self.inst:ListenForEvent("minhealth",function(_,_table)
         local x,y,z = self.inst.Transform:GetWorldPosition()
         local players = TheSim:FindEntities(x,y,z,radius,musthavetags,canthavetags,musthaveoneoftags)
-        GetTaskInst():DoTaskInTime(self.inst:HasTag("epic") and 10 or 1,function()  -- 避免克劳斯 这种 半血复活的怪物.延迟一丢丢
+        GetTaskInst():DoTaskInTime(exp_broadcast_delay[self.inst.prefab] or 0.3,function()  -- 避免克劳斯 这种 半血复活的怪物.延迟一丢丢
         -----------------------------------------------------------------------------------
         --- 
             local max_health = self.maxhealth

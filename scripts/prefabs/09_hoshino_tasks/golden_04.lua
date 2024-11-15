@@ -144,8 +144,8 @@
             --- 召唤BOSS
             inst:DoTaskInTime(TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15,function()
                 if not inst.components.hoshino_data:Get("boss_spawned") then
-                        local pt = TUNING.HOSHINO_FNS:Get_Random_Point(Vector3(owner.Transform:GetWorldPosition()),10)
-                        if type(pt) == type(Vector3(0,0,0)) then                            
+                        local pt = TUNING.HOSHINO_FNS:Get_Random_Point(Vector3(owner.Transform:GetWorldPosition()),20)
+                        if type(pt) == type(Vector3(0,0,0)) then
 
                             local klaus = SpawnPrefab("klaus")
                             klaus.Transform:SetPosition(pt.x,0,pt.z)
