@@ -20,6 +20,20 @@ local musthaveoneoftags = nil
 local radius = 20
 local radius_sq = radius*radius
 
+local function GetPlayers(x,y,z)
+    local ret_players = {}
+    for k, temp_player in pairs(AllPlayers) do
+        if temp_player and temp_player:IsValid() 
+            and temp_player:GetDistanceSqToPoint(x,y,z) <= radius_sq
+            and temp_player.components.hoshino_com_level_sys
+            and not temp_player:HasTag("playerghost")
+        then
+            table.insert(ret_players,temp_player)
+        end
+    end
+    return ret_players
+end
+
 ---------------------------------------------------------------------------------------------------------
 local prefab_black_list = {
     ["killerbee"] = true, -- 杀人蜂
@@ -51,7 +65,7 @@ AddComponentPostInit("health", function(self)
 
     self.inst:ListenForEvent("minhealth",function(_,_table)
         local x,y,z = self.inst.Transform:GetWorldPosition()
-        local players = TheSim:FindEntities(x,y,z,radius,musthavetags,canthavetags,musthaveoneoftags)
+        local players = GetPlayers(x,y,z) or TheSim:FindEntities(x,y,z,radius,musthavetags,canthavetags,musthaveoneoftags)
         GetTaskInst():DoTaskInTime(exp_broadcast_delay[self.inst.prefab] or 0.3,function()  -- 避免克劳斯 这种 半血复活的怪物.延迟一丢丢
         -----------------------------------------------------------------------------------
         --- 
