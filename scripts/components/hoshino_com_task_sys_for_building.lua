@@ -138,13 +138,36 @@ nil,
         return ret_table
     end
     function hoshino_com_task_sys_for_building:GetNewTaskItem()
-        local list = {
-            "hoshino_task_excample_kill",
-            "hoshino_task_excample_item",
-        }
-        local ret_prefab = list[math.random(1,#list)]
-        print("spawn new task item",ret_prefab)
-        return SpawnPrefab(ret_prefab)
+        -----------------------------------------------------------------
+        --- 根据概率池子生成物品
+            local list = {
+                "hoshino_task_excample_kill",
+                "hoshino_task_excample_item",
+            }
+            local ret_prefab = list[math.random(1,#list)]
+        -----------------------------------------------------------------
+        --- 返回任务物品inst
+            print("spawn new task item",ret_prefab)
+            while true do
+                local task_item = SpawnPrefab(ret_prefab)
+                if task_item then
+                    if task_item.SpawnTest then
+                        --- 有测试检查函数，则进行测试
+                        local test_ret = task_item:SpawnTest()
+                        if test_ret == true then
+                            --- 测试通过，返回物品
+                            return task_item
+                        else
+                            --- 测试不通过，prefab 替换。
+                            ret_prefab = test_ret
+                        end
+                    else
+                        --- 没有测试检查函数，直接返回物品
+                        return task_item
+                    end
+                end
+            end
+        -----------------------------------------------------------------
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 刷新全部
