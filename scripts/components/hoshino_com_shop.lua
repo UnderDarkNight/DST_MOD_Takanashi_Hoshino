@@ -314,14 +314,24 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 --- 刷新按键点击后执行。
     function hoshino_com_shop:Refresh_Clicked()
-
+        local refresh_cost_type = nil
         if self:GetRefreshCount() > 0 then
             self:Refresh_Delta(-1)
-            self:Spawn_Items_List_And_Send_2_Client(true)            
+            self:Spawn_Items_List_And_Send_2_Client(true)
+            refresh_cost_type = "free_times"
         elseif self:Has_Enough_Coins_For_Refresh() then
             self:Cost_Coins_For_Refresh()
             self:Spawn_Items_List_And_Send_2_Client(true)
+            refresh_cost_type = "cost_credit_coins"
+        else
+            return
         end
+
+        --- 广播事件。
+        self.inst:PushEvent("hoshino_com_shop.refresh",{
+            refresh_cost_type = refresh_cost_type
+        })
+
         -- -----------------------------------------------
         -- --- 执行刷新内容逻辑。
         --     self:Spawn_Items_List_And_Send_2_Client(true)

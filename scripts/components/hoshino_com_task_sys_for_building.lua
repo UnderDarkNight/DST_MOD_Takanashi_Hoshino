@@ -263,7 +263,8 @@ nil,
             else
                 new_item:Remove()
             end
-        end        
+        end
+        self.inst:PushEvent("task_item_update")        
     end
 ------------------------------------------------------------------------------------------------------------------------------
     function hoshino_com_task_sys_for_building:OnSave()

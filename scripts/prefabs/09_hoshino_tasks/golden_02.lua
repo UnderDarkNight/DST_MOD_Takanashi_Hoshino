@@ -19,8 +19,8 @@
 --- 素材
     local assets =
     {
-        Asset("IMAGE", "images/hoshino_mission/blue_mission.tex"),
-        Asset("ATLAS", "images/hoshino_mission/blue_mission.xml"),
+        Asset("IMAGE", "images/hoshino_mission/golden_mission.tex"),
+        Asset("ATLAS", "images/hoshino_mission/golden_mission.xml"),
     }
     local button_atlas = "images/inspect_pad/page_main.xml"     --- 按钮图集
     local button_give_up_img = "button_give_up.tex"             --- 放弃按钮
@@ -31,8 +31,8 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_blue_01","hoshino_mission_blue_01")
-        inst:ListenForEvent("hoshino_mission_blue_01",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_golden_02","hoshino_mission_golden_02")
+        inst:ListenForEvent("hoshino_mission_golden_02",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
@@ -61,7 +61,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_01_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_02_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -77,27 +77,27 @@
         --------------------------------------------------------------------------
         ---  91,112,136
             local display_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
-            display_text:SetPosition(-300,-30)
+            display_text:SetPosition(-300+10,-30)
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
                 local num = inst.num or inst.__num:value() or 0
-                if num >= 4 then
+                if num >= 10 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/4")
+                display_text:SetString(""..num.."/10")
             end
             update_fn()
-            display_text.inst:ListenForEvent("hoshino_mission_blue_01",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_golden_02",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_01_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_02_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -109,17 +109,17 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and inst.components.hoshino_data:Add("num",0) >= 4 then
+            if owner and inst.components.hoshino_data:Add("num",0) >= 10 then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.25 -- 25% 经验
+                local exp = current_max_exp*0.05 -- 5% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(200)
+                owner.components.hoshino_com_shop:CreditCoinDelta(1500)
 
             end
         end)
@@ -136,38 +136,17 @@
         inst:ListenForEvent("active",function(inst,owner)
             --- 定时检查
             inst:DoPeriodicTask(10,function()
-                -- 
-                local owner = inst:GetOwner()
-                if owner == nil then
-                    return
-                end
                 local num = inst.components.hoshino_data:Add("num",0)
-                if num >= 4 then
+                if num >= 10 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
-            end)
-            --- 吃东西
-            inst:ListenForEvent("oneat",function(_,_table)
-                local food = _table and _table.food
-                if food and food.components.edible then
-                    local food_base_prefab = food.nameoverride or food.prefab  -- 带调味料的食物通过这个获取基础食物名字
-                    --- 食物记忆器
-                    local food_remembered_list = inst.components.hoshino_data:Get("food_remembered_list") or {}
-                    food_remembered_list[food_base_prefab] = true
-                    inst.components.hoshino_data:Set("food_remembered_list",food_remembered_list)
-                    --- 数量记忆器
-                    local num = 0
-                    for k, v in pairs(food_remembered_list) do
-                        if k and v then
-                            num = math.clamp( num + 1, 0 , 4 )
-                        end
-                    end
-                    inst.__num:set(num)
-                    inst.components.hoshino_data:Set("num",num)
-                    if num >= 4 then
-                        owner:PushEvent("hoshino_event.pad_warnning","main_page")
-                    end
-
+            end)            
+            -- 事件
+            inst:ListenForEvent("hoshino_com_shop.refresh",function(_,_table)
+                local num = inst.components.hoshino_data:Add("num",1,0,10)
+                inst.__num:set(num)
+                if num >= 10 then
+                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
             end,owner)
 
@@ -214,7 +193,7 @@ local function fn()
     --- 
         inst:AddTag("nosteal")
         inst:AddTag("hoshino_task_item")
-        inst.type = "blue"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
+        inst.type = "golden"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
     --------------------------------------------------------------------------------------------
     --- 数据组件
         if TheWorld.ismastersim then
@@ -242,4 +221,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_blue_01", fn, assets)
+return Prefab("hoshino_mission_golden_02", fn, assets)
