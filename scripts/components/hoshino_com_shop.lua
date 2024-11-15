@@ -449,6 +449,15 @@ nil,
         --- 生成物品给玩家
             self:GiveItemByPrefab(prefab,num_to_give)
         -----------------------------------------------------------------
+        -- 事件广播
+            self.inst:PushEvent("hoshino_com_shop.buy",{
+                price_type = price_type,
+                price = price,
+                prefab = prefab,
+                num_to_give = num_to_give,
+                right_click = right_click,
+            })
+        -----------------------------------------------------------------
 
     end
 ------------------------------------------------------------------------------------------------------------------------------
