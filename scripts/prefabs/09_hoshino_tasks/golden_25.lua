@@ -34,7 +34,7 @@
 
     local MISSION_ITEM_1 = "healingsalve"
     local MISSION_ITEM_1_NUM = 10
-    local MISSION_ITEM_2 = "greenmooneye"
+    local MISSION_ITEM_2 = "hoshino_item_ether_essence"
     local MISSION_ITEM_2_NUM = 1
     local MISSION_ITEM_3 = "gunpowder"
     local MISSION_ITEM_3_NUM = 5
@@ -82,11 +82,11 @@
     local function Net_Vars_Install(inst)
 
         inst.__healingsalve_num = net_uint(inst.GUID, "hoshino_mission_golden_25.healingsalve","hoshino_mission_golden_25")
-        inst.__greenmooneye_num = net_uint(inst.GUID, "hoshino_mission_golden_25.greenmooneye","hoshino_mission_golden_25")
+        inst.__hoshino_item_ether_essence_num = net_uint(inst.GUID, "hoshino_mission_golden_25.hoshino_item_ether_essence","hoshino_mission_golden_25")
         inst.__gunpowder_num = net_uint(inst.GUID, "hoshino_mission_golden_25.gunpowder","hoshino_mission_golden_25")
         inst:ListenForEvent("hoshino_mission_golden_25",function()
             inst.healingsalve_num = inst.__healingsalve_num:value()
-            inst.greenmooneye_num = inst.__greenmooneye_num:value()
+            inst.hoshino_item_ether_essence_num = inst.__hoshino_item_ether_essence_num:value()
             inst.gunpowder_num = inst.__gunpowder_num:value()
         end)
 
@@ -140,8 +140,8 @@
             local healingsalve_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
             healingsalve_text:SetPosition(x,y)
 
-            local greenmooneye_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-            greenmooneye_text:SetPosition(x,y+delta_y)
+            local hoshino_item_ether_essence_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+            hoshino_item_ether_essence_text:SetPosition(x,y+delta_y)
 
             local gunpowder_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
             gunpowder_text:SetPosition(x,y+delta_y*2)
@@ -149,18 +149,18 @@
         --- 检查任务是否完成
             local update_fn = function()
                 local healingsalve_flag,healingsalve_num = Has_Enough_Items(ThePlayer,"healingsalve",MISSION_ITEM_1_NUM)
-                local greenmooneye_flag,greenmooneye_num = Has_Enough_Items(ThePlayer,"greenmooneye",MISSION_ITEM_2_NUM)
+                local hoshino_item_ether_essence_flag,hoshino_item_ether_essence_num = Has_Enough_Items(ThePlayer,"hoshino_item_ether_essence",MISSION_ITEM_2_NUM)
                 local gunpowder_flag,gunpowder_num = Has_Enough_Items(ThePlayer,"gunpowder",MISSION_ITEM_3_NUM)
-                if healingsalve_flag and greenmooneye_flag and gunpowder_flag then
+                if healingsalve_flag and hoshino_item_ether_essence_flag and gunpowder_flag then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
                 healingsalve_num = math.clamp(healingsalve_num,0,MISSION_ITEM_1_NUM)
-                greenmooneye_num = math.clamp(greenmooneye_num,0,MISSION_ITEM_2_NUM)
+                hoshino_item_ether_essence_num = math.clamp(hoshino_item_ether_essence_num,0,MISSION_ITEM_2_NUM)
                 gunpowder_num = math.clamp(gunpowder_num,0,MISSION_ITEM_3_NUM)
                 healingsalve_text:SetString(""..healingsalve_num.."/"..MISSION_ITEM_1_NUM)
-                greenmooneye_text:SetString(""..greenmooneye_num.."/"..MISSION_ITEM_2_NUM)
+                hoshino_item_ether_essence_text:SetString(""..hoshino_item_ether_essence_num.."/"..MISSION_ITEM_2_NUM)
                 gunpowder_text:SetString(""..gunpowder_num.."/"..MISSION_ITEM_3_NUM)
             end
             update_fn()
@@ -183,7 +183,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"healingsalve",MISSION_ITEM_1_NUM) and Has_Enough_Items(owner,"greenmooneye",MISSION_ITEM_2_NUM) and Has_Enough_Items(owner,"gunpowder",MISSION_ITEM_3_NUM) then
+            if owner and Has_Enough_Items(owner,"healingsalve",MISSION_ITEM_1_NUM) and Has_Enough_Items(owner,"hoshino_item_ether_essence",MISSION_ITEM_2_NUM) and Has_Enough_Items(owner,"gunpowder",MISSION_ITEM_3_NUM) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
@@ -196,7 +196,7 @@
                 -- owner.components.hoshino_com_shop:CreditCoinDelta(400)
 
                 Remove_Items_By_Prefab(owner,"healingsalve",MISSION_ITEM_1_NUM)
-                Remove_Items_By_Prefab(owner,"greenmooneye",MISSION_ITEM_2_NUM)
+                Remove_Items_By_Prefab(owner,"hoshino_item_ether_essence",MISSION_ITEM_2_NUM)
                 Remove_Items_By_Prefab(owner,"gunpowder",MISSION_ITEM_3_NUM)
 
                 -- local item = SpawnPrefab("hoshino_item_12mm_shotgun_shells")
@@ -224,18 +224,18 @@
             if owner then
 
                 local healingsalve_flag,healingsalve_num = Has_Enough_Items(owner,"healingsalve",MISSION_ITEM_1_NUM)
-                local greenmooneye_flag,greenmooneye_num = Has_Enough_Items(owner,"greenmooneye",MISSION_ITEM_2_NUM)
+                local hoshino_item_ether_essence_flag,hoshino_item_ether_essence_num = Has_Enough_Items(owner,"hoshino_item_ether_essence",MISSION_ITEM_2_NUM)
                 local gunpowder_flag,gunpowder_num = Has_Enough_Items(owner,"gunpowder",MISSION_ITEM_3_NUM)
 
                 healingsalve_num = math.clamp(healingsalve_num,0,MISSION_ITEM_1_NUM)
-                greenmooneye_num = math.clamp(greenmooneye_num,0,MISSION_ITEM_2_NUM)
+                hoshino_item_ether_essence_num = math.clamp(hoshino_item_ether_essence_num,0,MISSION_ITEM_2_NUM)
                 gunpowder_num = math.clamp(gunpowder_num,0,MISSION_ITEM_3_NUM)
 
                 inst.__healingsalve_num:set(healingsalve_num)
-                inst.__greenmooneye_num:set(greenmooneye_num)
+                inst.__hoshino_item_ether_essence_num:set(hoshino_item_ether_essence_num)
                 inst.__gunpowder_num:set(gunpowder_num)
 
-                if healingsalve_num >= MISSION_ITEM_1_NUM and greenmooneye_num >= MISSION_ITEM_2_NUM and gunpowder_num >= MISSION_ITEM_3_NUM then
+                if healingsalve_num >= MISSION_ITEM_1_NUM and hoshino_item_ether_essence_num >= MISSION_ITEM_2_NUM and gunpowder_num >= MISSION_ITEM_3_NUM then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 

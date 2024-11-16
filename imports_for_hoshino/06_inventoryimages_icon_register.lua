@@ -29,6 +29,7 @@ local files_name = {
 		"hoshino_item_special_wraped_box",								--- 超级打包盒（已经打包）
 		"hoshino_item_yi",												--- 镒
 		"hoshino_item_fragments_of_divine_script",						--- 神明文字碎片
+		"hoshino_item_ether_essence",									--- 以太精髓
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

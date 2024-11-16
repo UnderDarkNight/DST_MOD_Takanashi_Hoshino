@@ -203,8 +203,7 @@
                 -- item.components.stackable.stacksize = 5
                 -- owner.components.inventory:GiveItem(item) -- 给予物品
 
-                -- owner.components.inventory:GiveItem(SpawnPrefab("glasscutter")) -- 给予物品
-                -- owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack")) -- 给予物品
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_ether_essence"))
 
             end
         end)

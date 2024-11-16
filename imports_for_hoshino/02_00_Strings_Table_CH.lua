@@ -112,6 +112,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "神明文字碎片",
                 ["recipe_desc"] = "神明文字碎片",
             },
+            ["hoshino_item_ether_essence"] = {
+                ["name"] = "以太精髓",
+                ["inspect_str"] = "以太精髓",
+                ["recipe_desc"] = "以太精髓",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
