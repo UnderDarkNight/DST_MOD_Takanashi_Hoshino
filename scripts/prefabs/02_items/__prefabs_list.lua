@@ -37,6 +37,7 @@ local prefabs_name_list = {
     "07_yi",                                    --- 镒
     "08_fragments_of_divine_script",            --- 神明文字碎片
     "09_ether_essence",                         --- 以太精髓
+    "10_treasure_map",                          --- 藏宝图
 
 }
 

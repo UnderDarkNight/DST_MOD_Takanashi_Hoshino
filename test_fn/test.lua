@@ -35,6 +35,49 @@ local flg,error_code = pcall(function()
         -- )
         -- ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
+    --- 卡牌调试-变种
+        -- local item = SpawnPrefab("hoshino_item_cards_pack")
+        -- item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
+
+        -- -- item:PushEvent("SetName","窥秘权柄") -- 金色
+        -- -- item:PushEvent("Set",{
+        -- --         cards = {
+        -- --             "card_golden",
+        -- --             "card_golden",
+        -- --             "card_golden",
+        -- --         },
+        -- --     }
+        -- -- )
+        -- -- item:PushEvent("SetDisplay",{
+        -- --     bank = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+        -- --     build = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+        -- --     anim = "idle",
+        -- --     imagename = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+        -- --     atlasname = "images/inventoryimages/hoshino_item_cards_pack_authority_to_unveil_secrets.xml",
+        -- -- })
+        -- ThePlayer.components.inventory:GiveItem(item)
+
+        -- local item = SpawnPrefab("hoshino_item_cards_pack")
+        -- item:PushEvent("Type","hoshino_item_cards_pack_supreme_mystery")
+
+        -- -- item:PushEvent("SetName","最高神秘") -- 彩色
+        -- -- item:PushEvent("Set",{
+        -- --         cards = {
+        -- --             "card_colourful",
+        -- --             "card_colourful",
+        -- --             "card_colourful",
+        -- --         },
+        -- --     }
+        -- -- )
+        -- -- item:PushEvent("SetDisplay",{
+        -- --     bank = "hoshino_item_cards_pack_supreme_mystery",
+        -- --     build = "hoshino_item_cards_pack_supreme_mystery",
+        -- --     anim = "idle",
+        -- --     imagename = "hoshino_item_cards_pack_supreme_mystery",
+        -- --     atlasname = "images/inventoryimages/hoshino_item_cards_pack_supreme_mystery.xml",
+        -- -- })
+        -- ThePlayer.components.inventory:GiveItem(item)
+    ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer:ListenForEvent("newstate",function(inst,_table)
         --     local statename = _table and _table.statename
@@ -66,7 +109,7 @@ local flg,error_code = pcall(function()
         --     print("+++++++++",items[i])
         -- end
     ----------------------------------------------------------------------------------------------------------------
-    ---
+    --- 调试任务栏
         -- ThePlayer.___task_board_widget_fn = function(inst,front_root)
             
         -- end
@@ -74,38 +117,20 @@ local flg,error_code = pcall(function()
 
         -- print(TheWorld.Map:GetTileAtPoint(x,y,z))
 
-        local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+        -- local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_27")
+        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_27")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 
         -- TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
         -- local inst = CreateEntity()
-        -- inst.entity:AddSoundEmitter()
+        -- inst.entity:AddSoundEmitter()        
+
+
+        -- ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
+    ----------------------------------------------------------------------------------------------------------------
+    --- 藏宝图 调试
         
-
-        -- inst:Remove()
-        -- ThePlayer.__test_fn = function(bg)
-        --     local x = -210
-        --     local y = 2
-        --     local delta_y = -22
-        --     local front_size = 25
-        --     local red_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-        --     red_text:SetPosition(x,y)
-
-        --     local blue_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-        --     blue_text:SetPosition(x,y+delta_y)
-
-        --     local purple_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-        --     purple_text:SetPosition(x,y+delta_y*2)
-        -- end
-
-
-        -- for k, v in pairs(PREFAB_SKINS["researchlab"]) do
-        --     print(k,v)
-        -- end
-
-        ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

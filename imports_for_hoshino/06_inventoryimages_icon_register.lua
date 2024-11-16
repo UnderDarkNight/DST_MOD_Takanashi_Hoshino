@@ -21,6 +21,8 @@ local files_name = {
 	---------------------------------------------------------------------------------------
 	-- 02_items
 		"hoshino_item_cards_pack",										--- 卡牌芯片
+		"hoshino_item_cards_pack_supreme_mystery",						--- 卡牌芯片-最高神秘
+		"hoshino_item_cards_pack_authority_to_unveil_secrets",			--- 卡牌芯片-窥秘权柄
 		"hoshino_weapon_gun_eye_of_horus",								--- 专属武器
 		"hoshino_item_abydos_high_purity_alloy",						--- 阿拜索斯高纯度合金
 		"hoshino_item_blue_schist",										--- 青辉石
@@ -30,6 +32,7 @@ local files_name = {
 		"hoshino_item_yi",												--- 镒
 		"hoshino_item_fragments_of_divine_script",						--- 神明文字碎片
 		"hoshino_item_ether_essence",									--- 以太精髓
+		"hoshino_item_treasure_map",									--- 藏宝图
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

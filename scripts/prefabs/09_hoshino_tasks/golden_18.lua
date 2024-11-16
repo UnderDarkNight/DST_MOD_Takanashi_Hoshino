@@ -116,12 +116,11 @@
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
                 local exp = current_max_exp*0.05 -- 5% 经验
-                -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
-                -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                -- owner.components.hoshino_com_shop:CreditCoinDelta(1000)
 
-                -- owner.components.inventory:GiveItem(SpawnPrefab("opalpreciousgem"))
+                local item = SpawnPrefab("hoshino_item_cards_pack")
+                item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
+                owner.components.inventory:GiveItem(item)
 
             end
         end)

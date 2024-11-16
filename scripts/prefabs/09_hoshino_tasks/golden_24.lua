@@ -204,7 +204,7 @@
                 -- owner.components.inventory:GiveItem(item) -- 给予物品
 
                 owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_special_packer")) -- 给予物品
-                -- owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack")) -- 给予物品
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_treasure_map")) -- 给予物品
 
             end
         end)

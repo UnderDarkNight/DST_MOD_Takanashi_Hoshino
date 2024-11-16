@@ -200,12 +200,9 @@
                 Remove_Items_By_Prefab(owner,"boards",MISSION_ITEM_2_NUM)
                 Remove_Items_By_Prefab(owner,"moonrocknugget",MISSION_ITEM_3_NUM)
 
-                -- local item = SpawnPrefab("hoshino_item_12mm_shotgun_shells")
-                -- item.components.stackable.stacksize = 5
-                -- owner.components.inventory:GiveItem(item) -- 给予物品
-
-                -- owner.components.inventory:GiveItem(SpawnPrefab("glasscutter")) -- 给予物品
-                -- owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack")) -- 给予物品
+                local item = SpawnPrefab("hoshino_item_cards_pack")
+                item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
+                owner.components.inventory:GiveItem(item)
 
             end
         end)

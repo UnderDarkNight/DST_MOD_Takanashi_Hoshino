@@ -117,6 +117,15 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "以太精髓",
                 ["recipe_desc"] = "以太精髓",
             },
+            ["hoshino_item_treasure_map"] = {
+                ["name"] = "藏宝图",
+                ["inspect_str"] = "藏宝图",
+                ["recipe_desc"] = "藏宝图",
+            },
+            ["hoshino_item_treasure_map_marker"] = {
+                ["name"] = "可疑的土堆",
+                ["inspect_str"] = "需要铲子",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

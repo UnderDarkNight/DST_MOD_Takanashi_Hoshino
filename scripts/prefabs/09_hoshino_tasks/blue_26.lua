@@ -182,6 +182,7 @@
                 Remove_Items_By_Prefab(owner,"watermelonhat",1)
                 Remove_Items_By_Prefab(owner,"waterballoon",3)
 
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_treasure_map")) -- 给予物品
 
             end
         end)

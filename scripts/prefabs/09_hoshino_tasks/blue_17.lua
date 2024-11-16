@@ -191,11 +191,10 @@
                 Remove_Items_By_Prefab(owner,"cane",1)
                 Remove_Items_By_Prefab(owner,"dragonpie",3)
 
-                -- local item = SpawnPrefab("hoshino_item_12mm_shotgun_shells")
-                -- item.components.stackable.stacksize = 5
-                -- owner.components.inventory:GiveItem(item) -- 给予物品
-
-                -- owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack")) -- 给予物品
+                local item = SpawnPrefab("hoshino_food_energy_drink")
+                item.components.stackable.stacksize = 4
+                owner.components.inventory:GiveItem(item) -- 给予物品
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_treasure_map")) -- 给予物品
 
             end
         end)

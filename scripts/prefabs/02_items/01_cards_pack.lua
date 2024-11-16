@@ -19,11 +19,22 @@
             },
         })
 
+    设置外观
+        item:PushEvent("SetDisplay",{
+            bank = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+            build = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+            anim = "idle",
+            imagename = "hoshino_item_cards_pack",
+            atlasname = "images/inventoryimages/hoshino_item_cards_pack.xml",
+        })
+
 ]]--
 ------------------------------------------------------------------------------------------------------------------------------------------------
     local assets =
     {
         Asset("ANIM", "anim/hoshino_item_cards_pack.zip"),
+        Asset("ANIM", "anim/hoshino_item_cards_pack_supreme_mystery.zip"),
+        Asset("ANIM", "anim/hoshino_item_cards_pack_authority_to_unveil_secrets.zip"),
     }
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- RPC 等辅助 函数
@@ -79,8 +90,63 @@
         inst.components.hoshino_com_workable:SetOnWorkFn(workable_active_fn)
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+--- 设置外观
+    local function SetDisplay(inst,data)
+        local bank = data.bank
+        local build = data.build
+        local anim = data.anim
+        local imagename = data.imagename
+        local atlasname = data.atlasname
+        if bank and build and anim and imagename and atlasname then
+            inst.AnimState:SetBank(bank)
+            inst.AnimState:SetBuild(build)
+            inst.AnimState:PlayAnimation(anim)
+            inst.components.inventoryitem.imagename = imagename
+            inst.components.inventoryitem.atlasname = atlasname
+        end
+    end
+------------------------------------------------------------------------------------------------------------------------------------------------
+--- 预设外观
+    local function Custom_Type_Event_Install(inst)
+        inst:ListenForEvent("Type",function(inst,pack_type)
+            if pack_type == "hoshino_item_cards_pack_authority_to_unveil_secrets" then
+                inst:PushEvent("SetName","窥秘权柄") -- 金色
+                inst:PushEvent("Set",{
+                        cards = {
+                            "card_golden",
+                            "card_golden",
+                            "card_golden",
+                        },
+                    }
+                )
+                inst:PushEvent("SetDisplay",{
+                    bank = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+                    build = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+                    anim = "idle",
+                    imagename = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+                    atlasname = "images/inventoryimages/hoshino_item_cards_pack_authority_to_unveil_secrets.xml",
+                })
+            elseif pack_type == "hoshino_item_cards_pack_supreme_mystery" then
+                inst:PushEvent("SetName","最高神秘") -- 彩色
+                inst:PushEvent("Set",{
+                        cards = {
+                            "card_colourful",
+                            "card_colourful",
+                            "card_colourful",
+                        },
+                    }
+                )
+                inst:PushEvent("SetDisplay",{
+                    bank = "hoshino_item_cards_pack_supreme_mystery",
+                    build = "hoshino_item_cards_pack_supreme_mystery",
+                    anim = "idle",
+                    imagename = "hoshino_item_cards_pack_supreme_mystery",
+                    atlasname = "images/inventoryimages/hoshino_item_cards_pack_supreme_mystery.xml",
+                })
+            end
+        end)
+    end
+------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
     local inst = CreateEntity()
 
@@ -136,6 +202,19 @@ local function fn()
         inst:ListenForEvent("Set",function(inst,data)
             inst.components.hoshino_data:Set("CardsData",data)
         end)
+    -------------------------------------------------------------------------
+    --- 设置外观
+        inst:ListenForEvent("SetDisplay",function(inst,data)
+            inst.components.hoshino_data:Set("display_data",data)
+            SetDisplay(inst,data)
+        end)
+        inst.components.hoshino_data:AddOnLoadFn(function()
+            local display_data = inst.components.hoshino_data:Get("display_data") or {}
+            SetDisplay(inst,display_data)
+        end)
+    -------------------------------------------------------------------------
+    -- 自定义预设外观
+        Custom_Type_Event_Install(inst)
     -------------------------------------------------------------------------
 
     MakeHauntableLaunch(inst)
