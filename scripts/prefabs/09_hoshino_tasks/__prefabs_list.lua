@@ -150,6 +150,7 @@ local prefabs_name_list = {
     "golden_22",                             --- 金色22
     "golden_23",                             --- 金色23
     "golden_24",                             --- 金色24
+    "golden_25",                             --- 金色25
 
 
 }
