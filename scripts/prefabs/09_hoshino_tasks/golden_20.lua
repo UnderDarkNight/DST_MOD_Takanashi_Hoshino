@@ -198,7 +198,7 @@
             local owner = inst:GetOwner()
             if owner then
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.give_up_task",inst.prefab) -- 放弃任务广播
+                owner:PushEvent("hoshino_event.give_up_task",{prefab = inst.prefab,inst = inst}) -- 放弃任务广播
             end
             inst:Remove()
         end)
