@@ -38,6 +38,10 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                         target:SpawnChild("wanda_attack_shadowweapon_old_fx")
                         local linked_delta = num*0.6
                         linked_player.components.health:DoDelta(linked_delta,nil,inst.prefab)
+                        linked_player:PushEvent("hoshino_buff_special_equipment_backpack_t8_linked",{
+                            num = math.abs(linked_delta),
+                            from = target,
+                        })
 
                         num = num*0.4
                     end

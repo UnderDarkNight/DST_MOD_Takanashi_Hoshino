@@ -152,16 +152,14 @@
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
             end)
-            -- inst:ListenForEvent("hoshino_event.exp_broadcast",function(_,_table)
-            --     local target = _table and _table.target
-            --     if target and target:HasTag("shadow_aligned") then
-            --         local num = inst.components.hoshino_data:Add("num",1,0,GetMissionAskNum())
-            --         inst.__num:set(num)
-            --         if num >= GetMissionAskNum() then
-            --             owner:PushEvent("hoshino_event.pad_warnning","main_page")
-            --         end
-            --     end
-            -- end,owner)
+            inst:ListenForEvent("hoshino_buff_special_equipment_backpack_t8_linked",function(_,_table)
+                local delta_num = _table and _table.num or 0
+                local num = inst.components.hoshino_data:Add("num",delta_num,0,GetMissionAskNum())
+                inst.__num:set(math.floor(num))
+                if num >= GetMissionAskNum() then
+                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                end
+            end,owner)
         end)
 
         --- 加载检查
