@@ -42,7 +42,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                         num = num*0.4 -- 当前玩家承受的值
 
                         linked_player:PushEvent("hoshino_buff_special_equipment_backpack_t8_linked",{
-                            num = math.abs(num),
+                            num = math.abs(linked_delta),
                             from = target,
                         })
                     end
