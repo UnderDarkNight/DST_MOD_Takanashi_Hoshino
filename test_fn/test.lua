@@ -117,9 +117,9 @@ local flg,error_code = pcall(function()
 
         -- print(TheWorld.Map:GetTileAtPoint(x,y,z))
 
-        -- local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+        local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
-        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_27")
+        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_28")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 
         -- TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
@@ -127,7 +127,7 @@ local flg,error_code = pcall(function()
         -- inst.entity:AddSoundEmitter()        
 
 
-        -- ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
+        ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
     ----------------------------------------------------------------------------------------------------------------
     --- 藏宝图 调试
         
