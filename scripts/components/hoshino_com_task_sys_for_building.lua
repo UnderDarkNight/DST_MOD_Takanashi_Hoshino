@@ -137,6 +137,12 @@ nil,
         end
         return ret_table
     end
+    function hoshino_com_task_sys_for_building:GetNewPrefab()
+        -- local white_pool = self:Get_White_Mission_Prefabs()
+        -- local blue_pool = self:Get_Blue_Mission_Prefabs()
+
+        return "hoshino_mission_golden_14"
+    end
     function hoshino_com_task_sys_for_building:GetNewTaskItem()
         -----------------------------------------------------------------
         --- 根据概率池子生成物品
@@ -144,11 +150,12 @@ nil,
                 "hoshino_task_excample_kill",
                 "hoshino_task_excample_item",
             }
-            local ret_prefab = list[math.random(1,#list)]
         -----------------------------------------------------------------
         --- 返回任务物品inst
-            print("spawn new task item",ret_prefab)
+            local ret_prefab = nil
             while true do
+                ret_prefab = self:GetNewPrefab()
+                print("spawn new task item",ret_prefab)                
                 local task_item = SpawnPrefab(ret_prefab)
                 if task_item then
                     if task_item.SpawnTest then
@@ -159,7 +166,8 @@ nil,
                             return task_item
                         else
                             --- 测试不通过，prefab 替换。
-                            ret_prefab = test_ret
+                            task_item:Remove()
+                            ret_prefab = test_ret or self:GetNewPrefab()
                         end
                     else
                         --- 没有测试检查函数，直接返回物品
@@ -173,6 +181,7 @@ nil,
 --- 刷新全部
     function hoshino_com_task_sys_for_building:Refresh_All()
         local container_com = self:GetContainer()
+        container_com:Close()
         for i = 1, 6, 1 do
             local item = container_com.slots[i]
             if item then
