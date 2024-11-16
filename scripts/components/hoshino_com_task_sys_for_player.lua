@@ -103,6 +103,15 @@ nil,
         end
         return nil
     end
+    function hoshino_com_task_sys_for_player:HasTask(prefab)
+        for i = 1, self.max_task_num, 1 do        
+            local item = self:GetContainer():GetItemInSlot(i)
+            if item and item.prefab == prefab then
+                return true
+            end
+        end
+        return false
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 击杀广播,给外部调用。
     function hoshino_com_task_sys_for_player:KillBroadcast(prefab,num,other_data)

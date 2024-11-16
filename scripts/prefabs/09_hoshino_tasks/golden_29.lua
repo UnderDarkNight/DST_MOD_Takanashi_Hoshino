@@ -52,8 +52,8 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_golden_28","hoshino_mission_golden_28")
-        inst:ListenForEvent("hoshino_mission_golden_28",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_golden_29","hoshino_mission_golden_29")
+        inst:ListenForEvent("hoshino_mission_golden_29",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
@@ -82,7 +82,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_28_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_29_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -97,8 +97,8 @@
             end)
         --------------------------------------------------------------------------
         ---  91,112,136
-            local display_text = bg:AddChild(Text(CODEFONT,25,"30",{ 91/255 , 112/255 ,136/255 , 1}))
-            display_text:SetPosition(-300,-42)
+            local display_text = bg:AddChild(Text(CODEFONT,35,"30",{ 91/255 , 112/255 ,136/255 , 1}))
+            display_text:SetPosition(-300,-30)
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
@@ -111,14 +111,14 @@
                 display_text:SetString(""..num.."/1")
             end
             update_fn()
-            display_text.inst:ListenForEvent("hoshino_mission_golden_28",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_golden_29",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_28_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_29_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -136,16 +136,16 @@
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.30 -- 30% 经验
+                local exp = current_max_exp*0.10 -- 10% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 -- owner.components.hoshino_com_shop:CreditCoinDelta(1200)
 
-                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_yi"))
-                owner.components.inventory:GiveItem(SpawnPrefab("ruinshat"))
-                owner.components.inventory:GiveItem(SpawnPrefab("ruinshat"))
-                owner.components.inventory:GiveItem(SpawnPrefab("ruinshat"))
+                local item = SpawnPrefab("hoshino_item_cards_pack")
+                item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
+                owner.components.inventory:GiveItem(item)
+
 
             end
         end)
@@ -169,10 +169,10 @@
             end)
             -- 添加标记debuff
             if inst.components.hoshino_data:Add("num",0) == 0 then
-                Add_Debuff_2_Target(owner,"hoshino_mission_golden_28_debuff")
+                Add_Debuff_2_Target(owner,"hoshino_mission_golden_29_debuff")
             end
-            inst:ListenForEvent("hoshino_mission_golden_28_debuff_killed",function(_,target)
-                Remove_Debuff_From_Target(owner,"hoshino_mission_golden_28_debuff")
+            inst:ListenForEvent("hoshino_mission_golden_29_debuff_killed",function(_,target)
+                Remove_Debuff_From_Target(owner,"hoshino_mission_golden_29_debuff")
                 local num = inst.components.hoshino_data:Add("num",1,0,1)
                 inst.__num:set(num)
                 if num >= 1 then
@@ -258,39 +258,50 @@ end
         inst:ListenForEvent("onhitother",function(_,_table)
             local target = _table and _table.target
             if target and target:HasTag("epic") then
-                Add_Debuff_2_Target(target,"hoshino_mission_golden_28_debuff")
+                Add_Debuff_2_Target(target,"hoshino_mission_golden_29_debuff")
             end
         end,player)
-        print("info 成功给 玩家 添加 mission_golden_28 记录debuff",player)
+        print("info 成功给 玩家 添加 mission_golden_29 记录debuff",player)
         inst:DoTaskInTime(5,function()
-            if not player.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_28") then
+            if not player.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29") then
                 inst:Remove()
             end
         end)
     end
-    local function Is_Pigman_Or_Bunnyman(target)        
-        if type(target) == "string" then
-            return target == "pigman" or target == "bunnyman"
-        elseif type(target) == "table" then
-            return target.prefab == "pigman" or target.prefab == "bunnyman"
+    local function SelectPlayer(cause,afflicter)
+        if type(cause) == "table" and cause:HasTag("player") then
+            return cause
         end
-        return false     
+        if type(afflicter) == "table" and afflicter:HasTag("player") then
+            return afflicter
+        end
+        return nil
     end
     local function debuff_for_boss(inst,monster)
+        
         --- inst:PushEvent("death", { cause = cause, afflicter = afflicter })
-        print("info 成功给 BOSS 添加 mission_golden_28 记录debuff",monster)
+        -- TheWorld:PushEvent("entity_death", { inst = self.inst, cause = cause, afflicter = afflicter })
+        print("info 成功给 BOSS 添加 mission_golden_29 记录debuff",monster)
+
+        inst._on_hit_others = {}
+
         inst:ListenForEvent("death",function(_,_table)
             local cause = _table and _table.cause
             local afflicter = _table and _table.afflicter
-            print("fake error boss 死亡事件",cause,afflicter)
-            if Is_Pigman_Or_Bunnyman(cause) or Is_Pigman_Or_Bunnyman(afflicter) then
-                local x,y,z = monster.Transform:GetWorldPosition()
-                local ents = TheSim:FindEntities(x,y,z,100,{"player"})
-                for _,player in ipairs(ents) do
-                    player:PushEvent("hoshino_mission_golden_28_debuff_killed",monster)
-                end
+            local player = SelectPlayer(cause,afflicter)
+            if player and not inst._on_hit_others[player] then
+                player:PushEvent("hoshino_mission_golden_29_debuff_killed",monster)
             end
         end,monster)
+        -- 攻击目标
+        --- attacker:PushEvent("onhitother", { target = self.inst, damage = damage, damageresolved = damageresolved, stimuli = stimuli, spdamage = spdamage, weapon = weapon, redirected = damageredirecttarget })
+        inst:ListenForEvent("onhitother",function(_,_table)
+            local target = _table and _table.target
+            if target and target:HasTag("player") then
+                inst._on_hit_others[target] = true
+            end
+        end,monster)
+        
     end
     local function debuff_fn()
         local inst = CreateEntity()
@@ -329,5 +340,5 @@ end
         return inst
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-return Prefab("hoshino_mission_golden_28", fn, assets),
-    Prefab("hoshino_mission_golden_28_debuff", debuff_fn, assets)
+return Prefab("hoshino_mission_golden_29", fn, assets),
+    Prefab("hoshino_mission_golden_29_debuff", debuff_fn, assets)
