@@ -266,6 +266,7 @@ end
                         else
                             inst.AnimState:Hide("snow")
                         end
+                    else
                         inst.AnimState:SetScale(2,2,2)
                     end
                 end
