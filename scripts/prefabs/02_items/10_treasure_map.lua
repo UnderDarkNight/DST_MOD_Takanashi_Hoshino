@@ -182,7 +182,8 @@ end
             end
         ----------------------------------------------------------
         --- 宝箱，9格子
-            local box = SpawnPrefab("terrariumchest")
+            local box_prefabs = {"terrariumchest","treasurechest","dragonflychest"}
+            local box = SpawnPrefab(box_prefabs[math.random(1,#box_prefabs)])
             box.Transform:SetPosition(x,y,z)
         ----------------------------------------------------------
         --- 金子
