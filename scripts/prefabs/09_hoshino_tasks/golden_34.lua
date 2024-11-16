@@ -32,15 +32,15 @@
 ---
     local function GetMissionAskNum()
         if TUNING.HOSHINO_DEBUGGING_MODE then
-            return 100
+            return 5
         end
-        return 600
+        return 200
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- net install
     local function Net_Vars_Install(inst)
-        inst.__num = net_uint(inst.GUID, "hoshino_mission_golden_33","hoshino_mission_golden_33")
-        inst:ListenForEvent("hoshino_mission_golden_33",function()
+        inst.__num = net_uint(inst.GUID, "hoshino_mission_golden_34","hoshino_mission_golden_34")
+        inst:ListenForEvent("hoshino_mission_golden_34",function()
             inst.num = inst.__num:value()
         end)
         if not TheWorld.ismastersim then
@@ -69,7 +69,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_33_pad.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_34_pad.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -98,14 +98,14 @@
                 display_text:SetString(""..num.."/"..GetMissionAskNum())
             end
             update_fn()
-            display_text.inst:ListenForEvent("hoshino_mission_golden_33",update_fn,inst)
+            display_text.inst:ListenForEvent("hoshino_mission_golden_34",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_33_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/golden_mission.xml","golden_mission_34_board.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -123,13 +123,15 @@
                 owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.15 -- 15% 经验
+                local exp = current_max_exp*0.05 -- 5% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                -- owner.components.hoshino_com_shop:CreditCoinDelta(800)
-                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_blue_schist"))
-                -- owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
+                owner.components.hoshino_com_shop:CreditCoinDelta(800)
+                -- owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_blue_schist"))
+                local item = SpawnPrefab("hoshino_item_cards_pack")
+                item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
+                owner.components.inventory:GiveItem(item)
 
             end
         end)
@@ -152,16 +154,16 @@
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
             end)
-            -- inst:ListenForEvent("hoshino_event.exp_broadcast",function(_,_table)
-            --     local target = _table and _table.target
-            --     if target and target:HasTag("shadow_aligned") then
-            --         local num = inst.components.hoshino_data:Add("num",1,0,GetMissionAskNum())
-            --         inst.__num:set(num)
-            --         if num >= GetMissionAskNum() then
-            --             owner:PushEvent("hoshino_event.pad_warnning","main_page")
-            --         end
-            --     end
-            -- end,owner)
+            inst:ListenForEvent("hoshino_event.exp_broadcast",function(_,_table)
+                local target = _table and _table.target
+                if target and target:HasTag("werepig") and TheWorld.state.isfullmoon and TheWorld.state.isnight then
+                    local num = inst.components.hoshino_data:Add("num",1,0,GetMissionAskNum())
+                    inst.__num:set(num)
+                    if num >= GetMissionAskNum() then
+                        owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                    end
+                end
+            end,owner)
         end)
 
         --- 加载检查
@@ -233,4 +235,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_golden_33", fn, assets)
+return Prefab("hoshino_mission_golden_34", fn, assets)
