@@ -113,6 +113,37 @@
 
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------------
+--- acceptable
+    local function acceptable_com_inst(inst)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_acceptable",function(inst,replica_com)
+            replica_com:SetTestFn(function(inst,item,doer,right_click)
+                if item and item.prefab == "hoshino_item_12mm_shotgun_shells" then
+                    return true
+                end
+                return false
+            end)
+            replica_com:SetText("hoshino_weapon_gun_eye_of_horus","填装")
+            replica_com:SetSGAction("dolongaction")
+        end)
+        if not TheWorld.ismastersim then
+            return
+        end
+
+        inst:AddComponent("hoshino_com_acceptable")
+        inst.components.hoshino_com_acceptable:SetOnAcceptFn(function(inst,item,doer)
+            if inst.components.finiteuses:GetPercent() > 1 then
+                return false
+            end
+            item.components.stackable:Get():Remove()
+            inst.components.finiteuses:Use_Hoshino(-0.2*200)
+            if inst.components.finiteuses:GetPercent() > 1 then
+                inst.components.finiteuses:SetPercent(1)
+            end
+            return true
+        end)
+
+    end
+------------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
     local inst = CreateEntity()
 
@@ -137,6 +168,7 @@ local function fn()
 
     inst.entity:SetPristine()
     special_attack_module_install(inst)
+    acceptable_com_inst(inst)
     if not TheWorld.ismastersim then
         return inst
     end

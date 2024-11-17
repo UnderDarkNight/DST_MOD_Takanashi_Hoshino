@@ -58,6 +58,25 @@
     )
     RemoveRecipeFromFilter("hoshino_spell_gun_eye_of_horus_level_2_to_3","MODS")
 --------------------------------------------------------------------------------------------------------------------------------------------
+---- 12号霰弹
+--------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_item_12mm_shotgun_shells","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_item_12mm_shotgun_shells",            --  --  inst.prefab  实体名字
+        {Ingredient("gunpowder", 1),Ingredient("goldnugget", 2)} ,
+        TECH.NONE, ---
+        {
+            -- nounlock=true,
+            no_deconstruction=false,
+            builder_tag = "hoshino",
+            atlas = "images/inventoryimages/hoshino_item_12mm_shotgun_shells.xml",
+            image = "hoshino_item_12mm_shotgun_shells.tex",
+            -- sg_state="carvewood",
+        },
+        {"CHARACTER",}
+    )
+    RemoveRecipeFromFilter("hoshino_item_12mm_shotgun_shells","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
 ---- 任务看板
 --------------------------------------------------------------------------------------------------------------------------------------------
     AddRecipeToFilter("hoshino_building_task_board_pre","CHARACTER")     ---- 添加物品到目标标签

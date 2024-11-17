@@ -88,8 +88,8 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_item_12mm_shotgun_shells"] = {
                 ["name"] = "12mm霰弹",
-                ["inspect_str"] = "12mm霰弹",
-                ["recipe_desc"] = "12mm霰弹",
+                ["inspect_str"] = "为荷鲁斯之眼填充20%耐久",
+                ["recipe_desc"] = "为荷鲁斯之眼填充20%耐久",
             },
             ["hoshino_item_special_packer"] = {
                 ["name"] = "超级打包盒",

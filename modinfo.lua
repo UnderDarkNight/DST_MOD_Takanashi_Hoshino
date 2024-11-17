@@ -12,11 +12,12 @@ local the_version = "0.00.00.00000"
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 -- 语言相关的基础API  ---- 参数表： loc.lua 里面的localizations 表，code 为 这里用的index
   local function IsChinese()
-      if locale == nil then
-          return true
-      else
-          return locale == "zh" or locate == "zht" or locate == "zhr" or false
-      end
+      -- if locale == nil then
+      --     return true
+      -- else
+      --     return locale == "zh" or locate == "zht" or locate == "zhr" or false
+      -- end
+      return true
   end
   local function ChooseTranslationTable_Test(_table)
       if ChooseTranslationTable then
