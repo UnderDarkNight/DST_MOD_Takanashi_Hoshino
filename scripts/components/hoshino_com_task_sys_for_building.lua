@@ -137,45 +137,151 @@ nil,
         end
         return ret_table
     end
+    function hoshino_com_task_sys_for_building:Get_Golden_Mission_Prefabs()
+        local ret_table = {}
+        for i = 1, 34 do
+            -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
+            local formatted_number = string.format("%02d", i)
+            local ret_prefab = "hoshino_mission_golden_" .. formatted_number
+            if PrefabExists(ret_prefab) then
+                table.insert(ret_table,ret_prefab)
+            end
+        end
+        return ret_table
+    end
+    function hoshino_com_task_sys_for_building:Get_Colourful_Mission_Prefabs()
+        if TheWorld.state.cycles < 40 then
+            return {}
+        end
+        local ret_table = {}
+        for i = 1, 11 do
+            -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
+            local formatted_number = string.format("%02d", i)
+            local ret_prefab = "hoshino_mission_colourful_" .. formatted_number
+            if PrefabExists(ret_prefab) then
+                table.insert(ret_table,ret_prefab)
+            end
+        end
+        return ret_table
+    end
+    function hoshino_com_task_sys_for_building:Get_Colourful_Egg_Mission_Prefabs()
+        if TheWorld.state.cycles < 40 then
+            return {}
+        end
+        local ret_table = {}
+        for i = 12, 16 do
+            -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
+            local formatted_number = string.format("%02d", i)
+            local ret_prefab = "hoshino_mission_colourful_" .. formatted_number
+            if PrefabExists(ret_prefab) then
+                table.insert(ret_table,ret_prefab)
+            end
+        end
+        return ret_table
+    end
     function hoshino_com_task_sys_for_building:GetNewPrefab()
         -- local white_pool = self:Get_White_Mission_Prefabs()
         -- local blue_pool = self:Get_Blue_Mission_Prefabs()
-
-        return "hoshino_mission_golden_14"
+        -- local golden_pool = self:Get_Golden_Mission_Prefabs()
+        -- local colourful_pool = self:Get_Colourful_Mission_Prefabs()
+        -- local colourful_egg_pool = self:Get_Colourful_Egg_Mission_Prefabs()
+        -------------------------------------------------------------------------
+        --- 定义概率池及其权重
+            local weights = {
+                ["white"] = 100,
+                ["blue"] = 50,
+                ["golden"] = 25,
+                ["colourful"] = 6,
+                ["colourful_egg"] = 1,
+            }
+        -------------------------------------------------------------------------
+        --- 从概率池中随机选择一个任务
+            local chosen_pool = nil
+            local chosen_pool_name = nil
+            local chosen_pool_weight = nil
+            local total_weight = 0
+            for pool_name, pool_weight in pairs(weights) do
+                total_weight = total_weight + pool_weight
+            end
+            local random_number = math.random(1, total_weight)
+            for pool_name, pool_weight in pairs(weights) do
+                if random_number <= pool_weight then
+                    chosen_pool_name = pool_name
+                    chosen_pool_weight = pool_weight
+                    break
+                end
+                random_number = random_number - pool_weight
+            end
+            if chosen_pool_name == "white" then
+                chosen_pool = self:Get_White_Mission_Prefabs()
+            elseif chosen_pool_name == "blue" then
+                chosen_pool = self:Get_Blue_Mission_Prefabs()
+            elseif chosen_pool_name == "golden" then
+                chosen_pool = self:Get_Golden_Mission_Prefabs()
+            elseif chosen_pool_name == "colourful" then
+                chosen_pool = self:Get_Colourful_Mission_Prefabs()
+            elseif chosen_pool_name == "colourful_egg" then
+                chosen_pool = self:Get_Colourful_Egg_Mission_Prefabs()
+            end
+            local chosen_prefab = tostring( chosen_pool[math.random(1, #chosen_pool)] )
+        -------------------------------------------------------------------------
+        --- 重复检查
+            if self:HasTask(chosen_prefab) then
+                print("fake error : 自动刷新出现重复任务")
+                return nil
+            end
+        -------------------------------------------------------------------------
+        --- 检查是否是 单次任务
+            if one_time_list[chosen_prefab] and not self:One_Time_Remembered_Check_Succeed(chosen_prefab) then
+                return nil
+            end
+            if one_time_list[chosen_prefab] then
+                self:OneTimeRemember(chosen_prefab)
+            end
+        -------------------------------------------------------------------------
+        return chosen_prefab
     end
     function hoshino_com_task_sys_for_building:GetNewTaskItem()
-        -----------------------------------------------------------------
-        --- 根据概率池子生成物品
-            local list = {
-                "hoshino_task_excample_kill",
-                "hoshino_task_excample_item",
-            }
         -----------------------------------------------------------------
         --- 返回任务物品inst
             local ret_prefab = nil
             while true do
                 ret_prefab = self:GetNewPrefab()
-                print("spawn new task item",ret_prefab)                
-                local task_item = SpawnPrefab(ret_prefab)
-                if task_item then
-                    if task_item.SpawnTest then
-                        --- 有测试检查函数，则进行测试
-                        local test_ret = task_item:SpawnTest()
-                        if test_ret == true then
-                            --- 测试通过，返回物品
-                            return task_item
-                        else
-                            --- 测试不通过，prefab 替换。
-                            task_item:Remove()
-                            ret_prefab = test_ret or self:GetNewPrefab()
+                if ret_prefab then
+                        print("spawn new task item",ret_prefab)                
+                        local task_item = SpawnPrefab(ret_prefab)
+                        if task_item then
+                            if task_item.SpawnTest then
+                                --- 有测试检查函数，则进行测试
+                                local test_ret = task_item:SpawnTest()
+                                if test_ret == true then
+                                    --- 测试通过，返回物品
+                                    return task_item
+                                else
+                                    --- 测试不通过，prefab 替换。
+                                    task_item:Remove()
+                                    ret_prefab = test_ret or self:GetNewPrefab()
+                                end
+                            else
+                                --- 没有测试检查函数，直接返回物品
+                                return task_item
+                            end
                         end
-                    else
-                        --- 没有测试检查函数，直接返回物品
-                        return task_item
-                    end
                 end
             end
         -----------------------------------------------------------------
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 用于检查
+    function hoshino_com_task_sys_for_building:HasTask(prefab)
+        local container_com = self:GetContainer()
+        for i = 1, container_com:GetNumSlots(), 1 do
+            local item = container_com:GetItemInSlot(i)
+            if item and item.prefab == prefab then
+                return true
+            end
+        end
+        return false
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 刷新全部

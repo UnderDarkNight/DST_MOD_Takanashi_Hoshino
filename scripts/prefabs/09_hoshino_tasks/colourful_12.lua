@@ -307,6 +307,11 @@ local function fn()
             if TUNING["hoshino.Config"].COLOURFUL_EGG_MISSIONS or TUNING.HOSHINO_DEBUGGING_MODE then
                 return true
             end
+            local formatted_number = string.format("%02d", math.random(1,10))
+            local ret_prefab = "hoshino_mission_colourful_" .. formatted_number
+            if PrefabExists(ret_prefab) then
+                return ret_prefab
+            end
             return nil
         end
     --------------------------------------------------------------------------------------------
