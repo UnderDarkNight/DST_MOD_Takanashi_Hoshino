@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="colourful_mission.tex" />
+	<Elements>
+		<Element name="colourful_mission_01_board.tex" u1="0.292748046875" u2="0.413306640625" v2="0.5292734375" v1="0.354515625" variant="" />
+		<Element name="colourful_mission_01_pad.tex" u1="0.12355859375" u2="0.290748046875" v2="0.4130625" v1="0.35695703125" variant="" />
+		<Element name="colourful_mission_02_board.tex" u1="0.2461171875" u2="0.36667578125" v2="0.352515625" v1="0.1777578125" variant="" />
+		<Element name="colourful_mission_02_pad.tex" u1="0.001" u2="0.168189453125" v2="0.11765234375" v1="0.061546875" variant="" />
+		<Element name="colourful_mission_03_board.tex" u1="0.2461171875" u2="0.36667578125" v2="0.1757578125" v1="0.001" variant="" />
+		<Element name="colourful_mission_03_pad.tex" u1="0.001" u2="0.168189453125" v2="0.059546875" v1="0.00344140625" variant="" />
+		<Element name="colourful_mission_04_board.tex" u1="0.36867578125" u2="0.489234375" v2="0.352515625" v1="0.1777578125" variant="" />
+		<Element name="colourful_mission_04_pad.tex" u1="0.33937890625" u2="0.506568359375" v2="0.999" v1="0.94289453125" variant="" />
+		<Element name="colourful_mission_05_board.tex" u1="0.415306640625" u2="0.535865234375" v2="0.94089453125" v1="0.76613671875" variant="" />
+		<Element name="colourful_mission_05_pad.tex" u1="0.508568359375" u2="0.6757578125" v2="0.999" v1="0.94289453125" variant="" />
+		<Element name="colourful_mission_06_board.tex" u1="0.537865234375" u2="0.658423828125" v2="0.94089453125" v1="0.76613671875" variant="" />
+		<Element name="colourful_mission_06_pad.tex" u1="0.491234375" u2="0.658423828125" v2="0.76413671875" v1="0.70803125" variant="" />
+		<Element name="colourful_mission_07_board.tex" u1="0.415306640625" u2="0.535865234375" v2="0.58737890625" v1="0.41262109375" variant="" />
+		<Element name="colourful_mission_07_pad.tex" u1="0.001" u2="0.168189453125" v2="0.999" v1="0.94289453125" variant="" />
+		<Element name="colourful_mission_08_board.tex" u1="0.001" u2="0.12155859375" v2="0.94089453125" v1="0.76613671875" variant="" />
+		<Element name="colourful_mission_08_pad.tex" u1="0.001" u2="0.168189453125" v2="0.76413671875" v1="0.70803125" variant="" />
+		<Element name="colourful_mission_09_board.tex" u1="0.001" u2="0.12155859375" v2="0.70603125" v1="0.5312734375" variant="" />
+		<Element name="colourful_mission_09_pad.tex" u1="0.12355859375" u2="0.290748046875" v2="0.94089453125" v1="0.8847890625" variant="" />
+		<Element name="colourful_mission_10_board.tex" u1="0.12355859375" u2="0.2441171875" v2="0.70603125" v1="0.5312734375" variant="" />
+		<Element name="colourful_mission_10_pad.tex" u1="0.170189453125" u2="0.33737890625" v2="0.999" v1="0.94289453125" variant="" />
+		<Element name="colourful_mission_11_board.tex" u1="0.292748046875" u2="0.413306640625" v2="0.94089453125" v1="0.76613671875" variant="" />
+		<Element name="colourful_mission_11_pad.tex" u1="0.12355859375" u2="0.290748046875" v2="0.8827890625" v1="0.82668359375" variant="" />
+		<Element name="colourful_mission_12_board.tex" u1="0.2461171875" u2="0.36667578125" v2="0.76413671875" v1="0.58937890625" variant="" />
+		<Element name="colourful_mission_12_pad.tex" u1="0.12355859375" u2="0.290748046875" v2="0.82468359375" v1="0.768578125" variant="" />
+		<Element name="colourful_mission_13_board.tex" u1="0.36867578125" u2="0.489234375" v2="0.76413671875" v1="0.58937890625" variant="" />
+		<Element name="colourful_mission_13_pad.tex" u1="0.2461171875" u2="0.413306640625" v2="0.58737890625" v1="0.5312734375" variant="" />
+		<Element name="colourful_mission_14_board.tex" u1="0.001" u2="0.12155859375" v2="0.5292734375" v1="0.354515625" variant="" />
+		<Element name="colourful_mission_14_pad.tex" u1="0.001" u2="0.168189453125" v2="0.352515625" v1="0.29641015625" variant="" />
+		<Element name="colourful_mission_15_board.tex" u1="0.001" u2="0.12155859375" v2="0.29441015625" v1="0.11965234375" variant="" />
+		<Element name="colourful_mission_15_pad.tex" u1="0.12355859375" u2="0.290748046875" v2="0.5292734375" v1="0.47316796875" variant="" />
+		<Element name="colourful_mission_16_board.tex" u1="0.12355859375" u2="0.2441171875" v2="0.29441015625" v1="0.11965234375" variant="" />
+		<Element name="colourful_mission_16_pad.tex" u1="0.12355859375" u2="0.290748046875" v2="0.47116796875" v1="0.4150625" variant="" />
+	</Elements>
+</Atlas>
