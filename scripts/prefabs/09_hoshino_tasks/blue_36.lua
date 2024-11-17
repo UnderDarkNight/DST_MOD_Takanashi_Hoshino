@@ -187,7 +187,7 @@
             if owner and featherpencil_num + decor_pictureframe_num >= 2 then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
+                owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst}) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
                 local exp = current_max_exp*0.30 -- 25% 经验

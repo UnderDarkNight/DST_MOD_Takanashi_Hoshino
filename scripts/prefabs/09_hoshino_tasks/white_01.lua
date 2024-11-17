@@ -121,7 +121,7 @@
             if owner and inst.components.hoshino_data:Add("num",0) >= 5 then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
+                owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst}) -- 提交任务广播
 
                 local item = SpawnPrefab("marblebean")
                 item.components.stackable.stacksize = 2

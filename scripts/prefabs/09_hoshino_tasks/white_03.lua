@@ -176,7 +176,7 @@
             if owner and Has_Enough_Items(owner,"redgem",1) and Has_Enough_Items(owner,"bluegem",1) and Has_Enough_Items(owner,"purplegem",1) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
+                owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst}) -- 提交任务广播
 
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(200)
                 owner.components.hoshino_com_shop:CreditCoinDelta(800)

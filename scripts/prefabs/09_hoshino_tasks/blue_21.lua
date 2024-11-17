@@ -155,7 +155,7 @@
             if owner and Has_Enough_Items(owner,MISSION_REQUIRE_PREFAB,MISSION_REQUIRE_NUM) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.delivery_task",inst.prefab) -- 提交任务广播
+                owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst}) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
                 local exp = current_max_exp*0.40 -- 40% 经验
