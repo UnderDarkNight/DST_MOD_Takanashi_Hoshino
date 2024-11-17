@@ -9,6 +9,7 @@ modimport("imports_for_hoshino/02_01_Strings_Table_EN.lua")	---- 英文语言
 
 modimport("imports_for_hoshino/03_01_TUNING_Common_Func.lua")	---- 常用函数
 modimport("imports_for_hoshino/03_02_cross_archive_data_api.lua")	---- 跨存档函数
+modimport("imports_for_hoshino/03_03_copy_equip_slot.lua")	---- 复制装备槽
 
 modimport("imports_for_hoshino/04_DST_STRINGS_PRE_INIT_.lua")	---- 尝试初始化部分变量名字。后缀名字注意
 
