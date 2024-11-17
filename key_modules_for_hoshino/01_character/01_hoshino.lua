@@ -33,7 +33,7 @@ end
         STRINGS.CHARACTER_QUOTES["hoshino"] = "XXXXXXXX"
 
         -- Custom speech strings  ----人物语言文件  可以进去自定义
-        -- STRINGS.CHARACTERS[string.upper("hoshino")] = require "speech_hoshino"
+        STRINGS.CHARACTERS[string.upper("hoshino")] = require("speech_hoshino")
 
         -- The character's name as appears in-game  --人物在游戏里面的名字
         STRINGS.NAMES[string.upper("hoshino")] = "小鸟游星野"
