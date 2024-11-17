@@ -328,6 +328,17 @@ local function debuff_fn()
         inst.entity:SetParent(target.entity)
         inst.Network:SetClassifiedTarget(target)
         -----------------------------------------------------
+        -- 避免互殴
+            if target.components.combat then
+                local old_GetAttacked = target.components.combat.GetAttacked
+                target.components.combat.GetAttacked = function(self,attacker,...)
+                    if attacker and  (attacker.prefab == "sharkboi" or attacker.prefab == "bearger") then
+                        return true
+                    end
+                    return old_GetAttacked(self,attacker,...)
+                end
+            end
+        -----------------------------------------------------
         -- --- 60%减伤
         --     target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.2)
         -----------------------------------------------------

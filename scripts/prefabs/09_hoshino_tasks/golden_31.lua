@@ -146,6 +146,12 @@
         inst:ListenForEvent("active",function(inst,owner)
             --- 
             local function near_ghost_checker()
+                --- 任务完成后不需要继续检查了
+                if inst.components.hoshino_data:Add("num",0,0,GetStayTime()) >= GetStayTime() then
+                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                    return
+                end
+
                 local x,y,z = owner.Transform:GetWorldPosition()
                 local ents = TheSim:FindEntities(x,0,z,10,{"ghost"})
                 local near_ghost_flag = false

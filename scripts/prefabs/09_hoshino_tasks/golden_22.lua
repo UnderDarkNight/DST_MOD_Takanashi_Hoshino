@@ -121,7 +121,7 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 -- owner.components.hoshino_com_shop:CreditCoinDelta(200)
 
-                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_abydos_high_purity_alloy"))
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_blue_schist"))
 
             end
         end)
