@@ -233,15 +233,10 @@ TUNING.HOSHINO_FNS = {}
             local x,y,z
             local radius
             if type(x_or_vect3) == type(Vector3(0,0,0)) and type(y_or_radius) == "number" then
-                x = x_or_vect3.x
-                y = x_or_vect3.y
-                z = x_or_vect3.z
+                x,y,z = x_or_vect3.x,x_or_vect3.y,x_or_vect3.z
                 radius = y_or_radius
             elseif type(x_or_vect3) == "number" and type(y_or_radius) == "number" and type(_z) == "number" and type(_radius) == "number" then
-                x = x_or_vect3
-                y = y_or_radius
-                z = _z
-                radius = _radius
+                x,y,z,radius = x_or_vect3,y_or_radius,_z,_radius
             end
         ---------------------------------------------------------------
         --- 避免崩溃处理。
