@@ -125,6 +125,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["name"] = "可疑的土堆",
                 ["inspect_str"] = "需要铲子",
             },
+            ["hoshino_equipment_holiday_glasses"] = {
+                ["name"] = "假日眼镜",
+                ["inspect_str"] = "假日眼镜",
+                ["recipe_desc"] = "假日眼镜",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

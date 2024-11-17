@@ -38,6 +38,7 @@ local prefabs_name_list = {
     "08_fragments_of_divine_script",            --- 神明文字碎片
     "09_ether_essence",                         --- 以太精髓
     "10_treasure_map",                          --- 藏宝图
+    "11_holiday_glasses",                       --- 假日眼镜
 
 }
 
