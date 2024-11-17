@@ -270,6 +270,7 @@ nil,
     function hoshino_com_shop:BlueSchistDelta(num)
         self.blue_schist = math.clamp(self.blue_schist + num,0,self.u32_max)
         self:ShopData_Set("blue_schist",self.blue_schist)
+        self.inst:PushEvent("hoshino_com_shop.blue_schist_updated")
     end
     function hoshino_com_shop:GetBlueSchist()
         return self.blue_schist

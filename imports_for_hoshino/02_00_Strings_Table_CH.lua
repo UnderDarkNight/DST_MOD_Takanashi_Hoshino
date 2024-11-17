@@ -68,9 +68,8 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
         --- 02_items
             ["hoshino_item_cards_pack"] = {
                 ["name"] = "神秘核心",
-                ["inspect_str"] = "神秘核心",
-                ["recipe_desc"] = "神秘核心",
-                -- ["level_up_default"] = ""
+                ["inspect_str"] = "内含一些特殊能力",
+                ["recipe_desc"] = "内含一些特殊能力",
             },
             ["hoshino_weapon_gun_eye_of_horus"] = {
                 ["name"] = "荷鲁斯之眼",
