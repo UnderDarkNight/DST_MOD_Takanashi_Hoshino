@@ -393,6 +393,7 @@
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{
                             spell_name = "swimming_emergency_assistance",
                             pt = Vector3(player.Transform:GetWorldPosition()),
+                            userid = player.userid,
                         })
                     end)
                 end

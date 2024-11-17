@@ -214,7 +214,7 @@
         inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
         inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
         inst.components.playercontroller:DoAction(BufferedAction(inst, nil, ACTIONS.HOSHINO_SG_JUMP_OUT,nil,Vector3(pt.x,0,pt.z)))
-
+        inst:PushEvent("hoshino_event.swimming_emergency_assistance",{pt = pt,userid = _table and _table.userid})
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 【游泳模式】晓之荷鲁斯
