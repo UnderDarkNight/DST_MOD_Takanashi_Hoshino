@@ -119,7 +119,7 @@ local flg,error_code = pcall(function()
 
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_02")
+        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_03")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_34")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 

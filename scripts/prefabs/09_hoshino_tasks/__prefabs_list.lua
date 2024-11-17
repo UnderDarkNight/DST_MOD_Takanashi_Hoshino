@@ -163,6 +163,7 @@ local prefabs_name_list = {
 
     "colourful_01",                             --- 彩色01
     "colourful_02",                             --- 彩色02
+    "colourful_03",                             --- 彩色03
 
 
 }
