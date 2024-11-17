@@ -166,6 +166,7 @@ local function fn()
 
     MakeInventoryFloatable(inst)
 
+    inst.pickupsound = "metal"
 
     inst.entity:SetPristine()
     workable_install(inst)
@@ -221,5 +222,54 @@ local function fn()
 
     return inst
 end
+------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    local function custom_common(pack_type)
+        local inst = CreateEntity()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddSoundEmitter()
+        inst.entity:AddNetwork()    
+        MakeInventoryPhysics(inst)    
+        -- inst.AnimState:SetBank("hoshino_item_cards_pack")
+        -- inst.AnimState:SetBuild("hoshino_item_cards_pack")
+        -- inst.AnimState:PlayAnimation("idle")
+        MakeInventoryFloatable(inst)
+        inst.pickupsound = "NONE"
+        inst.entity:SetPristine()
+        if not TheWorld.ismastersim then
+            return inst
+        end
+        inst:AddComponent("inspectable")
+        inst:AddComponent("inventoryitem")
+        inst:DoTaskInTime(0,function()
+            local item = SpawnPrefab("hoshino_item_cards_pack")
+            item:PushEvent("Type",pack_type)
+            local owner = inst.components.inventoryitem:GetGrandOwner()
+            if owner then
+                local container = owner.components.inventory or owner.components.container
+                if container and container.GiveItem then
+                    inst:Remove()
+                    container:GiveItem(item)
+                    return
+                end
+            else
+                item.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                inst:Remove()
+            end
+        end)
+        return inst
+    end
+    local function golden_fn()
+        local inst = custom_common("hoshino_item_cards_pack_authority_to_unveil_secrets")
+        return inst
+    end
+    local function colourful_fn()
+        local inst = custom_common("hoshino_item_cards_pack_supreme_mystery")        
+        return inst
+    end
 
-return Prefab("hoshino_item_cards_pack", fn, assets)
+------------------------------------------------------------------------------------------------------------------------------------------------
+return Prefab("hoshino_item_cards_pack", fn, assets),
+    Prefab("hoshino_item_cards_pack_authority_to_unveil_secrets", golden_fn, assets),
+    Prefab("hoshino_item_cards_pack_supreme_mystery", colourful_fn, assets)
