@@ -38,10 +38,10 @@ local prefabs_name_list = {
 
 ---------------------------------------------------------------------------
 ---- 正在测试的物品
-if TUNING.UNDERWORLD_HANA_DEBUGGING_MODE == true then
+if TUNING.HOSHINO_DEBUGGING_MODE == true then
     local debugging_name_list = {
 
-
+        "05_right_click_2_target_spell_test_item",   --- 右键点击目标测试物品
 
     }
     for k, temp in pairs(debugging_name_list) do

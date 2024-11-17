@@ -27,3 +27,6 @@ modimport("key_modules_for_hoshino/07_actions/08_sg_jump_out.lua")
 
 modimport("key_modules_for_hoshino/07_actions/09_com_special_packer.lua") 
 --- 特殊打包器
+
+modimport("key_modules_for_hoshino/07_actions/10_com_action_item_use_to.lua") 
+--- 物品对目标使用

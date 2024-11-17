@@ -21,6 +21,7 @@
 AddReplicableComponent("hoshino_com_rpc_event")  --- RPC通道
 AddReplicableComponent("hoshino_com_workable")  --- 通用workable组件
 AddReplicableComponent("hoshino_com_acceptable")  --- 通用acceptable组件
+AddReplicableComponent("hoshino_com_item_use_to")  --- 通用给予组件
 
 AddReplicableComponent("hoshino_com_level_sys")  --- 等级系统组件
 AddReplicableComponent("hoshino_cards_sys")  --- 卡牌系统

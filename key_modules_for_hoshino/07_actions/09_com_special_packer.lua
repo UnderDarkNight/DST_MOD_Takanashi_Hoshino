@@ -2,7 +2,7 @@
 
 --------------------------------------------------------------------------------
 -- local function GetStringsTable(name)
---     local prefab_name = name or "fwd_in_pdt_com_acceptable"
+--     local prefab_name = name or "hoshino_com_acceptable"
 --     return TUNING["Forward_In_Predicament.fn"].GetStringsTable(prefab_name)
 -- end
 
