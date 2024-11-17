@@ -177,7 +177,7 @@
             if owner and Has_Enough_Items(owner,"transistor",5) and Has_Enough_Items(owner,"gears",10) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst}) -- 提交任务广播
+                owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
                 local exp = current_max_exp*0.05 -- 5% 经验
@@ -196,7 +196,7 @@
             local owner = inst:GetOwner()
             if owner then
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.give_up_task",{prefab = inst.prefab,inst = inst}) -- 放弃任务广播
+                owner:PushEvent("hoshino_event.give_up_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 放弃任务广播
             end
             inst:Remove()
         end)

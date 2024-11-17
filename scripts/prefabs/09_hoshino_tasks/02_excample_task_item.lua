@@ -123,7 +123,7 @@
                 owner.components.inventory:GiveItem(SpawnPrefab("cane"))
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst}) -- 提交任务广播
+                owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
             end
 
         end)
@@ -132,7 +132,7 @@
             local owner = inst:GetOwner()
             if owner then
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
-                owner:PushEvent("hoshino_event.give_up_task",{prefab = inst.prefab,inst = inst}) -- 放弃任务广播
+                owner:PushEvent("hoshino_event.give_up_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 放弃任务广播
             end
             inst:Remove()
         end)
