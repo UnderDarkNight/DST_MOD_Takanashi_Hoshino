@@ -119,7 +119,7 @@ local flg,error_code = pcall(function()
 
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_10")
+        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_11")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_34")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 
@@ -138,14 +138,22 @@ local flg,error_code = pcall(function()
         print("66",ThePlayer.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29"))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        if ThePlayer.__old_AddDebuff == nil then
-            ThePlayer.__old_AddDebuff = ThePlayer.AddDebuff
-            ThePlayer.AddDebuff = function(inst,debuff_name,debuff_prefab,...)
-                print("AddDebuff",debuff_name,debuff_prefab,...)
-                return inst:__old_AddDebuff(debuff_name,debuff_prefab,...)
-            end
-        end
+        -- if ThePlayer.__old_AddDebuff == nil then
+        --     ThePlayer.__old_AddDebuff = ThePlayer.AddDebuff
+        --     ThePlayer.AddDebuff = function(inst,debuff_name,debuff_prefab,...)
+        --         print("AddDebuff",debuff_name,debuff_prefab,...)
+        --         return inst:__old_AddDebuff(debuff_name,debuff_prefab,...)
+        --     end
+        -- end
         
+    ----------------------------------------------------------------------------------------------------------------
+    --- 精神控制
+        -- local inst = ThePlayer
+        -- for i = 1, 15, 1 do
+        --     inst:DoTaskInTime(0.5*i, function()
+        --         inst:AddDebuff("mindcontroller", "mindcontroller")
+        --     end)
+        -- end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
