@@ -115,3 +115,22 @@
         {"CHARACTER",}
     )
     RemoveRecipeFromFilter("hoshino_item_fragments_of_divine_script","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 超级打包盒
+--------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_item_special_packer","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_item_special_packer",            --  --  inst.prefab  实体名字
+        {Ingredient("bundlewrap", 3),Ingredient("hoshino_item_yi", 1),} ,
+        TECH.SCIENCE_TWO,
+        {
+            -- nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_item_special_packer.xml",
+            image = "hoshino_item_special_packer.tex",
+            -- sg_state="carvewood",
+        },
+        {"CHARACTER","TOOLS"}
+    )
+    RemoveRecipeFromFilter("hoshino_item_special_packer","MODS")
