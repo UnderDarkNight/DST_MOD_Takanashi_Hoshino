@@ -42,6 +42,7 @@ local prefabs_name_list = {
     "12_travel_traces",                         --- 遍历之迹
     "13_anti_entropy_crystal_wheel",            --- 反熵水晶殖轮
     "14_sandstorm_core",                        --- 沙暴核心
+    "15_cacti_core",                            --- 仙人掌核心
 
 }
 

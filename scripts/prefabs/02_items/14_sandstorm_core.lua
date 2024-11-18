@@ -51,11 +51,11 @@ local assets = {
 --
     local function onequip(inst, owner)
         inst:DoTaskInTime(1,function()
-            owner:ListenForEvent("onhitother",player_on_hit_other_event)
+            inst:ListenForEvent("onhitother",player_on_hit_other_event,owner)
         end)
     end
     local function onunequip(inst, owner)
-        owner:RemoveEventCallback("onhitother",player_on_hit_other_event)
+        inst:RemoveEventCallback("onhitother",player_on_hit_other_event,owner)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 动画控制器
