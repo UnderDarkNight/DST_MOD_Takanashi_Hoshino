@@ -40,6 +40,8 @@ local function fn()
     inst.AnimState:SetBuild("swap_cane")
     inst.AnimState:PlayAnimation("idle")
 
+    inst:AddTag("hoshino_tag.cursor_sight")
+
     inst.entity:SetPristine()
 
     item_use_2_com_install(inst)
@@ -96,6 +98,8 @@ local function fn2()
     inst.AnimState:SetBank("cane")
     inst.AnimState:SetBuild("swap_cane")
     inst.AnimState:PlayAnimation("idle")
+
+    inst:AddTag("hoshino_tag.cursor_sight")
 
     inst.entity:SetPristine()
 

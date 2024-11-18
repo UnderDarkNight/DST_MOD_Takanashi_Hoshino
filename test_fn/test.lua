@@ -117,10 +117,10 @@ local flg,error_code = pcall(function()
 
         -- print(TheWorld.Map:GetTileAtPoint(x,y,z))
 
-        local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+        -- local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_27")
+        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_27")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 
@@ -138,7 +138,7 @@ local flg,error_code = pcall(function()
 
         -- print("66",ThePlayer.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29"))
 
-        print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
+        -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
         -- if ThePlayer.__old_AddDebuff == nil then
@@ -160,6 +160,8 @@ local flg,error_code = pcall(function()
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer.SoundEmitter:PlaySound("hoshino_sound/hoshino_sound/christmas_carol")
+        ThePlayer.AnimState:PlayAnimation("action_uniqueitem_pre")
+        ThePlayer.AnimState:PushAnimation("bedroll", false)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
