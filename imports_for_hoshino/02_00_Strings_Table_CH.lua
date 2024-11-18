@@ -135,6 +135,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "遍历之迹",
                 ["recipe_desc"] = "遍历之迹",
             },
+            ["hoshino_item_anti_entropy_crystal_wheel"] = {
+                ["name"] = "反熵水晶殖轮",
+                ["inspect_str"] = "反熵水晶殖轮",
+                ["recipe_desc"] = "反熵水晶殖轮",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
