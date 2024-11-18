@@ -130,6 +130,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "假日眼镜",
                 ["recipe_desc"] = "假日眼镜",
             },
+            ["hoshino_item_travel_traces"] = {
+                ["name"] = "遍历之迹",
+                ["inspect_str"] = "遍历之迹",
+                ["recipe_desc"] = "遍历之迹",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
