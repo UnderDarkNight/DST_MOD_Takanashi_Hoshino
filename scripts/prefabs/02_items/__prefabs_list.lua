@@ -44,6 +44,7 @@ local prefabs_name_list = {
     "14_sandstorm_core",                        --- 沙暴核心
     "15_cacti_core",                            --- 仙人掌核心
     "16_oasis_core",                            --- 绿洲核心
+    "17_desert_core",                           --- 沙漠核心
 
 }
 

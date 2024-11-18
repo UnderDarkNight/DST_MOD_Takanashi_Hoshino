@@ -25,7 +25,7 @@ local assets = {
         local target = _table and _table.target
         if target and target:IsValid() and target.components.health and not target.components.health:IsDead() then
             local max_health = target.components.health.maxhealth
-            local delta_health = max_health * 0.2/100/2
+            local delta_health = max_health * 0.2/100
             target.components.health:DoDelta(-delta_health,nil,"wind")
         end
     end
@@ -42,7 +42,7 @@ local assets = {
                 tornado.overridepkname = tornado.WINDSTAFF_CASTER:GetDisplayName()
                 tornado.overridepkpet = true
             end
-            tornado.DAMAGE_PER_HIT = 15/2
+            tornado.DAMAGE_PER_HIT = 15
             tornado:ListenForEvent("Tornado_Do_Attack",Tornado_Do_Attack_Fn)
 
         end
