@@ -33,6 +33,8 @@ local files_name = {
 		"hoshino_item_fragments_of_divine_script",						--- 神明文字碎片
 		"hoshino_item_ether_essence",									--- 以太精髓
 		"hoshino_item_treasure_map",									--- 藏宝图
+
+		"hoshino_equipment_sandstorm_core",								--- 沙暴核心
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

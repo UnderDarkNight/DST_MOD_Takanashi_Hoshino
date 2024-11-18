@@ -153,3 +153,22 @@
         -- {"CHARACTER","TOOLS"}
     )
     RemoveRecipeFromFilter("hoshino_item_abydos_high_purity_alloy","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 沙暴核心
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_equipment_sandstorm_core","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_sandstorm_core",            --  --  inst.prefab  实体名字
+        {Ingredient("hoshino_item_ether_essence", 1),Ingredient("hoshino_item_yi", 1),Ingredient("hoshino_item_abydos_high_purity_alloy", 1),} ,
+        TECH.ANCIENT_FOUR, -- 完整的远古科技
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_sandstorm_core.xml",
+            image = "hoshino_equipment_sandstorm_core.tex",
+            -- station_tag="lunar_forge"
+        }--,
+        -- {"CHARACTER","TOOLS"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_sandstorm_core","MODS")

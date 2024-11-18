@@ -41,6 +41,7 @@ local prefabs_name_list = {
     "11_holiday_glasses",                       --- 假日眼镜
     "12_travel_traces",                         --- 遍历之迹
     "13_anti_entropy_crystal_wheel",            --- 反熵水晶殖轮
+    "14_sandstorm_core",                        --- 沙暴核心
 
 }
 

@@ -140,6 +140,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "反熵水晶殖轮",
                 ["recipe_desc"] = "反熵水晶殖轮",
             },
+            ["hoshino_equipment_sandstorm_core"] = {
+                ["name"] = "沙暴核心",
+                ["inspect_str"] = "沙暴核心",
+                ["recipe_desc"] = "沙暴核心",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
