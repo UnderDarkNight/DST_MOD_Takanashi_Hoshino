@@ -134,3 +134,22 @@
         {"CHARACTER","TOOLS"}
     )
     RemoveRecipeFromFilter("hoshino_item_special_packer","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 阿拜多斯高纯度合金
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_item_abydos_high_purity_alloy","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_item_abydos_high_purity_alloy",            --  --  inst.prefab  实体名字
+        {Ingredient("hoshino_item_yi", 2),Ingredient("lunarplant_husk", 15),Ingredient("thulecite", 15),Ingredient("goldnugget", 15),} ,
+        TECH.LUNARFORGING_TWO, -- 辉煌铁匠铺
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_item_abydos_high_purity_alloy.xml",
+            image = "hoshino_item_abydos_high_purity_alloy.tex",
+            station_tag="lunar_forge"
+        }--,
+        -- {"CHARACTER","TOOLS"}
+    )
+    RemoveRecipeFromFilter("hoshino_item_abydos_high_purity_alloy","MODS")
