@@ -96,3 +96,22 @@
         {"CHARACTER",}
     )
     RemoveRecipeFromFilter("hoshino_building_task_board_pre","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 神明文字碎片
+--------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_item_fragments_of_divine_script","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_item_fragments_of_divine_script",            --  --  inst.prefab  实体名字
+        {Ingredient("hoshino_item_yi", 3),Ingredient("opalpreciousgem", 1),} ,
+        TECH.NONE,
+        {
+            -- nounlock=true,
+            no_deconstruction=false,
+            builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_item_fragments_of_divine_script.xml",
+            image = "hoshino_item_fragments_of_divine_script.tex",
+            -- sg_state="carvewood",
+        },
+        {"CHARACTER",}
+    )
+    RemoveRecipeFromFilter("hoshino_item_fragments_of_divine_script","MODS")

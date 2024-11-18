@@ -25,6 +25,7 @@ return function(inst)
         else
             TheWorld.components.hoshino_com_shop_items_pool:LevelSet(0)
         end
+        inst:PushEvent("shop24_level_update")
         item:Remove()
         return true
     end)

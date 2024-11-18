@@ -15,25 +15,47 @@ local assets = {
 -- workable install
 
     local function workable_install(inst)
-        -- inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
-        --     replica_com:SetTestFn(function(inst,doer,right_click)
-        --         if doer.prefab == "hoshino" and inst.replica.inventoryitem:IsGrandOwner(doer) then
-        --             return true
-        --         end
-        --     end)
-        --     replica_com:SetText("hoshino_item_fragments_of_divine_script","储蓄")
-        --     replica_com:SetSGAction("give")
-        -- end)
-        -- if not TheWorld.ismastersim then
-        --     return
-        -- end
-        -- inst:AddComponent("hoshino_com_workable")
-        -- inst.components.hoshino_com_workable:SetOnWorkFn(function(inst,doer)
-        --     local num = inst.components.stackable:StackSize() or 0
-        --     inst:Remove()
-        --     doer.components.hoshino_com_shop:BlueSchistDelta(num)
-        --     return true
-        -- end)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
+            replica_com:SetTestFn(function(inst,doer,right_click)
+                if doer.prefab == "hoshino" and inst.replica.inventoryitem:IsGrandOwner(doer) then
+                    return true
+                end
+            end)
+            replica_com:SetText("hoshino_item_fragments_of_divine_script","升级卡池")
+            replica_com:SetSGAction("dolongaction")
+        end)
+        if not TheWorld.ismastersim then
+            return
+        end
+        inst:AddComponent("hoshino_com_workable")
+        inst.components.hoshino_com_workable:SetOnWorkFn(function(inst,doer)
+            -- 使用后可以提高1点金卡权重，0.2彩卡权重，至多使用五次。
+            -- local num = inst.components.stackable:StackSize() or 0
+            -- inst:Remove()
+            -------------------------------------------------------------------------------------
+            --- 检查是否已经达到上限
+                if doer.components.hoshino_cards_sys:Add(inst.prefab,0) >= 5 then
+                    return false
+                end
+            -------------------------------------------------------------------------------------
+            --- 计数，单次。
+                local num = 1
+                doer.components.hoshino_cards_sys:Add(inst.prefab,1)
+                inst.components.stackable:Get():Remove()
+            -------------------------------------------------------------------------------------
+            --- 暂时预留多次使用功能
+                local weights_per_time = {
+                    ["card_golden"] = 1,
+                    ["card_colourful"] = 0.2,
+                }
+                for i = 1, num, 1 do
+                    for card_type, weight in pairs(weights_per_time) do
+                        doer.components.hoshino_cards_sys:Card_Pool_Delata(card_type, weight)
+                    end
+                end
+            -------------------------------------------------------------------------------------
+            return true
+        end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()

@@ -171,6 +171,17 @@
         end
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 玩家靠近
+    local function playerprox_for_shop_install(inst)
+        if not TheWorld.ismastersim then
+            return
+        end
+        local fn = require("prefabs/06_buildings/01_05_playerprox_for_shop")
+        if type(fn) == "function" then
+            fn(inst)
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -198,6 +209,7 @@ local function fn()
     workable_com_install(inst)
     recycle_sys_install(inst)
     shop_level_up_sys_install(inst)
+    playerprox_for_shop_install(inst)
     if not TheWorld.ismastersim then
         return inst
     end
