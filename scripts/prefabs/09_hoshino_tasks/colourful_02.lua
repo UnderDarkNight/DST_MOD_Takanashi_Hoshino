@@ -358,6 +358,14 @@ local function debuff_fn()
         --- 80%减伤
             target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.2)
         -----------------------------------------------------
+        --- 2倍伤害
+            target.components.combat.externaldamagemultipliers:SetModifier(inst, 2)
+        -----------------------------------------------------
+        --- 位面伤害
+            if target.components.planardamage then
+                target.components.planardamage:AddMultiplier(inst,2)
+            end
+        -----------------------------------------------------
         --- 5倍血量
             local max_health = target.components.health.maxhealth
             target.components.health:SetMaxHealth(max_health * 5)

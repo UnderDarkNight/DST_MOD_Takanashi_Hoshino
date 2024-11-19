@@ -326,6 +326,16 @@ local function debuff_fn()
             local max_health = target.components.health.maxhealth
             target.components.health:SetMaxHealth(max_health * 5)
         -----------------------------------------------------
+        --- 位面抵抗
+            if target.components.planarentity == nil then
+                target:AddComponent("planarentity")
+            end
+        -----------------------------------------------------
+        --- 位面伤害
+            if target.components.planardamage then
+                target.components.planardamage:AddMultiplier(inst,2)
+            end
+        -----------------------------------------------------
         -- --- 2倍移速
         --     target.components.locomotor.walkspeed = target.components.locomotor.walkspeed * 2
         --     target.components.locomotor.runspeed = target.components.locomotor.runspeed * 2

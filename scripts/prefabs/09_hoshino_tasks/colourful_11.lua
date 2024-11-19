@@ -327,6 +327,16 @@ local function debuff_fn()
                 target.components.health:SetMaxHealth(max_health * 3)
             end
         -----------------------------------------------------
+        --- 位面抵抗
+            if target.components.planarentity == nil then
+                target:AddComponent("planarentity")
+            end
+        -----------------------------------------------------
+        --- 位面伤害
+            if target.components.planardamage then
+                target.components.planardamage:AddMultiplier(inst,2)
+            end
+        -----------------------------------------------------
         --- 死亡广播
             -- target:ListenForEvent("minhealth",function()
             --     local x,y,z = target.Transform:GetWorldPosition()

@@ -275,11 +275,11 @@ local function debuff_fn()
         inst.entity:SetParent(target.entity)
         inst.Network:SetClassifiedTarget(target)
         -----------------------------------------------------
-        --- 50%减伤
+        --- 50%基础伤害减免
             target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.5)
         -----------------------------------------------------
-        --- 2倍攻击
-            -- target.components.combat.externaldamagemultipliers:SetModifier(inst, 2)
+        --- 2倍基础攻击
+            target.components.combat.externaldamagemultipliers:SetModifier(inst, 2)
         -----------------------------------------------------
         --- 血量3倍
             target.components.health:SetMaxHealth(TUNING.MUTATED_BEARGER_HEALTH*3)
@@ -287,6 +287,11 @@ local function debuff_fn()
         --- 移速2倍
             target.components.locomotor.walkspeed = TUNING.BEARGER_CALM_WALK_SPEED*2
             target.components.locomotor.runspeed = TUNING.BEARGER_RUN_SPEED*2
+        -----------------------------------------------------
+        --- 位面伤害
+            if target.components.planardamage then
+                target.components.planardamage:AddMultiplier(inst,2)
+            end
         -----------------------------------------------------
         --- 死亡广播
             -- target:ListenForEvent("minhealth",function()
