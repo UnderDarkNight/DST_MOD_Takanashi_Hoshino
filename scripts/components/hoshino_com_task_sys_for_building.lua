@@ -223,6 +223,9 @@ nil,
             elseif chosen_pool_name == "colourful_egg" then
                 chosen_pool = self:Get_Colourful_Egg_Mission_Prefabs()
             end
+            if chosen_pool == nil or #chosen_pool == 0 then
+                return nil
+            end
             local chosen_prefab = tostring( chosen_pool[math.random(1, #chosen_pool)] )
         -------------------------------------------------------------------------
         --- 重复检查

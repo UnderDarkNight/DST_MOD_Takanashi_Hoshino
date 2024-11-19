@@ -50,10 +50,10 @@
     end
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- inventorybar
-    -- local task_inst = CreateEntity()
+    local task_inst = CreateEntity()
     local function StartIconHiddingTask(self)
-        if self.inst._____cursor_sight_hidding_task == nil then
-            self.inst._____cursor_sight_hidding_task = self.inst:DoPeriodicTask(0.5, function()
+        if task_inst._____cursor_sight_hidding_task == nil then
+            task_inst._____cursor_sight_hidding_task = self.inst:DoPeriodicTask(0.5, function()
                 -- if self.hovertile then
                 --     self.hovertile:Hide()
                 -- end
@@ -64,9 +64,9 @@
         end
     end
     local function StopHiddingTask(self)
-        if self.inst._____cursor_sight_hidding_task ~= nil then
-            self.inst._____cursor_sight_hidding_task:Cancel()
-            self.inst._____cursor_sight_hidding_task = nil
+        if task_inst._____cursor_sight_hidding_task ~= nil then
+            task_inst._____cursor_sight_hidding_task:Cancel()
+            task_inst._____cursor_sight_hidding_task = nil
             -- if self.hovertile then
             --     self.hovertile:Show()
             -- end
