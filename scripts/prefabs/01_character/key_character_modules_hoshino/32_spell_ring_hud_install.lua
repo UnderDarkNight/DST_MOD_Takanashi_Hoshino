@@ -62,8 +62,18 @@
                 -- print("player in screen",s_pt_x,s_pt_y)
                 root:SetPosition(s_pt_x,s_pt_y+60,0)
             end
-            root.inst:DoPeriodicTask(FRAMES/2,root_position_update_fn)
+            -- root.inst:DoPeriodicTask(FRAMES,root_position_update_fn)
             root_position_update_fn()
+            local old_root_Update = root.Update or function()end
+            root.Update = function(self,...)
+                old_root_Update(self,...)
+                root_position_update_fn()
+            end
+            root.OnUpdate = root.Update
+            root:StartUpdating()
+            root.inst:ListenForEvent("onremove",function()
+                root:StopUpdating()
+            end)
         --------------------------------------------------------------------------
         --- 按钮盒子
             local button_box = root:AddChild(Widget())
@@ -424,6 +434,10 @@
             -- print("key_down SPELL_RING_HOTKEY")
             ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.spell_ring_active")
             CreateSpellButtons(ThePlayer)
+        end
+        if TUNING.HOSHINO_FNS:IsKeyPressed(TUNING["hoshino.Config"].SPELL_TYPE_SWITICH_HOTKEY,key) and not ThePlayer:HasTag("playerghost") then
+            -- print("key_down SPELL_RING_HOTKEY")
+            ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.spell_type_switch_hotkey_press")
         end
     end
     local function hotkey_listener_install(inst)

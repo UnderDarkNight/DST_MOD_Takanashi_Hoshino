@@ -1,7 +1,12 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
-
+    特效预选：
+    weregoose_splash_less1
+    glass_fx
+    sleepbomb_burst
+    halloween_firepuff_1   -3
+    halloween_firepuff_cold_1   -3
 
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,6 +37,15 @@ return function(inst)
         inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.pad_data_update",{
             character_spell_type = spell_type
         })
+        
+        if spell_type == SWIMMING_TYPE  then
+            inst.components.skinner:SetSkinName("hoshino_swimsuit")
+            SpawnPrefab("halloween_firepuff_cold_"..math.random(1,3)).Transform:SetPosition(inst.Transform:GetWorldPosition())
+        elseif spell_type == NORMAL_TYPE then
+            inst.components.skinner:SetSkinName("hoshino_none")
+            SpawnPrefab("halloween_firepuff_"..math.random(1,3)).Transform:SetPosition(inst.Transform:GetWorldPosition())
+        end
+                
     end
 
     inst:DoTaskInTime(0,init_fn)
@@ -51,6 +65,17 @@ return function(inst)
             inst.components.hoshino_data:Set(data_index,nil)
         end
         init_fn()
+    end)
+    --- 来自快捷键
+    local cd_task = nil
+    inst:ListenForEvent("hoshino_event.spell_type_switch_hotkey_press",function()
+        if cd_task then
+            return
+        end
+        cd_task = inst:DoTaskInTime(3,function()
+            cd_task = nil
+        end)
+        inst:PushEvent("hoshino_spell_type_change")
     end)
 
 end

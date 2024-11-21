@@ -160,8 +160,11 @@ local flg,error_code = pcall(function()
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer.SoundEmitter:PlaySound("hoshino_sound/hoshino_sound/christmas_carol")
-        ThePlayer.AnimState:PlayAnimation("action_uniqueitem_pre")
-        ThePlayer.AnimState:PushAnimation("bedroll", false)
+        -- ThePlayer.AnimState:PlayAnimation("action_uniqueitem_pre")
+        -- ThePlayer.AnimState:PushAnimation("bedroll", false)
+
+        -- ThePlayer.components.skinner:SetSkinName("hoshino_swimsuit")
+        ThePlayer.components.skinner:SetSkinName("hoshino_none")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

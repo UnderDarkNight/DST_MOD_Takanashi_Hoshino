@@ -1,7 +1,9 @@
 local assets =
 {
 	Asset( "ANIM", "anim/hoshino.zip" ),
+	-- Asset( "ANIM", "anim/hoshino_run.zip" ),
 	Asset( "ANIM", "anim/ghost_hoshino_build.zip" ),
+	Asset( "ANIM", "anim/hoshino_swimsuit.zip" ),
 }
 local skin_fns = {
 
@@ -16,6 +18,20 @@ local skin_fns = {
 			skin_tags = {"BASE" ,"HOSHINO", "CHARACTER"},		--- 皮肤对应的tag
 			
 			build_name_override = "hoshino",
+			rarity = "Character",
+		}),
+	-----------------------------------------------------
+	-----------------------------------------------------
+		CreatePrefabSkin("hoshino_swimsuit",{
+			base_prefab = "hoshino",			---- 角色prefab
+			skins = {
+					normal_skin = "hoshino_swimsuit",					--- 正常外观
+					ghost_skin = "ghost_hoshino_build",			--- 幽灵外观
+			}, 								
+			assets = assets,
+			skin_tags = {"SWIMSUIT" ,"HOSHINO", "CHARACTER"},		--- 皮肤对应的tag
+			
+			build_name_override = "hoshino_swimsuit",
 			rarity = "Character",
 		}),
 	-----------------------------------------------------

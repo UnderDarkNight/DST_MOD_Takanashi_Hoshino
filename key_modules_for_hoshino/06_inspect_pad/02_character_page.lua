@@ -181,8 +181,10 @@ local function page_create(front_root,MainScale)
                     local temp_img = "page_character_picture2.tex"
                     if character_spell_type == "hoshino_spell_type_normal" then
                         temp_img = "page_character_picture_normal.tex"
+                        -- temp_img = "page_character_picture_swimming.tex"
                     elseif character_spell_type == "hoshino_spell_type_swimming" then
-                        temp_img = "page_character_picture_swimming.tex"                            
+                        temp_img = "page_character_picture_swimming.tex"
+                        -- temp_img = "page_character_picture_normal.tex"
                     end
                     c_pic:SetTextures( "images/inspect_pad/page_character.xml", temp_img, temp_img, temp_img, temp_img)
                 end

@@ -223,6 +223,13 @@ configuration_options = {
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("快捷键") or GetTitle("Hotkeys"),hover = "",options = {{description = "",data = 0}},default = 0},
   {
+    name = "SPELL_TYPE_SWITICH_HOTKEY",
+    label = IsChinese() and "切换泳装" or "Switch Swimwear Hotkey",
+    hover = IsChinese() and "切换泳装" or "Switch Swimwear Hotkey",
+    options = keys_option,
+    default = "KEY_B",
+  },
+  {
     name = "SPELL_RING_HOTKEY",
     label = IsChinese() and "技能环快捷键" or "Spell Ring Hotkey",
     hover = IsChinese() and "技能环快捷键" or "Spell Ring Hotkey",
