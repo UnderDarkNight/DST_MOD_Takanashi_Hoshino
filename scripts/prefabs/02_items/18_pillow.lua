@@ -60,6 +60,12 @@ local function workable_com_install(inst)
             -- print("info server side wake up pst")
         end,doer)
 
+        temp_inst:DoPeriodicTask(FRAMES*10,function()
+            if not doer.sg:HasStateTag("hoshino_sg_bedroll") then
+                temp_inst:Remove()
+            end
+        end)
+
 
         temp_inst:DoPeriodicTask(1,function()
             if doer.components.hoshino_com_power_cost then
