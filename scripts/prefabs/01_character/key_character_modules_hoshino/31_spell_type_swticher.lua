@@ -8,6 +8,14 @@
     halloween_firepuff_1   -3
     halloween_firepuff_cold_1   -3
 
+    crab_king_waterspout
+    waterstreak_burst
+    archive_lockbox_player_fx
+    carnival_sparkle_fx
+    moonpulse_fx
+    spider_heal_target_fx
+    wolfgang_mighty_fx
+    monkey_morphin_power_players_fx
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

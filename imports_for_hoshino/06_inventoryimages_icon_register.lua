@@ -35,6 +35,7 @@ local files_name = {
 		"hoshino_item_treasure_map",									--- 藏宝图
 
 		"hoshino_equipment_sandstorm_core",								--- 沙暴核心
+		"hoshino_item_pillow",											--- 抱枕
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

@@ -160,6 +160,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "沙漠核心",
                 ["recipe_desc"] = "沙漠核心",
             },
+            ["hoshino_item_pillow"] = {
+                ["name"] = "随地入场券",
+                ["inspect_str"] = "随地入场券",
+                ["recipe_desc"] = "随地入场券",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

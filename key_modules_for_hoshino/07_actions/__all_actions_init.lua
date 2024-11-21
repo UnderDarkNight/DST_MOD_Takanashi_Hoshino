@@ -30,3 +30,9 @@ modimport("key_modules_for_hoshino/07_actions/09_com_special_packer.lua")
 
 modimport("key_modules_for_hoshino/07_actions/10_com_action_item_use_to.lua") 
 --- 物品对目标使用
+
+modimport("key_modules_for_hoshino/07_actions/11_sg_straw_sleep.lua") 
+--- 草席入睡 修改
+
+modimport("key_modules_for_hoshino/07_actions/12_sg_empty_active.lua") 
+--- 空的执行SG。
