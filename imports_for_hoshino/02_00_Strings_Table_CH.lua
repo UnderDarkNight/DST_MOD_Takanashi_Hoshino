@@ -180,6 +180,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "树精之心",
                 ["recipe_desc"] = "树精之心",
             },
+            ["hoshino_equipment_spider_core"] = {
+                ["name"] = "蛛后之心",
+                ["inspect_str"] = "蛛后之心",
+                ["recipe_desc"] = "蛛后之心",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

@@ -48,7 +48,8 @@ local prefabs_name_list = {
     "18_pillow",                                --- 抱枕
     "19_rune_core",                             --- 符文核心
     "20_guardian_core",                         --- 守护者核心
-    "21_tree_code",                             --- 树精核心
+    "21_tree_core",                             --- 树精核心
+    "22_spider_core",                           --- 蛛后之心
 
 }
 

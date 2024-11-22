@@ -159,21 +159,7 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-        -- ThePlayer.SoundEmitter:PlaySound("hoshino_sound/hoshino_sound/christmas_carol")
-        -- ThePlayer.AnimState:PlayAnimation("action_uniqueitem_pre")
-        -- ThePlayer.AnimState:PushAnimation("bedroll", false)
-
-        -- ThePlayer.components.skinner:SetSkinName("hoshino_swimsuit")
-        -- ThePlayer.components.skinner:SetSkinName("hoshino_none")
-
-        -- local failreason =
-        -- (siesta ~= TheWorld.state.isday and (siesta and (TheWorld:HasTag("cave") and "ANNOUNCE_NONIGHTSIESTA_CAVE" or "ANNOUNCE_NONIGHTSIESTA")
-        --     or (TheWorld:HasTag("cave") and "ANNOUNCE_NODAYSLEEP_CAVE" or "ANNOUNCE_NODAYSLEEP"))
-        -- )
-
-        ThePlayer:ListenForEvent("newstate",function(_,_table)
-            print("newstate",_table and _table.statename)
-        end)
+        -- ThePlayer:AddDebuff("hoshino_equipment_spider_core_debuff", "hoshino_equipment_spider_core_debuff")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
