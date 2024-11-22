@@ -12,7 +12,7 @@
     local SHADOW_SEARCH_RADIUS = ATTACK_RANGE*1.5
 
     local must_have_tags = {"_combat"}
-    local cant_have_tags = {"player","companion"}
+    local cant_have_tags = {"player","companion","INLIMBO", "wall", "notarget","flight", "invisible", "noattack", "hiding"}
     local must_have_one_of_tags = nil
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
