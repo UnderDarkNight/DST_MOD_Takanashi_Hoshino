@@ -237,7 +237,8 @@
             end
         end,
         onexit = function(inst)
-
+            -- print("ex skill pre exit client side")
+            -- inst.Physics:SetMotorVelOverride(1, 0, 0)
         end,
     })
 ---------------------------------------------------------------------------------------------------------------------------------------------------------

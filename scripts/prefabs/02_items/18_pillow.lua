@@ -27,24 +27,24 @@ local function workable_com_install(inst)
         replica_com:SetSGAction("hoshino_sg_bedroll")
         replica_com:SetText("hoshino_item_pillow",STRINGS.ACTIONS.SLEEPIN)
         replica_com:SetPreActionFn(function(inst,doer)
-            if TheInput and ThePlayer then -- 键盘监听控制器，用来控制醒来
-
-                    local temp_inst = CreateEntity()
-                    temp_inst:DoPeriodicTask(FRAMES*5,function()
-                        if IsWalkButtonDown() then
-                            ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_item_pillow.wakeup")
-                        end
-                    end)
-                    temp_inst:ListenForEvent("hoshino_item_pillow.wakeup_pst",function()
-                        temp_inst:Remove()
-                        doer.sg:GoToState("wakeup")
-                        -- print("info client side wake up pst")
-                    end,doer)
-                    -- print("++ client side event listener added")
-
-            end
             doer.AnimState:OverrideSymbol("swap_bedroll", "hoshino_item_pillow", "bedroll_straw")
         end)        
+    end)
+    inst:ListenForEvent("hoshino_item_pillow.player_enter_sleep",function()
+        if TheInput and ThePlayer then
+                local temp_inst = CreateEntity()
+                temp_inst:DoPeriodicTask(FRAMES*5,function()
+                    if IsWalkButtonDown() then
+                        ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_item_pillow.wake_up_button_down")
+                    end
+                end)
+                temp_inst:ListenForEvent("hoshino_item_pillow.wakeup_pst",function()
+                    temp_inst:Remove()
+                    if ThePlayer.sg then
+                        ThePlayer.sg:GoToState("wakeup")
+                    end
+                end,ThePlayer)
+        end
     end)
     if not TheWorld.ismastersim then
         return
@@ -53,18 +53,19 @@ local function workable_com_install(inst)
     inst.components.hoshino_com_workable:SetOnWorkFn(function(inst,doer)
 
         local temp_inst = CreateEntity()
-        temp_inst:ListenForEvent("hoshino_item_pillow.wakeup",function()
+        temp_inst:ListenForEvent("hoshino_item_pillow.wake_up_button_down",function()
             temp_inst:Remove()
             doer.sg:GoToState("wakeup")
             doer.components.hoshino_com_rpc_event:PushEvent("hoshino_item_pillow.wakeup_pst")
-            -- print("info server side wake up pst")
         end,doer)
-
         temp_inst:DoPeriodicTask(FRAMES*10,function()
             if not doer.sg:HasStateTag("hoshino_sg_bedroll") then
                 temp_inst:Remove()
             end
         end)
+        doer.components.hoshino_com_rpc_event:PushEvent("hoshino_item_pillow.player_enter_sleep",{},inst)
+
+
 
 
         temp_inst:DoPeriodicTask(1,function()
