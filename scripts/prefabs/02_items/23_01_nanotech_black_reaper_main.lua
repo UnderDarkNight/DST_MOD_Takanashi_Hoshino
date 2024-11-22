@@ -7,6 +7,7 @@
 ---
     local ATTACK_RANGE = 16
     local PROJ_SPEED = 20
+    local SHADOW_PROJ_SPEED = 20*1.5
     local HIT_RADIUS = 1.5
     local HIT_RADIUS_SQ = HIT_RADIUS * HIT_RADIUS
     local SHADOW_SEARCH_RADIUS = ATTACK_RANGE*1.5
@@ -71,7 +72,7 @@
         proj.Ready = true
         proj.owner = owner
         proj.weapon = weapon
-        proj.components.projectile:SetSpeed(PROJ_SPEED)
+        proj.components.projectile:SetSpeed(SHADOW_PROJ_SPEED)
         proj.Transform:SetPosition(x,0,z)
         proj:DoTaskInTime(1,function()
             proj._find_target_task = proj:DoPeriodicTask(0.1,function()
