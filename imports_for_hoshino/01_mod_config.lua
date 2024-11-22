@@ -9,6 +9,8 @@ TUNING["hoshino.Config"].Language = GetModConfigData("LANGUAGE")
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- 角色配置
     TUNING["hoshino.Config"].DIFFICULTY_MODE = GetModConfigData("DIFFICULTY_MODE")     --- 认真模式
+    TUNING["hoshino.Config"].HIDE_HAT = GetModConfigData("HIDE_HAT")     --- 隐藏帽子
+    TUNING["hoshino.Config"].HIDE_CLOTHS = GetModConfigData("HIDE_CLOTHS")     --- 隐藏衣服
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 任务类

@@ -208,6 +208,26 @@ configuration_options = {
     },
     default = false
   },
+  {
+    name = "HIDE_HAT",
+    label = IsChinese() and "隐藏帽子" or "Hide Hat",
+    hover = IsChinese() and "隐藏帽子" or "Hide Hat",
+    options = {
+      {description = "OFF",data = false},
+      {description = "ON",data = true},
+    },
+    default = true
+  },
+  {
+    name = "HIDE_CLOTHS",
+    label = IsChinese() and "隐藏衣服" or "Hide Clothes",
+    hover = IsChinese() and "隐藏衣服" or "Hide Clothes",
+    options = {
+      {description = "OFF",data = false},
+      {description = "ON",data = true},
+    },
+    default = true
+  },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("任务") or GetTitle("Missions"),hover = "",options = {{description = "",data = 0}},default = 0},
   {

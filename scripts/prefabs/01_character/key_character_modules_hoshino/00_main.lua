@@ -49,6 +49,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/34_task_sys_install",                       ---- 任务系统安装器
         "prefabs/01_character/key_character_modules_hoshino/35_sound_emitter_hook",                     ---- SoundEmitter hook
         "prefabs/01_character/key_character_modules_hoshino/36_travel_traces_spawner",                  ---- 遍历之迹 刷新控制器
+        "prefabs/01_character/key_character_modules_hoshino/37_anim_state_hook",                        ---- inst.AnimState hook
 
     }
     for k, lua_addr in pairs(modules) do
