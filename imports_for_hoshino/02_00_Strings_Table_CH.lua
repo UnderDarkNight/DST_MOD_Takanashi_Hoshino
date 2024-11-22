@@ -170,6 +170,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "符章核心",
                 ["recipe_desc"] = "符章核心",
             },
+            ["hoshino_equipment_guardian_core"] = {
+                ["name"] = "守护者核心",
+                ["inspect_str"] = "守护者核心",
+                ["recipe_desc"] = "守护者核心",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
