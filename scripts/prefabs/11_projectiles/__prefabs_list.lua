@@ -28,29 +28,8 @@ local Prefabs_addr_base = string.sub(temp_addr,1,temp_str_index2) .. "/"    --- 
 local prefabs_name_list = {
 
 
-    "01_cards_pack",                            --- 卡牌包
-    "02_gun_eye_of_horus",                      --- 专属武器 荷鲁斯之眼
-    "03_abydos_high_purity_alloy",              --- 阿拜索斯高纯度合金
-    "04_blue_schist",                           --- 青辉石
-    "05_12mm_shotgun_shells",                   --- 12mm霰弹
-    "06_special_packer",                        --- 特殊打包盒
-    "07_yi",                                    --- 镒
-    "08_fragments_of_divine_script",            --- 神明文字碎片
-    "09_ether_essence",                         --- 以太精髓
-    "10_treasure_map",                          --- 藏宝图
-    "11_holiday_glasses",                       --- 假日眼镜
-    "12_travel_traces",                         --- 遍历之迹
-    "13_anti_entropy_crystal_wheel",            --- 反熵水晶殖轮
-    "14_sandstorm_core",                        --- 沙暴核心
-    "15_cacti_core",                            --- 仙人掌核心
-    "16_oasis_core",                            --- 绿洲核心
-    "17_desert_core",                           --- 沙漠核心
-    "18_pillow",                                --- 抱枕
-    "19_rune_core",                             --- 符文核心
-    "20_guardian_core",                         --- 守护者核心
-    "21_tree_core",                             --- 树精核心
-    "22_spider_core",                           --- 蛛后之心
-    "23_00_nanotech_black_reaper",              --- 纳米黑死神
+    "01_nanotech_black_reaper_shadow",            ---- 黑科技黑死神 虚影
+
 
 }
 

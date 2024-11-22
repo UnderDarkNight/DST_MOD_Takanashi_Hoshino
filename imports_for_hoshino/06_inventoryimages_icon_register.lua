@@ -36,6 +36,8 @@ local files_name = {
 
 		"hoshino_equipment_sandstorm_core",								--- 沙暴核心
 		"hoshino_item_pillow",											--- 抱枕
+
+		"hoshino_weapon_nanotech_black_reaper",							--- 纳米黑死神
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子
