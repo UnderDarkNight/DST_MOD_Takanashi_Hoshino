@@ -41,7 +41,7 @@
             end
         end
         for k,v in pairs(ret_target) do
-            do_damage_to_target(v,weapon,owner, weapon:GetDamage() * 6)
+            do_damage_to_target(v,weapon,owner, weapon:GetDamage() * 4)
             inst.hit_targets[v] = true
         end
     end
@@ -98,12 +98,12 @@
             proj.components.projectile:SetOnHitFn(function()
                 if proj.hit_cd_checker == nil then
                     do_damage_to_target(target,weapon,owner,weapon:GetDamage()/2)
-                    proj.hit_cd_checker = proj:DoTaskInTime(0.1,function()
+                    proj.hit_cd_checker = proj:DoTaskInTime(0.3,function()
                         proj.hit_cd_checker = nil
                     end)
                 end
                 if proj.__remove_task == nil then
-                    proj.__remove_task = proj:DoTaskInTime(3,proj.Remove)
+                    proj.__remove_task = proj:DoTaskInTime(2,proj.Remove)
                 end
             end)
         end)
@@ -165,7 +165,7 @@ return function(inst,doer,_target,_pt)
         proj:ListenForEvent("entitysleep",proj.Remove)
     -------------------------------------------------------------
     --- 创建虚影
-        proj:DoPeriodicTask(0.2,CreateShadow)
+        proj:DoPeriodicTask(0.1,CreateShadow)
     -------------------------------------------------------------
 
 

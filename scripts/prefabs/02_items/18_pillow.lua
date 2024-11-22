@@ -63,10 +63,14 @@ local function workable_com_install(inst)
                 temp_inst:Remove()
             end
         end)
+        -- temp_inst:ListenForEvent("newstate",function()            
+        -- end,doer)
+        temp_inst:ListenForEvent("onremove",function()
+            doer:PushEvent("hoshino_event.hoshino_item_pillow.leave")
+        end)
+        doer:PushEvent("hoshino_event.hoshino_item_pillow.enter")
+
         doer.components.hoshino_com_rpc_event:PushEvent("hoshino_item_pillow.player_enter_sleep",{},inst)
-
-
-
 
         temp_inst:DoPeriodicTask(1,function()
             if doer.components.hoshino_com_power_cost then
