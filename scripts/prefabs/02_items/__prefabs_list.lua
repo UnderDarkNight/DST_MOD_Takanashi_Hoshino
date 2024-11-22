@@ -46,6 +46,7 @@ local prefabs_name_list = {
     "16_oasis_core",                            --- 绿洲核心
     "17_desert_core",                           --- 沙漠核心
     "18_pillow",                                --- 抱枕
+    "19_rune_core",                             --- 符文核心
 
 }
 

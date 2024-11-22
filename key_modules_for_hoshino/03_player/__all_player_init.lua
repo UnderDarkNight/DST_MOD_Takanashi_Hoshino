@@ -5,3 +5,6 @@ modimport("key_modules_for_hoshino/03_player/01_health_and_combat_hook.lua")
 
 modimport("key_modules_for_hoshino/03_player/02_talker_hook.lua") 
 --- talker 模块 hook
+
+modimport("key_modules_for_hoshino/03_player/03_debuff_blocker.lua") 
+--- debuff 屏蔽器
