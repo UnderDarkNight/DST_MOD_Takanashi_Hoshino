@@ -89,7 +89,7 @@
 
         proj.hit_cd_checker = nil
         proj:ListenForEvent("find_target",function(_,target)
-            proj:DoPeriodicTask(FRAMES,function()
+            proj:DoPeriodicTask(FRAMES*3,function()
                 if target_can_be_attack(target,weapon,owner) then
                     proj.components.projectile:Throw(proj,target,owner)
                 else

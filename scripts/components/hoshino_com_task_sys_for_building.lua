@@ -332,7 +332,7 @@ nil,
     function hoshino_com_task_sys_for_building:Accept_Clicked(index)
         local container_com = self:GetContainer()
         local item = container_com.slots[index]
-        if item and self.owner then
+        if item and self.owner and not self.owner.components.hoshino_com_task_sys_for_player:IsFull() then
             local tesk_prefab = item.prefab
             item:Remove()
             self.owner.components.hoshino_com_task_sys_for_player:GiveTask(tesk_prefab)

@@ -53,7 +53,7 @@ return function(inst)
             inst.components.skinner:SetSkinName("hoshino_none")
             SpawnPrefab("halloween_firepuff_"..math.random(1,3)).Transform:SetPosition(inst.Transform:GetWorldPosition())
         end
-                
+        inst:PushEvent("hoshino_event.spell_type_changed",spell_type)
     end
 
     inst:DoTaskInTime(0,init_fn)
@@ -85,5 +85,9 @@ return function(inst)
         end)
         inst:PushEvent("hoshino_spell_type_change")
     end)
+    --- 外部调取
+    function inst:Hoshino_Get_Spell_Type()
+        return inst.components.hoshino_data:Get(data_index) or NORMAL_TYPE
+    end
 
 end

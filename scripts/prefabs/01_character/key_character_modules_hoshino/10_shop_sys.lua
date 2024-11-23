@@ -10,7 +10,9 @@ return function(inst)
     if not TheWorld.ismastersim then
         return
     end
-    inst:AddComponent("hoshino_com_shop")
+    if inst.components.hoshino_com_shop == nil then
+        inst:AddComponent("hoshino_com_shop")
+    end
 
     ---- 加载的时候初始化下发全部数据。
     inst:DoTaskInTime(0,function()

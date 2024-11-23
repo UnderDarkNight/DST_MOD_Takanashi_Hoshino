@@ -17,7 +17,7 @@ local assets = {
     local function workable_install(inst)
         inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
             replica_com:SetTestFn(function(inst,doer,right_click)
-                if doer.prefab == "hoshino" and inst.replica.inventoryitem:IsGrandOwner(doer) then
+                if inst.replica.inventoryitem:IsGrandOwner(doer) then
                     return true
                 end
             end)

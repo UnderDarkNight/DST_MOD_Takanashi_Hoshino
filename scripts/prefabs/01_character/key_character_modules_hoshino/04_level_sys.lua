@@ -37,7 +37,9 @@ return function(inst)
         return
     end
 
-    inst:AddComponent("hoshino_com_level_sys")
+    if inst.components.hoshino_com_level_sys == nil then
+        inst:AddComponent("hoshino_com_level_sys")
+    end
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 为了保证显示数据的初始化成功，初始等级为0，升级经验为10.
         inst:DoTaskInTime(0,function()

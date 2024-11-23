@@ -42,6 +42,10 @@ local temp_assets = {
 		Asset("ANIM", "anim/hoshino_exp_bar.zip"),						--- 经验条
 		Asset("ANIM", "anim/hoshino_self_inspect_button_warning.zip"),	--- 自检按钮
 	---------------------------------------------------------------------------
+	--- 给其他角色的智能手机素材
+		Asset("IMAGE", "images/inspect_pad/little_smart_phone.tex"),			--- 智能手机素材
+		Asset("ATLAS", "images/inspect_pad/little_smart_phone.xml"),
+	---------------------------------------------------------------------------
 	--- 能量条
 		Asset("ANIM", "anim/hoshino_power_bar_cost.zip"),	--- COST 能量条
 	---------------------------------------------------------------------------

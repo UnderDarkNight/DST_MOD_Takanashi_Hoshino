@@ -459,6 +459,7 @@ nil,
             end
         -----------------------------------------------------------------
         --- 生成物品给玩家
+            print("hoshino_com_shop item spawn for player",self.inst,prefab,num_to_give)
             self:GiveItemByPrefab(prefab,num_to_give)
         -----------------------------------------------------------------
         -- 事件广播

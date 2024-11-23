@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="little_smart_phone.tex" />
+	<Elements>
+		<Element name="background_color.tex" u1="0.001" u2="0.37741796875" v2="0.999" v1="0.6035390625" variant="" />
+		<Element name="background_frame.tex" u1="0.37941796875" u2="0.78269140625" v2="0.999" v1="0.5664296875" variant="" />
+		<Element name="blue_schist_icon.tex" u1="0.001" u2="0.01804296875" v2="0.6015390625" v1="0.58351953125" variant="" />
+		<Element name="button_close.tex" u1="0.02004296875" u2="0.0536875" v2="0.6015390625" v1="0.56789453125" variant="" />
+		<Element name="button_phone.tex" u1="0.001" u2="0.04343359375" v2="0.56589453125" v1="0.5195546875" variant="" />
+		<Element name="credit_coin_icon.tex" u1="0.0556875" u2="0.07761328125" v2="0.6015390625" v1="0.5820546875" variant="" />
+		<Element name="empty_box.tex" u1="0.0556875" u2="0.1698984375" v2="0.5800546875" v1="0.55715234375" variant="" />
+		<Element name="task_box_background.tex" u1="0.001" u2="0.34226171875" v2="0.5175546875" v1="0.22316796875" variant="" />
+		<Element name="task_box_excample.tex" u1="0.001" u2="0.33737890625" v2="0.22116796875" v1="0.1650625" variant="" />
+	</Elements>
+</Atlas>

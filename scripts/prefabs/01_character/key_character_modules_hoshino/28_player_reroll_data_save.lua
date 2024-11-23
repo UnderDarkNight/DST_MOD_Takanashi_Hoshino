@@ -6,7 +6,8 @@ ms_playerreroll
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-    local need_2_save_components = {"hoshino_data","hoshino_com_shop","hoshino_com_debuff","hoshino_cards_sys"}
+    -- local need_2_save_components = {"hoshino_data","hoshino_com_shop","hoshino_com_debuff","hoshino_cards_sys"}
+    local need_2_save_components = {"hoshino_com_debuff","hoshino_cards_sys"}
 
     local function GetIndex(inst)
         return "hoshino_datas_for_player_reroll_"..inst.userid

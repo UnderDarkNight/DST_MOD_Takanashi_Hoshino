@@ -43,4 +43,7 @@ modimport("key_modules_for_hoshino/11_recipes/__all_recipes_init.lua")
 modimport("key_modules_for_hoshino/12_active_item_cursor_sight/__all_active_item_cursor_sight_init.lua") 
 -- 鼠标物品施法指示器
 
+modimport("key_modules_for_hoshino/23_mission_shop_level_sys_for_other_player/__mission_shop_level_init.lua") 
+-- 任务、货币、商店、等级 系统 安装给其他玩家
+
 

@@ -11,7 +11,9 @@ return function(inst)
         return
     end
 
-    inst:AddComponent("hoshino_com_task_sys_for_player")
+    if inst.components.hoshino_com_task_sys_for_player == nil then
+        inst:AddComponent("hoshino_com_task_sys_for_player")
+    end
 
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 经验广播触发监听

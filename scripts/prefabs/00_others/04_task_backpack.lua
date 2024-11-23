@@ -69,6 +69,8 @@ local function add_container_before_not_ismastersim_return(inst)
             inst.components.container.canbeopened = true
             -- inst.components.container:WidgetSetup(container_WidgetSetup)
             container_Widget_change(inst.components.container)
+            inst.components.container.skipopensnd = true
+            inst.components.container.skipclosesnd = true
         else
             inst.OnEntityReplicated = function(inst)
                 container_Widget_change(inst.replica.container)
@@ -143,13 +145,11 @@ local function fn()
     inst.components.inventoryitem:ChangeImageName("cane")
     inst.components.inventoryitem.keepondeath = true
 
-
-
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HOSHINO_TASK_BACKPACK
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
-    inst.components.equippable.restrictedtag = "hoshino"
+    inst.components.equippable.restrictedtag = "player"
 
     --------------------------------------------------------------------
     ---

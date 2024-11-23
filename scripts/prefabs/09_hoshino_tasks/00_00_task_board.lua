@@ -124,7 +124,7 @@ local assets =
     local function workable_com_install(inst)
         inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
             replica_com:SetTestFn(function(inst,doer,right_click)
-                if doer.prefab == "hoshino" then
+                if doer and doer.replica.hoshino_com_task_sys_for_player then
                     return true
                 end
                 return false
