@@ -57,6 +57,9 @@ AddPlayerPostInit(function(inst)
         if inst.components.hoshino_com_level_sys == nil then
             inst:AddComponent("hoshino_com_level_sys")
         end
+        if inst.prefab ~= "hoshino" then
+            inst.components.hoshino_com_level_sys:EXP_SetModifier(inst,0)
+        end
     ------------------------------------------------------------------------
     --- 屏蔽掉落、避免意外
         if inst.components.inventory and not inst.components.inventory.__hoshino_DropItem_hooked then
