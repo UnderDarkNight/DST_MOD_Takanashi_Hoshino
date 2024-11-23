@@ -65,7 +65,7 @@ AddPlayerPostInit(function(inst)
         if inst.components.inventory and not inst.components.inventory.__hoshino_DropItem_hooked then
             local old_DropItem = inst.components.inventory.DropItem
             inst.components.inventory.DropItem = function(self,item,...)
-                if item and item:HasOneOfTags({"hoshino_special_equipment","hoshino_spell_item"}) then
+                if item and item:HasOneOfTags({"hoshino_special_equipment","hoshino_spell_item","hoshino_drop_block"}) then
                     return
                 end
                 return old_DropItem(self,item,...)

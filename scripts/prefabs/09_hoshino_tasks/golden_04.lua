@@ -270,10 +270,14 @@ local function debuff_fn()
         inst.Network:SetClassifiedTarget(target)
         -----------------------------------------------------
         --- 60%减伤
-            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.2)
+            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.4)
         -----------------------------------------------------
         --- 6倍攻击
             target.components.combat.externaldamagemultipliers:SetModifier(inst, 6)
+        -----------------------------------------------------
+        --- 10倍血量 
+            local current_max_health = target.components.health.maxhealth
+            target.components.health:SetMaxHealth(current_max_health * 10)
         -----------------------------------------------------
         --- 死亡广播
             -- target:ListenForEvent("minhealth",function()
