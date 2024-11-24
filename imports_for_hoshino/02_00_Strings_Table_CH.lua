@@ -205,6 +205,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "龙蝇之护",
                 ["recipe_desc"] = "龙蝇之护",
             },
+            ["hoshino_equipment_giant_crab_claw"] = {
+                ["name"] = "巨蟹钳",
+                ["inspect_str"] = "巨蟹钳",
+                ["recipe_desc"] = "巨蟹钳",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
