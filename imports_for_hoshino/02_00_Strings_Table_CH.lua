@@ -215,6 +215,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "至纯铥矿",
                 ["recipe_desc"] = "至纯铥矿",
             },
+            ["hoshino_equipment_used_mechanical_sheets"] = {
+                ["name"] = "废旧机械板材",
+                ["inspect_str"] = "废旧机械板材",
+                ["recipe_desc"] = "废旧机械板材",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
