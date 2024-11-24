@@ -90,7 +90,7 @@ local flg,error_code = pcall(function()
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer.components.hoshino_com_shop:BlueSchistDelta(123)
-        ThePlayer.components.hoshino_com_shop:CreditCoinDelta(222)
+        -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(222)
         -- ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_kill")
         -- ThePlayer.components.hoshino_com_task_sys_for_player:GiveTask("hoshino_task_excample_item")
         -- print("+++++++++",inst)
@@ -151,12 +151,12 @@ local flg,error_code = pcall(function()
         
     ----------------------------------------------------------------------------------------------------------------
     --- 精神控制
-        -- local inst = ThePlayer
-        -- for i = 1, 15, 1 do
-        --     inst:DoTaskInTime(0.5*i, function()
-        --         inst:AddDebuff("mindcontroller", "mindcontroller")
-        --     end)
-        -- end
+        local inst = ThePlayer
+        for i = 1, 15, 1 do
+            inst:DoTaskInTime(0.5*i, function()
+                inst:AddDebuff("mindcontroller", "mindcontroller")
+            end)
+        end
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer:AddDebuff("hoshino_equipment_spider_core_debuff", "hoshino_equipment_spider_core_debuff")

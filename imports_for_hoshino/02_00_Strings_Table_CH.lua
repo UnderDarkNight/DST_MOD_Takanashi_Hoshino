@@ -195,6 +195,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "和谐之证",
                 ["recipe_desc"] = "和谐之证",
             },
+            ["hoshino_equipment_shadow_core"] = {
+                ["name"] = "暗影核心",
+                ["inspect_str"] = "暗影核心",
+                ["recipe_desc"] = "暗影核心",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
