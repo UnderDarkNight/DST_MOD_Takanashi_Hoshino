@@ -200,6 +200,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "暗影核心",
                 ["recipe_desc"] = "暗影核心",
             },
+            ["hoshino_equipment_dragonfly_core"] = {
+                ["name"] = "龙蝇之护",
+                ["inspect_str"] = "龙蝇之护",
+                ["recipe_desc"] = "龙蝇之护",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

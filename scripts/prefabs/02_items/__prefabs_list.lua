@@ -53,6 +53,7 @@ local prefabs_name_list = {
     "23_00_nanotech_black_reaper",              --- 纳米黑死神
     "24_proof_of_harmony",                      --- 和谐之证
     "25_shadow_core",                           --- 暗影核心
+    "26_dragonfly_core",                        --- 龙蝇核心
 
 }
 
