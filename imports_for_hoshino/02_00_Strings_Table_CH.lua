@@ -190,6 +190,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "纳米黑死神",
                 ["recipe_desc"] = "纳米黑死神",
             },
+            ["hoshino_equipment_proof_of_harmony"] = {
+                ["name"] = "和谐之证",
+                ["inspect_str"] = "和谐之证",
+                ["recipe_desc"] = "和谐之证",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

@@ -51,6 +51,7 @@ local prefabs_name_list = {
     "21_tree_core",                             --- 树精核心
     "22_spider_core",                           --- 蛛后之心
     "23_00_nanotech_black_reaper",              --- 纳米黑死神
+    "24_proof_of_harmony",                      --- 和谐之证
 
 }
 
