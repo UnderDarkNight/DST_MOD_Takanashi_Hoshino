@@ -56,6 +56,9 @@ local files_name = {
 		"hoshino_item_sky",												--- 天
 		"hoshino_item_spring",											--- 春
 		"hoshino_item_snow",											--- 雪
+
+		"hoshino_item_artifact_du",										--- Artifact 都
+		"hoshino_item_artifact_sky",									--- Artifact 天
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

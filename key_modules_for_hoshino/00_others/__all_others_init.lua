@@ -21,3 +21,6 @@ modimport("key_modules_for_hoshino/00_others/05_tag_sys_rpc_register.lua")
 modimport("key_modules_for_hoshino/00_others/06_anim_get_bank_api.lua")
 --- 添加 GetBank 函数
 
+modimport("key_modules_for_hoshino/00_others/07_the_input_upgrade.lua")
+--- 升级 TheInput API
+

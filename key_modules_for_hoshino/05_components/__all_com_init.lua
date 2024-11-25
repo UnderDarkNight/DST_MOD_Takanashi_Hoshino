@@ -22,3 +22,6 @@ modimport("key_modules_for_hoshino/05_components/07_drawable_hook.lua")
 
 modimport("key_modules_for_hoshino/05_components/08_combat_target_event.lua") 
 --- combat hook target event
+
+modimport("key_modules_for_hoshino/05_components/09_lootdropper_hook_for_block.lua") 
+--- lootdropper hook
