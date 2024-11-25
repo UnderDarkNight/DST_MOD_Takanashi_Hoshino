@@ -51,6 +51,11 @@ local files_name = {
 
 		"hoshino_equipment_giant_crab_claw",							--- 巨蟹之爪
 		"hoshino_equipment_ruins_core",									--- 至纯铥矿
+
+		"hoshino_item_nine",											--- 九
+		"hoshino_item_sky",												--- 天
+		"hoshino_item_spring",											--- 春
+		"hoshino_item_snow",											--- 雪
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

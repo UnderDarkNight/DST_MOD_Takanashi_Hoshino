@@ -225,6 +225,26 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "奈因",
                 ["recipe_desc"] = "奈因",
             },
+            ["hoshino_item_nine"] = {
+                ["name"] = "九",
+                ["inspect_str"] = "九",
+                ["recipe_desc"] = "九",
+            },
+            ["hoshino_item_sky"] = {
+                ["name"] = "天",
+                ["inspect_str"] = "天",
+                ["recipe_desc"] = "天",
+            },
+            ["hoshino_item_spring"] = {
+                ["name"] = "春",
+                ["inspect_str"] = "春",
+                ["recipe_desc"] = "春",
+            },
+            ["hoshino_item_snow"] = {
+                ["name"] = "雪",
+                ["inspect_str"] = "雪",
+                ["recipe_desc"] = "雪",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
