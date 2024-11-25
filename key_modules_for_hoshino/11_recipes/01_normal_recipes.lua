@@ -172,3 +172,117 @@
         -- {"CHARACTER","TOOLS"}
     )
     RemoveRecipeFromFilter("hoshino_equipment_sandstorm_core","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 仙人掌核心
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_equipment_cacti_core","MAGIC")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_cacti_core",            --  --  inst.prefab  实体名字
+        {Ingredient("cactus_meat", 20),Ingredient("cactus_meat_cooked", 20),Ingredient("twigs", 20),} ,
+        TECH.ANCIENT_FOUR, -- 完整的远古科技
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_cacti_core.xml",
+            image = "hoshino_equipment_cacti_core.tex",
+            -- station_tag="lunar_forge"
+        }--,
+        -- {"MAGIC"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_cacti_core","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 绿洲核心
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_equipment_oasis_core","MAGIC")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_oasis_core",            --  --  inst.prefab  实体名字
+        {Ingredient("succulent_picked", 18),Ingredient("wetpouch", 10)} ,
+        TECH.ANCIENT_FOUR, -- 完整的远古科技
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_oasis_core.xml",
+            image = "hoshino_equipment_oasis_core.tex",
+            -- station_tag="lunar_forge"
+        }--,
+        -- {"MAGIC"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_oasis_core","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 沙漠核心
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_equipment_desert_core","MAGIC")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_desert_core",            --  --  inst.prefab  实体名字
+        {Ingredient("hoshino_equipment_sandstorm_core", 1),Ingredient("hoshino_equipment_cacti_core", 1),Ingredient("hoshino_equipment_oasis_core", 1)} ,
+        TECH.ANCIENT_FOUR, -- 完整的远古科技
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_desert_core.xml",
+            image = "hoshino_equipment_desert_core.tex",
+            -- station_tag="lunar_forge"
+        }--,
+        -- {"MAGIC"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_desert_core","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 符章核心
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_equipment_rune_core","MAGIC")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_rune_core",            --  --  inst.prefab  实体名字
+        {Ingredient("yellowamulet", 1),Ingredient("orangeamulet", 1),Ingredient("greenamulet", 1)} ,
+        TECH.ANCIENT_FOUR, -- 完整的远古科技
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_rune_core.xml",
+            image = "hoshino_equipment_rune_core.tex",
+            -- station_tag="lunar_forge"
+        }--,
+        -- {"MAGIC"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_rune_core","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 暗影核心
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_item_abydos_high_purity_alloy","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_shadow_core",            --  --  inst.prefab  实体名字
+        {Ingredient("nightmarefuel",50),Ingredient("horrorfuel",15),Ingredient("thurible",1),Ingredient("skeletonhat",1),Ingredient("armorskeleton",1),} ,
+        TECH.SHADOWFORGING_TWO, -- 暗影术基座
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_shadow_core.xml",
+            image = "hoshino_equipment_shadow_core.tex",
+            station_tag="shadow_forge"
+        }--,
+        -- {"CHARACTER","TOOLS"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_shadow_core","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 至纯铥矿
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_equipment_ruins_core","MAGIC")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_ruins_core",            --  --  inst.prefab  实体名字
+        {Ingredient("armorruins", 1),Ingredient("ruinshat", 1),Ingredient("ruins_bat", 1),Ingredient("nightmare_timepiece", 3)} ,
+        TECH.ANCIENT_FOUR, -- 完整的远古科技
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_ruins_core.xml",
+            image = "hoshino_equipment_ruins_core.tex",
+            -- station_tag="lunar_forge"
+        }--,
+        -- {"MAGIC"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_ruins_core","MODS")
