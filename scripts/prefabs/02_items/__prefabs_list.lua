@@ -57,6 +57,7 @@ local prefabs_name_list = {
     "27_giant_crab_claw",                       --- 巨蟹钳
     "28_ruins_core",                            --- 至纯铥矿
     "29_used_mechanical_sheets",                --- 废旧机械板材
+    "30_accessory_remnants",                    --- 奈因
 
 }
 

@@ -206,9 +206,9 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["recipe_desc"] = "龙蝇之护",
             },
             ["hoshino_equipment_giant_crab_claw"] = {
-                ["name"] = "巨蟹钳",
-                ["inspect_str"] = "巨蟹钳",
-                ["recipe_desc"] = "巨蟹钳",
+                ["name"] = "巨蟹之眼",
+                ["inspect_str"] = "巨蟹之眼",
+                ["recipe_desc"] = "巨蟹之眼",
             },
             ["hoshino_equipment_ruins_core"] = {
                 ["name"] = "至纯铥矿",
@@ -219,6 +219,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["name"] = "废旧机械板材",
                 ["inspect_str"] = "废旧机械板材",
                 ["recipe_desc"] = "废旧机械板材",
+            },
+            ["hoshino_item_accessory_remnants"] = {
+                ["name"] = "奈因",
+                ["inspect_str"] = "奈因",
+                ["recipe_desc"] = "奈因",
             },
         --------------------------------------------------------------------
         --- 03_special_equipment

@@ -1,15 +1,15 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
-    遍历之迹
+    奈因
 
 ]]--
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 local assets = {
-    Asset("ANIM", "anim/hoshino_item_travel_traces.zip"), 
-    Asset( "IMAGE", "images/inventoryimages/hoshino_item_travel_traces.tex" ),  -- 背包贴图
-    Asset( "ATLAS", "images/inventoryimages/hoshino_item_travel_traces.xml" ),
+    Asset("ANIM", "anim/hoshino_item_accessory_remnants.zip"), 
+    Asset( "IMAGE", "images/inventoryimages/hoshino_item_accessory_remnants.tex" ),  -- 背包贴图
+    Asset( "ATLAS", "images/inventoryimages/hoshino_item_accessory_remnants.xml" ),
 }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 -- workable install
@@ -21,7 +21,7 @@ local assets = {
         --             return true
         --         end
         --     end)
-        --     replica_com:SetText("hoshino_item_travel_traces","储蓄")
+        --     replica_com:SetText("hoshino_item_accessory_remnants","储蓄")
         --     replica_com:SetSGAction("give")
         -- end)
         -- if not TheWorld.ismastersim then
@@ -45,8 +45,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("hoshino_item_travel_traces") -- 地上动画
-    inst.AnimState:SetBuild("hoshino_item_travel_traces") -- 材质包，就是anim里的zip包
+    inst.AnimState:SetBank("hoshino_item_accessory_remnants") -- 地上动画
+    inst.AnimState:SetBuild("hoshino_item_accessory_remnants") -- 材质包，就是anim里的zip包
     inst.AnimState:PlayAnimation("idle",true) -- 默认播放哪个动画
     -- inst.AnimState:SetScale(1.5,1.5,1.5)
     -- MakeInventoryFloatable(inst)
@@ -64,8 +64,8 @@ local function fn()
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
         -- inst.components.inventoryitem:ChangeImageName("leafymeatburger")
-        inst.components.inventoryitem.imagename = "hoshino_item_travel_traces"
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_item_travel_traces.xml"
+        inst.components.inventoryitem.imagename = "hoshino_item_accessory_remnants"
+        inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_item_accessory_remnants.xml"
         inst.components.inventoryitem:SetSinks(true)    -- 掉水里消失
     -------------------------------------------------------------------
         inst:AddComponent("stackable") -- 可堆叠
@@ -89,4 +89,4 @@ local function fn()
     return inst
 end
 
-return Prefab("hoshino_item_travel_traces", fn, assets)
+return Prefab("hoshino_item_accessory_remnants", fn, assets)

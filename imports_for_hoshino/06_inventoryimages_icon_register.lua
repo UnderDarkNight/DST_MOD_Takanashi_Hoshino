@@ -33,11 +33,24 @@ local files_name = {
 		"hoshino_item_fragments_of_divine_script",						--- 神明文字碎片
 		"hoshino_item_ether_essence",									--- 以太精髓
 		"hoshino_item_treasure_map",									--- 藏宝图
-
+		"hoshino_equipment_holiday_glasses",							--- 假日眼镜
+		"hoshino_item_travel_traces",									--- 遍历之迹
+		"hoshino_item_anti_entropy_crystal_wheel",						--- 反熵水晶殖轮
 		"hoshino_equipment_sandstorm_core",								--- 沙暴核心
+		"hoshino_equipment_cacti_core",									--- 仙人掌核心
+		"hoshino_equipment_oasis_core",									--- 绿洲核心
+		"hoshino_equipment_desert_core",								--- 沙漠核心
 		"hoshino_item_pillow",											--- 抱枕
-
+		"hoshino_equipment_rune_core",									--- 符文核心
+		"hoshino_equipment_guardian_core",								--- 守护核心
+		"hoshino_equipment_tree_core",									--- 树木核心
+		"hoshino_equipment_spider_core",								--- 蜘蛛核心
 		"hoshino_weapon_nanotech_black_reaper",							--- 纳米黑死神
+		"hoshino_equipment_proof_of_harmony",							--- 和谐证明
+		"hoshino_equipment_shadow_core",								--- 暗影核心
+
+		"hoshino_equipment_giant_crab_claw",							--- 巨蟹之爪
+		"hoshino_equipment_ruins_core",									--- 至纯铥矿
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

@@ -9,9 +9,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 local assets = {
-    Asset("ANIM", "anim/hoshino_item_yi.zip"), 
-    Asset( "IMAGE", "images/inventoryimages/hoshino_item_yi.tex" ),  -- 背包贴图
-    Asset( "ATLAS", "images/inventoryimages/hoshino_item_yi.xml" ),
+    Asset("ANIM", "anim/hoshino_item_anti_entropy_crystal_wheel.zip"), 
+    Asset( "IMAGE", "images/inventoryimages/hoshino_item_anti_entropy_crystal_wheel.tex" ),  -- 背包贴图
+    Asset( "ATLAS", "images/inventoryimages/hoshino_item_anti_entropy_crystal_wheel.xml" ),
 }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -59,8 +59,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("hoshino_item_yi") -- 地上动画
-    inst.AnimState:SetBuild("hoshino_item_yi") -- 材质包，就是anim里的zip包
+    inst.AnimState:SetBank("hoshino_item_anti_entropy_crystal_wheel") -- 地上动画
+    inst.AnimState:SetBuild("hoshino_item_anti_entropy_crystal_wheel") -- 材质包，就是anim里的zip包
     inst.AnimState:PlayAnimation("idle",true) -- 默认播放哪个动画
     -- inst.AnimState:SetScale(1.5,1.5,1.5)
     -- MakeInventoryFloatable(inst)
@@ -78,8 +78,8 @@ local function fn()
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
         -- inst.components.inventoryitem:ChangeImageName("leafymeatburger")
-        inst.components.inventoryitem.imagename = "hoshino_item_yi"
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_item_yi.xml"
+        inst.components.inventoryitem.imagename = "hoshino_item_anti_entropy_crystal_wheel"
+        inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_item_anti_entropy_crystal_wheel.xml"
         inst.components.inventoryitem:SetSinks(true)    -- 掉水里消失
     -------------------------------------------------------------------
         inst:AddComponent("stackable") -- 可堆叠

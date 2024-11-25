@@ -8,8 +8,7 @@
 --- 素材
     local assets =
     {
-        Asset("ANIM", "anim/cane.zip"),
-        Asset("ANIM", "anim/swap_cane.zip"),
+        Asset("ANIM", "anim/hoshino_equipment_holiday_glasses.zip"),
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 参数
@@ -153,8 +152,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("cane")
-    inst.AnimState:SetBuild("swap_cane")
+    inst.AnimState:SetBank("hoshino_equipment_holiday_glasses")
+    inst.AnimState:SetBuild("hoshino_equipment_holiday_glasses")
     inst.AnimState:PlayAnimation("idle")
 
 
@@ -173,9 +172,9 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem:ChangeImageName("leafymeatburger")
-    -- inst.components.inventoryitem.imagename = "hoshino_item_ether_essence"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_item_ether_essence.xml"
+    -- inst.components.inventoryitem:ChangeImageName("leafymeatburger")
+    inst.components.inventoryitem.imagename = "hoshino_equipment_holiday_glasses"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_holiday_glasses.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = TUNING.HOSHINO_FNS:CopyEquipmentSlotFrom("goggleshat") or EQUIPSLOTS.HEAD

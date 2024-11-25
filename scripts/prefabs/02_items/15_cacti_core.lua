@@ -11,7 +11,9 @@
 -- 素材
     local assets =
     {
-        Asset("ANIM", "anim/armor_bramble.zip"),
+        Asset("ANIM", "anim/hoshino_equipment_cacti_core.zip"),
+        Asset( "IMAGE", "images/inventoryimages/hoshino_equipment_cacti_core.tex" ),
+        Asset( "ATLAS", "images/inventoryimages/hoshino_equipment_cacti_core.xml" ),
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- finiteuses
@@ -63,6 +65,50 @@ local function onunequip(inst, owner)
         inst._time_Task = nil
     end
 end
+----------------------------------------------------------------------------------------------------------------------------------------------------
+--- 动画控制器
+    local function Player_Near(inst)
+        if inst:IsOnOcean(false) then
+            inst.AnimState:HideSymbol("shadow")
+        else
+            inst.AnimState:ShowSymbol("shadow")
+        end
+        inst.AnimState:PlayAnimation("proximity_pre")
+        inst.AnimState:PushAnimation("proximity_loop",true)
+    end
+    local function Player_Far(inst)
+        if inst:IsOnOcean(false) then
+            inst.AnimState:HideSymbol("shadow")
+        else
+            inst.AnimState:ShowSymbol("shadow")
+        end
+        -- inst.AnimState:PlayAnimation("proximity_loop")
+        inst.AnimState:PushAnimation("proximity_pst")
+        inst.AnimState:PushAnimation("idle",true)
+    end
+    local function DropInWater(inst)
+        inst.AnimState:HideSymbol("shadow")
+    end
+    local function DropLanded(inst)
+        inst.AnimState:ShowSymbol("shadow")
+    end
+    local function core_anim_controller_install(inst)
+        inst:AddComponent("playerprox")
+        inst.components.playerprox:SetDist(2, 3)
+        inst.components.playerprox:SetOnPlayerNear(Player_Near)
+        inst.components.playerprox:SetOnPlayerFar(Player_Far)
+        --- 落水影子
+        local function shadow_init(inst)
+            if inst:IsOnOcean(false) then       --- 如果在海里（不包括船）
+                DropInWater(inst)
+            else                                
+                DropLanded(inst)
+            end
+        end
+        inst:ListenForEvent("on_landed",shadow_init)
+        shadow_init(inst)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 local function fn()
     local inst = CreateEntity()
@@ -75,9 +121,9 @@ local function fn()
 
     inst:AddTag("bramble_resistant") -- 避免被自己装备伤害
 
-    inst.AnimState:SetBank("armor_bramble")
-    inst.AnimState:SetBuild("armor_bramble")
-    inst.AnimState:PlayAnimation("anim")
+    inst.AnimState:SetBank("moonrock_seed")
+    inst.AnimState:SetBuild("hoshino_equipment_cacti_core")
+    inst.AnimState:PlayAnimation("idle",true)
 
     inst.foleysound = "dontstarve/movement/foley/cactus_armor"
 
@@ -91,9 +137,9 @@ local function fn()
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem:ChangeImageName("leafymeatburger")
-            -- inst.components.inventoryitem.imagename = "hoshino_equipment_sandstorm_core"
-            -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_sandstorm_core.xml"
+    -- inst.components.inventoryitem:ChangeImageName("leafymeatburger")
+    inst.components.inventoryitem.imagename = "hoshino_equipment_cacti_core"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_cacti_core.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot =  TUNING.HOSHINO_FNS:CopyEquipmentSlotFrom("amulet") or EQUIPSLOTS.BODY
@@ -106,127 +152,10 @@ local function fn()
     inst.components.finiteuses:SetPercent(1)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
 
+    core_anim_controller_install(inst)
 
     MakeHauntableLaunch(inst)
     return inst
 end
-
-----------------------------------------------------------------------------------------------------------------------------------------------------
--- --- 复制自 bramblefx.lua
-    -- --DSV uses 4 but ignores physics radius
-    -- local MAXRANGE = 3
-    -- local NO_TAGS_NO_PLAYERS =	{ "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "wall", "player", "companion" }
-    -- local NO_TAGS =				{ "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "wall", "playerghost" }
-    -- local COMBAT_TARGET_TAGS = { "_combat" }
-
-    -- local function OnUpdateThorns(inst)
-    --     inst.range = inst.range + .75
-
-    --     local x, y, z = inst.Transform:GetWorldPosition()
-    --     for i, v in ipairs(TheSim:FindEntities(x, y, z, inst.range + 3, COMBAT_TARGET_TAGS, inst.canhitplayers and NO_TAGS or NO_TAGS_NO_PLAYERS)) do
-    --         if not inst.ignore[v] and
-    --             v:IsValid() and
-    --             v.entity:IsVisible() and
-    --             v.components.combat ~= nil and
-    --             not (v.components.inventory ~= nil and
-    --                 v.components.inventory:EquipHasTag("bramble_resistant")) then
-    --             local range = inst.range + v:GetPhysicsRadius(0)
-    --             if v:GetDistanceSqToPoint(x, y, z) < range * range then
-    --                 if inst.owner ~= nil and not inst.owner:IsValid() then
-    --                     inst.owner = nil
-    --                 end
-    --                 if inst.owner ~= nil then
-    --                     if inst.owner.components.combat ~= nil and
-    --                         inst.owner.components.combat:CanTarget(v) and
-    --                         not inst.owner.components.combat:IsAlly(v)
-    --                     then
-    --                         inst.ignore[v] = true
-    --                         v.components.combat:GetAttacked(v.components.follower and v.components.follower:GetLeader() == inst.owner and inst or inst.owner, inst.damage, nil, nil, inst.spdmg)
-    --                         --V2C: wisecracks make more sense for being pricked by picking
-    --                         --v:PushEvent("thorns")
-    --                     end
-    --                 elseif v.components.combat:CanBeAttacked() then
-    --                     -- NOTES(JBK): inst.owner is nil here so this is for non worn things like the bramble trap.
-    --                     local isally = false
-    --                     if not inst.canhitplayers then
-    --                         --non-pvp, so don't hit any player followers (unless they are targeting a player!)
-    --                         local leader = v.components.follower ~= nil and v.components.follower:GetLeader() or nil
-    --                         isally = leader ~= nil and leader:HasTag("player") and
-    --                             not (v.components.combat ~= nil and
-    --                                 v.components.combat.target ~= nil and
-    --                                 v.components.combat.target:HasTag("player"))
-    --                     end
-    --                     if not isally then
-    --                         inst.ignore[v] = true
-    --                         v.components.combat:GetAttacked(inst, inst.damage, nil, nil, inst.spdmg)
-    --                         --v:PushEvent("thorns")
-    --                     end
-    --                 end
-    --             end
-    --         end
-    --     end
-
-    --     if inst.range >= MAXRANGE then
-    --         inst.components.updatelooper:RemoveOnUpdateFn(OnUpdateThorns)
-    --     end
-    -- end
-
-    -- local function SetFXOwner(inst, owner,damage,spdamage)
-    --     inst.Transform:SetPosition(owner.Transform:GetWorldPosition())
-    --     inst.owner = owner
-    --     inst.canhitplayers = not owner:HasTag("player") or TheNet:GetPVPEnabled()
-    --     inst.ignore[owner] = true
-
-    --     if spdamage then
-    --         inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-    --     end
-    --     inst.damage = damage or TUNING.ARMORBRAMBLE_DMG
-    --     if spdamage then
-    --         inst.spdmg = { planar = spdamage or TUNING.ARMORBRAMBLE_DMG_PLANAR_UPGRADE }
-    --     end
-    -- end
-
-    -- local function fx()
-
-    --     local inst = CreateEntity()
-    --     inst.entity:AddTransform()
-    --     inst.entity:AddAnimState()
-    --     inst.entity:AddNetwork()
-
-    --     inst:AddTag("FX")
-    --     inst:AddTag("thorny")
-
-    --     inst.Transform:SetFourFaced()
-
-    --     inst.AnimState:SetBank("bramblefx")
-    --     inst.AnimState:SetBuild("bramblefx")
-    --     inst.AnimState:PlayAnimation("idle")
-
-    --     inst:SetPrefabNameOverride("bramblefx")
-
-    --     inst.entity:SetPristine()
-
-    --     if not TheWorld.ismastersim then
-    --         return inst
-    --     end
-
-    --     inst:AddComponent("updatelooper")
-    --     inst.components.updatelooper:AddOnUpdateFn(OnUpdateThorns)
-
-    --     inst:ListenForEvent("animover", inst.Remove)
-    --     inst.persists = false
-    --     inst.damage = TUNING.ARMORBRAMBLE_DMG
-    --     -- inst.spdmg = planardamage and { planar = TUNING.ARMORBRAMBLE_DMG_PLANAR_UPGRADE } or nil
-    --     inst.range = .75
-    --     inst.ignore = {}
-    --     inst.canhitplayers = true
-    --     --inst.owner = nil
-
-    --     inst.SetFXOwner = SetFXOwner
-
-    --     return inst
-    -- end
-
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 return Prefab("hoshino_equipment_cacti_core", fn, assets)
-        -- ,Prefab("hoshino_equipment_cacti_core_fx", fx, assets)

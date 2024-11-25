@@ -11,7 +11,7 @@
 
 local assets = {
     Asset("ANIM", "anim/hoshino_equipment_sandstorm_core.zip"), 
-    Asset( "IMAGE", "images/inventoryimages/hoshino_equipment_sandstorm_core.tex" ),  -- 背包贴图
+    Asset( "IMAGE", "images/inventoryimages/hoshino_equipment_sandstorm_core.tex" ),
     Asset( "ATLAS", "images/inventoryimages/hoshino_equipment_sandstorm_core.xml" ),
 }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,6 +84,22 @@ local assets = {
     local function DropLanded(inst)
         inst.AnimState:ShowSymbol("shadow")
     end
+    local function core_anim_controller_install(inst)
+        inst:AddComponent("playerprox")
+        inst.components.playerprox:SetDist(2, 3)
+        inst.components.playerprox:SetOnPlayerNear(Player_Near)
+        inst.components.playerprox:SetOnPlayerFar(Player_Far)
+        --- 落水影子
+        local function shadow_init(inst)
+            if inst:IsOnOcean(false) then       --- 如果在海里（不包括船）
+                DropInWater(inst)
+            else                                
+                DropLanded(inst)
+            end
+        end
+        inst:ListenForEvent("on_landed",shadow_init)
+        shadow_init(inst)
+    end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
 
@@ -123,21 +139,24 @@ local function fn()
         MakeHauntableLaunch(inst)
     -------------------------------------------------------------------
     ---
-        inst:AddComponent("playerprox")
-        inst.components.playerprox:SetDist(5, 6)
-        inst.components.playerprox:SetOnPlayerNear(Player_Near)
-        inst.components.playerprox:SetOnPlayerFar(Player_Far)
+        -- inst:AddComponent("playerprox")
+        -- inst.components.playerprox:SetDist(5, 6)
+        -- inst.components.playerprox:SetOnPlayerNear(Player_Near)
+        -- inst.components.playerprox:SetOnPlayerFar(Player_Far)
     -------------------------------------------------------------------
     --- 落水影子
-        local function shadow_init(inst)
-            if inst:IsOnOcean(false) then       --- 如果在海里（不包括船）
-                DropInWater(inst)
-            else                                
-                DropLanded(inst)
-            end
-        end
-        inst:ListenForEvent("on_landed",shadow_init)
-        shadow_init(inst)
+        -- local function shadow_init(inst)
+        --     if inst:IsOnOcean(false) then       --- 如果在海里（不包括船）
+        --         DropInWater(inst)
+        --     else                                
+        --         DropLanded(inst)
+        --     end
+        -- end
+        -- inst:ListenForEvent("on_landed",shadow_init)
+        -- shadow_init(inst)
+    -------------------------------------------------------------------
+    ---
+        core_anim_controller_install(inst)
     -------------------------------------------------------------------
     
     return inst
