@@ -74,10 +74,14 @@ Artifact 天
     end
     local function spell_active_fn(inst,doer,_target,_pt)
         local pt = GetPT(_target,_pt)
-
         --------------------------------------------------------------------------------------------
         --- 
-            local actived_flag = false
+            if inst.spell_working then
+                return false
+            end
+        --------------------------------------------------------------------------------------------
+        --- 
+
         --------------------------------------------------------------------------------------------
         --- 怪物扫描
             local ents = TheSim:FindEntities(pt.x,0,pt.z, SPELL_ACTIVE_RADIUS, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS)
@@ -88,7 +92,7 @@ Artifact 天
                     end
                     temp_target.components.health.currenthealth = 0.1
                     temp_target.components.combat:GetAttacked(doer,1000000,inst)
-                    actived_flag = true
+                    inst.spell_working = true
                 end
             end
         --------------------------------------------------------------------------------------------
@@ -100,16 +104,35 @@ Artifact 天
                         temp_target.components.lootdropper:Hoshino_Block()
                     end
                     temp_target.components.workable:Destroy(doer)
-                    actived_flag = true
+                    inst.spell_working = true
                 end
             end
         --------------------------------------------------------------------------------------------
-        ---消耗耐久
-            if actived_flag then
-                inst.components.finiteuses:Use(20)
-            end
+        --- 延时挖
+            local tempInst = CreateEntity()
+            tempInst:DoTaskInTime(0.5,function()
+                local ents = TheSim:FindEntities(pt.x,0,pt.z, SPELL_ACTIVE_RADIUS,nil,nil,{"DIG_workable","HAMMER_workable","MINE_workable","CHOP_workable"})
+                for k, temp_target in pairs(ents) do
+                    if temp_target and temp_target:IsValid() and temp_target.components.workable and temp_target.components.workable:CanBeWorked() then
+                        if temp_target.components.lootdropper then
+                            temp_target.components.lootdropper:Hoshino_Block()
+                        end
+                        temp_target.components.workable:Destroy(doer)
+                        inst.spell_working = true
+                    end
+                end
+                if inst.spell_working then
+                    inst.components.finiteuses:Use(20)
+                    inst.spell_working = false
+                end
+                tempInst:Remove()
+            end)
         --------------------------------------------------------------------------------------------
-
+        ---消耗耐久
+            -- if actived_flag then
+            --     inst.components.finiteuses:Use(20)
+            -- end
+        --------------------------------------------------------------------------------------------
         return true
     end
     local function com_point_and_target_spell_caster_install(inst)
