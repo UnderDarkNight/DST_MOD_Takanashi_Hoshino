@@ -15,6 +15,28 @@ local assets = {
 }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 -- hoshino_com_item_use_to 安装
+    local function pause_timer_com(inst)
+        if inst.components.timer then
+            local names = {}
+            for timer_name_index, v in pairs(inst.components.timer.timers) do
+                names[timer_name_index] = true
+            end
+            for timer_name_index, v in pairs(names) do
+                inst.components.timer:PauseTimer(timer_name_index)
+            end
+        end
+    end
+    local function resume_timer_com(inst)
+        if inst.components.timer then
+            local names = {}
+            for timer_name_index, v in pairs(inst.components.timer.timers) do
+                names[timer_name_index] = true
+            end
+            for timer_name_index, v in pairs(names) do
+                inst.components.timer:ResumeTimer(timer_name_index)
+            end
+        end
+    end
     local BOUNCE_NO_TAGS = { "INLIMBO", "wall", "notarget", "player", "companion", "flight", "invisible", "noattack", "hiding" }
     local function item_use_2_com_install(inst)
         inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_item_use_to",function(inst,replica_com)
@@ -42,13 +64,14 @@ local assets = {
                 target:StopBrain()
                 target.sg:Stop()
                 target:AddTag("hoshino_item_artifact_du_used")
-
+                pause_timer_com(target)
                 local temp_inst = target:SpawnChild("hoshino_item_artifact_du_fx")
                 temp_inst:PushEvent("Set",{pt = Vector3(0,1,0)})
                 temp_inst:ListenForEvent("minhealth",function()
-                temp_inst:Remove()
-                target.sg:Start()
-                target:RestartBrain()
+                    temp_inst:Remove()
+                    target.sg:Start()
+                    target:RestartBrain()
+                    resume_timer_com(target)
                 end,target)
                 inst.components.finiteuses:Use(20)
                 return true
