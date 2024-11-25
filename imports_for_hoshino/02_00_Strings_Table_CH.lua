@@ -245,6 +245,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "雪",
                 ["recipe_desc"] = "雪",
             },
+            ["hoshino_item_artifact_du"] = {
+                ["name"] = "Artifact · 都",
+                ["inspect_str"] = "Artifact · 都",
+                ["recipe_desc"] = "Artifact · 都",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
