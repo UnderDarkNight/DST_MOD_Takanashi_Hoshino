@@ -260,6 +260,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "Artifact · 春风",
                 ["recipe_desc"] = "Artifact · 春风",
             },
+            ["hoshino_item_artifact_hia"] = {
+                ["name"] = "Artifact · 希亚",
+                ["inspect_str"] = "Artifact · 希亚",
+                ["recipe_desc"] = "Artifact · 希亚",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

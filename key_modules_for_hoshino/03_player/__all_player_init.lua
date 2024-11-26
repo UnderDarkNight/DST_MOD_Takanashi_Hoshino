@@ -11,3 +11,6 @@ modimport("key_modules_for_hoshino/03_player/03_debuff_blocker.lua")
 
 modimport("key_modules_for_hoshino/03_player/04_leader_follower_event_handler.lua") 
 --- 雇佣监听广播控制器
+
+modimport("key_modules_for_hoshino/03_player/05_artifact_hia_debuff_marker.lua") 
+--- Artifact HIA Debuff Marker
