@@ -154,6 +154,25 @@
     )
     RemoveRecipeFromFilter("hoshino_item_abydos_high_purity_alloy","MODS")
 --------------------------------------------------------------------------------------------------------------------------------------------
+---- 假日眼镜
+--------------------------------------------------------------------------------------------------------------------------------------------
+    -- AddRecipeToFilter("hoshino_item_abydos_high_purity_alloy","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_holiday_glasses",            --  --  inst.prefab  实体名字
+        {Ingredient("nightmarefuel",5),Ingredient("purplegem",2),Ingredient("livinglog",2)} ,
+        TECH.SHADOWFORGING_TWO, -- 暗影术基座
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_holiday_glasses.xml",
+            image = "hoshino_equipment_holiday_glasses.tex",
+            station_tag="shadow_forge"
+        }--,
+        -- {"CHARACTER","TOOLS"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_holiday_glasses","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
 ---- 沙暴核心
 --------------------------------------------------------------------------------------------------------------------------------------------
     -- AddRecipeToFilter("hoshino_equipment_sandstorm_core","CHARACTER")     ---- 添加物品到目标标签
