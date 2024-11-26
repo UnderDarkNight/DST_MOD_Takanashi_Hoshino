@@ -31,8 +31,12 @@ local TheInput = require("input")
 ---
     local old_OnUpdate = TheInput.OnUpdate
     function TheInput:OnUpdate(...)
-        for k,v in pairs(self.__hoshino_modify_fns) do
-            v(self)
+        if ThePlayer then
+            for k,v in pairs(self.__hoshino_modify_fns) do
+                if k and k:IsValid() and ( k.Transform == nil or ThePlayer:GetDistanceSqToInst(k) < 2500 ) then
+                    v(self)
+                end
+            end
         end
         return old_OnUpdate(self,...)
     end

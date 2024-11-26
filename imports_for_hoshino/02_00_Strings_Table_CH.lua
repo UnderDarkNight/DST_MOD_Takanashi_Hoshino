@@ -447,6 +447,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "商店",
                 ["recipe_desc"] = "商店",
             },
+            ["hoshino_building_shiba_seki_ramen_cart"] = {
+                ["name"] = "柴关拉面店",
+                ["inspect_str"] = "柴关拉面店",
+                ["recipe_desc"] = "柴关拉面店",
+            },
         --------------------------------------------------------------------
         --- 07_spell
             ["hoshino_spell_gun_eye_of_horus_level_1_to_2"] = {

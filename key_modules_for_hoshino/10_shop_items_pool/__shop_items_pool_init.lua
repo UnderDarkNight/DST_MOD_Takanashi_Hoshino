@@ -31,3 +31,6 @@ end
 
 modimport("key_modules_for_hoshino/10_shop_items_pool/05_recycle_items.lua") 
 --- 商品回收列表。
+
+modimport("key_modules_for_hoshino/10_shop_items_pool/06_shiba_seki_ramen_cart_pool.lua") 
+--- 拉面店商品列表
