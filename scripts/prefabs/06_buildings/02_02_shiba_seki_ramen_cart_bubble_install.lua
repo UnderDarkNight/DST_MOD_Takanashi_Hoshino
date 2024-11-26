@@ -24,7 +24,10 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function install_buttons(inst)
-        
+        -- if ThePlayer and ThePlayer.__install_buttons_fn then
+        --     ThePlayer.__install_buttons_fn(inst)
+        --     return
+        -- end
         if inst.hud_button_widget then
             inst.hud_button_widget:Kill()
         end
@@ -71,9 +74,9 @@
             local bubble_scale = 1.5
 
             bubbles["left"] = button_widget:AddChild(AnimButton("hoshino_building_shiba_seki_ramen_cart",{
-                idle = "left_bubble", -- 按钮默认状态
-                over = "left_bubble", -- 按钮悬停状态
-                disabled = "left_bubble", -- 按钮禁用状态
+                idle = "bubble", -- 按钮默认状态
+                over = "bubble", -- 按钮悬停状态
+                disabled = "bubble", -- 按钮禁用状态
             }))
             bubbles["left"]:SetPosition(-200,360,0)
             bubbles["left"]:SetOnClick(function()
@@ -85,29 +88,29 @@
             bubbles["left"]:SetScale(bubble_scale,bubble_scale,bubble_scale)
             bubbles["left"].name_text = bubbles["left"]:AddChild(Text(CODEFONT,30,"肉汤",{ 0/255 , 0/255 ,0/255 , 1}))
             bubbles["left"].name_text:SetString("肉汤")
-            bubbles["left"].name_text:SetPosition(0,22,0)
+            bubbles["left"].name_text:SetPosition(0,10,0)
             bubbles["left"].icon = bubbles["left"]:AddChild(UIAnim())
             bubbles["left"].icon:GetAnimState():SetBank("hoshino_building_shiba_seki_ramen_cart")
             bubbles["left"].icon:GetAnimState():SetBuild("hoshino_building_shiba_seki_ramen_cart")
             bubbles["left"].icon:GetAnimState():PlayAnimation("credit_coins")
             bubbles["left"].icon:SetScale(0.2,0.2,0.2)
-            bubbles["left"].icon:SetPosition(-45,0,0)
+            bubbles["left"].icon:SetPosition(-30,-12,0)
             bubbles["left"].price_text = bubbles["left"]:AddChild(Text(CODEFONT,20,"50",{ 0/255 , 0/255 ,0/255 , 1}))
             bubbles["left"].price_text:SetString("50")
-            bubbles["left"].price_text:SetPosition(10,0,0)
+            bubbles["left"].price_text:SetPosition(10,-12,0)
             bubbles["left"].on_sale = bubbles["left"]:AddChild(UIAnim())
             bubbles["left"].on_sale:GetAnimState():SetBank("hoshino_building_shiba_seki_ramen_cart")
             bubbles["left"].on_sale:GetAnimState():SetBuild("hoshino_building_shiba_seki_ramen_cart")
-            bubbles["left"].on_sale:GetAnimState():PlayAnimation("sale")
-            bubbles["left"].on_sale:SetPosition(50,0,0)
-            bubbles["left"].on_sale:SetScale(0.5,0.5,0.5)
+            bubbles["left"].on_sale:GetAnimState():PlayAnimation("sale2")
+            bubbles["left"].on_sale:SetPosition(0,-35,0)
+            bubbles["left"].on_sale:SetScale(1,1,1)
 
 
             
             bubbles["mid"] = button_widget:AddChild(AnimButton("hoshino_building_shiba_seki_ramen_cart",{
-                idle = "mid_bubble", -- 按钮默认状态
-                over = "mid_bubble", -- 按钮悬停状态
-                disabled = "mid_bubble", -- 按钮禁用状态
+                idle = "bubble", -- 按钮默认状态
+                over = "bubble", -- 按钮悬停状态
+                disabled = "bubble", -- 按钮禁用状态
             }))
             bubbles["mid"]:SetPosition(0,430,0)
             bubbles["mid"]:SetOnClick(function()
@@ -118,29 +121,29 @@
             end)
             bubbles["mid"]:SetScale(bubble_scale,bubble_scale,bubble_scale)
             bubbles["mid"].name_text = bubbles["mid"]:AddChild(Text(CODEFONT,30,"拉面",{ 0/255 , 0/255 ,0/255 , 1}))
-            bubbles["mid"].name_text:SetPosition(0,22,0)
+            bubbles["mid"].name_text:SetPosition(0,10,0)
             bubbles["mid"].icon = bubbles["mid"]:AddChild(UIAnim())
             bubbles["mid"].icon:GetAnimState():SetBank("hoshino_building_shiba_seki_ramen_cart")
             bubbles["mid"].icon:GetAnimState():SetBuild("hoshino_building_shiba_seki_ramen_cart")
             bubbles["mid"].icon:GetAnimState():PlayAnimation("credit_coins")
-            bubbles["mid"].icon:SetPosition(-45,0,0)
+            bubbles["mid"].icon:SetPosition(-30,-12,0)
             bubbles["mid"].icon:SetScale(0.2,0.2,0.2)
             bubbles["mid"].price_text = bubbles["mid"]:AddChild(Text(CODEFONT,20,"50",{ 0/255 , 0/255 ,0/255 , 1}))
-            bubbles["mid"].price_text:SetPosition(10,0,0)
+            bubbles["mid"].price_text:SetPosition(10,-12,0)
             bubbles["mid"].price_text:SetString("50")
             bubbles["mid"].on_sale = bubbles["mid"]:AddChild(UIAnim())
             bubbles["mid"].on_sale:GetAnimState():SetBank("hoshino_building_shiba_seki_ramen_cart")
             bubbles["mid"].on_sale:GetAnimState():SetBuild("hoshino_building_shiba_seki_ramen_cart")
-            bubbles["mid"].on_sale:GetAnimState():PlayAnimation("sale")
-            bubbles["mid"].on_sale:SetPosition(55,25,0)
-            bubbles["mid"].on_sale:SetScale(0.5,0.5,0.5)
+            bubbles["mid"].on_sale:GetAnimState():PlayAnimation("sale2")
+            bubbles["mid"].on_sale:SetPosition(0,-35,0)
+            bubbles["mid"].on_sale:SetScale(1,1,1)
 
 
 
             bubbles["right"] = button_widget:AddChild(AnimButton("hoshino_building_shiba_seki_ramen_cart",{
-                idle = "right_bubble", -- 按钮默认状态
-                over = "right_bubble", -- 按钮悬停状态
-                disabled = "right_bubble", -- 按钮禁用状态
+                idle = "bubble", -- 按钮默认状态
+                over = "bubble", -- 按钮悬停状态
+                disabled = "bubble", -- 按钮禁用状态
             }))
             bubbles["right"]:SetPosition(200,360,0)
             bubbles["right"]:SetOnClick(function()
@@ -151,22 +154,22 @@
             end)
             bubbles["right"]:SetScale(bubble_scale,bubble_scale,bubble_scale)
             bubbles["right"].name_text = bubbles["right"]:AddChild(Text(CODEFONT,30,"排骨拉面",{ 0/255 , 0/255 ,0/255 , 1}))
-            bubbles["right"].name_text:SetPosition(0,22,0)
+            bubbles["right"].name_text:SetPosition(0,10,0)
             bubbles["right"].icon = bubbles["right"]:AddChild(UIAnim())
             bubbles["right"].icon:GetAnimState():SetBank("hoshino_building_shiba_seki_ramen_cart")
             bubbles["right"].icon:GetAnimState():SetBuild("hoshino_building_shiba_seki_ramen_cart")
             bubbles["right"].icon:GetAnimState():PlayAnimation("credit_coins")
-            bubbles["right"].icon:SetPosition(-45,0,0)
+            bubbles["right"].icon:SetPosition(-30,-12,0)
             bubbles["right"].icon:SetScale(0.2,0.2,0.2)
             bubbles["right"].price_text = bubbles["right"]:AddChild(Text(CODEFONT,20,"50",{ 0/255 , 0/255 ,0/255 , 1}))
-            bubbles["right"].price_text:SetPosition(10,0,0)
+            bubbles["right"].price_text:SetPosition(10,-12,0)
             bubbles["right"].price_text:SetString("50")
             bubbles["right"].on_sale = bubbles["right"]:AddChild(UIAnim())
             bubbles["right"].on_sale:GetAnimState():SetBank("hoshino_building_shiba_seki_ramen_cart")
             bubbles["right"].on_sale:GetAnimState():SetBuild("hoshino_building_shiba_seki_ramen_cart")
-            bubbles["right"].on_sale:GetAnimState():PlayAnimation("sale")
-            bubbles["right"].on_sale:SetPosition(55,25,0)
-            bubbles["right"].on_sale:SetScale(0.5,0.5,0.5)
+            bubbles["right"].on_sale:GetAnimState():PlayAnimation("sale2")
+            bubbles["right"].on_sale:SetPosition(0,-35,0)
+            bubbles["right"].on_sale:SetScale(1,1,1)
 
 
         -----------------------------------------------------
