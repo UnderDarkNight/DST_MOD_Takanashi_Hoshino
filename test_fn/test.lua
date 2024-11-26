@@ -151,19 +151,23 @@ local flg,error_code = pcall(function()
         
     ----------------------------------------------------------------------------------------------------------------
     --- 精神控制
-        local inst = ThePlayer
-        for i = 1, 15, 1 do
-            inst:DoTaskInTime(0.5*i, function()
-                inst:AddDebuff("mindcontroller", "mindcontroller")
-            end)
-        end
+        -- local inst = ThePlayer
+        -- for i = 1, 15, 1 do
+        --     inst:DoTaskInTime(0.5*i, function()
+        --         inst:AddDebuff("mindcontroller", "mindcontroller")
+        --     end)
+        -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer:AddDebuff("hoshino_equipment_spider_core_debuff", "hoshino_equipment_spider_core_debuff")
 
     ----------------------------------------------------------------------------------------------------------------
     ----
+        -- TheWorld:PushEvent("ms_setclocksegs", {day = 0, dusk = 0, night = 16})
+        -- TheWorld:PushEvent("ms_setmoonphase", {moonphase = "new", iswaxing = true})
 
+        TheWorld:PushEvent("ms_setclocksegs", {day = 0, dusk = 0, night = 16})
+        TheWorld:PushEvent("ms_setmoonphase", {moonphase = "full", iswaxing = false})
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
