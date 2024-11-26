@@ -13,6 +13,9 @@ TUNING["hoshino.Config"].Language = GetModConfigData("LANGUAGE")
     TUNING["hoshino.Config"].HIDE_CLOTHS = GetModConfigData("HIDE_CLOTHS")     --- 隐藏衣服
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 物品类
+    TUNING["hoshino.Config"].COLOURFUL_EGG_ITEMS = GetModConfigData("COLOURFUL_EGG_ITEMS")     --- 彩蛋物品
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 任务类
     TUNING["hoshino.Config"].COLOURFUL_EGG_MISSIONS = GetModConfigData("COLOURFUL_EGG_MISSIONS")     --- 彩蛋任务开关
 --------------------------------------------------------------------------------------------------------------------------------------------------------

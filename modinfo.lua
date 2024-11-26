@@ -229,6 +229,18 @@ configuration_options = {
     default = true
   },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
+  {name = "AAAA",label = IsChinese() and GetTitle("物品类") or GetTitle("Items"),hover = "",options = {{description = "",data = 0}},default = 0},
+  {
+      name = "COLOURFUL_EGG_ITEMS",
+      label = IsChinese() and "彩蛋物品" or "Egg Items",
+      hover = IsChinese() and "彩蛋物品" or "Egg Items",
+      options = {
+        {description = "OFF",data = false},
+        {description = "ON",data = true},
+      },
+      default = true
+  },
+------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("任务") or GetTitle("Missions"),hover = "",options = {{description = "",data = 0}},default = 0},
   {
       name = "COLOURFUL_EGG_MISSIONS",

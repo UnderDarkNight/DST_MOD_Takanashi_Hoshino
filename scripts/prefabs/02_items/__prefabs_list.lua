@@ -57,20 +57,41 @@ local prefabs_name_list = {
     "27_giant_crab_claw",                       --- 巨蟹钳
     "28_ruins_core",                            --- 至纯铥矿
     "29_used_mechanical_sheets",                --- 废旧机械板材
-    "30_accessory_remnants",                    --- 奈因
-    "31_nine",                                  --- 九
-    "32_sky",                                   --- 天
-    "33_spring",                                --- 春
-    "34_snow",                                  --- 雪
 
-    "35_artifact_du",                           --- Artifact 都
-    "36_artifact_sky",                          --- Artifact 天
-    "37_artifact_spring_wind",                  --- Artifact 春风
-    "38_artifact_hia",                          --- Artifact 希亚
+    -- "30_accessory_remnants",                    --- 奈因
+    -- "31_nine",                                  --- 九
+    -- "32_sky",                                   --- 天
+    -- "33_spring",                                --- 春
+    -- "34_snow",                                  --- 雪
+    -- "35_artifact_du",                           --- Artifact 都
+    -- "36_artifact_sky",                          --- Artifact 天
+    -- "37_artifact_spring_wind",                  --- Artifact 春风
+    -- "38_artifact_hia",                          --- Artifact 希亚
 
 
 }
 
+---------------------------------------------------------------------------
+---- 彩蛋物品
+if TUNING["hoshino.Config"].COLOURFUL_EGG_ITEMS then
+    local temp_name_list = {
+
+        "30_accessory_remnants",                    --- 奈因
+        "31_nine",                                  --- 九
+        "32_sky",                                   --- 天
+        "33_spring",                                --- 春
+        "34_snow",                                  --- 雪
+        "35_artifact_du",                           --- Artifact 都
+        "36_artifact_sky",                          --- Artifact 天
+        "37_artifact_spring_wind",                  --- Artifact 春风
+        "38_artifact_hia",                          --- Artifact 希亚
+
+    }
+    for k, temp in pairs(temp_name_list) do
+        table.insert(prefabs_name_list,temp)
+    end
+end
+---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
 ---- 正在测试的物品
 if TUNING.HOSHINO_DEBUGGING_MODE == true then
