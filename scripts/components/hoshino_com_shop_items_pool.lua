@@ -142,7 +142,8 @@ nil,
             local index = item_data.index
             local is_permanent = item_data.is_permanent -- 常驻标记位
             local level = item_data.level or 0
-            if self.pool[index] == nil and self.level >= level and not is_permanent then
+            local prefab = item_data.prefab
+            if self.pool[index] == nil and self.level >= level and not is_permanent and PrefabExists(prefab) then
                 table.insert(temp_pool,item_data)
             end
         end

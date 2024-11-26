@@ -65,6 +65,7 @@ local prefabs_name_list = {
 
     "35_artifact_du",                           --- Artifact 都
     "36_artifact_sky",                          --- Artifact 天
+    "37_artifact_spring_wind",                  --- Artifact 春风
 
 
 }
