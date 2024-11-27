@@ -36,6 +36,22 @@ local assets = {
         -- end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
+--- deployable_hook
+    local function deployable_hook(inst)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.inventoryitem",function(inst,replica_com)
+            local old_CanDeploy = replica_com.CanDeploy
+            replica_com.CanDeploy = function(self,pt, mouseover, deployer, rot,...)
+                if type(pt) == "table" and pt.x and pt.y and pt.z then
+                    local ents = TheSim:FindEntities(pt.x,0,pt.z,4.5,{"hoshino_building_ether_pool"})
+                    if #ents > 0 then
+                        return false
+                    end
+                end
+                return old_CanDeploy(self,pt, mouseover, deployer, rot,...)
+            end
+        end)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
 
     local inst = CreateEntity() -- 创建实体
@@ -48,14 +64,12 @@ local function fn()
     inst.AnimState:SetBank("hoshino_item_ether_essence") -- 地上动画
     inst.AnimState:SetBuild("hoshino_item_ether_essence") -- 材质包，就是anim里的zip包
     inst.AnimState:PlayAnimation("idle",true) -- 默认播放哪个动画
-    -- inst.AnimState:SetScale(1.5,1.5,1.5)
-    -- MakeInventoryFloatable(inst)
 
-    -- inst:AddTag("frozen")   --- 给腐烂组件用的
-    -- inst:AddTag("preparedfood")
+    inst:AddTag("deploykititem")
 
     inst.entity:SetPristine()
     workable_install(inst)
+    deployable_hook(inst)
     if not TheWorld.ismastersim then
         return inst
     end
@@ -85,8 +99,29 @@ local function fn()
         inst:ListenForEvent("on_landed",shadow_init)
         shadow_init(inst)
     -------------------------------------------------------------------
+    ---
+        inst:AddComponent("deployable")                
+        inst.components.deployable.ondeploy = function(inst, pt, deployer)
+            inst.components.stackable:Get():Remove()
+            SpawnPrefab("hoshino_building_ether_pool").Transform:SetPosition(pt.x,0,pt.z)
+        end
+        -- inst.components.deployable:SetDeployMode(DEPLOYMODE.PLANT)
+        inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)
+    -------------------------------------------------------------------
     
     return inst
 end
+----------------------------------------------------------------------------------------------------------------------------------------------------
+--- 
+    local function placer_postinit_fn(inst)
+        inst.AnimState:SetBuild("hoshino_building_ether_pool")
+        inst.AnimState:SetBank("marsh_tile")
+        inst.AnimState:PlayAnimation("idle",true)
+        inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+        inst.AnimState:SetLayer(LAYER_BACKGROUND)
+        inst.AnimState:SetSortOrder(3)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
-return Prefab("hoshino_item_ether_essence", fn, assets)
+return Prefab("hoshino_item_ether_essence", fn, assets),
+    MakePlacer("hoshino_item_ether_essence_placer", "hoshino_building_ether_pool", "hoshino_building_ether_pool", "idle", nil, nil, nil, nil, nil, nil, placer_postinit_fn, nil, nil)

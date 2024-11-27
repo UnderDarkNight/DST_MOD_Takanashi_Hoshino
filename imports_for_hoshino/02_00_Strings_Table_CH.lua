@@ -452,6 +452,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "柴关拉面店",
                 ["recipe_desc"] = "柴关拉面店",
             },
+            ["hoshino_building_ether_pool"] = {
+                ["name"] = "以太池",
+                ["inspect_str"] = "以太池",
+                ["recipe_desc"] = "以太池",
+            },
         --------------------------------------------------------------------
         --- 07_spell
             ["hoshino_spell_gun_eye_of_horus_level_1_to_2"] = {
