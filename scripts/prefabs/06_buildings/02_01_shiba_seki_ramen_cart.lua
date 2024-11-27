@@ -43,6 +43,15 @@
         return 9999999
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    local function onhammered(inst, worker)
+        inst.components.lootdropper:DropLoot()
+        local fx = SpawnPrefab("collapse_big")
+        fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        fx:SetMaterial("wood")
+        inst:Remove()
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
     local inst = CreateEntity()
 
@@ -54,7 +63,7 @@ local function fn()
     inst.DynamicShadow:SetSize(2, .6)
 
     inst.entity:AddMiniMapEntity()
-    inst.MiniMapEntity:SetIcon("hoshino_building_shiba_seki_ramen_cart.tex")
+    inst.MiniMapEntity:SetIcon("hoshino_building_shiba_seki_ramen_cart_map.tex")
 
     MakeObstaclePhysics(inst, 1.5)---设置一下距离
 
@@ -164,9 +173,27 @@ local function fn()
     --- 物品刷新器
         item_spawner_install(inst)
     -----------------------------------------------------------------
+    --- 可拆解
+        inst:AddComponent("lootdropper")
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+        inst.components.workable:SetWorkLeft(4)
+        inst.components.workable:SetOnFinishCallback(onhammered)
+        -- inst.components.workable:SetOnWorkCallback(onhit)
+    -----------------------------------------------------------------
 
     inst:AddComponent("inspectable")
     return inst
 end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    local function placer_postinit_fn(inst)
+        inst.AnimState:OverrideSymbol("left","hoshino_building_shiba_seki_ramen_cart","empty")
+        inst.AnimState:OverrideSymbol("mid","hoshino_building_shiba_seki_ramen_cart","empty")
+        inst.AnimState:OverrideSymbol("right","hoshino_building_shiba_seki_ramen_cart","empty")
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-return Prefab("hoshino_building_shiba_seki_ramen_cart", fn, assets)
+return Prefab("hoshino_building_shiba_seki_ramen_cart", fn, assets),
+    MakePlacer("hoshino_building_shiba_seki_ramen_cart_placer", "hoshino_building_shiba_seki_ramen_cart", "hoshino_building_shiba_seki_ramen_cart", "idle", nil, nil, nil, nil, nil, nil, placer_postinit_fn, nil, nil)
+

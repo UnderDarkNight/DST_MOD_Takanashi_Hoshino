@@ -11,7 +11,7 @@ local TheInput = require("input")
         TheInput:Hoshino_Remove_Update_Modify_Fn(inst)
     end
     function TheInput:Hoshino_Add_Update_Modify_Fn(inst,fn)
-        if inst and fn then
+        if inst and type(fn) == "function" then
             self.__hoshino_modify_fns[inst] = fn
         end
         inst:ListenForEvent("onremove",self.__hoshino_remove_fn)
@@ -36,7 +36,7 @@ local TheInput = require("input")
         if ThePlayer then
             for k,v in pairs(self.__hoshino_modify_fns) do
                 if k and k:IsValid() and ( k.Transform == nil or ThePlayer:GetDistanceSqToInst(k) < 2500 ) then
-                    v(self)
+                    v()
                 end
             end
         end

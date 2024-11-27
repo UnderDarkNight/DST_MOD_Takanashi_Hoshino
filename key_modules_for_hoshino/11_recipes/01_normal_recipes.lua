@@ -305,3 +305,23 @@
         -- {"MAGIC"}
     )
     RemoveRecipeFromFilter("hoshino_equipment_ruins_core","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 任务看板
+--------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_building_shiba_seki_ramen_cart","STRUCTURES")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_building_shiba_seki_ramen_cart",            --  --  inst.prefab  实体名字
+        {Ingredient("boards", 5),Ingredient("cutstone", 5),Ingredient("charcoal", 5)} ,
+        TECH.SCIENCE_ONE, --- 魔法三本
+        {
+            -- nounlock=true,
+            -- no_deconstruction=false,
+            -- builder_tag = "hoshino",
+            atlas = "images/map_icons/hoshino_building_shiba_seki_ramen_cart.xml",
+            image = "hoshino_building_shiba_seki_ramen_cart.tex",
+            placer = "hoshino_building_shiba_seki_ramen_cart_placer",                       -------- 建筑放置器
+            -- sg_state="carvewood",
+        },
+        {"STRUCTURES"}
+    )
+    RemoveRecipeFromFilter("hoshino_building_shiba_seki_ramen_cart","MODS")
