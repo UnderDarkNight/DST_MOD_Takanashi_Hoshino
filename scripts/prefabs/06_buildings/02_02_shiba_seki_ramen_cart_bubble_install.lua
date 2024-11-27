@@ -18,6 +18,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local slots = {["left"] = true,["mid"] = true,["right"] = true,}
+    local DISPLAY_RADIUS_SQ = 5*5
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     
@@ -54,7 +55,7 @@
         -----------------------------------------------------
         --- 绑定更新点
             TheInput:Hoshino_Add_Update_Modify_Fn(root.inst,function()
-                if ThePlayer:GetDistanceSqToInst(inst) < 25 then
+                if ThePlayer:GetDistanceSqToInst(inst) < DISPLAY_RADIUS_SQ then
                     local s_pt_x,s_pt_y= TheSim:GetScreenPos(inst.Transform:GetWorldPosition()) -- 左下角为原点。
                     -- print("player in screen",s_pt_x,s_pt_y)
                     root:SetPosition(s_pt_x,s_pt_y,0)
@@ -180,9 +181,10 @@
             local items = {}
             for slot, _ in pairs(slots) do
                 local temp = inst["__item_"..slot]:value()
-                items[slot] = temp
+                items[slot] = temp or inst
             end
             for slot, tempItem in pairs(items) do
+                -- print("+++ buttons +++ ",slot,tempItem)
                 if tempItem and tempItem:IsValid() and tempItem ~= inst then
                     bubbles[slot]:Show()
                     bubbles[slot].name_text:SetString(tempItem:GetDisplayName())
@@ -198,6 +200,13 @@
             end
         -----------------------------------------------------        
     
+    end
+    local function uninstall_buttons(inst)
+        if inst.hud_button_widget then
+            inst.hud_button_widget:Kill()
+            inst.hud_button_widget = nil
+            -- print("拉面店按钮 界面移除")
+        end
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -223,6 +232,24 @@
 
 
 return function(inst)
-    inst:DoTaskInTime(1,update_display)
+    -- inst:DoTaskInTime(1,update_display)
+
     inst:ListenForEvent("item_update",update_display)
+    inst:DoTaskInTime(1,function()
+        if TheInput and ThePlayer then
+            TheInput:Hoshino_Add_Update_Modify_Fn(inst,function()
+                local in_range_flag = inst:GetDistanceSqToInst(ThePlayer) < DISPLAY_RADIUS_SQ
+                if in_range_flag and inst.__near_player == nil then
+                    inst.__near_player = ThePlayer
+                    inst:PushEvent("hoshino_event.client_side_player_near")
+                elseif not in_range_flag and inst.__near_player ~= nil then
+                    inst:PushEvent("hoshino_event.client_side_player_leave")
+                    inst.__near_player = nil
+                end
+            end)
+        end
+    end)
+
+    inst:ListenForEvent("hoshino_event.client_side_player_near",update_display)
+    inst:ListenForEvent("hoshino_event.client_side_player_leave",uninstall_buttons)
 end

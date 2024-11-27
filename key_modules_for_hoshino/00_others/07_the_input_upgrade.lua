@@ -15,6 +15,7 @@ local TheInput = require("input")
             self.__hoshino_modify_fns[inst] = fn
         end
         inst:ListenForEvent("onremove",self.__hoshino_remove_fn)
+        -- print("TheInput add update modify fn",inst)
     end
     function TheInput:Hoshino_Remove_Update_Modify_Fn(inst)
         local new_table = {}
@@ -25,6 +26,7 @@ local TheInput = require("input")
         end
         self.__hoshino_modify_fns = new_table
         inst:RemoveEventCallback("onremove",self.__hoshino_remove_fn)
+        -- print("TheInput remove update modify fn",inst)
     end
 
 --------------------------------------------------------------------------------------
