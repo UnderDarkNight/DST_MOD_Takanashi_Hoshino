@@ -51,7 +51,9 @@ local function fn()
     inst:AddComponent("edible") -- 可食物组件
     inst.components.edible.foodtype = FOODTYPE.GOODIES
     inst.components.edible:SetOnEatenFn(function(inst,eater)
-
+        if eater and eater.components.hoshino_com_power_cost then
+            eater.components.hoshino_com_power_cost:DoDelta(3)
+        end
     end)
 
     -- inst:AddComponent("perishable") -- 可腐烂的组件
@@ -59,9 +61,9 @@ local function fn()
     -- inst.components.perishable:StartPerishing()
     -- inst.components.perishable.onperishreplacement = "spoiled_food" -- 腐烂后变成腐烂食物
 
-    inst.components.edible.hungervalue = 0
-    inst.components.edible.sanityvalue = 0
-    inst.components.edible.healthvalue = 0
+    inst.components.edible.hungervalue = 20
+    inst.components.edible.sanityvalue = 40
+    inst.components.edible.healthvalue = 30
 
     inst:AddComponent("stackable") -- 可堆叠
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM

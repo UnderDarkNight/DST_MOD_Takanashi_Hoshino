@@ -5,16 +5,39 @@
 
 ]]--
 ----------------------------------------------------------------------------------------------------------------------------------------------------
+----
+    local assets = {
+        Asset("ANIM", "anim/hoshino_food_mandrake_concentrate.zip"), 
+        Asset( "IMAGE", "images/inventoryimages/hoshino_food_mandrake_concentrate.tex" ),  -- 背包贴图
+        Asset( "ATLAS", "images/inventoryimages/hoshino_food_mandrake_concentrate.xml" ),
+    }
+----------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    local function OnEateFn(inst,eater)
+        if not (eater and eater.components.hoshino_cards_sys) then
+            return
+        end
 
+        local black_cards_data = eater.components.hoshino_cards_sys:GetActivatedCards("card_black")
+        --[[
+            得到返回 {
+                ["card_name_index"] = actived_times
+            }
+        ]]
+        local cards_list = {}
+        for card_name_index, times in pairs(black_cards_data) do
+            if card_name_index and times and type(times) == "number" and times > 0 then
+                table.insert(cards_list, card_name_index)
+            end
+        end
+        if #cards_list == 0 then
+            return
+        end
 
-
-
-local assets = {
-    Asset("ANIM", "anim/hoshino_food_mandrake_concentrate.zip"), 
-    Asset( "IMAGE", "images/inventoryimages/hoshino_food_mandrake_concentrate.tex" ),  -- 背包贴图
-    Asset( "ATLAS", "images/inventoryimages/hoshino_food_mandrake_concentrate.xml" ),
-}
-
+        local card_name_index = cards_list[math.random(#cards_list)]
+        eater.components.hoshino_cards_sys:TryToDeactiveCardByName(card_name_index) -- 尝试取消激活
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
 
     local inst = CreateEntity() -- 创建实体
@@ -50,18 +73,16 @@ local function fn()
 
     inst:AddComponent("edible") -- 可食物组件
     inst.components.edible.foodtype = FOODTYPE.GOODIES
-    inst.components.edible:SetOnEatenFn(function(inst,eater)
-
-    end)
+    inst.components.edible:SetOnEatenFn(OnEateFn) -- 吃完后的回调函数
 
     inst:AddComponent("perishable") -- 可腐烂的组件
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_SLOW)
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_ONE_DAY*80)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food" -- 腐烂后变成腐烂食物
 
-    inst.components.edible.hungervalue = 0
-    inst.components.edible.sanityvalue = 0
-    inst.components.edible.healthvalue = 0
+    inst.components.edible.hungervalue = 150
+    inst.components.edible.sanityvalue = 150
+    inst.components.edible.healthvalue = 150
 
     inst:AddComponent("stackable") -- 可堆叠
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
