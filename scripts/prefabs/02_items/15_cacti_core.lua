@@ -4,7 +4,7 @@
 仙人掌核心
 饰品 amulet 24min	
 合成材料：仙人掌*20 烤仙人掌*20 树枝*20
-你被攻击时会爆出尖刺，对周围造成12点aoe伤害
+你被攻击时会爆出尖刺，对周围造成12点aoe伤害.夏天伤害为40
 
 ]]--
 ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -12,14 +12,52 @@
     local assets =
     {
         Asset("ANIM", "anim/hoshino_equipment_cacti_core.zip"),
+        Asset("ANIM", "anim/hoshino_equipment_cacti_core_summer.zip"),
         Asset( "IMAGE", "images/inventoryimages/hoshino_equipment_cacti_core.tex" ),
         Asset( "ATLAS", "images/inventoryimages/hoshino_equipment_cacti_core.xml" ),
+        Asset( "IMAGE", "images/inventoryimages/hoshino_equipment_cacti_core_summer.tex" ),
+        Asset( "ATLAS", "images/inventoryimages/hoshino_equipment_cacti_core_summer.xml" ),
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- finiteuses
     local FINITEUSES_MAX = TUNING.HOSHINO_DEBUGGING_MODE and 60 or 24*60
     local DAMAGE_PER_HIT = 12   -- 直接反伤
+    local DAMAGE_PER_HIT_SUMMER = 40 -- 直接反伤
     local DAMAGE_SP_PER_HIT = nil -- 位面伤害
+    local function Get_Damage_Per_Hit()
+        if TheWorld.state.issummer then
+            return DAMAGE_PER_HIT_SUMMER
+        else
+            return DAMAGE_PER_HIT
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------
+--- 外观切换
+    local function Summer_Active(inst)
+        inst.components.inventoryitem.imagename = "hoshino_equipment_cacti_core_summer"
+        inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_cacti_core_summer.xml"
+        inst:PushEvent("imagechange")
+        inst.AnimState:SetBuild("hoshino_equipment_cacti_core_summer")
+    end
+    local function Summer_Deactive(inst)
+        inst.components.inventoryitem.imagename = "hoshino_equipment_cacti_core"
+        inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_cacti_core.xml"
+        inst:PushEvent("imagechange")
+        inst.AnimState:SetBuild("hoshino_equipment_cacti_core")
+    end
+    local function Switcher_Active(inst)
+        if TheWorld.state.issummer then
+            Summer_Active(inst)
+        else
+            Summer_Deactive(inst)
+        end
+    end
+    local function Anim_Summer_Switcher_Install(inst)
+        inst:WatchWorldState("season",function()
+            inst:DoTaskInTime(0,Switcher_Active)            
+        end)
+        inst:DoTaskInTime(0,Switcher_Active)
+    end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -32,7 +70,7 @@ local function onequip(inst, owner)
             local damage = _table and _table.damage
             if type(damage) == "number" and damage > 0 then
                     local fx = SpawnPrefab("bramblefx_armor")
-                    fx.damage = DAMAGE_PER_HIT -- 直接伤害
+                    fx.damage = Get_Damage_Per_Hit() or DAMAGE_PER_HIT -- 直接伤害
                     if DAMAGE_SP_PER_HIT then -- 位面伤害
                         fx.spdmg = { planar = DAMAGE_SP_PER_HIT }
                         fx.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
@@ -153,7 +191,7 @@ local function fn()
     inst.components.finiteuses:SetOnFinished(inst.Remove)
 
     core_anim_controller_install(inst)
-
+    Anim_Summer_Switcher_Install(inst)
     MakeHauntableLaunch(inst)
     return inst
 end

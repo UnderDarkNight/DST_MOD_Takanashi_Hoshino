@@ -38,6 +38,7 @@ local files_name = {
 		"hoshino_item_anti_entropy_crystal_wheel",						--- 反熵水晶殖轮
 		"hoshino_equipment_sandstorm_core",								--- 沙暴核心
 		"hoshino_equipment_cacti_core",									--- 仙人掌核心
+		"hoshino_equipment_cacti_core_summer",							--- 仙人掌核心-夏日
 		"hoshino_equipment_oasis_core",									--- 绿洲核心
 		"hoshino_equipment_desert_core",								--- 沙漠核心
 		"hoshino_item_pillow",											--- 抱枕
