@@ -443,9 +443,14 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
         --------------------------------------------------------------------
         --- 06_buildings
             ["hoshino_building_shop24"] = {
-                ["name"] = "24小时商店",
-                ["inspect_str"] = "商店",
-                ["recipe_desc"] = "商店",
+                ["name"] = "24H商店",
+                ["inspect_str"] = "24H商店",
+                ["recipe_desc"] = "24H商店",
+            },
+            ["hoshino_building_shop24_pre"] = {
+                ["name"] = "24H商店",
+                ["inspect_str"] = "24H商店",
+                ["recipe_desc"] = "24H商店",
             },
             ["hoshino_building_shiba_seki_ramen_cart"] = {
                 ["name"] = "柴关拉面店",

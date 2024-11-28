@@ -106,6 +106,10 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
     ----------------------------------------------------------------------
+    --- 地图图标
+        inst.entity:AddMiniMapEntity()
+        inst.MiniMapEntity:SetIcon("hoshino_building_ether_pool.tex")
+    ----------------------------------------------------------------------
     --- 物理引擎
         MakePondPhysics(inst, 1.95)
         RemovePhysicsColliders(inst)

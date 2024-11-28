@@ -8,6 +8,8 @@
 ---
     local assets =
     {
+        Asset("ANIM", "anim/hoshino_building_shop24.zip"),
+
         Asset("ANIM", "anim/hoshino_building_shop24_hud.zip"),
         Asset("IMAGE", "images/widgets/hoshino_shop24_slot_bg.tex"),
 		Asset("ATLAS", "images/widgets/hoshino_shop24_slot_bg.xml"),
@@ -194,15 +196,16 @@ local function fn()
     inst.entity:AddSoundEmitter()
 
     inst.entity:AddMiniMapEntity()
-    -- inst.MiniMapEntity:SetIcon("hoshino_firewood_container.tex")
+    inst.MiniMapEntity:SetIcon("hoshino_building_shop24.tex")
 
     MakeObstaclePhysics(inst, 0.5)---设置一下距离
 
-    inst.AnimState:SetBank("madscience_lab")
-    inst.AnimState:SetBuild("madscience_lab")
+    inst.AnimState:SetBank("hoshino_building_shop24")
+    inst.AnimState:SetBuild("hoshino_building_shop24")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("structure")
+    inst:AddTag("hoshino_building_shop24")
 
     add_container_before_not_ismastersim_return(inst)
     widget_open_event_install(inst)
@@ -218,6 +221,7 @@ local function fn()
     inst:AddComponent("inspectable")
     -------------------------------------------------------------------------------------
     --
+        inst:AddComponent("hoshino_data")
     -------------------------------------------------------------------------------------
 
     -------------------------------------------------------------------------------------
@@ -242,9 +246,53 @@ local function fn()
         inst:WatchWorldState("issnowcovered", snow_init)
         snow_init(inst)
     -------------------------------------------------------------------------------------
+    ---
+        inst:DoTaskInTime(0,function()
+            if not inst.components.hoshino_data:Get("Ready") then
+                inst:Remove()
+            end
+        end)
+    -------------------------------------------------------------------------------------
 
     return inst
 end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    local function pre_build_fn()
+        
+        local inst = CreateEntity()
 
-return Prefab("hoshino_building_shop24", fn, assets)
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddNetwork()
+
+        if not TheWorld.ismastersim then
+            return inst
+        end
+
+        inst.OnBuilt = function(inst,builder)
+            local old_building = TheSim:FindFirstEntityWithTag("hoshino_building_shop24")
+            if old_building then
+                -- old_building:Remove()
+                old_building.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            else
+                local new_building = SpawnPrefab("hoshino_building_shop24")
+                new_building.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                new_building.components.hoshino_data:Set("Ready",true)
+            end
+            inst:Remove()
+        end
+        return inst
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    local function placer_postinit_fn(inst)
+        -- local scale = 1.5
+        -- inst.AnimState:SetScale(scale,scale,scale)
+        -- inst.AnimState:Hide("SNOW")
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+return Prefab("hoshino_building_shop24", fn, assets),
+    Prefab("hoshino_building_shop24_pre", pre_build_fn, assets),
+    MakePlacer("hoshino_building_shop24_pre_placer", "hoshino_building_shop24", "hoshino_building_shop24", "idle", nil, nil, nil, nil, nil, nil, placer_postinit_fn, nil, nil)

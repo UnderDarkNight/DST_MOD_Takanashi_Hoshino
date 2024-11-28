@@ -327,6 +327,13 @@ local function fn()
         inst:WatchWorldState("issnowcovered", snow_init)
         snow_init(inst)
     -------------------------------------------------------------------------------------
+    --- 
+        inst:DoTaskInTime(0,function()
+            if not inst.components.hoshino_data:Get("Ready") then
+                inst:Remove()
+            end            
+        end)
+    -------------------------------------------------------------------------------------
 
     return inst
 end
@@ -349,7 +356,9 @@ local function pre_build_fn()
             old_building:PushEvent("save_data_to_theworld")
             old_building:Remove()
         end
-        SpawnPrefab("hoshino_building_task_board").Transform:SetPosition(inst.Transform:GetWorldPosition())
+        local new_building = SpawnPrefab("hoshino_building_task_board")
+        new_building.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        new_building.components.hoshino_data:Set("Ready",true)
         inst:Remove()
     end
     return inst

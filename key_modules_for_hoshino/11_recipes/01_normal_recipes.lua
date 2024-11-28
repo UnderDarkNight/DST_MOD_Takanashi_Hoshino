@@ -79,7 +79,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 任务看板
 --------------------------------------------------------------------------------------------------------------------------------------------
-    AddRecipeToFilter("hoshino_building_task_board_pre","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipeToFilter("hoshino_building_task_board_pre","STRUCTURES")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_building_task_board_pre",            --  --  inst.prefab  实体名字
         {} ,
@@ -87,13 +87,13 @@
         {
             -- nounlock=true,
             no_deconstruction=false,
-            builder_tag = "hoshino",
+            -- builder_tag = "hoshino",
             atlas = "images/map_icons/hoshino_building_task_board.xml",
             image = "hoshino_building_task_board.tex",
             placer = "hoshino_building_task_board_pre_placer",                       -------- 建筑放置器
             -- sg_state="carvewood",
         },
-        {"CHARACTER",}
+        {"STRUCTURES",}
     )
     RemoveRecipeFromFilter("hoshino_building_task_board_pre","MODS")
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -306,7 +306,7 @@
     )
     RemoveRecipeFromFilter("hoshino_equipment_ruins_core","MODS")
 --------------------------------------------------------------------------------------------------------------------------------------------
----- 任务看板
+---- 拉面店
 --------------------------------------------------------------------------------------------------------------------------------------------
     AddRecipeToFilter("hoshino_building_shiba_seki_ramen_cart","STRUCTURES")     ---- 添加物品到目标标签
     AddRecipe2(
@@ -325,3 +325,23 @@
         {"STRUCTURES"}
     )
     RemoveRecipeFromFilter("hoshino_building_shiba_seki_ramen_cart","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 24小时商店
+--------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_building_shop24_pre","STRUCTURES")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_building_shop24_pre",            --  --  inst.prefab  实体名字
+        {} ,
+        TECH.NONE, --- 
+        {
+            -- nounlock=true,
+            no_deconstruction = false,
+            -- builder_tag = "hoshino",
+            atlas = "images/map_icons/hoshino_building_shop24.xml",
+            image = "hoshino_building_shop24.tex",
+            placer = "hoshino_building_shop24_pre_placer",                       -------- 建筑放置器
+            -- sg_state="carvewood",
+        },
+        {"STRUCTURES"}
+    )
+    RemoveRecipeFromFilter("hoshino_building_shop24_pre","MODS")
