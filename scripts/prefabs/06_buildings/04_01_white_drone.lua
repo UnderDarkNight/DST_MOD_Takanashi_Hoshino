@@ -143,7 +143,7 @@
     local function acceptable_com_install(inst)
         inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_acceptable",function(inst,replica_com)
             replica_com:SetTestFn(function(inst,item,doer,right_click)
-                if item and item.prefab == "eyeturret_item" then
+                if item and item.prefab == "eyeturret_item" and not inst:HasTag("eyeturret_item") then
                     return true
                 end
                 return false
