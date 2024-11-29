@@ -4,7 +4,8 @@
 ]]--
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 参数
-    local ATTACK_SEARCHING_RADIUS_SQ = 20*20
+    local ATTACK_SEARCHING_RADIUS = 20
+    local ATTACK_SEARCHING_RADIUS_SQ = ATTACK_SEARCHING_RADIUS*ATTACK_SEARCHING_RADIUS
     local MISSILE_SPEED = 10
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -27,11 +28,30 @@
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
+    local BOUNCE_MUST_TAGS = { "_combat" }
+    local BOUNCE_NO_TAGS = { "INLIMBO", "wall", "notarget", "player", "companion", "flight", "invisible", "noattack", "hiding" }
+    local function Search_New_Trget(inst)
+        local x,y,z = inst.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x,0, z, ATTACK_SEARCHING_RADIUS, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS, nil)
+        if #ents > 0 then
+            for k, tempMonster in pairs(ents) do
+                if tempMonster and tempMonster:IsValid() then
+                    local monster_attacking_target = tempMonster.components.combat.target
+                    if monster_attacking_target and monster_attacking_target:HasOneOfTags({"player","companion"}) then
+                        return tempMonster
+                    end
+                end
+            end
+        end
+        return nil
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
     local function attacking_event(inst)
         if inst:IsBusy() or not inst:IsWorking() then
             return
         end
-        local target = inst:GetTarget()
+        local target = inst:GetTarget() or Search_New_Trget(inst)
         local player = inst:GetPlayer()
         if target == nil or player == nil then
             return
