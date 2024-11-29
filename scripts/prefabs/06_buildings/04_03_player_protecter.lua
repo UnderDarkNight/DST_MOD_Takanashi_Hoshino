@@ -30,7 +30,7 @@
 ---
     local BOUNCE_MUST_TAGS = { "_combat" }
     local BOUNCE_NO_TAGS = { "INLIMBO", "wall", "notarget", "player", "companion", "flight", "invisible", "noattack", "hiding" }
-    local function Search_New_Trget(inst)
+    local function Search_New_Target(inst)
         local x,y,z = inst.Transform:GetWorldPosition()
         local ents = TheSim:FindEntities(x,0, z, ATTACK_SEARCHING_RADIUS, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS, nil)
         if #ents > 0 then
@@ -49,22 +49,22 @@
 ---
     local function attacking_event(inst)
         if inst:IsBusy() or not inst:IsWorking() or not inst:HasTag("eyeturret_item") then
-            print("无人机无法进行攻击：忙碌",inst:IsBusy()," 工作状态",inst:IsWorking()," 标签",inst:HasTag("eyeturret_item"))
+            -- print("无人机无法进行攻击：忙碌",inst:IsBusy()," 工作状态",inst:IsWorking()," 标签",inst:HasTag("eyeturret_item"))
             return
         end
-        local target = inst:GetTarget() or Search_New_Trget(inst)
+        local target = inst:GetTarget() or Search_New_Target(inst)
         local player = inst:GetPlayer()
         if target == nil or player == nil then
-            print("无人机没有目标")
+            -- print("无人机没有目标")
             return
         end
         if target and target.components.health and target.components.health:IsDead() then
-            print("无人机的目标死亡")
+            -- print("无人机的目标死亡")
             return
         end
         if not player.components.combat:CanTarget(target) then
             -- print("can be attack check fail",target)
-            print("无人机攻击目标检查 失败",target)
+            -- print("无人机攻击目标检查 失败",target)
             return
         end
         inst:SetTarget(target,true)
@@ -121,7 +121,7 @@ return function(inst)
     inst:ListenForEvent("link",function(inst,player)
         ---- 玩家被设置成目标的时候
         inst:ListenForEvent("hoshino_event.combat_set_target",function(_,target)
-            print(" 无人机检测到 玩家被怪物仇恨",target)
+            -- print(" 无人机检测到 玩家被怪物仇恨",target)
             inst:SetTarget(target)
         end,player)
         ---- 玩家主动攻击目标的时候.强制主动攻击玩家的目标
@@ -129,7 +129,7 @@ return function(inst)
             local target = _table and _table.target
             local weapon = _table and _table.weapon
             if target and target:IsValid() and weapon ~= inst and target.components.combat then
-                print(" 无人机检测到 玩家主动攻击怪物",target,weapon,inst)
+                -- print(" 无人机检测到 玩家主动攻击怪物",target,weapon,inst)
                 inst:SetTarget(target,true)
             end
         end,player)
@@ -137,7 +137,7 @@ return function(inst)
         inst:ListenForEvent("attacked",function(_,_table)
             local target = _table and _table.attacker
             if target and target:IsValid() and target.components.combat then
-                print(" 无人机检测到 玩家被怪物攻击",target)
+                -- print(" 无人机检测到 玩家被怪物攻击",target)
                 inst:SetTarget(target,true)
             end
         end,player)
