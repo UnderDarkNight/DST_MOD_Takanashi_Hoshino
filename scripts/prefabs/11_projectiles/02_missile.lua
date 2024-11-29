@@ -13,6 +13,7 @@
     local ANIM_SCALE = 2
     local START_HEIGHT = 3.2    --- 起始时候的 高度
     local END_HEIGHT = 0.7      --- 末端击中时候的高度
+    local HEIGHT_DWON_PER_FRAME = 0.05    --- 每帧下降的高度
     local HIDE_FRAMES = 3       --- 初始化时候隐藏的帧数
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -42,28 +43,30 @@
         inst:Hide()
         inst.AnimState:PlayAnimation("missile",true)
         inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-        inst.Transform:SetPosition(0,START_HEIGHT,0)
         inst.AnimState:SetDeltaTimeMultiplier(3)
         inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
         inst.frames = 0
 
-        parent:ListenForEvent("hoshino_projectile_missile_target",function()
-            local target = parent._net_target:value()
-            inst.__max_dis_sq = parent:GetDistanceSqToInst(target)
-            if inst.__max_dis_sq > 0 then
-                -- print("inst.__max_dis_sq",inst.__max_dis_sq,target)
-                inst:DoPeriodicTask(FRAMES,function()
-                    --- 越靠近高度越低，START_HEIGHT 到 END_HEIGHT
-                    local current_dis_sq = target and target:IsValid() and parent:GetDistanceSqToInst(target) or inst.__max_dis_sq
-                    local height = (START_HEIGHT - END_HEIGHT)/inst.__max_dis_sq * current_dis_sq + END_HEIGHT
-                    inst.Transform:SetPosition(0,height,0)
+        inst.current_height = START_HEIGHT
+        inst.Transform:SetPosition(0,START_HEIGHT,0)
 
-                    inst.frames = inst.frames + 1
-                    if not inst._show_flag and inst.frames > HIDE_FRAMES  then
-                        inst:Show()
-                        inst._show_flag = true
-                    end
-                end)
+        -- parent:ListenForEvent("hoshino_projectile_missile_target",function()            
+        --     -- local target = parent._net_target:value()
+        --     -- print("fake error +++++++  target",target)
+        --     -- inst.__max_dis_sq = parent:GetDistanceSqToInst(target)
+        --     -- if inst.__max_dis_sq > 0 then
+        --         -- print("info inst.__max_dis_sq",inst.__max_dis_sq,target)
+
+        --     -- end
+        -- end)
+        parent:DoPeriodicTask(FRAMES,function()
+            --- 越靠近高度越低，START_HEIGHT 到 END_HEIGHT           
+            inst.current_height = math.clamp(inst.current_height - HEIGHT_DWON_PER_FRAME,END_HEIGHT,START_HEIGHT)
+            inst.Transform:SetPosition(0,inst.current_height,0)
+            inst.frames = inst.frames + 1
+            if not inst._show_flag and inst.frames > HIDE_FRAMES  then
+                inst:Show()
+                inst._show_flag = true
             end
         end)
     end
@@ -110,6 +113,7 @@ local function fn()
     RemovePhysicsColliders(inst)
 
     if not TheNet:IsDedicated() then
+        -- inst:DoTaskInTime(0,CreateAnim)
         CreateAnim(inst)
     end
     -- inst.Transform:SetFourFaced()

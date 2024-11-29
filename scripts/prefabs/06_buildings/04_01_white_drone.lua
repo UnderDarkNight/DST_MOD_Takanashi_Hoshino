@@ -139,6 +139,43 @@
         end
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 物品接受
+    local function acceptable_com_install(inst)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_acceptable",function(inst,replica_com)
+            replica_com:SetTestFn(function(inst,item,doer,right_click)
+                if item and item.prefab == "eyeturret_item" then
+                    return true
+                end
+                return false
+            end)
+            replica_com:SetText("hoshino_weapon_gun_eye_of_horus","升级")
+            replica_com:SetSGAction("dolongaction")
+        end)
+        if not TheWorld.ismastersim then
+            return
+        end
+        inst:AddComponent("hoshino_com_acceptable")
+        inst.components.hoshino_com_acceptable:SetOnAcceptFn(function(inst,item,doer)
+            inst:AddTag("eyeturret_item")
+            item:Remove()
+            return true
+        end)
+        inst.components.hoshino_data:AddOnSaveFn(function()
+            if inst:HasTag("eyeturret_item") then
+                inst.components.hoshino_data:Set("eyeturret_item",true)
+            end
+        end)
+        -- inst:DoTaskInTime(0,function()
+        -- end)
+        -- inst.components.hoshino_data:AddOnLoadFn(function()
+        inst:DoTaskInTime(0,function()
+            if inst.components.hoshino_data:Get("eyeturret_item") then
+                inst:AddTag("eyeturret_item")
+            end
+        end)
+    
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- building
     local function fn()
         local inst = CreateEntity()
@@ -166,6 +203,15 @@
         inst.Transform:SetFourFaced()
 
         inst.entity:SetPristine()
+        -----------------------------------------------------------------
+        --- 
+            if TheWorld.ismastersim then
+                inst:AddComponent("hoshino_data")
+            end
+        -----------------------------------------------------------------
+        ---
+            acceptable_com_install(inst)
+        -----------------------------------------------------------------
 
         if not TheWorld.ismastersim then
             return inst
@@ -173,8 +219,6 @@
         -----------------------------------------------------------------
         --- 检查
             inst:AddComponent("inspectable")
-            inst:AddComponent("hoshino_data")
-            -- MakeHauntableLaunch(inst)
         -----------------------------------------------------------------
         --- 弹药系统
             inst:AddComponent("weapon")
