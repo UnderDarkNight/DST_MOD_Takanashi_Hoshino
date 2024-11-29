@@ -397,8 +397,18 @@ local flg,error_code = pcall(function()
         -- inst:SetItem(SpawnPrefab("shroomcake"),"right",true)
     ----------------------------------------------------------------------------------------------------------------
     ---
-        local inst = TheSim:FindFirstEntityWithTag("hoshino_building_ether_pool")
-        RemovePhysicsColliders(inst)
+        -- local inst = TheSim:FindFirstEntityWithTag("hoshino_building_ether_pool")
+        -- RemovePhysicsColliders(inst)
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+
+
+            local inst = SpawnPrefab("hoshino_building_white_drone")
+            inst.Transform:SetPosition(x,y,z)
+            inst:PushEvent("link",ThePlayer)
+
+            -- print(ThePlayer.components.hoshino_com_drone_leader:Get("drone_num"))
+
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

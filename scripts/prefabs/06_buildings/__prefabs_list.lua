@@ -31,6 +31,7 @@ local prefabs_name_list = {
     "01_01_shop24",                             --- 商店建筑
     "02_01_shiba_seki_ramen_cart",              --- 柴关拉面店
     "03_ether_pool",                            --- 以太池子
+    "04_01_white_drone",                        --- 白色无人机
 
 }
 

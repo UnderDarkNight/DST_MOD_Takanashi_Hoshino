@@ -78,6 +78,9 @@ local files_name = {
 		"hoshino_special_equipment_shoes_t8",								--- 8级鞋子
 		"hoshino_special_equipment_shoes_t9",								--- 9级鞋子
 	---------------------------------------------------------------------------------------
+	-- 06_buildings
+		"hoshino_building_white_drone_item",								--- 白子无人机
+	---------------------------------------------------------------------------------------
 	-- 10_foods
 		"hoshino_food_shiba_seki_ramen",								--- 柴关拉面
 		"hoshino_food_mandrake_concentrate",								--- 曼德拉草浓缩液

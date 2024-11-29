@@ -462,6 +462,16 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "以太池",
                 ["recipe_desc"] = "以太池",
             },
+            ["hoshino_building_white_drone"] = {
+                ["name"] = "白子无人机",
+                ["inspect_str"] = "白子无人机",
+                ["recipe_desc"] = "白子无人机",
+            },
+            ["hoshino_building_white_drone_item"] = {
+                ["name"] = "白子无人机",
+                ["inspect_str"] = "白子无人机",
+                ["recipe_desc"] = "白子无人机",
+            },
         --------------------------------------------------------------------
         --- 07_spell
             ["hoshino_spell_gun_eye_of_horus_level_1_to_2"] = {

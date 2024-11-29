@@ -14,3 +14,6 @@ modimport("key_modules_for_hoshino/03_player/04_leader_follower_event_handler.lu
 
 modimport("key_modules_for_hoshino/03_player/05_artifact_hia_debuff_marker.lua") 
 --- Artifact HIA Debuff Marker
+
+modimport("key_modules_for_hoshino/03_player/06_white_drone_leader.lua") 
+--- 无人机 领导器
