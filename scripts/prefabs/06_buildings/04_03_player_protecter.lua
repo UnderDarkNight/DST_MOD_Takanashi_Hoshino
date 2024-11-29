@@ -49,7 +49,7 @@
 ---
     local function attacking_event(inst)
         if inst:IsBusy() or not inst:IsWorking() or not inst:HasTag("eyeturret_item") then
-            print("无人机无法进行攻击：忙碌"..inst:IsBusy().." 工作状态"..inst:IsWorking().." 标签"..inst:HasTag("eyeturret_item"))
+            print("无人机无法进行攻击：忙碌",inst:IsBusy()," 工作状态",inst:IsWorking()," 标签",inst:HasTag("eyeturret_item"))
             return
         end
         local target = inst:GetTarget() or Search_New_Trget(inst)
