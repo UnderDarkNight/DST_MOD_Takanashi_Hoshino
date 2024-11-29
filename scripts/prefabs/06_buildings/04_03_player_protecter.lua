@@ -36,6 +36,13 @@
         if target == nil or player == nil then
             return
         end
+        if target and target.components.health and target.components.health:IsDead() then
+            return
+        end
+        if not player.components.combat:CanTarget(target) then
+            print("can be attack check fail",target)
+            return
+        end
 
         inst:StopMoving()
         inst:SetBusy("attack_monster",true)
@@ -92,14 +99,20 @@ return function(inst)
         inst:ListenForEvent("hoshino_event.combat_set_target",function(_,target)
             inst:SetTarget(target)
         end,player)
-        ---- 玩家主动攻击目标的时候
+        ---- 玩家主动攻击目标的时候.强制主动攻击玩家的目标
         inst:ListenForEvent("onhitother",function(_,_table)
             local target = _table and _table.target
             if target and target:IsValid() and target.components.combat then
                 inst:SetTarget(target,true)
             end
         end,player)
-
+        --- 玩家被攻击的时候
+        inst:ListenForEvent("attacked",function(_,_table)
+            local target = _table and _table.attacker
+            if target and target:IsValid() and target.components.combat then
+                inst:SetTarget(target,true)
+            end
+        end,player)
 
     end)
     inst.SetTarget = SetTarget
