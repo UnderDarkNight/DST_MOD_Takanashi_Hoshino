@@ -275,6 +275,7 @@ end
             if old_building then
                 -- old_building:Remove()
                 old_building.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                old_building.components.container:Close()
             else
                 local new_building = SpawnPrefab("hoshino_building_shop24")
                 new_building.Transform:SetPosition(inst.Transform:GetWorldPosition())
