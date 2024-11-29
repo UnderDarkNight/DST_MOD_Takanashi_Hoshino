@@ -28,7 +28,8 @@ local Prefabs_addr_base = string.sub(temp_addr,1,temp_str_index2) .. "/"    --- 
 local prefabs_name_list = {
 
 
-    "01_nanotech_black_reaper_shadow",            ---- 黑科技黑死神 虚影
+    "01_nanotech_black_reaper_shadow",              ---- 黑科技黑死神 虚影
+    "02_missile",                                   ---- 导弹
 
 
 }

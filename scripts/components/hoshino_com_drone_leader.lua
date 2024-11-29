@@ -106,6 +106,7 @@ nil,
                 if tempInst then
                     tempInst.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
                     tempInst:PushEvent("link",self.inst)
+                    tempInst:StartFly()
                 end
                 save_guid[tempGuid] = nil
             end

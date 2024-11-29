@@ -170,7 +170,7 @@ local flg,error_code = pcall(function()
         -- TheWorld:PushEvent("ms_setmoonphase", {moonphase = "full", iswaxing = false})
     ----------------------------------------------------------------------------------------------------------------
     ---- 拉面店调试
-        local inst = TheSim:FindFirstEntityWithTag("hoshino_building_shiba_seki_ramen_cart")
+        -- local inst = TheSim:FindFirstEntityWithTag("hoshino_building_shiba_seki_ramen_cart")
         -- -------------------------------------------------------------------------------
         -- ---
         --     local item_left = SpawnPrefab("bonestew")
@@ -403,11 +403,35 @@ local flg,error_code = pcall(function()
     ---
 
 
-            local inst = SpawnPrefab("hoshino_building_white_drone")
-            inst.Transform:SetPosition(x,y,z)
-            inst:PushEvent("link",ThePlayer)
+            -- local inst = SpawnPrefab("hoshino_building_white_drone")
+            -- inst.Transform:SetPosition(x,y,z)
+            -- inst:PushEvent("link",ThePlayer)
 
             -- print(ThePlayer.components.hoshino_com_drone_leader:Get("drone_num"))
+
+            local drone = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
+            local door = TheSim:FindFirstEntityWithTag("multiplayer_portal")
+
+            drone:PushEvent("spawn_missile",{
+                target = door,
+                onhit = function()
+                    print("+++++++++++++")
+                    -- SpawnPrefab("willow_shadow_fire_explode").Transform:SetPosition(door.Transform:GetWorldPosition())
+                    SpawnPrefab("balloon_pop_head").Transform:SetPosition(door.Transform:GetWorldPosition())
+                    -- SpawnPrefab("statue_transition_2").Transform:SetPosition(door.Transform:GetWorldPosition())
+                    SpawnPrefab("chester_transform_fx").Transform:SetPosition(door.Transform:GetWorldPosition())
+                end,
+            })
+
+            -- SpawnPrefab("hoshino_projectile_missile"):PushEvent("Set",{
+            --     pt = Vector3(drone.Transform:GetWorldPosition()),
+            --     target = door,
+            --     speed = 10,
+            --     onhit = function()
+            --         print("+++++++++++++")
+            --     end,
+            --     doer = ThePlayer,
+            -- })
 
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")

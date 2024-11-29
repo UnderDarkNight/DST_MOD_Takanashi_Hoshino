@@ -13,7 +13,8 @@
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 参数
-    local MAX_FUELED_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 15 or 18*60
+    local ANIM_SCALE = 1.5
+    local MAX_FUELED_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 60*60 or 18*60
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- API
     local function FaceTo(inst,target_or_v3_or_x,_y,_z) --- 做多模态自适应
@@ -62,6 +63,10 @@
         end
         inst:ListenForEvent("animover",inst.__call_back_fn)
     end
+    local function StopMoving(inst)
+        inst.Physics:SetMotorVel(0,0,0)
+        inst.Physics:Stop()
+    end
     local function OnHit(inst, attacker, target)
         inst:PushEvent("OnHit",target)
     end
@@ -92,6 +97,14 @@
 --- 跟随玩家系统 
     local function Follow_Player_Sys_Install(inst)
         local fn = require("prefabs/06_buildings/04_02_white_drone_follow_player")
+        if type(fn) == "function" then
+            fn(inst)
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 玩家保护模块 
+    local function Player_Protecter_Sys_Install(inst)
+        local fn = require("prefabs/06_buildings/04_03_player_protecter")
         if type(fn) == "function" then
             fn(inst)
         end
@@ -136,13 +149,15 @@
         inst.entity:AddNetwork()
 
         inst.entity:AddDynamicShadow()
-        inst.DynamicShadow:SetSize(1,1)
+        inst.DynamicShadow:SetSize(1*ANIM_SCALE,1*ANIM_SCALE)
 
         MakeInventoryPhysics(inst)
         RemovePhysicsColliders(inst)
 
         inst:AddTag("projectile")
+        inst:AddTag("hoshino_building_white_drone")
         -- inst:AddTag("flying")
+        inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
 
         inst.AnimState:SetBank("hoshino_building_white_drone")
         inst.AnimState:SetBuild("hoshino_building_white_drone")
@@ -163,6 +178,7 @@
         -----------------------------------------------------------------
         --- 弹药系统
             inst:AddComponent("weapon")
+            inst.components.weapon:SetDamage(68)
             inst:AddComponent("projectile")
             inst.components.projectile:SetSpeed(20)
             inst.components.projectile:SetHoming(false)
@@ -179,10 +195,11 @@
             inst.RemoveBusy = RemoveBusy
             inst.IsBusy = IsBusy
             inst.IsWorking = IsWorking
-
+            inst.StopMoving = StopMoving
         -----------------------------------------------------------------
         --- 各种系统安装
             Follow_Player_Sys_Install(inst)
+            Player_Protecter_Sys_Install(inst)
         -----------------------------------------------------------------
         --- 燃料
             inst:AddComponent("fueled")
@@ -259,7 +276,8 @@
         inst.AnimState:SetBank("hoshino_building_white_drone")
         inst.AnimState:SetBuild("hoshino_building_white_drone")
         inst.AnimState:PlayAnimation("ground")
-    
+        inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
+
         inst:AddTag("deploykititem")
     
         inst.entity:SetPristine()
@@ -322,7 +340,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function placer_postinit_fn(inst)
-
+        inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 return Prefab("hoshino_building_white_drone", fn, assets),
