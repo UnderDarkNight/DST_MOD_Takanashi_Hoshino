@@ -75,21 +75,15 @@
         inst:PushEvent("spawn_missile",{
             target = target,
             onhit = function()
-                if target and target.components.combat then
-                    local damage,spdamage = inst.components.weapon:GetDamage(player,target)
-                    target.components.combat:GetAttacked(player,damage,inst,nil,spdamage)
+                if target then
+                    if target:IsValid() and target.components.combat then
+                        local damage,spdamage = inst.components.weapon:GetDamage(player,target)
+                        target.components.combat:GetAttacked(player,damage,inst,nil,spdamage)
+                    end
                     SpawnPrefab("balloon_pop_head").Transform:SetPosition(target.Transform:GetWorldPosition())
                     -- SpawnPrefab("statue_transition_2").Transform:SetPosition(target.Transform:GetWorldPosition())
                     SpawnPrefab("chester_transform_fx").Transform:SetPosition(target.Transform:GetWorldPosition())
                 end
-            end,
-            custom_fn = function(self)
-                self:ListenForEvent("onremove",function()
-                    SpawnPrefab("balloon_pop_head").Transform:SetPosition(self.Transform:GetWorldPosition())
-                    -- SpawnPrefab("statue_transition_2").Transform:SetPosition(target.Transform:GetWorldPosition())
-                    SpawnPrefab("chester_transform_fx").Transform:SetPosition(self.Transform:GetWorldPosition())
-                    self:Remove()
-                end,target)
             end,
         })
         inst:DoTaskInTime(0.3,function()

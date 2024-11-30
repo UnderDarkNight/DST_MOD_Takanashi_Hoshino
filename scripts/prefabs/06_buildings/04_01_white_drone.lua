@@ -128,6 +128,14 @@
         end
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 自动种植
+    local function Auto_Planting_Sys_Install(inst)
+        local fn = require("prefabs/06_buildings/04_07_drone_auto_automatic_planting")
+        if type(fn) == "function" then
+            fn(inst)
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 燃料
     local function trans_2_item(inst)
 
@@ -273,6 +281,7 @@
             Player_Protecter_Sys_Install(inst)
             Plant_Care_Sys_Install(inst)
             Auto_Pick_Sys_Install(inst)
+            Auto_Planting_Sys_Install(inst)
         -----------------------------------------------------------------
         --- 燃料
             inst:AddComponent("fueled")

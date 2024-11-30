@@ -60,20 +60,14 @@
         inst:PushEvent("spawn_missile",{
             target = ret_plant,
             onhit = function()
-                if ret_plant and ret_plant.components.farmplanttendable then
-                    ret_plant.components.farmplanttendable:TendTo(player)
+                if ret_plant then
+                    if ret_plant:IsValid() and ret_plant.components.farmplanttendable then
+                        ret_plant.components.farmplanttendable:TendTo(player)
+                    end
                     SpawnPrefab("balloon_pop_head").Transform:SetPosition(ret_plant.Transform:GetWorldPosition())
                     -- SpawnPrefab("statue_transition_2").Transform:SetPosition(target.Transform:GetWorldPosition())
                     SpawnPrefab("chester_transform_fx").Transform:SetPosition(ret_plant.Transform:GetWorldPosition())
                 end
-            end,
-            custom_fn = function(self)
-                self:ListenForEvent("onremove",function()
-                    SpawnPrefab("balloon_pop_head").Transform:SetPosition(self.Transform:GetWorldPosition())
-                    -- SpawnPrefab("statue_transition_2").Transform:SetPosition(target.Transform:GetWorldPosition())
-                    SpawnPrefab("chester_transform_fx").Transform:SetPosition(self.Transform:GetWorldPosition())
-                    self:Remove()
-                end,ret_plant)
             end,
         })
         inst:DoTaskInTime(0.3,function()
