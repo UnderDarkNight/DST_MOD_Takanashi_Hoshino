@@ -409,7 +409,7 @@ local flg,error_code = pcall(function()
 
             -- print(ThePlayer.components.hoshino_com_drone_leader:Get("drone_num"))
 
-            -- local drone = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
+            local drone = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
             -- local door = TheSim:FindFirstEntityWithTag("multiplayer_portal")
 
             -- drone:PushEvent("spawn_missile",{
@@ -433,16 +433,26 @@ local flg,error_code = pcall(function()
             --     doer = ThePlayer,
             -- })
 
+            -- for i = 1, 10, 1 do
+            --     local item = drone.components.container:GetItemInSlot(i)
+            --     print(item)                
+            -- end
+            local item = drone.components.container:GetItemInSlot(1)
+            local slot = drone.components.container:GetItemInSlot(item)
+            drone.components.container:RemoveItem(item):Remove()
+            -- print(item)
+            -- item:Remove()
+            -- print(item:GetDebugString())
     ----------------------------------------------------------------------------------------------------------------
     ---
-        local ents = TheSim:FindEntities(x,y,z,5,{"soil"},{"NOCLICK"})
-        local soil = ents[1]
-        if soil then
-            local pt = Vector3(soil.Transform:GetWorldPosition())
-            -- soil:Remove()
-            local seed = SpawnPrefab("seeds")
-            seed.components.farmplantable:Plant(soil,ThePlayer)
-        end
+        -- local ents = TheSim:FindEntities(x,y,z,5,{"soil"},{"NOCLICK"})
+        -- local soil = ents[1]
+        -- if soil then
+        --     local pt = Vector3(soil.Transform:GetWorldPosition())
+        --     -- soil:Remove()
+        --     local seed = SpawnPrefab("seeds")
+        --     seed.components.farmplantable:Plant(soil,ThePlayer)
+        -- end
 
         -- local seed = SpawnPrefab("watermelon_seeds")
         -- for k, v in pairs(seed.components) do

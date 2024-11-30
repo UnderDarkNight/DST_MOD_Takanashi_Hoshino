@@ -26,11 +26,20 @@
         end
         return seed_insts[math.random(#seed_insts)]
     end
-    local function GetSingleSeed(item)
-        if item.components.stackable then
-            return item.components.stackable:Get()
+    local function GetStack(item)
+        if item:IsValid() then
+            if item.components.stackable then
+                return item.components.stackable:StackSize()
+            else
+                return 1
+            end
+        else
+            item:Remove()
         end
-        return item
+        return 0
+    end
+    local function GetSingleSeed(inst,item)
+        return inst.components.container:RemoveItem(item)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -40,7 +49,7 @@
         end
 
         local ret_seed_inst = Get_Seed_Inst_From_Container(inst)
-        if ret_seed_inst == nil then
+        if ret_seed_inst == nil or GetStack(ret_seed_inst) < 1 then
             -- print("没有种子")
             return
         end
@@ -82,7 +91,7 @@
                             if ret_seed_inst == nil then
                                 return
                             end
-                            local seed = GetSingleSeed(ret_seed_inst)
+                            local seed = GetSingleSeed(inst,ret_seed_inst)
                             if seed then
                                 seed.components.farmplantable:Plant(ret_soil,player)
                                 -- seed.components.farmplantable:Plant(ret_soil)
