@@ -6,7 +6,7 @@
 --- 参数
     local ATTACK_SEARCHING_RADIUS = 20
     local ATTACK_SEARCHING_RADIUS_SQ = ATTACK_SEARCHING_RADIUS*ATTACK_SEARCHING_RADIUS
-    local MISSILE_SPEED = 10
+    local MISSILE_SPEED = 17
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function SetTarget(inst,target,force)
@@ -70,7 +70,7 @@
         end
         inst:SetTarget(target,true)
         inst:StopMoving()
-        inst:SetBusy("attack_monster",true)
+        inst:SetBusy("attack_monster")
         inst:FaceTo(target)
         inst:PushEvent("spawn_missile",{
             target = target,
@@ -116,6 +116,9 @@
         if _table.custom_fn then
             _table.custom_fn(missile)
         end
+        missile:ListenForEvent("onremove",function()
+            missile:Remove()
+        end,inst)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 return function(inst)

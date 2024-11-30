@@ -16,7 +16,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 参数
     local ANIM_SCALE = 1.5
-    local MAX_FUELED_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 20 or 18*60
+    local MAX_FUELED_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 60*60 or 18*60
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- API
     local function FaceTo(inst,target_or_v3_or_x,_y,_z) --- 做多模态自适应
@@ -107,6 +107,22 @@
 --- 玩家保护模块 
     local function Player_Protecter_Sys_Install(inst)
         local fn = require("prefabs/06_buildings/04_03_player_protecter")
+        if type(fn) == "function" then
+            fn(inst)
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 照顾植物系统
+    local function Plant_Care_Sys_Install(inst)
+        local fn = require("prefabs/06_buildings/04_05_drone_farm_plant_care")
+        if type(fn) == "function" then
+            fn(inst)
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 自动采集模块
+    local function Auto_Pick_Sys_Install(inst)
+        local fn = require("prefabs/06_buildings/04_06_drone_auto_pick")
         if type(fn) == "function" then
             fn(inst)
         end
@@ -255,6 +271,8 @@
         --- 各种系统安装
             Follow_Player_Sys_Install(inst)
             Player_Protecter_Sys_Install(inst)
+            Plant_Care_Sys_Install(inst)
+            Auto_Pick_Sys_Install(inst)
         -----------------------------------------------------------------
         --- 燃料
             inst:AddComponent("fueled")
