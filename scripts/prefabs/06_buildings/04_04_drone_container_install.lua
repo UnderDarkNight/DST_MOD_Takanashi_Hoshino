@@ -107,16 +107,18 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 界面修改
     local function container_Widget_change(inst, front_root)
-        pcall(function()            
-            local new_bg = front_root.bgimage:AddChild(UIAnim())
+        -- pcall(function()
+            local new_bg = front_root:AddChild(UIAnim())
             new_bg:GetAnimState():SetBank("ui_chest_1x2")
             new_bg:GetAnimState():SetBuild("ui_chest_1x2")
             new_bg:GetAnimState():PlayAnimation("open")
             new_bg:SetPosition(300,0,0)
             new_bg:MoveToBack()
-            front_root.inv[21].bgimage:SetTexture("images/widgets/hoshino_building_white_drone_widget.xml", "eyeturret_item.tex")
-            front_root.inv[22].bgimage:SetTexture("images/widgets/hoshino_building_white_drone_widget.xml", "orangeamulet.tex")
-        end)
+            if type(front_root.inv) == "table" and front_root.inv[21] and front_root.inv[22] then
+                front_root.inv[21].bgimage:SetTexture("images/widgets/hoshino_building_white_drone_widget.xml", "eyeturret_item.tex")
+                front_root.inv[22].bgimage:SetTexture("images/widgets/hoshino_building_white_drone_widget.xml", "orangeamulet.tex")
+            end
+        -- end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
