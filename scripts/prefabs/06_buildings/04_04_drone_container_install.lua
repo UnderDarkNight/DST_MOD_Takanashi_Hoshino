@@ -118,6 +118,14 @@
                 front_root.inv[21].bgimage:SetTexture("images/widgets/hoshino_building_white_drone_widget.xml", "eyeturret_item.tex")
                 front_root.inv[22].bgimage:SetTexture("images/widgets/hoshino_building_white_drone_widget.xml", "orangeamulet.tex")
             end
+            front_root.inst:ListenForEvent("onremove",function()
+                new_bg:Kill()
+            end)
+            new_bg.inst:DoPeriodicTask(FRAMES*10,function()
+                if not front_root.inst:IsValid() then
+                    new_bg:Kill()
+                end
+            end)
         -- end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
