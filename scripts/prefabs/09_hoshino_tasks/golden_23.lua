@@ -36,7 +36,7 @@
     local MISSION_ITEM_1_NUM = 5
     local MISSION_ITEM_2 = "thulecite"
     local MISSION_ITEM_2_NUM = 3
-    local MISSION_ITEM_3 = "nightmarefuel"
+    local MISSION_ITEM_3 = "hoshino_building_white_drone_item"
     local MISSION_ITEM_3_NUM = 2
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
@@ -195,9 +195,9 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 owner.components.hoshino_com_shop:CreditCoinDelta(240)
 
-                Remove_Items_By_Prefab(owner,"wagpunkbits_kit",MISSION_ITEM_1_NUM)
-                Remove_Items_By_Prefab(owner,"thulecite",MISSION_ITEM_2_NUM)
-                Remove_Items_By_Prefab(owner,"nightmarefuel",MISSION_ITEM_3_NUM)
+                Remove_Items_By_Prefab(owner,MISSION_ITEM_1,MISSION_ITEM_1_NUM)
+                Remove_Items_By_Prefab(owner,MISSION_ITEM_2,MISSION_ITEM_2_NUM)
+                Remove_Items_By_Prefab(owner,MISSION_ITEM_3,MISSION_ITEM_3_NUM)
 
                 -- local item = SpawnPrefab("hoshino_item_12mm_shotgun_shells")
                 -- item.components.stackable.stacksize = 5

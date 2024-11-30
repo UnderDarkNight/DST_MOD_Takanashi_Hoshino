@@ -409,19 +409,19 @@ local flg,error_code = pcall(function()
 
             -- print(ThePlayer.components.hoshino_com_drone_leader:Get("drone_num"))
 
-            local drone = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
-            local door = TheSim:FindFirstEntityWithTag("multiplayer_portal")
+            -- local drone = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
+            -- local door = TheSim:FindFirstEntityWithTag("multiplayer_portal")
 
-            drone:PushEvent("spawn_missile",{
-                target = door,
-                onhit = function()
-                    print("+++++++++++++")
-                    -- SpawnPrefab("willow_shadow_fire_explode").Transform:SetPosition(door.Transform:GetWorldPosition())
-                    SpawnPrefab("balloon_pop_head").Transform:SetPosition(door.Transform:GetWorldPosition())
-                    -- SpawnPrefab("statue_transition_2").Transform:SetPosition(door.Transform:GetWorldPosition())
-                    SpawnPrefab("chester_transform_fx").Transform:SetPosition(door.Transform:GetWorldPosition())
-                end,
-            })
+            -- drone:PushEvent("spawn_missile",{
+            --     target = door,
+            --     onhit = function()
+            --         print("+++++++++++++")
+            --         -- SpawnPrefab("willow_shadow_fire_explode").Transform:SetPosition(door.Transform:GetWorldPosition())
+            --         SpawnPrefab("balloon_pop_head").Transform:SetPosition(door.Transform:GetWorldPosition())
+            --         -- SpawnPrefab("statue_transition_2").Transform:SetPosition(door.Transform:GetWorldPosition())
+            --         SpawnPrefab("chester_transform_fx").Transform:SetPosition(door.Transform:GetWorldPosition())
+            --     end,
+            -- })
 
             -- SpawnPrefab("hoshino_projectile_missile"):PushEvent("Set",{
             --     pt = Vector3(drone.Transform:GetWorldPosition()),
@@ -433,6 +433,22 @@ local flg,error_code = pcall(function()
             --     doer = ThePlayer,
             -- })
 
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        local ents = TheSim:FindEntities(x,y,z,5,{"soil"},{"NOCLICK"})
+        local soil = ents[1]
+        if soil then
+            local pt = Vector3(soil.Transform:GetWorldPosition())
+            -- soil:Remove()
+            local seed = SpawnPrefab("seeds")
+            seed.components.farmplantable:Plant(soil,ThePlayer)
+        end
+
+        -- local seed = SpawnPrefab("watermelon_seeds")
+        -- for k, v in pairs(seed.components) do
+        --     print(k,v)
+        -- end
+        -- seed:Remove()
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

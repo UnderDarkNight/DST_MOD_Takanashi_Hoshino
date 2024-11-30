@@ -190,7 +190,7 @@
                 Remove_Items_By_Prefab(owner,"staff_tornado",MISSION_ITEM_1_NUM)
                 Remove_Items_By_Prefab(owner,"minifan",MISSION_ITEM_2_NUM)
 
-                -- owner.components.inventory:GiveItem(SpawnPrefab("log"))
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_equipment_sandstorm_core"))
 
             end
         end)

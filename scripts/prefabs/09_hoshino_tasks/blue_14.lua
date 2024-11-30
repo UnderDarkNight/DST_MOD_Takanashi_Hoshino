@@ -121,9 +121,9 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 -- owner.components.hoshino_com_shop:CreditCoinDelta(400)
 
-                -- local item = SpawnPrefab("dragonfruit_seeds")
+                local item = SpawnPrefab("hoshino_building_white_drone_item")
                 -- -- item.components.stackable.stacksize = 5
-                -- owner.components.inventory:GiveItem(item)
+                owner.components.inventory:GiveItem(item)
 
             end
         end)
