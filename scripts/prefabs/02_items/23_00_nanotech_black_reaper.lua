@@ -24,6 +24,7 @@
     end
     local function onequip(inst, owner)
         -- owner.AnimState:OverrideSymbol("swap_object", "hoshino_weapon_nanotech_black_reaper", "swap_in_hand")
+        owner.AnimState:ClearOverrideSymbol("swap_object")
         owner.AnimState:Show("ARM_carry")
         owner.AnimState:Hide("ARM_normal")
         add_fx(inst,owner)
