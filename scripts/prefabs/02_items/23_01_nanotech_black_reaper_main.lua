@@ -144,6 +144,7 @@ return function(inst,doer,_target,_pt)
     -------------------------------------------------------------
     --- 创建弹药
         local proj = SpawnPrefab("hoshino_projectile_nanotech_black_reaper_shadow")
+        proj:AddTag("main")
         proj.Ready = true
         proj.owner = doer
         proj.weapon = inst

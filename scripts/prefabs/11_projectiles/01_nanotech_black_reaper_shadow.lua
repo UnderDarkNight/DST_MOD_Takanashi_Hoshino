@@ -22,10 +22,15 @@ local function CreateAnim(parent)
     parent:AddChild(inst)
     inst.AnimState:SetBank("hoshino_projectile_nanotech_black_reaper_shadow")
     inst.AnimState:SetBuild("hoshino_projectile_nanotech_black_reaper_shadow")
-    inst.AnimState:PlayAnimation("idle",true)
+    inst.AnimState:PlayAnimation("idle2",true)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.Transform:SetPosition(0,1,0)
     inst.AnimState:SetDeltaTimeMultiplier(3)
+    parent:DoTaskInTime(0,function()
+        if parent:HasTag("main") then
+            inst.AnimState:PlayAnimation("main",true)
+        end
+    end)
 end
 
 local function fn()
