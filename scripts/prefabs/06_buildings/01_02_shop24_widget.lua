@@ -32,6 +32,16 @@ return function(inst,front_root)
                 TheCamera.HOSHINO_ZOOM_BLOCK = false
             end)
         ------------------------------------------------------------------------------
+        --- 
+            front_root.inst:ListenForEvent("onremove",function()
+                root:Kill()
+            end)
+            root.inst:DoPeriodicTask(FRAMES*10,function()
+                if not front_root.inst:IsValid() then
+                    root:Kill()
+                end
+            end)
+        ------------------------------------------------------------------------------
         --- 关闭按钮
             local button_close = root:AddChild(ImageButton(
                 atlas,
