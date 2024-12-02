@@ -216,7 +216,7 @@ configuration_options = {
       {description = "OFF",data = false},
       {description = "ON",data = true},
     },
-    default = true
+    default = false
   },
   {
     name = "HIDE_CLOTHS",
@@ -226,7 +226,7 @@ configuration_options = {
       {description = "OFF",data = false},
       {description = "ON",data = true},
     },
-    default = true
+    default = false
   },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("物品类") or GetTitle("Items"),hover = "",options = {{description = "",data = 0}},default = 0},
