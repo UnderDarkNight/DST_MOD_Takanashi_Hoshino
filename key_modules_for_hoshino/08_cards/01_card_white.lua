@@ -26,19 +26,19 @@
 local cards = {
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 测试用的空白卡
-        ["test_card_white"] = {
-            back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
-            test = function(inst)
-                return true
-            end,
-            fn = function(inst)
-                print("test_card_white")
-            end,
-            text = function(inst)
-                return "测试用的空白卡"
-            end,
-        },
+        -- ["test_card_white"] = {
+        --     back = "card_white",
+        --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+        --     test = function(inst)
+        --         return true
+        --     end,
+        --     fn = function(inst)
+        --         print("test_card_white")
+        --     end,
+        --     text = function(inst)
+        --         return "测试用的空白卡"
+        --     end,
+        -- },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 1、【白】【生命值上限+15】【可叠加】
         ["max_health_up_15"] = {

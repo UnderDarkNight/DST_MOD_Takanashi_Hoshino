@@ -11,7 +11,7 @@
     相关API:
 
 
-    1：免疫钢羊的控制效果
+    1：免疫钢羊的控制效果，血上限+20
 
     2：免疫冰冻，半径30码内所有玩家获得15%减伤
 
@@ -25,7 +25,7 @@
 
     7：半径30码内的枯萎植物会恢复，半径30码内的玩家会每10s恢复3点生命值
 
-    8：每次睡觉时获得一包升级卡包，此效果每一天仅可触发1次。
+    8：每次睡觉时获得一包升级卡包，此效果每一天仅可触发1次。其余时候，睡觉每秒+0.2cost
 
     9：每次攻击会恢复造成伤害1%的生命值，被攻击到的生物获得debuff：受到的最终伤害增加100%，持续10s。
 
@@ -42,7 +42,7 @@ return function(inst)
         inst:AddTag("hoshino_special_equipment_amulet_t"..tostring(inst.level))
         inst:AddComponent("hoshino_data")
     ----------------------------------------------------------------------------------
-    --- 免疫钢羊鼻涕的控制效果
+    --- 免疫钢羊鼻涕的控制效果。+血20
         if inst.level >= 1 then
             local sg_state = {
                 ["pinned_hit"] = true,
@@ -57,9 +57,17 @@ return function(inst)
             end
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 inst:ListenForEvent("newstate",player_pinned_block_state_event_fn,owner)
+                if not inst.components.hoshino_data:Get("max_health_active.t1_amulet") then
+                    inst.components.hoshino_data:Set("max_health_active.t1_amulet",true)
+                    owner.components.hoshino_com_debuff:Add_Max_Helth(20)
+                end
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
                 inst:RemoveEventCallback("newstate",player_pinned_block_state_event_fn,owner)
+                if inst.components.hoshino_data:Get("max_health_active.t1_amulet") then
+                    inst.components.hoshino_data:Set("max_health_active.t1_amulet",false)
+                    owner.components.hoshino_com_debuff:Add_Max_Helth(-20)
+                end
             end)
         end
     ----------------------------------------------------------------------------------
@@ -300,6 +308,7 @@ return function(inst)
             end
 
             local t8_sleep_task = nil
+            local t8_sleep_task_cost = nil
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 if t8_sleep_task == nil then
                     t8_sleep_task = inst:DoPeriodicTask(30,function()
@@ -313,11 +322,22 @@ return function(inst)
                         end
                     end)
                 end
+                if t8_sleep_task_cost == nil then
+                    t8_sleep_task_cost = inst:DoPeriodicTask(1,function()
+                        if player_is_sleeping(owner) then
+                            owner.components.hoshino_com_power_cost:DoDelta(0.2)
+                        end
+                    end)
+                end
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
                 if t8_sleep_task ~= nil then
                     t8_sleep_task:Cancel()
                     t8_sleep_task = nil
+                end
+                if t8_sleep_task_cost ~= nil then
+                    t8_sleep_task_cost:Cancel()
+                    t8_sleep_task_cost = nil
                 end
             end)
 

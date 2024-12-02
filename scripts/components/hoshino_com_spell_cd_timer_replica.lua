@@ -51,6 +51,22 @@ local hoshino_com_spell_cd_timer = Class(function(self, inst)
         --     end)
         -- end
     ---------------------------------------------------------------------------
+    --- 数据同步
+        self.unlocked_spells = {}
+        self.__net_string_unlock_spell_data = net_string(inst.GUID,"hoshino_com_spell_cd_timer.unlock_spell_data","hoshino_com_spell_cd_timer.unlock_spell_data")
+        if not TheNet:IsDedicated() then
+            inst:ListenForEvent("hoshino_com_spell_cd_timer.unlock_spell_data",function()
+                local string_data = self.__net_string_unlock_spell_data:value()
+                local flag,data_table = pcall(json.decode,string_data)
+                if flag then
+                    for k, v in pairs(data_table) do
+                        self.unlocked_spells[k] = v
+                    end
+                end
+                -- print("fake error +++++++++++++++ unlock_spell_data")
+            end)
+        end
+    ---------------------------------------------------------------------------
 end)
 ------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -59,7 +75,7 @@ end)
         if self[index] == nil then
             return false
         end
-        return self[index]:value() <= 0
+        return self[index]:value() <= 0 and self:Is_Spell_Unlocked(spell_name)
     end
     function hoshino_com_spell_cd_timer:GetTime(spell_name)
         local index = "_net_vars_"..spell_name
@@ -67,6 +83,15 @@ end)
             return 0
         end
         return self[index]:value()
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 数据同步
+    function hoshino_com_spell_cd_timer:Unlock_Spell_Sync(data)
+        self.unlocked_spells = data
+        self.__net_string_unlock_spell_data:set(json.encode(data))
+    end
+    function hoshino_com_spell_cd_timer:Is_Spell_Unlocked(spell_name)
+        return self.unlocked_spells[spell_name] == true
     end
 ------------------------------------------------------------------------------------------------------------------------------
 return hoshino_com_spell_cd_timer

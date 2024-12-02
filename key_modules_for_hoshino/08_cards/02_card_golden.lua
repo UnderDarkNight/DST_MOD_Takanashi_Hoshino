@@ -26,19 +26,19 @@
 local cards = {
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 测试用的空金卡
-        ["test_card_golden"] = {
-            back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
-            test = function(inst)
-                return true
-            end,
-            fn = function(inst)
-                print("test_card_golden")
-            end,
-            text = function(inst)
-                return "测试用的空金卡"
-            end,
-        },
+        -- ["test_card_golden"] = {
+        --     back = "card_golden",
+        --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+        --     test = function(inst)
+        --         return true
+        --     end,
+        --     fn = function(inst)
+        --         print("test_card_golden")
+        --     end,
+        --     text = function(inst)
+        --         return "测试用的空金卡"
+        --     end,
+        -- },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 24、【金】【多多益善】【「升级卡包」选项+1，最高变成 5选1】【达到5选1的时候从卡池移除，小于的时候从新进卡池】
         ["more_default_selectting_cards"] = {
@@ -246,7 +246,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 34、【金】【七弦】【赠送7包结果注定一样的白色1选1卡包】
+    --- 34、【金】【七弦】【赠送7包结果注定一样的白色1选1卡包】。但是有20%的概率获得诅咒：【键山雏】
         ["7_identical_white_card_packs"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
@@ -261,9 +261,12 @@ local cards = {
                     item:PushEvent("SetName","White 1-1")
                     inst.components.inventory:GiveItem(item)
                 end
+                if math.random(10000)/10000 <= 0.2 then
+                    inst.components.hoshino_cards_sys:Card_Pool_Delata("card_white",5)
+                end
             end,
             text = function(inst)
-                return "赠送7包结果注定一样的白色1选1卡包"
+                return "赠送7包结果注定一样的白色1选1卡包\n但是有20%的概率获得诅咒：【键山雏】"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -276,14 +279,15 @@ local cards = {
             end,
             fn = function(inst)
                 local item = SpawnPrefab("hoshino_item_cards_pack")
-                item:PushEvent("Set",{
-                    cards = {
-                        "card_golden",
-                        "card_golden",
-                        "card_golden",
-                    }
-                })
-                item:PushEvent("SetName","Golden 3-1")
+                -- item:PushEvent("Set",{
+                --     cards = {
+                --         "card_golden",
+                --         "card_golden",
+                --         "card_golden",
+                --     }
+                -- })
+                -- item:PushEvent("SetName","Golden 3-1")
+                item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
                 inst.components.inventory:GiveItem(item)
             end,
             text = function(inst)
@@ -476,10 +480,10 @@ local cards = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
-                return true
+                return not inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("gun_eye_of_horus_ex")
             end,
             fn = function(inst)
-
+                inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("gun_eye_of_horus_ex")
             end,
             text = function(inst)
                 return "解锁技能：普通EX"
@@ -491,10 +495,10 @@ local cards = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
-                return true
+                return not inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_ex_support")
             end,
             fn = function(inst)
-
+                inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("swimming_ex_support")
             end,
             text = function(inst)
                 return "解锁技能：泳装EX"
@@ -506,10 +510,18 @@ local cards = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
-                return true
+                if inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("normal_heal") and
+                    inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("normal_covert_operation") and
+                    inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("normal_breakthrough") then
+                    return false
+                else
+                    return true
+                end
             end,
             fn = function(inst)
-
+                inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("normal_heal")
+                inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("normal_covert_operation")
+                inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("normal_breakthrough")
             end,
             text = function(inst)
                 return "解锁普通形态所有普通技能"
@@ -521,29 +533,37 @@ local cards = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
-                return true
+                if inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_efficient_work") and
+                    inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_emergency_assistance") and
+                    inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_dawn_of_horus") then
+                    return false
+                else
+                    return true
+                end
             end,
             fn = function(inst)
-
+                inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("swimming_efficient_work")
+                inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("swimming_emergency_assistance")
+                inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("swimming_dawn_of_horus")
             end,
             text = function(inst)
                 return "解锁泳装形态所有普通技能"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 49、【金】【抵抗】【各个阵营伤害防御 + 20%（暗影阵营、月亮阵营）】【满概率后从卡池移除】
+    --- 49、【金】【抵抗】【各个阵营伤害防御 + 10%（暗影阵营、月亮阵营）】【最高80%】
         ["armor_damage_type_resist"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
-                return inst.components.hoshino_com_debuff:Get_Damage_Type_Resist() ~= 0
+                return inst.components.hoshino_com_debuff:Get_Damage_Type_Resist() > 0.2
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Damage_Type_Resist(0.2)
+                inst.components.hoshino_com_debuff:Add_Damage_Type_Resist(0.1)
                 inst:PushEvent("hoshino_other_armor_item_param_refresh")
             end,
             text = function(inst)
-                return "受到暗影、月亮阵营伤害减少20%"
+                return "受到暗影、月亮阵营伤害减少10%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

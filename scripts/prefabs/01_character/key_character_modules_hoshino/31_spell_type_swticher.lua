@@ -1,6 +1,9 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
+    普通形态基本特性：受到的伤害减少10%（对普通和位面伤害有效）
+    泳装形态基本特性：移动速度+10%，潮湿不会过冷和掉san
+
     特效预选：
     weregoose_splash_less1
     glass_fx
@@ -23,6 +26,10 @@ local NORMAL_TYPE = "hoshino_spell_type_normal"
 local SWIMMING_TYPE = "hoshino_spell_type_swimming"
 
 local data_index = "player_spell_type"
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
     if not TheWorld.ismastersim then
@@ -89,5 +96,32 @@ return function(inst)
     function inst:Hoshino_Get_Spell_Type()
         return inst.components.hoshino_data:Get(data_index) or NORMAL_TYPE
     end
+
+    ---------------------------------------------------------------------------------------------
+    ---     
+        local temp_inst = CreateEntity()
+        inst:ListenForEvent("onremove",function()
+            temp_inst:Remove()
+        end)
+    ---------------------------------------------------------------------------------------------
+    --- 受伤
+        inst:DoTaskInTime(0,function()
+            inst.components.hoshino_com_health_hooker:Add_Modifier(temp_inst,function(num)
+                if num < 0 and inst:Hoshino_Get_Spell_Type() == NORMAL_TYPE then
+                    return num*0.9
+                end
+                return num
+            end)
+        end)
+    ---------------------------------------------------------------------------------------------
+    --- 速度控制
+        inst:ListenForEvent("hoshino_event.spell_type_changed",function()
+            if inst:Hoshino_Get_Spell_Type() == SWIMMING_TYPE then
+                inst.components.locomotor:SetExternalSpeedMultiplier(temp_inst, "hoshino_spell_type_speed", 1.1)
+            else
+                inst.components.locomotor:SetExternalSpeedMultiplier(temp_inst, "hoshino_spell_type_speed", 1.0)
+            end
+        end)
+    ---------------------------------------------------------------------------------------------
 
 end

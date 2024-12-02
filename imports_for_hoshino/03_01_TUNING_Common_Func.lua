@@ -51,7 +51,7 @@ TUNING.HOSHINO_FNS = {}
 ---- 给指定数量的物品（用来减少卡顿）
     function TUNING.HOSHINO_FNS:GiveItemByPrefab(inst,prefab,num)
         -- print("main info hoshino_func:GiveItemByPrefab",prefab,num)
-        if type(prefab) ~= "string" or not PrefabExists(prefab) then
+        if type(prefab) ~= "string" or not PrefabExists(prefab) or num == 0 then
             return {}
         end
 

@@ -50,6 +50,11 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/35_sound_emitter_hook",                     ---- SoundEmitter hook
         "prefabs/01_character/key_character_modules_hoshino/36_travel_traces_spawner",                  ---- 遍历之迹 刷新控制器
         "prefabs/01_character/key_character_modules_hoshino/37_anim_state_hook",                        ---- inst.AnimState hook
+        "prefabs/01_character/key_character_modules_hoshino/38_new_selected_gift",                      ---- 新选礼物
+        "prefabs/01_character/key_character_modules_hoshino/39_heavylifting",                           ---- 搬重物 处理
+        "prefabs/01_character/key_character_modules_hoshino/40_temperature_controller",                 ---- 温度控制
+        "prefabs/01_character/key_character_modules_hoshino/41_sanity_controller",                      ---- Sanity 控制器
+        "prefabs/01_character/key_character_modules_hoshino/42_halo_controller",                        ---- 头顶光环 控制器
 
     }
     for k, lua_addr in pairs(modules) do
@@ -64,7 +69,7 @@ return function(inst)
     inst.soundsname = "wendy"           -- 角色声音
 
     inst:AddTag("hoshino")
-    -- inst:AddTag("stronggrip")      --- 不被打掉武器
+    inst:AddTag("stronggrip")      --- 不被打掉武器
 
 
     if not TheWorld.ismastersim then

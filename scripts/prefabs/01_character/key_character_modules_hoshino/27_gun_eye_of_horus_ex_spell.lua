@@ -32,7 +32,7 @@ return function(inst)
         local blocking_task = nil
         inst:ListenForEvent("hoshino_sg_action_gun_shoot_with_walking_dmg_blocker_start",function(inst)
             blocking_flag = true
-            inst:AddTag("stronggrip")   --- 不被打掉武器的tag
+            -- inst:AddTag("stronggrip")   --- 不被打掉武器的tag
             if blocking_task then
                 blocking_task:Cancel()
                 blocking_task = nil
@@ -42,7 +42,7 @@ return function(inst)
         end)
         inst:ListenForEvent("hoshino_sg_action_gun_shoot_with_walking_dmg_blocker_end",function(inst)
             -- blocking_flag = false
-            inst:RemoveTag("stronggrip")   --- 不被打掉武器的tag
+            -- inst:RemoveTag("stronggrip")   --- 不被打掉武器的tag
             --- 2秒后解除,避免AOE
             if blocking_task then
                 blocking_task:Cancel()

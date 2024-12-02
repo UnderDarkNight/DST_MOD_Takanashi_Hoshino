@@ -13,13 +13,13 @@
 
     1：获得50%防水
 
-    2：生命上限+30，cost恢复速度+0.01/s
+    2：生命上限+20，cost恢复速度+0.01/s
 
     3：使人物身上的所有带有新鲜度的物品获得75%的保鲜效果（腐烂速度为1/4），cost恢复速度+0.01/s
 
     4：基础伤害减免+20%，免疫击飞
 
-    5：位面防御+10，经验值获取速率增加200%，总共3倍经验
+    5：位面防御+10，经验值获取速率增加100%，总共2倍经验
 
     6：基础攻击伤害+50%，cost恢复+0.02/s
 
@@ -52,18 +52,18 @@ return function(inst)
             inst.components.waterproofer:SetEffectiveness(0.5)
         end
     ----------------------------------------------------------------------------------
-    --- 生命上限+30
+    --- 生命上限+20
         if inst.level >= 2 then            
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 if not inst.components.hoshino_data:Get("max_health_active") then
                     inst.components.hoshino_data:Set("max_health_active",true)
-                    owner.components.hoshino_com_debuff:Add_Max_Helth(30)
+                    owner.components.hoshino_com_debuff:Add_Max_Helth(20)
                 end
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
                 if inst.components.hoshino_data:Get("max_health_active") then
                     inst.components.hoshino_data:Set("max_health_active",false)
-                    owner.components.hoshino_com_debuff:Add_Max_Helth(-30)
+                    owner.components.hoshino_com_debuff:Add_Max_Helth(-20)
                 end
             end)
         end
@@ -116,7 +116,7 @@ return function(inst)
     --- 经验倍率：
         if inst.level >= 5 then
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                owner.components.hoshino_com_level_sys:EXP_SetModifier(inst,3)
+                owner.components.hoshino_com_level_sys:EXP_SetModifier(inst,2)
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
                 owner.components.hoshino_com_level_sys:EXP_RemoveModifier(inst)

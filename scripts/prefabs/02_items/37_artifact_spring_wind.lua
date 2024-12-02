@@ -369,7 +369,7 @@ Artifact 春风
                 inst:DoPeriodicTask(1,function()
                     if target.components.finiteuses then
                         local max_finiteuses = target.components.finiteuses.total
-                        local delta_finiteuses = math.floor(max_finiteuses*0.1)
+                        local delta_finiteuses = math.ceil(max_finiteuses*0.1)
                         target.components.finiteuses:Use(-delta_finiteuses)
                     end
                     inst.time = (inst.time or 20 ) - 1

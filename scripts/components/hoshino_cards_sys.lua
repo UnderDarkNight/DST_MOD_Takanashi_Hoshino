@@ -500,7 +500,7 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 --- refresh 按钮点击后
     function hoshino_cards_sys:Refresh_Clicked()
-        if not self:IsCardsSelectting() or self.refresh_num <= 0 then
+        if not self:IsCardsSelectting() or self.refresh_num <= 0 or self:HasBlackCard() then
             return
         end
         self.selectting = false

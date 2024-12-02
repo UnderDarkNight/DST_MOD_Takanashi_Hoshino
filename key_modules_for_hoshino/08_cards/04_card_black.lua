@@ -26,22 +26,22 @@
 local cards = {
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 测试用的空黑卡
-            ["test_card_black"] = {
-                back = "card_black",
-                front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
-                test = function(inst)
-                    return true
-                end,
-                fn = function(inst)
-                    print("test_card_black")
-                end,
-                deactive_fn = function(inst) --- 诅咒去除（单次）
+            -- ["test_card_black"] = {
+            --     back = "card_black",
+            --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            --     test = function(inst)
+            --         return true
+            --     end,
+            --     fn = function(inst)
+            --         print("test_card_black")
+            --     end,
+            --     deactive_fn = function(inst) --- 诅咒去除（单次）
                     
-                end,
-                text = function(inst)
-                    return "测试用的空黑卡"
-                end,
-            },
+            --     end,
+            --     text = function(inst)
+            --         return "测试用的空黑卡"
+            --     end,
+            -- },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 1、【诅咒】【依神紫苑】【你每天至多获得300信用点】【从诅咒池移除】
         ["max_daily_earn"] = {

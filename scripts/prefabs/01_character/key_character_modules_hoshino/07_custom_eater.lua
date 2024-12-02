@@ -30,25 +30,25 @@ return function(inst)
                 --- 【汲取】
                 if Player_Unlocked_Warly_Eater_Modules(inst) then
                     if health_delta > 0 then
-                        health_delta = health_delta * 2
+                        health_delta = health_delta * 2.5
                     end
                     if hunger_delta > 0 then
-                        hunger_delta = hunger_delta * 2
+                        hunger_delta = hunger_delta * 2.5
                     end
                     if sanity_delta > 0 then
-                        sanity_delta = sanity_delta * 2
+                        sanity_delta = sanity_delta * 2.5
                     end
                 end
                 --- 【消化不良】
                 if Player_Indigestion(inst) then
                     if health_delta > 0 then
-                        health_delta = health_delta / 2
+                        health_delta = health_delta / 2.5
                     end
                     if hunger_delta > 0 then
-                        hunger_delta = hunger_delta / 2
+                        hunger_delta = hunger_delta / 2.5
                     end
                     if sanity_delta > 0 then
-                        sanity_delta = sanity_delta / 2
+                        sanity_delta = sanity_delta / 2.5
                     end
                 end
                 return health_delta, hunger_delta, sanity_delta

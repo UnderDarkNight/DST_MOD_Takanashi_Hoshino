@@ -23,9 +23,18 @@
     local function GetReplicaCom(self)
         return self.inst.replica.hoshino_com_spell_cd_timer or self.inst.replica._.hoshino_com_spell_cd_timer or nil
     end
-
+    -- local function Unlocked_Spells(self,data)
+    --     local replica_com = GetReplicaCom(self)
+    --     if replica_com then
+    --         replica_com:Unlock_Spell_Sync(data)
+    --     end
+    -- end
     local function Creating_Synchronization_Controllers()
-        local ret_table = {}
+        local ret_table = {
+
+            -- unlocked_spells = Unlocked_Spells,
+
+        }
         for temp_spell_name, v in pairs(all_spell_names) do
                 ret_table[temp_spell_name] = function(self,value)
                     local replica_com = GetReplicaCom(self)
@@ -36,6 +45,7 @@
         end
         return ret_table
     end
+
 ----------------------------------------------------------------------------------------------------------------------------------
 local hoshino_com_spell_cd_timer = Class(function(self, inst)
     self.inst = inst
@@ -77,6 +87,12 @@ local hoshino_com_spell_cd_timer = Class(function(self, inst)
         end)
         self.timer_delta_time = 0.1 -- 计时器的递减速度。
     ---------------------------------------------------------------------------
+    --- 技能解锁记录器
+        self.unlocked_spells = {}
+        inst:DoTaskInTime(0,function()
+            self:Unlocked_Spell_Sync()
+        end)
+    ---------------------------------------------------------------------------
 end,
 nil,
 Creating_Synchronization_Controllers() or {}
@@ -84,7 +100,7 @@ Creating_Synchronization_Controllers() or {}
 ------------------------------------------------------------------------------------------------------------------------------
 --
     function hoshino_com_spell_cd_timer:IsReady(spell_name)
-        return self[spell_name] == 0
+        return self[spell_name] == 0 and self:Is_Spell_Unlocked(spell_name)
     end
     function hoshino_com_spell_cd_timer:StartCDTimer(spell_name, time)
         if self[spell_name] then
@@ -116,6 +132,22 @@ Creating_Synchronization_Controllers() or {}
         -------------------------------------------------------------------------------------
         self.__all_timer_task = self.inst:DoPeriodicTask(self.timer_delta_time or 0.5,self.__all_timer_task_fn)
     end
+------------------------------------------------------------------------------------------------------------------------------
+--- 技能解锁控制器
+    function hoshino_com_spell_cd_timer:Unlock_Spell(spell_name)
+        self.unlocked_spells[spell_name] = true
+        self:Unlocked_Spell_Sync()
+    end
+    function hoshino_com_spell_cd_timer:Is_Spell_Unlocked(spell_name)
+        return self.unlocked_spells[spell_name] == true
+    end
+    function hoshino_com_spell_cd_timer:Unlocked_Spell_Sync()
+        local replica_com = GetReplicaCom(self)
+        if replica_com then
+            replica_com:Unlock_Spell_Sync(self.unlocked_spells)
+        end
+    end
+
 ------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数
     function hoshino_com_spell_cd_timer:AddOnLoadFn(fn)

@@ -119,6 +119,7 @@
                     local button_spell_text_pt = Vector3(60,25,0)
                     ---- 
                     CreateButton(nil,base_x - delta_x,base_y + delta_y,function(temp_button)
+                        temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("疗愈",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -135,6 +136,11 @@
                                 info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
                                 can_click_button = false
                             end
+                            if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("normal_heal") then
+                                temp_button:Show()
+                            else
+                                temp_button:Hide()
+                            end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
@@ -146,6 +152,7 @@
                     end)
                     ----
                     CreateButton(nil,base_x,base_y,function(temp_button)
+                        temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("隐秘行动",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -162,6 +169,11 @@
                                 info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
                                 can_click_button = false
                             end
+                            if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("normal_covert_operation") then
+                                temp_button:Show()
+                            else
+                                temp_button:Hide()
+                            end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
@@ -173,6 +185,7 @@
                     end)
                     ----
                     CreateButton(nil,base_x -delta_x,base_y - delta_y,function(temp_button)
+                        temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("突破",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -189,6 +202,11 @@
                                 info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
                                 can_click_button = false
                             end
+                            if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("normal_breakthrough") then
+                                temp_button:Show()
+                            else
+                                temp_button:Hide()
+                            end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
@@ -203,6 +221,7 @@
                     local delta_x,delta_y = 80,120
                     local button_spell_text_pt = Vector3(60,25,0)
                     CreateButton(nil,base_x - delta_x,base_y + 1.5*delta_y,function(temp_button)
+                        temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("水上支援",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -219,6 +238,11 @@
                                 info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
                                 can_click_button = false
                             end
+                            if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_ex_support") then
+                                temp_button:Show()
+                            else
+                                temp_button:Hide()
+                            end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
@@ -229,6 +253,7 @@
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "swimming_ex_support"})
                     end)
                     CreateButton(nil,base_x,base_y + delta_y/2,function(temp_button)
+                        temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("高效率工作",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -245,6 +270,11 @@
                                 info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
                                 can_click_button = false
                             end
+                            if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_efficient_work") then
+                                temp_button:Show()
+                            else
+                                temp_button:Hide()
+                            end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
@@ -255,6 +285,7 @@
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "swimming_efficient_work"})
                     end)
                     CreateButton(nil,base_x,base_y - delta_y/2,function(temp_button)
+                        temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("急援",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -271,6 +302,11 @@
                                 info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
                                 can_click_button = false
                             end
+                            if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_emergency_assistance") then
+                                temp_button:Show()
+                            else
+                                temp_button:Hide()
+                            end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
                         end
@@ -284,6 +320,7 @@
                         button_box:Hide()
                     end)
                     CreateButton(nil,base_x -delta_x,base_y - 1.5*delta_y,function(temp_button)
+                        temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("晓之荷鲁斯",button_spell_text_pt.x,button_spell_text_pt.y)
                         local spell_info = temp_button:AddChild(CreateText(txt_font,40,"",{  255/255 , 255/255 ,255/255 , 1}))
@@ -299,6 +336,11 @@
                                 local cd_time = ThePlayer.replica.hoshino_com_spell_cd_timer:GetTime("swimming_dawn_of_horus")
                                 info_txt = info_txt.."【 "..string.format("%.1f",cd_time).." 】"
                                 can_click_button = false
+                            end
+                            if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_dawn_of_horus") then
+                                temp_button:Show()
+                            else
+                                temp_button:Hide()
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)

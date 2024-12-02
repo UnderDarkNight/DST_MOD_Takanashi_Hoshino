@@ -21,19 +21,24 @@ local flg,error_code = pcall(function()
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --         cards = {
-        --             -- "card_golden",
-        --             -- "card_white",
-        --             -- "card_colourful",
-        --             -- "card_colourful",
-        --             "card_golden",
-        --             -- "kill_and_explode",
-        --         },
-        --     }
-        -- )
-        -- ThePlayer.components.inventory:GiveItem(item)
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+                cards = {
+                    -- "card_golden",
+                    -- "card_white",
+                    -- "card_colourful",
+                    -- "card_colourful",
+                    -- "card_golden",
+                    -- "card_black",
+                    -- "kill_and_explode",
+                    -- "unlock_spell_normal_ex",
+                    -- "unlock_spell_swimming_ex",
+                    -- "unlock_spell_all_normal",
+                    "unlock_spell_all_swimming",
+                },
+            }
+        )
+        ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试-变种
         -- local item = SpawnPrefab("hoshino_item_cards_pack")
@@ -134,7 +139,7 @@ local flg,error_code = pcall(function()
         -- inst.entity:AddSoundEmitter()        
         -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(-10000)
 
-        -- ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
+        ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
 
         -- print("66",ThePlayer.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29"))
 
@@ -409,7 +414,7 @@ local flg,error_code = pcall(function()
 
             -- print(ThePlayer.components.hoshino_com_drone_leader:Get("drone_num"))
 
-            local drone = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
+            -- local drone = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
             -- local door = TheSim:FindFirstEntityWithTag("multiplayer_portal")
 
             -- drone:PushEvent("spawn_missile",{
@@ -437,9 +442,9 @@ local flg,error_code = pcall(function()
             --     local item = drone.components.container:GetItemInSlot(i)
             --     print(item)                
             -- end
-            local item = drone.components.container:GetItemInSlot(1)
-            local slot = drone.components.container:GetItemInSlot(item)
-            drone.components.container:RemoveItem(item):Remove()
+            -- local item = drone.components.container:GetItemInSlot(1)
+            -- local slot = drone.components.container:GetItemInSlot(item)
+            -- drone.components.container:RemoveItem(item):Remove()
             -- print(item)
             -- item:Remove()
             -- print(item:GetDebugString())
@@ -459,6 +464,12 @@ local flg,error_code = pcall(function()
         --     print(k,v)
         -- end
         -- seed:Remove()
+    ----------------------------------------------------------------------------------------------------------------
+    --
+        -- for k, v in pairs(ThePlayer.replica.hoshino_com_spell_cd_timer.unlocked_spells) do
+        --     print(k,v)
+        -- end
+        -- print(ThePlayer.replica.hoshino_com_spell_cd_timer.__net_string_unlock_spell_data:value())
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

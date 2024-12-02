@@ -198,16 +198,16 @@ configuration_options = {
   {name = "AAAA",label = IsChinese() and GetTitle("角色") or GetTitle("Character"),hover = "",options = {{description = "",data = 0}},default = 0},
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  {
-    name = "DIFFICULTY_MODE",
-    label = IsChinese() and "游玩难度" or "Difficulty Mode",
-    hover = IsChinese() and "游玩难度" or "Difficulty Mode",
-    options = {
-      {description = "OFF",data = false},
-      {description = "ON",data = true},
-    },
-    default = false
-  },
+  -- {
+  --   name = "DIFFICULTY_MODE",
+  --   label = IsChinese() and "游玩难度" or "Difficulty Mode",
+  --   hover = IsChinese() and "游玩难度" or "Difficulty Mode",
+  --   options = {
+  --     {description = "OFF",data = false},
+  --     {description = "ON",data = true},
+  --   },
+  --   default = false
+  -- },
   {
     name = "HIDE_HAT",
     label = IsChinese() and "隐藏帽子" or "Hide Hat",

@@ -191,6 +191,14 @@ return function(inst)
             return true
         end
     ----------------------------------------------------------------------------------------
+    --- 检查是不是随从
+        local function Check_Is_Following_Player(target)
+            if target.components.follower then
+                return target.components.follower:GetLeader() == inst
+            end
+            return false
+        end
+    ----------------------------------------------------------------------------------------
     --- 扇形特效
         local function get_offset_pt_by_angle(angle,distance) -- 为了节省解析计算量，放外面。
             return Vector3(math.cos(math.rad(angle))*distance,0,math.sin(math.rad(angle))*distance )                    
@@ -414,7 +422,7 @@ return function(inst)
                 local ents = TheSim:FindEntities(center_pt.x,0,center_pt.z,15,musthavetags,canthavetags,musthaveoneoftags)
                 for k, temp_target in pairs(ents) do
                     if temp_target and temp_target:IsValid() and Check_In_Area(Vector3(temp_target.Transform:GetWorldPosition()),start_pt,mid_line_max_pt) then                        
-                        if temp_target.components.combat and doer.components.combat:CanHitTarget(temp_target) then
+                        if temp_target.components.combat and doer.components.combat:CanHitTarget(temp_target) and not Check_Is_Following_Player(temp_target) then
                             -- doer.components.combat:DoAttack(temp_target,weapon)
                             -- temp_target.components.combat:GetAttacked(doer,34,weapon)
                             if spell_flag == nil then

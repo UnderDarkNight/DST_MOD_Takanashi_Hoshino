@@ -70,6 +70,12 @@ local hoshino_com_shop_items_pool = Class(function(self, inst)
             self.day = self:Get("day") or 0
         end)
     -------------------------------------------
+    --- 特价物品
+        self.special_price_item_index = nil
+        inst:WatchWorldState("cycles",function()
+            self.special_price_item_index = nil
+        end)
+    -------------------------------------------
 end,
 nil,
 {
@@ -131,6 +137,38 @@ nil,
     function hoshino_com_shop_items_pool:LevelSet(num)
         self.level = math.clamp(num or 0,0,10000000)
         self.day = -1
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 特价商品的记忆
+    function hoshino_com_shop_items_pool:Set_Special_Price(_items_data)
+        -------------------------------------------------------
+        --- 需要深度复制，避免污染原始数据池
+            local items_data = deepcopy(_items_data)
+        -------------------------------------------------------
+        --- 如果记忆有 特价物品，则寻找数据里
+            if self.special_price_item_index then
+                for k, item_data in pairs(items_data) do
+                    local index = item_data.index
+                    if index == self.special_price_item_index then
+                        item_data.price = math.ceil(item_data.price * 0.5)
+                        item_data.special_price = true
+                        break
+                    end
+                end
+            elseif math.random(1000)/1000 <= 0.3 or TUNING.HOSHINO_DEBUGGING_MODE then
+                --- 没有特价商品，则随机一个
+                for i = 1, 50, 1 do
+                    local temp_item_data = ret[math.random(#items_data)]
+                    if temp_item_data.price >= 2 then
+                        temp_item_data.price = math.ceil(temp_item_data.price * 0.5)
+                        temp_item_data.special_price = true
+                        self.special_price_item_index = temp_item_data.index
+                        break
+                    end
+                end
+            end
+        -------------------------------------------------------
+        return items_data
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 数据池获取
@@ -217,19 +255,20 @@ nil,
         end
         ----------------------------------------------------------
         -- 特价商品处理
-            if math.random(1000)/1000 <= 0.3 or TUNING.HOSHINO_DEBUGGING_MODE then
-                --- 需要深度复制，避免污染原始数据池
-                ret = deepcopy(ret)
-                --- 随机一个商品(价格大于2) 打折
-                for i = 1, 50, 1 do
-                    local temp_item_data = ret[math.random(#ret)]
-                    if temp_item_data.price >= 2 then
-                        temp_item_data.price = math.ceil(temp_item_data.price * 0.5)
-                        temp_item_data.special_price = true
-                        break
-                    end
-                end
-            end
+            -- if math.random(1000)/1000 <= 0.3 or TUNING.HOSHINO_DEBUGGING_MODE then
+            --     --- 需要深度复制，避免污染原始数据池
+            --     ret = deepcopy(ret)
+            --     --- 随机一个商品(价格大于2) 打折
+            --     for i = 1, 50, 1 do
+            --         local temp_item_data = ret[math.random(#ret)]
+            --         if temp_item_data.price >= 2 then
+            --             temp_item_data.price = math.ceil(temp_item_data.price * 0.5)
+            --             temp_item_data.special_price = true
+            --             break
+            --         end
+            --     end
+            -- end
+            ret = self:Set_Special_Price(ret)
         ----------------------------------------------------------
         -- print("随机物品数量", #ret)
         --- 添加常驻物品

@@ -15,14 +15,15 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             if monster == target and target.components.lootdropper then
                 local item = target.components.lootdropper:SpawnLootPrefab("hoshino_item_cards_pack")
                 if item then
-                    item:PushEvent("Set",{
-                        cards = {
-                            "card_golden",
-                            "card_golden",
-                            "card_golden",
-                        }
-                    })
-                    item:PushEvent("SetName","Golden 3-1")
+                    -- item:PushEvent("Set",{
+                    --     cards = {
+                    --         "card_golden",
+                    --         "card_golden",
+                    --         "card_golden",
+                    --     }
+                    -- })
+                    -- item:PushEvent("SetName","Golden 3-1")
+                    item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
                 end
             end
             -- inst:Remove()

@@ -64,7 +64,7 @@
                 ---- 返还一半材料
                 local ret_recipe = {}
                 for prefab, num in pairs(recipe) do
-                    local ret_num = math.ceil(num/2)
+                    local ret_num = math.floor(num/2)
                     if ret_num > 0 then
                         ret_recipe[prefab] = ret_num
                     end

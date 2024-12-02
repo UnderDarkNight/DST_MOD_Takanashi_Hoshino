@@ -26,19 +26,19 @@
 local cards = {
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 测试用的空白卡
-        ["test_card_colourful"] = {
-            back = "card_colourful",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
-            test = function(inst)
-                return true
-            end,
-            fn = function(inst)
-                print("test_card_colourful")
-            end,
-            text = function(inst)
-                return "测试用的空彩卡"
-            end,
-        },
+        -- ["test_card_colourful"] = {
+        --     back = "card_colourful",
+        --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+        --     test = function(inst)
+        --         return true
+        --     end,
+        --     fn = function(inst)
+        --         print("test_card_colourful")
+        --     end,
+        --     text = function(inst)
+        --         return "测试用的空彩卡"
+        --     end,
+        -- },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 53、【彩】【钨合金棍】【最终血量扣除结算的时候，所扣除点数减少1点】（未超过一点则免疫，选择后从池子内移除，无法叠加）【笔记】按照可叠加的形式写
         ["final_health_down_value_reduce"] = {

@@ -6,7 +6,15 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.player = target
     -----------------------------------------------------
     ---
+        inst.cd_task = nil
+    -----------------------------------------------------
+    ---
         inst:ListenForEvent("healthdelta", function(_,_table)
+            if inst.cd_task then
+                return
+            end
+            inst.cd_task = inst:DoTaskInTime(0.5,function() inst.cd_task = nil end)
+
             local oldpercent = _table.oldpercent
             local newpercent = _table.newpercent
             if oldpercent > newpercent then
