@@ -21,24 +21,24 @@ local flg,error_code = pcall(function()
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        local item = SpawnPrefab("hoshino_item_cards_pack")
-        item:PushEvent("Set",{
-                cards = {
-                    -- "card_golden",
-                    -- "card_white",
-                    -- "card_colourful",
-                    -- "card_colourful",
-                    -- "card_golden",
-                    -- "card_black",
-                    -- "kill_and_explode",
-                    -- "unlock_spell_normal_ex",
-                    -- "unlock_spell_swimming_ex",
-                    -- "unlock_spell_all_normal",
-                    "unlock_spell_all_swimming",
-                },
-            }
-        )
-        ThePlayer.components.inventory:GiveItem(item)
+        -- local item = SpawnPrefab("hoshino_item_cards_pack")
+        -- item:PushEvent("Set",{
+        --         cards = {
+        --             -- "card_golden",
+        --             -- "card_white",
+        --             -- "card_colourful",
+        --             -- "card_colourful",
+        --             -- "card_golden",
+        --             -- "card_black",
+        --             -- "kill_and_explode",
+        --             -- "unlock_spell_normal_ex",
+        --             -- "unlock_spell_swimming_ex",
+        --             -- "unlock_spell_all_normal",
+        --             "unlock_spell_all_swimming",
+        --         },
+        --     }
+        -- )
+        -- ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试-变种
         -- local item = SpawnPrefab("hoshino_item_cards_pack")
@@ -139,7 +139,7 @@ local flg,error_code = pcall(function()
         -- inst.entity:AddSoundEmitter()        
         -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(-10000)
 
-        ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
+        -- ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
 
         -- print("66",ThePlayer.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29"))
 
@@ -470,6 +470,22 @@ local flg,error_code = pcall(function()
         --     print(k,v)
         -- end
         -- print(ThePlayer.replica.hoshino_com_spell_cd_timer.__net_string_unlock_spell_data:value())
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        -- local inst = ThePlayer
+        -- if inst:Hoshino_Get_Spell_Type() == "hoshino_spell_type_normal" then
+        --     inst.AnimState:OverrideSymbol("headbase", "hoshino_empty_halo","headbase")
+        --     inst.AnimState:OverrideSymbol("headbase_hat", "hoshino_empty_halo","headbase")
+        -- else
+        --     inst.AnimState:OverrideSymbol("headbase", "hoshino_empty_halo","headbase_swimming")
+        --     inst.AnimState:OverrideSymbol("headbase_hat", "hoshino_empty_halo","headbase_swimming")
+        -- end
+        ThePlayer.__light_test = function(light_fx)
+            light_fx.Light:SetFalloff(0.4)
+            light_fx.Light:SetIntensity(.4)
+            light_fx.Light:SetRadius(1)
+            light_fx.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
+        end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

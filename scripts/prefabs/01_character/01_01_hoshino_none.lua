@@ -4,6 +4,7 @@ local assets =
 	-- Asset( "ANIM", "anim/hoshino_run.zip" ),
 	Asset( "ANIM", "anim/ghost_hoshino_build.zip" ),
 	Asset( "ANIM", "anim/hoshino_swimsuit.zip" ),
+	Asset( "ANIM", "anim/hoshino_empty_halo.zip" ),
 }
 local skin_fns = {
 
