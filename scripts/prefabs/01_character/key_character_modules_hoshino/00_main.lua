@@ -55,6 +55,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/40_temperature_controller",                 ---- 温度控制
         "prefabs/01_character/key_character_modules_hoshino/41_sanity_controller",                      ---- Sanity 控制器
         "prefabs/01_character/key_character_modules_hoshino/42_halo_controller",                        ---- 头顶光环 控制器
+        "prefabs/01_character/key_character_modules_hoshino/43_cursable_hook",                          ---- 诅咒 控制器
 
     }
     for k, lua_addr in pairs(modules) do
