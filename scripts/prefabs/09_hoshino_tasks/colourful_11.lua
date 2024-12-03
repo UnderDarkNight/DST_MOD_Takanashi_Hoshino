@@ -156,7 +156,7 @@
                     inst:Remove()
                     return
                 end
-                local max_time = 8*60   -- 8分钟
+                local max_time = 3*60   -- 3分钟
                 if TUNING.HOSHINO_DEBUGGING_MODE then
                     max_time = 60
                 end
@@ -180,7 +180,7 @@
                     test_num = test_num - 1
                 end
             end
-            inst:DoPeriodicTask(8,function()
+            inst:DoPeriodicTask(4,function()
                 if inst.components.hoshino_data:Add("num",0) >= 1 then
                     return
                 end

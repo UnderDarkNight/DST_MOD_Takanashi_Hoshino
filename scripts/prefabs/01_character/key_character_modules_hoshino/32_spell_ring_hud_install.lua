@@ -194,7 +194,7 @@
                             local can_click_button = true
                             local info_txt = ""
                             if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 2 then
-                                info_txt = info_txt.."【 COST 2 】"
+                                info_txt = info_txt.."【 COST 1 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_breakthrough") then
@@ -480,6 +480,12 @@
         if TUNING.HOSHINO_FNS:IsKeyPressed(TUNING["hoshino.Config"].SPELL_TYPE_SWITICH_HOTKEY,key) and not ThePlayer:HasTag("playerghost") then
             -- print("key_down SPELL_RING_HOTKEY")
             ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.spell_type_switch_hotkey_press")
+        end
+        if TUNING.HOSHINO_FNS:IsKeyPressed(TUNING["hoshino.Config"].SPELL_BREAKTHROUGH_HOTKEY,key) and not ThePlayer:HasTag("playerghost") then
+            -- 突破快捷键
+            if ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_breakthrough") then
+                ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "normal_breakthrough"})
+            end
         end
     end
     local function hotkey_listener_install(inst)

@@ -269,6 +269,13 @@ configuration_options = {
     default = "KEY_R",
   },
   {
+    name = "SPELL_BREAKTHROUGH_HOTKEY",
+    label = IsChinese() and "突破捷键" or "Breakthrough Hotkey",
+    hover = IsChinese() and "突破捷键" or "Breakthrough Hotkey",
+    options = keys_option,
+    default = "KEY_N",
+  },
+  {
     name = "SPECIAL_EQUIPMENT_SHOES_HOTKEY",
     label = IsChinese() and "鞋子快捷键" or "Shoes Hotkey",
     hover = IsChinese() and "鞋子快捷键" or "Shoes Hotkey",

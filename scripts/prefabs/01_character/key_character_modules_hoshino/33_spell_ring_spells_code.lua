@@ -14,7 +14,7 @@
         ["normal_covert_operation"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 8*60,                 --- 【普通模式】隐秘行动
         ["normal_breakthrough"] = 0,                                                                --- 【普通模式】突破
         ["swimming_ex_support"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or  60,                      --- 【游泳模式】EX支援
-        ["swimming_efficient_work"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 24*60,                --- 【游泳模式】高效作业
+        ["swimming_efficient_work"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60,                --- 【游泳模式】高效作业
         ["swimming_emergency_assistance"] = 0,                                                      --- 【游泳模式】紧急支援
         ["swimming_dawn_of_horus"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 100*60,                --- 【游泳模式】晓之荷鲁斯
         -- ["gun_eye_of_horus_ex_test"] = 30,
@@ -27,6 +27,10 @@
             and inst.components.hoshino_com_power_cost:GetCurrent() >= cost_value then
                 inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
                 inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
+                ----------------------------------------------------------------------------
+                --- fx
+                    local fx = SpawnPrefab("wormwood_lunar_transformation_finish")
+                    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
                 ----------------------------------------------------------------------------
                 --- 上debuff
                     local debuff_prefab = "hoshino_spell_normal_heal_buff"
@@ -42,7 +46,7 @@
                     end
                 ----------------------------------------------------------------------------
                 --- 反馈
-                    inst.SoundEmitter:PlaySound("dontstarve/common/together/celestial_orb/active")
+                    -- inst.SoundEmitter:PlaySound("dontstarve/common/together/celestial_orb/active")
                 ----------------------------------------------------------------------------
 
         end
@@ -62,7 +66,7 @@
                     while test_num > 0 do
                         local debuff_inst = inst:GetDebuff(debuff_prefab)
                         if debuff_inst and debuff_inst:IsValid() then
-                            debuff_inst:PushEvent("SetTime",8*60)
+                            debuff_inst:PushEvent("SetTime",1*60)
                             break
                         end
                         inst:AddDebuff(debuff_prefab,debuff_prefab)
@@ -84,7 +88,12 @@
         local damage = 30
         local mult_from_combat = inst.components.combat.externaldamagemultipliers:Get()
         local player_level = inst.components.hoshino_com_level_sys:GetLevel()
-        damage = damage + mult_from_combat*player_level*3
+        local player_max_health = inst.components.health.maxhealth
+        local player_max_sanity = inst.components.sanity.max
+        -- damage = damage + mult_from_combat*player_level*3
+        -- |0.01*攻击倍率*生命上限*san上限-232
+        damage = 0.01*mult_from_combat*player_max_health*player_max_sanity - 232
+        damage = math.max(damage,1)
         local ents = TheSim:FindEntities(x,0, z,10,musthavetags, canthavetags, musthaveoneoftags)
         for k, temp_monster in pairs(ents) do
             if temp_monster.components.health and not temp_monster.components.health:IsDead() then
@@ -104,7 +113,7 @@
         return true
     end
     local function normal_breakthrough_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
-        local cost_value = 2
+        local cost_value = 1
         if not normal_breakthrough_test(inst,spell_name,cost_value) then
             return
         end
@@ -154,7 +163,7 @@
         -- local speed_mult = 1.5
         -- local damage_mult = (50+player_level)/100 + 1
         -- local cost_value_num = 0.04 + player_level*0.005
-        local time = 30 + player_level*0.3
+        local time = 30 + player_level*1
 
         local debuff_prefab = "hoshino_spell_swimming_ex_support_buff"
         local test_num = 100
@@ -270,6 +279,11 @@
         end)
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 模式判断
+    local function IsSwimmingType(inst)
+        return inst:Hoshino_Get_Spell_Type() == "hoshino_spell_type_swimming"
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
     if not TheWorld.ismastersim then
@@ -317,43 +331,43 @@ return function(inst)
             end
         ---------------------------------------------------------------------------------------------------
         --- 【普通模式】疗愈
-            if spell_name == "normal_heal" then
+            if spell_name == "normal_heal" and not IsSwimmingType(inst) then
                 normal_heal_fn(inst,spell_name)
                 return
             end
         ---------------------------------------------------------------------------------------------------
         --- 【普通模式】隐秘行动
-            if spell_name == "normal_covert_operation" then
+            if spell_name == "normal_covert_operation" and not IsSwimmingType(inst) then
                 normal_covert_operation_fn(inst,spell_name)
                 return
             end
         ---------------------------------------------------------------------------------------------------
         --- 【普通模式】突破
-            if spell_name == "normal_breakthrough" then
+            if spell_name == "normal_breakthrough" and not IsSwimmingType(inst) then
                 normal_breakthrough_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
                 return
             end
         ---------------------------------------------------------------------------------------------------
         --- 【游泳模式】EX支援
-            if spell_name == "swimming_ex_support" then
+            if spell_name == "swimming_ex_support" and IsSwimmingType(inst) then
                 swimming_ex_support_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
                 return
             end
         ---------------------------------------------------------------------------------------------------
         --- 【游泳模式】高效作业
-            if spell_name == "swimming_efficient_work" then
+            if spell_name == "swimming_efficient_work" and IsSwimmingType(inst) then
                 swimming_efficient_work_fn(inst,spell_name)
                 return
             end
         ---------------------------------------------------------------------------------------------------
         --- 【游泳模式】紧急支援
-            if spell_name == "swimming_emergency_assistance" then
+            if spell_name == "swimming_emergency_assistance" and IsSwimmingType(inst) then
                 swimming_emergency_assistance_fn(inst,spell_name,data)
                 return
             end
         ---------------------------------------------------------------------------------------------------
         --- 【游泳模式】晓之荷鲁斯
-            if spell_name == "swimming_dawn_of_horus" then
+            if spell_name == "swimming_dawn_of_horus" and IsSwimmingType(inst) then
                 swimming_dawn_of_horus_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
                 return
             end

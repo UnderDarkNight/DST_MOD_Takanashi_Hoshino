@@ -71,16 +71,7 @@ return function(inst)
     --- 上笨怪debuff
         local debuff_prefab = "hoshino_debuff_gun_eye_of_horus_spell_monster_brain_stop"
         local function Add_Debuff_To_Monster(monster)
-            local i = 10
-            while i > 0 do
-                local debuff_inst = monster:GetDebuff(debuff_prefab)
-                if debuff_inst and debuff_inst:IsValid() then
-                    debuff_inst:PushEvent("reset")
-                    break
-                end
-                monster:AddDebuff(debuff_prefab,debuff_prefab)
-                i = i - 1
-            end
+            monster:AddDebuff(debuff_prefab,debuff_prefab)
         end
         local function Remove_Debuff_From_Monster(monster)
             for i = 1, 3, 1 do
@@ -125,7 +116,7 @@ return function(inst)
             weapon.components.weapon:SetDamage(0)
             if not ignore_finiteuses_use then
                 if not inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Check_Need_2_Block() then --- 卡牌BUFF
-                    weapon.components.finiteuses:Use_Hoshino(1)
+                    weapon.components.finiteuses:Use_Hoshino(10)
                 end
             end
         end

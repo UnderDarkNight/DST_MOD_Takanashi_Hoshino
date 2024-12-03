@@ -135,7 +135,7 @@
                 return false
             end
             item.components.stackable:Get():Remove()
-            inst.components.finiteuses:Use_Hoshino(-0.2*200)
+            inst.components.finiteuses:Use_Hoshino(-1*200)
             if inst.components.finiteuses:GetPercent() > 1 then
                 inst.components.finiteuses:SetPercent(1)
             end
@@ -210,13 +210,8 @@ local function fn()
     ---------------------------------------------------------------------------------------------------
     --- 耐久度
         inst:AddComponent("finiteuses")
-        if TUNING.HOSHINO_DEBUGGING_MODE then
-            inst.components.finiteuses:SetMaxUses(200)
-            inst.components.finiteuses:SetPercent(1)
-        else            
-            inst.components.finiteuses:SetMaxUses(200)
-            inst.components.finiteuses:SetPercent(1)
-        end
+        inst.components.finiteuses:SetMaxUses(200)
+        inst.components.finiteuses:SetPercent(1)
         inst.components.finiteuses:SetOnFinished(function()
             inst:PushEvent("attack_range_update")
         end)

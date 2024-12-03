@@ -44,6 +44,7 @@
 
             -- inst.components.armor:SetAbsorption(TUNING.ARMOR_RUINSHAT_ABSORPTION)
             inst.components.armor:SetAbsorption(0)
+            inst.components.planardefense:SetBaseDefense(0)  -- 位面防御
             inst.components.armor.ontakedamage = nil
 
             if inst._task ~= nil then
@@ -64,6 +65,7 @@
         inst:ListenForEvent("armordamaged", ruinshat_fxanim)
 
         inst.components.armor:SetAbsorption(TUNING.FULL_ABSORPTION)
+        inst.components.planardefense:SetBaseDefense(100000000) -- 位面防御
         inst.components.armor.ontakedamage = function(inst, damage_amount)
             if owner ~= nil and owner.components.sanity ~= nil then
                 owner.components.sanity:DoDelta(-damage_amount * TUNING.ARMOR_RUINSHAT_DMG_AS_SANITY, false)
@@ -205,6 +207,9 @@ local function fn()
     inst:AddComponent("armor")
     -- inst.components.armor:InitCondition(TUNING.ARMOR_RUINSHAT, TUNING.ARMOR_RUINSHAT_ABSORPTION)
     inst.components.armor:InitIndestructible(0)
+    --- 位面防御
+	inst:AddComponent("planardefense")
+	inst.components.planardefense:SetBaseDefense(0)
 
     inst:AddComponent("shadowlevel")
     inst.components.shadowlevel:SetDefaultLevel(TUNING.RUINSHAT_SHADOW_LEVEL)

@@ -29,6 +29,11 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
         target:AddTag("fastpicker")
         target:AddTag("fastbuilder")
     -----------------------------------------------------
+    ---
+        target.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   TUNING.BUFF_WORKEFFECTIVENESS_MODIFIER, inst)
+        target.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   TUNING.BUFF_WORKEFFECTIVENESS_MODIFIER, inst)
+        target.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, TUNING.BUFF_WORKEFFECTIVENESS_MODIFIER, inst)
+    -----------------------------------------------------
 end
 
 local function OnDetached(inst) -- 被外部命令  inst:RemoveDebuff 移除debuff 的时候 执行

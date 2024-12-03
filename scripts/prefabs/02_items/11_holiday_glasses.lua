@@ -14,14 +14,41 @@
 --- 参数
     local FULL_FINITEUSES = 18*60
     local FINITEUSES_DELTA_PER_SECOND = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 1
+    local function GetEquipSlot()
+        if TheWorld.ismastersim then
+            return TUNING.HOSHINO_FNS:CopyEquipmentSlotFrom("goggleshat") or EQUIPSLOTS.HEAD
+        else
+            return EQUIPSLOTS.HEAD
+        end
+    end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 外观穿戴
     local function onequip(inst, owner)
-
+        if inst.__onequip_task then
+            inst.__onequip_task:Cancel()
+            inst.__onequip_task = nil
+        end
+        if inst.__onunequip_task then
+            inst.__onunequip_task:Cancel()
+            inst.__onunequip_task = nil
+        end
+        inst.__onequip_task = inst:DoTaskInTime(0,function()
+            inst:PushEvent("glasses_on_equip",owner)
+        end)
     end
 
     local function onunequip(inst, owner)
-
+        if inst.__onequip_task then
+            inst.__onequip_task:Cancel()
+            inst.__onequip_task = nil
+        end
+        if inst.__onunequip_task then
+            inst.__onunequip_task:Cancel()
+            inst.__onunequip_task = nil
+        end
+        inst.__onunequip_task = inst:DoTaskInTime(0,function()
+            inst:PushEvent("glasses_on_unequip",owner)
+        end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -142,6 +169,70 @@
 
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
+--- 虚假光源
+    local function fake_light_install(inst)
+        if TheWorld.ismastersim then
+            inst:ListenForEvent("glasses_on_equip",function(_,owner)
+                -- print("眼镜穿戴")
+                if owner.components.grue then
+                    owner.components.grue:AddImmunity("hoshino_equipment_holiday_glasses")
+                end
+                owner.components.hoshino_com_rpc_event:PushEvent("fake_vision_client_active",{},inst)
+            end)
+            inst:ListenForEvent("glasses_on_unequip",function(_,owner)
+                -- print("眼镜脱下")
+                if owner.components.grue then
+                    owner.components.grue:RemoveImmunity("hoshino_equipment_holiday_glasses")
+                end
+                owner.components.hoshino_com_rpc_event:PushEvent("fake_vision_client_deactive",{},inst)
+            end)
+        end
+
+        if TheNet:IsDedicated() then
+           return 
+        end
+
+        inst:ListenForEvent("fake_vision_client_active",function()
+            -- print("客户端激活")
+            if inst._fake_light and inst._fake_light:IsValid() or ThePlayer == nil then
+                -- print("客户端激活失败")
+                return
+            end
+            local fake_light = CreateEntity()
+            inst._fake_light = fake_light
+
+            fake_light.entity:AddTransform()
+            fake_light.entity:AddLight()
+            fake_light.entity:AddNetwork()        
+            fake_light.Light:SetFalloff(0.1)
+            fake_light.Light:SetIntensity(.9)
+            fake_light.Light:SetRadius(40)
+            fake_light.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
+            fake_light.Light:Enable(true)
+            fake_light.entity:SetParent(ThePlayer.entity)
+            -- if ThePlayer.__light_test then
+            --     ThePlayer.__light_test(fake_light)
+            -- end
+
+            fake_light:DoPeriodicTask(0.5,function()
+                local item = ThePlayer.replica.inventory:GetEquippedItem(GetEquipSlot())
+                if item ~= inst then
+                    -- print("客户端激活失败+++++++",item,inst)
+                    fake_light:Remove()
+                    inst._fake_light = nil
+                end
+            end)
+        end)
+        inst:ListenForEvent("fake_vision_client_deactive",function()
+            -- print("客户端关闭")
+            if inst._fake_light and inst._fake_light:IsValid() then
+                inst._fake_light:Remove()
+                inst._fake_light = nil
+            end
+        end)
+
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
     local inst = CreateEntity()
 
@@ -159,12 +250,10 @@ local function fn()
 
     MakeInventoryFloatable(inst)
 
-
-
     inst.entity:SetPristine()
 
     acceptable_com_inst(inst)
-
+    fake_light_install(inst)
     if not TheWorld.ismastersim then
         return inst
     end
@@ -177,9 +266,10 @@ local function fn()
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_holiday_glasses.xml"
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = TUNING.HOSHINO_FNS:CopyEquipmentSlotFrom("goggleshat") or EQUIPSLOTS.HEAD
+    inst.components.equippable.equipslot = GetEquipSlot()
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
+    inst.components.equippable.restrictedtag = "hoshino"
 
 
     inst:AddComponent("finiteuses")

@@ -18,14 +18,14 @@ return function(inst)
         end
         light_fx = inst:SpawnChild("minerhatlight")
 
-        light_fx.Light:SetFalloff(0.4)
-        light_fx.Light:SetIntensity(.7)
-        light_fx.Light:SetRadius(2.5)
+        light_fx.Light:SetFalloff(0.6)
+        light_fx.Light:SetIntensity(.35)
+        light_fx.Light:SetRadius(1)
         light_fx.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
 
-        if inst.__light_test then
-            inst.__light_test(light_fx)
-        end
+        -- if inst.__light_test then
+        --     inst.__light_test(light_fx)
+        -- end
     end
     local function DestroyLight()
         if light_fx then

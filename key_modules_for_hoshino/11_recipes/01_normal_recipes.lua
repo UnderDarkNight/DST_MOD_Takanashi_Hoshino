@@ -69,6 +69,7 @@
             -- nounlock=true,
             no_deconstruction=false,
             builder_tag = "hoshino",
+            numtogive = 4,
             atlas = "images/inventoryimages/hoshino_item_12mm_shotgun_shells.xml",
             image = "hoshino_item_12mm_shotgun_shells.tex",
             -- sg_state="carvewood",

@@ -175,6 +175,7 @@
                     ["spiderqueen"] = 5,       -- 蜘蛛女王
                     ["spider_spitter"] = 10,    -- 喷射蜘蛛
                     ["spider_warrior"] = 10,    -- 蜘蛛战士
+                    ["spider_healer"] = 8,    -- 蜘蛛治疗师
                 }
                 local num = 0
                 for i = 1, 20, 1 do

@@ -92,6 +92,12 @@ local hoshino_com_spell_cd_timer = Class(function(self, inst)
         inst:DoTaskInTime(0,function()
             self:Unlocked_Spell_Sync()
         end)
+        self:AddOnLoadFn(function()
+            self.unlocked_spells = self:Get("unlocked_spells") or {}
+        end)
+        self:AddOnSaveFn(function()
+            self:Set("unlocked_spells",self.unlocked_spells)
+        end)
     ---------------------------------------------------------------------------
 end,
 nil,

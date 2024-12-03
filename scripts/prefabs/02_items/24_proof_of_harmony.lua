@@ -58,7 +58,7 @@
             ---- 寻找同类prefab
             local new_added_follower_prefab = new_added_follower.prefab
             local x,y,z = player.Transform:GetWorldPosition()
-            local radius = TUNING.HOSHINO_DEBUGGING_MODE and 20 or 8
+            local radius = TUNING.HOSHINO_DEBUGGING_MODE and 20 or 14
             local ents = TheSim:FindEntities(x,0, z, radius or 4)
             local need_to_add_follower_list = {}
             for k, v in pairs(ents) do

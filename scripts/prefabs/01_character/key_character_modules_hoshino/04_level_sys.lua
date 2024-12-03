@@ -102,11 +102,17 @@ return function(inst)
         end)
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 经验广播触发监听
+        local exp_monsters_black_lis = {
+            ["stalker_atrium"] = true,  -- 远古织影者
+        }
         inst:ListenForEvent("hoshino_event.exp_broadcast",function(inst,_table)
             inst:PushEvent("hoshino_event.exp_mult_update")
             local max_health = _table.max_health
-            local prefab = _table.prefab -- 暂时预留，给某些特殊经验爆表的怪。
+            local prefab = tostring(_table.prefab) -- 暂时预留，给某些特殊经验爆表的怪。
             local exp = max_health/10
+            if exp_monsters_black_lis[prefab] then
+                return
+            end
             if max_health >= 100 then
                 inst.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 if TUNING.HOSHINO_DEBUGGING_MODE then

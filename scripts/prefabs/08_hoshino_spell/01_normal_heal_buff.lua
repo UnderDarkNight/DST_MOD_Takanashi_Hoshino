@@ -23,6 +23,15 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 local heal_num = max_health*4/100
                 target.components.health:DoDelta(heal_num,true)
             -------------------------------------------
+            --- 特效
+                if inst.time %2 == 0 then
+                    -- target:SpawnChild("itemmimic_puff")
+                    -- target:SpawnChild("wormwood_lunar_transformation_finish")
+                    local fx = SpawnPrefab("wormwood_lunar_transformation_finish")
+                    fx.Transform:SetPosition(target.Transform:GetWorldPosition())
+                    fx.Transform:SetScale(0.5,0.5,0.5)
+                end
+            -------------------------------------------
         end)
         inst:ListenForEvent("SetTime",function(inst,time)
             inst.time = time

@@ -57,6 +57,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 懒人
     local function pickup(inst, owner)
+        if not inst:HasTag("orange_actived") then
+            return
+        end
         local item = FindPickupableItem(owner, TUNING.ORANGEAMULET_RANGE, false)
         if item == nil then
             return
@@ -153,6 +156,35 @@
         on_unequip_green(inst,owner)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
+--- 右键激活控制器 workable
+    local function workable_replica_fn(inst,replica_com)
+        replica_com:SetText("hoshino_equipment_rune_core",STRINGS.ACTIONS.ACTIVATE.GENERIC)
+        replica_com:SetSGAction("give")
+        replica_com:SetTestFn(function(inst,doer,right_click)
+            if inst:HasTag("orange_actived") then
+                replica_com:SetText("hoshino_equipment_rune_core",STRINGS.ACTIONS.BOAT_MAGNET_BEACON_TURN_OFF)
+            else
+                replica_com:SetText("hoshino_equipment_rune_core",STRINGS.ACTIONS.ACTIVATE.GENERIC)
+            end
+            return inst.replica.inventoryitem:IsGrandOwner(doer)    --- 在背包里才能使用 
+        end)
+    end
+    local function workable_active_fn(inst,doer)
+        if inst:HasTag("orange_actived") then
+            inst:RemoveTag("orange_actived")
+        else
+            inst:AddTag("orange_actived")
+        end
+        return true
+    end
+    local function workable_install(inst)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",workable_replica_fn)
+        if not TheWorld.ismastersim then
+            return
+        end
+        inst:AddComponent("hoshino_com_workable")
+        inst.components.hoshino_com_workable:SetOnWorkFn(workable_active_fn)
+    end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 动画控制器
     local function Player_Near(inst)
@@ -215,7 +247,7 @@ local function fn()
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
-
+    workable_install(inst)
     if not TheWorld.ismastersim then
         return inst
     end

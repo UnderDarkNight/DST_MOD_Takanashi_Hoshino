@@ -77,9 +77,9 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["recipe_desc"] = "荷鲁斯之眼",
             },
             ["hoshino_item_abydos_high_purity_alloy"] = {
-                ["name"] = "阿拜索斯高纯度合金",
-                ["inspect_str"] = "阿拜索斯高纯度合金",
-                ["recipe_desc"] = "阿拜索斯高纯度合金",
+                ["name"] = "阿拜多斯高纯度合金",
+                ["inspect_str"] = "阿拜多斯高纯度合金",
+                ["recipe_desc"] = "阿拜多斯高纯度合金",
             },
             ["hoshino_item_blue_schist"] = {
                 ["name"] = "青辉石",

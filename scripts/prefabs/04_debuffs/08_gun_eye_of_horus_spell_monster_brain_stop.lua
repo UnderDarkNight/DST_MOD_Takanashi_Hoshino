@@ -1,36 +1,82 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
+--[[
+
+]]--
+------------------------------------------------------------------------------------------------------------------------------------------------
+--
+    local function pause_timer_com(inst)
+        if inst.components.timer then
+            local names = {}
+            for timer_name_index, v in pairs(inst.components.timer.timers) do
+                names[timer_name_index] = true
+            end
+            for timer_name_index, v in pairs(names) do
+                inst.components.timer:PauseTimer(timer_name_index)
+            end
+        end
+    end
+    local function resume_timer_com(inst)
+        if inst.components.timer then
+            local names = {}
+            for timer_name_index, v in pairs(inst.components.timer.timers) do
+                names[timer_name_index] = true
+            end
+            for timer_name_index, v in pairs(names) do
+                inst.components.timer:ResumeTimer(timer_name_index)
+            end
+        end
+    end
+    local function stop_sg(inst)
+        if inst.sg then
+            inst.sg:Stop()
+        end
+    end
+    local function start_sg(inst)
+        if inst.sg then
+            inst.sg:Start()
+        end
+    end
+------------------------------------------------------------------------------------------------------------------------------------------------
 
 local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
     inst.entity:SetParent(target.entity)
     inst.Network:SetClassifiedTarget(target)
-    inst.player = target
+    -- inst.player = target
     -----------------------------------------------------
     ---
-        local task = nil
-        inst:ListenForEvent("reset",function()
-            if task then
-                task:Cancel()
+        inst.time = inst.time or 3
+        inst:DoPeriodicTask(1,function()
+            inst.time = inst.time - 1
+            if inst.time <= 0 then
+                inst:Remove()
+
+                target:RestartBrain()
+                start_sg(target)
+                resume_timer_com(target)
+
             end
-            task = inst:DoTaskInTime(2,function()
-                task = nil
-                target:RestartBrain() -- 恢复 思维
-            end)
-            target:StopBrain() -- 停止 思维
         end)
+    -----------------------------------------------------
+    ---
+        target:StopBrain()
+        stop_sg(target)
+        pause_timer_com(target)
+    -----------------------------------------------------
+    ---
     -----------------------------------------------------
 end
 
 local function OnDetached(inst) -- 被外部命令  inst:RemoveDebuff 移除debuff 的时候 执行
-    local player = inst.player
+-- local player = inst.player
 end
 
 local function OnUpdate(inst)
-    local player = inst.player
+-- local player = inst.player
 
 end
 
 local function ExtendDebuff(inst)
-    -- inst.countdown = 3 + (inst._level:value() < CONTROL_LEVEL and EXTEND_TICKS or math.floor(TUNING.STALKER_MINDCONTROL_DURATION / FRAMES + .5))
+    inst.time = (inst.time or 0 ) + 3
 end
 
 local function fn()
@@ -51,13 +97,13 @@ local function fn()
 
     inst:AddComponent("debuff")
     inst.components.debuff:SetAttachedFn(OnAttached)
-    inst.components.debuff.keepondespawn = false -- 是否保持debuff 到下次登陆
+    -- inst.components.debuff.keepondespawn = true -- 是否保持debuff 到下次登陆
     -- inst.components.debuff:SetDetachedFn(inst.Remove)
-    inst.components.debuff:SetDetachedFn(OnDetached)
-    -- inst.components.debuff:SetExtendedFn(ExtendDebuff)
+    -- inst.components.debuff:SetDetachedFn(OnDetached)
+    inst.components.debuff:SetExtendedFn(ExtendDebuff)
     -- ExtendDebuff(inst)
 
-    inst:DoPeriodicTask(1, OnUpdate, nil, TheWorld.ismastersim)  -- 定时执行任务
+    -- inst:DoPeriodicTask(1, OnUpdate, nil, TheWorld.ismastersim)  -- 定时执行任务
 
 
     return inst
