@@ -225,6 +225,9 @@ return function(inst)
                 if inst.level >= 3 then
                     cost_value_delta_per_second = cost_value_delta_per_second + 0.01
                 end
+                if inst.level >= 6 then
+                    cost_value_delta_per_second = cost_value_delta_per_second + 0.02
+                end
                 if inst.level >= 8 then
                     cost_value_delta_per_second = cost_value_delta_per_second + 0.05
                 end

@@ -96,6 +96,17 @@
                     end
                 end)
                 temp_button:SetPosition(x,y)
+                temp_button.black_mask = temp_button.image:AddChild(Image(atlas,"black.tex"))
+                temp_button.black_mask:Hide()
+                function temp_button:SetBlackMask(flag)
+                    if flag then
+                        self.black_mask:Show()
+                    else
+                        self.black_mask:Hide()
+                    end
+                end
+                local button_scale = 128/150
+                temp_button:SetScale(button_scale,button_scale,button_scale)
                 return temp_button
             end
             local function CreateText(font,size,text,color)
@@ -116,9 +127,9 @@
             if character_spell_type == "hoshino_spell_type_normal" then
                     local base_x,base_y = 200,0
                     local delta_x,delta_y = 40,120
-                    local button_spell_text_pt = Vector3(60,25,0)
+                    local button_spell_text_pt = Vector3(60+20,25,0)
                     ---- 
-                    CreateButton(nil,base_x - delta_x,base_y + delta_y,function(temp_button)
+                    CreateButton("normal_heal.tex",base_x - delta_x,base_y + delta_y,function(temp_button)
                         temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("疗愈",button_spell_text_pt.x,button_spell_text_pt.y)
@@ -143,6 +154,7 @@
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
+                            temp_button:SetBlackMask(not can_click_button)
                         end
                         temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
@@ -151,7 +163,7 @@
                         root:CloseSpellRing()                            
                     end)
                     ----
-                    CreateButton(nil,base_x,base_y,function(temp_button)
+                    CreateButton("normal_covert_operation.tex",base_x,base_y,function(temp_button)
                         temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("隐秘行动",button_spell_text_pt.x,button_spell_text_pt.y)
@@ -176,6 +188,7 @@
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
+                            temp_button:SetBlackMask(not can_click_button)
                         end
                         temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
@@ -184,7 +197,7 @@
                         root:CloseSpellRing()  
                     end)
                     ----
-                    CreateButton(nil,base_x -delta_x,base_y - delta_y,function(temp_button)
+                    CreateButton("normal_breakthrough.tex",base_x -delta_x,base_y - delta_y,function(temp_button)
                         temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("突破",button_spell_text_pt.x,button_spell_text_pt.y)
@@ -209,6 +222,7 @@
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
+                            temp_button:SetBlackMask(not can_click_button)
                         end
                         temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
@@ -219,8 +233,8 @@
             elseif character_spell_type == "hoshino_spell_type_swimming" then
                     local base_x,base_y = 240,0
                     local delta_x,delta_y = 80,120
-                    local button_spell_text_pt = Vector3(60,25,0)
-                    CreateButton(nil,base_x - delta_x,base_y + 1.5*delta_y,function(temp_button)
+                    local button_spell_text_pt = Vector3(60+20,25,0)
+                    CreateButton("swimming_ex_support.tex",base_x - delta_x,base_y + 1.5*delta_y,function(temp_button)
                         temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("水上支援",button_spell_text_pt.x,button_spell_text_pt.y)
@@ -245,6 +259,7 @@
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
+                            temp_button:SetBlackMask(not can_click_button)
                         end
                         temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
@@ -252,7 +267,7 @@
                         root:CloseSpellRing()
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "swimming_ex_support"})
                     end)
-                    CreateButton(nil,base_x,base_y + delta_y/2,function(temp_button)
+                    CreateButton("swimming_efficient_work.tex",base_x,base_y + delta_y/2 + 5,function(temp_button)
                         temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("高效率工作",button_spell_text_pt.x,button_spell_text_pt.y)
@@ -277,6 +292,7 @@
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
+                            temp_button:SetBlackMask(not can_click_button)
                         end
                         temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
@@ -284,7 +300,7 @@
                         root:CloseSpellRing()
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "swimming_efficient_work"})
                     end)
-                    CreateButton(nil,base_x,base_y - delta_y/2,function(temp_button)
+                    CreateButton("swimming_emergency_assistance.tex",base_x,base_y - delta_y/2 -5,function(temp_button)
                         temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("急援",button_spell_text_pt.x,button_spell_text_pt.y)
@@ -309,6 +325,7 @@
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
+                            temp_button:SetBlackMask(not can_click_button)
                         end
                         temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()
@@ -319,7 +336,7 @@
                         end
                         button_box:Hide()
                     end)
-                    CreateButton(nil,base_x -delta_x,base_y - 1.5*delta_y,function(temp_button)
+                    CreateButton("swimming_dawn_of_horus.tex",base_x -delta_x,base_y - 1.5*delta_y,function(temp_button)
                         temp_button:Hide()
                         local spell_name = temp_button:AddChild(CreateText(txt_font,45,"",{  255/255 , 255/255 ,255/255 , 1}))
                         spell_name:CustomSetStr("晓之荷鲁斯",button_spell_text_pt.x,button_spell_text_pt.y)
@@ -344,6 +361,7 @@
                             end
                             spell_info:CustomSetStr(info_txt,button_spell_text_pt.x,-button_spell_text_pt.y)
                             temp_button:SetClickable(can_click_button)
+                            temp_button:SetBlackMask(not can_click_button)
                         end
                         temp_button.inst:DoPeriodicTask(2*FRAMES,button_info_update_fn)
                     end,function()

@@ -18,18 +18,20 @@
         }
     end
     local function UPDATE_FN(inst)
-        inst.components.hoshino_com_rpc_event:PushEvent("HOSHINO_INFO_CLIENT_SIDE_UPDATE",GetInfo(inst))        
+        inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.pad_data_update",{
+            info = GetInfo(inst)
+        })
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
-    inst.HOSHINO_INFO_CLIENT_SIDE_DATA = {}
-    inst:ListenForEvent("HOSHINO_INFO_CLIENT_SIDE_UPDATE",function(inst,_table)
-        _table = _table or {}
-        for k, v in pairs(_table) do
-            inst.HOSHINO_INFO_CLIENT_SIDE_DATA[k] = v
-        end
-    end)
+    -- inst.HOSHINO_INFO_CLIENT_SIDE_DATA = {}
+    -- inst:ListenForEvent("HOSHINO_INFO_CLIENT_SIDE_UPDATE",function(inst,_table)
+    --     _table = _table or {}
+    --     for k, v in pairs(_table) do
+    --         inst.HOSHINO_INFO_CLIENT_SIDE_DATA[k] = v
+    --     end
+    -- end)
     if not TheWorld.ismastersim then
         return
     end

@@ -2,6 +2,14 @@
 <Atlas>
 	<Texture filename="hoshino_spell_ring.tex" />
 	<Elements>
-		<Element name="test_img.tex" u1="0.001" u2="0.6865" v2="0.999" v1="0.3135" variant="" />
+		<Element name="black.tex" u1="0.001" u2="0.29196875" v2="0.999" v1="0.70803125" variant="" />
+		<Element name="gun_eye_of_horus_ex.tex" u1="0.29396875" u2="0.5849375" v2="0.999" v1="0.70803125" variant="" />
+		<Element name="normal_breakthrough.tex" u1="0.5869375" u2="0.87790625" v2="0.999" v1="0.70803125" variant="" />
+		<Element name="normal_covert_operation.tex" u1="0.001" u2="0.29196875" v2="0.70603125" v1="0.4150625" variant="" />
+		<Element name="normal_heal.tex" u1="0.29396875" u2="0.5849375" v2="0.70603125" v1="0.4150625" variant="" />
+		<Element name="swimming_dawn_of_horus.tex" u1="0.001" u2="0.29196875" v2="0.4130625" v1="0.12209375" variant="" />
+		<Element name="swimming_efficient_work.tex" u1="0.29396875" u2="0.5849375" v2="0.4130625" v1="0.12209375" variant="" />
+		<Element name="swimming_emergency_assistance.tex" u1="0.5869375" u2="0.87790625" v2="0.70603125" v1="0.4150625" variant="" />
+		<Element name="swimming_ex_support.tex" u1="0.5869375" u2="0.87790625" v2="0.4130625" v1="0.12209375" variant="" />
 	</Elements>
 </Atlas>

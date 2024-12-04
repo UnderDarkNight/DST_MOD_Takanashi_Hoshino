@@ -377,7 +377,12 @@ return function(inst)
     -- 初始化默认拥有的技能
         inst:DoTaskInTime(0,function()
             inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("normal_breakthrough")
-            inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("swimming_efficient_work")        
+            inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("swimming_efficient_work")
+            if TUNING.HOSHINO_DEBUGGING_MODE then
+                for spell_name, v in pairs(all_spell_names) do
+                    inst.components.hoshino_com_spell_cd_timer:Unlock_Spell(spell_name)                    
+                end
+            end
         end)
     -------------------------------------------------------------------------
 

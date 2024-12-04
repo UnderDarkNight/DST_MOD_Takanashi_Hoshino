@@ -80,9 +80,10 @@
                         local damage,spdamage = inst.components.weapon:GetDamage(player,target)
                         target.components.combat:GetAttacked(player,damage,inst,nil,spdamage)
                     end
-                    SpawnPrefab("balloon_pop_head").Transform:SetPosition(target.Transform:GetWorldPosition())
+                    SpawnPrefab("halloween_firepuff_3").Transform:SetPosition(target.Transform:GetWorldPosition())
+                    -- SpawnPrefab("balloon_pop_head").Transform:SetPosition(target.Transform:GetWorldPosition())
                     -- SpawnPrefab("statue_transition_2").Transform:SetPosition(target.Transform:GetWorldPosition())
-                    SpawnPrefab("chester_transform_fx").Transform:SetPosition(target.Transform:GetWorldPosition())
+                    -- SpawnPrefab("chester_transform_fx").Transform:SetPosition(target.Transform:GetWorldPosition())
                 end
             end,
         })
