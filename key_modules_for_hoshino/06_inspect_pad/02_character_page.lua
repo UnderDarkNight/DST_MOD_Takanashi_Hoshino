@@ -23,6 +23,11 @@
 ---
     TUNING.HOSHINO_INSPECT_PAD_FNS = TUNING.HOSHINO_INSPECT_PAD_FNS or{}    
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    local function GetInfoData()
+        return ThePlayer.HOSHINO_INFO_CLIENT_SIDE_DATA or {}
+    end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 装备强化配方页面
     local current_display_recipes_page = 1
     local function Create_Special_Equipment_Recipes_Box(page,MainScale)
@@ -233,6 +238,42 @@ local function page_create(front_root,MainScale)
                 local speed_txt = status_box:AddChild(Text(CODEFONT,35,"1",{ 126/255 , 133/255 ,143/255 , 1}))
                 speed_txt:SetPosition(60,150)
 
+                local function info_update()
+                    local data = GetInfoData() or {}
+                    --- 护盾值
+                    if data.defence then
+                        defensive_txt:SetString(tostring(data.defence))
+                        defensive_txt:SetPosition(120,230)
+                        defensive_txt:SetScale(0.7,1)
+                    else
+                        defensive_txt:SetString("N/A")
+                        defensive_txt:SetPosition(60,230)
+                        defensive_txt:SetScale(1,1)
+                    end
+                    --- 伤害值
+                    if data.damage then
+                        damage_txt:SetString(tostring(data.damage))
+                        damage_txt:SetPosition(120,190)
+                        damage_txt:SetScale(0.7,1)
+                    else
+                        damage_txt:SetString("N/A")
+                        damage_txt:SetPosition(60,190)
+                        damage_txt:SetScale(1,1)
+                    end
+                    --- 速度值
+                    if data.speed then
+                        speed_txt:SetString(tostring(data.speed))
+                        speed_txt:SetPosition(120,150)
+                        speed_txt:SetScale(0.7,1)
+                    else
+                        speed_txt:SetString("N/A")
+                        speed_txt:SetPosition(60,150)
+                        speed_txt:SetScale(1,1)
+                    end
+                end
+                info_update()
+                page.inst:ListenForEvent("HOSHINO_INFO_CLIENT_SIDE_UPDATE",info_update,ThePlayer)
+
                 local function RoundToTwoDecimalPlaces(number)
                     return math.floor(number * 100 + 0.5) / 100
                 end
@@ -244,7 +285,7 @@ local function page_create(front_root,MainScale)
 
                     -- defensive_txt:SetString(tostring(ThePlayer.replica.defense:GetCurrent())) --- 防御
                     -- damage_txt:SetString(tostring(ThePlayer.replica.damage:GetCurrent())) --- 伤害
-                    speed_txt:SetString(tostring( ThePlayer.components.locomotor and RoundToTwoDecimalPlaces(ThePlayer.components.locomotor:GetRunSpeed()) or "N/A"  )) --- 速度
+                    -- speed_txt:SetString(tostring( ThePlayer.components.locomotor and RoundToTwoDecimalPlaces(ThePlayer.components.locomotor:GetRunSpeed()) or "N/A"  )) --- 速度
                 end)
 
             --------------------------------------------------------------------------------------
