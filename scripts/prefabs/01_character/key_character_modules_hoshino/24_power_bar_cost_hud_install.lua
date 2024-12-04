@@ -122,6 +122,7 @@
                     -- current = math.floor(current*10+0.5)/10
 
                     value_text:SetString(string.format("%.1f", current))
+                    -- value_text:SetString(tostring(current))
                     local precent = math.clamp(percent+0.02,0,1) --- 修正一下动画的偏差。
                     -- print("hud power bar cost percent:",current,max,precent)
                     bar_animstate:SetPercent("idle",percent) 

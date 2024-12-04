@@ -21,24 +21,25 @@ local flg,error_code = pcall(function()
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --         cards = {
-        --             -- "card_golden",
-        --             -- "card_white",
-        --             -- "card_colourful",
-        --             -- "card_colourful",
-        --             -- "card_golden",
-        --             -- "card_black",
-        --             -- "kill_and_explode",
-        --             -- "unlock_spell_normal_ex",
-        --             -- "unlock_spell_swimming_ex",
-        --             "unlock_spell_all_normal",
-        --             -- "unlock_spell_all_swimming",
-        --         },
-        --     }
-        -- )
-        -- ThePlayer.components.inventory:GiveItem(item)
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+                cards = {
+                    -- "card_golden",
+                    -- "card_white",
+                    -- "card_colourful",
+                    -- "card_colourful",
+                    -- "card_golden",
+                    -- "card_black",
+                    -- "kill_and_explode",
+                    "unlock_spell_normal_ex",
+                    -- "unlock_spell_swimming_ex",
+                    -- "unlock_spell_all_normal",
+                    -- "unlock_spell_all_swimming",
+                    -- "kill_and_explode",
+                },
+            }
+        )
+        ThePlayer.components.inventory:GiveItem(item)
         -- local item = SpawnPrefab("hoshino_item_cards_pack")
         -- item:PushEvent("Set",{
         --         cards = {
@@ -195,29 +196,8 @@ local flg,error_code = pcall(function()
     ---
     ----------------------------------------------------------------------------------------------------------------
     ---
-        local function GetInfo(inst)
-            local combat = inst.components.combat
-            local speed = inst.components.locomotor
-            local health = inst.components.health
-
-            -- local damage_1 = 
-            -- print("damage_1",damage_1)
-            -- local damage_1 = string.format("%.2f%",(combat.damagemultiplier or 1)* combat.externaldamagemultipliers:Get()* 100)
-            -- local damage_2 = string.format("%.2f", (combat.damagebonus or 0) )
-            -- local defence = string.format("%.2f%% * %.2f%%",combat.externaldamagetakenmultipliers:Get()* 100, math.clamp(1 - health.absorb, 0, 1) * math.clamp(1 - health.externalabsorbmodifiers:Get(), 0, 1)*100)
-            -- local speed = string.format("%.2f/%.2f,%.2f/%.2f", speed.walkspeed, speed:GetWalkSpeed(), speed.runspeed, speed:GetRunSpeed() )
-            -- print(damage_1,damage_2,defence,speed)
-
-            return {
-                damage = string.format("%.2f%%", (combat.damagemultiplier or 1)* combat.externaldamagemultipliers:Get()* 100) .." + ".. string.format("%.2f", (combat.damagebonus or 0) ),
-                defence = string.format("%.2f%% * %.2f%%",combat.externaldamagetakenmultipliers:Get()* 100, math.clamp(1 - health.absorb, 0, 1) * math.clamp(1 - health.externalabsorbmodifiers:Get(), 0, 1)*100) ,
-                speed = string.format("%.2f/%.2f - %.2f/%.2f", speed.walkspeed, speed:GetWalkSpeed(), speed.runspeed, speed:GetRunSpeed() ),
-            }
-        end
-        local ret = GetInfo(ThePlayer)
-        for k, v in pairs(ret) do
-            print(k,v)
-        end
+    -- local target_num = 0
+    -- TheNet:Announce("触发连锁爆炸,炸到了"..target_num.."个生物")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

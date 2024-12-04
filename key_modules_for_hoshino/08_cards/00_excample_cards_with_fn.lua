@@ -348,7 +348,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------
-    -- 20、【白】【汲取】【从食物获取的「正向」三维x2的同时，增加厨子的挑食机制】【从卡池移除】
+    -- 20、【白】【汲取】【从食物获取的「正向」三维x2.5的同时，增加厨子的挑食机制】【从卡池移除】
         ["warly_eater_modules_unlock"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
@@ -359,7 +359,7 @@ local cards = {
                 inst:PushEvent("player_unlocked_warly_eater_modules")
             end,
             text = function(inst)
-                return "从食物获取的「正向」三维x2的同时，增加厨子的挑食机制"
+                return "从食物获取的「正向」三维x2.5的同时，增加厨子的挑食机制"
             end,
         },
     --------------------------------------------------------------------------------

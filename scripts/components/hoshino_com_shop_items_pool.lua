@@ -157,8 +157,8 @@ nil,
                 end
             elseif math.random(1000)/1000 <= 0.3 or TUNING.HOSHINO_DEBUGGING_MODE then
                 --- 没有特价商品，则随机一个
-                for i = 1, 50, 1 do
-                    local temp_item_data = ret[math.random(#items_data)]
+                for i = 1, 50, 1 do  -- 最多尝试50次
+                    local temp_item_data = items_data[math.random(#items_data)]
                     if temp_item_data.price >= 2 then
                         temp_item_data.price = math.ceil(temp_item_data.price * 0.5)
                         temp_item_data.special_price = true

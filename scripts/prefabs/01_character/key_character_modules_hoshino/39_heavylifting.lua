@@ -39,13 +39,13 @@ return function(inst)
 
     local function add_speed_mult()
         inst:DoTaskInTime(0,function()            
-            if inst.components.mcoda_com_level_sys:GetLevel() >= 5 then
+            -- if inst.components.mcoda_com_level_sys:GetLevel() >= 5 then
                 if ThePlayer and ThePlayer == inst then   --- 没洞穴的时候，直接上加速器
                     inst.components.locomotor:SetExternalSpeedMultiplier(speed_mult_inst, "hoshino_heavy_run", 1/TUNING.HEAVY_SPEED_MULT)
                 else    -- 有洞穴就上tag
                     inst:AddTag("mightiness_mighty")    --- client 端 走路动画需要
                 end
-            end
+            -- end
         end)
 
     end

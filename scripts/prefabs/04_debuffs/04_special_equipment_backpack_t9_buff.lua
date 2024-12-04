@@ -50,6 +50,11 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             end)            
         end
     -----------------------------------------------------
+    ---
+        inst:ListenForEvent("death",function()
+            inst:Remove()
+        end,target)
+    -----------------------------------------------------
 end
 
 local function OnDetached(inst) -- 被外部命令  inst:RemoveDebuff 移除debuff 的时候 执行

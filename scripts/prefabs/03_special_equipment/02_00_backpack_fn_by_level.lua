@@ -199,7 +199,7 @@ return function(inst)
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 inst:DoPeriodicTask(15,function()
                     local x,y,z = owner.Transform:GetWorldPosition()
-                    local ents = TheSim:FindEntities(x,y,z,30,{"player"})
+                    local ents = TheSim:FindEntities(x,y,z,30,{"player"},{"playerghost"})
                     for k, temp_player in pairs(ents) do
                         if temp_player ~= owner or TUNING.HOSHINO_DEBUGGING_MODE then                            
                             local debuff_prefab = "hoshino_buff_special_equipment_backpack_t9"
@@ -231,8 +231,9 @@ return function(inst)
             --------------------------------------------------------------------------
             local cost_value_delta_task = nil
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                if cost_value_delta_per_second == nil then
-                    cost_value_delta_per_second = inst:DoPeriodicTask(1,function()
+                if cost_value_delta_task == nil then
+                    cost_value_delta_task = inst:DoPeriodicTask(1,function()
+                        -- TheNet:Announce("特殊装备+Cost"..cost_value_delta_per_second)
                         owner.components.hoshino_com_power_cost:DoDelta(cost_value_delta_per_second)
                     end)
                 end

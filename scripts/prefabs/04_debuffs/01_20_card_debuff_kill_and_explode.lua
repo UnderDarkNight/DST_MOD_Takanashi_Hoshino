@@ -35,15 +35,19 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             local killed_monster = _table and _table.victim
             -- print("fake error :killed",killed_monster)
             if killed_monster == nil then
+                TheNet:Announce("触发连锁爆炸, 不知道击杀了什么！！！！！！！")
+
                 return
             end
             local pt = Vector3(killed_monster.Transform:GetWorldPosition())
             local ents = TheSim:FindEntities(pt.x,0,pt.z,20,musthavetags,canthavetags,musthaveoneoftags)
+            local target_num = 0
             for k, temp_monster in pairs(ents) do
                 -- print("fake error searching",temp_monster,CanBeAttack(temp_monster,target))
                 if temp_monster and temp_monster ~= target and CanBeAttack(temp_monster,target) then
                     -- target.components.combat:DoAttack(temp_monster,inst)
                     temp_monster.components.combat:GetAttacked(target,200,inst)
+                    target_num = target_num + 1
                 end
             end
             SpawnPrefab("hoshino_sfx_explode"):PushEvent("Set",{
@@ -51,6 +55,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 pt = pt,
                 scale = 2,
             })
+            TheNet:Announce("触发连锁爆炸,炸到了 "..target_num.." 个生物")
         end)
     -----------------------------------------------------
     -- 
