@@ -265,7 +265,7 @@ local function fn()
     --- 
         inst:AddTag("nosteal")
         inst:AddTag("hoshino_task_item")
-        inst.type = "gray"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
+        inst.type = "white"  -- "white" "golden" "blue" "colourful" --- 给任务栏用的
     --------------------------------------------------------------------------------------------
     --- 数据组件
         if TheWorld.ismastersim then

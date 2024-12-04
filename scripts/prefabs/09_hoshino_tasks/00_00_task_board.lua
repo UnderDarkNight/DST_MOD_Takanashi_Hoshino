@@ -14,6 +14,7 @@ local assets =
     Asset("IMAGE", "images/widgets/hoshino_building_task_board_widget.tex"),
     Asset("ATLAS", "images/widgets/hoshino_building_task_board_widget.xml"),
 }
+local ANIM_SCALE = 1.5
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- 安装容器界面
     local empty_fn = function()    end
@@ -168,36 +169,25 @@ local assets =
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 外观更新
-    local item_type = {
-        ["nil"] = 0,
-        ["gray"] = 1,
-        ["blue"] = 2,
-        ["golden"] = 3,
-        ["colourful"] = 4,
-    }
-    local item_type_id = {
-        [0] = "gray",
-        [1] = "gray",
-        [2] = "blue",
-        [3] = "golden",
-        [4] = "colourful",
+    local item_types = {
+        ["white"] = true,
+        ["golden"] = true,
+        ["blue"] = true,
+        ["colourful"] = true,
     }
     local function anim_display_update_fn_install(inst)
-        inst:ListenForEvent("task_item_update",function()
-            
-            local ret_display_type = 1
-            local all_items = inst.components.container:GetAllItems()
-            for k, item in pairs(all_items) do
-                if item and item.type then
-                    local item_type_num = item_type[tostring(item.type)]
-                    if item_type_num > ret_display_type then
-                        ret_display_type = item_type_num
-                    end
+        inst:ListenForEvent("task_item_update",function()            
+            local all_items = inst.components.container.slots or {}
+            for i = 1, 6, 1 do
+                local item = all_items[i]
+                local slot_index = "slot_"..tostring(i)
+                if item and item.type and item_types[item.type] then
+                    inst.AnimState:ShowSymbol(slot_index)
+                    inst.AnimState:OverrideSymbol(slot_index,"hoshino_building_task_board",item.type)
+                else
+                    inst.AnimState:HideSymbol(slot_index)
                 end
             end
-
-            local ret_type_index = item_type_id[ret_display_type] or "gray"
-            inst.AnimState:PlayAnimation("idle_"..ret_type_index)
         end)
         inst:DoTaskInTime(1,function()
             inst:PushEvent("task_item_update")
@@ -278,6 +268,7 @@ local function fn()
     inst.AnimState:SetBank("hoshino_building_task_board")
     inst.AnimState:SetBuild("hoshino_building_task_board")
     inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
 
     inst:AddTag("irreplaceable")
     inst:AddTag("structure")
@@ -368,6 +359,7 @@ local function placer_postinit_fn(inst)
     -- local scale = 1.5
     -- inst.AnimState:SetScale(scale,scale,scale)
     -- inst.AnimState:Hide("SNOW")
+    inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
 end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

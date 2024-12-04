@@ -195,24 +195,7 @@ local flg,error_code = pcall(function()
     ---
     ----------------------------------------------------------------------------------------------------------------
     ---
-        -- local inst = TheSim:FindFirstEntityWithTag("hoshino_building_ether_pool")
-        -- RemovePhysicsColliders(inst)
-    ----------------------------------------------------------------------------------------------------------------
-    ---
-    ----------------------------------------------------------------------------------------------------------------
-    ---
-        -- local target = ThePlayer
-        -- local fx = SpawnPrefab("wormwood_lunar_transformation_finish")
-        -- fx.Transform:SetPosition(target.Transform:GetWorldPosition())
-        -- fx.Transform:SetScale(0.5,0.5,0.5)
 
-        -- ThePlayer.__light_test = function(fake_light)
-        --     fake_light.Light:SetFalloff(0.1)
-        --     fake_light.Light:SetIntensity(.9)
-        --     fake_light.Light:SetRadius(40)
-        --     fake_light.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
-        --     fake_light.Light:Enable(true)
-        -- end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -30,7 +30,7 @@
     local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 专属参数
-    local MISSION_TYPE = "blue" -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
+    local MISSION_TYPE = "blue" -- "white" "golden" "blue" "colourful" --- 给任务栏用的
     
     local MISSION_ITEM_1 = "decor_pictureframe"
     local MISSION_ITEM_1_NUM = 1
@@ -276,7 +276,7 @@ local function fn()
     --- 
         inst:AddTag("nosteal")
         inst:AddTag("hoshino_task_item")
-        inst.type = MISSION_TYPE or "gray"  -- "gray" "golden" "blue" "colourful" --- 给任务栏用的
+        inst.type = MISSION_TYPE or "gray"  -- "white" "golden" "blue" "colourful" --- 给任务栏用的
     --------------------------------------------------------------------------------------------
     --- 数据组件
         if TheWorld.ismastersim then
