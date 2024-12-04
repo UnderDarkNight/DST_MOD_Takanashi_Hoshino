@@ -503,6 +503,26 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "柴关拉面",
                 ["recipe_desc"] = "柴关拉面",
             },
+            ["hoshino_food_shiba_seki_ramen_spice_sugar"] = {
+                ["name"] = "蜜制柴关拉面",
+                ["inspect_str"] = "蜜制柴关拉面",
+                ["recipe_desc"] = "蜜制柴关拉面",
+            },
+            ["hoshino_food_shiba_seki_ramen_spice_salt"] = {
+                ["name"] = "特咸柴关拉面",
+                ["inspect_str"] = "特咸柴关拉面",
+                ["recipe_desc"] = "特咸柴关拉面",
+            },
+            ["hoshino_food_shiba_seki_ramen_spice_garlic"] = {
+                ["name"] = "蒜香柴关拉面",
+                ["inspect_str"] = "蒜香柴关拉面",
+                ["recipe_desc"] = "蒜香柴关拉面",
+            },
+            ["hoshino_food_shiba_seki_ramen_spice_chili"] = {
+                ["name"] = "特辣柴关拉面",
+                ["inspect_str"] = "特辣柴关拉面",
+                ["recipe_desc"] = "特辣柴关拉面",
+            },
             ["hoshino_food_mandrake_concentrate"] = {
                 ["name"] = "曼德拉草浓缩液",
                 ["inspect_str"] = "曼德拉草浓缩液",

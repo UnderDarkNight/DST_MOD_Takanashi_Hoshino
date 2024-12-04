@@ -13,6 +13,9 @@ TUNING["hoshino.Config"].Language = GetModConfigData("LANGUAGE")
     TUNING["hoshino.Config"].HIDE_CLOTHS = GetModConfigData("HIDE_CLOTHS")     --- 隐藏衣服
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 通告类
+    TUNING["hoshino.Config"].LEVEL_UP_ANNOUNCEMENT = GetModConfigData("LEVEL_UP_ANNOUNCEMENT")     --- 升级通告
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 物品类
     TUNING["hoshino.Config"].COLOURFUL_EGG_ITEMS = GetModConfigData("COLOURFUL_EGG_ITEMS")     --- 彩蛋物品
 --------------------------------------------------------------------------------------------------------------------------------------------------------

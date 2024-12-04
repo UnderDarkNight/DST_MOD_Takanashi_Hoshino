@@ -21,25 +21,25 @@ local flg,error_code = pcall(function()
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        local item = SpawnPrefab("hoshino_item_cards_pack")
-        item:PushEvent("Set",{
-                cards = {
-                    -- "card_golden",
-                    -- "card_white",
-                    -- "card_colourful",
-                    -- "card_colourful",
-                    -- "card_golden",
-                    -- "card_black",
-                    -- "kill_and_explode",
-                    "unlock_spell_normal_ex",
-                    -- "unlock_spell_swimming_ex",
-                    -- "unlock_spell_all_normal",
-                    -- "unlock_spell_all_swimming",
-                    -- "kill_and_explode",
-                },
-            }
-        )
-        ThePlayer.components.inventory:GiveItem(item)
+        -- local item = SpawnPrefab("hoshino_item_cards_pack")
+        -- item:PushEvent("Set",{
+        --         cards = {
+        --             -- "card_golden",
+        --             -- "card_white",
+        --             -- "card_colourful",
+        --             -- "card_colourful",
+        --             -- "card_golden",
+        --             -- "card_black",
+        --             -- "kill_and_explode",
+        --             "unlock_spell_normal_ex",
+        --             -- "unlock_spell_swimming_ex",
+        --             -- "unlock_spell_all_normal",
+        --             -- "unlock_spell_all_swimming",
+        --             -- "kill_and_explode",
+        --         },
+        --     }
+        -- )
+        -- ThePlayer.components.inventory:GiveItem(item)
         -- local item = SpawnPrefab("hoshino_item_cards_pack")
         -- item:PushEvent("Set",{
         --         cards = {
@@ -198,6 +198,13 @@ local flg,error_code = pcall(function()
     ---
     -- local target_num = 0
     -- TheNet:Announce("触发连锁爆炸,炸到了"..target_num.."个生物")
+        if  ThePlayer.__old_AddDebuff == nil then
+            ThePlayer.__old_AddDebuff = ThePlayer.AddDebuff
+            ThePlayer.AddDebuff = function(inst,debuff_name,debuff_prefab,...)
+                print("AddDebuff",debuff_name,debuff_prefab,...)
+                return inst:__old_AddDebuff(debuff_name,debuff_prefab,...)
+            end
+        end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

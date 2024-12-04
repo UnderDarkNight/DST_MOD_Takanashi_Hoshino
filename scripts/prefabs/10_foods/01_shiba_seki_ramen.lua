@@ -84,4 +84,64 @@ local function fn()
     return inst
 end
 
+---- 甜味拉面
+local function _spice_sugar()
+    local inst = fn()
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst.components.edible:SetOnEatenFn(function(inst,eater)
+        if eater and eater:HasTag("player") then
+            eater:AddDebuff("buff_workeffectiveness","buff_workeffectiveness")
+        end
+    end)
+    return inst
+end
+---- 咸的拉面
+local function _spice_salt()
+    local inst = fn()
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst.components.edible:SetOnEatenFn(function(inst,eater)
+        if eater and eater:HasTag("player") then
+            -- eater:AddDebuff("playerabsorption","playerabsorption")
+        end
+    end)
+    inst.components.edible.healthvalue = inst.components.edible.healthvalue * 1.25
+    return inst
+end
+---- 蒜香拉面
+local function _spice_garlic()
+    local inst = fn()
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst.components.edible:SetOnEatenFn(function(inst,eater)
+        if eater and eater:HasTag("player") then
+            eater:AddDebuff("buff_playerabsorption","buff_playerabsorption")
+        end
+    end)
+    return inst
+end
+---- 辣味
+local function _spice_chili()
+    local inst = fn()
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst.components.edible:SetOnEatenFn(function(inst,eater)
+        if eater and eater:HasTag("player") then
+            eater:AddDebuff("buff_attack","buff_attack")
+        end
+    end)
+    return inst
+end
+
+
+
 return Prefab("hoshino_food_shiba_seki_ramen", fn, assets)
+,Prefab("hoshino_food_shiba_seki_ramen_spice_sugar", _spice_sugar, assets),
+    Prefab("hoshino_food_shiba_seki_ramen_spice_salt", _spice_salt, assets),
+    Prefab("hoshino_food_shiba_seki_ramen_spice_garlic", _spice_garlic, assets),
+    Prefab("hoshino_food_shiba_seki_ramen_spice_chili", _spice_chili, assets)

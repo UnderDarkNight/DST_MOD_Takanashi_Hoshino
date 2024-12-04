@@ -66,7 +66,9 @@ return function(inst)
                     inst.components.hoshino_com_debuff:Set("level_up_card_pack_gift_blocker",0)
                 end
             --- 系统广播
-                TheNet:Announce("恭喜玩家【"..inst:GetDisplayName().."】升级到"..level.."级")
+                if TUNING["hoshino.Config"].LEVEL_UP_ANNOUNCEMENT then
+                    TheNet:Announce("恭喜玩家【"..inst:GetDisplayName().."】升级到"..level.."级")
+                end
         end)
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 经验值上限更新函数。模块初始化的时候也会执行一次。
@@ -135,7 +137,8 @@ return function(inst)
         --- 采集
             inst:ListenForEvent("picksomething",function(inst,_table)
                 inst:PushEvent("hoshino_event.exp_mult_update")
-                inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
+                local max_exp = inst.components.hoshino_com_level_sys:GetMaxExp()
+                inst.components.hoshino_com_level_sys:Exp_DoDelta( 1 + max_exp*0.1/100 )
             end)
         -----------------------------------------------------------------------------------------
         --- 吃东西

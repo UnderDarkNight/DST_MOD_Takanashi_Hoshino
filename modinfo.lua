@@ -229,6 +229,18 @@ configuration_options = {
     default = false
   },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
+  {name = "AAAA",label = IsChinese() and GetTitle("通告") or GetTitle("Announcements"),hover = "",options = {{description = "",data = 0}},default = 0},
+  {
+      name = "LEVEL_UP_ANNOUNCEMENT",
+      label = IsChinese() and "升级通告" or "Level Up Announcement",
+      hover = IsChinese() and "升级通告" or "Level Up Announcement",
+      options = {
+        {description = "OFF",data = false},
+        {description = "ON",data = true},
+      },
+      default = true
+  },
+------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("物品类") or GetTitle("Items"),hover = "",options = {{description = "",data = 0}},default = 0},
   {
       name = "COLOURFUL_EGG_ITEMS",

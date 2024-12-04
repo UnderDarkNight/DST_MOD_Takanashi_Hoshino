@@ -29,9 +29,12 @@ return function(inst)
     inst:DoPeriodicTask(1,function()
         inst.components.hoshino_com_power_cost:DoDelta(0.01)
     end)
-    ---- 吃任何东西都会回复
-    inst:ListenForEvent("oneat",function()
-        inst.components.hoshino_com_power_cost:DoDelta(0.5)        
+    ---- 吃料理恢复0.2cost。
+    inst:ListenForEvent("oneat",function(_,_table)
+        local food = _table and _table.food 
+        if food and food:HasOneOfTags({"preparedfood","pre-preparedfood"}) then
+            inst.components.hoshino_com_power_cost:DoDelta(0.2)
+        end
     end)
 
 end
