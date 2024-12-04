@@ -98,7 +98,12 @@ return function(inst)
                 return
             end
             local mult = inst.components.combat.externaldamagemultipliers:Get() -- 伤害倍增器。
-            target.components.health:DoDelta(-value*mult,nil, nil, nil, nil, true)
+            local real_damage = value*mult
+            local monster_current_health = target.components.health.currenthealth
+            target.components.health:DoDelta(-real_damage,nil, nil, nil, nil, true)
+            if real_damage >= monster_current_health then
+                inst:PushEvent("hoshino_event.eye_of_horus_real_damage_kill_monster",{target=target})
+            end
         end
         local function SetWeaponParam(weapon) --- 配置攻击距离 和 伤害。
             weapon.components.weapon:SetDamage(GetDMG())

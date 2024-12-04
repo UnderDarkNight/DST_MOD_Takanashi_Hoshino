@@ -31,12 +31,11 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
         
     -----------------------------------------------------
     --- 
-        target:ListenForEvent("killed",function(_,_table)
-            local killed_monster = _table and _table.victim
+        local function explode_fn(_,_table)
+            local killed_monster = _table and _table.victim or _table.target
             -- print("fake error :killed",killed_monster)
             if killed_monster == nil then
-                TheNet:Announce("触发连锁爆炸, 不知道击杀了什么！！！！！！！")
-
+                -- TheNet:Announce("触发连锁爆炸, 不知道击杀了什么！！！！！！！")
                 return
             end
             local pt = Vector3(killed_monster.Transform:GetWorldPosition())
@@ -55,8 +54,10 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 pt = pt,
                 scale = 2,
             })
-            TheNet:Announce("触发连锁爆炸,炸到了 "..target_num.." 个生物")
-        end)
+            -- TheNet:Announce("触发连锁爆炸,炸到了 "..target_num.." 个生物")
+        end
+        target:ListenForEvent("killed",explode_fn)
+        target:ListenForEvent("hoshino_event.eye_of_horus_real_damage_kill_monster",explode_fn)
     -----------------------------------------------------
     -- 
         -- print("fake error debuff 成功安装到",target)
