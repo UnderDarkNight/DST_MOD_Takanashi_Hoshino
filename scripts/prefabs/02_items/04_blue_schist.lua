@@ -36,6 +36,49 @@ local assets = {
         end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
+--- 动画控制器
+    local function Player_Near(inst)
+        if inst:IsOnOcean(false) then
+            inst.AnimState:HideSymbol("shadow")
+        else
+            inst.AnimState:ShowSymbol("shadow")
+        end
+        inst.AnimState:PlayAnimation("proximity_pre")
+        inst.AnimState:PushAnimation("proximity_loop",true)
+    end
+    local function Player_Far(inst)
+        if inst:IsOnOcean(false) then
+            inst.AnimState:HideSymbol("shadow")
+        else
+            inst.AnimState:ShowSymbol("shadow")
+        end
+        -- inst.AnimState:PlayAnimation("proximity_loop")
+        inst.AnimState:PushAnimation("proximity_pst")
+        inst.AnimState:PushAnimation("idle",true)
+    end
+    local function DropInWater(inst)
+        inst.AnimState:HideSymbol("shadow")
+    end
+    local function DropLanded(inst)
+        inst.AnimState:ShowSymbol("shadow")
+    end
+    local function core_anim_controller_install(inst)
+        inst:AddComponent("playerprox")
+        inst.components.playerprox:SetDist(2, 3)
+        inst.components.playerprox:SetOnPlayerNear(Player_Near)
+        inst.components.playerprox:SetOnPlayerFar(Player_Far)
+        --- 落水影子
+        local function shadow_init(inst)
+            if inst:IsOnOcean(false) then       --- 如果在海里（不包括船）
+                DropInWater(inst)
+            else                                
+                DropLanded(inst)
+            end
+        end
+        inst:ListenForEvent("on_landed",shadow_init)
+        shadow_init(inst)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
 
     local inst = CreateEntity() -- 创建实体
@@ -45,11 +88,11 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("hoshino_item_blue_schist") -- 地上动画
+    inst.AnimState:SetBank("moonrock_seed") -- 地上动画
     inst.AnimState:SetBuild("hoshino_item_blue_schist") -- 材质包，就是anim里的zip包
     inst.AnimState:PlayAnimation("idle",true) -- 默认播放哪个动画
     -- inst.AnimState:SetScale(1.5,1.5,1.5)
-    -- MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst)
 
     -- inst:AddTag("frozen")   --- 给腐烂组件用的
     -- inst:AddTag("preparedfood")
@@ -66,24 +109,27 @@ local function fn()
         -- inst.components.inventoryitem:ChangeImageName("leafymeatburger")
         inst.components.inventoryitem.imagename = "hoshino_item_blue_schist"
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_item_blue_schist.xml"
-        inst.components.inventoryitem:SetSinks(true)    -- 掉水里消失
+        -- inst.components.inventoryitem:SetSinks(true)    -- 掉水里消失
     -------------------------------------------------------------------
         inst:AddComponent("stackable") -- 可堆叠
         inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
     -------------------------------------------------------------------
         MakeHauntableLaunch(inst)
     -------------------------------------------------------------------
-    --- 落水影子
-        local function shadow_init(inst)
-            if inst:IsOnOcean(false) then       --- 如果在海里（不包括船）
-                inst.AnimState:Hide("SHADOW")
-                -- inst:Remove()
-            else                                
-                -- inst.AnimState:Show("SHADOW")
-            end
-        end
-        inst:ListenForEvent("on_landed",shadow_init)
-        shadow_init(inst)
+    -- --- 落水影子
+    --     local function shadow_init(inst)
+    --         if inst:IsOnOcean(false) then       --- 如果在海里（不包括船）
+    --             inst.AnimState:Hide("SHADOW")
+    --             -- inst:Remove()
+    --         else                                
+    --             -- inst.AnimState:Show("SHADOW")
+    --         end
+    --     end
+    --     inst:ListenForEvent("on_landed",shadow_init)
+    --     shadow_init(inst)
+    -------------------------------------------------------------------
+    --
+        core_anim_controller_install(inst)
     -------------------------------------------------------------------
     
     return inst
