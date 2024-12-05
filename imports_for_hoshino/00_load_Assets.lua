@@ -48,6 +48,10 @@ local temp_assets = {
 		Asset("IMAGE", "images/inspect_pad/little_smart_phone.tex"),			--- 智能手机素材
 		Asset("ATLAS", "images/inspect_pad/little_smart_phone.xml"),
 	---------------------------------------------------------------------------
+	--- 无人机控制器素材
+		Asset("IMAGE", "images/widgets/hoshino_drone_controller.tex"),			
+		Asset("ATLAS", "images/widgets/hoshino_drone_controller.xml"),
+	---------------------------------------------------------------------------
 	--- 能量条
 		Asset("ANIM", "anim/hoshino_power_bar_cost.zip"),	--- COST 能量条
 	---------------------------------------------------------------------------

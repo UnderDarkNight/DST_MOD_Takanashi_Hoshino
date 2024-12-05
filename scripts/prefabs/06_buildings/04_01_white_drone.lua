@@ -210,6 +210,19 @@
         end
     end    
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 玩家遥控模块
+    local function drone_controller_install(inst)
+        local fn = require("prefabs/06_buildings/04_08_drone_controller")
+        if type(fn) == "function" then
+            fn(inst)
+        end
+        if not TheWorld.ismastersim then
+            return
+        end
+        --- 强制转换成物品
+        inst:ListenForEvent("command.trans_2_item",OnFuelEmpty)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- building
     local function fn()
         local inst = CreateEntity()
@@ -235,7 +248,10 @@
         inst.AnimState:PlayAnimation("ground")
 
         inst.Transform:SetFourFaced()
-
+        -----------------------------------------------------------------
+        --- 
+            inst._linked_player = net_entity(inst.GUID,"_linked_player","_linked_player")
+        -----------------------------------------------------------------
         inst.entity:SetPristine()
         -----------------------------------------------------------------
         --- 
@@ -246,6 +262,7 @@
         ---
             -- acceptable_com_install(inst)
             container_install(inst)
+            drone_controller_install(inst)
         -----------------------------------------------------------------
 
         if not TheWorld.ismastersim then

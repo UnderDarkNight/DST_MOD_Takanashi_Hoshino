@@ -36,6 +36,7 @@
     local function link_fn(inst,player)
         inst.player = player
         player.components.hoshino_com_drone_leader:AddDrone(inst)
+        inst._linked_player:set(player)
     end
     --- GetPlayer
     local function GetPlayer(inst)

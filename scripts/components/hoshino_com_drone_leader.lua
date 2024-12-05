@@ -17,6 +17,27 @@ local hoshino_com_drone_leader = Class(function(self, inst)
     self._onsave_fns = {}
 
     self.drones = {}
+    ---------------------------------------------------------------------------------------
+    --- 玩家控制器来的控制要求。冷却时间1秒
+        self.commmand_cd_task = nil
+        inst:ListenForEvent("hoshino_com_drone_leader.commmand",function(_,command)
+            if type(command) == "string" then
+                if self.commmand_cd_task then
+                    return
+                end
+                self.commmand_cd_task = inst:DoTaskInTime(1,function()
+                    self.commmand_cd_task = nil
+                end)
+                for temp_drone, flag in pairs(self.drones) do
+                    if temp_drone and flag and temp_drone:IsValid() then
+                        temp_drone:PushEvent("command."..command)
+                        temp_drone:PushEvent("command",command)
+                    end
+                end
+            end
+        end)
+    ---------------------------------------------------------------------------------------
+
 end,
 nil,
 {
