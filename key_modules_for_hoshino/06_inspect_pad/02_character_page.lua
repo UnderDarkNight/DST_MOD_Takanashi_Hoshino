@@ -146,30 +146,62 @@ local function page_create(front_root,MainScale)
 
             --------------------------------------------------------------------------------------
             --- 技能图标占位.两行、四列
+                local normal_spell_names = {
+                    ["gun_eye_of_horus_ex"] = "战术镇压",
+                    ["normal_heal"] = "疗愈",
+                    ["normal_covert_operation"] = "隐秘行动",
+                    ["normal_breakthrough"] = "突破",
+                }
+                local swimming_spell_names = {
+                    ["swimming_ex_support"] = "水上支援",
+                    ["swimming_efficient_work"] = "高效率工作",
+                    ["swimming_emergency_assistance"] = "急援",
+                    ["swimming_dawn_of_horus"] = "晓之荷鲁斯",
+                }
                 page.skill_icons = {}
                 local icon_scale = MainScale*1.5
                 local icon_delta = 110
-                for i = 1, 4, 1 do
+                local spell_icon_atlas = "images/inspect_pad/hoshino_pad_spells_icon.xml"
+                local i = 1
+                for spell_index, display_name in pairs(normal_spell_names) do
                     local temp_icon = skill_box:AddChild(Image())
-                    temp_icon:SetTexture("images/inspect_pad/page_character.xml","page_character_skill_locked.tex")
+                    temp_icon:SetTexture(spell_icon_atlas,spell_index..".tex")
                     temp_icon:SetScale(icon_scale,icon_scale,icon_scale)
                     temp_icon:SetPosition(-170 + (icon_delta * (i-1)),85)
-                    -- temp_icon.inst.indicator_fn = function(mouse_indicator)
-                    --     mouse_indicator.txt:SetString("spell  ".. tostring(i) .. " ")
-                    -- end
-                    table.insert(page.skill_icons,temp_icon)
+                    temp_icon.inst.indicator_fn = function(mouse_indicator)
+                        mouse_indicator.txt:SetString(display_name)
+                    end
+                    -- table.insert(page.skill_icons,temp_icon)
+                    page.skill_icons[spell_index] = temp_icon
+                    i = i + 1
                 end
-                for i = 1, 4, 1 do
+                i = 1
+                for spell_index, display_name in pairs(swimming_spell_names) do
                     local temp_icon = skill_box:AddChild(Image())
-                    temp_icon:SetTexture("images/inspect_pad/page_character.xml","page_character_skill_locked.tex")
+                    temp_icon:SetTexture(spell_icon_atlas,spell_index..".tex")
                     temp_icon:SetScale(icon_scale,icon_scale,icon_scale)
                     temp_icon:SetPosition(-170 + (icon_delta * (i-1)),-80)
-                    -- temp_icon.inst.indicator_fn = function(mouse_indicator)
-                    --     mouse_indicator.txt:SetString("spell  "..tostring(i+4) .. " ")
-                    -- end
-                    table.insert(page.skill_icons,temp_icon)
+                    temp_icon.inst.indicator_fn = function(mouse_indicator)
+                        mouse_indicator.txt:SetString(display_name)
+                    end
+                    -- table.insert(page.skill_icons,temp_icon)
+                    page.skill_icons[spell_index] = temp_icon
+                    i = i + 1
                 end
-                
+                --- 解锁覆盖
+                for spell_name, temp_icon in pairs(page.skill_icons) do
+                    temp_icon.black_mask = temp_icon:AddChild(Image(spell_icon_atlas,"black.tex"))
+                    temp_icon.black_mask:SetClickable(false)
+                end
+                page.inst:DoPeriodicTask(0.5,function()
+                    for spell_name, temp_icon in pairs(page.skill_icons) do
+                        if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked(spell_name) then
+                            temp_icon.black_mask:Hide()
+                        else
+                            temp_icon.black_mask:Show()
+                        end
+                    end
+                end)
             --------------------------------------------------------------------------------------
             --- 
             --------------------------------------------------------------------------------------
@@ -382,9 +414,9 @@ local function page_create(front_root,MainScale)
                     else
                         mouse_indicator:Hide()                            
                     end
-
+                    mouse_indicator:MoveToFront()
                 end
-                page.inst:DoPeriodicTask(FRAMES,OnUpdateFn)
+                page.inst:DoPeriodicTask(FRAMES,OnUpdateFn)                
             --------------------------------------------------------------------------------------
             --- 装备槽
                 
@@ -447,6 +479,8 @@ local function page_create(front_root,MainScale)
                 end
                 update_level_exp_data()
                 page.inst:ListenForEvent("hoshino_com_level_sys_client_side_data_update",update_level_exp_data,ThePlayer)
+            --------------------------------------------------------------------------------------
+            ---
             --------------------------------------------------------------------------------------
             ---
                 return page

@@ -378,11 +378,11 @@ return function(inst)
         inst:DoTaskInTime(0,function()
             inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("normal_breakthrough")
             inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("swimming_efficient_work")
-            if TUNING.HOSHINO_DEBUGGING_MODE then
-                for spell_name, v in pairs(all_spell_names) do
-                    inst.components.hoshino_com_spell_cd_timer:Unlock_Spell(spell_name)                    
-                end
-            end
+            -- if TUNING.HOSHINO_DEBUGGING_MODE then
+            --     for spell_name, v in pairs(all_spell_names) do
+            --         inst.components.hoshino_com_spell_cd_timer:Unlock_Spell(spell_name)                    
+            --     end
+            -- end
         end)
     -------------------------------------------------------------------------
 

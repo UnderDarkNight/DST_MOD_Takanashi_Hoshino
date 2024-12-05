@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="hoshino_pad_spells_icon.tex" />
+	<Elements>
+		<Element name="black.tex" u1="0.249046875" u2="0.49509375" v2="0.999" v1="0.772484375" variant="" />
+		<Element name="gun_eye_of_horus_ex.tex" u1="0.001" u2="0.247046875" v2="0.770484375" v1="0.54396875" variant="" />
+		<Element name="normal_breakthrough.tex" u1="0.249046875" u2="0.49509375" v2="0.770484375" v1="0.54396875" variant="" />
+		<Element name="normal_covert_operation.tex" u1="0.49709375" u2="0.743140625" v2="0.999" v1="0.772484375" variant="" />
+		<Element name="normal_heal.tex" u1="0.49709375" u2="0.743140625" v2="0.770484375" v1="0.54396875" variant="" />
+		<Element name="swimming_dawn_of_horus.tex" u1="0.745140625" u2="0.9911875" v2="0.999" v1="0.772484375" variant="" />
+		<Element name="swimming_efficient_work.tex" u1="0.745140625" u2="0.9911875" v2="0.770484375" v1="0.54396875" variant="" />
+		<Element name="swimming_emergency_assistance.tex" u1="0.001" u2="0.247046875" v2="0.54196875" v1="0.315453125" variant="" />
+		<Element name="swimming_ex_support.tex" u1="0.001" u2="0.247046875" v2="0.999" v1="0.772484375" variant="" />
+	</Elements>
+</Atlas>
