@@ -206,13 +206,19 @@ local function fn()
 
     inst:AddTag("structure")
     inst:AddTag("hoshino_building_shop24")
-
+    -------------------------------------------------------------------------------------
+    --- 数据库
+        if TheWorld.ismastersim then
+            inst:AddComponent("hoshino_data")
+        end
+    -------------------------------------------------------------------------------------
     add_container_before_not_ismastersim_return(inst)
     widget_open_event_install(inst)
     workable_com_install(inst)
     recycle_sys_install(inst)
     shop_level_up_sys_install(inst)
     playerprox_for_shop_install(inst)
+    -------------------------------------------------------------------------------------
     if not TheWorld.ismastersim then
         return inst
     end
@@ -221,7 +227,6 @@ local function fn()
     inst:AddComponent("inspectable")
     -------------------------------------------------------------------------------------
     --
-        inst:AddComponent("hoshino_data")
     -------------------------------------------------------------------------------------
 
     -------------------------------------------------------------------------------------

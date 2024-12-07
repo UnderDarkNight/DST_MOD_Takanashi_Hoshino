@@ -265,6 +265,21 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "Artifact · 希亚",
                 ["recipe_desc"] = "Artifact · 希亚",
             },
+            ["hoshino_item_shop_level_up_chip_1"] = {
+                ["name"] = "商店升级芯片 lv 1",
+                ["inspect_str"] = "商店升级芯片 lv 1",
+                ["recipe_desc"] = "商店升级芯片 lv 1",
+            },
+            ["hoshino_item_shop_level_up_chip_2"] = {
+                ["name"] = "商店升级芯片 lv 2",
+                ["inspect_str"] = "商店升级芯片 lv 2",
+                ["recipe_desc"] = "商店升级芯片 lv 2",
+            },
+            ["hoshino_item_shop_level_up_chip_3"] = {
+                ["name"] = "商店升级芯片 lv 3",
+                ["inspect_str"] = "商店升级芯片 lv 3",
+                ["recipe_desc"] = "商店升级芯片 lv 3",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

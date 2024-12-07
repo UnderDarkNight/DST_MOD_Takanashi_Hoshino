@@ -68,6 +68,8 @@ local prefabs_name_list = {
     -- "37_artifact_spring_wind",                  --- Artifact 春风
     -- "38_artifact_hia",                          --- Artifact 希亚
 
+    "39_shop_level_up_chip",                          --- 商店升级芯片
+
 
 }
 
