@@ -53,56 +53,69 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   is_permanent = true, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  yellowgem
+--  icestaff
 {
-  prefab = "yellowgem",
+  prefab = "icestaff",
   bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("yellowgem.tex"), image = "yellowgem.tex"},
+  icon = {atlas = GetInventoryItemAtlas("icestaff.tex"), image = "icestaff.tex"},
+  price = 220, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "normal", -- 类型。normal special 。这个可以不下发。
+  is_permanent = true, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  firestaff
+{
+  prefab = "firestaff",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = GetInventoryItemAtlas("firestaff.tex"), image = "firestaff.tex"},
+  price = 230, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "normal", -- 类型。normal special 。这个可以不下发。
+  is_permanent = true, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  telestaff
+{
+  prefab = "telestaff",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = GetInventoryItemAtlas("telestaff.tex"), image = "telestaff.tex"},
+  price = 300, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "normal", -- 类型。normal special 。这个可以不下发。
+  is_permanent = true, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  hermit_pearl
+{
+  prefab = "hermit_pearl",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = GetInventoryItemAtlas("hermit_pearl.tex"), image = "hermit_pearl.tex"},
+  price = 1800, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  gelblob_storage_kit
+{
+  prefab = "gelblob_storage_kit",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = GetInventoryItemAtlas("gelblob_storage_kit.tex"), image = "gelblob_storage_kit.tex"},
   price = 450, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "normal", -- 类型。normal special 。这个可以不下发。
-  is_permanent = true, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
---  orangegem
-{
-  prefab = "orangegem",
-  bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("orangegem.tex"), image = "orangegem.tex"},
-  price = 390, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "normal", -- 类型。normal special 。这个可以不下发。
-  is_permanent = true, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
---  greengem
-{
-  prefab = "greengem",
-  bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("greengem.tex"), image = "greengem.tex"},
-  price = 600, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "normal", -- 类型。normal special 。这个可以不下发。
-  is_permanent = true, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
---  greengem
-{
-  prefab = "greengem",
-  bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("greengem.tex"), image = "greengem.tex"},
-  price = 1, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "laplite", -- 货币需求。
-  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "normal", -- 类型。normal special 。这个可以不下发。
-  is_permanent = true, -- 是否永久。0 非永久 1 永久
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
 --  greenstaff
@@ -123,9 +136,22 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "opalstaff",
   bg = "item_slot_golden.tex",
   icon = {atlas = GetInventoryItemAtlas("opalstaff.tex"), image = "opalstaff.tex"},
-  price = 2, -- 价格
+  price = 1200, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "laplite", -- 货币需求。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  hoshino_item_anti_entropy_crystal_wheel
+{
+  prefab = "hoshino_item_anti_entropy_crystal_wheel",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = "images/inventoryimages/hoshino_item_anti_entropy_crystal_wheel.xml", image = "hoshino_item_anti_entropy_crystal_wheel.tex"},
+  price = 1200, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
   type = "special", -- 类型。normal special 。这个可以不下发。
   is_permanent = false, -- 是否永久。0 非永久 1 永久
@@ -137,6 +163,19 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   bg = "item_slot_golden.tex",
   icon = {atlas = GetInventoryItemAtlas("orangestaff.tex"), image = "orangestaff.tex"},
   price = 600, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  hoshino_food_mandrake_concentrate
+{
+  prefab = "hoshino_food_mandrake_concentrate",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = "images/inventoryimages/hoshino_food_mandrake_concentrate.xml", image = "hoshino_food_mandrake_concentrate.tex"},
+  price = 1000, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -162,7 +201,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "security_pulse_cage_full",
   bg = "item_slot_golden.tex",
   icon = {atlas = GetInventoryItemAtlas("security_pulse_cage_full.tex"), image = "security_pulse_cage_full.tex"},
-  price = 2, -- 价格
+  price = 1, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "laplite", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -175,7 +214,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "houndstooth_blowpipe",
   bg = "item_slot_golden.tex",
   icon = {atlas = GetInventoryItemAtlas("houndstooth_blowpipe.tex"), image = "houndstooth_blowpipe.tex"},
-  price = 2, -- 价格
+  price = 1, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "laplite", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -188,7 +227,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "shadowheart",
   bg = "item_slot_golden.tex",
   icon = {atlas = GetInventoryItemAtlas("shadowheart.tex"), image = "shadowheart.tex"},
-  price = 3600, -- 价格
+  price = 2400, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -196,15 +235,67 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  shadowheart
+--  moonstorm_static_item
 {
-  prefab = "shadowheart",
+  prefab = "moonstorm_static_item",
   bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("shadowheart.tex"), image = "shadowheart.tex"},
-  price = 7, -- 价格
+  icon = {atlas = GetInventoryItemAtlas("moonstorm_static_item.tex"), image = "moonstorm_static_item.tex"},
+  price = 1800, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "laplite", -- 货币需求。
-  level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  hoshino_item_cards_pack_authority_to_unveil_secrets
+{
+  prefab = "hoshino_item_cards_pack_authority_to_unveil_secrets",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = "images/inventoryimages/hoshino_item_cards_pack_authority_to_unveil_secrets.xml", image = "hoshino_item_cards_pack_authority_to_unveil_secrets.tex"},
+  price = 4000, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  hoshino_item_treasure_map
+{
+  prefab = "hoshino_item_treasure_map",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = "images/inventoryimages/hoshino_item_treasure_map.xml", image = "hoshino_item_treasure_map.tex"},
+  price = 3000, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  hoshino_item_fragments_of_divine_script
+{
+  prefab = "hoshino_item_fragments_of_divine_script",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = "images/inventoryimages/hoshino_item_fragments_of_divine_script.xml", image = "hoshino_item_fragments_of_divine_script.tex"},
+  price = 2400, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  hoshino_item_ether_essence
+{
+  prefab = "hoshino_item_ether_essence",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = "images/inventoryimages/hoshino_item_ether_essence.xml", image = "hoshino_item_ether_essence.tex"},
+  price = 4000, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
   type = "special", -- 类型。normal special 。这个可以不下发。
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },

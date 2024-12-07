@@ -214,7 +214,7 @@
             end
             inst:DoTaskInTime(TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15,function()
                 if not inst.components.hoshino_data:Get("boss_spawned") then
-                    local boss_prefabs = {"mutatedbearger","mutateddeerclops","mutatedwarg"}
+                    local boss_prefabs = {"mutatedbearger","mutateddeerclops","mutatedwarg","klaus","alterguardian_phase3","leif_sparse","toadstool","beequeen","dragonfly","spiderqueen","minotaur"}
                     local x,y,z = owner.Transform:GetWorldPosition()
                     local pt = TUNING.HOSHINO_FNS:Get_Random_Point(x,y,z,15) or Vector3(x,y,z)
 
