@@ -67,4 +67,45 @@ local function fn()
     return inst
 end
 
-return Prefab("hoshino_spell_swimming_dawn_of_horus", fn, assets)
+
+
+local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
+    inst.entity:SetParent(target.entity)
+    inst.Network:SetClassifiedTarget(target)
+    -----------------------------------------------------
+    --- 80% 伤害减免
+        if target.components.combat then
+            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst,0.2)
+        end
+    -----------------------------------------------------
+    ----
+        if target.components.health then
+            inst:DoPeriodicTask(3,function()
+                target.components.health:DoDelta(3)
+            end)
+        end
+    -----------------------------------------------------
+end
+
+local function buff_fn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddNetwork()
+    inst:AddTag("CLASSIFIED")
+    inst.entity:SetPristine()
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst:AddComponent("debuff")
+    inst.components.debuff:SetAttachedFn(OnAttached)
+    inst.components.debuff.keepondespawn = true -- 是否保持debuff 到下次登陆
+    -- inst.components.debuff:SetDetachedFn(inst.Remove)
+    -- inst.components.debuff:SetDetachedFn(OnDetached)
+    -- inst.components.debuff:SetExtendedFn(ExtendDebuff)
+    -- ExtendDebuff(inst)
+    -- inst:DoPeriodicTask(1, OnUpdate, nil, TheWorld.ismastersim)  -- 定时执行任务
+    return inst
+end
+
+return Prefab("hoshino_spell_swimming_dawn_of_horus", fn, assets),
+    Prefab("hoshino_spell_swimming_dawn_of_horus_buff", buff_fn, assets)

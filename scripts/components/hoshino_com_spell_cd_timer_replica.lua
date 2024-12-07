@@ -14,7 +14,7 @@
         ["swimming_ex_support"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or  60,                      --- 【游泳模式】EX支援
         ["swimming_efficient_work"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60,                --- 【游泳模式】高效作业
         ["swimming_emergency_assistance"] = 0,                                                      --- 【游泳模式】紧急支援
-        ["swimming_dawn_of_horus"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 100*60,                --- 【游泳模式】晓之荷鲁斯
+        ["swimming_dawn_of_horus"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 10*60,                --- 【游泳模式】晓之荷鲁斯
         -- ["gun_eye_of_horus_ex_test"] = 30,
     }
     local max_spell_cd_time = 50000000

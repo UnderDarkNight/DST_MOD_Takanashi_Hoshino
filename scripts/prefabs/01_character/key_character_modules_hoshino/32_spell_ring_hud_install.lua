@@ -346,7 +346,7 @@
                             local can_click_button = true
                             local info_txt = ""
                             if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 10 then
-                                info_txt = info_txt.."【 COST 10 】"
+                                info_txt = info_txt.."【 COST 6 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("swimming_dawn_of_horus") then
