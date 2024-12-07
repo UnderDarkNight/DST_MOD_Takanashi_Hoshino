@@ -21,7 +21,8 @@
     local TEMPLATES = require "widgets/redux/templates"
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-    TUNING.HOSHINO_INSPECT_PAD_FNS = TUNING.HOSHINO_INSPECT_PAD_FNS or{}    
+    TUNING.HOSHINO_INSPECT_PAD_FNS = TUNING.HOSHINO_INSPECT_PAD_FNS or{}
+    TUNING.HOSHINO_INSPECT_PAD_BOX_FNS = TUNING.HOSHINO_INSPECT_PAD_BOX_FNS or {}
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function GetCardTypeByName(card_name_index)
@@ -109,7 +110,7 @@ local function page_create(front_root,MainScale)
             local card_desc_text = card_select_box:AddChild(Text(CODEFONT,50,"500",{ 0/255 , 0/255 ,0/255 , 1}))
             card_desc_text:SetPosition(0,-160)
             card_desc_text:SetString("     ")
-            function card_select_box:SetDescByCardName(card_name)
+            function card_select_box:SetDescByCardName(card_name,ignore_black)
                 -- card_desc_text:SetString("测试卡牌描述")
                 -- card_desc_text:SetColour({ 0/255 , 0/255 ,0/255 , 1})
                 -- card_desc_text:SetPosition(0,-160)
@@ -125,11 +126,12 @@ local function page_create(front_root,MainScale)
                 else
                     card_desc_text:SetString("未找到卡牌描述")
                 end
-                if Has_Black_Card() then
+                if Has_Black_Card() and not ignore_black then
                     card_desc_text:SetString("这可能是诅咒卡牌，请谨慎选择")
                 end
                 card_desc_text:MoveToFront()
-            end            
+            end
+            page.card_select_box = card_select_box
         --------------------------------------------------------------------------------------
         --- 卡牌区。1-5张牌。数据从 ThePlayer.PAD_DATA.cards 获取。靠index返回。做决定，避免有MOD搞事。
             --[[                
@@ -322,6 +324,16 @@ local function page_create(front_root,MainScale)
                     card_desc_text:SetString("诅咒卡存在，不允许回收")
                 end
             end)
+        --------------------------------------------------------------------------------------
+        --- hoshino_event.pad_data_update
+            local debuff_icon_box = TUNING.HOSHINO_INSPECT_PAD_BOX_FNS:Create_Buff_Icon_Box(page)
+            page.inst:ListenForEvent("refresh_buff_icon",function()
+                debuff_icon_box:Kill()
+                debuff_icon_box = TUNING.HOSHINO_INSPECT_PAD_BOX_FNS:Create_Buff_Icon_Box(page)
+            end)
+            page.inst:ListenForEvent("hoshino_event.pad_data_update",function()
+                page.inst:PushEvent("refresh_buff_icon")
+            end,ThePlayer)
         --------------------------------------------------------------------------------------
         ---
             return page

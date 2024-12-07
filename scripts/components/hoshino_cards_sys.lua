@@ -149,6 +149,7 @@ local hoshino_cards_sys = Class(function(self, inst)
             if activated_cards then
                 self.ActivatedCards = activated_cards
             end
+            self:SetClientSideData("actived_cards",self.ActivatedCards) -- 下发激活过的卡牌记录池
         end)
     ---------------------------------------------------------------------
     --- 卡牌回收
@@ -524,6 +525,10 @@ nil,
         self.ActivatedCards[card_type] = self.ActivatedCards[card_type] or {}
         self.ActivatedCards[card_type][card_name_index] = (self.ActivatedCards[card_type][card_name_index] or 0) + (num or 1)
         -- print("card rememberd",card_name_index,self.ActivatedCards[card_type][card_name_index])
+        self:SetClientSideData("actived_cards",self.ActivatedCards)
+    end
+    function hoshino_cards_sys:ActivedCards_Data_2_Client()
+        self:SetClientSideData("actived_cards",self.ActivatedCards)
     end
     function hoshino_cards_sys:GetActivatedCards(card_type)
         --[[

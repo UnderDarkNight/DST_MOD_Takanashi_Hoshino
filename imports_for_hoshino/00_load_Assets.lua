@@ -33,6 +33,8 @@ local temp_assets = {
 		Asset("ATLAS", "images/inspect_pad/inspect_pad.xml"),
 		Asset("IMAGE", "images/inspect_pad/page_level_up.tex"),			--- 升级界面贴图
 		Asset("ATLAS", "images/inspect_pad/page_level_up.xml"),		
+		Asset("IMAGE", "images/inspect_pad/hoshino_pad_buff_icon.tex"),			--- 卡牌buff贴图
+		Asset("ATLAS", "images/inspect_pad/hoshino_pad_buff_icon.xml"),		
 		Asset("IMAGE", "images/inspect_pad/page_character.tex"),		--- 玩家信息界面贴图
 		Asset("ATLAS", "images/inspect_pad/page_character.xml"),		
 		Asset("IMAGE", "images/inspect_pad/hoshino_pad_spells_icon.tex"),		--- 玩家信息界面 技能贴图

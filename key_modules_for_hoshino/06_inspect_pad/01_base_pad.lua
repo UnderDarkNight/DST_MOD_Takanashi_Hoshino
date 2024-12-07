@@ -242,7 +242,8 @@ AddPrefabPostInit(
                 -------------------------------------------------------------------------------
                 --- 默认展示界面
                     -- print("Check_Has_Selectting_Cards",Check_Has_Selectting_Cards(inst))
-                    local default_page = inst.PAD_DATA.default_page or Check_Has_Selectting_Cards(inst) and "level_up" or "main_page"
+                    -- local default_page = inst.PAD_DATA.default_page or Check_Has_Selectting_Cards(inst) and "level_up" or "main_page"
+                    local default_page = "level_up"
                     inst.PAD_DATA.default_page = nil
                     pages[default_page]:Show()
                     root[page_swtich_buttons[default_page]].red_dot:Hide()

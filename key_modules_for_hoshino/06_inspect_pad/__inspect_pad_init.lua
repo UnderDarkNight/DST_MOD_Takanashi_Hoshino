@@ -17,3 +17,6 @@ modimport("key_modules_for_hoshino/06_inspect_pad/03_level_up_page.lua")
 
 modimport("key_modules_for_hoshino/06_inspect_pad/04_main_page.lua") 
 --- 主页按钮
+
+modimport("key_modules_for_hoshino/06_inspect_pad/05_card_buff_box.lua") 
+--- buff 图标

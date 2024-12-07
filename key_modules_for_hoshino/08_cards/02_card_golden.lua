@@ -175,14 +175,16 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_shop:CreditCoinDelta(9999)
-                local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                -- local debuff_prefab = "hoshino_card_debuff_builder_blocker"
+                -- while true do
+                --     local debuff_inst = inst:GetDebuff(debuff_prefab)
+                --     if debuff_inst and debuff_inst:IsValid() then
+                --         break
+                --     end
+                --     inst:AddDebuff(debuff_prefab,debuff_prefab)
+                -- end
+                inst.components.hoshino_cards_sys:AcitveCardFnByIndex("mediocre")
+                inst.components.hoshino_cards_sys:RememberActivedCard("mediocre")
                 inst.components.hoshino_com_debuff:Set("golden_card_unlocked_give_me_some_money",true)
             end,
             text = function(inst)
@@ -262,7 +264,9 @@ local cards = {
                     inst.components.inventory:GiveItem(item)
                 end
                 if math.random(10000)/10000 <= 0.2 then
-                    inst.components.hoshino_cards_sys:Card_Pool_Delata("card_white",5)
+                    -- inst.components.hoshino_cards_sys:Card_Pool_Delata("card_white",5)
+                    inst.components.hoshino_cards_sys:AcitveCardFnByIndex("keyhole_mountain_chick")
+                    inst.components.hoshino_cards_sys:RememberActivedCard("keyhole_mountain_chick")
                 end
             end,
             text = function(inst)

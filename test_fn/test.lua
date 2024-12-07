@@ -21,25 +21,26 @@ local flg,error_code = pcall(function()
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --         cards = {
-        --             -- "card_golden",
-        --             -- "card_white",
-        --             -- "card_colourful",
-        --             -- "card_colourful",
-        --             -- "card_golden",
-        --             -- "card_black",
-        --             -- "kill_and_explode",
-        --             "unlock_spell_normal_ex",
-        --             -- "unlock_spell_swimming_ex",
-        --             -- "unlock_spell_all_normal",
-        --             -- "unlock_spell_all_swimming",
-        --             -- "kill_and_explode",
-        --         },
-        --     }
-        -- )
-        -- ThePlayer.components.inventory:GiveItem(item)
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+                cards = {
+                    -- "card_golden",
+                    -- "card_white",
+                    -- "card_colourful",
+                    -- "card_colourful",
+                    -- "card_golden",
+                    -- "card_black",
+                    -- "kill_and_explode",
+                    -- "unlock_spell_normal_ex",
+                    -- "unlock_spell_swimming_ex",
+                    -- "unlock_spell_all_normal",
+                    -- "unlock_spell_all_swimming",
+                    -- "kill_and_explode",
+                    "give_me_some_money",
+                },
+            }
+        )
+        ThePlayer.components.inventory:GiveItem(item)
         -- local item = SpawnPrefab("hoshino_item_cards_pack")
         -- item:PushEvent("Set",{
         --         cards = {
@@ -193,99 +194,14 @@ local flg,error_code = pcall(function()
         -- TheWorld:PushEvent("ms_setclocksegs", {day = 0, dusk = 0, night = 16})
         -- TheWorld:PushEvent("ms_setmoonphase", {moonphase = "full", iswaxing = false}) 
     ----------------------------------------------------------------------------------------------------------------
-    ---
-    ----------------------------------------------------------------------------------------------------------------
-    ---
-    -- local target_num = 0
-    -- TheNet:Announce("触发连锁爆炸,炸到了"..target_num.."个生物")
-        if  ThePlayer.__old_AddDebuff == nil then
-            ThePlayer.__old_AddDebuff = ThePlayer.AddDebuff
-            ThePlayer.AddDebuff = function(inst,debuff_name,debuff_prefab,...)
-                print("AddDebuff",debuff_name,debuff_prefab,...)
-                return inst:__old_AddDebuff(debuff_name,debuff_prefab,...)
-            end
-        end
-    ----------------------------------------------------------------------------------------------------------------
-    --- 无人机控制器
-        local drone_controller_atlas = "images/widgets/hoshino_drone_controller.xml"
-        local MainScale = 0.6
-        ThePlayer.___test_fn = function(root)
-            -----------------------------------------------------------------------------------
-            --- 按钮坐标 横向4个按钮，高度4个按钮
-                local start_x = -150
-                local start_y = 150
-                local delta_x = 100
-                local delta_y = -100
-                local button_pos = {
-                }
-                for y=1,4 do
-                    for x=1,4 do
-                        table.insert(button_pos,Vector3(start_x + delta_x * (x-1),start_y + delta_y * (y-1),0))
-                    end
-                end
-            -----------------------------------------------------------------------------------
-            --- 测试布局
-                -- root.test_buttons = {}
-                -- for i = 1, #button_pos do
-                --     local test_button = root:AddChild(ImageButton(
-                --         drone_controller_atlas,"stop_attack.tex","stop_attack.tex","stop_attack.tex","stop_attack.tex","stop_attack.tex"
-                --     ))
-                --     test_button:SetOnClick(function()
-                --         print("test_button",i)
-                --     end)
-                --     test_button:SetScale(MainScale,MainScale,MainScale)
-                --     test_button.focus_scale = {1.05, 1.05, 1.05}
-                --     test_button:SetPosition(button_pos[i].x,button_pos[i].y)
-                -- end
-            -----------------------------------------------------------------------------------
-            --- 停止攻击 stop_attack
-                local button_stop_attack =  root:AddChild(ImageButton(
-                    drone_controller_atlas,"stop_attack.tex","stop_attack.tex","stop_attack.tex","stop_attack.tex","stop_attack.tex"
-                ))
-                button_stop_attack:SetOnClick(function()
-                    
-                end)
-                button_stop_attack:SetScale(MainScale,MainScale,MainScale)
-                button_stop_attack.focus_scale = {1.05, 1.05, 1.05}
-                button_stop_attack:SetPosition(button_pos[1].x,button_pos[1].y)
-            -----------------------------------------------------------------------------------
-            --- 解除攻击 disarm
-                local button_disarm =  root:AddChild(ImageButton(
-                    drone_controller_atlas,"disarm.tex","disarm.tex","disarm.tex","disarm.tex","disarm.tex"
-                ))
-                button_disarm:SetOnClick(function()
-                    
-                end)
-                button_disarm:SetScale(MainScale,MainScale,MainScale)
-                button_disarm.focus_scale = {1.05, 1.05, 1.05}
-                button_disarm:SetPosition(button_pos[2].x,button_pos[2].y)
-            -----------------------------------------------------------------------------------
-            --- 停止工作 stop_working
-                local button_stop_working =  root:AddChild(ImageButton(
-                    drone_controller_atlas,"stop_working.tex","stop_working.tex","stop_working.tex","stop_working.tex","stop_working.tex"
-                ))
-                button_stop_working:SetOnClick(function()
-                    
-                end)
-                button_stop_working:SetScale(MainScale,MainScale,MainScale)
-                button_stop_working.focus_scale = {1.05, 1.05, 1.05}
-                button_stop_working:SetPosition(button_pos[3].x,button_pos[3].y)
-            -----------------------------------------------------------------------------------
-            --- 落地打包 trans_2_item
-                local button_trans_2_item =  root:AddChild(ImageButton(
-                    drone_controller_atlas,"trans_2_item.tex","trans_2_item.tex","trans_2_item.tex","trans_2_item.tex","trans_2_item.tex"
-                ))
-                button_trans_2_item:SetOnClick(function()
-                    
-                end)
-                button_trans_2_item:SetScale(MainScale,MainScale,MainScale)
-                button_trans_2_item.focus_scale = {1.05, 1.05, 1.05}
-                button_trans_2_item:SetPosition(button_pos[4].x,button_pos[4].y)
-            -----------------------------------------------------------------------------------
-        end
-
-        -- local inst = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
-        -- inst:PushEvent("command.trans_2_item")
+    --- 
+        -- for card_type, _table in pairs(ThePlayer.PAD_DATA.actived_cards) do
+        --     if card_type and type(_table) == "table" then
+        --         for card_name, v in pairs(_table) do
+        --             print(card_type, card_name, v)
+        --         end
+        --     end
+        -- end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
