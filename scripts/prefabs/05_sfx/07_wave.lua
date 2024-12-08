@@ -1,6 +1,6 @@
 local assets = {
 
-	Asset("ANIM", "anim/hoshino_fx_wave.zip"),
+	Asset("ANIM", "anim/hoshino_sfx_wave.zip"),
 }
 
 
@@ -12,8 +12,8 @@ local function fx()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
     -- inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-    inst.AnimState:SetBank("hoshino_fx_wave")
-    inst.AnimState:SetBuild("hoshino_fx_wave")
+    inst.AnimState:SetBank("hoshino_sfx_wave")
+    inst.AnimState:SetBuild("hoshino_sfx_wave")
     inst.AnimState:PlayAnimation("start")
     inst.AnimState:PushAnimation("idle",true)
 	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)

@@ -271,9 +271,19 @@ local function page_create(front_root,MainScale)
                 if current_cards then
                     for index, card in pairs(current_cards) do
                         local refresh_fx = card:AddChild(UIAnim())
-                        if GetCardTypeByName(card.card_name)  == "card_white" then
+                        local card_type = GetCardTypeByName(card.card_name)
+                        if card_type  == "card_white" then
                             refresh_fx:GetAnimState():SetBank("halloween_embers_cold")
                             refresh_fx:GetAnimState():SetBuild("halloween_embers_cold")
+                        elseif card_type == "card_golden" then
+                            refresh_fx:GetAnimState():SetBank("halloween_embers")
+                            refresh_fx:GetAnimState():SetBuild("halloween_embers")
+                        elseif card_type == "card_colourful" then
+                            refresh_fx:GetAnimState():SetBank("halloween_embers")
+                            refresh_fx:GetAnimState():SetBuild("hoshino_fx_flame_purple")
+                        elseif card_type == "card_black" then
+                            refresh_fx:GetAnimState():SetBank("halloween_embers")
+                            refresh_fx:GetAnimState():SetBuild("hoshino_fx_flame_black")
                         else
                             refresh_fx:GetAnimState():SetBank("halloween_embers")
                             refresh_fx:GetAnimState():SetBuild("halloween_embers")

@@ -34,7 +34,7 @@ local prefabs_name_list = {
     "04_explode2",                            --- 爆炸特效2
     "05_dotted_circle",                       --- 虚线指示器
     "06_icelance_ping",                       --- 冰圈特效
-    -- "07_wave",                                --- 浪花圈圈 特效
+    "07_wave",                                --- 浪花圈圈 特效
 
 }
 

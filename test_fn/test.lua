@@ -32,11 +32,11 @@ local flg,error_code = pcall(function()
                     -- "card_black",
                     -- "kill_and_explode",
                     -- "unlock_spell_normal_ex",
-                    -- "unlock_spell_swimming_ex",
+                    "unlock_spell_swimming_ex",
                     -- "unlock_spell_all_normal",
                     -- "unlock_spell_all_swimming",
                     -- "kill_and_explode",
-                    "give_me_some_money",
+                    -- "give_me_some_money",
                 },
             }
         )
@@ -202,6 +202,12 @@ local flg,error_code = pcall(function()
         --         end
         --     end
         -- end
+    ----------------------------------------------------------------------------------------------------------------
+    ---
+        SpawnPrefab("hoshino_sfx_wave"):PushEvent("Set",{
+            pt = Vector3(x,y,z),
+            radius = 8
+        })
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -28,7 +28,7 @@ local cards = {
     --- 测试用的空金卡
         -- ["test_card_golden"] = {
         --     back = "card_golden",
-        --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+        --     front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
         --     test = function(inst)
         --         return true
         --     end,
@@ -43,7 +43,7 @@ local cards = {
     --- 24、【金】【多多益善】【「升级卡包」选项+1，最高变成 5选1】【达到5选1的时候从卡池移除，小于的时候从新进卡池】
         ["more_default_selectting_cards"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return inst.components.hoshino_cards_sys:GetDefaultCardsNum() ~= 5
             end,
@@ -58,7 +58,7 @@ local cards = {
     --- 25、【金】【星野的精算】【每天前3次制作返回一半的材料（向下取整）】【次数叠加】
         ["returning_half_recipe_by_count"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -73,7 +73,7 @@ local cards = {
     --- 26、【金】【精选】【每天便利店免费刷新次数+1】【不可叠加】【选择后从卡组移除】
         ["card_shop_refresh_count"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 if inst.components.hoshino_cards_sys:Add("card_shop_refresh_count",0) == 0 then
                     return true
@@ -92,7 +92,7 @@ local cards = {
     --- 27、【金】【救命稻草】【获取一层buff：死亡瞬间随机传送一次，恢复10%血量。触发后消耗一层】【叠加buff层数】
         ["a_lifesaver"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -107,7 +107,7 @@ local cards = {
     --- 28、【金】【再来亿次】【赠送卡组刷新次数15】【可叠加】
         ["cards_refresh_num"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -122,7 +122,7 @@ local cards = {
     --- 29、【金】【焉知非福】【每次失去生命值的时候，获得10点「信用点」，持续2天】【时间叠加】
         ["buff_health_down_and_coins_up"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -145,7 +145,7 @@ local cards = {
     --- 30、【金】【荷鲁斯的抗争】【立即获得12个「升级卡包」，「升级卡包」选项-1】【升级卡包变成1选1的时候从卡池移除，后续会重新进卡池】
         ["the_rsistance_of_horus"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 if inst.components.hoshino_cards_sys:GetDefaultCardsNum() == 1 then
                     return false
@@ -166,7 +166,7 @@ local cards = {
     --- 31、【金】【我将富有】【立即获得9999「信用点」，同时获得诅咒「凡庸」】【从卡池移除】
         ["give_me_some_money"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 if inst.components.hoshino_com_debuff:Get("golden_card_unlocked_give_me_some_money") then
                     return false
@@ -195,7 +195,7 @@ local cards = {
     --- 32、【金】【我必凯旋】【立即生成一只随机BOSS（列表形式），血量，攻击力是普通的3倍，击杀后获得3选1金色卡包】
         ["spawn_boss_with_golden_cards_pack"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -228,7 +228,7 @@ local cards = {
     --- 33、【金】【寒暑不侵】【恒温5天】【叠加时间】
         ["card_temperature_locker"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -251,7 +251,7 @@ local cards = {
     --- 34、【金】【七弦】【赠送7包结果注定一样的白色1选1卡包】。但是有20%的概率获得诅咒：【键山雏】
         ["7_identical_white_card_packs"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -277,7 +277,7 @@ local cards = {
     --- 35、【金】【点金之手】【赠送1包金色3选1】
         ["hand_of_midas"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -302,7 +302,7 @@ local cards = {
     --- 37、【金】【竭泽】【随机清空一项白卡能力（血、San、饥饿、移速、经验、攻击、护甲、反伤、位面防御），然后获得1500点「信用点」】
         ["get_some_coins_and_delete_one_white_card_ability"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -374,7 +374,7 @@ local cards = {
     --- 38、【金】【坚毅】【清除所有血量上限惩罚值（黑血），且永远不会出现惩罚】【从卡池移除】
         ["health_penalty_blocker"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_health_penalty_blocker"
                 for i = 1, 5, 1 do
@@ -403,7 +403,7 @@ local cards = {
     --- 39、【金】【基沃托斯超人】【每10s恢复1点生命值】【数值叠加】
         ["health_auto_up"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -426,7 +426,7 @@ local cards = {
     --- 40、【金】【最高神秘】【攻击任何血量低于70%的 生物，都有0.2%的概率造成99999999999999伤害】【概率叠加】
         ["direct_kill_target"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -449,7 +449,7 @@ local cards = {
     --- 44、【金】【甘露】去除一个诅咒效果【如果可以就设计为无诅咒时不会出现在池子里】
         ["deactive_random_black_card"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 local actived_black_cards = inst.components.hoshino_cards_sys:GetActivatedCards("card_black") or {}
                 local count = 0
@@ -482,7 +482,7 @@ local cards = {
     --- 45、【金】解锁技能：普通EX
         ["unlock_spell_normal_ex"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return not inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("gun_eye_of_horus_ex")
             end,
@@ -497,7 +497,7 @@ local cards = {
     --- 46、【金】解锁技能：泳装EX
         ["unlock_spell_swimming_ex"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return not inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_ex_support")
             end,
@@ -512,7 +512,7 @@ local cards = {
     --- 47、【金】解锁普通形态所有普通技能
         ["unlock_spell_all_normal"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 if inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("normal_heal") and
                     inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("normal_covert_operation") and
@@ -535,7 +535,7 @@ local cards = {
     --- 48、【金】解锁泳装形态所有普通技能
         ["unlock_spell_all_swimming"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 if inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_efficient_work") and
                     inst.components.hoshino_com_spell_cd_timer:Is_Spell_Unlocked("swimming_emergency_assistance") and
@@ -558,7 +558,7 @@ local cards = {
     --- 49、【金】【抵抗】【各个阵营伤害防御 + 10%（暗影阵营、月亮阵营）】【最高80%】
         ["armor_damage_type_resist"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return inst.components.hoshino_com_debuff:Get_Damage_Type_Resist() > 0.2
             end,
@@ -574,7 +574,7 @@ local cards = {
     --- 50、【金】【生命值上限，san值上限，饥饿上限+20】【可叠加】
         ["halth_sanity_hunger_max_up_20"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -591,7 +591,7 @@ local cards = {
     --- 51、【金】【移动速度+6%，基础攻击伤害+10%】【可叠加】
         ["speed_up_and_damage_up_6_10"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return true
             end,
@@ -607,7 +607,7 @@ local cards = {
     --- 52、【金】【基础减伤值增加6%】【所有减伤值总和无法超过99%，达到之后移除该卡片】
         ["damage_taken_mult_6"] = {
             back = "card_golden",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 return inst.components.hoshino_com_debuff:Get_Damage_Taken_Mult() < 0.99
             end,
@@ -630,6 +630,8 @@ for card_name,data in pairs(cards) do
     local atlas = front_data.atlas
     local image = front_data.image
 
-    table.insert(Assets, Asset("ATLAS", atlas )     )
-    table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
+    if atlas ~= "images/inspect_pad/page_level_up.xml" then
+        table.insert(Assets, Asset("ATLAS", atlas )     )
+        table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
+    end
 end

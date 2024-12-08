@@ -28,7 +28,7 @@ local cards = {
     --- 测试用的空黑卡
             -- ["test_card_black"] = {
             --     back = "card_black",
-            --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            --     front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             --     test = function(inst)
             --         return true
             --     end,
@@ -46,7 +46,7 @@ local cards = {
     --- 1、【诅咒】【依神紫苑】【你每天至多获得300信用点】【从诅咒池移除】
         ["max_daily_earn"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 if inst.components.hoshino_com_shop:Get("card_black_active.max_daily_earn") then
                     return false
@@ -69,7 +69,7 @@ local cards = {
     --- 2、【诅咒】【消化不良】【从食物中获取的三维增加量减半，扣除的不减】【从诅咒池移除】
         ["eater_indigestion"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 return inst.components.hoshino_data:Get("Player_Indigestion") ~= true
             end,
@@ -88,7 +88,7 @@ local cards = {
     --- 3、【诅咒】【噩梦】【无法通过睡觉恢复生命值】【从诅咒池移除】
         ["sleeping_bag_health_blocker"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 if inst.components.hoshino_cards_sys:Get("card_black.sleeping_bag_health_blocker") then
                     return false
@@ -109,7 +109,7 @@ local cards = {
     --- 4、【诅咒】【凡庸】【每天最多只能制作10个物品】【从诅咒池移除】
         ["mediocre"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
                 for i = 1, 5, 1 do
@@ -145,7 +145,7 @@ local cards = {
     --- 5、【诅咒】【键山雏】【白卡的权重提升5】【可叠加】
         ["keyhole_mountain_chick"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 return true
             end,
@@ -163,7 +163,7 @@ local cards = {
     --- 6、【诅咒】【弱视】【出现遮挡视线的遮罩】【不可叠加】
         ["amblyopia"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 if inst.components.hoshino_cards_sys:Get("amblyopia_active") then
                     return false
@@ -185,7 +185,7 @@ local cards = {
     --- 7、【诅咒】【泛社会悖论】【商店物品售价+5%（向上取整）】【可叠加】
         ["shop_price_increase"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 return true
             end,
@@ -226,7 +226,7 @@ local cards = {
     --- 8、【诅咒】【流血】【当你受到伤害掉血X点（向上取整）的时候，在X秒内每秒掉1点】【从诅咒池移除】
         ["bloodshed"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_bloodshed"
                 for i = 1, 5, 1 do
@@ -264,7 +264,7 @@ local cards = {
     --- 9、【诅咒】【无实体】【血量的最高上限为1】【从诅咒池移除】
         ["max_health_1"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_max_health_1"
                 for i = 1, 5, 1 do
@@ -302,7 +302,7 @@ local cards = {
     --- 10、【诅咒】【嗜睡】【每到晚上，立马原地睡觉（至少20s ）】【从诅咒池移除】
         ["force_night_sleep"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
                 for i = 1, 5, 1 do
@@ -340,7 +340,7 @@ local cards = {
     --- 11、【诅咒】【斗争之心】【你只能从BOSS生物中获取经验值】【从诅咒池移除】
         ["only_epic_exp"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
                 for i = 1, 5, 1 do
@@ -378,7 +378,7 @@ local cards = {
     --- 12、【诅咒】【饥饿值自然掉速进行2的X次幂】【可叠加】
         ["hunger_auto_down_by_the_xth_power_of_2"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 return true
             end,
@@ -396,7 +396,7 @@ local cards = {
     --- 13、【诅咒】【黑星】【你的San永久为0】【从诅咒池移除】
         ["sanity_ever_zero"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
                 for i = 1, 5, 1 do
@@ -435,7 +435,7 @@ local cards = {
     --- 14、【诅咒】【咒印】【你无法穿戴任何装备，持续2天】【时间叠加】
         ["equipment_blocker"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 return true
             end,
@@ -462,7 +462,7 @@ local cards = {
     --- 15、【诅咒】【潮湿】【你的潮湿度永远无法降低】【从诅咒池移除】
         ["moisture_down_blocker"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
                 for i = 1, 5, 1 do
@@ -500,7 +500,7 @@ local cards = {
     --- 16、【诅咒】【虚弱】【工作效率降低50%】【从诅咒池移除】
         ["reduced_work_efficiency"] = {
             back = "card_black",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_reduced_work_efficiency"
                 for i = 1, 5, 1 do
@@ -546,7 +546,8 @@ for card_name,data in pairs(cards) do
     local front_data = data.front
     local atlas = front_data.atlas
     local image = front_data.image
-
-    table.insert(Assets, Asset("ATLAS", atlas )     )
-    table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
+    if atlas ~= "images/inspect_pad/page_level_up.xml" then
+        table.insert(Assets, Asset("ATLAS", atlas )     )
+        table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
+    end
 end

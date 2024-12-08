@@ -58,6 +58,9 @@ local temp_assets = {
 		Asset("ANIM", "anim/hoshino_power_bar_cost.zip"),	--- COST 能量条
 	---------------------------------------------------------------------------
 	--- 卡牌正面
+		Asset("ANIM", "anim/hoshino_fx_flame_black.zip"),	--- 火焰特效
+		Asset("ANIM", "anim/hoshino_fx_flame_purple.zip"),	--- 火焰特效
+
 		Asset("IMAGE", "images/inspect_pad/card_excample_a.tex"),
 		Asset("ATLAS", "images/inspect_pad/card_excample_a.xml"),
 

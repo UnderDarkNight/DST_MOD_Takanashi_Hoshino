@@ -28,7 +28,7 @@ local cards = {
     --- 测试用的空白卡
         -- ["test_card_colourful"] = {
         --     back = "card_colourful",
-        --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+        --     front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
         --     test = function(inst)
         --         return true
         --     end,
@@ -43,7 +43,7 @@ local cards = {
     --- 53、【彩】【并非钨合金棍】【最终血量扣除结算的时候，所扣除点数减少1点】（未超过一点则免疫，选择后从池子内移除，无法叠加）【笔记】按照可叠加的形式写
         ["final_health_down_value_reduce"] = {
             back = "card_colourful",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 -- return inst.components.hoshino_com_debuff:Get_Health_Down_Reduce() == 0
                 return true
@@ -59,7 +59,7 @@ local cards = {
     --- 54、【彩】【我已膨胀】【三维+300/300/300，基础攻击力倍增器2（2倍原始基础伤害，不算卡牌加成），受伤倍增器0.2（80%减伤）】【此后无法再获取经验】【选择之后从卡池移除】
         ["i_have_expanded"] = {
             back = "card_colourful",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_i_have_expanded"
                 for i = 1, 5, 1 do
@@ -93,7 +93,7 @@ local cards = {
     --- 55、【彩】【照我以火】【击杀任意生物会产生半径6伤害200的爆炸，被爆炸炸死的也一样触发】【从卡池移除】
         ["kill_and_explode"] = {
             back = "card_colourful",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_kill_and_explode"
                 for i = 1, 5, 1 do
@@ -122,7 +122,7 @@ local cards = {
     --- 56、【彩】【每次升级额外获得一包「升级卡包」，同时每次升级 20%概率获得随机诅咒】【不可叠加，选择后从卡组移除】
         ["level_up_and_double_card_pack"] = {
             back = "card_colourful",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_level_up_and_double_card_pack"
                 for i = 1, 5, 1 do
@@ -151,7 +151,7 @@ local cards = {
     --- 58、【彩】【绝对防御】【每10s内，受到的总【血量扣除值】超过20以后，变成0】【从卡池移除】
         ["absolute_defense"] = {
             back = "card_colourful",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_absolute_defense"
                 for i = 1, 5, 1 do
@@ -180,7 +180,7 @@ local cards = {
     --- 59、【彩】【金色传说】【赠送5包金色的1选1】
         ["the_golden_legend"] = {
             back = "card_colourful",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 return true
             end,
@@ -204,7 +204,7 @@ local cards = {
     --- 60、【彩】【壁垒】【受到攻击后，获得一个10s的铥矿冒效果，效果持续期间，攻击伤害的1%转换为玩家血量】【吸血叠加】
         ["ruins_sheild_and_vengeance"] = {
             back = "card_colourful",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 return true
             end,
@@ -236,7 +236,8 @@ for card_name,data in pairs(cards) do
     local front_data = data.front
     local atlas = front_data.atlas
     local image = front_data.image
-
-    table.insert(Assets, Asset("ATLAS", atlas )     )
-    table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
+    if atlas ~= "images/inspect_pad/page_level_up.xml" then
+        table.insert(Assets, Asset("ATLAS", atlas )     )
+        table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
+    end
 end

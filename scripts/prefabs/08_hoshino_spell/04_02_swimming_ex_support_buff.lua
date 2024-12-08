@@ -16,6 +16,12 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             pt = Vector3(0,0,0),
             radius = RADIUS,
         })
+        local fx2 = target:SpawnChild("hoshino_sfx_wave")
+        fx2:PushEvent("Set",{
+            pt = Vector3(0,0,0),
+            radius = RADIUS,
+        })
+        
     -----------------------------------------------------
     ---
         inst.time = 30
@@ -24,6 +30,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             if inst.time <= 0 then
                 inst:Remove()
                 fx:Remove()
+                fx2:Remove()
             end
         end)
     -----------------------------------------------------

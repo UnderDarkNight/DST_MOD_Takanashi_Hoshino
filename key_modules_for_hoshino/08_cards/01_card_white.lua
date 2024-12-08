@@ -28,7 +28,7 @@ local cards = {
     --- 测试用的空白卡
         -- ["test_card_white"] = {
         --     back = "card_white",
-        --     front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+        --     front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
         --     test = function(inst)
         --         return true
         --     end,
@@ -43,7 +43,7 @@ local cards = {
     --- 1、【白】【生命值上限+15】【可叠加】
         ["max_health_up_15"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -58,7 +58,7 @@ local cards = {
     --- 2、【白】【San上限+10】【可叠加】
         ["max_sanity_up_10"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -73,7 +73,7 @@ local cards = {
     --- 3、【白】【饥饿值上限+8】【可叠加】
         ["max_hunger_up_8"] ={
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -88,7 +88,7 @@ local cards = {
     --- 4、【白】【移动速度+2%】【可叠加】
         ["speed_up_2_percent"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -103,7 +103,7 @@ local cards = {
     --- 5、【白】【基础攻击伤害+4%】【可叠加】
         ["damage_mult_up_4_percent"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -118,7 +118,7 @@ local cards = {
     --- 6、【白】【饥饿自然掉速-3%，最高-30%】【达到最高后从卡池移除】
         ["hunger_down_mult_down_3_percent"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 if inst.components.hoshino_com_debuff:Is_Hunger_Down_Mult_Max() then
                     return false
@@ -136,7 +136,7 @@ local cards = {
     --- 7、【白】【日积月累】【经验获取增加10%】【可叠加】
         ["exp_up_mult_up_10_percent"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -151,7 +151,7 @@ local cards = {
     --- 8、【白】【好东西！】【随机获得一个BOSS掉落物（列表形式）】
         ["random_boss_item_drop"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -172,7 +172,7 @@ local cards = {
     --- 9、【白】【神秘仪式】【随机召唤一只怪物（列表形式）】
         ["random_monster_summon"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -198,7 +198,7 @@ local cards = {
     --- 10、【白】【透支】【根据当前剩余未选择的卡牌数量，给玩家N张1选1卡包，包括颜色对应，下1次升级不再赠送升级卡包。如果当前未翻开的剩余卡牌数量为0，则重新赠送一包1选1卡包】
         ["overdraft"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -248,7 +248,7 @@ local cards = {
     --- 11、【白】【邪咒】【基础攻击伤害+10%，然后获取debuff : 2天内San掉落的时候，同数值掉落血量】【debuff时间叠加】【攻击倍率也叠加】
         ["damage_mult_up_10_percent_and_sanity_down"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -272,7 +272,7 @@ local cards = {
     --- 12、【白】【荆棘】【每次受到攻击时候，对伤害来源直接反伤3点（任何玩家都不会触发这个）】【可叠加】
         ["counter_damage"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -287,7 +287,7 @@ local cards = {
     --- 13、【白】【节约风气】【使用专属武器「荷鲁斯之眼（枪）」的时候，有10%概率不消耗耐久，最高100%概率】【满概率后从卡池移除】
         ["the_eye_of_horus_finiteuses_down_block"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 1
             end,
@@ -302,7 +302,7 @@ local cards = {
     --- 14、【白】【白日梦】【选择之后传送到一个位置并开始睡觉，每一秒获得9点「信用点」，直到醒来】
         ["sleep_and_coins"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -388,7 +388,7 @@ local cards = {
     --- 15、【白】【避重就轻】【受到伤害的时候，有10%的概率不损失盔甲的耐久，最高100%】【满概率后从卡池移除】
         ["armor_down_blocker_percent"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return inst.components.hoshino_com_debuff:Get_Armor_Down_Blocker_Percent() < 1
             end,
@@ -403,7 +403,7 @@ local cards = {
     --- 16、【白】【防暴盾牌】【获得1点位面防御】【可叠加】
         ["armor_planar_defense"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -418,7 +418,7 @@ local cards = {
     --- 17、【白】【尤里卡】【获得一个随机物品蓝图】
         ["random_blueprint"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -434,7 +434,7 @@ local cards = {
     --- 19、【白】【好运】【金卡和彩卡的出现权重都+0.1】【可叠加】
         ["rare_cards_appearance_weight"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -450,7 +450,7 @@ local cards = {
     --- 20、【白】【汲取】【从食物获取的「正向」三维x2.5的同时，增加厨子的挑食机制】【从卡池移除】
         ["warly_eater_modules_unlock"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return inst.components.hoshino_data:Get("Player_Unlocked_Warly_Eater_Modules") ~= true
             end,
@@ -465,7 +465,7 @@ local cards = {
     --- 21、【白】【巧匠】【每次制作物品的时候，有1%概率返还制作材料，最高50%】【满概率后从卡池移除】
         ["probability_of_returning_full_recipe"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return inst.components.hoshino_com_debuff:Get_Probability_Of_Returning_Recipe() < 0.5
             end,
@@ -480,7 +480,7 @@ local cards = {
     --- 22、【白】【石虾助我！】【生成一只永久石虾跟随】
         ["summon_rocky"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -495,7 +495,7 @@ local cards = {
     --- 23、【白】【滚草成灾】【立刻在玩家身边生成5个风滚草】
         ["summon_tumbleweed"] = {
             back = "card_white",
-            front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
                 return true
             end,
@@ -527,7 +527,8 @@ for card_name,data in pairs(cards) do
     local front_data = data.front
     local atlas = front_data.atlas
     local image = front_data.image
-
-    table.insert(Assets, Asset("ATLAS", atlas )     )
-    table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
+    if atlas ~= "images/inspect_pad/page_level_up.xml" then
+        table.insert(Assets, Asset("ATLAS", atlas )     )
+        table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
+    end
 end
