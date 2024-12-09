@@ -105,7 +105,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_amulet_t5.xml",
             image = "hoshino_pad_equipment_amulet_t5.tex",
-            -- inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t9","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t9","recipe_desc"),
+            inspect_txt = TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") or "拥有其下位的效果，半径30码内所有玩家基础攻击伤害+20%，且每次攻击恢复5点san值"
 
         }
     -----------------------------------------------------------------------------------

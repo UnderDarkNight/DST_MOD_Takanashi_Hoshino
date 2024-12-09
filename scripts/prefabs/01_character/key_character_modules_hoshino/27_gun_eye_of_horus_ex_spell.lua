@@ -30,6 +30,7 @@ return function(inst)
     ---
         local blocking_flag = false
         local blocking_task = nil
+        local cost = TUNING.HOSHINO_PARAMS.SPELLS.GUN_EYE_OF_HORUS_EX_COST or 4
         inst:ListenForEvent("hoshino_sg_action_gun_shoot_with_walking_dmg_blocker_start",function(inst)
             blocking_flag = true
             -- inst:AddTag("stronggrip")   --- 不被打掉武器的tag
@@ -38,7 +39,7 @@ return function(inst)
                 blocking_task = nil
             end
             inst.components.hoshino_com_spell_cd_timer:StartCDTimer("gun_eye_of_horus_ex",20)   -- 启动20秒CD
-            inst.components.hoshino_com_power_cost:DoDelta(-4) -- 消耗4点能量
+            inst.components.hoshino_com_power_cost:DoDelta(-cost) -- 消耗4点能量
         end)
         inst:ListenForEvent("hoshino_sg_action_gun_shoot_with_walking_dmg_blocker_end",function(inst)
             -- blocking_flag = false

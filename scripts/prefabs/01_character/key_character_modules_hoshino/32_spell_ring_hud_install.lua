@@ -138,8 +138,9 @@
                         local function button_info_update_fn()
                             local can_click_button = true
                             local info_txt = ""
-                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 3 then
-                                info_txt = info_txt.."【 COST 3 】"
+                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_HEAL_COST or 3
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < cost then
+                                info_txt = info_txt.."【 COST "..cost.." 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_heal") then
@@ -172,8 +173,9 @@
                         local function button_info_update_fn()
                             local can_click_button = true
                             local info_txt = ""
-                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 4 then
-                                info_txt = info_txt.."【 COST 4 】"
+                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_COVERT_OPERATION_CD or 4
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < cost then
+                                info_txt = info_txt.."【 COST "..cost.." 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_covert_operation") then
@@ -206,8 +208,9 @@
                         local function button_info_update_fn()
                             local can_click_button = true
                             local info_txt = ""
-                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 2 then
-                                info_txt = info_txt.."【 COST 1 】"
+                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_BREAKTHROUGH_COST or 1
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < cost then
+                                info_txt = info_txt.."【 COST "..cost.." 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_breakthrough") then
@@ -243,8 +246,9 @@
                         local function button_info_update_fn()
                             local can_click_button = true
                             local info_txt = ""
-                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 5 then
-                                info_txt = info_txt.."【 COST 5 】"
+                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EX_SUPPORT_COST or 5
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < cost then
+                                info_txt = info_txt.."【 COST "..cost.." 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("swimming_ex_support") then
@@ -276,8 +280,9 @@
                         local function button_info_update_fn()
                             local can_click_button = true
                             local info_txt = ""
-                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 4 then
-                                info_txt = info_txt.."【 COST 4 】"
+                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EFFICIENT_WORK_COST or 4
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < cost then
+                                info_txt = info_txt.."【 COST "..cost.." 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("swimming_efficient_work") then
@@ -309,8 +314,9 @@
                         local function button_info_update_fn()
                             local can_click_button = true
                             local info_txt = ""
-                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 4 then
-                                info_txt = info_txt.."【 COST 4 】"
+                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EMERGENCY_ASSISTANCE_COST or 4
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < cost then
+                                info_txt = info_txt.."【 COST "..cost.." 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("swimming_emergency_assistance") then
@@ -345,8 +351,9 @@
                         local function button_info_update_fn()
                             local can_click_button = true
                             local info_txt = ""
-                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < 10 then
-                                info_txt = info_txt.."【 COST 6 】"
+                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_DAWN_OF_HORUS_COST or 6
+                            if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < cost then
+                                info_txt = info_txt.."【 COST "..cost.." 】"
                                 can_click_button = false
                             end
                             if not ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("swimming_dawn_of_horus") then

@@ -9,20 +9,20 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 技能名和CD时间
     local all_spell_names = {
-        ["gun_eye_of_horus_ex"] = 20,                                                               --- 【普通模式】枪，EX技能
-        ["normal_heal"] = 30,                                                                       --- 【普通模式】疗愈
-        ["normal_covert_operation"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 8*60,                 --- 【普通模式】隐秘行动
-        ["normal_breakthrough"] = 0,                                                                --- 【普通模式】突破
-        ["swimming_ex_support"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or  60,                      --- 【游泳模式】EX支援
-        ["swimming_efficient_work"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60,                --- 【游泳模式】高效作业
-        ["swimming_emergency_assistance"] = 0,                                                      --- 【游泳模式】紧急支援
-        ["swimming_dawn_of_horus"] = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 10*60,                --- 【游泳模式】晓之荷鲁斯
+        ["gun_eye_of_horus_ex"] = TUNING.HOSHINO_PARAMS.SPELLS.GUN_EYE_OF_HORUS_EX_CD  or 20,                                                               --- 【普通模式】枪，EX技能
+        ["normal_heal"] = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_HEAL_CD or 30,                                                                                --- 【普通模式】疗愈
+        ["normal_covert_operation"] = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_COVERT_OPERATION_CD or TUNING.HOSHINO_DEBUGGING_MODE and 10 or 8*60,              --- 【普通模式】隐秘行动
+        ["normal_breakthrough"] = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_BREAKTHROUGH_CD or 0,                                                                 --- 【普通模式】突破
+        ["swimming_ex_support"] = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EX_SUPPORT_CD or TUNING.HOSHINO_DEBUGGING_MODE and 10 or  60,                       --- 【游泳模式】EX支援
+        ["swimming_efficient_work"] = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EFFICIENT_WORK_CD or TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60,             --- 【游泳模式】高效作业
+        ["swimming_emergency_assistance"] = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EMERGENCY_ASSISTANCE_CD or 0,                                             --- 【游泳模式】紧急支援
+        ["swimming_dawn_of_horus"] = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_DAWN_OF_HORUS_CD or TUNING.HOSHINO_DEBUGGING_MODE and 10 or 10*60,               --- 【游泳模式】晓之荷鲁斯
         -- ["gun_eye_of_horus_ex_test"] = 30,
     }
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 【普通模式】疗愈
     local function normal_heal_fn(inst,spell_name)
-        local cost_value = 3
+        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_HEAL_COST or 3
         if inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) 
             and inst.components.hoshino_com_power_cost:GetCurrent() >= cost_value then
                 inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
@@ -38,7 +38,7 @@
                     while test_num > 0 do
                         local debuff_inst = inst:GetDebuff(debuff_prefab)
                         if debuff_inst and debuff_inst:IsValid() then
-                            debuff_inst:PushEvent("SetTime",30)
+                            debuff_inst:PushEvent("SetTime",TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_HEAL_BUFF_REMAIN_TIME or 30)
                             break
                         end
                         inst:AddDebuff(debuff_prefab,debuff_prefab)
@@ -54,7 +54,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 【普通模式】隐秘行动
     local function normal_covert_operation_fn(inst,spell_name)
-        local cost_value = 4
+        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_COVERT_OPERATION_CD or 4
         if inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) 
             and inst.components.hoshino_com_power_cost:GetCurrent() >= cost_value then
                 inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
@@ -66,7 +66,7 @@
                     while test_num > 0 do
                         local debuff_inst = inst:GetDebuff(debuff_prefab)
                         if debuff_inst and debuff_inst:IsValid() then
-                            debuff_inst:PushEvent("SetTime",1*60)
+                            debuff_inst:PushEvent("SetTime",TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_COVERT_OPERATION_BUFF_REMAIN_TIME or 1*60)
                             break
                         end
                         inst:AddDebuff(debuff_prefab,debuff_prefab)
@@ -113,7 +113,7 @@
         return true
     end
     local function normal_breakthrough_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
-        local cost_value = 1
+        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_BREAKTHROUGH_COST or 1
         if not normal_breakthrough_test(inst,spell_name,cost_value) then
             return
         end
@@ -150,7 +150,7 @@
         return true
     end
     local function swimming_ex_support_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
-        local cost_value = 5
+        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EX_SUPPORT_COST or 5
         if not swimming_ex_support_test(inst,spell_name,cost_value) then
             return
         end
@@ -181,7 +181,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 【游泳模式】高效作业
     local function swimming_efficient_work_fn(inst,spell_name)
-        local cost_value = 4
+        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EFFICIENT_WORK_COST or 4
         if inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) 
             and inst.components.hoshino_com_power_cost:GetCurrent() >= cost_value then
                 inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
@@ -193,7 +193,7 @@
                     while test_num > 0 do
                         local debuff_inst = inst:GetDebuff(debuff_prefab)
                         if debuff_inst and debuff_inst:IsValid() then
-                            debuff_inst:PushEvent("SetTime",16*60)
+                            debuff_inst:PushEvent("SetTime",TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EFFICIENT_WORK_BUFF_REMAIN_TIME or 16*60)
                             break
                         end
                         inst:AddDebuff(debuff_prefab,debuff_prefab)
@@ -209,7 +209,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 【游泳模式】紧急支援
     local function swimming_emergency_assistance_fn(inst,spell_name,_table)
-        local cost_value = 4
+        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_EMERGENCY_ASSISTANCE_COST or 4
         if not inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) then
             return
         end
@@ -259,7 +259,7 @@
         return true
     end
     local function swimming_dawn_of_horus_fn(inst,spell_name,RemoveSpellInst,AddSpellInstByPrefab)
-        local cost_value = 6
+        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.SWIMMING_DAWN_OF_HORUS_COST or 6
         if not swimming_dawn_of_horus_test(inst,spell_name,cost_value) then
             return
         end

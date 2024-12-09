@@ -20,7 +20,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                     return
                 end
                 local max_health  = target.components.health.maxhealth
-                local heal_num = max_health*4/100
+                local heal_num = max_health*(TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_HEAL_BUFF_HEAL_PERCENT_PRE_SECOND or 4/100)
                 target.components.health:DoDelta(heal_num,true)
             -------------------------------------------
             --- 特效

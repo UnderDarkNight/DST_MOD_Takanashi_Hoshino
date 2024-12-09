@@ -25,3 +25,5 @@ modimport("imports_for_hoshino/09_drawings.lua")	        ---- 立绘用的动画
 modimport("imports_for_hoshino/10_load_characters_assets.lua")	        ---- 角色相关的素材文件
 
 modimport("imports_for_hoshino/11_load_sounds.lua")	        ---- 声音文件
+
+modimport("imports_for_hoshino/12_hoshino_params.lua")	        ---- 配置文件

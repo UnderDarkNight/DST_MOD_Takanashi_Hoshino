@@ -105,7 +105,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_shoes_t1.xml",
             image = "hoshino_pad_equipment_shoes_t1.tex",
-            -- inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t1","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t1","recipe_desc"),
+            inspect_txt = TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") or "移动速度+5%"
         }
     -----------------------------------------------------------------------------------
     if not TheWorld.ismastersim then

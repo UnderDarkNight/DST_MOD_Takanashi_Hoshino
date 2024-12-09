@@ -27,6 +27,40 @@
     local function GetInfoData()
         return ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.info or {}
     end
+    local function Player_Is_Swimming_Type()
+        local character_spell_type = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.character_spell_type or "hoshino_spell_type_normal"
+        if character_spell_type == "hoshino_spell_type_swimming" then
+            return true
+        else
+            return false
+        end
+    end
+    local normal_spell_names = {
+        ["gun_eye_of_horus_ex"] = "战术镇压",
+        ["normal_heal"] = "疗愈",
+        ["normal_covert_operation"] = "隐秘行动",
+        ["normal_breakthrough"] = "突破",
+    }
+    local swimming_spell_names = {
+        ["swimming_ex_support"] = "水上支援",
+        ["swimming_efficient_work"] = "高效率工作",
+        ["swimming_emergency_assistance"] = "急援",
+        ["swimming_dawn_of_horus"] = "晓之荷鲁斯",
+    }  
+    local function GetSpellInfoByName(spell_name)
+        local crash_flag,ret = pcall(function()
+            local index = string.upper(spell_name).."_MOUSE_OVER_TEXT"
+            return TUNING.HOSHINO_PARAMS.SPELLS[index]
+        end)
+        if crash_flag then
+            return ret or ""
+        else
+            return ""
+        end
+        -- local ret = spell_infos[spell_name]
+        -- print("spell info",spell_name,ret)
+        -- return ret or ""
+    end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 装备强化配方页面
     local current_display_recipes_page = 1
@@ -143,22 +177,14 @@ local function page_create(front_root,MainScale)
                 skill_box:SetTexture("images/inspect_pad/page_character.xml","page_character_skill.tex")
                 skill_box:SetScale(MainScale,MainScale,MainScale)
                 skill_box:SetPosition(-270,-40)
-
+            --------------------------------------------------------------------------------------
+            --- 文本框 -- 13字一行。最多 52字
+                local spell_info_text = skill_box:AddChild(Text(CODEFONT,40,"技能信息",{ 0/255 , 0/255 ,0/255 , 1}))
+                spell_info_text:SetPosition(0,-85)
+                spell_info_text:SetString("技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n")
             --------------------------------------------------------------------------------------
             --- 技能图标占位.两行、四列
-                local normal_spell_names = {
-                    ["gun_eye_of_horus_ex"] = "战术镇压",
-                    ["normal_heal"] = "疗愈",
-                    ["normal_covert_operation"] = "隐秘行动",
-                    ["normal_breakthrough"] = "突破",
-                }
-                local swimming_spell_names = {
-                    ["swimming_ex_support"] = "水上支援",
-                    ["swimming_efficient_work"] = "高效率工作",
-                    ["swimming_emergency_assistance"] = "急援",
-                    ["swimming_dawn_of_horus"] = "晓之荷鲁斯",
-                }
-                page.skill_icons = {}
+                page.skill_normal_icons = {}
                 local icon_scale = MainScale*1.5
                 local icon_delta = 110
                 local spell_icon_atlas = "images/inspect_pad/hoshino_pad_spells_icon.xml"
@@ -170,31 +196,45 @@ local function page_create(front_root,MainScale)
                     temp_icon:SetPosition(-170 + (icon_delta * (i-1)),85)
                     temp_icon.inst.indicator_fn = function(mouse_indicator)
                         mouse_indicator.txt:SetString(display_name)
+                        spell_info_text:SetString(GetSpellInfoByName(spell_index))
                     end
                     -- table.insert(page.skill_icons,temp_icon)
-                    page.skill_icons[spell_index] = temp_icon
+                    page.skill_normal_icons[spell_index] = temp_icon
                     i = i + 1
                 end
                 i = 1
+                page.skill_swimming_icons = {}
                 for spell_index, display_name in pairs(swimming_spell_names) do
                     local temp_icon = skill_box:AddChild(Image())
                     temp_icon:SetTexture(spell_icon_atlas,spell_index..".tex")
                     temp_icon:SetScale(icon_scale,icon_scale,icon_scale)
-                    temp_icon:SetPosition(-170 + (icon_delta * (i-1)),-80)
+                    temp_icon:SetPosition(-170 + (icon_delta * (i-1)),85)
                     temp_icon.inst.indicator_fn = function(mouse_indicator)
                         mouse_indicator.txt:SetString(display_name)
+                        spell_info_text:SetString(GetSpellInfoByName(spell_index))
                     end
                     -- table.insert(page.skill_icons,temp_icon)
-                    page.skill_icons[spell_index] = temp_icon
+                    page.skill_swimming_icons[spell_index] = temp_icon
                     i = i + 1
                 end
                 --- 解锁覆盖
-                for spell_name, temp_icon in pairs(page.skill_icons) do
+                for spell_name, temp_icon in pairs(page.skill_normal_icons) do
+                    temp_icon.black_mask = temp_icon:AddChild(Image(spell_icon_atlas,"black.tex"))
+                    temp_icon.black_mask:SetClickable(false)
+                end
+                for spell_name, temp_icon in pairs(page.skill_swimming_icons) do
                     temp_icon.black_mask = temp_icon:AddChild(Image(spell_icon_atlas,"black.tex"))
                     temp_icon.black_mask:SetClickable(false)
                 end
                 page.inst:DoPeriodicTask(0.5,function()
-                    for spell_name, temp_icon in pairs(page.skill_icons) do
+                    for spell_name, temp_icon in pairs(page.skill_normal_icons) do
+                        if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked(spell_name) then
+                            temp_icon.black_mask:Hide()
+                        else
+                            temp_icon.black_mask:Show()
+                        end
+                    end
+                    for spell_name, temp_icon in pairs(page.skill_swimming_icons) do
                         if ThePlayer.replica.hoshino_com_spell_cd_timer:Is_Spell_Unlocked(spell_name) then
                             temp_icon.black_mask:Hide()
                         else
@@ -202,6 +242,25 @@ local function page_create(front_root,MainScale)
                         end
                     end
                 end)
+                local function switch_spell_display()
+                    if not Player_Is_Swimming_Type() then
+                        for spell_name, temp_icon in pairs(page.skill_normal_icons) do
+                            temp_icon:Show()
+                        end
+                        for spell_name, temp_icon in pairs(page.skill_swimming_icons) do
+                            temp_icon:Hide()
+                        end
+                    else
+                        for spell_name, temp_icon in pairs(page.skill_normal_icons) do
+                            temp_icon:Hide()
+                        end
+                        for spell_name, temp_icon in pairs(page.skill_swimming_icons) do
+                            temp_icon:Show()
+                        end
+                    end
+                end
+                switch_spell_display()
+                page.inst:ListenForEvent("hoshino_event.pad_data_update",switch_spell_display,ThePlayer)
             --------------------------------------------------------------------------------------
             --- 
             --------------------------------------------------------------------------------------
@@ -214,14 +273,19 @@ local function page_create(front_root,MainScale)
                 c_pic:SetPosition(0,30)
                 c_pic:SetScale(MainScale,MainScale,MainScale)
                 local function update_character_pic()
-                    local character_spell_type = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.character_spell_type or "hoshino_spell_type_normal"
+                    -- local character_spell_type = ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.character_spell_type or "hoshino_spell_type_normal"
+                    -- local temp_img = "page_character_picture2.tex"
+                    -- if character_spell_type == "hoshino_spell_type_normal" then
+                    --     temp_img = "page_character_picture_normal.tex"
+                    -- elseif character_spell_type == "hoshino_spell_type_swimming" then
+                    --     temp_img = "page_character_picture_swimming.tex"
+                    -- end
+
                     local temp_img = "page_character_picture2.tex"
-                    if character_spell_type == "hoshino_spell_type_normal" then
+                    if not Player_Is_Swimming_Type() then
                         temp_img = "page_character_picture_normal.tex"
-                        -- temp_img = "page_character_picture_swimming.tex"
-                    elseif character_spell_type == "hoshino_spell_type_swimming" then
+                    else
                         temp_img = "page_character_picture_swimming.tex"
-                        -- temp_img = "page_character_picture_normal.tex"
                     end
                     c_pic:SetTextures( "images/inspect_pad/page_character.xml", temp_img, temp_img, temp_img, temp_img)
                 end
@@ -386,6 +450,10 @@ local function page_create(front_root,MainScale)
                 local button_enhancement_focus_scale = 1.02
                 button_enhancement.focus_scale = {button_enhancement_focus_scale,button_enhancement_focus_scale,button_enhancement_focus_scale}
             --------------------------------------------------------------------------------------
+            --- 
+                local equip_info_text = status_box:AddChild(Text(CODEFONT,40,"装备信息",{ 0/255 , 0/255 ,0/255 , 1}))
+                equip_info_text:SetPosition(0,-150)
+                equip_info_text:SetString("装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n")
             --------------------------------------------------------------------------------------
             --- 鼠标指示器
                 local mouse_indicator = page:AddChild(Widget())
@@ -433,14 +501,17 @@ local function page_create(front_root,MainScale)
                         page.equip_slots[i]:SetTexture(atlas,image)
                         page.equip_slots[i].inspect_txt = inspect_txt
 
-                        if mouse_indicator_fn then
-                            page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
-                                mouse_indicator_fn(mouse_indicator)
-                            end
-                        else                        
-                            page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
-                                mouse_indicator.txt:SetString(inspect_txt)
-                            end
+                        -- if mouse_indicator_fn then
+                        --     page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
+                        --         mouse_indicator_fn(mouse_indicator)
+                        --     end
+                        -- else                        
+                        --     page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
+                        --         mouse_indicator.txt:SetString(inspect_txt)
+                        --     end
+                        -- end
+                        page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
+                            equip_info_text:SetString(inspect_txt)
                         end
                         page.equip_slots[i]:Show()
 

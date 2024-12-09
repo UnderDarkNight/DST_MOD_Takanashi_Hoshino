@@ -105,7 +105,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_backpack_t7.xml",
             image = "hoshino_pad_equipment_backpack_t7.tex",
-            -- inspect_txt = TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t9","name") .. "\n"..TUNING.HOSHINO_FNS:GetString("hoshino_special_equipment_shoes_t9","recipe_desc"),
+            inspect_txt = TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") or "拥有其下位的效果，商店所有物品打折20%，每次击杀单位可以获得3信用点，传奇单位则获得300信用点"
 
         }
     -----------------------------------------------------------------------------------

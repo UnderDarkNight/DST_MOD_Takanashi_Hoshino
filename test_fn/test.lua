@@ -21,26 +21,26 @@ local flg,error_code = pcall(function()
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        local item = SpawnPrefab("hoshino_item_cards_pack")
-        item:PushEvent("Set",{
-                cards = {
-                    -- "card_golden",
-                    -- "card_white",
-                    -- "card_colourful",
-                    -- "card_colourful",
-                    -- "card_golden",
-                    -- "card_black",
-                    -- "kill_and_explode",
-                    -- "unlock_spell_normal_ex",
-                    "unlock_spell_swimming_ex",
-                    -- "unlock_spell_all_normal",
-                    -- "unlock_spell_all_swimming",
-                    -- "kill_and_explode",
-                    -- "give_me_some_money",
-                },
-            }
-        )
-        ThePlayer.components.inventory:GiveItem(item)
+        -- local item = SpawnPrefab("hoshino_item_cards_pack")
+        -- item:PushEvent("Set",{
+        --         cards = {
+        --             -- "card_golden",
+        --             -- "card_white",
+        --             -- "card_colourful",
+        --             -- "card_colourful",
+        --             -- "card_golden",
+        --             -- "card_black",
+        --             -- "kill_and_explode",
+        --             -- "unlock_spell_normal_ex",
+        --             "unlock_spell_swimming_ex",
+        --             -- "unlock_spell_all_normal",
+        --             -- "unlock_spell_all_swimming",
+        --             -- "kill_and_explode",
+        --             -- "give_me_some_money",
+        --         },
+        --     }
+        -- )
+        -- ThePlayer.components.inventory:GiveItem(item)
         -- local item = SpawnPrefab("hoshino_item_cards_pack")
         -- item:PushEvent("Set",{
         --         cards = {
@@ -204,10 +204,8 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-        SpawnPrefab("hoshino_sfx_wave"):PushEvent("Set",{
-            pt = Vector3(x,y,z),
-            radius = 8
-        })
+        ThePlayer.__t_x = 0
+        ThePlayer.__t_y = -150
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

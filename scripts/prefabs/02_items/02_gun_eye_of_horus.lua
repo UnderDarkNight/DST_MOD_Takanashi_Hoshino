@@ -89,9 +89,10 @@
 
                     if time > 0 then
                         ret_str = "【 "..string.format("%.1f", time).." 】 " .. ret_str
-                    end                    
-                    if cost_value < 4 then
-                        ret_str = ret_str.." 【 COST 4 】"
+                    end
+                    local spell_cost = TUNING.HOSHINO_PARAMS.SPELLS.GUN_EYE_OF_HORUS_EX_COST or 4
+                    if cost_value < spell_cost then
+                        ret_str = ret_str.." 【 COST "..spell_cost.." 】"
                     end
                     replica_com:SetText(com_str_index,ret_str)
                 else
