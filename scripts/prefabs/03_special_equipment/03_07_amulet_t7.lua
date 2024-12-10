@@ -105,7 +105,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_amulet_t7.xml",
             image = "hoshino_pad_equipment_amulet_t7.tex",
-            inspect_txt = TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") or "拥有其下位的效果，半径30码内的枯萎植物会恢复，半径30码内的玩家会每10s恢复3点生命值"
+            inspect_txt = function() return TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") end,
 
         }
     -----------------------------------------------------------------------------------

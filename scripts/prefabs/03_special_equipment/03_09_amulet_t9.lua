@@ -105,7 +105,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_amulet_t9.xml",
             image = "hoshino_pad_equipment_amulet_t9.tex",
-            inspect_txt = TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") or "拥有其下位的效果，每次攻击会恢复造成伤害1%的生命值，被攻击到的生物获得debuff：受到的最终伤害增加100%，持续10s"
+            inspect_txt = function() return TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") end,
 
         }
     -----------------------------------------------------------------------------------

@@ -105,7 +105,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_amulet_t1.xml",
             image = "hoshino_pad_equipment_amulet_t1.tex",
-            inspect_txt = TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") or "拥有其下位的效果，免疫钢羊的控制效果，生命上限+20"
+            inspect_txt = function() return TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") end,
 
         }
     -----------------------------------------------------------------------------------

@@ -105,7 +105,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_amulet_t8.xml",
             image = "hoshino_pad_equipment_amulet_t8.tex",
-            inspect_txt = TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") or "拥有其下位的效果，睡觉时cost恢复速率+0.02/s。每次睡觉时获得一包升级卡包，此效果每一天仅可触发1次"
+            inspect_txt = function() return TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") end,
 
         }
     -----------------------------------------------------------------------------------

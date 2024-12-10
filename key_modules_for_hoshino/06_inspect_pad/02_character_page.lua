@@ -511,7 +511,12 @@ local function page_create(front_root,MainScale)
                         --     end
                         -- end
                         page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
-                            equip_info_text:SetString(inspect_txt)
+                            if type(inspect_txt) == "string" then
+                                equip_info_text:SetString(inspect_txt)
+                            elseif type(inspect_txt) == "function" then
+                                print("inspect_txt is function",inspect_txt())
+                                equip_info_text:SetString(inspect_txt())
+                            end                                    
                         end
                         page.equip_slots[i]:Show()
 

@@ -105,7 +105,7 @@ local function fn()
         inst.pad_data = {
             atlas = "images/inspect_pad/hoshino_pad_equipment_shoes_t3.xml",
             image = "hoshino_pad_equipment_shoes_t3.tex",
-            inspect_txt = TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") or "拥有其下位的效果，免疫雷电，免疫麻痹，基础攻击伤害+15%"
+            inspect_txt = function() return TUNING.HOSHINO_FNS:GetString(inst.prefab,"inspect_str") end,
         }
     -----------------------------------------------------------------------------------
     if not TheWorld.ismastersim then
