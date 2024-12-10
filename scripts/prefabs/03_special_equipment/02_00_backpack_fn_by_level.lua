@@ -55,14 +55,14 @@ return function(inst)
     --- 生命上限+20
         if inst.level >= 2 then            
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                if not inst.components.hoshino_data:Get("max_health_active") then
-                    inst.components.hoshino_data:Set("max_health_active",true)
+                if not owner.components.hoshino_data:Get("max_health_active.backpack_t1") then
+                    owner.components.hoshino_data:Set("max_health_active.backpack_t1",true)
                     owner.components.hoshino_com_debuff:Add_Max_Helth(20)
                 end
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
-                if inst.components.hoshino_data:Get("max_health_active") then
-                    inst.components.hoshino_data:Set("max_health_active",false)
+                if owner.components.hoshino_data:Get("max_health_active.backpack_t1") then
+                    owner.components.hoshino_data:Set("max_health_active.backpack_t1",false)
                     owner.components.hoshino_com_debuff:Add_Max_Helth(-20)
                 end
             end)
