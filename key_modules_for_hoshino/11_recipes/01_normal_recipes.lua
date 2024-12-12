@@ -83,7 +83,7 @@
     AddRecipeToFilter("hoshino_building_task_board_pre","STRUCTURES")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_building_task_board_pre",            --  --  inst.prefab  实体名字
-        {} ,
+        {Ingredient("cutstone", 2),Ingredient("boards", 3),Ingredient("rope", 2)} ,
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
@@ -332,7 +332,7 @@
     AddRecipeToFilter("hoshino_building_shop24_pre","STRUCTURES")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_building_shop24_pre",            --  --  inst.prefab  实体名字
-        {} ,
+        {Ingredient("boards", 5),Ingredient("cutstone", 5),Ingredient("gears", 1)} ,
         TECH.NONE, --- 
         {
             -- nounlock=true,
