@@ -62,7 +62,20 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
         stop_sg(target)
         pause_timer_com(target)
     -----------------------------------------------------
+    --- 
+        inst:ListenForEvent("minhealth",function()
+            target:RestartBrain()
+            start_sg(target)
+            resume_timer_com(target)
+            inst:Remove()
+        end,target)
+    -----------------------------------------------------
     ---
+        inst:ListenForEvent("SetTime",function(_,_time)
+            if _time > inst.time then
+                inst.time = _time
+            end
+        end)
     -----------------------------------------------------
 end
 

@@ -63,6 +63,8 @@ local files_name = {
 		"hoshino_item_artifact_sky",									--- Artifact 天
 		"hoshino_equipment_artifact_spring_wind",						--- Artifact 春风
 		"hoshino_item_artifact_hia",									--- Artifact 希亚
+
+		"hoshino_weapon_soul_cleaving_tang_saber",						--- 灵斩刀
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子

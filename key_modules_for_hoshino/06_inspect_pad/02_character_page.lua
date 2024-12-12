@@ -514,7 +514,7 @@ local function page_create(front_root,MainScale)
                             if type(inspect_txt) == "string" then
                                 equip_info_text:SetString(inspect_txt)
                             elseif type(inspect_txt) == "function" then
-                                print("inspect_txt is function",inspect_txt())
+                                -- print("inspect_txt is function",inspect_txt())
                                 equip_info_text:SetString(inspect_txt())
                             end                                    
                         end

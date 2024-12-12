@@ -36,3 +36,6 @@ modimport("key_modules_for_hoshino/07_actions/11_sg_straw_sleep.lua")
 
 modimport("key_modules_for_hoshino/07_actions/12_sg_empty_active.lua") 
 --- 空的执行SG。
+
+modimport("key_modules_for_hoshino/07_actions/13_sg_polymorphic_attack_action.lua") 
+--- 多态攻击动作

@@ -280,6 +280,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "商店升级芯片 lv 3",
                 ["recipe_desc"] = "商店升级芯片 lv 3",
             },
+            ["hoshino_weapon_soul_cleaving_tang_saber"] = {
+                ["name"] = "斩灵唐刀",
+                ["inspect_str"] = "斩灵唐刀",
+                ["recipe_desc"] = "斩灵唐刀",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

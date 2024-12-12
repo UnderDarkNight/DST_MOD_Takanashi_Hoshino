@@ -41,6 +41,8 @@ AddReplicableComponent("hoshino_com_item_spell")  --- 物品技能控制器
 AddReplicableComponent("hoshino_com_task_sys_for_player")  --- 任务系统
 AddReplicableComponent("hoshino_com_task_sys_for_building")  --- 任务系统
 
+AddReplicableComponent("hoshino_com_polymorphic_attack_action")  --- 多态攻击动作
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
