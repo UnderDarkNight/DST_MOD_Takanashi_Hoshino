@@ -50,8 +50,8 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     -- inst.components.inventoryitem:ChangeImageName("leafymeatburger")
-    inst.components.inventoryitem.imagename = "hoshino_equipment_sandstorm_core"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_sandstorm_core.xml"
+    inst.components.inventoryitem.imagename = "hoshino_equipment_used_mechanical_sheets"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_used_mechanical_sheets.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot =  TUNING.HOSHINO_FNS:CopyEquipmentSlotFrom("amulet") or EQUIPSLOTS.BODY
