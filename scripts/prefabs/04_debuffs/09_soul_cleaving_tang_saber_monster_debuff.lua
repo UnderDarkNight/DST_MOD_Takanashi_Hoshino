@@ -16,6 +16,10 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     ---
         local linked_monster_old_DoDelta = linked_monster.components.health.DoDelta
         linked_monster.components.health.DoDelta = function(self,num,...)
+            -- if not inst:IsValid() then
+            --     linked_monster.components.health.DoDelta = linked_monster_old_DoDelta
+            --     return linked_monster_old_DoDelta(self,num,...)
+            -- end
             -- 先屏蔽回血
             if num > 0 then
                 num = 0
@@ -48,6 +52,11 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             linked_monster:RemoveTag("linked_by_soul_cleaving_tang_saber")
             target.components.health.DoDelta = target_old_DoDelta
             linked_monster.components.health.DoDelta = linked_monster_old_DoDelta
+            inst:Remove()
+            local brain_debuff = linked_monster:GetDebuff("hoshino_debuff_gun_eye_of_horus_spell_monster_brain_stop")
+            if brain_debuff then
+                brain_debuff:PushEvent("force_remove")
+            end
         end,target)
     -----------------------------------------------------
 end

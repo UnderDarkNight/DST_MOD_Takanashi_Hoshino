@@ -19,6 +19,24 @@
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
+    local function create_fx(inst,owner)
+        inst.sfx = inst.sfx or {}
+        for i = 1, 3, 1 do
+            local fx = SpawnPrefab("cane_victorian_fx")
+            fx.entity:SetParent(owner.entity)
+            fx.entity:AddFollower()
+            fx.Follower:FollowSymbol(owner.GUID, "swap_object",0,-130 - (i-1)*100, 0)
+            table.insert(inst.sfx,fx)
+        end
+
+    end
+    local function remove_fx(inst)
+        inst.sfx = inst.sfx or {}
+        for k, v in pairs(inst.sfx) do
+            v:Remove()
+        end
+        inst.sfx = {}
+    end
     local function onequip(inst, owner)
         owner.AnimState:OverrideSymbol("swap_object", "hoshino_weapon_soul_cleaving_tang_saber_swap", "swap_object")
         owner.AnimState:Show("ARM_carry")
@@ -36,6 +54,9 @@
         if inst.light_fx == nil then
             inst.light_fx = owner:SpawnChild("minerhatlight")
         end
+
+        create_fx(inst,owner)
+        
     end
 
     local function onunequip(inst, owner)
@@ -48,6 +69,7 @@
             inst.light_fx:Remove()
             inst.light_fx = nil
         end
+        remove_fx(inst)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 切换攻击动作。

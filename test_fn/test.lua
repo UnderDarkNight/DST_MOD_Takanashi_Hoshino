@@ -204,13 +204,26 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-        ThePlayer.__t_x = 0
-        ThePlayer.__t_y = -150
-        ThePlayer.___test = function(button)
-            local text = button:AddChild(Text(CODEFONT,50,"测试文本",{ 0/255 , 0/255 ,0/255 , 1}))
-            text:SetPosition(0,-100)
-            print("6666666666")
+        -- ThePlayer.__t_x = 0
+        -- ThePlayer.__t_y = -150
+        -- ThePlayer.___test = function(button)
+        --     local text = button:AddChild(Text(CODEFONT,50,"测试文本",{ 0/255 , 0/255 ,0/255 , 1}))
+        --     text:SetPosition(0,-100)
+        --     print("6666666666")
+        -- end
+
+        if ThePlayer.fx then
+            ThePlayer.fx:Remove()
         end
+
+        local owner = ThePlayer
+
+        local fx = SpawnPrefab("cane_victorian_fx")
+        fx.entity:SetParent(owner.entity)
+        fx.entity:AddFollower()
+        fx.Follower:FollowSymbol(owner.GUID, "swap_object",0,-100, 0)
+
+        ThePlayer.fx = fx
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -7,7 +7,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     -----------------------------------------------------
     --- 计时器
         inst:DoPeriodicTask(1,function()
-            inst.time = inst.time - 1
+            inst.time = (inst.time or 0) - 1
             if inst.time <= 0 then
                 inst:Remove()
             end

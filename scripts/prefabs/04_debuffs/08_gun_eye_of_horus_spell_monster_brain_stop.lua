@@ -71,6 +71,14 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
         end,target)
     -----------------------------------------------------
     ---
+        inst:ListenForEvent("force_remove",function()
+            target:RestartBrain()
+            start_sg(target)
+            resume_timer_com(target)
+            inst:Remove()
+        end)
+    -----------------------------------------------------
+    ---
         inst:ListenForEvent("SetTime",function(_,_time)
             if _time > inst.time then
                 inst.time = _time
