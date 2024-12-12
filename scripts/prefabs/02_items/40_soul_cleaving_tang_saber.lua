@@ -13,7 +13,7 @@
 ---
     local BASE_DAMAGE = 17
     local PLANARDAMAGE = 51
-    local SPELL_CD_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60
+    local SPELL_CD_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 200 or 16*60
     local MONSTER_BLACK_LIST = {
         ["ghost"] = true , --- 幽灵
     }
@@ -60,7 +60,7 @@
             inst.components.hoshino_com_polymorphic_attack_action:SetRandomType()
         end
         local x,y,z = target.Transform:GetWorldPosition()
-        SpawnPrefab(hit_fx[math.random(#hit_fx)]).Transform:SetPosition(x,y,z)
+        SpawnPrefab(hit_fx[math.random(#hit_fx)]).Transform:SetPosition(x,2,z)
     end
     local function swtich_event_locker_install(inst)
         inst:ListenForEvent("enter_multithrust",function()

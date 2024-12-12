@@ -68,4 +68,19 @@ return function(inst)
     end)
     
 
+    -------------------------------------------------------------------
+    --- 睡觉消失光环
+        local checker_fn = function()
+            if inst.sg:HasStateTag("sleeping") then
+                inst:PushEvent("hoshino_event.halo",false)
+            else
+                inst:PushEvent("hoshino_event.halo",true)
+            end
+        end
+        local event = function()
+            inst:DoTaskInTime(0,checker_fn)
+        end
+        inst:ListenForEvent("newstate",event)
+    -------------------------------------------------------------------
+
 end
