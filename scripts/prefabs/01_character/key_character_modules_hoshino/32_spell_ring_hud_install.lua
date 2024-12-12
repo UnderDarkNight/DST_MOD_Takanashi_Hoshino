@@ -173,7 +173,7 @@
                         local function button_info_update_fn()
                             local can_click_button = true
                             local info_txt = ""
-                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_COVERT_OPERATION_CD or 4
+                            local cost = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_COVERT_OPERATION_COST or 4
                             if ThePlayer.replica.hoshino_com_power_cost:GetCurrent() < cost then
                                 info_txt = info_txt.."【 COST "..cost.." 】"
                                 can_click_button = false
@@ -511,6 +511,10 @@
             if ThePlayer.replica.hoshino_com_spell_cd_timer:IsReady("normal_breakthrough") then
                 ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{spell_name = "normal_breakthrough"})
             end
+        end
+        if TUNING.HOSHINO_FNS:IsKeyPressed(TUNING["hoshino.Config"]._12MM_BULLET_HOTKEY,key) and not ThePlayer:HasTag("playerghost") then
+            --- 12mm子弹快捷键
+            ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.12mm_bullet_hotkey_press")
         end
     end
     local function hotkey_listener_install(inst)

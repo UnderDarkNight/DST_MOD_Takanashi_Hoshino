@@ -311,6 +311,13 @@ configuration_options = {
     default = "KEY_B",
   },
   {
+    name = "_12MM_BULLET_HOTKEY",
+    label = IsChinese() and "12mm子弹快捷键" or "12mm Bullet Hotkey",
+    hover = IsChinese() and "12mm子弹快捷键" or "12mm Bullet Hotkey",
+    options = keys_option,
+    default = "KEY_F5",
+  },
+  {
     name = "SPELL_RING_HOTKEY",
     label = IsChinese() and "技能环快捷键" or "Spell Ring Hotkey",
     hover = IsChinese() and "技能环快捷键" or "Spell Ring Hotkey",
