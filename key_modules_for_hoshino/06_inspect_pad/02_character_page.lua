@@ -410,25 +410,27 @@ local function page_create(front_root,MainScale)
                 -- -- end
 
                 for i = 1, 3, 1 do
-                    local temp_slot = status_box:AddChild(Image())
-                    temp_slot:SetTexture("images/inspect_pad/page_character.xml","excample_equipment.tex")
+                    -- local temp_slot = status_box:AddChild(Image())
+                    -- temp_slot:SetTexture("images/inspect_pad/page_character.xml","excample_equipment.tex")
+                    -- temp_slot:SetPosition(-187 + (i-1)*110,equip_slot_icon_y)
+                    -- -- temp_slot.inst.indicator_fn = function(mouse_indicator)
+                    -- --     mouse_indicator.txt:SetString("equip slot "..i)
+                    -- -- end
+                    -- temp_slot:Hide()
+                    -- table.insert(page.equip_slots,temp_slot)
+                    local temp_slot = status_box:AddChild(ImageButton("images/inspect_pad/page_character.xml",
+                        "excample_equipment.tex",
+                        "excample_equipment.tex",
+                        "excample_equipment.tex",
+                        "excample_equipment.tex",
+                        "excample_equipment.tex"
+                    ))
+                    temp_slot:SetOnClick(function()
+                        print("special_equpment_click",i)
+                        ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.pad_special_equipment_clicked",i)
+                    end)
+                    temp_slot.focus_scale = {1.01, 1.01, 1.01}
                     temp_slot:SetPosition(-187 + (i-1)*110,equip_slot_icon_y)
-                    -- temp_slot.inst.indicator_fn = function(mouse_indicator)
-                    --     mouse_indicator.txt:SetString("equip slot "..i)
-                    -- end
-                    -- local old_OnMouseButton = temp_slot.OnMouseButton
-                    -- temp_slot.OnMouseButton = function(self,button, down, x, y,...)
-                    --     local origin_ret = old_OnMouseButton(self,button, down, x, y,...)
-                    --     if down == false then
-                    --         if button == MOUSEBUTTON_LEFT then
-                    --             temp_slot.inst:PushEvent("mouse_left_clicked")
-                    --         else
-                    --         -- print("+++++666",i)
-                    --             temp_slot.inst:PushEvent("mouse_right_clicked")
-                    --         end
-                    --     end
-                    --     return origin_ret
-                    -- end
                     temp_slot:Hide()
                     table.insert(page.equip_slots,temp_slot)
                 end
@@ -498,19 +500,20 @@ local function page_create(front_root,MainScale)
                         local inspect_txt = temp_equipment_inst.pad_data.inspect_txt or ""
                         local mouse_indicator_fn = temp_equipment_inst.mouse_indicator_fn
 
-                        page.equip_slots[i]:SetTexture(atlas,image)
+                        -- page.equip_slots[i]:SetTexture(atlas,image)
+                        page.equip_slots[i]:SetTextures(atlas,image,image,image,image,image)
                         page.equip_slots[i].inspect_txt = inspect_txt
 
-                        -- if mouse_indicator_fn then
-                        --     page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
-                        --         mouse_indicator_fn(mouse_indicator)
-                        --     end
-                        -- else                        
-                        --     page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
-                        --         mouse_indicator.txt:SetString(inspect_txt)
-                        --     end
+
+                        -- page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
+                        --     if type(inspect_txt) == "string" then
+                        --         equip_info_text:SetString(inspect_txt)
+                        --     elseif type(inspect_txt) == "function" then
+                        --         -- print("inspect_txt is function",inspect_txt())
+                        --         equip_info_text:SetString(inspect_txt())
+                        --     end                                    
                         -- end
-                        page.equip_slots[i].inst.indicator_fn = function(mouse_indicator)
+                        page.equip_slots[i].ongainfocus = function()
                             if type(inspect_txt) == "string" then
                                 equip_info_text:SetString(inspect_txt)
                             elseif type(inspect_txt) == "function" then
@@ -520,16 +523,7 @@ local function page_create(front_root,MainScale)
                         end
                         page.equip_slots[i]:Show()
 
-                        -- page.equip_slots[i].inst:ListenForEvent("mouse_left_clicked",function()
-                        --     front_root.parent.inst:PushEvent("pad_close")
-                        --     ThePlayer.replica.inventory:TakeActiveItemFromEquipSlot(slot)
-                        --     -- print("装备槽被点击")
-                        -- end)
-                        -- page.equip_slots[i].inst:ListenForEvent("mouse_right_clicked",function()
-                        --     -- print("装备槽被右键点击")
-                        --     ThePlayer.replica.hoshino_com_rpc_event:PushEvent("pad_equip_slot_right_click",slot)
-                        --     page.equip_slots[i]:Hide()
-                        -- end)
+
                     end
                 end
             --------------------------------------------------------------------------------------
