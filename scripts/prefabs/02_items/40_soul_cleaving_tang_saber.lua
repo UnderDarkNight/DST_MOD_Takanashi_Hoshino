@@ -14,6 +14,9 @@
     local BASE_DAMAGE = 17
     local PLANARDAMAGE = 51
     local SPELL_CD_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 16*60
+    local MONSTER_BLACK_LIST = {
+        ["ghost"] = true , --- 幽灵
+    }
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function onequip(inst, owner)
@@ -94,7 +97,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 技能
     local function Spawn_Ghost_Test_Fn(target)
-        if target.prefab == "ghost" then
+        if target.prefab == "ghost" or MONSTER_BLACK_LIST[target.prefab] then
             return false
         end
         if target.components.health == nil or target.sg == nil or target.brainfn == nil then
@@ -138,7 +141,7 @@
         inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_point_and_target_spell_caster",function(inst,replica_com)
             replica_com:SetDistance(2)
             replica_com:SetTestFn(function(inst,doer,target,pt,right_click)
-                if right_click and target and doer ~= target and target.prefab ~= "ghost" then
+                if right_click and target and doer ~= target and target.prefab ~= "ghost" and not MONSTER_BLACK_LIST[target.prefab] then
                     return true
                 end
                 return false
