@@ -5,6 +5,11 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.Network:SetClassifiedTarget(target)
     inst.player = target
     -----------------------------------------------------
+    --- 
+        if target.components.playercontroller == nil then
+            return
+        end
+    -----------------------------------------------------
     --- 伤害格挡池
         inst.damage_block_pool = 75
         inst:ListenForEvent("reset_pool", function(inst)

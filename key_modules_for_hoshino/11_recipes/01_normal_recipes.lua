@@ -346,3 +346,30 @@
         {"STRUCTURES"}
     )
     RemoveRecipeFromFilter("hoshino_building_shop24_pre","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 24小时商店 升级芯片 LV 1 - 3
+--------------------------------------------------------------------------------------------------------------------------------------------
+    local recipe_level = {
+        {Ingredient("goldnugget", 10),Ingredient("gears", 2)},
+        {Ingredient("thulecite", 6),Ingredient("greengem", 2)},
+        {Ingredient("opalpreciousgem", 3)},
+    }
+    for i, v in ipairs(recipe_level) do
+        local chip_prefab = "hoshino_item_shop_level_up_chip_"..i
+        AddRecipeToFilter(chip_prefab,"REFINE")     ---- 添加物品到目标标签
+        AddRecipe2(
+            chip_prefab,            --  --  inst.prefab  实体名字
+            v,
+            TECH.NONE, --- 
+            {
+                -- nounlock=true,
+                no_deconstruction = false,
+                -- builder_tag = "hoshino",
+                atlas = "images/inventoryimages/"..chip_prefab..".xml",
+                image = chip_prefab .. ".tex",
+                -- sg_state="carvewood",
+            },
+            {"REFINE"}
+        )
+        RemoveRecipeFromFilter(chip_prefab,"MODS")
+    end

@@ -52,6 +52,7 @@ local files_name = {
 
 		"hoshino_equipment_giant_crab_claw",							--- 巨蟹之爪
 		"hoshino_equipment_ruins_core",									--- 至纯铥矿
+		"hoshino_equipment_used_mechanical_sheets",						--- 旧金属板
 
 		"hoshino_item_nine",											--- 九
 		"hoshino_item_sky",												--- 天

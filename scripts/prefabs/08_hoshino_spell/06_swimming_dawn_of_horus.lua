@@ -32,6 +32,7 @@ local function spell_com_install(inst)
         return
     end
     inst:AddComponent("hoshino_com_item_spell")
+    inst.components.hoshino_com_item_spell:SetNeed2CloseController(false)
     -----------------------------------------------------------------------------
     ---
         -- inst:ListenForEvent("left_clicked",function(inst,_table)

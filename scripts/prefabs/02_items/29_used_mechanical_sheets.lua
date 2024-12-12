@@ -12,7 +12,7 @@
 -- 素材
     local assets =
     {
-        Asset("ANIM", "anim/armor_bramble.zip"),
+        Asset("ANIM", "anim/hoshino_equipment_used_mechanical_sheets.zip"),
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
@@ -35,9 +35,9 @@ local function fn()
     MakeInventoryPhysics(inst)
 
 
-    inst.AnimState:SetBank("armor_bramble")
-    inst.AnimState:SetBuild("armor_bramble")
-    inst.AnimState:PlayAnimation("anim")
+    inst.AnimState:SetBank("hoshino_equipment_used_mechanical_sheets")
+    inst.AnimState:SetBuild("hoshino_equipment_used_mechanical_sheets")
+    inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
 
@@ -49,9 +49,9 @@ local function fn()
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem:ChangeImageName("leafymeatburger")
-            -- inst.components.inventoryitem.imagename = "hoshino_equipment_sandstorm_core"
-            -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_sandstorm_core.xml"
+    -- inst.components.inventoryitem:ChangeImageName("leafymeatburger")
+    inst.components.inventoryitem.imagename = "hoshino_equipment_sandstorm_core"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hoshino_equipment_sandstorm_core.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot =  TUNING.HOSHINO_FNS:CopyEquipmentSlotFrom("amulet") or EQUIPSLOTS.BODY
