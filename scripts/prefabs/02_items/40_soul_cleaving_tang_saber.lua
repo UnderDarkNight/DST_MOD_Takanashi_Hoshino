@@ -35,7 +35,7 @@
         owner.AnimState:Hide("ARM_carry")
         owner.AnimState:Show("ARM_normal")
         if inst.___kill_other_event then
-            inst:RemoveEventCallbacks("killed",inst.___kill_other_event,owner)
+            inst:RemoveEventCallback("killed",inst.___kill_other_event,owner)
         end
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

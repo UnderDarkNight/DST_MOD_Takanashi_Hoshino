@@ -2,9 +2,10 @@
 <Atlas>
 	<Texture filename="hoshino_drone_controller.tex" />
 	<Elements>
-		<Element name="disarm.tex" u1="0.001" u2="0.266578125" v2="0.999" v1="0.733421875" variant="" />
-		<Element name="stop_attack.tex" u1="0.268578125" u2="0.53415625" v2="0.999" v1="0.733421875" variant="" />
-		<Element name="stop_working.tex" u1="0.53615625" u2="0.801734375" v2="0.999" v1="0.733421875" variant="" />
-		<Element name="trans_2_item.tex" u1="0.001" u2="0.266578125" v2="0.731421875" v1="0.46584375" variant="" />
+		<Element name="controller.tex" u1="0.29396875" u2="0.547828125" v2="0.70603125" v1="0.52834375" variant="" />
+		<Element name="disarm.tex" u1="0.001" u2="0.29196875" v2="0.999" v1="0.70803125" variant="" />
+		<Element name="stop_attack.tex" u1="0.29396875" u2="0.5849375" v2="0.999" v1="0.70803125" variant="" />
+		<Element name="stop_working.tex" u1="0.5869375" u2="0.87790625" v2="0.999" v1="0.70803125" variant="" />
+		<Element name="trans_2_item.tex" u1="0.001" u2="0.29196875" v2="0.70603125" v1="0.4150625" variant="" />
 	</Elements>
 </Atlas>

@@ -57,6 +57,12 @@
             bg_color:MoveToBack()
             bg_color:SetScale(MainScale,MainScale,MainScale)
         -----------------------------------------------------------------------------------
+        ---
+            local function CreateIconText(button,str)
+                local text = button:AddChild(Text(CODEFONT,50,str or "测试文本",{ 0/255 , 0/255 ,0/255 , 1}))
+                text:SetPosition(0,-100)
+            end
+        -----------------------------------------------------------------------------------
         --- close button
             local button_close =  root:AddChild(ImageButton(
                 little_smart_phone_atlas,"button_close.tex","button_close.tex","button_close.tex","button_close.tex","button_close.tex"
@@ -122,6 +128,7 @@
             button_stop_attack:SetScale(MainScale,MainScale,MainScale)
             button_stop_attack.focus_scale = {1.05, 1.05, 1.05}
             button_stop_attack:SetPosition(button_pos[1].x,button_pos[1].y)
+            CreateIconText(button_stop_attack,"停止攻击")
         -----------------------------------------------------------------------------------
         --- 解除攻击 disarm
             local button_disarm =  root:AddChild(ImageButton(
@@ -133,6 +140,7 @@
             button_disarm:SetScale(MainScale,MainScale,MainScale)
             button_disarm.focus_scale = {1.05, 1.05, 1.05}
             button_disarm:SetPosition(button_pos[2].x,button_pos[2].y)
+            CreateIconText(button_disarm,"解除炮塔")
         -----------------------------------------------------------------------------------
         --- 停止工作 stop_working
             local button_stop_working =  root:AddChild(ImageButton(
@@ -144,6 +152,7 @@
             button_stop_working:SetScale(MainScale,MainScale,MainScale)
             button_stop_working.focus_scale = {1.05, 1.05, 1.05}
             button_stop_working:SetPosition(button_pos[3].x,button_pos[3].y)
+            CreateIconText(button_stop_working,"解除项链")
         -----------------------------------------------------------------------------------
         --- 落地打包 trans_2_item
             local button_trans_2_item =  root:AddChild(ImageButton(
@@ -157,6 +166,7 @@
             button_trans_2_item:SetScale(MainScale,MainScale,MainScale)
             button_trans_2_item.focus_scale = {1.05, 1.05, 1.05}
             button_trans_2_item:SetPosition(button_pos[4].x,button_pos[4].y)
+            CreateIconText(button_trans_2_item,"落地打包")
         -----------------------------------------------------------------------------------
         return root
     end
@@ -232,9 +242,9 @@
         --------------------------------------------------------------------------
         ---- 按钮
             local button_phone = root:AddChild(ImageButton(
-                little_smart_phone_atlas,"button_phone.tex","button_phone.tex","button_phone.tex","button_phone.tex","button_phone.tex"
+                drone_controller_atlas,"controller.tex","controller.tex","controller.tex","controller.tex","controller.tex"
             ))
-            local button_scale = 0.8
+            local button_scale = 0.5
             button_phone:SetScale(button_scale,button_scale,button_scale)
             button_phone:SetOnClick(function()
                 if root.pad_hud and root.pad_hud.inst:IsValid() then
@@ -247,11 +257,11 @@
             end)
         --------------------------------------------------------------------------
         --- 按钮图标
-            local icon = button_phone.image:AddChild(Image("images/inventoryimages/hoshino_building_white_drone_item.xml","hoshino_building_white_drone_item.tex"))
-            icon:SetScale(0.7,0.7,0.7)
-            icon:SetRotation(30)
-            icon:SetPosition(1,5,0)
-            button_phone.icon = icon
+            -- local icon = button_phone.image:AddChild(Image("images/inventoryimages/hoshino_building_white_drone_item.xml","hoshino_building_white_drone_item.tex"))
+            -- icon:SetScale(0.7,0.7,0.7)
+            -- icon:SetRotation(30)
+            -- icon:SetPosition(1,5,0)
+            -- button_phone.icon = icon
         --------------------------------------------------------------------------
         --- 扫描遍历,没有无人机的时候，自动销毁界面
             local function need_2_remove_task_fn()
