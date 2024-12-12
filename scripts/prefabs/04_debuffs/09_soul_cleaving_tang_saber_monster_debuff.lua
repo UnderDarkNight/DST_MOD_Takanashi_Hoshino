@@ -43,6 +43,13 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             return target_old_DoDelta(self,num,...)
         end
     -----------------------------------------------------
+    --- 
+        inst:ListenForEvent("minhealth",function()
+            linked_monster:RemoveTag("linked_by_soul_cleaving_tang_saber")
+            target.components.health.DoDelta = target_old_DoDelta
+            linked_monster.components.health.DoDelta = linked_monster_old_DoDelta
+        end,target)
+    -----------------------------------------------------
 end
 local function fn()
     local inst = CreateEntity()

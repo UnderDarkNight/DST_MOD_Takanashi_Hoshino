@@ -29,6 +29,10 @@
             end
         end
         inst:ListenForEvent("killed",inst.___kill_other_event,owner)
+
+        if inst.light_fx == nil then
+            inst.light_fx = owner:SpawnChild("minerhatlight")
+        end
     end
 
     local function onunequip(inst, owner)
@@ -37,13 +41,23 @@
         if inst.___kill_other_event then
             inst:RemoveEventCallback("killed",inst.___kill_other_event,owner)
         end
+        if inst.light_fx ~= nil then
+            inst.light_fx:Remove()
+            inst.light_fx = nil
+        end
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 切换攻击动作。
+    local hit_fx = {
+        "shadowstrike_slash_fx",
+        "shadowstrike_slash2_fx",
+    }
     local function OnAttackFn(inst, attacker, target)
         if not inst._multithrust_lock then
-            inst.components.hoshino_com_polymorphic_attack_action:SetNextType()
+            inst.components.hoshino_com_polymorphic_attack_action:SetRandomType()
         end
+        local x,y,z = target.Transform:GetWorldPosition()
+        SpawnPrefab(hit_fx[math.random(#hit_fx)]).Transform:SetPosition(x,y,z)
     end
     local function swtich_event_locker_install(inst)
         inst:ListenForEvent("enter_multithrust",function()
@@ -51,7 +65,7 @@
         end)
         inst:ListenForEvent("exit_multithrust",function()
             inst._multithrust_lock = false
-            inst.components.hoshino_com_polymorphic_attack_action:SetNextType()
+            inst.components.hoshino_com_polymorphic_attack_action:SetRandomType()
         end)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

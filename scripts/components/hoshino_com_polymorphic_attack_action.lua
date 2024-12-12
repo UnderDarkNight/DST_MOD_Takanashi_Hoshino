@@ -53,6 +53,9 @@ end)
         end
         self:SetType(ret)
     end
+    function hoshino_com_polymorphic_attack_action:SetRandomType()
+        self:SetType(math.random(1,self.max_index))
+    end
     function hoshino_com_polymorphic_attack_action:GetTypeIndex()
         return self.index
     end
