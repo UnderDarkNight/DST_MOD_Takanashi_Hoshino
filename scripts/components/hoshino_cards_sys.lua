@@ -251,12 +251,24 @@ nil,
         end
     end
     function hoshino_cards_sys:Get_Card_From_Pool()  --- 从概率池获取一个卡牌
+        ---------------------------------------------------------------
+        --- 卡牌池开关切换
+            local CardPools = {}
+            CardPools["card_white"] = self.CardPools["card_white"]
+            if TUNING["hoshino.Config"].CARDS_GOLDEN then
+                CardPools["card_golden"] = self.CardPools["card_golden"]
+            end
+            if TUNING["hoshino.Config"].CARDS_COLOURFUL then
+                CardPools["card_colourful"] = self.CardPools["card_colourful"]
+            end
+            CardPools["card_black"] = self.CardPools["card_black"]            
+        ---------------------------------------------------------------
         local total = 0
-        for k,v in pairs(self.CardPools) do
+        for k,v in pairs(CardPools) do
             total = total + v
         end
         local rand = math.random(total*100)/100
-        for k,v in pairs(self.CardPools) do
+        for k,v in pairs(CardPools) do
             rand = rand - v
             if rand <= 0 then
                 return k

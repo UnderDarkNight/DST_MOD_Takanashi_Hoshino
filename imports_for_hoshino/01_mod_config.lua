@@ -8,18 +8,20 @@ TUNING["hoshino.Config"].Language = GetModConfigData("LANGUAGE")
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- 角色配置
-    TUNING["hoshino.Config"].DIFFICULTY_MODE = GetModConfigData("DIFFICULTY_MODE")     --- 认真模式
+    TUNING["hoshino.Config"].LEVEL_UP_MAX_EXP_MULT = GetModConfigData("LEVEL_UP_MAX_EXP_MULT")     --- 升级经验倍数
+    TUNING["hoshino.Config"].MAX_LEVEL = GetModConfigData("MAX_LEVEL")     --- 最大等级
+
     TUNING["hoshino.Config"].HIDE_HAT = GetModConfigData("HIDE_HAT")     --- 隐藏帽子
     TUNING["hoshino.Config"].HIDE_CLOTHS = GetModConfigData("HIDE_CLOTHS")     --- 隐藏衣服
-
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 通告类
     TUNING["hoshino.Config"].LEVEL_UP_ANNOUNCEMENT = GetModConfigData("LEVEL_UP_ANNOUNCEMENT")     --- 升级通告
 --------------------------------------------------------------------------------------------------------------------------------------------------------
---- 物品类
+--- 杂项
+    TUNING["hoshino.Config"].CARDS_GOLDEN = GetModConfigData("CARDS_GOLDEN")     --- 金色卡牌
+    TUNING["hoshino.Config"].CARDS_COLOURFUL = GetModConfigData("CARDS_COLOURFUL")     --- 彩色卡牌
+
     TUNING["hoshino.Config"].COLOURFUL_EGG_ITEMS = GetModConfigData("COLOURFUL_EGG_ITEMS")     --- 彩蛋物品
---------------------------------------------------------------------------------------------------------------------------------------------------------
---- 任务类
     TUNING["hoshino.Config"].COLOURFUL_EGG_MISSIONS = GetModConfigData("COLOURFUL_EGG_MISSIONS")     --- 彩蛋任务开关
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 快捷键 类

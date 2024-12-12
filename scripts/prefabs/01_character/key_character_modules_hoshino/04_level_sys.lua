@@ -39,6 +39,7 @@ return function(inst)
 
     if inst.components.hoshino_com_level_sys == nil then
         inst:AddComponent("hoshino_com_level_sys")
+        inst.components.hoshino_com_level_sys.max_level = TUNING["hoshino.Config"].MAX_LEVEL or 999999
     end
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 为了保证显示数据的初始化成功，初始等级为0，升级经验为10.
@@ -74,17 +75,18 @@ return function(inst)
     --- 经验值上限更新函数。模块初始化的时候也会执行一次。
         inst.components.hoshino_com_level_sys:SetMaxExpUpdateFn(function(self)
             local level = self:GetLevel()
+            local MAX_EXP_MULT = TUNING["hoshino.Config"].LEVEL_UP_MAX_EXP_MULT or 1
             --- 更新经验曲线（修改max_exp）
                 if level < 10 then
-                    self:SetMaxExp(50+60*(level-1))
+                    self:SetMaxExp((50+60*(level-1))*MAX_EXP_MULT)
                 elseif level < 40 then
-                    self:SetMaxExp(590+20*(level-10))
+                    self:SetMaxExp((590+20*(level-10))*MAX_EXP_MULT)
                 elseif level < 200 then
-                    self:SetMaxExp(1100+10*(level-40))
+                    self:SetMaxExp((1100+10*(level-40))*MAX_EXP_MULT)
                 elseif level < 400 then
-                    self:SetMaxExp(2100+5*(level-200))
+                    self:SetMaxExp((2100+5*(level-200))*MAX_EXP_MULT)
                 else
-                    self:SetMaxExp(3100+10*(level-400))
+                    self:SetMaxExp((3100+10*(level-400))*MAX_EXP_MULT)
                 end
         end)
     ----------------------------------------------------------------------------------------------------------------------------------------------------------

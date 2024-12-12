@@ -56,6 +56,7 @@ AddPlayerPostInit(function(inst)
     --- 等级系统
         if inst.components.hoshino_com_level_sys == nil then
             inst:AddComponent("hoshino_com_level_sys")
+            inst.components.hoshino_com_level_sys.max_level = TUNING["hoshino.Config"].MAX_LEVEL or 999999
         end
         if inst.prefab ~= "hoshino" then
             inst.components.hoshino_com_level_sys:EXP_SetModifier(inst,0)

@@ -198,16 +198,35 @@ configuration_options = {
   {name = "AAAA",label = IsChinese() and GetTitle("角色") or GetTitle("Character"),hover = "",options = {{description = "",data = 0}},default = 0},
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  -- {
-  --   name = "DIFFICULTY_MODE",
-  --   label = IsChinese() and "游玩难度" or "Difficulty Mode",
-  --   hover = IsChinese() and "游玩难度" or "Difficulty Mode",
-  --   options = {
-  --     {description = "OFF",data = false},
-  --     {description = "ON",data = true},
-  --   },
-  --   default = false
-  -- },
+  {
+    name = "LEVEL_UP_MAX_EXP_MULT",
+    label = IsChinese() and "升级难度" or "Experience Difficulty",
+    hover = IsChinese() and "升级难度" or "Experience Difficulty",
+    options = {
+      {description = "无双",data = 1},
+      {description = "简单",data = 2},
+      {description = "普通",data = 3},
+      {description = "困难",data = 7},
+      {description = "极难",data = 10},
+    },
+    default = 3
+  },
+  {
+    name = "MAX_LEVEL",
+    label = IsChinese() and "最高等级" or "Max Level",
+    hover = IsChinese() and "最高等级" or "Max Level",
+    options = {
+      {description = "20",data = 20},
+      {description = "50",data = 50},
+      {description = "100",data = 100},
+      {description = "200",data = 200},
+      {description = "300",data = 300},
+      {description = "400",data = 400},
+      {description = "500",data = 500},
+      {description = "999999",data = 999999},
+    },
+    default = 100
+  },
   {
     name = "HIDE_HAT",
     label = IsChinese() and "隐藏帽子" or "Hide Hat",
@@ -241,7 +260,27 @@ configuration_options = {
       default = true
   },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  {name = "AAAA",label = IsChinese() and GetTitle("物品类") or GetTitle("Items"),hover = "",options = {{description = "",data = 0}},default = 0},
+  {name = "AAAA",label = IsChinese() and GetTitle("杂项") or GetTitle("Miscellaneous"),hover = "",options = {{description = "",data = 0}},default = 0},
+  {
+      name = "CARDS_GOLDEN",
+      label = IsChinese() and "金色卡牌池" or "Golden Cards",
+      hover = IsChinese() and "金色卡牌池" or "Golden Cards",
+      options = {
+        {description = "OFF",data = false},
+        {description = "ON",data = true},
+      },
+      default = true
+  },
+  {
+      name = "CARDS_COLOURFUL",
+      label = IsChinese() and "彩色卡牌池" or "Colourful Cards",
+      hover = IsChinese() and "彩色卡牌池" or "Colourful Cards",
+      options = {
+        {description = "OFF",data = false},
+        {description = "ON",data = true},
+      },
+      default = true
+  },
   {
       name = "COLOURFUL_EGG_ITEMS",
       label = IsChinese() and "彩蛋物品" or "Egg Items",
@@ -252,8 +291,6 @@ configuration_options = {
       },
       default = true
   },
-------------------------------------------------------------------------------------------------------------------------------------------------------
-  {name = "AAAA",label = IsChinese() and GetTitle("任务") or GetTitle("Missions"),hover = "",options = {{description = "",data = 0}},default = 0},
   {
       name = "COLOURFUL_EGG_MISSIONS",
       label = IsChinese() and "彩蛋任务" or "Egg Missions",
