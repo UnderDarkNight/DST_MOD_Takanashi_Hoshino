@@ -46,7 +46,19 @@
         ["swimming_efficient_work"] = "高效率工作",
         ["swimming_emergency_assistance"] = "急援",
         ["swimming_dawn_of_horus"] = "晓之荷鲁斯",
-    }  
+    }
+    local normal_spell_names_ids = {
+        [1] = "gun_eye_of_horus_ex",
+        [2] = "normal_heal",
+        [3] = "normal_covert_operation",
+        [4] = "normal_breakthrough",
+    }
+    local swimming_spell_names_ids = {
+        [1] = "swimming_ex_support",
+        [2] = "swimming_emergency_assistance",
+        [3] = "swimming_dawn_of_horus",
+        [4] = "swimming_efficient_work",
+    }
     local function GetSpellInfoByName(spell_name)
         local crash_flag,ret = pcall(function()
             local index = string.upper(spell_name).."_MOUSE_OVER_TEXT"
@@ -189,9 +201,9 @@ local function page_create(front_root,MainScale)
                 local icon_scale = MainScale*1.5
                 local icon_delta = 110
                 local spell_icon_atlas = "images/inspect_pad/hoshino_pad_spells_icon.xml"
-                local i = 1
-                for spell_index, display_name in pairs(normal_spell_names) do
+                for i, spell_index in pairs(normal_spell_names_ids) do
                     local temp_icon = skill_box:AddChild(Image())
+                    local display_name = normal_spell_names[spell_index]
                     temp_icon:SetTexture(spell_icon_atlas,spell_index..".tex")
                     temp_icon:SetScale(icon_scale,icon_scale,icon_scale)
                     temp_icon:SetPosition(-170 + (icon_delta * (i-1)),85)
@@ -201,12 +213,11 @@ local function page_create(front_root,MainScale)
                     end
                     -- table.insert(page.skill_icons,temp_icon)
                     page.skill_normal_icons[spell_index] = temp_icon
-                    i = i + 1
                 end
-                i = 1
                 page.skill_swimming_icons = {}
-                for spell_index, display_name in pairs(swimming_spell_names) do
+                for i, spell_index in pairs(swimming_spell_names_ids) do
                     local temp_icon = skill_box:AddChild(Image())
+                    local display_name = swimming_spell_names[spell_index]
                     temp_icon:SetTexture(spell_icon_atlas,spell_index..".tex")
                     temp_icon:SetScale(icon_scale,icon_scale,icon_scale)
                     temp_icon:SetPosition(-170 + (icon_delta * (i-1)),85)
@@ -216,7 +227,6 @@ local function page_create(front_root,MainScale)
                     end
                     -- table.insert(page.skill_icons,temp_icon)
                     page.skill_swimming_icons[spell_index] = temp_icon
-                    i = i + 1
                 end
                 --- 解锁覆盖
                 for spell_name, temp_icon in pairs(page.skill_normal_icons) do
