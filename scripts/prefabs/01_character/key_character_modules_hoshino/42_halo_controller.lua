@@ -12,9 +12,8 @@ return function(inst)
     end
     local light_fx = nil
     local function CreateLight()
-        if light_fx ~= nil then
-            light_fx:Remove()
-            light_fx = nil            
+        if light_fx and light_fx:IsValid() then
+            return        
         end
         light_fx = inst:SpawnChild("minerhatlight")
 
