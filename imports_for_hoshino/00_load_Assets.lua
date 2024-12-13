@@ -41,6 +41,8 @@ local temp_assets = {
 		Asset("ATLAS", "images/inspect_pad/hoshino_pad_spells_icon.xml"),		
 		Asset("IMAGE", "images/inspect_pad/page_main.tex"),				--- 主页相关贴图
 		Asset("ATLAS", "images/inspect_pad/page_main.xml"),		
+		Asset("IMAGE", "images/inspect_pad/hoshino_pad_main_page_exp_box.tex"),				--- 主页相关贴图
+		Asset("ATLAS", "images/inspect_pad/hoshino_pad_main_page_exp_box.xml"),		
 		Asset("IMAGE", "images/inspect_pad/special_equipment_recipes.tex"),		--- 特殊装备配方
 		Asset("ATLAS", "images/inspect_pad/special_equipment_recipes.xml"),		
 		Asset("ANIM", "anim/hoshino_exp_bar.zip"),						--- 经验条

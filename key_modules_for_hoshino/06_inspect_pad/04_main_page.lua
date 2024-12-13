@@ -97,13 +97,13 @@ local function page_create(front_root,MainScale)
                 end
             --------------------------------------------------------------------------------------
             --- exp
-                local exp_box = root:AddChild(Image("images/inspect_pad/page_main.xml","empty_box.tex"))
+                local exp_box = root:AddChild(Image("images/inspect_pad/hoshino_pad_main_page_exp_box.xml","hoshino_pad_main_page_exp_box.tex"))
                 exp_box:SetScale(MainScale,MainScale,MainScale)
                 -- exp_box:SetPosition(-320,40)
                 exp_box:SetPosition(-320,160-30)
-                local exp_box_icon = exp_box:AddChild(Text(CODEFONT,40,"Exp",{ 0/255 , 0/255 ,0/255 , 1}))
-                exp_box_icon:SetScale(0.7,1,1)
-                exp_box_icon:SetPosition(-90,0)
+                -- local exp_box_icon = exp_box:AddChild(Text(CODEFONT,40,"Exp",{ 0/255 , 0/255 ,0/255 , 1}))
+                -- exp_box_icon:SetScale(0.7,1,1)
+                -- exp_box_icon:SetPosition(-90,0)
                 local exp_box_text = exp_box:AddChild(Text(CODEFONT,40,"30",{ 0/255 , 0/255 ,0/255 , 1}))
                 exp_box_text:SetPosition(10,0)
                 exp_box_text:SetString("9999")

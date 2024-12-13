@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="hoshino_pad_main_page_exp_box.tex" />
+	<Elements>
+		<Element name="hoshino_pad_main_page_exp_box.tex" u1="0.001" u2="0.9286875" v2="0.999" v1="0.204125" variant="" />
+	</Elements>
+</Atlas>

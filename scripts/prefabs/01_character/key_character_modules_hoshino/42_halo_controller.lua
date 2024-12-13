@@ -70,17 +70,31 @@ return function(inst)
 
     -------------------------------------------------------------------
     --- 睡觉消失光环
+        local function player_is_sleeping(player)
+            if player and player.sg then
+                if player.sg:HasStateTag("sleeping") or player.sg:HasStateTag("yawn") then
+                    return true
+                end
+                if player.sg.currentstate and player.sg.currentstate.name == "knockout" then
+                    return true
+                end
+            end
+            return false
+        end
         local checker_fn = function()
-            if inst.sg:HasStateTag("sleeping") then
+            -- print("ffffffffffff",player_is_sleeping(inst))
+            if player_is_sleeping(inst) then
                 inst:PushEvent("hoshino_event.halo",false)
             else
                 inst:PushEvent("hoshino_event.halo",true)
             end
         end
-        local event = function()
-            inst:DoTaskInTime(0,checker_fn)
-        end
-        inst:ListenForEvent("newstate",event)
+        -- local event = function(_,_table)
+        --     -- print("statename",_table and _table.statename,inst.sg:HasStateTag("sleeping"))
+        --     inst:DoTaskInTime(1,checker_fn)
+        -- end
+        -- inst:ListenForEvent("newstate",event)
+        inst:DoPeriodicTask(0.5,checker_fn)
     -------------------------------------------------------------------
 
 end

@@ -181,7 +181,8 @@ local function page_create(front_root,MainScale)
             --- 文本框 -- 13字一行。最多 52字
                 local spell_info_text = skill_box:AddChild(Text(CODEFONT,40,"技能信息",{ 0/255 , 0/255 ,0/255 , 1}))
                 spell_info_text:SetPosition(0,-85)
-                spell_info_text:SetString("技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n")
+                -- spell_info_text:SetString("技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n技能信息,技能信息,技能信息,技能信息\n")
+                spell_info_text:SetString(" ")
             --------------------------------------------------------------------------------------
             --- 技能图标占位.两行、四列
                 page.skill_normal_icons = {}
@@ -455,7 +456,8 @@ local function page_create(front_root,MainScale)
             --- 
                 local equip_info_text = status_box:AddChild(Text(CODEFONT,40,"装备信息",{ 0/255 , 0/255 ,0/255 , 1}))
                 equip_info_text:SetPosition(0,-150)
-                equip_info_text:SetString("装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n")
+                -- equip_info_text:SetString("装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n装备信息,装备信息,装备信息,装备信息\n")
+                equip_info_text:SetString(" ")
             --------------------------------------------------------------------------------------
             --- 鼠标指示器
                 local mouse_indicator = page:AddChild(Widget())
