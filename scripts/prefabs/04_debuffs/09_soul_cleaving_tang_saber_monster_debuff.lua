@@ -1,5 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
 local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
     inst.entity:SetParent(target.entity)
     inst.Network:SetClassifiedTarget(target)
@@ -33,7 +35,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     -----------------------------------------------------
     ---
         local target_old_DoDelta = target.components.health.DoDelta
-        target.components.health.DoDelta = function(self,num,...)
+        target.components.health.DoDelta = function(self,num, overtime, cause, ignore_invincible, afflicter, ignore_absorb,...)
             -- 先屏蔽回血
             if num > 0 then
                 num = 0
@@ -41,10 +43,10 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             --- 同步扣血
             if num < 0 then
                 inst.unlock_flag = true
-                linked_monster.components.health:DoDelta(num,...)
+                linked_monster.components.health:DoDelta(num, overtime, cause, true, afflicter, true,...)
                 inst.unlock_flag = false
             end
-            return target_old_DoDelta(self,num,...)
+            return target_old_DoDelta(self,num, overtime, cause, ignore_invincible, afflicter, ignore_absorb,...)
         end
     -----------------------------------------------------
     --- 
