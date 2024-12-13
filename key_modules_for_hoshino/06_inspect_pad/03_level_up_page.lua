@@ -168,6 +168,9 @@ local function page_create(front_root,MainScale)
                                 --- 屏蔽卡牌选择。
                                 for k, v in pairs(current_cards) do
                                     v:Disable()
+                                    if v ~= temp_card then
+                                        v:Hide() -- 隐藏所有卡牌，等待服务器回传再显示
+                                    end
                                 end
                                 ThePlayer.PAD_DATA.cards_selectting = false
                                 ThePlayer.PAD_DATA.cards = nil
@@ -258,7 +261,7 @@ local function page_create(front_root,MainScale)
                             local card_name = _table.card_name
                             -- print("hoshino_event.card_display",card_name)
                             current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
-                            card_select_box:SetDescByCardName(card_name) -- 设置描述文本
+                            card_select_box:SetDescByCardName(card_name) -- 设置描述文本                            
                         end,ThePlayer)
                         return current_cards
                 end
