@@ -160,7 +160,7 @@ local flg,error_code = pcall(function()
         -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(-10000)
 
         ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
-
+        -- ThePlayer.__test_speed = 1
         -- print("66",ThePlayer.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29"))
 
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
@@ -204,26 +204,20 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-        -- ThePlayer.__t_x = 0
-        -- ThePlayer.__t_y = -150
-        -- ThePlayer.___test = function(button)
-        --     local text = button:AddChild(Text(CODEFONT,50,"测试文本",{ 0/255 , 0/255 ,0/255 , 1}))
-        --     text:SetPosition(0,-100)
-        --     print("6666666666")
-        -- end
-
-        if ThePlayer.fx then
-            ThePlayer.fx:Remove()
-        end
-
-        local owner = ThePlayer
-
-        local fx = SpawnPrefab("cane_victorian_fx")
-        fx.entity:SetParent(owner.entity)
-        fx.entity:AddFollower()
-        fx.Follower:FollowSymbol(owner.GUID, "swap_object",0,-100, 0)
-
-        ThePlayer.fx = fx
+            local inst = ThePlayer
+            inst.__test_forward = function(inst)
+                inst.Physics:SetMotorVel(1, 0, 0)
+                if inst.player_classified then
+                    inst.player_classified.busyremoteoverridelocomote:set(true)
+                end
+            end
+            inst.__test_stop = function(inst)
+                inst.Physics:SetMotorVel(0, 0, 0)
+                inst.Physics:Stop()
+                if inst.player_classified then
+                    inst.player_classified.busyremoteoverridelocomote:set(false)
+                end
+            end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

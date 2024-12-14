@@ -54,7 +54,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 【普通模式】隐秘行动
     local function normal_covert_operation_fn(inst,spell_name)
-        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_COVERT_OPERATION_CD or 4
+        local cost_value = TUNING.HOSHINO_PARAMS.SPELLS.NORMAL_COVERT_OPERATION_COST or 4
         if inst.components.hoshino_com_spell_cd_timer:IsReady(spell_name) 
             and inst.components.hoshino_com_power_cost:GetCurrent() >= cost_value then
                 inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
@@ -237,7 +237,8 @@
         local x,y,z = pt.x,0,pt.z
         local ents = TheSim:FindEntities(x,0,z,7,musthavetags, canthavetags, musthaveoneoftags)
         for k, temp_monster in pairs(ents) do
-            if not can_not_be_freands[temp_monster.prefab] and temp_monster.components.health and not temp_monster.components.health:IsDead() then
+            if not can_not_be_freands[temp_monster.prefab] and temp_monster.components.follower
+                and temp_monster.components.health and not temp_monster.components.health:IsDead() then
                 pcall(function() -- 做免崩溃处理
                     inst:PushEvent("makefriend")
                     inst.components.leader:AddFollower(temp_monster)
@@ -379,11 +380,11 @@ return function(inst)
         inst:DoTaskInTime(0,function()
             inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("normal_breakthrough")
             inst.components.hoshino_com_spell_cd_timer:Unlock_Spell("swimming_efficient_work")
-            -- if TUNING.HOSHINO_DEBUGGING_MODE then
-            --     for spell_name, v in pairs(all_spell_names) do
-            --         inst.components.hoshino_com_spell_cd_timer:Unlock_Spell(spell_name)                    
-            --     end
-            -- end
+            if TUNING.HOSHINO_DEBUGGING_MODE then
+                for spell_name, v in pairs(all_spell_names) do
+                    inst.components.hoshino_com_spell_cd_timer:Unlock_Spell(spell_name)                    
+                end
+            end
         end)
     -------------------------------------------------------------------------
 
