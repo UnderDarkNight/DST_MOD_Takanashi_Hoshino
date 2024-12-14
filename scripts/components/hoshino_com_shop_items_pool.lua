@@ -140,10 +140,24 @@ nil,
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 特价商品的记忆
+    local function s_deepcopy(orig)
+        local orig_type = type(orig)
+        local copy
+        if orig_type == 'table' then
+            copy = {}
+            for orig_key, orig_value in next, orig, nil do
+                copy[s_deepcopy(orig_key)] = s_deepcopy(orig_value)
+            end
+            setmetatable(copy, s_deepcopy(getmetatable(orig)))
+        else -- number, string, boolean, etc.
+            copy = orig
+        end
+        return copy
+    end
     function hoshino_com_shop_items_pool:Set_Special_Price(_items_data)
         -------------------------------------------------------
         --- 需要深度复制，避免污染原始数据池
-            local items_data = deepcopy(_items_data)
+            local items_data = s_deepcopy(_items_data)
         -------------------------------------------------------
         --- 如果记忆有 特价物品，则寻找数据里
             if self.special_price_item_index then
@@ -168,7 +182,7 @@ nil,
                 end
             end
         -------------------------------------------------------
-        return items_data
+        return s_deepcopy(items_data)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 数据池获取

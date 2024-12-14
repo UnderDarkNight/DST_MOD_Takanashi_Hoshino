@@ -1,64 +1,64 @@
 
 
+if TUNING.HOSHINO_DEBUGGING_MODE then
+    --------------------------------------------------------------------------------------------------------------------------------------------
+    ---- 清除护符
+    --------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_special_equipment_amulet_clear","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_special_equipment_amulet_clear",            --  --  inst.prefab  实体名字
+        {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+        TECH.NONE, --- 魔法三本
+        {
+            -- nounlock=true,
+            no_deconstruction=false,
+            builder_tag = "hoshino",    
+            atlas = "images/inventoryimages/hoshino_special_equipment_amulet_clear.xml",
+            image = "hoshino_special_equipment_amulet_clear.tex",
+        },
+        {"CHARACTER",}
+    )
+    RemoveRecipeFromFilter("hoshino_special_equipment_amulet_clear","MODS")                       -- -- 在【模组物品】标签里移除这个。
+    --------------------------------------------------------------------------------------------------------------------------------------------
+    ---- 清除背包
+    --------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_special_equipment_backpack_clear","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_special_equipment_backpack_clear",            --  --  inst.prefab  实体名字
+        {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+        TECH.NONE, --- 魔法三本
+        {
+            -- nounlock=true,
+            no_deconstruction=false,
+            builder_tag = "hoshino",    
+            atlas = "images/inventoryimages/hoshino_special_equipment_backpack_clear.xml",
+            image = "hoshino_special_equipment_backpack_clear.tex",
+        },
+        {"CHARACTER",}
+    )
+    RemoveRecipeFromFilter("hoshino_special_equipment_backpack_clear","MODS")                       -- -- 在【模组物品】标签里移除这个。
 
--- --------------------------------------------------------------------------------------------------------------------------------------------
--- ---- 清除护符
--- --------------------------------------------------------------------------------------------------------------------------------------------
--- AddRecipeToFilter("hoshino_special_equipment_amulet_clear","CHARACTER")     ---- 添加物品到目标标签
--- AddRecipe2(
---     "hoshino_special_equipment_amulet_clear",            --  --  inst.prefab  实体名字
---     {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
---     TECH.NONE, --- 魔法三本
---     {
---         -- nounlock=true,
---         no_deconstruction=false,
---         builder_tag = "hoshino",    
---         atlas = "images/inventoryimages/hoshino_special_equipment_amulet_clear.xml",
---         image = "hoshino_special_equipment_amulet_clear.tex",
---     },
---     {"CHARACTER",}
--- )
--- RemoveRecipeFromFilter("hoshino_special_equipment_amulet_clear","MODS")                       -- -- 在【模组物品】标签里移除这个。
--- --------------------------------------------------------------------------------------------------------------------------------------------
--- ---- 清除背包
--- --------------------------------------------------------------------------------------------------------------------------------------------
--- AddRecipeToFilter("hoshino_special_equipment_backpack_clear","CHARACTER")     ---- 添加物品到目标标签
--- AddRecipe2(
---     "hoshino_special_equipment_backpack_clear",            --  --  inst.prefab  实体名字
---     {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
---     TECH.NONE, --- 魔法三本
---     {
---         -- nounlock=true,
---         no_deconstruction=false,
---         builder_tag = "hoshino",    
---         atlas = "images/inventoryimages/hoshino_special_equipment_backpack_clear.xml",
---         image = "hoshino_special_equipment_backpack_clear.tex",
---     },
---     {"CHARACTER",}
--- )
--- RemoveRecipeFromFilter("hoshino_special_equipment_backpack_clear","MODS")                       -- -- 在【模组物品】标签里移除这个。
-
--- --------------------------------------------------------------------------------------------------------------------------------------------
--- ---- 清除鞋子
--- --------------------------------------------------------------------------------------------------------------------------------------------
--- AddRecipeToFilter("hoshino_special_equipment_shoes_clear","CHARACTER")     ---- 添加物品到目标标签
--- AddRecipe2(
---     "hoshino_special_equipment_shoes_clear",            --  --  inst.prefab  实体名字
---     {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
---     TECH.NONE, --- 魔法三本
---     {
---         -- nounlock=true,
---         no_deconstruction=false,
---         builder_tag = "hoshino",    
---         atlas = "images/inventoryimages/hoshino_special_equipment_shoes_clear.xml",
---         image = "hoshino_special_equipment_shoes_clear.tex",
---     },
---     {"CHARACTER",}
--- )
--- RemoveRecipeFromFilter("hoshino_special_equipment_shoes_clear","MODS")                       -- -- 在【模组物品】标签里移除这个。
--- --------------------------------------------------------------------------------------------------------------------------------------------
--- --------------------------------------------------------------------------------------------------------------------------------------------
-
+    --------------------------------------------------------------------------------------------------------------------------------------------
+    ---- 清除鞋子
+    --------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_special_equipment_shoes_clear","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_special_equipment_shoes_clear",            --  --  inst.prefab  实体名字
+        {} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+        TECH.NONE, --- 魔法三本
+        {
+            -- nounlock=true,
+            no_deconstruction=false,
+            builder_tag = "hoshino",    
+            atlas = "images/inventoryimages/hoshino_special_equipment_shoes_clear.xml",
+            image = "hoshino_special_equipment_shoes_clear.tex",
+        },
+        {"CHARACTER",}
+    )
+    RemoveRecipeFromFilter("hoshino_special_equipment_shoes_clear","MODS")                       -- -- 在【模组物品】标签里移除这个。
+    --------------------------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------------------------
+end
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- T1: 粉色休闲鞋 

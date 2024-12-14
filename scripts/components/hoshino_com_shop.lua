@@ -347,8 +347,22 @@ nil,
     end
 ------------------------------------------------------------------------------------------------------------------------------
 --- 获取物品列表并修正价格。
+    local function s_deepcopy(orig)
+        local orig_type = type(orig)
+        local copy
+        if orig_type == 'table' then
+            copy = {}
+            for orig_key, orig_value in next, orig, nil do
+                copy[s_deepcopy(orig_key)] = s_deepcopy(orig_value)
+            end
+            setmetatable(copy, s_deepcopy(getmetatable(orig)))
+        else -- number, string, boolean, etc.
+            copy = orig
+        end
+        return copy
+    end
     function hoshino_com_shop:GetItemsList(new_force)
-        local items_list = TheWorld.components.hoshino_com_shop_items_pool:GetItemsList(new_force)
+        local items_list = s_deepcopy(TheWorld.components.hoshino_com_shop_items_pool:GetItemsList(new_force))
         for k, single_data in pairs(items_list) do
             single_data.price = self:FixPriceWithMultiplier(single_data.price)
         end
@@ -376,6 +390,7 @@ nil,
         return items_list
     end
     function hoshino_com_shop:Spawn_Items_List_And_Send_2_Client(new_force)
+        self.items_list = nil
         local items_list = self:GetItemsList(new_force)
         self.items_list = items_list
         print("items_list num : ",#items_list)
