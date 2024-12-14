@@ -20,6 +20,11 @@ local flg,error_code = pcall(function()
     print("WARNING:PCALL START +++++++++++++++++++++++++++++++++++++++++++++++++")
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
+    --- 
+        if TheWorld.ismastersim then
+            ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
+        end
+    ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
         -- local item = SpawnPrefab("hoshino_item_cards_pack")
         -- item:PushEvent("Set",{
@@ -159,7 +164,6 @@ local flg,error_code = pcall(function()
         -- inst.entity:AddSoundEmitter()        
         -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(-10000)
 
-        ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
         -- ThePlayer.__test_speed = 1
         -- print("66",ThePlayer.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29"))
 
@@ -204,20 +208,14 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-            local inst = ThePlayer
-            inst.__test_forward = function(inst)
-                inst.Physics:SetMotorVel(1, 0, 0)
-                if inst.player_classified then
-                    inst.player_classified.busyremoteoverridelocomote:set(true)
-                end
-            end
-            inst.__test_stop = function(inst)
-                inst.Physics:SetMotorVel(0, 0, 0)
-                inst.Physics:Stop()
-                if inst.player_classified then
-                    inst.player_classified.busyremoteoverridelocomote:set(false)
-                end
-            end
+            local npc = SpawnPrefab("wilson")
+            npc.Transform:SetPosition(x,y,z)
+            npc.userid = "wilson_1"
+
+            -- local _table,_table2 = ThePlayer:HOSHINO_GET_ALLPLAYERS()
+            -- for k,v in pairs(_table) do
+            --     print(k,v)
+            -- end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

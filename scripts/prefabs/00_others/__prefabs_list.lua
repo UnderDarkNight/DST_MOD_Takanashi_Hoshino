@@ -34,6 +34,8 @@ local prefabs_name_list = {
     "03_shop_level_debugger",                           --- 商店调试道具
     "04_task_backpack",                                 --- 任务物品背包
 
+    "06_players_list_sync",                                 --- 玩家列表同步器
+
 }
 
 ---------------------------------------------------------------------------

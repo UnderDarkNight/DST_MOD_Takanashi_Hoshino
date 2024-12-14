@@ -220,6 +220,21 @@
         if not (type(pt) == "table" and pt.x) then
             return
         end
+        local target_userid = _table and _table.userid
+        -- print("swimming_emergency_assistance userid",target_userid)
+
+        local target_player = nil
+        for k, v in pairs(AllPlayers) do
+            if v.userid == target_userid then
+                target_player = v
+                break
+            end
+        end
+        -- print("swimming_emergency_assistance target",target_player)
+        if not target_player then
+            return
+        end
+        pt = Vector3(target_player.Transform:GetWorldPosition())
         inst.components.hoshino_com_spell_cd_timer:StartCDTimer(spell_name, all_spell_names[spell_name])
         inst.components.hoshino_com_power_cost:DoDelta(-cost_value)
         inst.components.playercontroller:DoAction(BufferedAction(inst, nil, ACTIONS.HOSHINO_SG_JUMP_OUT,nil,Vector3(pt.x,0,pt.z)))

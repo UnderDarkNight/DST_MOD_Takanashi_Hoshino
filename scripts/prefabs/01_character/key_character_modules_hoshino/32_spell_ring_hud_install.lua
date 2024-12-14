@@ -463,10 +463,17 @@
             end
         --------------------------------------------------------------------------
         --- 角色按钮
-            for k, temp_player in pairs(AllPlayers) do
+            -- for k, temp_player in pairs(AllPlayers) do
+            local all_players_list = AllPlayers
+            if ThePlayer.HOSHINO_GET_ALLPLAYERS then
+                local all_players,all_players_ids = ThePlayer:HOSHINO_GET_ALLPLAYERS()
+                all_players_list = all_players
+            end
+            for k, temp_player in pairs(all_players_list) do
                 if ret_points[k] then
+                    -- print("急援 按钮 : ",temp_player.userid)
                     local temp_button = CreateEmoteButton(ret_points[k].x,ret_points[k].y,temp_player,function(player)
-                        -- print("emote button click",player)
+                        -- print("emote button click",player,player.userid)
                         ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_spell_ring_spells_selected",{
                             spell_name = "swimming_emergency_assistance",
                             pt = Vector3(player.Transform:GetWorldPosition()),

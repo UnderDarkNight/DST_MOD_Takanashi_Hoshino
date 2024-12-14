@@ -8,3 +8,6 @@ modimport("key_modules_for_hoshino/02_theworld/02_data.lua")
 
 modimport("key_modules_for_hoshino/02_theworld/03_boss_item_loot_drop_controller.lua") 
 -- 物品掉落控制器
+
+modimport("key_modules_for_hoshino/02_theworld/04_all_players_list_sync.lua") 
+-- 玩家列表同步器
