@@ -37,6 +37,11 @@
             inst.components.lootdropper:SpawnLootPrefab("hoshino_equipment_giant_crab_claw")
         end,
     -------------------------------------------------------
+    --- 蠕虫BOSS
+        ["worm_boss"] = function(inst)
+            inst.components.lootdropper:SpawnLootPrefab("hoshino_equipment_worm_core")
+        end,
+    -------------------------------------------------------
 
     }
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

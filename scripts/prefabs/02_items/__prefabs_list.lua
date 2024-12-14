@@ -70,6 +70,8 @@ local prefabs_name_list = {
 
     "39_shop_level_up_chip",                          --- 商店升级芯片
 
+    "41_worm_core",                                   --- 蠕虫之口
+
 
 }
 

@@ -285,6 +285,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "斩灵唐刀",
                 ["recipe_desc"] = "斩灵唐刀",
             },
+            ["hoshino_equipment_worm_core"] = {
+                ["name"] = "蠕虫之口",
+                ["inspect_str"] = "让胃口更好",
+                ["recipe_desc"] = "让胃口更好",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {
