@@ -231,7 +231,7 @@
             end
         end
         -- print("swimming_emergency_assistance target",target_player)
-        if not target_player then
+        if not( target_player and target_player:IsValid() ) then
             return
         end
         pt = Vector3(target_player.Transform:GetWorldPosition())
