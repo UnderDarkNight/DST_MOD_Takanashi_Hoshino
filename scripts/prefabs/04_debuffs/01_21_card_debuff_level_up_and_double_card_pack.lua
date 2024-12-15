@@ -18,7 +18,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             ---------------------------------------------
             --- 给个卡包
                 local item = SpawnPrefab("hoshino_item_cards_pack")
-                item.components.inventory:GiveItem(item)
+                target.components.inventory:GiveItem(item)
             ---------------------------------------------
             --- 上诅咒
                 if math.random(10000)/10000 < 0.2 then
