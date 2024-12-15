@@ -277,6 +277,7 @@ local function fn()
         inst:PushEvent("finiteuses_empty")
     end)
     inst.components.finiteuses:SetMaxUses(FULL_FINITEUSES)
+    inst.components.finiteuses:SetPercent(1)
 
     active_event_install(inst)
 
