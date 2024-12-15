@@ -167,35 +167,35 @@
                 if not (weapon and weapon.components.weapon and target and punchingbag_prefabs[target.prefab] ) then
                     return
                 end
-                
-                local data = inst.components.hoshino_data:Get("data") or {}
-                local damage =  weapon.components.weapon.damage or 0
-                table.insert(data,damage)
-                inst.components.hoshino_data:Set("data",data)
+                pcall(function()
+                    local data = inst.components.hoshino_data:Get("data") or {}
+                    local damage =  weapon.components.weapon.damage or 0
+                    table.insert(data,damage)
+                    inst.components.hoshino_data:Set("data",data)
 
-                local ret_4,ret_3,ret_2,ret_1 = Get_Last_4_From_Table(data)  -- 需要颠倒一下顺序
-                -- print("weapon dmg",ret_1,ret_2,ret_3,ret_4)
-                local num = 1
-                if ret_4 > ret_3 and ret_3 ~= 0 and ret_4 ~= 0 then
-                    num = num + 1
-                end
-                if ret_3 > ret_2 and ret_3 ~= 0 and ret_2 ~= 0 then
-                    num = num + 1
-                end
-                if ret_2 > ret_1 and ret_1 ~= 0 and ret_2 ~= 0  then
-                    num = num + 1
-                end
+                    local ret_4,ret_3,ret_2,ret_1 = Get_Last_4_From_Table(data)  -- 需要颠倒一下顺序
+                    -- print("weapon dmg",ret_1,ret_2,ret_3,ret_4)
+                    local num = 1
+                    if ret_4 > ret_3 and ret_3 ~= 0 and ret_4 ~= 0 then
+                        num = num + 1
+                    end
+                    if ret_3 > ret_2 and ret_3 ~= 0 and ret_2 ~= 0 then
+                        num = num + 1
+                    end
+                    if ret_2 > ret_1 and ret_1 ~= 0 and ret_2 ~= 0  then
+                        num = num + 1
+                    end
 
-                --- 只储存最大值
-                if num >= inst.components.hoshino_data:Add("num",0) then
-                    inst.components.hoshino_data:Set("num",num)
-                end
-                local num = inst.components.hoshino_data:Add("num",0)
-                inst.__num:set(num)
-                if num >= 4 then
-                    owner:PushEvent("hoshino_event.pad_warnning","main_page")
-                end
-
+                    --- 只储存最大值
+                    if num >= inst.components.hoshino_data:Add("num",0) then
+                        inst.components.hoshino_data:Set("num",num)
+                    end
+                    local num = inst.components.hoshino_data:Add("num",0)
+                    inst.__num:set(num)
+                    if num >= 4 then
+                        owner:PushEvent("hoshino_event.pad_warnning","main_page")
+                    end
+                end)
             end,owner)
 
         end)
