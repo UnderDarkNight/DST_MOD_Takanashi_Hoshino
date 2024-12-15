@@ -15,12 +15,17 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                     if target.components.hoshino_com_tag_sys then
                         target.components.hoshino_com_tag_sys:RemoveTag("hoshino_tag.combat_set_target_block")
                     end
+                    target.AnimState:SetMultColour(1,1,1,1)
+                    return
                 end
             -------------------------------------------
             ---
                 if target:HasTag("playerghost") then
                     return
                 end
+            -------------------------------------------
+            --- 
+                target.AnimState:SetMultColour(1,1,1,0.7)
             -------------------------------------------
             --- hoshino_tag.combat_set_target_block
                 if target.components.hoshino_com_tag_sys then
