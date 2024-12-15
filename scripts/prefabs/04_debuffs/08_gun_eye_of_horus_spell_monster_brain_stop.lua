@@ -36,6 +36,23 @@
             inst.sg:Start()
         end
     end
+
+    local function Stop_AI(target)
+        -- target:StopBrain()
+        if target.brain then
+            target.brain:Stop()
+        end
+        stop_sg(target)
+        pause_timer_com(target)
+    end
+    local function Start_AI(target)
+        -- target:RestartBrain()
+        if target.brain then
+            target.brain:Start()
+        end
+        start_sg(target)
+        resume_timer_com(target)
+    end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
@@ -49,32 +66,22 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             inst.time = inst.time - 1
             if inst.time <= 0 then
                 inst:Remove()
-
-                target:RestartBrain()
-                start_sg(target)
-                resume_timer_com(target)
-
+                Start_AI(target)
             end
         end)
     -----------------------------------------------------
     ---
-        target:StopBrain()
-        stop_sg(target)
-        pause_timer_com(target)
+        Stop_AI(target)
     -----------------------------------------------------
     --- 
         inst:ListenForEvent("minhealth",function()
-            target:RestartBrain()
-            start_sg(target)
-            resume_timer_com(target)
+            Start_AI(target)
             inst:Remove()
         end,target)
     -----------------------------------------------------
     ---
         inst:ListenForEvent("force_remove",function()
-            target:RestartBrain()
-            start_sg(target)
-            resume_timer_com(target)
+            Start_AI(target)
             inst:Remove()
         end)
     -----------------------------------------------------
