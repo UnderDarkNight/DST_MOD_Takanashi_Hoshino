@@ -151,6 +151,9 @@ local hoshino_cards_sys = Class(function(self, inst)
             end
             self:SetClientSideData("actived_cards",self.ActivatedCards) -- 下发激活过的卡牌记录池
         end)
+        self.inst:DoPeriodicTask(10,function()
+            self:SetClientSideData("actived_cards",self.ActivatedCards) -- 下发激活过的卡牌记录池
+        end)
     ---------------------------------------------------------------------
     --- 卡牌回收
         inst:ListenForEvent("hoshino_event.card_recycle_button_clicked",function()

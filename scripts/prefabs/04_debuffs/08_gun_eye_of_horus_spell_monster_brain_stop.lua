@@ -4,55 +4,85 @@
 ]]--
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --
-    local function pause_timer_com(inst)
-        if inst.components.timer then
-            local names = {}
-            for timer_name_index, v in pairs(inst.components.timer.timers) do
-                names[timer_name_index] = true
-            end
-            for timer_name_index, v in pairs(names) do
-                inst.components.timer:PauseTimer(timer_name_index)
-            end
-        end
-    end
-    local function resume_timer_com(inst)
-        if inst.components.timer then
-            local names = {}
-            for timer_name_index, v in pairs(inst.components.timer.timers) do
-                names[timer_name_index] = true
-            end
-            for timer_name_index, v in pairs(names) do
-                inst.components.timer:ResumeTimer(timer_name_index)
+    ---------------------------------------------------------------------------
+    --- 计时器控制
+        local function pause_timer_com(inst)
+            if inst.components.timer then
+                local names = {}
+                for timer_name_index, v in pairs(inst.components.timer.timers) do
+                    names[timer_name_index] = true
+                end
+                for timer_name_index, v in pairs(names) do
+                    inst.components.timer:PauseTimer(timer_name_index)
+                end
             end
         end
-    end
-    local function stop_sg(inst)
-        if inst.sg then
-            inst.sg:Stop()
+        local function resume_timer_com(inst)
+            if inst.components.timer then
+                local names = {}
+                for timer_name_index, v in pairs(inst.components.timer.timers) do
+                    names[timer_name_index] = true
+                end
+                for timer_name_index, v in pairs(names) do
+                    inst.components.timer:ResumeTimer(timer_name_index)
+                end
+            end
         end
-    end
-    local function start_sg(inst)
-        if inst.sg then
-            inst.sg:Start()
+    ---------------------------------------------------------------------------
+    --- sg 控制
+        local BLACK_LIST_FOR_SG = {
+            ["toadstool"] = true,
+            ["toadstool_dark"] = true,
+            ["klaus"] = true,
+            ["alterguardian_phase1"] = true,
+            ["alterguardian_phase2"] = true,
+            ["alterguardian_phase3"] = true,
+            ["crabking"] = true,
+            ["eyeofterror"] = true,
+            ["twinofterror1"] = true,
+            ["twinofterror2"] = true,
+            ["mutatedwarg"] = true,
+            ["dragonfly"] = true,
+            ["beequeen"] = true,
+            ["minotaur"] = true,
+        }
+        local function stop_sg(inst)
+            if inst.sg and not BLACK_LIST_FOR_SG[inst.prefab] then
+                inst.sg:Stop()
+            end
         end
-    end
-
-    local function Stop_AI(target)
-        -- target:StopBrain()
-        if target.brain then
-            target.brain:Stop()
+        local function start_sg(inst)
+            if inst.sg and not BLACK_LIST_FOR_SG[inst.prefab] then
+                inst.sg:Start()
+            end
         end
-        stop_sg(target)
-        pause_timer_com(target)
-    end
-    local function Start_AI(target)
-        -- target:RestartBrain()
-        if target.brain then
-            target.brain:Start()
+    ---------------------------------------------------------------------------
+    --- 总入口
+        local BOSS_BLACK_LIST = {
+            ["pigking33"] = true, 
+        }
+        local function Stop_AI(target)
+            if BOSS_BLACK_LIST[target.prefab] then 
+                return
+            end
+            -- target:StopBrain()
+            if target.brain then
+                target.brain:Stop()
+            end
+            stop_sg(target)
+            pause_timer_com(target)
         end
-        start_sg(target)
-        resume_timer_com(target)
-    end
+        local function Start_AI(target)
+            if BOSS_BLACK_LIST[target.prefab] then
+                return
+            end
+            -- target:RestartBrain()
+            if target.brain then
+                target.brain:Start()
+            end
+            start_sg(target)
+            resume_timer_com(target)
+        end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
