@@ -320,7 +320,9 @@ nil,
                 local new_card_found = false
                 while not new_card_found do
                     local new_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
-                    if not seen_cards[new_card_name_index] then
+                    local test_fn = self:GetTestFnByCardName(new_card_name_index)
+                    local test_succeed = test_fn == nil or test_fn(self.inst)
+                    if not seen_cards[new_card_name_index] and test_succeed then
                         new_card_found = true
                         local new_card_data = self:GetCardFrontByIndex(new_card_name_index)
                         new_card_data.card_name = new_card_name_index
@@ -368,6 +370,21 @@ nil,
             -- 当前数据结构 cards_front[i] = {atlas,image,card_name}
             if card_type == "card_black" then
                 has_curse_card = true
+            end
+            --- 检查可用性并寻找新的卡牌
+            local test_fn = self:GetTestFnByCardName(current_card_name_index)
+            if test_fn ~= nil and not test_fn(self.inst) then -- 如果有检测函数，并且检测失败
+                local test_num = 1000
+                while test_num > 0 do
+                    local current_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
+                    cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
+                    cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
+                    test_fn = self:GetTestFnByCardName(current_card_name_index)
+                    if test_fn == nil or test_fn(self.inst) then -- 如果没有检测函数，或者检测成功
+                        break
+                    end
+                    test_num = test_num - 1
+                end
             end
         end
 
@@ -468,11 +485,19 @@ nil,
                         cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
                         cards_back[i] = self:GetCardBackByIndex(current_card_name_index)  --- 获取卡牌背面数据
                     else    --- 卡牌测试不通过，选一张同类型卡牌
-                        local card_type = self:GetCardTypeByName(current_card_name_index)
-                        cards_back[i] = card_type
-                        current_card_name_index = self:SelectRandomCardFromPoolByType(card_type) -- 按类型从卡池抽一张
-                        cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
-                        cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
+                        local test_num = 1000
+                        while test_num > 0 do -- 用循环多找几次。
+                            local card_type = self:GetCardTypeByName(current_card_name_index)
+                            cards_back[i] = card_type
+                            current_card_name_index = self:SelectRandomCardFromPoolByType(card_type) -- 按类型从卡池抽一张
+                            cards_front[i] = self:GetCardFrontByIndex(current_card_name_index)  --- 获取卡牌正面数据
+                            cards_front[i].card_name = current_card_name_index  -- 往数据里填卡牌名字
+                            local test_fn = self:GetTestFnByCardName(current_card_name_index)
+                            if test_fn == nil or test_fn(self.inst) then
+                                break
+                            end
+                            test_num = test_num - 1
+                        end -- 循环结束
                     end
                 end
             end
