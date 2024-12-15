@@ -55,12 +55,23 @@
             root:SetVAnchor(2) -- 设置原点y坐标位置，0、1、2分别对应屏幕中、上、下
             root:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)   --- 缩放模式
             local MainScale = 0.6
+            local temp_scale = MainScale * 0.8
+            local temp_scale_delta = 0.01
+        --------------------------------------------------------------------------
+        --- 按钮盒子
+            local button_box = root:AddChild(Widget())
+            button_box:SetPosition(0,0,0)
+            button_box:SetScale(temp_scale,temp_scale,temp_scale)
         --------------------------------------------------------------------------
         --- 坐标跟随 角色中心修正
             local function root_position_update_fn()
                 local s_pt_x,s_pt_y= TheSim:GetScreenPos(ThePlayer.Transform:GetWorldPosition()) -- 左下角为原点。
                 -- print("player in screen",s_pt_x,s_pt_y)
                 root:SetPosition(s_pt_x,s_pt_y+60,0)
+                if temp_scale < MainScale then
+                    temp_scale = math.clamp(temp_scale+temp_scale_delta,0,MainScale)
+                    button_box:SetScale(temp_scale,temp_scale,temp_scale)
+                end
             end
             -- root.inst:DoPeriodicTask(FRAMES,root_position_update_fn)
             root_position_update_fn()
@@ -74,11 +85,6 @@
             root.inst:ListenForEvent("onremove",function()
                 root:StopUpdating()
             end)
-        --------------------------------------------------------------------------
-        --- 按钮盒子
-            local button_box = root:AddChild(Widget())
-            button_box:SetPosition(0,0,0)
-            button_box:SetScale(MainScale,MainScale,MainScale)
         --------------------------------------------------------------------------
         --- 按钮创建基础API
             local atlas = "images/widgets/hoshino_spell_ring.xml"
