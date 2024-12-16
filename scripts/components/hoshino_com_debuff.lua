@@ -167,8 +167,10 @@
                 return self:Add("damage_taken_mult",0)
             end
             function self:Active_Damage_Taken_Mult()
-                local mult = 1 - self:Add("damage_taken_mult",0)
-                inst.components.combat.externaldamagetakenmultipliers:SetModifier(GetSpeedMultInst(self),mult)
+                -- local mult = 1 - self:Add("damage_taken_mult",0)
+                -- inst.components.combat.externaldamagetakenmultipliers:SetModifier(GetSpeedMultInst(self),mult)
+                local mult = self:Get_Damage_Taken_Mult()
+                inst.components.health.externalabsorbmodifiers:SetModifier(inst, mult)
             end
             self:AddOnLoadFn(function()
                 self:Add_Damage_Taken_Mult(0)

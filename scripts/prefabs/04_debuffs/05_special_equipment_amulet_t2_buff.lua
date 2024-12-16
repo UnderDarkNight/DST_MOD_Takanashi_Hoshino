@@ -6,7 +6,12 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.player = target
     -----------------------------------------------------
     --- 
-        target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 1-0.15)
+        -- if target.components.combat then
+        --     target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 1-0.15)
+        -- end
+        if target.components.health then
+            target.components.health.externalabsorbmodifiers:SetModifier(inst, 0.15)
+        end
     -----------------------------------------------------
     ---
         inst:DoPeriodicTask(1.5,function()

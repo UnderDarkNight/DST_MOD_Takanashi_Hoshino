@@ -75,9 +75,12 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.Network:SetClassifiedTarget(target)
     -----------------------------------------------------
     --- 80% 伤害减免
-        if target.components.combat then
-            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst,0.2)
-        end
+        -- if target.components.combat then
+        --     target.components.combat.externaldamagetakenmultipliers:SetModifier(inst,0.2)
+        -- end
+        if target.components.health then
+            target.components.health.externalabsorbmodifiers:SetModifier(inst, 0.8)
+        end            
     -----------------------------------------------------
     ----
         if target.components.health then

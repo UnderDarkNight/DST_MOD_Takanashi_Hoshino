@@ -81,10 +81,12 @@ return function(inst)
     --- 基础伤害减免+20%
         if inst.level >= 4 then
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                owner.components.combat.externaldamagetakenmultipliers:SetModifier(inst,0.8)
+                -- owner.components.combat.externaldamagetakenmultipliers:SetModifier(inst,0.8)
+                owner.components.health.externalabsorbmodifiers:SetModifier(inst, 0.20)
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
-                owner.components.combat.externaldamagetakenmultipliers:RemoveModifier(inst)
+                -- owner.components.combat.externaldamagetakenmultipliers:RemoveModifier(inst)
+                owner.components.health.externalabsorbmodifiers:RemoveModifier(inst)
             end)
         end
     ----------------------------------------------------------------------------------
