@@ -5,6 +5,15 @@
 
 ]]--
 ----------------------------------------------------------------------------------------------------------------------------------
+--- 
+    local function Exp_Only_From_Epic(inst)
+        local debuff_inst = inst:GetDebuff("hoshino_card_debuff_exp_and_epic")
+        if debuff_inst and debuff_inst:IsValid() then
+            return true
+        end
+        return false
+    end
+----------------------------------------------------------------------------------------------------------------------------------
 --- 同步到replica
     local function GetReplica(self)
         return self.inst.replica.hoshino_com_level_sys or self.inst.replica._.hoshino_com_level_sys
@@ -127,7 +136,14 @@ nil,
     function hoshino_com_level_sys:GetExp()
         return self.exp
     end
-    function hoshino_com_level_sys:Exp_DoDelta(value)
+    function hoshino_com_level_sys:Exp_DoDelta(value,data)
+        ----------------------------------------------------------------------
+        --- 
+            data = data or {}
+            if Exp_Only_From_Epic(self.inst) and not data.epic then
+                return
+            end
+        ----------------------------------------------------------------------
         if value <= 0 then
             return
         end

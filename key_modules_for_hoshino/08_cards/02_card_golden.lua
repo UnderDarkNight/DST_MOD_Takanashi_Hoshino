@@ -609,13 +609,13 @@ local cards = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
-                return inst.components.hoshino_com_debuff:Get_Damage_Taken_Mult() < 0.99
+                return inst.components.hoshino_com_debuff:Get_Damage_Taken_Mult() < 0.94
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Damage_Taken_Mult(6/100)
             end,
             text = function(inst)
-                return "基础伤害减免+6%\n最高到达99%"
+                return "基础伤害减免+6%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

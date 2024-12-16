@@ -44,7 +44,7 @@ return function(inst)
     --- 攻击距离+攻击角度 动态返回 预留的接口
         local attack_angle = {
             [1] = 45,
-            [2] = 60,
+            [2] = 50,
             [3] = 60
         }
         local attack_range = {
@@ -84,13 +84,13 @@ return function(inst)
             if not is_real_damage then
                 --- 普通伤害
                 if GetGunLevel() >= 3 then
-                    return 45/2*GetGunLevel()
+                    return 51/2*GetGunLevel()
                 else
-                    return 45*GetGunLevel()
+                    return 51*GetGunLevel()
                 end
             else
                 --- 真实伤害
-                return 45/2*GetGunLevel()
+                return 51/2*GetGunLevel()
             end
         end
         local function DoRealDamage(target,weapon,value) -- 真实伤害
@@ -131,7 +131,7 @@ return function(inst)
             -- print("DoSpellDamage",target,spell)
             local player_level = inst.components.hoshino_com_level_sys:GetLevel()
             local mult = inst.components.combat.externaldamagemultipliers:Get()
-            local ret_damage = 100*mult + 10*player_level
+            local ret_damage = 40*mult + 3*player_level
             if spell >= 5 then
                 ret_damage = 2*ret_damage
             end

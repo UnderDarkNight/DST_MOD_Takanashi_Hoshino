@@ -23,13 +23,13 @@
 ]]--
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-    local function Exp_Only_From_Epic(inst)
-        local debuff_inst = inst:GetDebuff("hoshino_card_debuff_exp_and_epic")
-        if debuff_inst and debuff_inst:IsValid() then
-            return true
-        end
-        return false
-    end
+    -- local function Exp_Only_From_Epic(inst)
+    --     local debuff_inst = inst:GetDebuff("hoshino_card_debuff_exp_and_epic")
+    --     if debuff_inst and debuff_inst:IsValid() then
+    --         return true
+    --     end
+    --     return false
+    -- end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
@@ -118,7 +118,7 @@ return function(inst)
                 return
             end
             if max_health >= 100 then
-                inst.components.hoshino_com_level_sys:Exp_DoDelta(exp)
+                inst.components.hoshino_com_level_sys:Exp_DoDelta(exp,{epic = _table.epic})
                 if TUNING.HOSHINO_DEBUGGING_MODE then
                     print("获得经验",exp,prefab)
                 end

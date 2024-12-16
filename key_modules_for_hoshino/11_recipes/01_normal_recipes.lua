@@ -7,7 +7,7 @@
     AddRecipeToFilter("hoshino_weapon_gun_eye_of_horus","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_weapon_gun_eye_of_horus",            --  --  inst.prefab  实体名字
-        { Ingredient("gears", 5),Ingredient("transistor", 5),Ingredient("orangegem", 2),Ingredient("bluegem", 2),Ingredient("nitre", 10) }, 
+        { Ingredient("gears", 2),Ingredient("transistor", 5),Ingredient("orangegem", 1),Ingredient("bluegem", 1),Ingredient("nitre", 10) }, 
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
@@ -44,7 +44,7 @@
     AddRecipeToFilter("hoshino_spell_gun_eye_of_horus_level_2_to_3","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_spell_gun_eye_of_horus_level_2_to_3",            --  --  inst.prefab  实体名字
-        {Ingredient("hoshino_weapon_gun_eye_of_horus", 0),Ingredient("opalpreciousgem", 2),Ingredient("hoshino_item_abydos_high_purity_alloy", 1),Ingredient("hoshino_item_blue_schist", 3)} ,
+        {Ingredient("hoshino_weapon_gun_eye_of_horus", 0),Ingredient("hoshino_item_yi", 2),Ingredient("hoshino_item_abydos_high_purity_alloy", 3),Ingredient("hoshino_item_blue_schist", 2)} ,
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
@@ -350,9 +350,9 @@
 ---- 24小时商店 升级芯片 LV 1 - 3
 --------------------------------------------------------------------------------------------------------------------------------------------
     local recipe_level = {
-        {Ingredient("goldnugget", 10),Ingredient("gears", 2)},
+        {Ingredient("goldnugget", 6),Ingredient("gears", 2),Ingredient("moonglass", 6)},
         {Ingredient("thulecite", 6),Ingredient("greengem", 2)},
-        {Ingredient("opalpreciousgem", 3)},
+        {Ingredient("opalpreciousgem", 1),Ingredient("glommerwings", 1),Ingredient("alterguardianhatshard", 1)},
     }
     for i, v in ipairs(recipe_level) do
         local chip_prefab = "hoshino_item_shop_level_up_chip_"..i

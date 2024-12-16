@@ -182,7 +182,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 7、【诅咒】【泛社会悖论】【商店物品售价+5%（向上取整）】【可叠加】
+    --- 7、【诅咒】【泛社会悖论】【商店物品售价+10%（向上取整）】【可叠加】
         ["shop_price_increase"] = {
             back = "card_black",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
@@ -197,7 +197,7 @@ local cards = {
                     if current == 0 then
                         current = 1
                     end
-                    current = current + 0.05
+                    current = current + 0.10
                     inst.components.hoshino_com_shop:Set("black_card_price_mult",current)
                 --------------------------------------------------------------------------------------------
                 --- 没debuff就上debuff
@@ -216,10 +216,10 @@ local cards = {
 
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
-                inst.components.hoshino_com_shop:Add("black_card_price_mult",-0.05)
+                inst.components.hoshino_com_shop:Add("black_card_price_mult",-0.10)
             end,
             text = function(inst)
-                return "【泛社会悖论】 商店物品售价+5%（向上取整）"
+                return "【泛社会悖论】 商店物品售价+10%（向上取整）"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

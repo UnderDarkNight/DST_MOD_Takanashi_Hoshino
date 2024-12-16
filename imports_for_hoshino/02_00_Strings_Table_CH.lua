@@ -439,7 +439,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_amulet_t6"] = {
                 ["name"] = "T6:诅咒娃娃",
-                ["inspect_str"] = "拥有其下位的效果\n每次造成伤害都会扣除敌人1%最大生命\n每有一个诅咒效果，基础攻击伤害增加50%",
+                ["inspect_str"] = "拥有其下位的效果\n每次造成伤害都会扣除敌人0.4%最大生命\n每有一个诅咒效果\n攻击伤害增加30%，百分比扣血增加0.3%",
                 -- ["recipe_desc"] = "???",
             },
             ["hoshino_special_equipment_amulet_t7"] = {

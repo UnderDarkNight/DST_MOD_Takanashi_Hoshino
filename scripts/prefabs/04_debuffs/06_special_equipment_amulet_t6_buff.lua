@@ -25,13 +25,13 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 return
             end
             local max_health = monster.components.health.maxhealth
-            local delta_value = max_health*0.01 + GetCurseNum() *max_health*0.3
+            local delta_value = max_health*0.004 + GetCurseNum() *max_health*0.003
             monster.components.health:DoDelta(-delta_value)
         end,target)
     -----------------------------------------------------
     --- 诅咒增伤
         local function fix_dmage_mult()
-            target.components.combat.externaldamagemultipliers:SetModifier(inst, 1 + GetCurseNum()*0.5 )            
+            target.components.combat.externaldamagemultipliers:SetModifier(inst, 1 + GetCurseNum()*0.3 )            
         end
         fix_dmage_mult()
         inst:DoPeriodicTask(5,fix_dmage_mult)
