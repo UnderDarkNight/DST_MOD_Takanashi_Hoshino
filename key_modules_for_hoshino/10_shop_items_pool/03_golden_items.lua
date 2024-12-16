@@ -1,12 +1,12 @@
 TUNING.HOSHINO_SHOP_ITEMS_POOL = TUNING.HOSHINO_SHOP_ITEMS_POOL or {}
 TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
 -----------------------------------------------------------
---  thulecite_pieces
+--  bandage
 {
-  prefab = "thulecite_pieces",
+  prefab = "bandage",
   bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("thulecite_pieces.tex"), image = "thulecite_pieces.tex"},
-  price = 45, -- 价格
+  icon = {atlas = GetInventoryItemAtlas("bandage.tex"), image = "bandage.tex"},
+  price = 90, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -58,7 +58,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "icestaff",
   bg = "item_slot_golden.tex",
   icon = {atlas = GetInventoryItemAtlas("icestaff.tex"), image = "icestaff.tex"},
-  price = 220, -- 价格
+  price = 300, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -105,6 +105,19 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
+--  glommerwings
+{
+  prefab = "glommerwings",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = GetInventoryItemAtlas("glommerwings.tex"), image = "glommerwings.tex"},
+  price = 600, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
 --  gelblob_storage_kit
 {
   prefab = "gelblob_storage_kit",
@@ -131,12 +144,12 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  opalstaff
+--  thulecite_pieces
 {
-  prefab = "opalstaff",
+  prefab = "thulecite_pieces",
   bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("opalstaff.tex"), image = "opalstaff.tex"},
-  price = 1200, -- 价格
+  icon = {atlas = GetInventoryItemAtlas("thulecite_pieces.tex"), image = "thulecite_pieces.tex"},
+  price = 60, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

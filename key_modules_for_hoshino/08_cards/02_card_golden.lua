@@ -119,7 +119,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 29、【金】【焉知非福】【每次失去生命值的时候，获得10点「信用点」，持续2天】【时间叠加】
+    --- 29、【金】【焉知非福】【每次失去生命值的时候，获得10点「信用点」，持续6分钟】【时间叠加】
         ["buff_health_down_and_coins_up"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
@@ -127,7 +127,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_data:Add("hoshino_card_debuff_health_down_and_coins_up",480*2) --- 计时器累加
+                inst.components.hoshino_data:Add("hoshino_card_debuff_health_down_and_coins_up",60*6) --- 计时器累加
                 local buff_prefab = "hoshino_card_debuff_health_down_and_coins_up"  -- 用while上BUFF
                 while true do
                     local buff_inst = inst:GetDebuff(buff_prefab)
@@ -138,11 +138,11 @@ local cards = {
                 end
             end,
             text = function(inst)
-                return "【焉知非福】\n每次失去生命值的时候，获得10点「信用点」，持续2天"
+                return "【焉知非福】\n每次失去生命值的时候，获得10点「信用点」，持续6分钟"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 30、【金】【荷鲁斯的抗争】【立即获得12个「升级卡包」，「升级卡包」选项-1】【升级卡包变成1选1的时候从卡池移除，后续会重新进卡池】
+    --- 30、【金】【荷鲁斯的抗争】【立即获得5个「升级卡包」，「升级卡包」选项-1】【升级卡包变成1选1的时候从卡池移除，后续会重新进卡池】
         ["the_rsistance_of_horus"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
@@ -154,16 +154,16 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_cards_sys:DefultCardsNum_Delta(-1)
-                for i = 1,12 do
+                for i = 1,5 do
                     inst.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
                 end
             end,
             text = function(inst)
-                return "【荷鲁斯的抗争】\n立即获得12个「升级卡包」，「升级卡包」选项-1"
+                return "【荷鲁斯的抗争】\n立即获得5个「升级卡包」，「升级卡包」选项-1"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 31、【金】【我将富有】【立即获得9999「信用点」，同时获得诅咒「凡庸」】【从卡池移除】
+    --- 31、【金】【我将富有】【立即获得6666「信用点」，同时获得诅咒「凡庸」】【从卡池移除】
         ["give_me_some_money"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
@@ -174,7 +174,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_shop:CreditCoinDelta(9999)
+                inst.components.hoshino_com_shop:CreditCoinDelta(6666)
                 -- local debuff_prefab = "hoshino_card_debuff_builder_blocker"
                 -- while true do
                 --     local debuff_inst = inst:GetDebuff(debuff_prefab)
@@ -188,7 +188,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Set("golden_card_unlocked_give_me_some_money",true)
             end,
             text = function(inst)
-                return "【我将富有】\n立即获得9999「信用点」，同时获得诅咒「凡庸」"
+                return "【我将富有】\n立即获得6666「信用点」，同时获得诅咒「凡庸」"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -423,7 +423,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 40、【金】【最高神秘】【攻击任何血量低于70%的 生物，都有0.2%的概率造成99999999999999伤害】【概率叠加】
+    --- 40、【金】【最高神秘】【攻击任何血量低于70%的 生物，都有0.1%的概率造成99999999999999伤害】【概率叠加】
         ["direct_kill_target"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
@@ -431,7 +431,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_direct_kill_target",0.2/100)
+                inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_direct_kill_target",0.1/100)
                 local debuff_prefab = "hoshino_card_debuff_direct_kill_target"
                 while true do
                     local debuff_inst = inst:GetDebuff(debuff_prefab)
@@ -442,7 +442,7 @@ local cards = {
                 end
             end,
             text = function(inst)
-                return " \n【最高神秘】\n对于血量低于70%的目标，有0.2%的直接击杀概率\n重复卡牌则概率叠加"
+                return " \n【最高神秘】\n对于血量低于70%的目标，有0.1%的直接击杀概率\n重复卡牌则概率叠加"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

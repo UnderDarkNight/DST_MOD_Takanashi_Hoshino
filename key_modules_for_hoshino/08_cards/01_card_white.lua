@@ -85,7 +85,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 4、【白】【移动速度+2%】【可叠加】
+    --- 4、【白】【移动速度+3%】【可叠加】
         ["speed_up_2_percent"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
@@ -93,7 +93,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Speed_Mult(0.02)
+                inst.components.hoshino_com_debuff:Add_Speed_Mult(0.03)
             end,
             text = function(inst)
                 return "移速+2%"
@@ -400,7 +400,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 16、【白】【防暴盾牌】【获得1点位面防御】【可叠加】
+    --- 16、【白】【防暴盾牌】【获得2点位面防御】【可叠加】
         ["armor_planar_defense"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
@@ -408,10 +408,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Planar_Defense(1)
+                inst.components.hoshino_com_debuff:Add_Planar_Defense(2)
             end,
             text = function(inst)
-                return "【防暴盾牌】 获得1点位面防御"
+                return "【防暴盾牌】 获得2点位面防御"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -431,7 +431,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 19、【白】【好运】【金卡和彩卡的出现权重都+0.1】【可叠加】
+    --- 19、【白】【好运】【金卡和彩卡的出现权重很~大~幅~度~上升】【可叠加】
         ["rare_cards_appearance_weight"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
@@ -439,11 +439,11 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_colourful",0.1)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_colourful",0.02)
                 inst.components.hoshino_cards_sys:Card_Pool_Delata("card_golden",0.1)
             end,
             text = function(inst)
-                return "【好运】 金卡和彩卡的出现权重都+0.1"
+                return "【好运】 金卡和彩卡的出现权重很~大~幅~度~上升"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -492,7 +492,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 23、【白】【滚草成灾】【立刻在玩家身边生成5个风滚草】
+    --- 23、【白】【滚草成灾】【立刻在玩家身边生成15个风滚草】
         ["summon_tumbleweed"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
@@ -503,7 +503,7 @@ local cards = {
                 local points = TUNING.HOSHINO_FNS:GetSurroundPoints({
                     target = inst,
                     range = 2,
-                    num = 5,
+                    num = 15,
                 })
                 if points then
                     for _,pt in ipairs(points) do
@@ -513,7 +513,7 @@ local cards = {
                 inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_force_close")
             end,
             text = function(inst)
-                return "【滚草成灾】 立刻在玩家身边生成5个风滚草"
+                return "【滚草成灾】 立刻在玩家身边生成15个风滚草"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

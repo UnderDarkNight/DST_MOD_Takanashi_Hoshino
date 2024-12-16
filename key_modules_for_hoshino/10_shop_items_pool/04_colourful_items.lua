@@ -6,7 +6,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "opalpreciousgem",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("opalpreciousgem.tex"), image = "opalpreciousgem.tex"},
-  price = 999, -- 价格
+  price = 1250, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -32,7 +32,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "thulecite",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("thulecite.tex"), image = "thulecite.tex"},
-  price = 300, -- 价格
+  price = 320, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -45,7 +45,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "voidcloth",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("voidcloth.tex"), image = "voidcloth.tex"},
-  price = 540, -- 价格
+  price = 660, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -58,7 +58,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "lunarplant_husk",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("lunarplant_husk.tex"), image = "lunarplant_husk.tex"},
-  price = 300, -- 价格
+  price = 450, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -71,7 +71,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "purebrilliance",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("purebrilliance.tex"), image = "purebrilliance.tex"},
-  price = 540, -- 价格
+  price = 660, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -84,7 +84,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "horrorfuel",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("horrorfuel.tex"), image = "horrorfuel.tex"},
-  price = 300, -- 价格
+  price = 450, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -105,6 +105,19 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   is_permanent = true, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
+--  opalstaff
+{
+  prefab = "opalstaff",
+  bg = "item_slot_colourful.tex",
+  icon = {atlas = GetInventoryItemAtlas("opalstaff.tex"), image = "opalstaff.tex"},
+  price = 2000, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
 --  shadowheart_infused
 {
   prefab = "shadowheart_infused",
@@ -123,7 +136,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "alterguardianhat",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("alterguardianhat.tex"), image = "alterguardianhat.tex"},
-  price = 3900, -- 价格
+  price = 4500, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -183,25 +196,12 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  alterguardianhat
-{
-  prefab = "alterguardianhat",
-  bg = "item_slot_colourful.tex",
-  icon = {atlas = GetInventoryItemAtlas("alterguardianhat.tex"), image = "alterguardianhat.tex"},
-  price = 2, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "laplite", -- 货币需求。
-  level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
 --  armorskeleton
 {
   prefab = "armorskeleton",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("armorskeleton.tex"), image = "armorskeleton.tex"},
-  price = 2, -- 价格
+  price = 1, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "laplite", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -214,7 +214,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "thurible",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("thurible.tex"), image = "thurible.tex"},
-  price = 2, -- 价格
+  price = 1, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "laplite", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -240,7 +240,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "hoshino_item_cards_pack_supreme_mystery",
   bg = "item_slot_colourful.tex",
   icon = {atlas = "images/inventoryimages/hoshino_item_cards_pack_supreme_mystery.xml", image = "hoshino_item_cards_pack_supreme_mystery.tex"},
-  price = 3, -- 价格
+  price = 2, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "laplite", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

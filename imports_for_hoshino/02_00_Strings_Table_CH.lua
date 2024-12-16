@@ -88,8 +88,8 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_item_12mm_shotgun_shells"] = {
                 ["name"] = "12mm霰弹",
-                ["inspect_str"] = "为荷鲁斯之眼填充20%耐久",
-                ["recipe_desc"] = "为荷鲁斯之眼填充20%耐久",
+                ["inspect_str"] = "为荷鲁斯之眼填充100%耐久",
+                ["recipe_desc"] = "为荷鲁斯之眼填充100%耐久",
             },
             ["hoshino_item_special_packer"] = {
                 ["name"] = "超级打包盒-千年改",
@@ -97,9 +97,9 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["recipe_desc"] = "千年制作的超级打包盒",
             },
             ["hoshino_item_special_wraped_box"] = {
-                ["name"] = "超级打包盒（已经打包）",
-                ["inspect_str"] = "超级打包盒（已经打包）",
-                ["recipe_desc"] = "超级打包盒（已经打包）",
+                ["name"] = "超级打包盒-千年改（已经打包）",
+                ["inspect_str"] = "超级打包盒-千年改（已经打包）",
+                ["recipe_desc"] = "超级打包盒-千年改（已经打包）",
             },
             ["hoshino_item_yi"] = {
                 ["name"] = "镒",
@@ -282,8 +282,8 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_weapon_soul_cleaving_tang_saber"] = {
                 ["name"] = "斩灵唐刀",
-                ["inspect_str"] = "斩灵唐刀",
-                ["recipe_desc"] = "斩灵唐刀",
+                ["inspect_str"] = "希望在未来的某个林间，我斩绝了世间的“恶”，再次与你相逢",
+                ["recipe_desc"] = "希望在未来的某个林间，我斩绝了世间的“恶”，再次与你相逢",
             },
             ["hoshino_equipment_worm_core"] = {
                 ["name"] = "蠕虫之口",
@@ -454,7 +454,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_amulet_t9"] = {
                 ["name"] = "T9:鲨齿御守",
-                ["inspect_str"] = "拥有其下位的效果\n每次攻击会恢复造成伤害1%的生命值\n被攻击到的生物获得debuff：\n受到的最终伤害增加100%，持续10s",
+                ["inspect_str"] = "拥有其下位的效果\n每次攻击会恢复造成伤害1%的生命值\n被攻击到的生物获得debuff：\n受到的伤害增加100%，持续10s",
                 -- ["recipe_desc"] = "???",
             },
         --------------------------------------------------------------------

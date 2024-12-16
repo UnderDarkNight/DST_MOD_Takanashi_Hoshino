@@ -91,8 +91,8 @@
         local player_max_health = inst.components.health.maxhealth
         local player_max_sanity = inst.components.sanity.max
         -- damage = damage + mult_from_combat*player_level*3
-        -- |0.01*攻击倍率*生命上限*san上限-232
-        damage = 0.01*mult_from_combat*player_max_health*player_max_sanity - 232
+        -- |0.006*攻击倍率*生命上限*san上限-112
+        damage = 0.006*mult_from_combat*player_max_health*player_max_sanity - 112
         damage = math.max(damage,1)
         local ents = TheSim:FindEntities(x,0, z,10,musthavetags, canthavetags, musthaveoneoftags)
         for k, temp_monster in pairs(ents) do
