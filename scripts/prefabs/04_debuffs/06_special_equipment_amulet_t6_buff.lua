@@ -5,21 +5,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.Network:SetClassifiedTarget(target)
     inst.player = target
     -----------------------------------------------------
-    --- 
-    -----------------------------------------------------
-    --- 每次攻击怪物，怪物额外掉血
-        inst:ListenForEvent("onhitother",function(player,_table)
-            local monster = _table and _table.target
-            if not (monster and monster.brainfn and monster.components.health) then
-                return
-            end
-
-            local max_health = monster.components.health.maxhealth
-            local delta_value = max_health*0.01
-            monster.components.health:DoDelta(-delta_value)
-        end,target)
-    -----------------------------------------------------
-    --- 诅咒增伤
+    --- 获取诅咒个数
         local function GetCurseNum()
             local active_curse_cards_data = target.components.hoshino_cards_sys:GetActivatedCards("card_black") or {}
             local active_cards_num = 0
@@ -31,6 +17,19 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             end
             return active_cards_num
         end
+    -----------------------------------------------------
+    --- 每次攻击怪物，怪物额外掉血
+        inst:ListenForEvent("onhitother",function(player,_table)
+            local monster = _table and _table.target
+            if not (monster and monster.brainfn and monster.components.health) then
+                return
+            end
+            local max_health = monster.components.health.maxhealth
+            local delta_value = max_health*0.01 + GetCurseNum() *max_health*0.3
+            monster.components.health:DoDelta(-delta_value)
+        end,target)
+    -----------------------------------------------------
+    --- 诅咒增伤
         local function fix_dmage_mult()
             target.components.combat.externaldamagemultipliers:SetModifier(inst, 1 + GetCurseNum()*0.5 )            
         end
