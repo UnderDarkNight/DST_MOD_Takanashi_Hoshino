@@ -59,6 +59,7 @@ return function(inst)
         "prefabs/01_character/key_character_modules_hoshino/44_pad_info",                               ---- PAD 的玩家信息
         "prefabs/01_character/key_character_modules_hoshino/45_12mm_bullet_hotkey",                     ---- 12mm子弹快捷键
         "prefabs/01_character/key_character_modules_hoshino/46_special_equipment_refresher",            ---- 特殊装备刷新器
+        "prefabs/01_character/key_character_modules_hoshino/47_custom_inspect",                         ---- 客制化检查
 
     }
     for k, lua_addr in pairs(modules) do
