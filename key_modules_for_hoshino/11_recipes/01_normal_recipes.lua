@@ -307,6 +307,25 @@
     )
     RemoveRecipeFromFilter("hoshino_equipment_ruins_core","MODS")
 --------------------------------------------------------------------------------------------------------------------------------------------
+---- 废旧机械板材
+--------------------------------------------------------------------------------------------------------------------------------------------
+    AddRecipeToFilter("hoshino_equipment_used_mechanical_sheets","MAGIC")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_equipment_used_mechanical_sheets",            --  --  inst.prefab  实体名字
+        {Ingredient("trinket_6", 15),Ingredient("trinket_1", 15),Ingredient("gears", 15)} ,
+        TECH.NONE, -- 
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_equipment_used_mechanical_sheets.xml",
+            image = "hoshino_equipment_used_mechanical_sheets.tex",
+            -- station_tag="lunar_forge"
+        }--,
+        -- {"MAGIC"}
+    )
+    RemoveRecipeFromFilter("hoshino_equipment_used_mechanical_sheets","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
 ---- 拉面店
 --------------------------------------------------------------------------------------------------------------------------------------------
     AddRecipeToFilter("hoshino_building_shiba_seki_ramen_cart","STRUCTURES")     ---- 添加物品到目标标签
