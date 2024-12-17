@@ -11,9 +11,9 @@
     相关API:
 
 
-    1：获得50%防水
+    1：获得50%防水 +20 max_health
 
-    2：生命上限+20，cost恢复速度+0.01/s
+    2：生命上限+30，cost恢复速度+0.01/s
 
     3：使人物身上的所有带有新鲜度的物品获得75%的保鲜效果（腐烂速度为1/4），cost恢复速度+0.01/s
 
@@ -53,7 +53,7 @@ return function(inst)
         end
     ----------------------------------------------------------------------------------
     --- 生命上限+20
-        if inst.level >= 2 then            
+        if inst.level >= 1 then            
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 if not owner.components.hoshino_data:Get("max_health_active.backpack_t1") then
                     owner.components.hoshino_data:Set("max_health_active.backpack_t1",true)
@@ -64,6 +64,22 @@ return function(inst)
                 if owner.components.hoshino_data:Get("max_health_active.backpack_t1") then
                     owner.components.hoshino_data:Set("max_health_active.backpack_t1",false)
                     owner.components.hoshino_com_debuff:Add_Max_Helth(-20)
+                end
+            end)
+        end
+    ----------------------------------------------------------------------------------
+    --- 生命上限+30
+        if inst.level >= 2 then            
+            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+                if not owner.components.hoshino_data:Get("max_health_active.backpack_t2") then
+                    owner.components.hoshino_data:Set("max_health_active.backpack_t2",true)
+                    owner.components.hoshino_com_debuff:Add_Max_Helth(30)
+                end
+            end)
+            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+                if owner.components.hoshino_data:Get("max_health_active.backpack_t2") then
+                    owner.components.hoshino_data:Set("max_health_active.backpack_t2",false)
+                    owner.components.hoshino_com_debuff:Add_Max_Helth(-30)
                 end
             end)
         end
