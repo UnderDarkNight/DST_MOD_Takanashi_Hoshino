@@ -208,14 +208,9 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-            local npc = SpawnPrefab("wilson")
-            npc.Transform:SetPosition(x,y,z)
-            npc.userid = "wilson_1"
-
-            -- local _table,_table2 = ThePlayer:HOSHINO_GET_ALLPLAYERS()
-            -- for k,v in pairs(_table) do
-            --     print(k,v)
-            -- end
+        TheWorld.R = 81
+        TheWorld.G = 200
+        TheWorld.B = 200
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

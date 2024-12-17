@@ -31,6 +31,16 @@ local function CreateAnim(parent)
             inst.AnimState:PlayAnimation("main",true)
         end
     end)
+    inst.AnimState:OverrideSymbol("point","hoshino_projectile_nanotech_black_reaper_shadow","point_empty")
+
+    local fx = SpawnPrefab("hoshino_sfx_victorian_fx")
+    fx.entity:SetParent(inst.entity)
+    fx.entity:AddFollower()
+    fx.Follower:FollowSymbol(inst.GUID, "point",0,0,0)
+    parent:ListenForEvent("onremove", function()
+        fx:Remove()
+        inst:Remove()
+    end)
 end
 
 local function fn()
@@ -77,7 +87,9 @@ local function fn()
     inst:DoTaskInTime(0,function()
         if not inst.Ready and not TUNING.HOSHINO_DEBUGGING_MODE then
             inst:Remove()
+            return
         end
+        -- inst:SpawnChild("hoshino_sfx_victorian_fx")
     end)
     return inst
 end

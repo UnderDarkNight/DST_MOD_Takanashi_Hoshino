@@ -166,6 +166,17 @@ local function fx()
     inst.entity:SetPristine()
     inst:AddTag("FX")
     inst:AddTag("fx")
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst.AnimState:OverrideSymbol("point","hoshino_weapon_nanotech_black_reaper","point_empty")
+    local fx = SpawnPrefab("hoshino_sfx_victorian_fx")
+    fx.entity:SetParent(inst.entity)
+    fx.entity:AddFollower()
+    fx.Follower:FollowSymbol(inst.GUID, "point",0,0,0)
+    inst:ListenForEvent("onremove", function()
+        fx:Remove()
+    end)
     return inst
 end
 local function mark_fn()
