@@ -161,7 +161,7 @@
     AddRecipe2(
         "hoshino_equipment_holiday_glasses",            --  --  inst.prefab  实体名字
         {Ingredient("nightmarefuel",5),Ingredient("purplegem",2),Ingredient("livinglog",2)} ,
-        TECH.SHADOWFORGING_TWO, -- 暗影术基座
+        TECH.MAGIC_THREE, -- 暗影操控器
         {
             nounlock = true,
             -- no_deconstruction = false,
@@ -325,6 +325,27 @@
         -- {"MAGIC"}
     )
     RemoveRecipeFromFilter("hoshino_equipment_used_mechanical_sheets","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+ ---- 纳米黑死神
+--------------------------------------------------------------------------------------------------------------------------------------------
+if TUNING["hoshino.Config"].COLOURFUL_EGG_ITEMS then
+AddRecipeToFilter("hoshino_weapon_nanotech_black_reaper","MAGIC")     ---- 添加物品到目标标签
+    AddRecipe2(
+        "hoshino_weapon_nanotech_black_reaper",            --  --  inst.prefab  实体名字
+        {Ingredient("shadowheart_infused", 3),Ingredient("voidcloth_scythe", 1),Ingredient("hoshino_item_abydos_high_purity_alloy", 3)} ,
+        TECH.SHADOWFORGING_TWO, -- 暗影术基座
+        {
+            nounlock = true,
+            -- no_deconstruction = false,
+            -- builder_tag = "hoshino_building_shop24_level_3",
+            atlas = "images/inventoryimages/hoshino_weapon_nanotech_black_reaper.xml",
+            image = "hoshino_weapon_nanotech_black_reaper.tex",
+            -- station_tag="lunar_forge"
+        }--,
+        -- {"MAGIC"}
+    )
+    RemoveRecipeFromFilter("hoshino_weapon_nanotech_black_reaper","MODS")
+end
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 拉面店
 --------------------------------------------------------------------------------------------------------------------------------------------

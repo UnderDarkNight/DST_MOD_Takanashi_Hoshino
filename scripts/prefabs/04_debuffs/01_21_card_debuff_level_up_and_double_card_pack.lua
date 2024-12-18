@@ -21,7 +21,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 target.components.inventory:GiveItem(item)
             ---------------------------------------------
             --- 上诅咒
-                if math.random(10000)/10000 < 0.2 then
+                if math.random(10000)/10000 < 0.15 then
                     local black_card_name_index = target.components.hoshino_cards_sys:SelectRandomCardFromPoolByType("card_black")
                     if black_card_name_index then
                         target.components.hoshino_cards_sys:AcitveCardFnByIndex(black_card_name_index)

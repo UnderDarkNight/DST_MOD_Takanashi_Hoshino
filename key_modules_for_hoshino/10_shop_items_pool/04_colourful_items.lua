@@ -188,7 +188,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "alterguardianhatshard",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("alterguardianhatshard.tex"), image = "alterguardianhatshard.tex"},
-  price = 1500, -- 价格
+  price = 1666, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

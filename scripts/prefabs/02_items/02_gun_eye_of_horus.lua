@@ -136,7 +136,7 @@
                 return false
             end
             item.components.stackable:Get():Remove()
-            inst.components.finiteuses:Use_Hoshino(-1*200)
+            inst.components.finiteuses:Use_Hoshino(-1*80)
             if inst.components.finiteuses:GetPercent() > 1 then
                 inst.components.finiteuses:SetPercent(1)
             end

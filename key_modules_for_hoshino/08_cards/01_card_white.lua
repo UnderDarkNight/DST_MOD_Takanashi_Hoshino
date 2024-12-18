@@ -169,7 +169,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 9、【白】【神秘仪式】【随机召唤一只怪物（列表形式）】
+    --- 9、【白】【神秘仪式】【随机召唤一只生物（列表形式）】
         ["random_monster_summon"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
@@ -182,7 +182,8 @@ local cards = {
                     "knight","bishop","rook","knight_nightmare","bishop_nightmare","rook_nightmare",
                     "spider","spider_warrior","spider_hider","spider_spitter","spider_dropper",
                     "spider_moon","spider_healer","spider_water","hound","firehound","icehound",
-                    "mutatedhound","frog","lightninggoat","bee","killerbee","monkey",
+                    "mutatedhound","frog","lightninggoat","bee","killerbee","monkey","worm_boss",
+                    "eyeofterror","leif","moose","dragonfly","beequeen","bearger"
                 }
                 local ret_monster = monsters[math.random(#monsters)]
                 local monster_inst = SpawnPrefab(ret_monster)
@@ -191,7 +192,7 @@ local cards = {
                 end
             end,
             text = function(inst)
-                return "【神秘仪式】 随机召唤一个非boss生物"
+                return "【神秘仪式】 随机召唤一个生物"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -238,10 +239,10 @@ local cards = {
                     inst.components.inventory:GiveItem(item)
                 end
                 --- 上屏蔽器
-                inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",1)
+                inst.components.hoshino_com_debuff:Add("level_up_card_pack_gift_blocker",2)
             end,
             text = function(inst)
-                return " \n【透支】\n根据当前剩余未选择的卡牌数量，给玩家N张 1选1卡包。\n包括颜色对应。下1次升级不再赠送升级卡包"
+                return " \n【透支】\n根据当前剩余未选择的卡牌数量，给玩家N张 1选1卡包。\n包括颜色对应。下2次升级不再赠送升级卡包"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -253,7 +254,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.1)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.08)
                 local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
                 while true do
                     local debuff_inst = inst:GetDebuff(debuff_prefab)
@@ -265,7 +266,7 @@ local cards = {
                 inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
             end,
             text = function(inst)
-                return "【邪咒】攻击伤害+10%\n接下来两天内每次失去san时会流失等量生命"
+                return "【邪咒】攻击伤害+8%\n接下来两天内每次失去san时会流失等量生命"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -393,10 +394,10 @@ local cards = {
                 return inst.components.hoshino_com_debuff:Get_Armor_Down_Blocker_Percent() < 1
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Armor_Down_Blocker_Percent(0.1)
+                inst.components.hoshino_com_debuff:Add_Armor_Down_Blocker_Percent(0.08)
             end,
             text = function(inst)
-                return "【避重就轻】 受伤时有10%的概率不损失盔甲耐久"
+                return "【避重就轻】 受伤时有8%的概率不损失盔甲耐久"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

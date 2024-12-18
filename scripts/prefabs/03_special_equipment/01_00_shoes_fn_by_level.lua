@@ -95,7 +95,7 @@ return function(inst)
         inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
             local speed_delta = {
                 [1] = 0.05,
-                [2] = 0.1,
+                [2] = 0,
                 [3] = 0,
                 [4] = 0.1,
                 [5] = 0,
@@ -124,10 +124,10 @@ return function(inst)
                 temperature_check_task = inst:DoPeriodicTask(10,function()
                     local temperature = owner.components.temperature:GetCurrent()
                     if temperature > 40 then
-                        inst.components.insulator:SetInsulation(120)
+                        inst.components.insulator:SetInsulation(90)
                         inst.components.insulator:SetSummer()
                     elseif temperature < 20 then
-                        inst.components.insulator:SetInsulation(120)
+                        inst.components.insulator:SetInsulation(90)
                         inst.components.insulator:SetWinter()
                     end
                 end)
@@ -186,7 +186,7 @@ return function(inst)
                 local mult_delta = {
                     [1] = 0,
                     [2] = 0,
-                    [3] = 0.15,
+                    [3] = 0.1,
                     [4] = 0,
                     [5] = 0,
                     [6] = 0,

@@ -88,8 +88,8 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_item_12mm_shotgun_shells"] = {
                 ["name"] = "12mm霰弹",
-                ["inspect_str"] = "为荷鲁斯之眼填充100%耐久",
-                ["recipe_desc"] = "为荷鲁斯之眼填充100%耐久",
+                ["inspect_str"] = "为荷鲁斯之眼填充八发弹药",
+                ["recipe_desc"] = "为荷鲁斯之眼填充八发弹药",
             },
             ["hoshino_item_special_packer"] = {
                 ["name"] = "超级打包盒-千年改",
@@ -329,12 +329,12 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_shoes_t2"] = {
                 ["name"] = "T2:雪地靴",
-                ["inspect_str"] = "拥有其下位的效果\n环境较冷时提供120点保暖\n较热时提供120点隔热\nsan+6，移动速度+10%",
+                ["inspect_str"] = "拥有其下位的效果\n环境较冷时提供90点保暖\n较热时提供90点隔热\nsan+6",
                 -- ["recipe_desc"] = "保暖+120\nSan+6/min\n移动速度+10%",
             },
             ["hoshino_special_equipment_shoes_t3"] = {
                 ["name"] = "T3:粉色羊驼拖鞋",
-                ["inspect_str"] = "拥有其下位的效果\n免疫雷电，免疫麻痹，基础攻击伤害+15%",
+                ["inspect_str"] = "拥有其下位的效果\n免疫雷电，免疫麻痹，基础攻击伤害+10%",
                 -- ["recipe_desc"] = "免疫雷电\n免疫麻痹\n基础攻击伤害+15%",
             },
             ["hoshino_special_equipment_shoes_t4"] = {
@@ -364,7 +364,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_shoes_t9"] = {
                 ["name"] = "T9:水上专用运动鞋",
-                ["inspect_str"] = "拥有其下位的效果\n按下预设键位可以闪现到鼠标位置",
+                ["inspect_str"] = "拥有其下位的效果\n按下预设键位可以闪现到鼠标位置\n移动速度+20%",
                 -- ["recipe_desc"] = "???",
             },
             ["hoshino_special_equipment_backpack_t1"] = {
@@ -394,7 +394,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_backpack_t6"] = {
                 ["name"] = "T6:恶魔之翼挎包",
-                ["inspect_str"] = "拥有其下位的效果\n基础攻击伤害+50%，cost恢复+0.02/s",
+                ["inspect_str"] = "拥有其下位的效果\n基础攻击伤害+30%，cost恢复+0.02/s",
                 -- ["recipe_desc"] = "???",
             },
             ["hoshino_special_equipment_backpack_t7"] = {
@@ -424,7 +424,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_amulet_t3"] = {
                 ["name"] = "T3:佩洛洛羽毛",
-                ["inspect_str"] = "拥有其下位的效果\n金卡和彩卡的出现概率提升，移动速度+10%",
+                ["inspect_str"] = "拥有其下位的效果\n金卡和彩卡的出现概率提升，移动速度+15%",
                 -- ["recipe_desc"] = "???",
             },
             ["hoshino_special_equipment_amulet_t4"] = {

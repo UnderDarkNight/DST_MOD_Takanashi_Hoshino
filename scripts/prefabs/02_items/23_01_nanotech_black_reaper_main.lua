@@ -7,7 +7,7 @@
 ---
     local ATTACK_RANGE = 16
     local PROJ_SPEED = 20
-    local SHADOW_PROJ_SPEED = 20*1.5
+    local SHADOW_PROJ_SPEED = 20*1.8
     local HIT_RADIUS = 1.5
     local HIT_RADIUS_SQ = HIT_RADIUS * HIT_RADIUS
     local SHADOW_SEARCH_RADIUS = ATTACK_RANGE*1.5
@@ -42,7 +42,7 @@
             end
         end
         for k,v in pairs(ret_target) do
-            do_damage_to_target(v,weapon,owner, weapon:GetDamage() * 4)
+            do_damage_to_target(v,weapon,owner, weapon:GetDamage() * 6)
             inst.hit_targets[v] = true
         end
     end
@@ -99,7 +99,7 @@
             proj.components.projectile:SetOnHitFn(function()
                 if proj.hit_cd_checker == nil then
                     do_damage_to_target(target,weapon,owner,weapon:GetDamage()/2)
-                    proj.hit_cd_checker = proj:DoTaskInTime(0.3,function()
+                    proj.hit_cd_checker = proj:DoTaskInTime(0.2,function()
                         proj.hit_cd_checker = nil
                     end)
                 end
