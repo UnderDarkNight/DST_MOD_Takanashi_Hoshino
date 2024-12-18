@@ -7,8 +7,8 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     -----------------------------------------------------
     --- 上event
         inst:ListenForEvent("hoshino_event.black_card_price_mult_update",function()
-            local current_mult = inst.components.hoshino_com_shop:Get("black_card_price_mult") or 1
-            inst.components.hoshino_com_shop.price_multiplier:SetModifier(inst,current_mult)
+            local current_mult = target.components.hoshino_com_shop:Get("black_card_price_mult") or 1
+            target.components.hoshino_com_shop.price_multiplier:SetModifier(inst,current_mult)
         end,target)
     -----------------------------------------------------
     --- 初始化
