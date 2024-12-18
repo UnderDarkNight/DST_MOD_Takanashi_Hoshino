@@ -11,7 +11,7 @@
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-    local BASE_DAMAGE = 17
+    local BASE_DAMAGE = 45
     local PLANARDAMAGE = 51
     local SPELL_CD_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 200 or 16*60
     local MONSTER_BLACK_LIST = {
@@ -168,7 +168,7 @@
                 end
                 return false
             end)
-            replica_com:SetText("hoshino_weapon_soul_cleaving_tang_saber","砍魂")
+            replica_com:SetText("hoshino_weapon_soul_cleaving_tang_saber","斩灵")
             replica_com:SetSGAction("hoshino_com_polymorphic_attack_action_lunge")
         end)
         if not TheWorld.ismastersim then

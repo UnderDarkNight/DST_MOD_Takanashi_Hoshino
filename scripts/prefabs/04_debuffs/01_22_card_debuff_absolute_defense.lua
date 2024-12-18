@@ -14,7 +14,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.target = target
     -----------------------------------------------------
     --- 计数池 每10s内，受到的总【血量扣除值】超过20以后，变成0
-        local num_max = 20 --- 最大值
+        local num_max =  target.components.health and target.components.health.maxhealth * 0.2 or 20 --- 最大值
         local num_pool = 0 --- 计数池
         local cd_task = nil --- 定时器
         local function health_delata_num_fx(num)

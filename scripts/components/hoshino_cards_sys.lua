@@ -79,9 +79,9 @@ local hoshino_cards_sys = Class(function(self, inst)
     --- 卡牌概率池子。初始化白色权重100，金色权重10，彩色权重1，黑色权重1
         self.CardPools = {
             ["card_white"] = 100,
-            ["card_colourful"] = 1,
-            ["card_golden"] = 10,
-            ["card_black"] = 1,
+            ["card_colourful"] = 0.6,
+            ["card_golden"] = 6,
+            ["card_black"] = 0.6,
         }
         self:AddOnSaveFn(function()
             self:Set("card_pools",self.CardPools)

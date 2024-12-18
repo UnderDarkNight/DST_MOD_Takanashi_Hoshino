@@ -135,7 +135,7 @@ return function(inst)
     ----------------------------------------------------------------------------------
     --- 移动速度
         if inst.level >= 3 then
-            inst.components.equippable.walkspeedmult = 1.1
+            inst.components.equippable.walkspeedmult = 1.15
         end
     ----------------------------------------------------------------------------------
     --- 卡牌权重

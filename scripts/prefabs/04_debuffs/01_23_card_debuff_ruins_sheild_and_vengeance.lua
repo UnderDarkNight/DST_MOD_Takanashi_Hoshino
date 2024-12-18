@@ -29,7 +29,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 spdamage = nil
                 player.SoundEmitter:PlaySound("dontstarve/impacts/impact_forcefield_armour_dull")
             elseif (damage > 0 or type(spdamage) == "table") and working_task == nil and sheild_inst == nil then
-                working_task = player:DoTaskInTime(10, function()
+                working_task = player:DoTaskInTime(6, function()
                     working_task = nil
                     if sheild_inst then
                         sheild_inst:PushEvent("close")

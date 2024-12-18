@@ -378,11 +378,11 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  berrybush_juicy
+--  dug_berrybush_juicy
 {
-  prefab = "berrybush_juicy",
+  prefab = "dug_berrybush_juicy",
   bg = "item_slot_blue.tex",
-  icon = {atlas = GetInventoryItemAtlas("berrybush_juicy.tex"), image = "berrybush_juicy.tex"},
+  icon = {atlas = GetInventoryItemAtlas("dug_berrybush_juicy.tex"), image = "dug_berrybush_juicy.tex"},
   price = 130, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
@@ -508,11 +508,11 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  hoshino_item_special_wraped_box
+--  hoshino_item_special_packer
 {
-  prefab = "hoshino_item_special_wraped_box",
+  prefab = "hoshino_item_special_packer",
   bg = "item_slot_blue.tex",
-  icon = {atlas = "images/inventoryimages/hoshino_item_special_wraped_box.xml", image = "hoshino_item_special_wraped_box.tex"},
+  icon = {atlas = "images/inventoryimages/hoshino_item_special_packer.xml", image = "hoshino_item_special_packer.tex"},
   price = 900, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。

@@ -144,7 +144,7 @@ return function(inst)
     --- 攻击伤害倍增器
         if inst.level >= 6 then
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                owner.components.combat.externaldamagemultipliers:SetModifier(inst,1.5)
+                owner.components.combat.externaldamagemultipliers:SetModifier(inst,1.3)
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
                 owner.components.combat.externaldamagemultipliers:RemoveModifier(inst)
