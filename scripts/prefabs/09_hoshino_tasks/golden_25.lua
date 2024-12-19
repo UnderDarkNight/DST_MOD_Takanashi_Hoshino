@@ -41,7 +41,7 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
     local function Has_Enough_Items(owner,prefab,num)
-        local flag,num = owner.replica.inventory:Has(prefab,num,true)
+        local flag,num = owner.replica.inventory:Has(prefab,num,false)
         return flag or false,num
     end
     local function Remove_Items_By_Prefab(owner,prefab,num)
