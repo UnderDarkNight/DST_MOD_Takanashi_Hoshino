@@ -315,16 +315,16 @@ local function debuff_fn()
         inst.entity:SetParent(target.entity)
         inst.Network:SetClassifiedTarget(target)
         -----------------------------------------------------
-        -- --- 60%减伤
-        --     target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.4)
+        --- 85%减伤
+            target.components.health.externalabsorbmodifiers:SetModifier(inst, 0.85)
         -----------------------------------------------------
-        --- 3倍攻击
-            target.components.combat.externaldamagemultipliers:SetModifier(inst, 3)
+        --- 4倍攻击
+            target.components.combat.externaldamagemultipliers:SetModifier(inst, 4)
         -----------------------------------------------------
-        --- 3倍血量
+        --- 5倍血量
             if target.components.health then
                 local max_health = target.components.health.maxhealth
-                target.components.health:SetMaxHealth(max_health * 3)
+                target.components.health:SetMaxHealth(max_health * 5)
             end
         -----------------------------------------------------
         --- 位面抵抗
@@ -334,8 +334,12 @@ local function debuff_fn()
         -----------------------------------------------------
         --- 位面伤害
             if target.components.planardamage then
-                target.components.planardamage:AddMultiplier(inst,2)
+                target.components.planardamage:AddMultiplier(inst,4)
             end
+        -----------------------------------------------------
+            --- 移速2倍
+            target.components.locomotor.walkspeed = target.components.locomotor.walkspeed*2
+            target.components.locomotor.runspeed = target.components.locomotor.runspeed*2
         -----------------------------------------------------
         --- 死亡广播
             -- target:ListenForEvent("minhealth",function()

@@ -209,7 +209,7 @@ return
 		TEACH =
 		{
 			--Recipes/Teacher
-			KNOWN = "我已经知道那个了。",		--学习已经知道的蓝图
+			KNOWN = "这个我已经学会了哦。",		--学习已经知道的蓝图
 			CANTLEARN = "我无法学习那个。",		--学习无法学习的蓝图
 
 			--MapRecorder/MapExplorer
@@ -452,14 +452,14 @@ return
 	},
 
 	ANNOUNCE_BEES = "蜜蜂！！！！",		--戴养蜂帽被蜜蜂蛰
-	ANNOUNCE_BOOMERANG = "噢！我应该尽量接住它！",		--没接住回旋镖
-	ANNOUNCE_CHARLIE = "那情景...好熟悉！你好？",		--查理即将攻击
-	ANNOUNCE_CHARLIE_ATTACK = "噢！有东西咬我！",		--被查理攻击
-	ANNOUNCE_CHARLIE_MISSED = "哈！我知道你的所有招数！",	--winona specific	--挡住查理攻击
+	ANNOUNCE_BOOMERANG = "还是枪比较方便啊",		--没接住回旋镖
+	ANNOUNCE_CHARLIE = "谁？",		--查理即将攻击
+	ANNOUNCE_CHARLIE_ATTACK = "唔呃...",		--被查理攻击
+	ANNOUNCE_CHARLIE_MISSED = "不过如此，出来！",	--winona specific	--挡住查理攻击
 	ANNOUNCE_COLD = "这这这可太冷了啊...",		--过冷
 	ANNOUNCE_HOT = "阿紫一哟~",		--过热
 	ANNOUNCE_CRAFTING_FAIL = "少了些什么？",		--未应用
-	ANNOUNCE_DEERCLOPS = "诶，有要打总力战了吗~",		--boss来袭
+	ANNOUNCE_DEERCLOPS = "诶，又要总力战了吗~",		--boss来袭
 	ANNOUNCE_CAVEIN = "呜啊啊，地震了！",		--洞穴内蚁狮地震
 	ANNOUNCE_ANTLION_SINKHOLE =
 	{
@@ -469,7 +469,7 @@ return
 	},
 	ANNOUNCE_ANTLION_TRIBUTE =
 	{
-		"请允许我致敬。",		--向蚁狮致敬
+		"你好呀",		--向蚁狮致敬
 		"这个给你哦，希望你可以安分点",		--给蚁狮上供
 		"可算能安心睡会觉了~",		--给蚁狮上供
 	},
@@ -524,7 +524,7 @@ return
 		"这里不安全。",		--中庭击杀织影者后开始震动，即将刷新
 	},
 	ANNOUNCE_RUINS_RESET = "他们回来了",		--远古已重置
-	ANNOUNCE_SNARED = "这也想困住我？",		--被远古织影者的骨笼困住
+	ANNOUNCE_SNARED = "诶呀呀，被抓住了呢",		--被远古织影者的骨笼困住
 	ANNOUNCE_SNARED_IVY = "呜嘿，这是什么啊！",		--被刺针旋花的藤蔓困住
 	ANNOUNCE_REPELLED = "还在抵抗吗？",		--织影者进入保护状态
 	ANNOUNCE_ENTER_DARK = "呜哇，大叔我也是会怕黑的啊。",		--进入黑暗
@@ -535,24 +535,24 @@ return
 	ANNOUNCE_WORMS = "地底有什么东西。",		--蠕虫袭击即将到来
 	ANNOUNCE_ACIDBATS = "你听到了吗？",	--酸雨蝙蝠袭击即将到来
 	ANNOUNCE_HUNGRY = "应该去吃点什么呢，老师请客吧~",		--饥饿
-	ANNOUNCE_HUNT_BEAST_NEARBY = "新鲜的足迹，那只野兽肯定就在附近。",		--即将找到野兽
-	ANNOUNCE_HUNT_LOST_TRAIL = "野兽的足迹到这里就没了。",		--脚印消失，追丢野兽
+	ANNOUNCE_HUNT_BEAST_NEARBY = "有大家伙在附近。",		--即将找到野兽
+	ANNOUNCE_HUNT_LOST_TRAIL = "啊，跟丢了...。",		--脚印消失，追丢野兽
 	ANNOUNCE_HUNT_LOST_TRAIL_SPRING = "这种湿土留不下脚印。",		--脚印消失，追丢野兽（潮湿天气）
-	ANNOUNCE_HUNT_START_FORK = "这个踪迹看起来有危险。",	--摸脚印选带狗牙土堆
-	ANNOUNCE_HUNT_SUCCESSFUL_FORK = "没有野兽能与我的智慧匹敌！",	--摸脚印结果导向丰盛收获
-	ANNOUNCE_HUNT_WRONG_FORK = "我感到有东西在看着我。",	--摸脚印结果导向陷阱
+	ANNOUNCE_HUNT_START_FORK = "嗯？有危险的气息。",	--摸脚印选带狗牙土堆
+	ANNOUNCE_HUNT_SUCCESSFUL_FORK = "是大获全胜的感觉~",	--摸脚印结果导向丰盛收获
+	ANNOUNCE_HUNT_WRONG_FORK = "不好，中计了。",	--摸脚印结果导向陷阱
 	ANNOUNCE_HUNT_AVOID_FORK = "这个踪迹看起来安全些了。",	--摸脚印选普通土堆
-	ANNOUNCE_INV_FULL = "我拿不了更多的东西了！",		--身上的物品满了
+	ANNOUNCE_INV_FULL = "装不下了...得联系工程部那边准备个大型随身空间呢~",		--身上的物品满了
 	ANNOUNCE_KNOCKEDOUT = "还想睡觉呢~",		--被催眠后醒来
 	ANNOUNCE_LOWRESEARCH = "我没从那儿学到什么。",		--未应用（废案）
 	ANNOUNCE_MOSQUITOS = "啊！滚开！",		--未应用（废案）
 	ANNOUNCE_NOWARDROBEONFIRE = "它着火了，我换不了衣服！",		--使用衣柜或皮弗娄牛美妆台时着火了
-	ANNOUNCE_NODANGERGIFT = "怪物在四周，我无法拆礼物！",		--周围有危险的情况下打开礼物
+	ANNOUNCE_NODANGERGIFT = "得先处理眼前的敌人！",		--周围有危险的情况下打开礼物
 	ANNOUNCE_NOMOUNTEDGIFT = "我得先从皮弗娄牛身上下来。",		--骑牛的时候打开礼物
-	ANNOUNCE_NODANGERSLEEP = "我很害怕就这样睡死过去！",		--周围危险，不能睡觉
+	ANNOUNCE_NODANGERSLEEP = "又来打扰大叔睡觉呢",		--周围危险，不能睡觉
 	ANNOUNCE_NODAYSLEEP = "光线太亮了。",		--白天睡帐篷
-	ANNOUNCE_NODAYSLEEP_CAVE = "我不累。",		--洞穴里白天睡帐篷
-	ANNOUNCE_NOHUNGERSLEEP = "我太饿了，睡不着，我肚子的咕咕叫声会让我一直醒着的！",		--饿了无法睡觉
+	ANNOUNCE_NODAYSLEEP_CAVE = "得先完成巡逻再休息。",		--洞穴里白天睡帐篷
+	ANNOUNCE_NOHUNGERSLEEP = "得先吃点东西呢。",		--饿了无法睡觉
 	ANNOUNCE_NOSLEEPONFIRE = "得换个地方睡觉呢",		--帐篷着火无法睡觉
 	ANNOUNCE_NOSLEEPHASPERMANENTLIGHT = "only_used_by_wx78",	--机器人安装发光模块时无法睡觉
 	ANNOUNCE_NODANGERSIESTA = "现在午休太危险了！",		--周围危险，不能午睡
@@ -561,9 +561,9 @@ return
 	ANNOUNCE_NOHUNGERSIESTA = "我太饿了，没法午休！",		--饱食度不足无法午睡
 	ANNOUNCE_NO_TRAP = "好吧，挺简单的。",		--没有陷阱（未应用）
 	ANNOUNCE_PECKED = "噢！停下！",		--被小高脚鸟啄
-	ANNOUNCE_QUAKE = "听起来不妙。",		--洞穴内地震
+	ANNOUNCE_QUAKE = "是比纳干的吗？",		--洞穴内地震
 	ANNOUNCE_RESEARCH = "活到老学到老！",		--（未应用）
-	ANNOUNCE_SHELTER = "大树，多谢你保护我免受自然侵害！",		--下雨天躲树下
+	ANNOUNCE_SHELTER = "先在这里避一避吧...",		--下雨天躲树下
 	ANNOUNCE_THORNS = "痛痛痛...",		--玫瑰、仙人掌、荆棘扎手
 	ANNOUNCE_BURNT = "呀！好烫！",		--扑灭冒烟的东西时被烫到
 	ANNOUNCE_TORCH_OUT = "火灭了！",		--火把用完了
@@ -579,7 +579,7 @@ return
 	ANNOUNCE_ACCOMPLISHMENT_DONE = "如果我的朋友现在能看到我就好了...",		--（未应用）
 	ANNOUNCE_INSUFFICIENTFERTILIZER = "你还饿吗，植物？",		--土地肥力不足
 	ANNOUNCE_TOOL_SLIP = "哦，那工具太滑手了！",		--工具滑出
-	ANNOUNCE_LIGHTNING_DAMAGE_AVOIDED = "躲过了那可怕的闪电！",		--绝缘，未被闪电击中
+	ANNOUNCE_LIGHTNING_DAMAGE_AVOIDED = "这种东西对我没用呢~",		--绝缘，未被闪电击中
 	ANNOUNCE_TOADESCAPING = "想逃？",		--蟾蜍正在逃跑
 	ANNOUNCE_TOADESCAPED = "呜啊，让他跑掉了",		--蟾蜍逃走了
 
@@ -601,15 +601,15 @@ return
 
 	ANNOUNCE_MOONALTAR_MINE =
 	{
-		GLASS_MED = "里面有东西。",		--开始挖天体底座
-		GLASS_LOW = "快挖出来了。",		--天体底座挖到一半
-		GLASS_REVEAL = "你自由了！",		--挖出天体底座
-		IDOL_MED = "里面有东西。",		--开始挖天体雕像
-		IDOL_LOW = "快挖出来了。",		--天体雕像挖到一半
-		IDOL_REVEAL = "你自由了！",		--挖出天体雕像
-		SEED_MED = "里面有东西。",		--开始挖天体宝球
-		SEED_LOW = "快挖出来了。",		--天体宝球挖到一半
-		SEED_REVEAL = "你自由了！",		--挖出天体宝球
+		GLASS_MED = "扎根于月亮上的神秘...",		--开始挖天体底座
+		GLASS_LOW = "再努力努力就出来了~",		--天体底座挖到一半
+		GLASS_REVEAL = "里面有什么宝藏吗？",		--挖出天体底座
+		IDOL_MED = "这个是什么宝物呢~",		--开始挖天体雕像
+		IDOL_LOW = "再努力努力就出来了~",		--天体雕像挖到一半
+		IDOL_REVEAL = "终于挖出来了~",		--挖出天体雕像
+		SEED_MED = "一个闪亮的球体！",		--开始挖天体宝球
+		SEED_LOW = "再努力努力就出来了~",		--天体宝球挖到一半
+		SEED_REVEAL = "这个能值不少钱吧？",		--挖出天体宝球
 	},
 
 	--hallowed nights
@@ -733,9 +733,9 @@ return
 	ANNOUNCE_OCEANFISHING_IDLE_QUOTE =
 	{
 		"难道这里有鲸鱼吗？",		--海钓等待上钩
-		"也许该换个鱼多的地方钓。",		--海钓等待上钩
-		"我还以为海里到处都是鱼呢！",		--海钓等待上钩
-		"我现在明明可以做更科学的事情……",		--海钓等待上钩
+		"钓鱼佬绝不空军！",		--海钓等待上钩
+		"钓着钓着就困了呢~",		--海钓等待上钩
+		"呼~",		--海钓等待上钩
 	},
 
 	ANNOUNCE_WEIGHT = "重量：{weight}",		--称重普通海鱼
@@ -847,11 +847,11 @@ return
 
 	ANNOUNCE_TALK_TO_PLANTS =
 	{
-		"生长吧，植物，生长吧！",		--照料植物
-		"我一直想要一株像你这样的植物。",		--照料植物
-		"你好，植物，我来给你提供每日的社交剂量了！",		--照料植物
-		"你真是一株好植物啊。",		--照料植物
-		"植物，你真是一个好的聆听者。",		--照料植物
+		"要是有白子的无人机就可以去偷懒了~",		--照料植物
+		"这个会是土豆，还是番茄？",		--照料植物
+		"这次一定是巨大作物！",		--照料植物
+		"希望你不会变成亮茄~",		--照料植物
+		"未发芽的种子，在泥土里会不会感到压抑呢？",		--照料植物
 	},
 	-- YOT Catcoon
 	ANNOUNCE_KITCOON_HIDEANDSEEK_START = "3,2,1……不管你有没有藏好，我都要开始找！",	--开始捉迷藏
@@ -1393,7 +1393,7 @@ return
 		CAVE_BANANA = "软塌塌的。",		-- 物品名:"洞穴香蕉"
 		CAVE_BANANA_COOKED = "好吃！",		-- 物品名:"烤香蕉"
 		CAVE_BANANA_TREE = "怀疑它能不能光合作用。",		-- 物品名:"洞穴香蕉树"
-		ROCKY = "它的钳子真吓人。",		-- 物品名:"石虾"
+		ROCKY = "这是石虾大哥。",		-- 物品名:"石虾"
 
 		COMPASS =
 		{
@@ -2047,14 +2047,14 @@ return
 			BURNING = "真是浪费木材。",		-- 物品名:"常青树"->正在燃烧
 			BURNT = "我觉得我本可以阻止这种事情发生的。",		-- 物品名:"常青树"->烧焦的
 			CHOPPED = "接招吧，大自然！",		-- 物品名:"常青树"->被砍了
-			GENERIC = "满是松针。",		-- 物品名:"常青树"->默认
+			GENERIC = "曾经的基沃托斯也有很多树呢。",		-- 物品名:"常青树"->默认
 		},
 		EVERGREEN_SPARSE =
 		{
 			BURNING = "真是浪费木材。",		-- 物品名:"粗壮常青树"->正在燃烧
 			BURNT = "我觉得我本可以阻止这种事情发生的。",		-- 物品名:"粗壮常青树"->烧焦的
 			CHOPPED = "接招吧，大自然！",		-- 物品名:"粗壮常青树"->被砍了
-			GENERIC = "这棵悲催的树没有球果。",		-- 物品名:"粗壮常青树"->默认
+			GENERIC = "这棵树没有球果。",		-- 物品名:"粗壮常青树"->默认
 		},
 		TWIGGYTREE =
 		{
@@ -2124,7 +2124,7 @@ return
 		FLINT = "非常尖的石头。",		-- 物品名:"燧石"
 		FLOWER =
 		{
-			GENERIC = "很漂亮，但闻起来一股汗臭。",		-- 物品名:"花"->默认
+			GENERIC = "很漂亮的花。",		-- 物品名:"花"->默认
 			ROSE = "衬托我红润的脸颊。",		-- 物品名:"花"->玫瑰
 		},
 		FLOWER_WITHERED = "我觉得它还没晒够太阳呢。",		-- 物品名:"枯萎的花"
@@ -2609,7 +2609,7 @@ return
 		SEWING_TAPE = "修补得不错。",		-- 物品名:"可靠的胶布" 制造描述:"缝补受损的衣物。"
 		SHOVEL = "地下隐藏着很多秘密。",		-- 物品名:"铲子" 制造描述:"挖掘各种各样的东西。"
 		SILK = "出自蜘蛛的屁股。",		-- 物品名:"蜘蛛丝"
-		SKELETON = "你死好过我死。",		-- 物品名:"骷髅"
+		SKELETON = "已经无法再救他了...",		-- 物品名:"骷髅"
 		SCORCHED_SKELETON = "真可怕。",		-- 物品名:"易碎骨骼"
 		SKELETON_NOTPLAYER = "不像是人骨。",	-- 物品名:"骷髅"（情人节彩蛋）
 		SKULLCHEST = "不确定要不要打开。", --removed		-- 物品名:"骷髅箱"（未应用）
@@ -2977,7 +2977,7 @@ return
 			BURNT = "闻起来像素食烧烤。",	-- 物品名:"兔人神龛"->烧焦的 制造描述:"供奉舒适之兔人。"
 		},
 
-		NIGHTCAPHAT = "本科学家再也不怕睡觉压坏发型了！",	-- 物品名:"睡帽" 制造描述:"为你打瞌睡的脑袋准备的帽子。"
+		NIGHTCAPHAT = "这个能睡得更舒服呢~！",	-- 物品名:"睡帽" 制造描述:"为你打瞌睡的脑袋准备的帽子。"
 
 		YOTR_FOOD1 = "它是用胡萝卜做的，所以科学说它肯定健康。",	-- 物品名:"兔子卷" 制造描述:"制造这个蛋糕的过程中没有兔子受到伤害。"
 		YOTR_FOOD2 = "蓝色是最科学的风味。",	-- 物品名:"月饼" 制造描述:"“蓝色”风味！"
@@ -3175,7 +3175,7 @@ return
 			OFF = "主要部分依然完好无损。",		-- 物品名:"远古大门"->关闭
 			CHARGING = "它正在获得能量。",		-- 物品名:"远古大门"->充能中
 			DESTABILIZING = "大门在晃动。",		-- 物品名:"远古大门"->不稳定
-			COOLDOWN = "它需要时间恢复。我也是。",		-- 物品名:"远古大门"->冷却中
+			COOLDOWN = "它需要时间恢复。先回去吧。",		-- 物品名:"远古大门"->冷却中
 		},
 		ATRIUM_KEY = "这是从它里面发射出来的能量。",		-- 物品名:"远古钥匙"
 		LIFEINJECTOR = "科学的突破！生命的答案！",		-- 物品名:"强心针" 制造描述:"提高下你那日渐衰退的最大健康值吧。"
@@ -3186,13 +3186,13 @@ return
 			ROBOT = "%s一定是在和%s进行试验时死的。",		-- 物品名:"骷髅"->机器人
 			DEFAULT = "%s一定是在和%s进行试验时死的。",		-- 物品名:"物品栏物品"->默认
 		},
-		HUMANMEAT = "肉就是肉。有区别么？",		-- 物品名:"长猪"
+		HUMANMEAT = "这是什么？",		-- 物品名:"长猪"
 		HUMANMEAT_COOKED = "煮的粉嫩，但在道德上还是灰色地带。",		-- 物品名:"煮熟的长猪"
 		HUMANMEAT_DRIED = "风干了就不是人肉了，对吧？",		-- 物品名:"长猪肉干"
 		ROCK_MOON = "那块石头来自月亮。",		-- 物品名:"岩石"
 		MOONROCKNUGGET = "那块石头来自月亮。",		-- 物品名:"月岩"
 		MOONROCKCRATER = "我应该把闪亮的东西粘在它里面。用来研究。",		-- 物品名:"带孔月岩" 制造描述:"用于划定地盘的岩石。"
-		MOONROCKSEED = "里面蕴藏着科学！",		-- 物品名:"天体宝球"
+		MOONROCKSEED = "月面的科技吗？",		-- 物品名:"天体宝球"
 
 		REDMOONEYE = "它能看几公里，也能在几公里外被看到。",		-- 物品名:"红色月眼"
 		PURPLEMOONEYE = "是个很好的标记物，但我希望它不要再那样看我。",		-- 物品名:"紫色月眼"
@@ -4007,7 +4007,7 @@ return
 
 		MEATRACK_HERMIT =
 		{
-			DONE = "肉干可以吃了！",		-- 物品名:"晾肉架"->完成了
+			DONE = "晾制完成！",		-- 物品名:"晾肉架"->完成了
 			DRYING = "肉风干需要一些时间。",		-- 物品名:"晾肉架"->正在风干
 			DRYINGINRAIN = "雨天晾干肉需要更长时间。",		-- 物品名:"晾肉架"->雨天风干
 			GENERIC = "肉晾在这里应该错不了。",		-- 物品名:"晾肉架"->默认
@@ -4018,8 +4018,8 @@ return
 		},
 		BEEBOX_HERMIT =
 		{
-			READY = "它里面装满了蜂蜜。",		-- 物品名:"蜂箱"->快满了
-			FULLHONEY = "它里面装满了蜂蜜。",		-- 物品名:"蜂箱"->蜂蜜满了
+			READY = "可以去拿了吗？",		-- 物品名:"蜂箱"->快满了
+			FULLHONEY = "现在去取些蜂蜜吧！",		-- 物品名:"蜂箱"->蜂蜜满了
 			GENERIC = "不知道里面有没有些许甜蜜。",		-- 物品名:"蜂箱"->默认
 			NOHONEY = "它是空的。",		-- 物品名:"蜂箱"->没有蜂蜜
 			SOMEHONEY = "需要等一会。",		-- 物品名:"蜂箱"->有一些蜂蜜
@@ -4028,8 +4028,8 @@ return
 
 		HERMITCRAB = "一个人住多少会寂寞吧。",		-- 物品名:"寄居蟹隐士"
 
-		HERMIT_PEARL = "我会照顾好它。",		-- 物品名:"珍珠的珍珠"
-		HERMIT_CRACKED_PEARL = "我……没有照顾好它。",		-- 物品名:"开裂珍珠"
+		HERMIT_PEARL = "这是故人的信物吗...",		-- 物品名:"珍珠的珍珠"
+		HERMIT_CRACKED_PEARL = "故人已逝...",		-- 物品名:"开裂珍珠"
 
 		-- DSEAS
 		WATERPLANT = "只要我们不拿它们的藤壶，它们就会跟我们做朋友。",		-- 物品名:"海草"
@@ -4193,9 +4193,9 @@ return
 		FIRENETTLES = "如果你受不了热，就不要在花园里呆着。",		-- 物品名:"火荨麻叶"
 		FORGETMELOTS = "嗯，我不记得我想说什么了。",		-- 物品名:"必忘我"
 		SWEETTEA = "一杯好茶，让我忘记所有的问题。",		-- 物品名:"舒缓茶"
-		TILLWEED = "你给我滚出我的园子！",		-- 物品名:"犁地草"
+		TILLWEED = "出去。",		-- 物品名:"犁地草"
 		TILLWEEDSALVE = "我的救赎。",		-- 物品名:"犁地草膏" 制造描述:"慢慢去处病痛。"
-		WEED_IVY = "嘿，你不是蔬菜！",		-- 物品名:"刺针旋花"
+		WEED_IVY = "这是什么哇！",		-- 物品名:"刺针旋花"
 		IVY_SNARE = "真是没礼貌。",		-- 物品名:"缠绕根须"
 
 		TROPHYSCALE_OVERSIZEDVEGGIES =
@@ -4471,18 +4471,18 @@ return
 
 		-- Moon Storm
 		ALTERGUARDIAN_PHASE1 = {
-			GENERIC = "你会为破坏科学付出代价！",		-- 物品名:"天体英雄"->默认
+			GENERIC = "你有最终boss的感觉呢",		-- 物品名:"天体英雄"->默认
 			DEAD = "有了！",		-- 物品名:"天体英雄"->死了
 		},
 		ALTERGUARDIAN_PHASE2 = {
-			GENERIC = "我想我激怒它了……",		-- 物品名:"天体英雄"->默认
-			DEAD = "这回我很确定我收拾了它。",		-- 物品名:"天体英雄"->死了
+			GENERIC = "哦，还没使出全力吗？",		-- 物品名:"天体英雄"->默认
+			DEAD = "这次还站得起来吗？",		-- 物品名:"天体英雄"->死了
 		},
 		ALTERGUARDIAN_PHASE2SPIKE = "你已经表明了你的观点！",		-- 物品名:"月光玻璃尖刺"
-		ALTERGUARDIAN_PHASE3 = "它现在一定生气了！",		-- 物品名:"天体英雄"
-		ALTERGUARDIAN_PHASE3TRAP = "经过不懈测试，我可以确认它们让我想打盹。",		-- 物品名:"启迪陷阱"
-		ALTERGUARDIAN_PHASE3DEADORB = "它死了吗？那股神秘的力量好像还在它附近游荡。",		-- 物品名:"天体英雄"
-		ALTERGUARDIAN_PHASE3DEAD = "应该找个人过去戳一下……这样才能确定。",		-- 物品名:"被击败的天体英雄"
+		ALTERGUARDIAN_PHASE3 = "呜啊，变得更厉害了。",		-- 物品名:"天体英雄"
+		ALTERGUARDIAN_PHASE3TRAP = "方便睡觉的宝物！",		-- 物品名:"启迪陷阱"
+		ALTERGUARDIAN_PHASE3DEADORB = "嗯，可以回去睡觉了。",		-- 物品名:"天体英雄"
+		ALTERGUARDIAN_PHASE3DEAD = "收工咯收工咯。",		-- 物品名:"被击败的天体英雄"
 
 		ALTERGUARDIANHAT = "它让我看到了无限可能……",		-- 物品名:"启迪之冠"
 		ALTERGUARDIANHATSHARD = "连部件都如此光彩夺目！",		-- 物品名:"启迪之冠碎片"
@@ -4932,8 +4932,8 @@ return
 		SHADOWTHRALL_HORNS = "它看起来渴望战斗。",	-- 物品名:"墨荒"->刮擦
 		SHADOWTHRALL_WINGS = "翅膀已经准备好了登场。",	-- 物品名:"墨荒"->尖叫
 
-		CHARLIE_NPC = "等等，那是……？",	-- 物品名:"查理"
-		CHARLIE_HAND = "它想要某种可怕的东西。",	-- 物品名:"召唤之手"
+		CHARLIE_NPC = "你是...？",	-- 物品名:"查理"
+		CHARLIE_HAND = "你需要什么呢？",	-- 物品名:"召唤之手"
 
 		NITRE_FORMATION = "这绝对是某种石头。",	-- 物品名:"硝石堆"
 		DREADSTONE_STACK = "它来自于那些裂隙深处...",	-- 物品名:"绝望石生成"
@@ -4975,31 +4975,31 @@ return
 
 		-- Rifts 3
 
-		MUTATEDDEERCLOPS = "它的眼睛里有一点东西。",	-- 物品名:"晶体独眼巨鹿"
-		MUTATEDWARG = "瞧你那双闪光的大眼睛！",	-- 物品名:"附身座狼"
-		MUTATEDBEARGER = "事情要变得毛骨悚然了……",	-- 物品名:"装甲熊獾"
+		MUTATEDDEERCLOPS = "彻底晶体化了呢。",	-- 物品名:"晶体独眼巨鹿"
+		MUTATEDWARG = "这是被月灵寄生了吗？",	-- 物品名:"附身座狼"
+		MUTATEDBEARGER = "虽然很麻烦、嘛、我还是会好好干的~",	-- 物品名:"装甲熊獾"
 
 		LUNARFROG = "别盯着看了。",	-- 物品名:"明眼青蛙"
 
 		DEERCLOPSCORPSE =
 		{
-			GENERIC  = "结束了……吧？",	-- 物品名:"独眼巨鹿"->尸体
-			BURNING  = "小心没大错。",	-- 物品名:"独眼巨鹿"->尸体燃烧
-			REVIVING = "我不愿相信双眼正在看到的这一切！",	-- 物品名:"独眼巨鹿"->尸体复活
+			GENERIC  = "结束了……吗？",	-- 物品名:"独眼巨鹿"->尸体
+			BURNING  = "可以回去休息啦。",	-- 物品名:"独眼巨鹿"->尸体燃烧
+			REVIVING = "诶？还能站起来？",	-- 物品名:"独眼巨鹿"->尸体复活
 		},
 
 		WARGCORPSE =
 		{
-			GENERIC  = "为什么我仍然感到不安？",	-- 物品名:"座狼"->尸体
-			BURNING  = "一切都是最好的安排。",	-- 物品名:"座狼"->尸体燃烧
-			REVIVING = "以科学的名义，这是什么玩意？！",	-- 物品名:"座狼"->尸体复活
+			GENERIC  = "终于完事啦。",	-- 物品名:"座狼"->尸体
+			BURNING  = "彻底处理掉吧",	-- 物品名:"座狼"->尸体燃烧
+			REVIVING = "这是那个月亮的力量吗？",	-- 物品名:"座狼"->尸体复活
 		},
 
 		BEARGERCORPSE =
 		{
-			GENERIC  = "臭不可闻！",	-- 物品名:"熊獾"->尸体
+			GENERIC  = "倒下了。",	-- 物品名:"熊獾"->尸体
 			BURNING  = "好险。",	-- 物品名:"熊獾"->尸体燃烧
-			REVIVING = "这一定有科学的解释！",	-- 物品名:"熊獾"->尸体复活
+			REVIVING = "这家伙不好对付，前面就交给我吧",	-- 物品名:"熊獾"->尸体复活
 		},
 
 		BEARGERFUR_SACK = "上面还有它的毛。寒毛直竖啊。",	-- 物品名:"极地熊獾桶" 制造描述:"便携式冰箱。酷。"
@@ -5155,8 +5155,8 @@ return
 		ARMOR_LUNARPLANT_HUSK = "它会给你身上扎根刺。",	--物品名:"荆棘茄甲" 制造描述:"这次下次，浑身带刺。"
 	},
 
-	DESCRIBE_GENERIC = "这是某种...东西。",		--检查物品描述的缺省值
-	DESCRIBE_TOODARK = "太黑了，什么也看不见！",		--天太黑
+	DESCRIBE_GENERIC = "这是什么？",		--检查物品描述的缺省值
+	DESCRIBE_TOODARK = "天黑了。",		--天太黑
 	DESCRIBE_SMOLDERING = "那东西快要着火了。",		--冒烟
 
 	DESCRIBE_PLANTHAPPY = "多么快乐的植物啊!",		--作物压力值低
