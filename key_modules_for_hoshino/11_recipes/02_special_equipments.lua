@@ -237,7 +237,7 @@ RemoveRecipeFromFilter("hoshino_special_equipment_shoes_t9","MODS")             
 AddRecipeToFilter("hoshino_special_equipment_backpack_t1","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_backpack_t1",            --  --  inst.prefab  实体名字
-    {Ingredient("tentaclespots", 2),Ingredient("rope", 2),Ingredient("boards", 2)} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {Ingredient("tentaclespots", 1),Ingredient("rope", 2),Ingredient("boards", 2)} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,

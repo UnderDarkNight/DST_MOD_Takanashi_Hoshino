@@ -175,7 +175,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["gray"] = {
   prefab = "hoshino_item_12mm_shotgun_shells",
   bg = "item_slot_gray.tex",
   icon = {atlas = "images/inventoryimages/hoshino_item_12mm_shotgun_shells.xml", image = "hoshino_item_12mm_shotgun_shells.tex"},
-  price = 50, -- 价格
+  price = 25, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 0, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

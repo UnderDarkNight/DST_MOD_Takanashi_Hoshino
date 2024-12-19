@@ -7,7 +7,7 @@
     AddRecipeToFilter("hoshino_weapon_gun_eye_of_horus","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_weapon_gun_eye_of_horus",            --  --  inst.prefab  实体名字
-        { Ingredient("gears", 2),Ingredient("transistor", 5),Ingredient("orangegem", 1),Ingredient("bluegem", 1),Ingredient("nitre", 10) }, 
+        { Ingredient("gears", 2),Ingredient("transistor", 5),Ingredient("wagpunk_bits", 4),Ingredient("nitre", 10) }, 
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
@@ -25,7 +25,7 @@
     AddRecipeToFilter("hoshino_spell_gun_eye_of_horus_level_1_to_2","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_spell_gun_eye_of_horus_level_1_to_2",            --  --  inst.prefab  实体名字
-        {Ingredient("hoshino_weapon_gun_eye_of_horus", 0),Ingredient("thulecite", 5),Ingredient("moonrocknugget", 5),Ingredient("dreadstone", 5)} ,
+        {Ingredient("hoshino_weapon_gun_eye_of_horus", 0),Ingredient("orangegem", 2),Ingredient("bluegem", 2),Ingredient("thulecite", 5),Ingredient("moonrocknugget", 5),Ingredient("dreadstone", 5)} ,
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
@@ -63,7 +63,7 @@
     AddRecipeToFilter("hoshino_item_12mm_shotgun_shells","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_item_12mm_shotgun_shells",            --  --  inst.prefab  实体名字
-        {Ingredient("gunpowder", 1),Ingredient("goldnugget", 2)} ,
+        {Ingredient("gunpowder", 1),Ingredient("goldnugget", 1)} ,
         TECH.NONE, ---
         {
             -- nounlock=true,

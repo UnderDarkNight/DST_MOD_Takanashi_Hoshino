@@ -84,13 +84,13 @@ return function(inst)
             if not is_real_damage then
                 --- 普通伤害
                 if GetGunLevel() >= 3 then
-                    return 51/2*GetGunLevel()
+                    return 51/2
                 else
-                    return 51*GetGunLevel()
+                    return 51
                 end
             else
                 --- 真实伤害
-                return 51/2*GetGunLevel()
+                return 51/2
             end
         end
         local function DoRealDamage(target,weapon,value) -- 真实伤害
@@ -109,11 +109,13 @@ return function(inst)
             weapon.components.weapon:SetDamage(GetDMG())
             weapon.components.weapon:SetRange(Get_Attack_Range(true))
         end
-        local function DoGunDamage(target,weapon)            
+        local function DoGunDamage(target,weapon) 
+            for i = 1, GetGunLevel(), 1 do           
             inst.components.combat:DoAttack(target,weapon)
             -- target.components.combat:GetAttacked(inst,GetDMG(),weapon)
-            if GetGunLevel() >= 3 then --- 三级的伤害直接造成部分真实伤害。
+             if GetGunLevel() >= 3 then --- 三级的伤害直接造成部分真实伤害。
                 DoRealDamage(target,weapon,GetDMG())
+            end
             end
         end
         local function ResetWeaponParam(weapon,ignore_finiteuses_use) --- 重置攻击距离和伤害。
@@ -131,7 +133,11 @@ return function(inst)
             -- print("DoSpellDamage",target,spell)
             local player_level = inst.components.hoshino_com_level_sys:GetLevel()
             local mult = inst.components.combat.externaldamagemultipliers:Get()
+<<<<<<< HEAD
             local ret_damage = 35*mult + 3*player_level + 60
+=======
+            local ret_damage = 35*mult + 3*player_level + 45*GetGunLevel()
+>>>>>>> 89dbeb6afce24ed195edd5da7d52a995d91096cf
             if spell >= 5 then
                 ret_damage = 2*ret_damage
             end
