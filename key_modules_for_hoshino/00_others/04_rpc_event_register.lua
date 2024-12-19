@@ -82,7 +82,7 @@
 
     local function pushevent_client2server(player_inst,data_json,tar_inst)
         -- print("info server side ",player_inst,data_json)
-        pcall(function()
+        -- pcall(function()
            local event_cmd = json.decode(data_json)
            if event_cmd.event_name then
                 if tar_inst then
@@ -91,7 +91,7 @@
                     player_inst:PushEvent(event_cmd.event_name,event_cmd.event_data)
                 end                
            end
-        end)
+        -- end)
     end
 
     AddModRPCHandler("hoshino_rpc_namespace", "pushevent.client2server.1", function(player_inst,inst,data_json,tar_inst) ----- Register on the server
