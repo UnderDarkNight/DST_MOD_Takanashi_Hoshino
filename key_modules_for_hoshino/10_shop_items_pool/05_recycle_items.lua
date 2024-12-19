@@ -53,7 +53,6 @@ TUNING.HOSHINO_SHOP_ITEMS_RECYCLE_LIST = {
     ["townportaltalisman"] = 10,
     ["feather_robin_winter"] = 5,
     ["honeycomb"] = 15,
-    ["feather_robin_winter"] = 5,
     ["feather_canary"] = 7,
     ["feather_crow"] = 3,
     ["beefalowool"] = 10,

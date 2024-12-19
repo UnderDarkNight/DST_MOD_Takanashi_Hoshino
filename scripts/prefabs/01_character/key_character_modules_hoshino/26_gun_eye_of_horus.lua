@@ -133,11 +133,7 @@ return function(inst)
             -- print("DoSpellDamage",target,spell)
             local player_level = inst.components.hoshino_com_level_sys:GetLevel()
             local mult = inst.components.combat.externaldamagemultipliers:Get()
-<<<<<<< HEAD
-            local ret_damage = 35*mult + 3*player_level + 60
-=======
             local ret_damage = 35*mult + 3*player_level + 45*GetGunLevel()
->>>>>>> 89dbeb6afce24ed195edd5da7d52a995d91096cf
             if spell >= 5 then
                 ret_damage = 2*ret_damage
             end

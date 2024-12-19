@@ -87,11 +87,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["recipe_desc"] = "“它绽放着天青色的光芒”",
             },
             ["hoshino_item_12mm_shotgun_shells"] = {
-<<<<<<< HEAD
-                ["name"] = "12mm霰弹",
-=======
                 ["name"] = "12号霰弹",
->>>>>>> 89dbeb6afce24ed195edd5da7d52a995d91096cf
                 ["inspect_str"] = "为荷鲁斯之眼填充八发弹药",
                 ["recipe_desc"] = "为荷鲁斯之眼填充八发弹药",
             },
