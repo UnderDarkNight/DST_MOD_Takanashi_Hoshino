@@ -96,7 +96,7 @@ local flg,error_code = pcall(function()
         -- TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
         -- local inst = CreateEntity()
         -- inst.entity:AddSoundEmitter()        
-        -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(-10000)
+        ThePlayer.components.hoshino_com_shop:CreditCoinDelta(1000)
 
         -- ThePlayer.__test_speed = 1
         -- print("66",ThePlayer.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29"))
