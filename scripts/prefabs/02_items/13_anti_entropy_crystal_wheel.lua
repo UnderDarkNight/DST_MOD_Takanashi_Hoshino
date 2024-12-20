@@ -106,7 +106,8 @@ end
 --- debuff
     local function Attached_Fn(inst,target)  -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
         inst.entity:SetParent(target.entity)
-        inst.Network:SetClassifiedTarget(target)
+        -- inst.Network:SetClassifiedTarget(target)
+        inst.Transform:SetPosition(0, 0, 0)
         -----------------------------------------------------
         --- 上tag，避免重复升级
             target:AddTag("anti_entropy_crystal_wheel")
@@ -141,7 +142,7 @@ end
 
         inst.entity:AddTransform()
         inst.entity:AddNetwork()
-
+        inst.entity:AddTransform()
         inst:AddTag("CLASSIFIED")
 
         inst.entity:SetPristine()
