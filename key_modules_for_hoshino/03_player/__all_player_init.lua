@@ -17,3 +17,6 @@ modimport("key_modules_for_hoshino/03_player/05_artifact_hia_debuff_marker.lua")
 
 modimport("key_modules_for_hoshino/03_player/06_white_drone_leader.lua") 
 --- 无人机 领导器
+
+modimport("key_modules_for_hoshino/03_player/07_player_debuffalbe_death_bug_fix.lua") 
+--- debuffable 组件 处理 玩家死亡 移除debuff 的bug
