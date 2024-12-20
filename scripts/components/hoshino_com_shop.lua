@@ -408,7 +408,9 @@ nil,
         special_items = self:SortItemsList(special_items)
 
         self:ShopData_Set("level",self:GetLevel())
+        self:ShopData_Set("new_items_list.normal",false)    --- 让列表滚动条不被刷新用
         self:ShopData_Set("normal_items",normal_items)
+        self:ShopData_Set("new_items_list.special",false)   --- 让列表滚动条不被刷新用
         self:ShopData_Set("special_items",special_items)
         self:ShopData_Set("new_spawn_list_flags",{normal_items = true, special_items = true}) -- 标记新列表
         self:Refresh_Delta(0)

@@ -496,6 +496,14 @@ return function(inst,front_root)
         ------------------------------------------------------------------------------
         --- 普通物品区域
             root.inst:ListenForEvent("create_normal_items_page",function()
+                -----------------------------------------------------------------------
+                ---- 没下发新的标记位，直接返回
+                    if ThePlayer.HOSHINO_SHOP["new_items_list.normal"] then
+                        return
+                    else
+                        ThePlayer.HOSHINO_SHOP["new_items_list.normal"] = true
+                    end
+                -----------------------------------------------------------------------
                 local normal_items = ThePlayer.HOSHINO_SHOP["normal_items"] or {}
                 if #normal_items > 0 and CheckIsNewItemList("normal_items") then
                     root.normal_items_page_last_data = normal_items
@@ -530,6 +538,14 @@ return function(inst,front_root)
         ------------------------------------------------------------------------------
         --- 特殊物品区域                
             root.inst:ListenForEvent("create_special_items_page",function()
+                -----------------------------------------------------------------------
+                ---- 没下发新的标记位，直接返回
+                    if ThePlayer.HOSHINO_SHOP["new_items_list.special"] then
+                        return
+                    else
+                        ThePlayer.HOSHINO_SHOP["new_items_list.special"] = true
+                    end
+                -----------------------------------------------------------------------
                 local special_items = ThePlayer.HOSHINO_SHOP["special_items"] or {}
                 if #special_items > 0 and CheckIsNewItemList("special_items") then
                     root.special_items_page_data = special_items
