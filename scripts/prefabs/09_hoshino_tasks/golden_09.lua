@@ -259,7 +259,7 @@ local function debuff_fn()
 
     inst.entity:AddTransform()
     inst.entity:AddNetwork()
-
+    inst.entity:AddTransform()
     inst:AddTag("CLASSIFIED")
 
     inst.entity:SetPristine()
@@ -271,7 +271,8 @@ local function debuff_fn()
     inst:AddComponent("debuff")
     inst.components.debuff:SetAttachedFn(function(inst,target) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
         inst.entity:SetParent(target.entity)
-        inst.Network:SetClassifiedTarget(target)
+        -- inst.Network:SetClassifiedTarget(target)
+        inst.Transform:SetPosition(0, 0, 0)
         -----------------------------------------------------
         --
             inst:DoPeriodicTask(1,function()

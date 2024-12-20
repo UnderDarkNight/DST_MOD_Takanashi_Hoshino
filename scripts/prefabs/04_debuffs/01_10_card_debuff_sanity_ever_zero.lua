@@ -3,7 +3,8 @@
 
 local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
     inst.entity:SetParent(target.entity)
-    inst.Network:SetClassifiedTarget(target)
+    -- inst.Network:SetClassifiedTarget(target)
+    inst.Transform:SetPosition(0,0,0)
     inst.target = target
     -----------------------------------------------------
     --- 
@@ -43,6 +44,7 @@ local function fn()
 
     inst.entity:AddTransform()
     inst.entity:AddNetwork()
+    inst.entity:AddTransform()
 
     inst:AddTag("CLASSIFIED")
 
