@@ -159,17 +159,25 @@ nil,
                     break
                 elseif self.exp_temp_pool == max_exp then --- 经验刚好满
                     self.exp_temp_pool = 0
+                    local old_level = self:GetLevel()
                     self:Level_DoDelta(1)
-                    self.inst:PushEvent("hoshino_com_level_sys.level_up",self:GetLevel()) -- Max Exp 靠这里进行更新。
-                    print("玩家升级到",self:GetLevel())
+                    local new_level = self:GetLevel()
+                    if old_level ~= new_level then
+                        self.inst:PushEvent("hoshino_com_level_sys.level_up",self:GetLevel()) -- Max Exp 靠这里进行更新。
+                        print("玩家升级到",self:GetLevel())
+                    end
                     self:ActiveMaxExpUpdate() -- 更新经验上限。
                     self:SetExp(self.exp_temp_pool)
                     break
                 else --- 经验满
                     self.exp_temp_pool = self.exp_temp_pool - max_exp
+                    local old_level = self:GetLevel()
                     self:Level_DoDelta(1)
-                    self.inst:PushEvent("hoshino_com_level_sys.level_up",self:GetLevel()) -- Max Exp 靠这里进行更新。
-                    print("玩家升级到",self:GetLevel())
+                    local new_level = self:GetLevel()
+                    if old_level ~= new_level then
+                        self.inst:PushEvent("hoshino_com_level_sys.level_up",self:GetLevel()) -- Max Exp 靠这里进行更新。
+                        print("玩家升级到",self:GetLevel())
+                    end
                     self:ActiveMaxExpUpdate() -- 更新经验上限。
                 end
             end
