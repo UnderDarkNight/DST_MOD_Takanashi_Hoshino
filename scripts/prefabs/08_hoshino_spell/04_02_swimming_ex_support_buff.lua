@@ -52,10 +52,10 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     --- 给玩家上buff
         inst:DoPeriodicTask(1,function()
             local player_level = target.components.hoshino_com_level_sys:GetLevel()
-            local heal_num = 5 +player_level * 0.05
+            local heal_num = 3 +player_level * 0.05
             local speed_mult = 1.3
-            local damage_mult = (30+player_level)/100 + 1
-            local cost_value_num = 0.02 + player_level*0.002
+            local damage_mult = (30+player_level*1)/100 + 1
+            local cost_value_num = 0.03 + player_level*0.002
 
             --- 刷新距离参数
             for player, _ in pairs(inst.player_list) do

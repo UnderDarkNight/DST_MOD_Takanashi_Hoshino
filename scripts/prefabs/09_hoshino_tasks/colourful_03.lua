@@ -334,7 +334,7 @@ local function debuff_fn()
         -----------------------------------------------------
         --- 位面伤害
             if target.components.planardamage then
-                target.components.planardamage:AddMultiplier(inst,2)
+                target.components.planardamage:AddMultiplier(inst,5)
             end
         -----------------------------------------------------
         -- --- 2倍移速

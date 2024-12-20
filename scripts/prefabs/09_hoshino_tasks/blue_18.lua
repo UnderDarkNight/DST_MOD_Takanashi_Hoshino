@@ -299,8 +299,8 @@ local function debuff_fn()
         -- inst.Network:SetClassifiedTarget(target)
         inst.Transform:SetPosition(0, 0, 0)
         -----------------------------------------------------
-        --- 60%减伤
-            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.4)
+        --- 50%减伤
+            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.5)
         -----------------------------------------------------
         --- 死亡广播
             target:ListenForEvent("minhealth",function()

@@ -356,20 +356,20 @@ local function debuff_fn()
         -- inst.Network:SetClassifiedTarget(target)
         inst.Transform:SetPosition(0, 0, 0)
         -----------------------------------------------------
-        --- 80%减伤
-            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.2)
+        --- 60%减伤
+            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.4)
         -----------------------------------------------------
-        --- 2倍伤害
-            target.components.combat.externaldamagemultipliers:SetModifier(inst, 2)
+        --- 3倍伤害
+            target.components.combat.externaldamagemultipliers:SetModifier(inst, 3)
         -----------------------------------------------------
         --- 位面伤害
             if target.components.planardamage then
-                target.components.planardamage:AddMultiplier(inst,2)
+                target.components.planardamage:AddMultiplier(inst,3)
             end
         -----------------------------------------------------
-        --- 5倍血量
+        --- 10倍血量
             local max_health = target.components.health.maxhealth
-            target.components.health:SetMaxHealth(max_health * 5)
+            target.components.health:SetMaxHealth(max_health * 10)
         -----------------------------------------------------
         --- 2倍移速
             target.components.locomotor.walkspeed = target.components.locomotor.walkspeed * 2

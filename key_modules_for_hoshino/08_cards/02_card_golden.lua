@@ -588,7 +588,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 51、【金】【移动速度+6%，基础攻击伤害+10%】【可叠加】
+    --- 51、【金】【移动速度+4%，基础攻击伤害+10%】【可叠加】
         ["speed_up_and_damage_up_6_10"] = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
@@ -596,11 +596,11 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Speed_Mult(6/100)
+                inst.components.hoshino_com_debuff:Add_Speed_Mult(4/100)
                 inst.components.hoshino_com_debuff:Add_Damage_Mult(10/100)
             end,
             text = function(inst)
-                return "移动速度+6%，基础攻击伤害+10%"
+                return "移动速度+4%，基础攻击伤害+10%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

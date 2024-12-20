@@ -100,7 +100,7 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 5、【白】【基础攻击伤害+4%】【可叠加】
+    --- 5、【白】【基础攻击伤害+3%】【可叠加】
         ["damage_mult_up_4_percent"] = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
@@ -108,10 +108,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.04)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.03)
             end,
             text = function(inst)
-                return "攻击伤害+4%"
+                return "攻击伤害+3%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

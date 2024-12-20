@@ -301,8 +301,8 @@ local function debuff_fn()
         -- inst.Network:SetClassifiedTarget(target)
         inst.Transform:SetPosition(0, 0, 0)
         -----------------------------------------------------
-        --- 70%减伤
-            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.3)
+        --- 60%减伤
+            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.4)
         -----------------------------------------------------
         --- 2倍攻击
             target.components.combat.externaldamagemultipliers:SetModifier(inst, 2)

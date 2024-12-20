@@ -84,13 +84,13 @@ return function(inst)
             if not is_real_damage then
                 --- 普通伤害
                 if GetGunLevel() >= 3 then
-                    return 51/2
+                    return 68/2
                 else
-                    return 51
+                    return 45
                 end
             else
                 --- 真实伤害
-                return 51/2
+                return 68/2
             end
         end
         local function DoRealDamage(target,weapon,value) -- 真实伤害
@@ -133,7 +133,7 @@ return function(inst)
             -- print("DoSpellDamage",target,spell)
             local player_level = inst.components.hoshino_com_level_sys:GetLevel()
             local mult = inst.components.combat.externaldamagemultipliers:Get()
-            local ret_damage = 35*mult + 3*player_level + 45*GetGunLevel()
+            local ret_damage = 20*mult + 3*player_level + 45*GetGunLevel()
             if spell >= 5 then
                 ret_damage = 2*ret_damage
             end
@@ -162,7 +162,7 @@ return function(inst)
         
             -----------------------------------------------------------------------------------
             --- 尝试包含玩家近距离正面区域
-                if dst_sq <= 1.2*1.2 then
+                if dst_sq <= 1.4*1.4 then
                     return true
                 end
             -----------------------------------------------------------------------------------

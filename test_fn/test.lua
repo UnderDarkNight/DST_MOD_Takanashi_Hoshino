@@ -81,10 +81,10 @@ local flg,error_code = pcall(function()
 
         -- print(TheWorld.Map:GetTileAtPoint(x,y,z))
 
-        -- local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+        local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
-        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_27")
+        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_18")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 

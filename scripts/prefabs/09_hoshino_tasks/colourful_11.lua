@@ -322,10 +322,10 @@ local function debuff_fn()
         --- 4倍攻击
             target.components.combat.externaldamagemultipliers:SetModifier(inst, 4)
         -----------------------------------------------------
-        --- 5倍血量
+        --- 7倍血量
             if target.components.health then
                 local max_health = target.components.health.maxhealth
-                target.components.health:SetMaxHealth(max_health * 5)
+                target.components.health:SetMaxHealth(max_health * 7)
             end
         -----------------------------------------------------
         --- 位面抵抗
