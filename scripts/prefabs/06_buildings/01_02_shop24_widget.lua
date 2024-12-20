@@ -480,32 +480,21 @@ return function(inst,front_root)
                 return scroll_bar_area,all_slots
             end
         ------------------------------------------------------------------------------
-        --- 时间戳记录器，用来记录上次刷新的时间
-            local function CheckIsNewItemList(item_list_name)
-                local new_spawn_list_flags = ThePlayer.HOSHINO_SHOP.new_spawn_list_flags or {}
-                if new_spawn_list_flags[item_list_name] then
-                    return true
-                else
-                    return false
-                end
-            end
-            local function ClearNewItemListFlag(item_list_name)
-                local new_spawn_list_flags = ThePlayer.HOSHINO_SHOP.new_spawn_list_flags or {}
-                new_spawn_list_flags[item_list_name] = false
-            end
-        ------------------------------------------------------------------------------
         --- 普通物品区域
+            local new_list_flag_number_for_normal = nil
             root.inst:ListenForEvent("create_normal_items_page",function()
                 -----------------------------------------------------------------------
                 ---- 没下发新的标记位，直接返回
-                    if ThePlayer.HOSHINO_SHOP["new_items_list.normal"] then
+                    if ThePlayer.HOSHINO_SHOP["new_items_list_spawned_flag.normal"] == new_list_flag_number_for_normal then
+                        -- print("列表没更新，不刷新 normal")
                         return
                     else
-                        ThePlayer.HOSHINO_SHOP["new_items_list.normal"] = true
+                        new_list_flag_number_for_normal = ThePlayer.HOSHINO_SHOP["new_items_list_spawned_flag.normal"]
+                        -- print("列表有更新，刷新slots  normal")
                     end
                 -----------------------------------------------------------------------
                 local normal_items = ThePlayer.HOSHINO_SHOP["normal_items"] or {}
-                if #normal_items > 0 and CheckIsNewItemList("normal_items") then
+                if #normal_items > 0 then
                     root.normal_items_page_last_data = normal_items
                     if root.normal_items_page then
                         root.normal_items_page:Kill()
@@ -524,7 +513,6 @@ return function(inst,front_root)
                     for index, item_slot in pairs(normal_items) do
                         normal_item_slots[index]:SetData(normal_items[index])
                     end
-                    ClearNewItemListFlag("normal_items")
                 end
             end)
             root.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated_for_widget",function()
@@ -536,18 +524,21 @@ return function(inst,front_root)
             end,ThePlayer)
             root.inst:PushEvent("create_normal_items_page") -- 初始化普通物品页面
         ------------------------------------------------------------------------------
-        --- 特殊物品区域                
+        --- 特殊物品区域
+            local new_list_flag_number_for_special = nil
             root.inst:ListenForEvent("create_special_items_page",function()
                 -----------------------------------------------------------------------
                 ---- 没下发新的标记位，直接返回
-                    if ThePlayer.HOSHINO_SHOP["new_items_list.special"] then
+                    if ThePlayer.HOSHINO_SHOP["new_items_list_spawned_flag.special"] == new_list_flag_number_for_special then
+                        -- print("列表没更新，不刷新 special")
                         return
                     else
-                        ThePlayer.HOSHINO_SHOP["new_items_list.special"] = true
+                        new_list_flag_number_for_special = ThePlayer.HOSHINO_SHOP["new_items_list_spawned_flag.special"]
+                        -- print("列表有更新，刷新slots  special")
                     end
                 -----------------------------------------------------------------------
                 local special_items = ThePlayer.HOSHINO_SHOP["special_items"] or {}
-                if #special_items > 0 and CheckIsNewItemList("special_items") then
+                if #special_items > 0 then
                     root.special_items_page_data = special_items
                     if root.special_items_page then
                         root.special_items_page:Kill()
@@ -566,7 +557,6 @@ return function(inst,front_root)
                     for index, item_slot in pairs(special_items) do
                         special_item_slots[index]:SetData(special_items[index])
                     end
-                    ClearNewItemListFlag("special_items")
                 end
             end)
             root.inst:ListenForEvent("hoshino_com_shop_client_side_data_updated_for_widget",function()
@@ -600,6 +590,7 @@ return function(inst,front_root)
             end)
             root.inst:ListenForEvent("container_widget_close",function()
                 inst.replica.container:Close()
+                root:Kill()
             end)
         ------------------------------------------------------------------------------
         --- mouseover 显示
