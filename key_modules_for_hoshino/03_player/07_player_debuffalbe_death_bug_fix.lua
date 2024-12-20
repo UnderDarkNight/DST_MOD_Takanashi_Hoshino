@@ -55,6 +55,32 @@ AddPlayerPostInit(function(inst)
         return old_AddDebuff(self,name,...)
     end
 
+    local old_Enable = inst.components.debuffable.Enable
+    inst.components.debuffable.Enable = function(self, enable,...)
+        if enable == false then
+            -- self.debuffs
+            -- 把本MOD的debuff剔除掉，操作完后恢复。
+            local fake_debuffs = {}
+            local hoshino_debuffs = {}
+            for name,data in pairs(self.debuffs) do
+                if not is_hoshino_debuff(name) then
+                    fake_debuffs[name] = data
+                else
+                    hoshino_debuffs[name] = data
+                end
+            end
+            self.debuffs = fake_debuffs
+            local old_ret = {old_Enable(self, enable,...)}
+
+            for name, data in pairs(hoshino_debuffs) do
+                self.debuffs[name] = data
+            end
+
+            return unpack(old_ret)
+        end
+        return old_Enable(self, enable,...)
+    end
+
 
 
 end)

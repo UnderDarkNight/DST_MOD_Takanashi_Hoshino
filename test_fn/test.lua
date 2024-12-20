@@ -37,86 +37,20 @@ local flg,error_code = pcall(function()
         --             -- "card_black",
         --             -- "kill_and_explode",
         --             -- "unlock_spell_normal_ex",
-        --             "unlock_spell_swimming_ex",
+        --             -- "unlock_spell_swimming_ex",
         --             -- "unlock_spell_all_normal",
         --             -- "unlock_spell_all_swimming",
         --             -- "kill_and_explode",
         --             -- "give_me_some_money",
+        --             "level_up_and_double_card_pack",
         --         },
         --     }
         -- )
         -- ThePlayer.components.inventory:GiveItem(item)
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --         cards = {
-        --             -- "card_golden",
-        --             -- "card_white",
-        --             -- "card_colourful",
-        --             -- "card_colourful",
-        --             -- "card_golden",
-        --             -- "card_black",
-        --             -- "kill_and_explode",
-        --             -- "unlock_spell_normal_ex",
-        --             -- "unlock_spell_swimming_ex",
-        --             "unlock_spell_all_normal",
-        --             -- "unlock_spell_all_swimming",
-        --         },
-        --     }
-        -- )
-        -- ThePlayer.components.inventory:GiveItem(item)
-    ----------------------------------------------------------------------------------------------------------------
-    --- 卡牌调试-变种
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
 
-        -- -- item:PushEvent("SetName","窥秘权柄") -- 金色
-        -- -- item:PushEvent("Set",{
-        -- --         cards = {
-        -- --             "card_golden",
-        -- --             "card_golden",
-        -- --             "card_golden",
-        -- --         },
-        -- --     }
-        -- -- )
-        -- -- item:PushEvent("SetDisplay",{
-        -- --     bank = "hoshino_item_cards_pack_authority_to_unveil_secrets",
-        -- --     build = "hoshino_item_cards_pack_authority_to_unveil_secrets",
-        -- --     anim = "idle",
-        -- --     imagename = "hoshino_item_cards_pack_authority_to_unveil_secrets",
-        -- --     atlasname = "images/inventoryimages/hoshino_item_cards_pack_authority_to_unveil_secrets.xml",
-        -- -- })
-        -- ThePlayer.components.inventory:GiveItem(item)
-
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Type","hoshino_item_cards_pack_supreme_mystery")
-
-        -- -- item:PushEvent("SetName","最高神秘") -- 彩色
-        -- -- item:PushEvent("Set",{
-        -- --         cards = {
-        -- --             "card_colourful",
-        -- --             "card_colourful",
-        -- --             "card_colourful",
-        -- --         },
-        -- --     }
-        -- -- )
-        -- -- item:PushEvent("SetDisplay",{
-        -- --     bank = "hoshino_item_cards_pack_supreme_mystery",
-        -- --     build = "hoshino_item_cards_pack_supreme_mystery",
-        -- --     anim = "idle",
-        -- --     imagename = "hoshino_item_cards_pack_supreme_mystery",
-        -- --     atlasname = "images/inventoryimages/hoshino_item_cards_pack_supreme_mystery.xml",
-        -- -- })
-        -- ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
     ---
-        -- ThePlayer:ListenForEvent("newstate",function(inst,_table)
-        --     local statename = _table and _table.statename
-        --     if statename then
-        --         print("newstate:",statename)
-        --     end
-        -- end)
-    ----------------------------------------------------------------------------------------------------------------
-    ---
+        print(ThePlayer:HasDebuff("hoshino_card_debuff_level_up_and_double_card_pack"))
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer.components.hoshino_com_shop:BlueSchistDelta(123)
@@ -147,10 +81,10 @@ local flg,error_code = pcall(function()
 
         -- print(TheWorld.Map:GetTileAtPoint(x,y,z))
 
-        local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+        -- local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_27")
+        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_27")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 
