@@ -23,6 +23,8 @@ local function fx()
 
     inst:AddTag("INLIMBO")
     inst:AddTag("FX")
+    inst:AddTag("fx")
+    inst:AddTag("NOBLOCK")
     inst:AddTag("NOCLICK")
 
 

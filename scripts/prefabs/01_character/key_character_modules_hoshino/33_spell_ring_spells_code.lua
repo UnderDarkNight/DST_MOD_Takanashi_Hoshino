@@ -81,7 +81,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 【普通模式】突破
     local musthavetags = {"_combat"}
-    local canthavetags = {"companion","player", "playerghost", "INLIMBO","chester","hutch","DECOR", "FX",}
+    local canthavetags = {"companion","player", "playerghost", "INLIMBO","chester","hutch","DECOR", "FX","wall","structure"}
     local musthaveoneoftags = nil
     local function do_aoe_dmage(inst,pt)
         local x,y,z = pt.x,0,pt.z
