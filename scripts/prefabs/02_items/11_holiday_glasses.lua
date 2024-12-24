@@ -172,20 +172,41 @@
 --- 虚假光源
     local function fake_light_install(inst)
         if TheWorld.ismastersim then
-            inst:ListenForEvent("glasses_on_equip",function(_,owner)
-                -- print("眼镜穿戴")
-                if owner.components.grue then
-                    owner.components.grue:AddImmunity("hoshino_equipment_holiday_glasses")
-                end
-                owner.components.hoshino_com_rpc_event:PushEvent("fake_vision_client_active",{},inst)
-            end)
-            inst:ListenForEvent("glasses_on_unequip",function(_,owner)
-                -- print("眼镜脱下")
-                if owner.components.grue then
-                    owner.components.grue:RemoveImmunity("hoshino_equipment_holiday_glasses")
-                end
-                owner.components.hoshino_com_rpc_event:PushEvent("fake_vision_client_deactive",{},inst)
-            end)
+            --------------------------------------------------------------------------------------------------------
+            --- 穿戴、脱下、耐久空
+                inst:ListenForEvent("glasses_on_equip",function(_,owner)
+                    -- print("眼镜穿戴")                
+                    if inst.components.finiteuses:GetPercent() > 0 then
+                        inst:PushEvent("fake_vision_server_active",owner)
+                    end
+                end)
+                inst:ListenForEvent("glasses_on_unequip",function(_,owner)
+                    -- print("眼镜脱下")
+                    inst:PushEvent("fake_vision_server_deactive",owner)
+                end)
+                inst:ListenForEvent("finiteuses_empty",function()
+                    local owner = inst.components.inventoryitem:GetGrandOwner()
+                    if owner and owner:HasTag("player") then
+                        inst:PushEvent("fake_vision_server_deactive",owner)
+                    end
+                end)
+            --------------------------------------------------------------------------------------------------------
+            ---- 激活和关闭
+                inst:ListenForEvent("fake_vision_server_active",function(_,owner)
+                    if owner.components.grue then
+                        owner.components.grue:AddImmunity("hoshino_equipment_holiday_glasses")
+                    end
+                    owner.components.hoshino_com_rpc_event:PushEvent("fake_vision_client_active",{},inst)
+                end)
+
+                inst:ListenForEvent("fake_vision_server_deactive",function(_,owner)
+                    if owner.components.grue then
+                        owner.components.grue:RemoveImmunity("hoshino_equipment_holiday_glasses")
+                    end
+                    owner.components.hoshino_com_rpc_event:PushEvent("fake_vision_client_deactive",{},inst)
+                end)
+            --------------------------------------------------------------------------------------------------------
+
         end
 
         if TheNet:IsDedicated() then
@@ -230,6 +251,8 @@
                 inst._fake_light = nil
             end
         end)
+
+
 
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
