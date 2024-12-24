@@ -97,7 +97,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "hoshino_item_abydos_high_purity_alloy",
   bg = "item_slot_colourful.tex",
   icon = {atlas = "images/inventoryimages/hoshino_item_abydos_high_purity_alloy.xml", image = "hoshino_item_abydos_high_purity_alloy.tex"},
-  price = 2500, -- 价格
+  price = 4000, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -123,7 +123,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["colourful"] = {
   prefab = "shadowheart_infused",
   bg = "item_slot_colourful.tex",
   icon = {atlas = GetInventoryItemAtlas("shadowheart_infused.tex"), image = "shadowheart_infused.tex"},
-  price = 2, -- 价格
+  price = 1, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "laplite", -- 货币需求。
   level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

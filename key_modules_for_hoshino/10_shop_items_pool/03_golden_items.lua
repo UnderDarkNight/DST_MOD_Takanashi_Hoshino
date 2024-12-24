@@ -162,7 +162,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "hoshino_item_anti_entropy_crystal_wheel",
   bg = "item_slot_golden.tex",
   icon = {atlas = "images/inventoryimages/hoshino_item_anti_entropy_crystal_wheel.xml", image = "hoshino_item_anti_entropy_crystal_wheel.tex"},
-  price = 1200, -- 价格
+  price = 3000, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -305,9 +305,9 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "hoshino_item_ether_essence",
   bg = "item_slot_golden.tex",
   icon = {atlas = "images/inventoryimages/hoshino_item_ether_essence.xml", image = "hoshino_item_ether_essence.tex"},
-  price = 4000, -- 价格
+  price = 1, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
+  price_type = "laplite", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
   type = "special", -- 类型。normal special 。这个可以不下发。
   is_permanent = false, -- 是否永久。0 非永久 1 永久

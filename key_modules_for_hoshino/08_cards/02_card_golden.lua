@@ -174,7 +174,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_shop:CreditCoinDelta(6666)
+                inst.components.hoshino_com_shop:CreditCoinDelta(5555)
                 -- local debuff_prefab = "hoshino_card_debuff_builder_blocker"
                 -- while true do
                 --     local debuff_inst = inst:GetDebuff(debuff_prefab)
@@ -188,7 +188,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Set("golden_card_unlocked_give_me_some_money",true)
             end,
             text = function(inst)
-                return "【我将富有】\n立即获得6666「信用点」，同时获得诅咒「凡庸」"
+                return "【我将富有】\n立即获得5555「信用点」，同时获得诅咒「凡庸」"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -203,7 +203,8 @@ local cards = {
                 local x,y,z = inst.Transform:GetWorldPosition()
                 local monster_list = {
                                 "bearger","mutatedbearger","deerclops","mutateddeerclops","spat",
-                                "leif","leif_sparse","spiderqueen","warglet","warg","mutatedwarg"
+                                "leif","spiderqueen","warglet","warg","mutatedwarg","klaus","mutatedwarg",
+                                "beequeen","dragonfly"
                                 }
                 local ret_monster_prefab = monster_list[math.random(#monster_list)]
                 local monster = SpawnPrefab(ret_monster_prefab or "hound")
@@ -615,7 +616,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Damage_Taken_Mult(6/100)
             end,
             text = function(inst)
-                return "基础伤害减免+6，达到60%后移出卡池"
+                return "基础伤害减免+6%，总和不超过60%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

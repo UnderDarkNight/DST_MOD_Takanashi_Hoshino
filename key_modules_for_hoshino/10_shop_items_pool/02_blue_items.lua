@@ -14,6 +14,19 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   is_permanent = true, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
+--  palmcone_seed
+{
+  prefab = "palmcone_seed",
+  bg = "item_slot_blue.tex",
+  icon = {atlas = GetInventoryItemAtlas("palmcone_seed.tex"), image = "palmcone_seed.tex"},
+  price = 50, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "normal", -- 类型。normal special 。这个可以不下发。
+  is_permanent = true, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
 --  cutgrass
 {
   prefab = "cutgrass",
@@ -32,7 +45,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   prefab = "log",
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("log.tex"), image = "log.tex"},
-  price = 800, -- 价格
+  price = 600, -- 价格
   num_to_give = 40, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -175,7 +188,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   prefab = "dug_sapling",
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("dug_sapling.tex"), image = "dug_sapling.tex"},
-  price = 120, -- 价格
+  price = 60, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -188,7 +201,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   prefab = "dug_sapling_moon",
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("dug_sapling_moon.tex"), image = "dug_sapling_moon.tex"},
-  price = 150, -- 价格
+  price = 90, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -201,7 +214,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   prefab = "dug_grass",
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("dug_grass.tex"), image = "dug_grass.tex"},
-  price = 105, -- 价格
+  price = 50, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -240,7 +253,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   prefab = "leif_idol",
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("leif_idol.tex"), image = "leif_idol.tex"},
-  price = 225, -- 价格
+  price = 250, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -371,6 +384,19 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("bearger_fur.tex"), image = "bearger_fur.tex"},
   price = 600, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "special", -- 类型。normal special 。这个可以不下发。
+  is_permanent = false, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  goose_feather
+{
+  prefab = "goose_feather",
+  bg = "item_slot_blue.tex",
+  icon = {atlas = GetInventoryItemAtlas("goose_feather.tex"), image = "goose_feather.tex"},
+  price = 90, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

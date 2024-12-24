@@ -391,7 +391,7 @@ end
 --------------------------------------------------------------------------------------------------------------------------------------------
     local recipe_level = {
         {Ingredient("goldnugget", 6),Ingredient("gears", 2),Ingredient("moonglass", 6)},
-        {Ingredient("thulecite", 6),Ingredient("greengem", 2)},
+        {Ingredient("thulecite", 6),Ingredient("greengem", 3),Ingredient("wagpunk_bits", 10)},
         {Ingredient("opalpreciousgem", 1),Ingredient("glommerwings", 1),Ingredient("alterguardianhatshard", 1)},
     }
     for i, v in ipairs(recipe_level) do
