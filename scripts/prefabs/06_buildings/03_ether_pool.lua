@@ -13,7 +13,22 @@
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---  acceptable_install
+    local CD_TIME = 60
+    local CD_TAG = "cd_ing"
+    local PrefabBlackList = {
+        ["turf_dragonfly"]=true,
+        ["turf_checkerfloor"]=true,
+        ["turf_cotl_gold"]=true,
+        ["turf_carpetfloor"]=true,
+        ["turf_mosaic_red"] = true,
+    }
     local function Test_Item(inst,item,doer,right_click)
+        if inst:HasTag(CD_TAG) then
+            return false
+        end
+        if PrefabBlackList[item.prefab] then
+            return false
+        end
         return true
     end
     local function replica_com_fn(inst,replica_com)
@@ -27,6 +42,9 @@
         end
     end
     local function OnAcceptFn(inst,item,doer)
+        if inst:HasTag(CD_TAG) then
+            return false
+        end
         local greenstaff = SpawnPrefab("greenstaff")
         greenstaff.components.inventoryitem.owner = doer
         greenstaff.components.finiteuses.Use = empty_fn
@@ -42,6 +60,10 @@
                 ReturnSanity(doer)
             end
         end
+        inst:AddTag(CD_TAG)
+        inst:DoTaskInTime(CD_TIME,function()
+            inst:RemoveTag(CD_TAG)
+        end)
         greenstaff:Remove()
         return true
     end
