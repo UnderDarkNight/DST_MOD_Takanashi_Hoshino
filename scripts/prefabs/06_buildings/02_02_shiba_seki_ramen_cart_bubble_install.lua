@@ -64,6 +64,9 @@
                     root:Hide()
                 end
             end)
+            root.inst:ListenForEvent("entitysleep",function()
+                root:Hide()
+            end,inst)
         -----------------------------------------------------
         --- 按钮节点
             local button_widget = root:AddChild(Widget())
