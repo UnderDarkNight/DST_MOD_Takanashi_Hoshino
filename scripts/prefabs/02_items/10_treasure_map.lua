@@ -225,36 +225,36 @@ end
             end
         ----------------------------------------------------------
     end
-    local function marker_workable_install(inst)
-        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
-            replica_com:SetTestFn(function(inst,doer,right_click)
-                if not right_click then
-                    return false
-                end
-                local weapon = doer and doer.replica.combat and doer.replica.combat:GetWeapon()
-                if weapon and weapon:HasTag("DIG_tool") and weapon:HasTag("tool") then
-                    return true
-                end
-                return false
-            end)
-            replica_com:SetText("hoshino_item_treasure_map_marker","挖掘")
-            replica_com:SetSGAction("dig")
-        end)
-        if not TheWorld.ismastersim then
-            return
-        end
-        inst:AddComponent("hoshino_com_workable")
-        inst.components.hoshino_com_workable:SetOnWorkFn(function(inst,doer)
-            -- print("挖掘宝藏")
-            local x,y,z = inst.Transform:GetWorldPosition()
-            local fx = SpawnPrefab("collapse_big")
-            fx.Transform:SetPosition(x,y,z)
-            fx:SetMaterial("wood")
-            SpawnTreasureBox(x,y,z)
-            inst:Remove()
-            return true
-        end)
-    end
+    -- local function marker_workable_install(inst)
+    --     inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
+    --         replica_com:SetTestFn(function(inst,doer,right_click)
+    --             if not right_click then
+    --                 return false
+    --             end
+    --             local weapon = doer and doer.replica.combat and doer.replica.combat:GetWeapon()
+    --             if weapon and weapon:HasTag("DIG_tool") and weapon:HasTag("tool") then
+    --                 return true
+    --             end
+    --             return false
+    --         end)
+    --         replica_com:SetText("hoshino_item_treasure_map_marker","挖掘")
+    --         replica_com:SetSGAction("dig")
+    --     end)
+    --     if not TheWorld.ismastersim then
+    --         return
+    --     end
+    --     inst:AddComponent("hoshino_com_workable")
+    --     inst.components.hoshino_com_workable:SetOnWorkFn(function(inst,doer)
+    --         -- print("挖掘宝藏")
+    --         local x,y,z = inst.Transform:GetWorldPosition()
+    --         local fx = SpawnPrefab("collapse_big")
+    --         fx.Transform:SetPosition(x,y,z)
+    --         fx:SetMaterial("wood")
+    --         SpawnTreasureBox(x,y,z)
+    --         inst:Remove()
+    --         return true
+    --     end)
+    -- end
     local function marker_fn()
         local inst = CreateEntity()
 
@@ -279,7 +279,7 @@ end
         inst:AddTag("hoshino_item_treasure_map_marker")
 
         inst.entity:SetPristine()
-        marker_workable_install(inst)
+        -- marker_workable_install(inst)
         if not TheWorld.ismastersim then
             return inst
         end
@@ -289,6 +289,18 @@ end
         -- inst.components.playerprox:SetOnPlayerNear(marker_on_near_fn)
         -- inst.components.playerprox:SetOnPlayerFar(onfar)
         inst:AddComponent("inspectable")
+
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkAction(ACTIONS.DIG)
+        inst.components.workable:SetOnFinishCallback(function()
+            local x,y,z = inst.Transform:GetWorldPosition()
+            local fx = SpawnPrefab("collapse_big")
+            fx.Transform:SetPosition(x,y,z)
+            fx:SetMaterial("wood")
+            SpawnTreasureBox(x,y,z)
+            inst:Remove()
+        end)
+        inst.components.workable:SetWorkLeft(1)
 
         return inst
     end
