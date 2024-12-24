@@ -93,7 +93,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Speed_Mult(0.03)
+                inst.components.hoshino_com_debuff:Add_Speed_Mult(0.02)
             end,
             text = function(inst)
                 return "移速+2%"

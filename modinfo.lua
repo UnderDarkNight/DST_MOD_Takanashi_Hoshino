@@ -225,7 +225,7 @@ configuration_options = {
       {description = "500",data = 500},
       {description = "999999",data = 999999},
     },
-    default = 100
+    default = 50
   },
   {
     name = "HIDE_HAT",
@@ -257,7 +257,7 @@ configuration_options = {
         {description = "OFF",data = false},
         {description = "ON",data = true},
       },
-      default = true
+      default = false
   },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("杂项") or GetTitle("Miscellaneous"),hover = "",options = {{description = "",data = 0}},default = 0},
@@ -279,7 +279,7 @@ configuration_options = {
         {description = "OFF",data = false},
         {description = "ON",data = true},
       },
-      default = true
+      default = false
   },
   {
       name = "COLOURFUL_EGG_ITEMS",
@@ -289,7 +289,7 @@ configuration_options = {
         {description = "OFF",data = false},
         {description = "ON",data = true},
       },
-      default = true
+      default = false
   },
   {
       name = "COLOURFUL_EGG_MISSIONS",
@@ -299,7 +299,7 @@ configuration_options = {
         {description = "OFF",data = false},
         {description = "ON",data = true},
       },
-      default = true
+      default = false
   },
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("快捷键") or GetTitle("Hotkeys"),hover = "",options = {{description = "",data = 0}},default = 0},
@@ -308,14 +308,14 @@ configuration_options = {
     label = IsChinese() and "切换泳装" or "Switch Swimwear Hotkey",
     hover = IsChinese() and "切换泳装" or "Switch Swimwear Hotkey",
     options = keys_option,
-    default = "KEY_B",
+    default = "KEY_C",
   },
   {
     name = "_12MM_BULLET_HOTKEY",
     label = IsChinese() and "12mm子弹快捷键" or "12mm Bullet Hotkey",
     hover = IsChinese() and "12mm子弹快捷键" or "12mm Bullet Hotkey",
     options = keys_option,
-    default = "KEY_F5",
+    default = "KEY_V",
   },
   {
     name = "SPELL_RING_HOTKEY",
@@ -329,7 +329,7 @@ configuration_options = {
     label = IsChinese() and "突破捷键" or "Breakthrough Hotkey",
     hover = IsChinese() and "突破捷键" or "Breakthrough Hotkey",
     options = keys_option,
-    default = "KEY_N",
+    default = "KEY_X",
   },
   {
     name = "SPECIAL_EQUIPMENT_SHOES_HOTKEY",
