@@ -40,7 +40,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 return num
             end
             if cd_task == nil then
-                cd_task = inst:DoPeriodicTask(10,function()
+                cd_task = inst:DoPeriodicTask(5,function()
                     num_pool = 0
                 end)              
             end

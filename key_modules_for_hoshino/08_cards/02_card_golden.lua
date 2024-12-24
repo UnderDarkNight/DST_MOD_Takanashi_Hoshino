@@ -63,10 +63,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Returning_Recipe_By_Count(3)
+                inst.components.hoshino_com_debuff:Add_Returning_Recipe_By_Count(1)
             end,
             text = function(inst)
-                return "【星野的精算】\n每天前3次制作返回一半的材料，向下取整"
+                return "【星野的精算】\n每天第一次制作返回一半的材料，向下取整"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,12 +154,12 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_cards_sys:DefultCardsNum_Delta(-1)
-                for i = 1,5 do
+                for i = 1,3 do
                     inst.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
                 end
             end,
             text = function(inst)
-                return "【荷鲁斯的抗争】\n立即获得5个「神秘核心」，「神秘核心」选项-1"
+                return "【荷鲁斯的抗争】\n立即获得3个「神秘核心」，「神秘核心」选项-1"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -563,11 +563,11 @@ local cards = {
                 return inst.components.hoshino_com_debuff:Get_Damage_Type_Resist() > 0.2
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Damage_Type_Resist(0.1)
+                inst.components.hoshino_com_debuff:Add_Damage_Type_Resist(0.08)
                 inst:PushEvent("hoshino_other_armor_item_param_refresh")
             end,
             text = function(inst)
-                return "【抵抗】 受到暗影、月亮阵营伤害减少10%"
+                return "【抵抗】 受到暗影、月亮阵营伤害减少8%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -609,13 +609,13 @@ local cards = {
             back = "card_golden",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
-                return inst.components.hoshino_com_debuff:Get_Damage_Taken_Mult() < 0.94
+                return inst.components.hoshino_com_debuff:Get_Damage_Taken_Mult() < 0.6
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Damage_Taken_Mult(6/100)
             end,
             text = function(inst)
-                return "基础伤害减免+6%"
+                return "基础伤害减免+6，达到60%后移出卡池%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

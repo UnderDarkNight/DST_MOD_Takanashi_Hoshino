@@ -140,8 +140,8 @@ return function(inst)
     ----------------------------------------------------------------------------------
     --- 卡牌权重
         if inst.level >= 3 then
-            local card_colourful_delta = 0.5
-            local card_golden_delta = 5
+            local card_colourful_delta = 0.2
+            local card_golden_delta = 2
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 if not inst.components.hoshino_data:Get("cards_weight_flag") then
                     inst.components.hoshino_data:Set("cards_weight_flag",true)
