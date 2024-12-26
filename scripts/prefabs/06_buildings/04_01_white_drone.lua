@@ -306,6 +306,8 @@
             inst.components.fueled:SetTakeFuelFn(OnAddFuel)
             inst.components.fueled.accepting = true
             inst.components.fueled:InitializeFuelLevel(MAX_FUELED_TIME)
+            inst.components.fueled.rate_modifiers:SetModifier(inst,1/4) --- 燃料消耗倍增器。
+
             inst:DoTaskInTime(0,function()
                 if not inst:IsWorking() then
                     -- inst:StopFly()
