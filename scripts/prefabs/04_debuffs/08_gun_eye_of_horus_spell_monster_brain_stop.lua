@@ -45,6 +45,8 @@
             ["dragonfly"] = true,
             ["beequeen"] = true,
             ["minotaur"] = true,
+            ["shadowthrall_horns"] = true,
+            ["shadowthrall_hands"] = true,
         }
         local function stop_sg(inst)
             if inst.sg and not BLACK_LIST_FOR_SG[inst.prefab] then
