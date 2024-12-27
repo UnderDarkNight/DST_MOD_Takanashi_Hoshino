@@ -166,41 +166,29 @@
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 物品接受
-    -- local function acceptable_com_install(inst)
-    --     inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_acceptable",function(inst,replica_com)
-    --         replica_com:SetTestFn(function(inst,item,doer,right_click)
-    --             if item and item.prefab == "eyeturret_item" and not inst:HasTag("eyeturret_item") then
-    --                 return true
-    --             end
-    --             return false
-    --         end)
-    --         replica_com:SetText("hoshino_weapon_gun_eye_of_horus","升级")
-    --         replica_com:SetSGAction("dolongaction")
-    --     end)
-    --     if not TheWorld.ismastersim then
-    --         return
-    --     end
-    --     inst:AddComponent("hoshino_com_acceptable")
-    --     inst.components.hoshino_com_acceptable:SetOnAcceptFn(function(inst,item,doer)
-    --         inst:AddTag("eyeturret_item")
-    --         item:Remove()
-    --         return true
-    --     end)
-    --     inst.components.hoshino_data:AddOnSaveFn(function()
-    --         if inst:HasTag("eyeturret_item") then
-    --             inst.components.hoshino_data:Set("eyeturret_item",true)
-    --         end
-    --     end)
-    --     -- inst:DoTaskInTime(0,function()
-    --     -- end)
-    --     -- inst.components.hoshino_data:AddOnLoadFn(function()
-    --     inst:DoTaskInTime(0,function()
-    --         if inst.components.hoshino_data:Get("eyeturret_item") then
-    --             inst:AddTag("eyeturret_item")
-    --         end
-    --     end)
+    local function acceptable_com_install(inst)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_acceptable",function(inst,replica_com)
+            replica_com:SetTestFn(function(inst,item,doer,right_click)
+                if item and item.prefab == "hoshino_item_yi" and not inst:HasTag("always_full_of_energy") then
+                    return true
+                end
+                return false
+            end)
+            replica_com:SetText("hoshino_building_white_drone","升级")
+            replica_com:SetSGAction("dolongaction")
+        end)
+        if not TheWorld.ismastersim then
+            return
+        end
+        inst:AddComponent("hoshino_com_acceptable")
+        inst.components.hoshino_com_acceptable:SetOnAcceptFn(function(inst,item,doer)
+            item.components.stackable:Get(1):Remove()
+            inst:AddDebuff("hoshino_building_white_drone_always_full_of_energy","hoshino_building_white_drone_always_full_of_energy")
+            return true
+        end)
+
     
-    -- end
+    end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- container install
     local function container_install(inst)
@@ -260,7 +248,7 @@
             end
         -----------------------------------------------------------------
         ---
-            -- acceptable_com_install(inst)
+            acceptable_com_install(inst)
             container_install(inst)
             drone_controller_install(inst)
         -----------------------------------------------------------------
