@@ -105,19 +105,6 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  leif_idol
-{
-  prefab = "leif_idol",
-  bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("leif_idol.tex"), image = "leif_idol.tex"},
-  price = 250, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
 --  glommerwings
 {
   prefab = "glommerwings",
