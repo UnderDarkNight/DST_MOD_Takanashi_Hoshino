@@ -24,3 +24,6 @@ modimport("key_modules_for_hoshino/00_others/06_anim_get_bank_api.lua")
 modimport("key_modules_for_hoshino/00_others/07_the_input_upgrade.lua")
 --- 升级 TheInput API
 
+modimport("key_modules_for_hoshino/00_others/inventoryitem_replica_bug_fix.lua")
+--- inventoryitem_replica_bug_fix
+
