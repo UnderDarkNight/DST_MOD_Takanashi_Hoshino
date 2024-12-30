@@ -198,8 +198,8 @@
     -- AddRecipeToFilter("hoshino_equipment_cacti_core","MAGIC")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_equipment_cacti_core",            --  --  inst.prefab  实体名字
-        {Ingredient("cactus_meat", 20),Ingredient("cactus_meat_cooked", 20),Ingredient("twigs", 20),} ,
-        TECH.ANCIENT_FOUR, -- 完整的远古科技
+        {Ingredient("cactus_meat", 6),Ingredient("cactus_meat_cooked", 6),Ingredient("twigs", 6),} ,
+        TECH.SCIENCE_TWO, -- 完整的远古科技
         {
             nounlock = true,
             -- no_deconstruction = false,
@@ -217,8 +217,8 @@
     -- AddRecipeToFilter("hoshino_equipment_oasis_core","MAGIC")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_equipment_oasis_core",            --  --  inst.prefab  实体名字
-        {Ingredient("succulent_picked", 18),Ingredient("wetpouch", 10)} ,
-        TECH.ANCIENT_FOUR, -- 完整的远古科技
+        {Ingredient("succulent_picked", 9),Ingredient("wetpouch", 4)} ,
+        TECH.SCIENCE_TWO, -- 完整的远古科技
         {
             nounlock = true,
             -- no_deconstruction = false,
@@ -391,7 +391,7 @@ end
 --------------------------------------------------------------------------------------------------------------------------------------------
     local recipe_level = {
         {Ingredient("goldnugget", 6),Ingredient("gears", 2),Ingredient("moonglass", 6)},
-        {Ingredient("thulecite", 6),Ingredient("greengem", 3),Ingredient("wagpunk_bits", 10)},
+        {Ingredient("thulecite", 6),Ingredient("greengem", 3),Ingredient("dreadstone", 3)},
         {Ingredient("opalpreciousgem", 1),Ingredient("glommerwings", 1),Ingredient("alterguardianhatshard", 1)},
     }
     for i, v in ipairs(recipe_level) do

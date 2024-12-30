@@ -54,7 +54,7 @@
                 local ret_pool = hooking_pool or GetNearestPool(pools,player_pt)
                 if ret_pool then
                     local crash_flag,crash_reason = pcall(function() -- 做防崩溃处理
-                        for i = 1, 2, 1 do
+                        for i = 1, 9, 1 do
                         local new_fish = ret_pool.components.fishable:HookFish(player)
                         if new_fish then
                                 local code = new_fish:GetSaveRecord()
