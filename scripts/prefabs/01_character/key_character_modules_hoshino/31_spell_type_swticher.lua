@@ -108,7 +108,7 @@ return function(inst)
         inst:DoTaskInTime(0,function()
             inst.components.hoshino_com_health_hooker:Add_Modifier(temp_inst,function(num)
                 if num < 0 and inst:Hoshino_Get_Spell_Type() == NORMAL_TYPE then
-                    return num*0.9
+                    return num*0.8
                 end
                 return num
             end)
@@ -117,7 +117,7 @@ return function(inst)
     --- 速度控制
         inst:ListenForEvent("hoshino_event.spell_type_changed",function()
             if inst:Hoshino_Get_Spell_Type() == SWIMMING_TYPE then
-                inst.components.locomotor:SetExternalSpeedMultiplier(temp_inst, "hoshino_spell_type_speed", 1.1)
+                inst.components.locomotor:SetExternalSpeedMultiplier(temp_inst, "hoshino_spell_type_speed", 1.25)
             else
                 inst.components.locomotor:SetExternalSpeedMultiplier(temp_inst, "hoshino_spell_type_speed", 1.0)
             end

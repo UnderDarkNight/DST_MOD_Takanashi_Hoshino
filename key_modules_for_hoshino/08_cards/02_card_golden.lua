@@ -365,10 +365,10 @@ local cards = {
                 if ret_fn then
                     ret_fn(inst)
                 end
-                inst.components.hoshino_com_shop:CreditCoinDelta(3000)
+                inst.components.hoshino_com_shop:CreditCoinDelta(5000)
             end,
             text = function(inst)
-                return " \n【竭泽】 获得3000点「信用点」\n随机清空以下的一项加成:\n血、San、饥饿、移速、经验、攻击、阵营减伤、反伤、位面防御"
+                return " \n【竭泽】 获得5000点「信用点」\n随机清空以下的一项加成:\n血、San、饥饿、移速、经验、攻击、阵营减伤、反伤、位面防御"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

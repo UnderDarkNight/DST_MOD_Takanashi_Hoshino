@@ -318,7 +318,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   prefab = "leif_idol",
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("leif_idol.tex"), image = "leif_idol.tex"},
-  price = 250, -- 价格
+  price = 300, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -456,77 +456,12 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  yellowamulet
-{
-  prefab = "yellowamulet",
-  bg = "item_slot_blue.tex",
-  icon = {atlas = GetInventoryItemAtlas("yellowamulet.tex"), image = "yellowamulet.tex"},
-  price = 540, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
 --  oceantreenut
 {
   prefab = "oceantreenut",
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("oceantreenut.tex"), image = "oceantreenut.tex"},
   price = 450, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
---  yellowgem
-{
-  prefab = "yellowgem",
-  bg = "item_slot_blue.tex",
-  icon = {atlas = GetInventoryItemAtlas("yellowgem.tex"), image = "yellowgem.tex"},
-  price = 400, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
---  orangegem
-{
-  prefab = "orangegem",
-  bg = "item_slot_blue.tex",
-  icon = {atlas = GetInventoryItemAtlas("orangegem.tex"), image = "orangegem.tex"},
-  price = 390, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
---  greengem
-{
-  prefab = "greengem",
-  bg = "item_slot_blue.tex",
-  icon = {atlas = GetInventoryItemAtlas("greengem.tex"), image = "greengem.tex"},
-  price = 600, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
---  yellowstaff
-{
-  prefab = "yellowstaff",
-  bg = "item_slot_blue.tex",
-  icon = {atlas = GetInventoryItemAtlas("yellowstaff.tex"), image = "yellowstaff.tex"},
-  price = 600, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

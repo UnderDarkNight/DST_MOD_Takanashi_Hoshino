@@ -7,7 +7,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.player = target
     -----------------------------------------------------
     ---
-        target.components.hoshino_com_builder_blocker:SetDailyMax(10)
+        target.components.hoshino_com_builder_blocker:SetDailyMax(6)
     -----------------------------------------------------
 end
 
