@@ -22,7 +22,7 @@
     end
 
     local function onattack(inst, owner, target)
-        if math.random() < 0.2 or TUNING.HOSHINO_DEBUGGING_MODE then
+        if math.random() < 0.4 or TUNING.HOSHINO_DEBUGGING_MODE then
             local pt
             if target ~= nil and target:IsValid() then
                 pt = target:GetPosition()
@@ -34,7 +34,7 @@
             if offset ~= nil then
                 local tentacle = SpawnPrefab("shadowtentacle")
                 if tentacle ~= nil then
-                    tentacle.components.combat:SetDefaultDamage(34)
+                    tentacle.components.combat:SetDefaultDamage(68)
                     tentacle.owner = owner
                     tentacle.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
                     tentacle.components.combat:SetTarget(target)

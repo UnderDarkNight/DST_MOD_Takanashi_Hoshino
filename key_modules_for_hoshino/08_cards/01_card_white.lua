@@ -48,10 +48,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Max_Helth(15)
+                inst.components.hoshino_com_debuff:Add_Max_Helth(9)
             end,
             text = function(inst)
-                return "生命上限+15"
+                return "生命上限+9"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -78,10 +78,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Max_Hunger(8)
+                inst.components.hoshino_com_debuff:Add_Max_Hunger(12)
             end,
             text = function(inst)
-                return "饥饿上限+8"
+                return "饥饿上限+12"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -254,7 +254,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.08)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.07)
                 local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
                 while true do
                     local debuff_inst = inst:GetDebuff(debuff_prefab)
@@ -266,7 +266,7 @@ local cards = {
                 inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
             end,
             text = function(inst)
-                return "【邪咒】攻击伤害+8%\n接下来两天内每次失去san时会流失等量生命"
+                return "【邪咒】攻击伤害+7%\n接下来两天内每次失去san时会流失等量生命"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -364,7 +364,7 @@ local cards = {
                                         mount:PushEvent("ridersleep", { sleepiness = 7, sleeptime = time + math.random() })
                                     end
                                     if v:HasTag("player") then
-                                        v:PushEvent("yawn", { grogginess = 4, knockoutduration = time + math.random() })
+                                        v:PushEvent("yawn", { grogginess = 6, knockoutduration = time + math.random() })
                                     elseif v.components.sleeper ~= nil then
                                         v.components.sleeper:AddSleepiness(7, time + math.random())
                                     elseif v.components.grogginess ~= nil then
@@ -382,7 +382,7 @@ local cards = {
 
             end,
             text = function(inst)
-                return "【白日梦】 随机传送到一个位置然后睡觉\n每一秒获得4点「信用点」，直到醒来"
+                return "【白日梦】 随机传送到一个位置然后睡觉\n每一秒获得6点「信用点」，直到醒来"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

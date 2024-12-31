@@ -434,7 +434,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_amulet_t5"] = {
                 ["name"] = "T5:迷彩不倒翁",
-                ["inspect_str"] = "拥有其下位的效果\n半径30码内所有玩家基础攻击伤害+20%\n且每次攻击恢复5点san值",
+                ["inspect_str"] = "拥有其下位的效果\n半径30码内所有玩家基础攻击伤害+33%\n且每次攻击恢复5点san值",
                 -- ["recipe_desc"] = "???",
             },
             ["hoshino_special_equipment_amulet_t6"] = {

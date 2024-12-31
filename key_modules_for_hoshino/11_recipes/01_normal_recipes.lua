@@ -179,7 +179,7 @@
     -- AddRecipeToFilter("hoshino_equipment_sandstorm_core","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_equipment_sandstorm_core",            --  --  inst.prefab  实体名字
-        {Ingredient("hoshino_item_ether_essence", 1),Ingredient("hoshino_item_yi", 1),Ingredient("hoshino_item_abydos_high_purity_alloy", 1),} ,
+        {Ingredient("hoshino_item_ether_essence", 1),Ingredient("hoshino_item_fragments_of_divine_script", 1),Ingredient("hoshino_item_abydos_high_purity_alloy", 1),Ingredient("hoshino_item_blue_schist", 1),} ,
         TECH.ANCIENT_FOUR, -- 完整的远古科技
         {
             nounlock = true,

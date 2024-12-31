@@ -183,6 +183,32 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   is_permanent = true, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
+--  storage_robot
+{
+  prefab = "storage_robot",
+  bg = "item_slot_blue.tex",
+  icon = {atlas = GetInventoryItemAtlas("storage_robot.tex"), image = "storage_robot.tex"},
+  price = 700, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "normal", -- 类型。normal special 。这个可以不下发。
+  is_permanent = true, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  wagpunkbits_kit
+{
+  prefab = "wagpunkbits_kit",
+  bg = "item_slot_blue.tex",
+  icon = {atlas = GetInventoryItemAtlas("wagpunkbits_kit.tex"), image = "wagpunkbits_kit.tex"},
+  price = 150, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "normal", -- 类型。normal special 。这个可以不下发。
+  is_permanent = true, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
 --  dug_sapling
 {
   prefab = "dug_sapling",

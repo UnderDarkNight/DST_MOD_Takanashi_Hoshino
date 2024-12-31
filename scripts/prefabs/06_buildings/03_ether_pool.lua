@@ -13,7 +13,7 @@
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---  acceptable_install
-    local CD_TIME = 60
+    local CD_TIME = 120
     local CD_TAG = "cd_ing"
     local PrefabBlackList = {
         ["turf_dragonfly"]=true,
@@ -21,6 +21,9 @@
         ["turf_cotl_gold"]=true,
         ["turf_carpetfloor"]=true,
         ["turf_mosaic_red"] = true,
+        ["hoshino_item_12mm_shotgun_shells"] = true,
+        ["sleepbomb"] = true,
+        ["bomb_lunarplant"] = true,
     }
     local function Test_Item(inst,item,doer,right_click)
         if inst:HasTag(CD_TAG) then
@@ -100,7 +103,7 @@
         {"hoshino_item_pillow", 0.03},
         {"hoshino_item_anti_entropy_crystal_wheel", 0.01},
         {"hoshino_item_yi", 0.03},
-        {"hoshino_item_treasure_map", 0.002},
+        {"hoshino_item_treasure_map", 0.003},
         {"hoshino_item_fragments_of_divine_script", 0.01}
     }
     

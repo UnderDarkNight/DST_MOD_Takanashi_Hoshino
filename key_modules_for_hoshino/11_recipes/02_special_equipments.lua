@@ -560,7 +560,7 @@ RemoveRecipeFromFilter("hoshino_special_equipment_amulet_t8","MODS")            
 AddRecipeToFilter("hoshino_special_equipment_amulet_t9","CHARACTER")     ---- 添加物品到目标标签
 AddRecipe2(
     "hoshino_special_equipment_amulet_t9",            --  --  inst.prefab  实体名字
-    {Ingredient("hoshino_item_blue_schist", 3),Ingredient("klaussackkey", 1),Ingredient("walrus_tusk", 3),Ingredient("gnarwail_horn", 5)} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
+    {Ingredient("hoshino_item_blue_schist", 3),Ingredient("klaussackkey", 1),Ingredient("walrus_tusk", 3),Ingredient("gnarwail_horn", 1)} ,--{ Ingredient("hoshino_material_realgar", 1),Ingredient("nightmarefuel", 10) }, 
     TECH.NONE, --- 魔法三本
     {
         -- nounlock=true,
