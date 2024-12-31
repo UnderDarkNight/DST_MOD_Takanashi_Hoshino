@@ -270,6 +270,8 @@ local function fn()
     inst.AnimState:SetBuild("hoshino_equipment_holiday_glasses")
     inst.AnimState:PlayAnimation("idle")
 
+    inst:AddTag("hoshino_special_equipment")
+    inst:AddTag("nosteal")
 
     MakeInventoryFloatable(inst)
 
