@@ -149,7 +149,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "greengem",
   bg = "item_slot_golden.tex",
   icon = {atlas = GetInventoryItemAtlas("greengem.tex"), image = "greengem.tex"},
-  price = 600, -- 价格
+  price = 700, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -318,7 +318,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "hoshino_item_cards_pack_authority_to_unveil_secrets",
   bg = "item_slot_golden.tex",
   icon = {atlas = "images/inventoryimages/hoshino_item_cards_pack_authority_to_unveil_secrets.xml", image = "hoshino_item_cards_pack_authority_to_unveil_secrets.tex"},
-  price = 4000, -- 价格
+  price = 3500, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
@@ -331,7 +331,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "hoshino_item_treasure_map",
   bg = "item_slot_golden.tex",
   icon = {atlas = "images/inventoryimages/hoshino_item_treasure_map.xml", image = "hoshino_item_treasure_map.tex"},
-  price = 3000, -- 价格
+  price = 4500, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

@@ -93,15 +93,15 @@
             “随地入场券”： 3%  hoshino_item_pillow
             反熵水晶殖轮：2%  hoshino_item_anti_entropy_crystal_wheel
             镒：5%  hoshino_item_yi
-            窥密权柄1.5%  hoshino_item_cards_pack_authority_to_unveil_secrets
+            窥密权柄2%  hoshino_item_cards_pack_authority_to_unveil_secrets
             神明文字碎片：2%  hoshino_item_fragments_of_divine_script
             剩余概率随机海鱼                
         ]]--
         {"hoshino_item_pillow", 0.03},
-        {"hoshino_item_anti_entropy_crystal_wheel", 0.02},
-        {"hoshino_item_yi", 0.05},
-        {"hoshino_item_cards_pack_authority_to_unveil_secrets", 0.015},
-        {"hoshino_item_fragments_of_divine_script", 0.02}
+        {"hoshino_item_anti_entropy_crystal_wheel", 0.01},
+        {"hoshino_item_yi", 0.03},
+        {"hoshino_item_treasure_map", 0.002},
+        {"hoshino_item_fragments_of_divine_script", 0.01}
     }
     
     local function GetFishFn(inst)
@@ -180,6 +180,7 @@ local function fn()
         local old_HookFish = inst.components.fishable.HookFish
         inst.components.fishable.HookFish = function(self, player,...)
             local old_ret = old_HookFish(self, player,...)
+            self.fishleft = self.maxfish
             if old_ret then
                 -- 必须有贴图，不然会崩溃。
                 old_ret.build = old_ret.build or "hoshino_building_ether_pool_item" or "wetpouch"
