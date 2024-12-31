@@ -107,7 +107,7 @@
         TECH.NONE,
         {
             -- nounlock=true,
-            no_deconstruction=false,
+            no_deconstruction=true,
             builder_tag = "hoshino_building_shop24_level_3",
             atlas = "images/inventoryimages/hoshino_item_fragments_of_divine_script.xml",
             image = "hoshino_item_fragments_of_divine_script.tex",
@@ -145,7 +145,7 @@
         TECH.LUNARFORGING_TWO, -- 辉煌铁匠铺
         {
             nounlock = true,
-            -- no_deconstruction = false,
+            no_deconstruction = true,
             -- builder_tag = "hoshino_building_shop24_level_3",
             atlas = "images/inventoryimages/hoshino_item_abydos_high_purity_alloy.xml",
             image = "hoshino_item_abydos_high_purity_alloy.tex",
@@ -183,7 +183,7 @@
         TECH.ANCIENT_FOUR, -- 完整的远古科技
         {
             nounlock = true,
-            -- no_deconstruction = false,
+            no_deconstruction = true,
             -- builder_tag = "hoshino_building_shop24_level_3",
             atlas = "images/inventoryimages/hoshino_equipment_sandstorm_core.xml",
             image = "hoshino_equipment_sandstorm_core.tex",
@@ -240,7 +240,7 @@
         TECH.ANCIENT_FOUR, -- 完整的远古科技
         {
             nounlock = true,
-            -- no_deconstruction = false,
+            no_deconstruction = true,
             -- builder_tag = "hoshino_building_shop24_level_3",
             atlas = "images/inventoryimages/hoshino_equipment_desert_core.xml",
             image = "hoshino_equipment_desert_core.tex",
@@ -259,7 +259,7 @@
         TECH.ANCIENT_FOUR, -- 完整的远古科技
         {
             nounlock = true,
-            -- no_deconstruction = false,
+            no_deconstruction = true,
             -- builder_tag = "hoshino_building_shop24_level_3",
             atlas = "images/inventoryimages/hoshino_equipment_rune_core.xml",
             image = "hoshino_equipment_rune_core.tex",
@@ -278,7 +278,7 @@
         TECH.SHADOWFORGING_TWO, -- 暗影术基座
         {
             nounlock = true,
-            -- no_deconstruction = false,
+            no_deconstruction = true,
             -- builder_tag = "hoshino_building_shop24_level_3",
             atlas = "images/inventoryimages/hoshino_equipment_shadow_core.xml",
             image = "hoshino_equipment_shadow_core.tex",
@@ -336,7 +336,7 @@ AddRecipeToFilter("hoshino_weapon_nanotech_black_reaper","MAGIC")     ---- 添�
         TECH.SHADOWFORGING_TWO, -- 暗影术基座
         {
             nounlock = true,
-            -- no_deconstruction = false,
+            no_deconstruction = true,
             -- builder_tag = "hoshino_building_shop24_level_3",
             atlas = "images/inventoryimages/hoshino_weapon_nanotech_black_reaper.xml",
             image = "hoshino_weapon_nanotech_black_reaper.tex",

@@ -212,6 +212,20 @@ configuration_options = {
     default = 3
   },
   {
+    name = "NEW_SPAWN_GIFT_TYPE",
+    label = IsChinese() and "初始礼物" or "Initial Gift",
+    hover = IsChinese() and "初始礼物" or "Initial Gift",
+    options = {
+      {description = "基础之理 x1",data = 1},
+      {description = "神秘核心 x1",data = 2},
+      {description = "神秘核心 x3",data = 3},
+      {description = "窥秘权柄 x3",data = 4},
+      {description = "最高神秘 x3",data = 5},
+      {description = "最高神秘 x10",data = 6},
+    },
+    default = 1
+  },
+  {
     name = "MAX_LEVEL",
     label = IsChinese() and "最高等级" or "Max Level",
     hover = IsChinese() and "最高等级" or "Max Level",
