@@ -165,10 +165,10 @@
         {
             nounlock = true,
             -- no_deconstruction = false,
-            -- builder_tag = "hoshino_building_shop24_level_3",
+            builder_tag = "hoshino",
             atlas = "images/inventoryimages/hoshino_equipment_holiday_glasses.xml",
             image = "hoshino_equipment_holiday_glasses.tex",
-            station_tag="shadow_forge"
+            -- station_tag="shadow_forge"
         },
         {"CHARACTER","MAGIC"}
     )
