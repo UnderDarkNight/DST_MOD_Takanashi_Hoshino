@@ -157,7 +157,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 假日眼镜
 --------------------------------------------------------------------------------------------------------------------------------------------
-    -- AddRecipeToFilter("hoshino_item_abydos_high_purity_alloy","CHARACTER")     ---- 添加物品到目标标签
+    AddRecipeToFilter("hoshino_item_abydos_high_purity_alloy","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_equipment_holiday_glasses",            --  --  inst.prefab  实体名字
         {Ingredient("nightmarefuel",5),Ingredient("purplegem",2),Ingredient("livinglog",2)} ,
@@ -165,12 +165,12 @@
         {
             nounlock = true,
             -- no_deconstruction = false,
-            -- builder_tag = "hoshino_building_shop24_level_3",
+            builder_tag = "hoshino",
             atlas = "images/inventoryimages/hoshino_equipment_holiday_glasses.xml",
             image = "hoshino_equipment_holiday_glasses.tex",
-            station_tag="shadow_forge"
-        }--,
-        -- {"CHARACTER","TOOLS"}
+            -- station_tag="shadow_forge"
+        },
+        {"CHARACTER","MAGIC"}
     )
     RemoveRecipeFromFilter("hoshino_equipment_holiday_glasses","MODS")
 --------------------------------------------------------------------------------------------------------------------------------------------
