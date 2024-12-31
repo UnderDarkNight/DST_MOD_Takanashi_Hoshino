@@ -180,6 +180,7 @@ local function fn()
         local old_HookFish = inst.components.fishable.HookFish
         inst.components.fishable.HookFish = function(self, player,...)
             local old_ret = old_HookFish(self, player,...)
+            self.fishleft = self.maxfish
             if old_ret then
                 -- 必须有贴图，不然会崩溃。
                 old_ret.build = old_ret.build or "hoshino_building_ether_pool_item" or "wetpouch"
