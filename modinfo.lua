@@ -90,7 +90,7 @@ forumthread = ""
 dont_starve_compatible = true
 dst_compatible = true
 all_clients_require_mod = true
-
+server_filter_tags = {"hoshino"} -- 服务器tag，通常用来广域搜索的时候
 priority = 0 -- MOD加载优先级 影响某些功能的兼容性，比如官方Com 的 Hook
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
