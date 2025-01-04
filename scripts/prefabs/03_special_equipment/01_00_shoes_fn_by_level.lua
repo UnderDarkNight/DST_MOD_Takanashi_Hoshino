@@ -223,13 +223,15 @@ return function(inst)
                     
                     local debuff_prefab = "hoshino_debuff_monster_damage_down"
                     local debuff_inst = nil
-                    while true do
+                    local test_num = 100
+                    while test_num > 0 do
                         debuff_inst = attacker:GetDebuff(debuff_prefab)
                         if debuff_inst and debuff_inst:IsValid() then
                             debuff_inst.time = 10
                             break
                         end
                         attacker:AddDebuff(debuff_prefab,debuff_prefab)
+                        test_num = test_num - 1
                     end
                 end
             end

@@ -94,7 +94,13 @@
     local function on_set_target_event_for_player(player,monster)
         -- print("on_set_target_event_for_player",monster)
         if monster and monster_block_list[monster.prefab] then
-            monster.components.combat:DropTarget()
+            monster.hoshino_equipment_proof_of_harmony_mark_flag_num = monster.hoshino_equipment_proof_of_harmony_mark_flag_num or 0
+            monster.hoshino_equipment_proof_of_harmony_mark_flag_num = monster.hoshino_equipment_proof_of_harmony_mark_flag_num + 1
+            if monster.hoshino_equipment_proof_of_harmony_mark_flag_num < 100 then
+                monster.components.combat:DropTarget()
+            else
+                monster.hoshino_equipment_proof_of_harmony_mark_flag_num = nil
+            end
         end
     end
 
