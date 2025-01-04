@@ -157,7 +157,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 假日眼镜
 --------------------------------------------------------------------------------------------------------------------------------------------
-    AddRecipeToFilter("hoshino_item_abydos_high_purity_alloy","CHARACTER")     ---- 添加物品到目标标签
+    -- AddRecipeToFilter("hoshino_item_abydos_high_purity_alloy","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_equipment_holiday_glasses",            --  --  inst.prefab  实体名字
         {Ingredient("nightmarefuel",5),Ingredient("purplegem",2),Ingredient("livinglog",2)} ,

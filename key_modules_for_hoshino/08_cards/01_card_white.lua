@@ -278,10 +278,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Counter_Damage(3)
+                inst.components.hoshino_com_debuff:Add_Counter_Damage(10)
             end,
             text = function(inst)
-                return "【荆棘】 每次受到攻击时，对伤害来源造成3点伤害"
+                return "【荆棘】 每次受到攻击时，对伤害来源造成10点伤害"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
