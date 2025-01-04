@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
-    专属武器的普通攻击的开枪sg
+    拒绝动作
 
 ]]--
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -14,6 +14,7 @@ AddStategraphState("wilson",State{
     tags = { "attack", "notalking", "abouttoattack", "autopredict" },
 
     onenter = function(inst)
+
 
         if inst.components.combat:InCooldown() then
             inst.sg:RemoveStateTag("abouttoattack")
@@ -34,7 +35,7 @@ AddStategraphState("wilson",State{
 
 
         inst.AnimState:PlayAnimation("hoshino_ex_pre")
-        inst.AnimState:PushAnimation("hoshino_ex_loop", false)
+        inst.AnimState:PushAnimation("hoshino_ex_loop")
         
 
 
@@ -55,7 +56,6 @@ AddStategraphState("wilson",State{
             TimeEvent(10*FRAMES, function(inst)
                 inst:PushEvent("hoshino_sg_action_gun_shoot_active",inst.sg.statemem.attacktarget)
                 inst:PerformBufferedAction()
-                inst.sg:RemoveStateTag("abouttoattack")
             end),
             TimeEvent(30*FRAMES, function(inst)
                 inst.sg:GoToState("idle")
@@ -112,7 +112,7 @@ AddStategraphState("wilson",State{
 
 
             inst.AnimState:PlayAnimation("hoshino_ex_pre")
-            inst.AnimState:PushAnimation("hoshino_ex_loop", false)
+            inst.AnimState:PushAnimation("hoshino_ex_loop")
             
             local buffaction = inst:GetBufferedAction()
             if buffaction ~= nil then
@@ -130,11 +130,7 @@ AddStategraphState("wilson",State{
             end
         end,
 
-<<<<<<< HEAD
-        onupdate = function(inst, dt)
-=======
-        onupdate = function(inst,dt)
->>>>>>> gitee/master
+        onupdate = function(inst)
             if (inst.sg.statemem.projectiledelay or 0) > 0 then
                 inst.sg.statemem.projectiledelay = inst.sg.statemem.projectiledelay - dt
                 if inst.sg.statemem.projectiledelay <= FRAMES then
@@ -149,15 +145,6 @@ AddStategraphState("wilson",State{
                 end
             end
         end,
-
-        timeline =
-        {
-            TimeEvent(10*FRAMES, function(inst)
-                inst:ClearBufferedAction()
-                inst.sg:RemoveStateTag("abouttoattack")
-            end),
-        },
-
         ontimeout = function(inst)
             inst.sg:RemoveStateTag("attack")
             inst.sg:AddStateTag("idle")
