@@ -50,7 +50,8 @@ amulet
         end
     end
     local function _MakeCharacterPhysics(inst, mass, rad)
-        local phys = inst.entity:AddPhysics()
+        -- local phys = inst.entity:AddPhysics()
+        local phys = inst.Physics
         phys:SetMass(mass)
         phys:SetFriction(0)
         phys:SetDamping(5)
