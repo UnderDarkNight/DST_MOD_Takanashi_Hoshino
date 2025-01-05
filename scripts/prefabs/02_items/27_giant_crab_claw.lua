@@ -49,7 +49,21 @@ amulet
             end)
         end
     end
-
+    local function _MakeCharacterPhysics(inst, mass, rad)
+        local phys = inst.entity:AddPhysics()
+        phys:SetMass(mass)
+        phys:SetFriction(0)
+        phys:SetDamping(5)
+        phys:SetCollisionGroup(COLLISION.CHARACTERS)
+        phys:ClearCollisionMask()
+        phys:CollidesWith(COLLISION.WORLD)
+        phys:CollidesWith(COLLISION.OBSTACLES)
+        phys:CollidesWith(COLLISION.SMALLOBSTACLES)
+        phys:CollidesWith(COLLISION.CHARACTERS)
+        phys:CollidesWith(COLLISION.GIANTS)
+        phys:SetCapsule(rad, 1)
+        return phys
+    end
     local function onunequip(inst, owner)
         if not owner:HasTag("player") then
             return
@@ -63,7 +77,7 @@ amulet
         owner.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
         owner.Physics:CollidesWith(COLLISION.CHARACTERS)
         owner.Physics:CollidesWith(COLLISION.GIANTS)
-        MakeCharacterPhysics(inst, 75, .5)
+        _MakeCharacterPhysics(inst, 75, .5)
         owner.Physics:Teleport(owner.Transform:GetWorldPosition())
 
 
