@@ -195,7 +195,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 仙人掌核心
 --------------------------------------------------------------------------------------------------------------------------------------------
-    -- AddRecipeToFilter("hoshino_equipment_cacti_core","MAGIC")     ---- 添加物品到目标标签
+    AddRecipeToFilter("hoshino_equipment_cacti_core","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_equipment_cacti_core",            --  --  inst.prefab  实体名字
         {Ingredient("cactus_meat", 6),Ingredient("cactus_meat_cooked", 6),Ingredient("twigs", 6),} ,
@@ -214,7 +214,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 绿洲核心
 --------------------------------------------------------------------------------------------------------------------------------------------
-    -- AddRecipeToFilter("hoshino_equipment_oasis_core","MAGIC")     ---- 添加物品到目标标签
+    AddRecipeToFilter("hoshino_equipment_oasis_core","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_equipment_oasis_core",            --  --  inst.prefab  实体名字
         {Ingredient("succulent_picked", 9),Ingredient("wetpouch", 4)} ,
@@ -309,14 +309,14 @@
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 废旧机械板材
 --------------------------------------------------------------------------------------------------------------------------------------------
-    AddRecipeToFilter("hoshino_equipment_used_mechanical_sheets","MAGIC")     ---- 添加物品到目标标签
+    -- AddRecipeToFilter("hoshino_equipment_used_mechanical_sheets","MAGIC")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_equipment_used_mechanical_sheets",            --  --  inst.prefab  实体名字
         {Ingredient("trinket_6", 15),Ingredient("trinket_1", 15),Ingredient("gears", 15)} ,
-        TECH.NONE, -- 
+        TECH.ANCIENT_FOUR, -- 
         {
             nounlock = true,
-            -- no_deconstruction = false,
+            no_deconstruction = false,
             -- builder_tag = "hoshino_building_shop24_level_3",
             atlas = "images/inventoryimages/hoshino_equipment_used_mechanical_sheets.xml",
             image = "hoshino_equipment_used_mechanical_sheets.tex",

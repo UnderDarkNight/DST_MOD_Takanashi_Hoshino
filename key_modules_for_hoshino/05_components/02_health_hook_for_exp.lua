@@ -38,6 +38,7 @@ end
 local prefab_black_list = {
     ["killerbee"] = true, -- 杀人蜂
     ["abigail"] = true, -- 阿比盖尔
+    ["shadowtentacle"] = true, -- 守护者核心触手
 }
 local function check_can_broadcast_exp(inst,percent)
     if inst.sg == nil then
