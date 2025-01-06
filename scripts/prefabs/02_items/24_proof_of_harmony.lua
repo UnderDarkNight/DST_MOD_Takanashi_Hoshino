@@ -174,6 +174,7 @@ local function fn()
     inst.AnimState:SetBuild("hoshino_equipment_proof_of_harmony")
     inst.AnimState:PlayAnimation("idle",true)
 
+    inst:AddTag("manrabbitscarer") --- 来自 兔王棍 ，让兔子不主动攻击带肉的玩家
 
     MakeInventoryFloatable(inst)
 
