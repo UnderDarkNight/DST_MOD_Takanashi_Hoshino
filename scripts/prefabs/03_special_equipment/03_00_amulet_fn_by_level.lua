@@ -276,7 +276,8 @@ return function(inst)
                                     if temp_plant and temp_plant:IsValid() and temp_plant.components.pickable and temp_plant.components.pickable:IsBarren() and temp_plant.__hoshino_t7_barren_task == nil then
                                         temp_plant.__hoshino_t7_barren_task = true
                                         inst:DoTaskInTime(math.random(0,50)/10,function()
-                                            inst.components.wateryprotection:SpreadProtection(temp_plant)
+                                            -- inst.components.wateryprotection:SpreadProtection(temp_plant)
+                                            pcall(inst.components.wateryprotection.SpreadProtection,inst.components.wateryprotection,temp_plant)
                                             temp_plant.__hoshino_t7_barren_task = nil
                                             SpawnPrefab("glass_fx").Transform:SetPosition(temp_plant.Transform:GetWorldPosition())
                                         end)
