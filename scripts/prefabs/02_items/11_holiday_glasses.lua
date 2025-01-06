@@ -236,7 +236,7 @@
             -- end
 
             fake_light:DoPeriodicTask(0.5,function()
-                local item = ThePlayer.replica.inventory:GetEquippedItem(GetEquipSlot())
+                local item = ThePlayer and ThePlayer.replica.inventory:GetEquippedItem(GetEquipSlot())
                 if item ~= inst then
                     -- print("客户端激活失败+++++++",item,inst)
                     fake_light:Remove()
