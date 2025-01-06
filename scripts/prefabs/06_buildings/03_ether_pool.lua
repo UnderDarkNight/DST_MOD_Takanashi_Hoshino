@@ -24,6 +24,10 @@
         ["hoshino_item_12mm_shotgun_shells"] = true,
         ["sleepbomb"] = true,
         ["bomb_lunarplant"] = true,
+        ["wall_moonrock_item"] = true,
+        ["wall_ruins_item"] = true,
+        ["wall_dreadstone_item"] = true,
+        ["wall_scrap_item"] = true,
     }
     local function Test_Item(inst,item,doer,right_click)
         if inst:HasTag(CD_TAG) then
