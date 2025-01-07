@@ -92,7 +92,7 @@
         -- local container_WidgetSetup = "wobysmall"
         if TheWorld.ismastersim then
             inst:AddComponent("container")
-            inst.components.container.openlimit = 1  ---- 限制1个人打开
+            -- inst.components.container.openlimit = 1  ---- 限制1个人打开
             -- inst.components.container:WidgetSetup(container_WidgetSetup)
             container_Widget_change(inst.components.container)
             inst.components.container:EnableInfiniteStackSize(true)-- 无限叠堆
