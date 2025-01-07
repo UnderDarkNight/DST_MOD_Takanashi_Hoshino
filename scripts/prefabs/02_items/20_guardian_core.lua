@@ -34,6 +34,7 @@
             if offset ~= nil then
                 local tentacle = SpawnPrefab("shadowtentacle")
                 if tentacle ~= nil then
+                    tentacle:AddTag("companion")
                     tentacle.components.combat:SetDefaultDamage(68)
                     tentacle.owner = owner
                     tentacle.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
