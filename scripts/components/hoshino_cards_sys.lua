@@ -634,8 +634,8 @@ nil,
             local type_with_num = {
                 ["card_black"] = 0,
                 ["card_white"] = 1,
-                ["card_golden"] = 2,
-                ["card_colourful"] = 3,
+                ["card_golden"] = 3,
+                ["card_colourful"] = 9,
             }
             local ret_num = 0
             for _,single_card_data in pairs(cards_data) do
