@@ -25,6 +25,12 @@ return function(inst)
     inst:DoTaskInTime(0,function()
         if inst == ThePlayer and inst.HUD then
             inst:ListenForEvent("hoshino_event.amblyopia_active_client",function(_,active_flag)
+                if active_flag == false and mask ~= nil then
+                    mask:Kill()
+                    mask = nil
+                    return
+                end
+
                 if active_flag and mask == nil then
                     --------------------------------------------------------------------------------
                     --- 前置节点
@@ -54,10 +60,7 @@ return function(inst)
                     -- 
                         mask = root
                     --------------------------------------------------------------------------------
-
-                elseif mask and not active_flag then
-                    mask:Kill()
-                    mask = nil                
+       
                 end
             end)
         end
