@@ -86,6 +86,7 @@
                 target.Physics:Stop()
                 target.Physics:SetMotorVel(0, 0, 0)
                 target.Physics:SetMotorVelOverride(0, 0, 0)
+                target.Physics:SetActive(false)
             end
         end
         local function Start_AI(target)
@@ -98,6 +99,11 @@
             end
             start_sg(target)
             resume_timer_com(target)
+
+            --- 启动物理引擎
+            if target.Physics then
+                target.Physics:SetActive(true)
+            end
         end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
