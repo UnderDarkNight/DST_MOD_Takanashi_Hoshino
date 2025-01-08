@@ -26,16 +26,16 @@ local flg,error_code = pcall(function()
         end
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --         cards = {
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+                cards = {
         --             -- "card_golden",
         --             -- "card_white",
         --             -- "card_colourful",
         --             -- "card_colourful",
         --             -- "card_golden",
         --             -- "card_black",
-        --             -- "kill_and_explode",
+                    "kill_and_explode",
         --             -- "unlock_spell_normal_ex",
         --             -- "unlock_spell_swimming_ex",
         --             -- "unlock_spell_all_normal",
@@ -43,10 +43,10 @@ local flg,error_code = pcall(function()
         --             -- "kill_and_explode",
         --             -- "give_me_some_money",
         --             "level_up_and_double_card_pack",
-        --         },
-        --     }
-        -- )
-        -- ThePlayer.components.inventory:GiveItem(item)
+                },
+            }
+        )
+        ThePlayer.components.inventory:GiveItem(item)
 
     ----------------------------------------------------------------------------------------------------------------
     ---

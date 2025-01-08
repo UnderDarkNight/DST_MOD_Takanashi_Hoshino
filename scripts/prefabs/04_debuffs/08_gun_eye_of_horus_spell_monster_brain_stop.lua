@@ -47,6 +47,13 @@
             ["minotaur"] = true,
             ["shadowthrall_horns"] = true,
             ["shadowthrall_hands"] = true,
+            ["leif"] = true,
+            ["leif_sparse"] = true,
+            ["daywalker2"] = true,
+            ["shadow_knight"] = true,
+            ["shadow_bishop"] = true,
+            ["shadow_rook"] = true,
+            ["lordfruitfly"] = true,
         }
         local function stop_sg(inst)
             if inst.sg and not BLACK_LIST_FOR_SG[inst.prefab] then
