@@ -18,14 +18,19 @@
     local TEMPLATES = require "widgets/redux/templates"
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- 
-    local main_mask = nil
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
+    local main_mask = nil
     inst:DoTaskInTime(0,function()
         if inst == ThePlayer and inst.HUD then
             inst:ListenForEvent("hoshino_event.amblyopia_active_client",function(_,active_flag)
-                if active_flag and main_mask == nil then
+                if active_flag then
+                    --------------------------------------------------------------------------------
+                    --- 
+                        if main_mask then
+                            main_mask:Kill()
+                        end
                     --------------------------------------------------------------------------------
                     --- 前置节点
                         local front_root = ThePlayer.HUD
@@ -40,6 +45,10 @@ return function(inst)
                         root:SetClickable(false)
                         root.inst:DoPeriodicTask(3,function()
                             root:MoveToBack()
+                            if not inst:HasTag("hoshino_tag.amblyopia_active") then
+                                root:Kill()
+                                main_mask = nil
+                            end
                         end)
                     --------------------------------------------------------------------------------
                     --  
@@ -56,7 +65,7 @@ return function(inst)
                     --------------------------------------------------------------------------------
                 elseif main_mask and not active_flag then
                     main_mask:Kill()
-                    main_mask = nil       
+                    main_mask = nil
                 end
             end)
         end
@@ -71,9 +80,11 @@ return function(inst)
         if active_flag then
             inst.components.hoshino_cards_sys:Set("amblyopia_active",true)
             inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.amblyopia_active_client",true)
+            inst.components.hoshino_com_tag_sys:AddTag("hoshino_tag.amblyopia_active")
         else
             inst.components.hoshino_cards_sys:Set("amblyopia_active",false)
             inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.amblyopia_active_client",false)
+            inst.components.hoshino_com_tag_sys:RemoveTag("hoshino_tag.amblyopia_active")
         end
     end)
     inst.components.hoshino_cards_sys:AddOnLoadFn(function()
