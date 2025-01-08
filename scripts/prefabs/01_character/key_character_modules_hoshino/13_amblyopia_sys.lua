@@ -18,14 +18,14 @@
     local TEMPLATES = require "widgets/redux/templates"
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- 
-    local mask = nil
+    local main_mask = nil
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
     inst:DoTaskInTime(0,function()
         if inst == ThePlayer and inst.HUD then
             inst:ListenForEvent("hoshino_event.amblyopia_active_client",function(_,active_flag)
-                if active_flag and mask == nil then
+                if active_flag and main_mask == nil then
                     --------------------------------------------------------------------------------
                     --- 前置节点
                         local front_root = ThePlayer.HUD
@@ -44,20 +44,19 @@ return function(inst)
                     --------------------------------------------------------------------------------
                     --  
                         local scale = 0.7
-                        local mask = root:AddChild(Image())
-                        mask:SetTexture("images/widgets/hoshino_amblyopia_mask.xml","hoshino_amblyopia_mask.tex")
-                        mask:SetPosition(0,0)
-                        mask:Show()
-                        mask:SetScale(scale,scale,scale)
-                        mask:SetTint(1,1,1,0.85)
+                        local temp_mask = root:AddChild(Image())
+                        temp_mask:SetTexture("images/widgets/hoshino_amblyopia_mask.xml","hoshino_amblyopia_mask.tex")
+                        temp_mask:SetPosition(0,0)
+                        temp_mask:Show()
+                        temp_mask:SetScale(scale,scale,scale)
+                        temp_mask:SetTint(1,1,1,0.85)
                     --------------------------------------------------------------------------------
                     -- 
-                        mask = root
+                        main_mask = root
                     --------------------------------------------------------------------------------
-
-                elseif mask and not active_flag then
-                    mask:Kill()
-                    mask = nil                
+                elseif main_mask and not active_flag then
+                    main_mask:Kill()
+                    main_mask = nil       
                 end
             end)
         end
