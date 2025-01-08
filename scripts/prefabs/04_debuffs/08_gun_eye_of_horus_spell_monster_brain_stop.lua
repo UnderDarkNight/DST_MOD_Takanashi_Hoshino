@@ -54,6 +54,12 @@
             ["shadow_bishop"] = true,
             ["shadow_rook"] = true,
             ["lordfruitfly"] = true,
+            ["deerclops"] = true,
+            ["mutateddeerclops"] = true,
+            ["warg"] = true,
+            ["mutatedwarg"] = true,
+            ["bearger"] = true,
+            ["spiderqueen"] = true,
         }
         local function stop_sg(inst)
             if inst.sg and not BLACK_LIST_FOR_SG[inst.prefab] then
