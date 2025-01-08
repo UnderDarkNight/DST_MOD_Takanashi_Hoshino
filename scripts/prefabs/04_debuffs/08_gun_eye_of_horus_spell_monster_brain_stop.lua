@@ -73,6 +73,13 @@
             end
             stop_sg(target)
             pause_timer_com(target)
+            
+            --- 停止物理引擎
+            if target.Physics then
+                target.Physics:Stop()
+                target.Physics:SetMotorVel(0, 0, 0)
+                target.Physics:SetMotorVelOverride(0, 0, 0)
+            end
         end
         local function Start_AI(target)
             if BOSS_BLACK_LIST[target.prefab] then
