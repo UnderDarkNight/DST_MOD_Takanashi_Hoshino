@@ -17,7 +17,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
                 [ACTIONS.DIG] = true,
            }
         -- target.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,0.5,inst)
-        for TEMP_ACTION,flag in ipairs(action_list) do
+        for TEMP_ACTION,flag in pairs(action_list) do
             target.components.workmultiplier:AddMultiplier(TEMP_ACTION,0.5,inst)
         end
     -----------------------------------------------------

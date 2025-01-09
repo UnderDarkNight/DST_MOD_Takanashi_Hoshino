@@ -90,10 +90,11 @@ local cards = {
             back = "card_black",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
-                if inst.components.hoshino_cards_sys:Get("card_black.sleeping_bag_health_blocker") then
-                    return false
-                end
-                return true
+                -- if inst.components.hoshino_cards_sys:Get("card_black.sleeping_bag_health_blocker") then
+                --     return false
+                -- end
+                -- return true
+                return false
             end,
             fn = function(inst)
                 inst.components.hoshino_cards_sys:Set("card_black.sleeping_bag_health_blocker",true)

@@ -50,7 +50,7 @@ local flg,error_code = pcall(function()
 
     ----------------------------------------------------------------------------------------------------------------
     ---
-        print(ThePlayer:HasDebuff("hoshino_card_debuff_level_up_and_double_card_pack"))
+        -- print(ThePlayer:HasDebuff("hoshino_card_debuff_level_up_and_double_card_pack"))
     ----------------------------------------------------------------------------------------------------------------
     ---
         -- ThePlayer.components.hoshino_com_shop:BlueSchistDelta(123)
@@ -84,7 +84,7 @@ local flg,error_code = pcall(function()
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_06")
+        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_06")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 
@@ -96,7 +96,7 @@ local flg,error_code = pcall(function()
         -- TUNING.HOSHINO_FNS:Client_PlaySound("dontstarve/common/together/celestial_orb/active")
         -- local inst = CreateEntity()
         -- inst.entity:AddSoundEmitter()        
-        ThePlayer.components.hoshino_com_shop:CreditCoinDelta(1000)
+        -- ThePlayer.components.hoshino_com_shop:CreditCoinDelta(1000)
 
         -- ThePlayer.__test_speed = 1
         -- print("66",ThePlayer.components.hoshino_com_task_sys_for_player:HasTask("hoshino_mission_golden_29"))
@@ -141,7 +141,8 @@ local flg,error_code = pcall(function()
         --     end
         -- end
     ----------------------------------------------------------------------------------------------------------------
-    ---        
+    ---
+        ThePlayer.components.hoshino_cards_sys:Set("card_black.sleeping_bag_health_blocker",true)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
