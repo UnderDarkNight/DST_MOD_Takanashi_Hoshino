@@ -35,7 +35,7 @@ local flg,error_code = pcall(function()
         --             -- "card_colourful",
         --             -- "card_golden",
         --             -- "card_black",
-                    "kill_and_explode",
+                    "counter_damage",
         --             -- "unlock_spell_normal_ex",
         --             -- "unlock_spell_swimming_ex",
         --             -- "unlock_spell_all_normal",
