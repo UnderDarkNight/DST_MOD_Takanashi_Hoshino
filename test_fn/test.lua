@@ -142,7 +142,20 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-        ThePlayer.components.hoshino_cards_sys:Set("card_black.sleeping_bag_health_blocker",true)
+        TUNING.___test__fn = function(inst,front_root)
+        local force_clear_btn = front_root:AddChild(ImageButton(
+                "images/widgets/hoshino_shop_widget.xml",
+                "close_button.tex",
+                "close_button.tex",
+                "close_button.tex",
+                "close_button.tex",
+                "close_button.tex"
+            ))
+            force_clear_btn:SetPosition(730,340+30)
+            force_clear_btn:SetOnClick(function()
+                front_root:Kill()
+            end)
+        end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
