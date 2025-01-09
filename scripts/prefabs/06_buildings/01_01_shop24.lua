@@ -128,10 +128,13 @@
                     "close_button.tex",
                     "close_button.tex"
                 ))
-                force_clear_btn:SetPosition(0,0)
+                force_clear_btn:SetPosition(-200,250)
                 force_clear_btn:SetOnClick(function()
                     front_root:Kill()
-                end)                
+                end)
+                -- if TUNING.___test__fn then
+                --     TUNING.___test__fn(inst,front_root)
+                -- end
             ------------------------------------------------------------------------
             ---- 
                 -- if ThePlayer.___test_container_fn then
