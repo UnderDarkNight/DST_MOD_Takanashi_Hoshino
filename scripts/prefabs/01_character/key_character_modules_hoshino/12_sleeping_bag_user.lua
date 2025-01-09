@@ -23,7 +23,7 @@ return function(inst)
             --- 
                 if self.inst.components.hoshino_cards_sys:Get("card_black.sleeping_bag_health_blocker") then
                     local health_tick = self.bed.components.sleepingbag.health_tick * self.health_bonus_mult
-                    self.inst.components.health:DoDelta(-health_tick, true)
+                    self.inst.components.health:DoDelta(-health_tick, true, self.bed.prefab, true)
                 end
             ---------------------------------------------------------------------------------------
             return unpack(origin_ret)
