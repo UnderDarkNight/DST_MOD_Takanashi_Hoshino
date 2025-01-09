@@ -151,7 +151,7 @@ local flg,error_code = pcall(function()
                 "close_button.tex",
                 "close_button.tex"
             ))
-            force_clear_btn:SetPosition(730,340+30)
+            force_clear_btn:SetPosition(-200,250)
             force_clear_btn:SetOnClick(function()
                 front_root:Kill()
             end)
