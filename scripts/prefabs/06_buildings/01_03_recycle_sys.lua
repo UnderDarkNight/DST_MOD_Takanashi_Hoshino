@@ -87,7 +87,8 @@ return function(inst)
             if doer and doer.components.hoshino_com_shop then
                 local coins = recycle_coins_count()
                 if coins > 0 then
-                    doer.components.hoshino_com_shop:CreditCoinDelta(coins,true)
+                    -- doer.components.hoshino_com_shop:CreditCoinDelta(coins,true)
+                    doer.components.hoshino_com_shop:CreditCoinDelta(coins)
                     inst.components.container:ForEachItem(function(item)
                         if item and item.prefab then
                             item:Remove()
