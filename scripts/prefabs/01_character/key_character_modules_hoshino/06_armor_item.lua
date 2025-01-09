@@ -34,6 +34,9 @@ return function(inst)
         ----------------------------------------------------------------------------------------
         --- 
             local item = GetArmorItem(inst)
+            if item == nil then
+                return
+            end
         ----------------------------------------------------------------------------------------
         --- 位面防御
             if item.components.planardefense == nil then
