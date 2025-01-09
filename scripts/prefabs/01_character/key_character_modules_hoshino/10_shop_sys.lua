@@ -52,5 +52,8 @@ return function(inst)
                 inst.components.hoshino_com_shop:SetCreditCoinDeltaFn(test_fn)
             end
         end)
+        inst:WatchWorldState("cycles",function()
+            inst.components.hoshino_com_shop:Set("card_black_active.max_daily_earn.current",0)
+        end)
     ---------------------------------------------------------------------------
 end
