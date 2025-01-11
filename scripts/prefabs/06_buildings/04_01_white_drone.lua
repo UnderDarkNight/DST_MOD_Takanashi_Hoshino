@@ -227,6 +227,8 @@
         RemovePhysicsColliders(inst)
 
         inst:AddTag("projectile")
+        inst:AddTag("structure")
+        inst:AddTag("chest")
         inst:AddTag("hoshino_building_white_drone")
         -- inst:AddTag("flying")
         inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)

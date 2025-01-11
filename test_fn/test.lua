@@ -142,20 +142,26 @@ local flg,error_code = pcall(function()
         -- end
     ----------------------------------------------------------------------------------------------------------------
     ---
-        TUNING.___test__fn = function(inst,front_root)
-        local force_clear_btn = front_root:AddChild(ImageButton(
-                "images/widgets/hoshino_shop_widget.xml",
-                "close_button.tex",
-                "close_button.tex",
-                "close_button.tex",
-                "close_button.tex",
-                "close_button.tex"
-            ))
-            force_clear_btn:SetPosition(-200,250)
-            force_clear_btn:SetOnClick(function()
-                front_root:Kill()
-            end)
+        -- local item = TheSim:FindFirstEntityWithTag("shadow_item")
+        -- print(item)
+        -- print(item.components.inventoryitem.owner)
+
+        local box = TheSim:FindFirstEntityWithTag("hoshino_building_white_drone")
+        -- box.components.container:DropEverything()
+        local items = box.replica.container:GetItems()
+        for k, v in pairs(items) do
+            if v then
+                print("------------------------------------------------")
+                print(v.entity:GetParent())
+                print("------------------------------------------------")
+            end
         end
+        -- for k, v in pairs(box.components.container.slots) do
+        --     print(k,v)
+        -- end
+        -- box.components.container.slots[1] = nil
+        -- local container_widget = box.container_widget
+        -- box:PushEvent("refresh")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

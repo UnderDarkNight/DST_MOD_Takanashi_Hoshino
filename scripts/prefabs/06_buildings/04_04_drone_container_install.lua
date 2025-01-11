@@ -16,6 +16,51 @@
     local containers = require("containers")
     containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, 22)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 处理装备复制问题
+    local function equipment_copy_refresh_task(inst)
+        for index, item in pairs(inst.components.container.slots) do
+            if item and item.components.inventoryitem and item.components.inventoryitem.owner ~= inst then
+                inst.components.container.slots[index] = nil
+                if inst.replica.container.classified then
+                    inst.replica.container.classified:SetSlotItem(index)
+                end
+            end
+        end
+    end
+    local function equipment_copy_open_event(inst)
+        if inst._____equipment_copy_refresh_task == nil then
+            inst._____equipment_copy_refresh_task = inst:DoPeriodicTask(0.3,equipment_copy_refresh_task)
+        end
+    end
+    local function equipment_copy_close_event(inst)
+        if inst._____equipment_copy_refresh_task ~= nil then
+            inst._____equipment_copy_refresh_task:Cancel()
+            inst._____equipment_copy_refresh_task = nil
+        end
+    end
+    local function equipment_copy_bug_fix_for_server(inst)
+        inst:ListenForEvent("onopen",equipment_copy_open_event)
+        inst:ListenForEvent("onclose",equipment_copy_close_event)
+        inst:ListenForEvent("itemlose",equipment_copy_refresh_task)
+    end
+    local function equipment_copy_bug_fix_for_client(inst)
+        local old_GetItems = inst.replica.container.GetItems
+        inst.replica.container.GetItems = function(...)
+            local origin_ret = old_GetItems(...) or {}
+            for i,item in pairs(origin_ret) do
+                if item and item.entity:GetParent() == inst then
+
+                else
+                    origin_ret[i] = nil
+                end
+            end
+            inst:DoTaskInTime(0.5,function()
+                inst:PushEvent("refresh")
+            end)
+            return origin_ret
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function container_Widget_change(theContainer)
         -----------------------------------------------------------------------------------
@@ -39,7 +84,6 @@
                 type = "chest",
                 acceptsstacks = true,                
             }
-
             for y = 2.5, -0.5, -1 do
                 for x = -1, 3 do
                     table.insert(params[container_widget_name].widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
@@ -92,15 +136,17 @@
         -- local container_WidgetSetup = "wobysmall"
         if TheWorld.ismastersim then
             inst:AddComponent("container")
-            -- inst.components.container.openlimit = 1  ---- 限制1个人打开
+            inst.components.container.openlimit = 1  ---- 限制1个人打开
             -- inst.components.container:WidgetSetup(container_WidgetSetup)
             container_Widget_change(inst.components.container)
             inst.components.container:EnableInfiniteStackSize(true)-- 无限叠堆
-
+        else
+            inst.OnEntityReplicated = function(inst)
+                container_Widget_change(inst.replica.container)
+                equipment_copy_bug_fix_for_client(inst)                
+            end
         end
-        inst.OnEntityReplicated = function(inst)
-            container_Widget_change(inst.replica.container)
-        end
+        
         
         -------------------------------------------------------------------------------------------------
     end
@@ -124,9 +170,11 @@
             new_bg.inst:DoPeriodicTask(FRAMES*10,function()
                 if not front_root.inst:IsValid() then
                     new_bg:Kill()
+                else
+                    inst:PushEvent("refresh")   
                 end
             end)
-        -- end)
+        -- end)    
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -151,4 +199,5 @@ return function(inst)
     inst:ListenForEvent("trans_2_item",function()
         inst.components.container:Close()
     end)
+    equipment_copy_bug_fix_for_server(inst)
 end
