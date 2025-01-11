@@ -140,6 +140,7 @@
             -- inst.components.container:WidgetSetup(container_WidgetSetup)
             container_Widget_change(inst.components.container)
             inst.components.container:EnableInfiniteStackSize(true)-- 无限叠堆
+            inst.components.container.canbeopened = false
         else
             inst.OnEntityReplicated = function(inst)
                 container_Widget_change(inst.replica.container)
@@ -188,8 +189,37 @@
         return false
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- workable install
+    local function workable_com_install(inst)
+        inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_workable",function(inst,replica_com)
+            replica_com:SetTestFn(function(inst,doer,right_click)
+                if inst.replica.container and inst.replica.container:IsOpenedBy(doer) then
+                    return false
+                end
+                if inst:HasTag(doer.userid) then
+                    return true
+                end
+            end)
+            replica_com:SetSGAction("give")
+            replica_com:SetText("hoshino_building_white_drone",STRINGS.ACTIONS.ACTIVATE.OPEN)
+        end)
+        if not TheWorld.ismastersim then
+            return
+        end
+        inst:AddComponent("hoshino_com_workable")
+        inst.components.hoshino_com_workable:SetOnWorkFn(function(inst,doer)
+            inst.components.container.canbeopened = true
+            inst.components.container:Open(doer)
+            return true
+        end)
+        inst:ListenForEvent("onclose",function(inst)
+            inst.components.container.canbeopened = false
+        end)
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 return function(inst)
     add_container_before_not_ismastersim_return(inst)
+    workable_com_install(inst)
     inst:ListenForEvent("hoshino_event.container_widget_open",container_Widget_change)
     if not TheWorld.ismastersim then
         return

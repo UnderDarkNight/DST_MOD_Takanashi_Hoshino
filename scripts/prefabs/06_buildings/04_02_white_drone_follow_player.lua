@@ -37,6 +37,7 @@
         inst.player = player
         player.components.hoshino_com_drone_leader:AddDrone(inst)
         inst._linked_player:set(player)
+        inst:AddTag(tostring(player.userid))
     end
     --- GetPlayer
     local function GetPlayer(inst)
