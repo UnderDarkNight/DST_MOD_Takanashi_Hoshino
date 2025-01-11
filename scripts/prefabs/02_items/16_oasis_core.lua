@@ -46,6 +46,7 @@ local function player_fishingcollect_event(player,_table)
             -- SpawnPrefab("log").Transform:SetPosition(fish.Transform:GetWorldPosition())
             --- 寻找附近池子，再多次钓鱼。
             local x,y,z = fish.Transform:GetWorldPosition()
+            if x == nil or y == nil or z == nil then return end            
             local pools = TheSim:FindEntities(x,0,z,20,{"fishable"})
             local ret_pool = hooking_pool or GetNearestPool(pools,player_pt)
             if ret_pool then
