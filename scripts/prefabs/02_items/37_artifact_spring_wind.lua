@@ -145,8 +145,8 @@ Artifact 春风
             for k, temp_monster in pairs(ents) do
                 if not can_not_be_freands[temp_monster.prefab] and temp_monster.components.health and not temp_monster.components.health:IsDead() then
                     pcall(function() -- 做免崩溃处理
-                        inst:PushEvent("makefriend")
-                        inst.components.leader:AddFollower(temp_monster)
+                        player:PushEvent("makefriend")
+                        player.components.leader:AddFollower(temp_monster)
                         SpawnPrefab("crab_king_shine").Transform:SetPosition(temp_monster.Transform:GetWorldPosition())
                         succeed_flag = true
                     end)
