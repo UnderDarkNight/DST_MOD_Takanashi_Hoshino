@@ -230,6 +230,8 @@
         inst:AddTag("structure")
         inst:AddTag("chest")
         inst:AddTag("hoshino_building_white_drone")
+        inst:AddTag("NOBLOCK")      -- 不会影响种植和放置
+
         -- inst:AddTag("flying")
         inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
 
