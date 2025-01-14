@@ -8,6 +8,7 @@ return {
     --- prefab黑名单
         prefab_blacklist = {
             ["multiplayer_portal"] = true,      --- 绚丽之门
+            ["wormhole"] = true,                --- 虫洞
         },
     ---------------------------------------------
     --- tags 黑名单
