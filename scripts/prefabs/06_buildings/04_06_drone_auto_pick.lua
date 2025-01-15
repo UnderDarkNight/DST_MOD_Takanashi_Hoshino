@@ -57,7 +57,7 @@
         return GetRandomKey(_table)
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
----
+--- 扫描可采集的目标并采集
     local function searching_task(inst)
         if inst:IsBusy() or not inst:IsWorking() or not inst:HasEquipment("orangeamulet") or inst.components.container:IsFull() then
             return
@@ -110,8 +110,49 @@
 
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 自动搜索东西、放进容器里
+    local ITEM_SEARCH_RADIUS = 15
+    local function auto_pick_item_task(inst)
+        if inst.components.container == nil then
+            return
+        end
+        local items_in_slot = inst.components.container:GetAllItems()
+        local serching_list = {}
+        local need_2_search_flag = false
+        for k,temp_item in pairs(items_in_slot) do
+            if temp_item and temp_item.components.inventoryitem and temp_item.components.stackable then
+                serching_list[temp_item.prefab] = true
+                need_2_search_flag = true
+            end
+        end
+
+        if not need_2_search_flag then
+            return
+        end
+
+        local x,y,z = inst.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x,0,z,ITEM_SEARCH_RADIUS,{"_inventoryitem"})
+        local items_from_around = {}
+        for k, temp_item in pairs(ents) do
+            if temp_item and temp_item:IsValid() and serching_list[temp_item.prefab] 
+                and temp_item.components.inventoryitem and temp_item.components.stackable 
+                and temp_item.components.inventoryitem.owner == nil then
+                    -- items_from_around[temp_item.prefab] = (items_from_around[temp_item.prefab] or 0 ) + temp_item.components.stackable:StackSize()
+                    -- temp_item:Remove()
+                    inst.components.container:GiveItem(temp_item)
+            end
+        end
+
+        -- for temp_prefab,num in pairs(items_from_around) do
+
+
+        -- end
+
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 return function(inst)
     inst:DoPeriodicTask(2,searching_task)
+    inst:DoPeriodicTask(5,auto_pick_item_task)
     --- 伪装成玩家，以便采集植物
     inst:AddComponent("inventory")
     inst.components.inventory.maxslots = 0
