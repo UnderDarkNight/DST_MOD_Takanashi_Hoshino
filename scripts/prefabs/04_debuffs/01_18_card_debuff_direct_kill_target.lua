@@ -52,7 +52,7 @@
         end
         do_damage_by_player()
         debuff_inst.time = 120  -- debuff 持续时间
-        debuff_inst:DoPeriodicTask(0.5,function()
+        debuff_inst:DoPeriodicTask(0.05,function()
             do_damage_by_player()
             debuff_inst.time = debuff_inst.time - 1
             if debuff_inst.time <= 0 then

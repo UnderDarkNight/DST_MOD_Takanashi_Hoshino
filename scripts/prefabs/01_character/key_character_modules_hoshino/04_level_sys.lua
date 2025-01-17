@@ -86,7 +86,7 @@ return function(inst)
                 elseif level < 400 then
                     self:SetMaxExp((2100+5*(level-200))*MAX_EXP_MULT)
                 else
-                    self:SetMaxExp((3100+10*(level-400))*MAX_EXP_MULT)
+                    self:SetMaxExp((3100+3000*(level-400))*MAX_EXP_MULT)
                 end
         end)
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
