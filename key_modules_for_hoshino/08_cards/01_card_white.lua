@@ -138,7 +138,7 @@ local cards = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
-                return true
+                return inst.components.hoshino_com_debuff:GetExpMult() < 1
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Exp_Mult(0.1)
