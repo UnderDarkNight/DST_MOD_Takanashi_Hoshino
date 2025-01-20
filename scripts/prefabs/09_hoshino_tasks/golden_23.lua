@@ -83,11 +83,11 @@
 
         inst.__wagpunkbits_kit_num = net_uint(inst.GUID, "hoshino_mission_golden_23.wagpunkbits_kit","hoshino_mission_golden_23")
         inst.__thulecite_num = net_uint(inst.GUID, "hoshino_mission_golden_23.thulecite","hoshino_mission_golden_23")
-        inst.__nightmarefuel_num = net_uint(inst.GUID, "hoshino_mission_golden_23.nightmarefuel","hoshino_mission_golden_23")
+        inst.__hoshino_building_white_drone_item_num = net_uint(inst.GUID, "hoshino_mission_golden_23.hoshino_building_white_drone_item","hoshino_mission_golden_23")
         inst:ListenForEvent("hoshino_mission_golden_23",function()
             inst.wagpunkbits_kit_num = inst.__wagpunkbits_kit_num:value()
             inst.thulecite_num = inst.__thulecite_num:value()
-            inst.nightmarefuel_num = inst.__nightmarefuel_num:value()
+            inst.hoshino_building_white_drone_item_num = inst.__hoshino_building_white_drone_item_num:value()
         end)
 
         if not TheWorld.ismastersim then
@@ -143,25 +143,25 @@
             local thulecite_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
             thulecite_text:SetPosition(x,y+delta_y)
 
-            local nightmarefuel_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
-            nightmarefuel_text:SetPosition(x,y+delta_y*2)
+            local hoshino_building_white_drone_item_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+            hoshino_building_white_drone_item_text:SetPosition(x,y+delta_y*2)
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
                 local wagpunkbits_kit_flag,wagpunkbits_kit_num = Has_Enough_Items(ThePlayer,"wagpunkbits_kit",MISSION_ITEM_1_NUM)
                 local thulecite_flag,thulecite_num = Has_Enough_Items(ThePlayer,"thulecite",MISSION_ITEM_2_NUM)
-                local nightmarefuel_flag,nightmarefuel_num = Has_Enough_Items(ThePlayer,"nightmarefuel",MISSION_ITEM_3_NUM)
-                if wagpunkbits_kit_flag and thulecite_flag and nightmarefuel_flag then
+                local hoshino_building_white_drone_item_flag,hoshino_building_white_drone_item_num = Has_Enough_Items(ThePlayer,"hoshino_building_white_drone_item",MISSION_ITEM_3_NUM)
+                if wagpunkbits_kit_flag and thulecite_flag and hoshino_building_white_drone_item_flag then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
                 wagpunkbits_kit_num = math.clamp(wagpunkbits_kit_num,0,MISSION_ITEM_1_NUM)
                 thulecite_num = math.clamp(thulecite_num,0,MISSION_ITEM_2_NUM)
-                nightmarefuel_num = math.clamp(nightmarefuel_num,0,MISSION_ITEM_3_NUM)
+                hoshino_building_white_drone_item_num = math.clamp(hoshino_building_white_drone_item_num,0,MISSION_ITEM_3_NUM)
                 wagpunkbits_kit_text:SetString(""..wagpunkbits_kit_num.."/"..MISSION_ITEM_1_NUM)
                 thulecite_text:SetString(""..thulecite_num.."/"..MISSION_ITEM_2_NUM)
-                nightmarefuel_text:SetString(""..nightmarefuel_num.."/"..MISSION_ITEM_3_NUM)
+                hoshino_building_white_drone_item_text:SetString(""..hoshino_building_white_drone_item_num.."/"..MISSION_ITEM_3_NUM)
             end
             update_fn()
             wagpunkbits_kit_text.inst:ListenForEvent("hoshino_mission_golden_23",update_fn,inst)
@@ -183,7 +183,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"wagpunkbits_kit",MISSION_ITEM_1_NUM) and Has_Enough_Items(owner,"thulecite",MISSION_ITEM_2_NUM) and Has_Enough_Items(owner,"nightmarefuel",MISSION_ITEM_3_NUM) then
+            if owner and Has_Enough_Items(owner,"wagpunkbits_kit",MISSION_ITEM_1_NUM) and Has_Enough_Items(owner,"thulecite",MISSION_ITEM_2_NUM) and Has_Enough_Items(owner,"hoshino_building_white_drone_item",MISSION_ITEM_3_NUM) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
@@ -224,17 +224,17 @@
 
                 local wagpunkbits_kit_flag,wagpunkbits_kit_num = Has_Enough_Items(owner,"wagpunkbits_kit",MISSION_ITEM_1_NUM)
                 local thulecite_flag,thulecite_num = Has_Enough_Items(owner,"thulecite",MISSION_ITEM_2_NUM)
-                local nightmarefuel_flag,nightmarefuel_num = Has_Enough_Items(owner,"nightmarefuel",MISSION_ITEM_3_NUM)
+                local hoshino_building_white_drone_item_flag,hoshino_building_white_drone_item_num = Has_Enough_Items(owner,"hoshino_building_white_drone_item",MISSION_ITEM_3_NUM)
 
                 wagpunkbits_kit_num = math.clamp(wagpunkbits_kit_num,0,MISSION_ITEM_1_NUM)
                 thulecite_num = math.clamp(thulecite_num,0,MISSION_ITEM_2_NUM)
-                nightmarefuel_num = math.clamp(nightmarefuel_num,0,MISSION_ITEM_3_NUM)
+                hoshino_building_white_drone_item_num = math.clamp(hoshino_building_white_drone_item_num,0,MISSION_ITEM_3_NUM)
 
                 inst.__wagpunkbits_kit_num:set(wagpunkbits_kit_num)
                 inst.__thulecite_num:set(thulecite_num)
-                inst.__nightmarefuel_num:set(nightmarefuel_num)
+                inst.__hoshino_building_white_drone_item_num:set(hoshino_building_white_drone_item_num)
 
-                if wagpunkbits_kit_num >= MISSION_ITEM_1_NUM and thulecite_num >= MISSION_ITEM_2_NUM and nightmarefuel_num >= MISSION_ITEM_3_NUM then
+                if wagpunkbits_kit_num >= MISSION_ITEM_1_NUM and thulecite_num >= MISSION_ITEM_2_NUM and hoshino_building_white_drone_item_num >= MISSION_ITEM_3_NUM then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 
