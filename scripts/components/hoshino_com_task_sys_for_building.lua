@@ -165,7 +165,7 @@ nil,
         return ret_table
     end
     function hoshino_com_task_sys_for_building:Get_Colourful_Egg_Mission_Prefabs()
-        if TheWorld.state.cycles < 40 then
+        if TheWorld.state.cycles < 30 then
             return {}
         end
         local ret_table = {}
@@ -191,8 +191,8 @@ nil,
                 ["white"] = 100,
                 ["blue"] = 50,
                 ["golden"] = 25,
-                ["colourful"] = 6,
-                ["colourful_egg"] = 1,
+                ["colourful"] = 8,
+                ["colourful_egg"] = 8,
             }
         -------------------------------------------------------------------------
         --- 从概率池中随机选择一个任务

@@ -66,14 +66,13 @@
 
 
                                     owner.AnimState:ClearOverrideSymbol("swap_hat")
-                                    owner.AnimState:Hide("HAT")
+                                    owner.AnimState:Show("HAT")
                                     owner.AnimState:Hide("HAIR_HAT")
                                     owner.AnimState:Show("HAIR_NOHAT")
                                     owner.AnimState:Show("HAIR")
-
                                     if owner:HasTag("player") then
-                                        owner.AnimState:Show("HEAD")
-                                        owner.AnimState:Hide("HEAD_HAT")
+                                        owner.AnimState:Hide("HEAD")
+                                        owner.AnimState:Show("HEAD_HAT")
                                         owner.AnimState:Hide("HEAD_HAT_NOHELM")
                                         owner.AnimState:Hide("HEAD_HAT_HELM")
                                     end
@@ -86,6 +85,9 @@
                             end)
 
                             inst:ListenForEvent("equip",function()
+                                inst:PushEvent("hoshino_event.clear_hat")
+                            end)
+                            inst:ListenForEvent("unequip",function()
                                 inst:PushEvent("hoshino_event.clear_hat")
                             end)
                             inst:PushEvent("hoshino_event.clear_hat")   --- 初始化的时候
