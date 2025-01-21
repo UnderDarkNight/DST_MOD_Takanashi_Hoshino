@@ -1,7 +1,13 @@
 return {
     ---------------------------------------------
     --- prefab白名单
-        prefab_whitelist = {   
+        prefab_whitelist = { 
+            ["moon_altar_glass"] = true, 
+            ["moon_altar_seed"] = true, 
+            ["moon_altar_idol"] = true, 
+            ["moon_altar_crown"] = true, 
+            ["moon_altar_icon"] = true, 
+            ["moon_altar_ward"] = true, 
             -- ["log"] = true,
         },
     ---------------------------------------------

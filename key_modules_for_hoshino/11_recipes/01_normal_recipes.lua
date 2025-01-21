@@ -103,12 +103,12 @@
     AddRecipeToFilter("hoshino_item_fragments_of_divine_script","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_item_fragments_of_divine_script",            --  --  inst.prefab  实体名字
-        {Ingredient("hoshino_item_yi", 3),Ingredient("opalpreciousgem", 1),} ,
+        {Ingredient("hoshino_item_yi", 2),Ingredient("glommerwings", 1),} ,
         TECH.NONE,
         {
             -- nounlock=true,
             no_deconstruction=true,
-            builder_tag = "hoshino_building_shop24_level_3",
+            builder_tag = "hoshino_building_shop24_level_1",
             atlas = "images/inventoryimages/hoshino_item_fragments_of_divine_script.xml",
             image = "hoshino_item_fragments_of_divine_script.tex",
             -- sg_state="carvewood",
