@@ -133,6 +133,9 @@ Artifact 天
             --     inst.components.finiteuses:Use(20)
             -- end
         --------------------------------------------------------------------------------------------
+        --特效
+        SpawnPrefab("moonpulse_spawner").Transform:SetPosition(pt.x,0,pt.z)
+        --------------------------------------------------------------------------------------------
         return true
     end
     local function com_point_and_target_spell_caster_install(inst)

@@ -25,7 +25,7 @@ Artifact 春风
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-    local MAX_COOL_DOWN_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 6*60
+    local MAX_COOL_DOWN_TIME = TUNING.HOSHINO_DEBUGGING_MODE and 10 or 3*60
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 植物生长
     --helper function for book_gardening
@@ -373,7 +373,7 @@ Artifact 春风
                         local delta_finiteuses = math.ceil(max_finiteuses*0.1)
                         target.components.finiteuses:Use(-delta_finiteuses)
                     end
-                    inst.time = (inst.time or 20 ) - 1
+                    inst.time = (inst.time or 40 ) - 1
                     if inst.time <= 0 then
                         inst:Remove()
                     end
@@ -384,7 +384,7 @@ Artifact 春风
             local target = inst.target
             -----------------------------------------------------
             --- 
-                inst.time = (inst.time or 0 ) + 20
+                inst.time = (inst.time or 0 ) + 40
             -----------------------------------------------------
         end)
         -- inst.components.debuff.keepondespawn = true -- 是否保持debuff 到下次登陆

@@ -92,6 +92,32 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   is_permanent = true, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
+--  dreadstone
+{
+  prefab = "dreadstone",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = GetInventoryItemAtlas("dreadstone.tex"), image = "dreadstone.tex"},
+  price = 450, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "normal", -- 类型。normal special 。这个可以不下发。
+  is_permanent = true, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
+--  moonstorm_spark
+{
+  prefab = "moonstorm_spark",
+  bg = "item_slot_golden.tex",
+  icon = {atlas = GetInventoryItemAtlas("moonstorm_spark.tex"), image = "moonstorm_spark.tex"},
+  price = 60, -- 价格
+  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
+  price_type = "credit_coins", -- 货币需求。
+  level = 3, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
+  type = "normal", -- 类型。normal special 。这个可以不下发。
+  is_permanent = true, -- 是否永久。0 非永久 1 永久
+},
+-----------------------------------------------------------
 --  hermit_pearl
 {
   prefab = "hermit_pearl",
@@ -318,7 +344,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   prefab = "hoshino_item_cards_pack_authority_to_unveil_secrets",
   bg = "item_slot_golden.tex",
   icon = {atlas = "images/inventoryimages/hoshino_item_cards_pack_authority_to_unveil_secrets.xml", image = "hoshino_item_cards_pack_authority_to_unveil_secrets.tex"},
-  price = 3500, -- 价格
+  price = 4200, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。

@@ -290,7 +290,7 @@ local cards = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
-                return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 0.9
+                return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 1
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.1)

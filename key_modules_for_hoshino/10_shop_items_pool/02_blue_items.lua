@@ -201,7 +201,7 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["blue"] = {
   prefab = "wagpunkbits_kit",
   bg = "item_slot_blue.tex",
   icon = {atlas = GetInventoryItemAtlas("wagpunkbits_kit.tex"), image = "wagpunkbits_kit.tex"},
-  price = 150, -- 价格
+  price = 165, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 1, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
