@@ -132,7 +132,7 @@ return function(inst)
                 inst:PushEvent("hoshino_event.exp_mult_update")
                 local action = _table and _table.action
                 if action == ACTIONS.CHOP or action == ACTIONS.MINE then
-                    inst.components.hoshino_com_level_sys:Exp_DoDelta( 1 + max_exp*0.1/100 )
+                    inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
                 end
             end)
         -----------------------------------------------------------------------------------------
@@ -146,7 +146,7 @@ return function(inst)
         --- 吃东西
             inst:ListenForEvent("oneat",function(inst,_table)
                 inst:PushEvent("hoshino_event.exp_mult_update")
-                inst.components.hoshino_com_level_sys:Exp_DoDelta( 1 + max_exp*0.1/100 )
+                inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
             end)
         -----------------------------------------------------------------------------------------
         --- 制作东西(消耗物品的才算数)
@@ -172,7 +172,7 @@ return function(inst)
                 -- end
                 if check_recipe_can_create_exp(recipe) then
                     inst:PushEvent("hoshino_event.exp_mult_update")
-                    inst.components.hoshino_com_level_sys:Exp_DoDelta( 1 + max_exp*0.1/100 )
+                    inst.components.hoshino_com_level_sys:Exp_DoDelta(1)
                 end
             end
             inst:ListenForEvent("builditem",build_fn)
