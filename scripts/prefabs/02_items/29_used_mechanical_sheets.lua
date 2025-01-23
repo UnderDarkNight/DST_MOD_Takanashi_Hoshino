@@ -16,17 +16,23 @@
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
-
+    local DEBUFF_NAME = "hoshino_equipment_used_mechanical_sheets"
+    local DEBUFF_PREFAB = "buff_electricattack"
     local function onequip(inst, owner)
+        owner:AddDebuff(DEBUFF_NAME,DEBUFF_PREFAB)
         if inst.__debuff_check_task == nil then
-            inst.__debuff_check_task = inst:DoPeriodicTask(10,function()
-                owner:AddDebuff("hoshino_equipment_used_mechanical_sheets", "buff_electricattack")                
+            inst.__debuff_check_task = inst:DoPeriodicTask(5,function()
+                if owner:HasDebuff(DEBUFF_NAME) then
+                    
+                else
+                    owner:AddDebuff(DEBUFF_NAME,DEBUFF_PREFAB)
+                end
             end)
         end
     end
 
     local function onunequip(inst, owner)
-        owner:RemoveDebuff("hoshino_equipment_used_mechanical_sheets")
+        owner:RemoveDebuff(DEBUFF_NAME)
         if inst.__debuff_check_task == nil then
             inst.__debuff_check_task:Cancel()
             inst.__debuff_check_task = nil
