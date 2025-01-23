@@ -136,8 +136,13 @@ Artifact 天
             --     inst.components.finiteuses:Use(20)
             -- end
         --------------------------------------------------------------------------------------------
+<<<<<<< HEAD
         --特效
         SpawnPrefab("moonpulse_spawner").Transform:SetPosition(pt.x,0,pt.z)
+=======
+        --- 特效
+            SpawnPrefab("moonpulse_spawner").Transform:SetPosition(pt.x,0,pt.z)
+>>>>>>> 1336cfb7564f54eb75267e5f30e5cbb218da3ad5
         --------------------------------------------------------------------------------------------
         return true
     end

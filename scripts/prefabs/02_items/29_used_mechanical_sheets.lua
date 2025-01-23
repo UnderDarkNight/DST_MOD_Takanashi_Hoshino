@@ -16,12 +16,21 @@
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
+
     local function onequip(inst, owner)
-        owner:AddDebuff("hoshino_equipment_used_mechanical_sheets", "buff_electricattack")
+        if inst.__debuff_check_task == nil then
+            inst.__debuff_check_task = inst:DoPeriodicTask(10,function()
+                owner:AddDebuff("hoshino_equipment_used_mechanical_sheets", "buff_electricattack")                
+            end)
+        end
     end
 
     local function onunequip(inst, owner)
         owner:RemoveDebuff("hoshino_equipment_used_mechanical_sheets")
+        if inst.__debuff_check_task == nil then
+            inst.__debuff_check_task:Cancel()
+            inst.__debuff_check_task = nil
+        end
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
