@@ -12,3 +12,6 @@ modimport("key_modules_for_hoshino/04_other_prefabs/03_gunpowder.lua")
 
 modimport("key_modules_for_hoshino/04_other_prefabs/04_cursed_monkey_token.lua") 
 -- 猴子诅咒物品 hook
+
+modimport("key_modules_for_hoshino/04_other_prefabs/05_tumbleweed.lua") 
+-- 风滚草 hook
