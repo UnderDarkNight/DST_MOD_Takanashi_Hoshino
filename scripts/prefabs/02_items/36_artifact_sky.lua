@@ -22,7 +22,7 @@ Artifact 天
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 -- 参数
     local SPELL_ACTIVE_RADIUS = 6  --- 施法范围
-
+    local MAX_COOL_DOWN_TIME = 10
     --- 怪物扫描的tag ，复制自 亮茄魔杖
     local BOUNCE_MUST_TAGS = { "_combat" }
     local BOUNCE_NO_TAGS = { "INLIMBO", "wall", "notarget", "player", "companion", "flight", "invisible", "noattack", "hiding" }
@@ -73,15 +73,18 @@ Artifact 天
         return Vector3(0,0,0)
     end
     local function spell_active_fn(inst,doer,_target,_pt)
-        local pt = GetPT(_target,_pt)
         --------------------------------------------------------------------------------------------
         --- 
             if inst.spell_working then
                 return false
             end
+            if not inst.components.rechargeable:IsCharged() then
+                return false
+            end            
+            inst.components.rechargeable:Discharge(MAX_COOL_DOWN_TIME)
         --------------------------------------------------------------------------------------------
         --- 
-
+            local pt = GetPT(_target,_pt)
         --------------------------------------------------------------------------------------------
         --- 怪物扫描
             local ents = TheSim:FindEntities(pt.x,0,pt.z, SPELL_ACTIVE_RADIUS, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS)
@@ -132,6 +135,9 @@ Artifact 天
             -- if actived_flag then
             --     inst.components.finiteuses:Use(20)
             -- end
+        --------------------------------------------------------------------------------------------
+        --- 特效
+            SpawnPrefab("moonpulse_spawner").Transform:SetPosition(pt.x,0,pt.z)
         --------------------------------------------------------------------------------------------
         return true
     end
@@ -220,6 +226,12 @@ local function fn()
         inst.components.finiteuses:SetMaxUses(100)
         inst.components.finiteuses:SetPercent(1)
         inst.components.finiteuses:SetOnFinished(finiteuses_empty_fn)
+    -------------------------------------------------------------------
+    ---
+        inst:AddComponent("rechargeable")
+        inst.components.rechargeable:SetMaxCharge(MAX_COOL_DOWN_TIME)
+        -- inst.components.rechargeable:Discharge(cool_down_time)
+        -- inst.components.rechargeable:IsCharged()
     -------------------------------------------------------------------
         MakeHauntableLaunch(inst)
     -------------------------------------------------------------------

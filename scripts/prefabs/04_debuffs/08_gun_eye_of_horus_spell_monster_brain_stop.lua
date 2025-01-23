@@ -57,7 +57,6 @@
             ["deerclops"] = true,
             ["mutateddeerclops"] = true,
             ["warg"] = true,
-            ["mutatedwarg"] = true,
             ["bearger"] = true,
             ["spiderqueen"] = true,
         }

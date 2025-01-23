@@ -83,6 +83,15 @@
     local musthavetags = {"_combat"}
     local canthavetags = {"companion","player", "playerghost", "INLIMBO","chester","hutch","DECOR", "FX","wall","structure"}
     local musthaveoneoftags = nil
+    local function monster_can_be_attacked(inst,monster)
+        if monster and monster.components.health and monster.components.health:IsDead() then
+            return false
+        end
+        if inst.components.leader and inst.components.leader:IsFollower(monster) then
+            return false
+        end
+        return true
+    end
     local function do_aoe_dmage(inst,pt)
         local x,y,z = pt.x,0,pt.z
         local damage = 30
@@ -96,7 +105,7 @@
         damage = math.max(damage,1)
         local ents = TheSim:FindEntities(x,0, z,10,musthavetags, canthavetags, musthaveoneoftags)
         for k, temp_monster in pairs(ents) do
-            if temp_monster.components.health and not temp_monster.components.health:IsDead() then
+            if monster_can_be_attacked(inst,temp_monster) then
                 temp_monster.components.combat:GetAttacked(inst,damage)
                 SpawnPrefab("crab_king_shine").Transform:SetPosition(temp_monster.Transform:GetWorldPosition())
             end

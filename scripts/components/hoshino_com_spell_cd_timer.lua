@@ -210,10 +210,12 @@ Creating_Synchronization_Controllers() or {}
     end
 
     function hoshino_com_spell_cd_timer:OnLoad(data)
-        if data.DataTable then
-            self.DataTable = data.DataTable
-        end
-        self:ActiveOnLoadFns()
+        self.inst:DoTaskInTime(1,function()            
+            if data.DataTable then
+                self.DataTable = data.DataTable
+            end
+            self:ActiveOnLoadFns()
+        end)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 return hoshino_com_spell_cd_timer
