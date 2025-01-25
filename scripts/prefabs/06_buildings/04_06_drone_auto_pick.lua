@@ -131,7 +131,7 @@
         end
 
         local x,y,z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x,0,z,ITEM_SEARCH_RADIUS,{"_inventoryitem"})
+        local ents = TheSim:FindEntities(x,0,z,ITEM_SEARCH_RADIUS,{"_inventoryitem"},{"INLIMBO","invisible","hiding"})
         local items_from_around = {}
         for k, temp_item in pairs(ents) do
             if temp_item and temp_item:IsValid() and serching_list[temp_item.prefab] 
