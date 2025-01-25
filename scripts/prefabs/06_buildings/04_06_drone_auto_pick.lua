@@ -112,6 +112,18 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 自动搜索东西、放进容器里
     local ITEM_SEARCH_RADIUS = 15
+    local PICKUP_CANT_TAGS = {
+        -- Items
+        "INLIMBO", "NOCLICK", "irreplaceable", "knockbackdelayinteraction", "event_trigger",
+        "minesprung", "mineactive", "catchable",
+        "fire", "light", "spider", "cursed", "paired", "bundle",
+        "heatrock", "deploykititem", "boatbuilder", "singingshell",
+        "archive_lockbox", "simplebook", "furnituredecor",
+        -- Pickables
+        "flower", "gemsocket", "structure",
+        -- Either
+        "donotautopick",
+    }
     local function auto_pick_item_task(inst)
         if inst.components.container == nil then
             return
@@ -131,7 +143,7 @@
         end
 
         local x,y,z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x,0,z,ITEM_SEARCH_RADIUS,{"_inventoryitem"},{"INLIMBO","invisible","hiding"})
+        local ents = TheSim:FindEntities(x,0,z,ITEM_SEARCH_RADIUS,{"_inventoryitem"},PICKUP_CANT_TAGS)
         local items_from_around = {}
         for k, temp_item in pairs(ents) do
             if temp_item and temp_item:IsValid() and serching_list[temp_item.prefab] 
