@@ -126,6 +126,10 @@ local function fn()
                 item.components.perishable:StopPerishing()
             end
             item:AddTag("NOCLICK")
+            item:AddTag("INLIMBO")
+            if item.components.inventoryitem then
+                item.components.inventoryitem.owner = inst
+            end
             item:ReturnToScene()
             if item.Follower == nil then
                 item.entity:AddFollower()
