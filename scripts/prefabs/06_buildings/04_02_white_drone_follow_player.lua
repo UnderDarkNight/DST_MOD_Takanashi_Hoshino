@@ -30,6 +30,7 @@
         local player = inst:GetPlayer()
         if player then
             inst.Transform:SetPosition(player.Transform:GetWorldPosition())
+            OnEntityWake(inst.GUID)
         end
     end
     --- 链接玩家
