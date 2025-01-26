@@ -218,6 +218,7 @@
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 return function(inst)
+    inst:AddTag("backpack")
     add_container_before_not_ismastersim_return(inst)
     workable_com_install(inst)
     inst:ListenForEvent("hoshino_event.container_widget_open",container_Widget_change)
