@@ -39,3 +39,6 @@ modimport("key_modules_for_hoshino/07_actions/12_sg_empty_active.lua")
 
 modimport("key_modules_for_hoshino/07_actions/13_sg_polymorphic_attack_action.lua") 
 --- 多态攻击动作
+
+modimport("key_modules_for_hoshino/07_actions/14_container_action_fix_for_drone_container.lua") 
+--- 无人机可以远一点打开
