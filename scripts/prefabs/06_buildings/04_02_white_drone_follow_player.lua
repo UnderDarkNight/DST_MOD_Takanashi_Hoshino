@@ -64,7 +64,9 @@
 return function(inst)
     inst:ListenForEvent("link",link_fn)
     inst:DoPeriodicTask(FRAMES*2,following_player_task)
-    inst:ListenForEvent("entitysleep",entitysleep_event_fn)
+    -- inst:ListenForEvent("entitysleep",entitysleep_event_fn)
+    inst:ListenForEvent("force_close_2_player",entitysleep_event_fn)
+
     inst:SetSpeed(FOLLOW_SPEED + math.random(20)/10)
     inst.components.projectile:SetHitDist(math.random(15,40)/10)
 
