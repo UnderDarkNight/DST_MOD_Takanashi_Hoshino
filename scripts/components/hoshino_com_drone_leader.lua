@@ -152,7 +152,21 @@ nil,
                     if tempInst and tempInst:IsValid() and flag then
                         activing_num = activing_num + 1
                         if self.inst:GetDistanceSqToInst(tempInst) >= 400 then
-                            tempInst:PushEvent("force_close_2_player")
+                            local x,y,z = self.inst.Transform:GetWorldPosition()
+                            local offset_x = math.random(12,20)
+                            local offset_z = math.random(12,20)
+                            if math.random() > 0.5 then
+                                offset_x = -offset_x
+                            end
+                            if math.random() > 0.5 then
+                                offset_z = -offset_z
+                            end
+                            x = x + offset_x
+                            z = z + offset_z
+                            tempInst.Transform:SetPosition(x,0,z)
+                            if tempInst.Physics then
+                                tempInst.Physics:Teleport(x,0,z)                                
+                            end
                         end
                     end
                 end

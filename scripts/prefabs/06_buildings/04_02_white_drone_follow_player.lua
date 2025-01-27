@@ -42,7 +42,7 @@
             if inst.Physics then
                 inst.Physics:Teleport(x+offset_x,0,z+offset_z)
             end
-            OnEntityWake(inst.GUID)
+            -- OnEntityWake(inst.GUID)
         end
     end
     --- 链接玩家
