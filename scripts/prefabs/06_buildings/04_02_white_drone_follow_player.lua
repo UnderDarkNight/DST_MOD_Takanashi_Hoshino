@@ -29,7 +29,16 @@
     local function entitysleep_event_fn(inst)
         local player = inst:GetPlayer()
         if player then
-            inst.Transform:SetPosition(player.Transform:GetWorldPosition())
+            local x,y,z = player.Transform:GetWorldPosition()
+            local offset_x = 20
+            local offset_z = 20
+            if math.random() <= 0.5 then
+                offset_x = -offset_x
+            end
+            if math.random() <= 0.5 then
+                offset_z = -offset_z
+            end
+            inst.Transform:SetPosition(x+offset_x,0,z+offset_z)
             OnEntityWake(inst.GUID)
         end
     end
