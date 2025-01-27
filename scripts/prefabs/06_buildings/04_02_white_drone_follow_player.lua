@@ -39,6 +39,9 @@
                 offset_z = -offset_z
             end
             inst.Transform:SetPosition(x+offset_x,0,z+offset_z)
+            if inst.Physics then
+                inst.Physics:Teleport(x+offset_x,0,z+offset_z)
+            end
             OnEntityWake(inst.GUID)
         end
     end
