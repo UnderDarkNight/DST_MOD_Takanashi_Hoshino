@@ -96,6 +96,7 @@ nil,
 --- 添加记录
     function hoshino_com_drone_leader:AddDrone(target)
         self.drones[target] = true
+        self:DronesDistanceCheckerStart()
     end
     function hoshino_com_drone_leader:RemoveDrone(target)
         self.drones[target] = false
@@ -140,6 +141,27 @@ nil,
         end
         self:Set("save_guid",new_table)
         -- print("info 已经保存无人机数量：",drone_num)
+    end
+------------------------------------------------------------------------------------------------------------------------------
+--- 距离检查器
+    function hoshino_com_drone_leader:DronesDistanceCheckerStart()
+        if self.___drones_distance_checker_task == nil then
+            self.___drones_distance_checker_task = self.inst:DoPeriodicTask(1,function()
+                local activing_num = 0
+                for tempInst, flag in pairs(self.drones) do
+                    if tempInst and tempInst:IsValid() and flag then
+                        activing_num = activing_num + 1
+                        if self.inst:GetDistanceSqToInst(tempInst) >= 400 then
+                            tempInst:PushEvent("force_close_2_player")
+                        end
+                    end
+                end
+                if activing_num == 0 then
+                    self.___drones_distance_checker_task:Cancel()
+                    self.___drones_distance_checker_task = nil
+                end
+            end)
+        end
     end
 ------------------------------------------------------------------------------------------------------------------------------
     function hoshino_com_drone_leader:OnSave()
