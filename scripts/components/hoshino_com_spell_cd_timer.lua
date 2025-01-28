@@ -89,11 +89,12 @@ local hoshino_com_spell_cd_timer = Class(function(self, inst)
     ---------------------------------------------------------------------------
     --- 技能解锁记录器
         self.unlocked_spells = {}
-        inst:DoTaskInTime(0,function()
-            self:Unlocked_Spell_Sync()
-        end)
+        -- inst:DoTaskInTime(0,function()
+        --     self:Unlocked_Spell_Sync()
+        -- end)
         self:AddOnLoadFn(function()
             self.unlocked_spells = self:Get("unlocked_spells") or {}
+            self:Unlocked_Spell_Sync()
         end)
         self:AddOnSaveFn(function()
             self:Set("unlocked_spells",self.unlocked_spells)
@@ -210,12 +211,10 @@ Creating_Synchronization_Controllers() or {}
     end
 
     function hoshino_com_spell_cd_timer:OnLoad(data)
-        self.inst:DoTaskInTime(1,function()            
-            if data.DataTable then
-                self.DataTable = data.DataTable
-            end
-            self:ActiveOnLoadFns()
-        end)
+        if data.DataTable then
+            self.DataTable = data.DataTable
+        end
+        self:ActiveOnLoadFns()
     end
 ------------------------------------------------------------------------------------------------------------------------------
 return hoshino_com_spell_cd_timer
