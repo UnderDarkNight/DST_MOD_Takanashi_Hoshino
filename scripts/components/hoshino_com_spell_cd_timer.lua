@@ -89,9 +89,9 @@ local hoshino_com_spell_cd_timer = Class(function(self, inst)
     ---------------------------------------------------------------------------
     --- 技能解锁记录器
         self.unlocked_spells = {}
-        -- inst:DoTaskInTime(0,function()
-        --     self:Unlocked_Spell_Sync()
-        -- end)
+        inst:DoTaskInTime(0,function()
+            self:Unlock_Spell_Sync_Task_Start()
+        end)
         self:AddOnLoadFn(function()
             self.unlocked_spells = self:Get("unlocked_spells") or {}
             self:Unlocked_Spell_Sync()
@@ -154,7 +154,15 @@ Creating_Synchronization_Controllers() or {}
             replica_com:Unlock_Spell_Sync(self.unlocked_spells)
         end
     end
-
+    function hoshino_com_spell_cd_timer:Unlock_Spell_Sync_Task_Start()
+        if self.___Unlock_Spell_Sync_Refresh_Task ~= nil then
+            return
+        end
+        self.___Unlock_Spell_Sync_Refresh_Task = self.inst:DoPeriodicTask(3,function()
+            self.unlocked_spells["test"] = not self.unlocked_spells["test"]
+            self:Unlocked_Spell_Sync()
+        end)
+    end
 ------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数
     function hoshino_com_spell_cd_timer:AddOnLoadFn(fn)
