@@ -19,7 +19,8 @@
 ---
     local function OnHit(inst, attacker, target)
         if inst.___onhit_fn then
-            inst.___onhit_fn()
+            -- inst.___onhit_fn()
+            pcall(inst.___onhit_fn)
         end
         inst:Remove()
         if target then
