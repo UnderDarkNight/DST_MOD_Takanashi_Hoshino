@@ -231,4 +231,23 @@ return function(inst)
         inst.components.container:Close()
     end)
     equipment_copy_bug_fix_for_server(inst)
+
+
+    inst:ListenForEvent("controller_cmd.disarm",function(inst)
+        -- print("无人机控制命令：解除攻击")
+        local item = inst.components.container:DropItemBySlot(21)
+        local player = inst:GetPlayer()
+        if item and item:IsValid() and player and player:IsValid() then
+            player.components.inventory:GiveItem(item)
+        end
+    end)
+    inst:ListenForEvent("controller_cmd.stop_working",function(inst)
+        -- print("无人机控制命令：停止工作")
+        local item = inst.components.container:DropItemBySlot(22)
+        local player = inst:GetPlayer()
+        if item and item:IsValid() and player and player:IsValid() then
+            player.components.inventory:GiveItem(item)
+        end
+    end)
+
 end

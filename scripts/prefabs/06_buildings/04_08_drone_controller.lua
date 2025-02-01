@@ -320,21 +320,23 @@
         --- 解除攻击
             ["disarm"] = function(inst)
                 print("无人机控制命令：解除攻击")
-                local item = inst.components.container:DropItemBySlot(21)
-                local player = inst:GetPlayer()
-                if item and item:IsValid() and player and player:IsValid() then
-                    player.components.inventory:GiveItem(item)
-                end
+                -- local item = inst.components.container:DropItemBySlot(21)
+                -- local player = inst:GetPlayer()
+                -- if item and item:IsValid() and player and player:IsValid() then
+                --     player.components.inventory:GiveItem(item)
+                -- end
+                inst:PushEvent("controller_cmd.disarm")
             end,
         ---------------------------------------------------------------
         --- 停止工作
             ["stop_working"] = function(inst)
                 print("无人机控制命令：停止工作")
-                local item = inst.components.container:DropItemBySlot(22)
-                local player = inst:GetPlayer()
-                if item and item:IsValid() and player and player:IsValid() then
-                    player.components.inventory:GiveItem(item)
-                end
+                -- local item = inst.components.container:DropItemBySlot(22)
+                -- local player = inst:GetPlayer()
+                -- if item and item:IsValid() and player and player:IsValid() then
+                --     player.components.inventory:GiveItem(item)
+                -- end
+                inst:PushEvent("controller_cmd.stop_working")
             end,
         ---------------------------------------------------------------
         --- 打包成盒
