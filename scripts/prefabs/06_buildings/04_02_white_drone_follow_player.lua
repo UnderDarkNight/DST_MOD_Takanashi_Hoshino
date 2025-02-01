@@ -13,6 +13,9 @@
 --- API
     --- 跟随玩家
     local function following_player_task(inst)
+        if inst.components.container:IsOpen() then
+            return
+        end
         local player = inst:GetPlayer()
         if player == nil then
             inst:Remove()

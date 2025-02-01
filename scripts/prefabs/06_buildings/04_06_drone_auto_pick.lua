@@ -171,16 +171,32 @@
 return function(inst)
     inst:DoPeriodicTask(2,searching_task)
     inst:DoPeriodicTask(5,auto_pick_item_task)
-    --- 伪装成玩家，以便采集植物
-    inst:AddComponent("inventory")
-    inst.components.inventory.maxslots = 0
-    inst.components.inventory.GiveItem = function(self,item,...)
-        if item and item.components.inventoryitem then
-            if item.components.inventoryitem.cangoincontainer then
-                self.inst.components.container:GiveItem(item,...)
-            else
-                -- item.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
+
+    inst:ListenForEvent("allow_auto_pick",function()
+        --- 伪装成玩家，以便采集植物
+        inst:AddComponent("inventory")
+        inst.components.inventory.maxslots = 0
+        inst.components.inventory.GiveItem = function(self,item,...)
+            if item and item.components.inventoryitem then
+                if item.components.inventoryitem.cangoincontainer then
+                    self.inst.components.container:GiveItem(item,...)
+                else
+                    -- item.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
+                end
             end
         end
-    end
+    end)
+    inst:ListenForEvent("deny_auto_pick",function()
+        inst:RemoveComponent("inventory")
+    end)
+    inst:DoTaskInTime(0,function()
+        inst:PushEvent("allow_auto_pick")
+    end)
+    inst:ListenForEvent("onopen",function()
+        inst:PushEvent("deny_auto_pick")
+    end)
+    inst:ListenForEvent("onclose",function()
+        inst:PushEvent("allow_auto_pick")
+    end)
+
 end
