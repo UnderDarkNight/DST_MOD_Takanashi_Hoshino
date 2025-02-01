@@ -59,6 +59,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 扫描可采集的目标并采集
     local function searching_task(inst)
+        if inst.components.container:IsOpen() then
+            return
+        end
         if inst:IsBusy() or not inst:IsWorking() or not inst:HasEquipment("orangeamulet") or inst.components.container:IsFull() then
             return
         end
@@ -126,6 +129,9 @@
     }
     local function auto_pick_item_task(inst)
         if inst.components.container == nil then
+            return
+        end
+        if inst.components.container:IsOpen() then
             return
         end
         local items_in_slot = inst.components.container:GetAllItems()
