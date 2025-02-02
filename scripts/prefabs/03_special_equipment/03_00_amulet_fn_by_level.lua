@@ -277,9 +277,11 @@ return function(inst)
                                         temp_plant.__hoshino_t7_barren_task = true
                                         inst:DoTaskInTime(math.random(0,50)/10,function()
                                             -- inst.components.wateryprotection:SpreadProtection(temp_plant)
-                                            pcall(inst.components.wateryprotection.SpreadProtection,inst.components.wateryprotection,temp_plant)
-                                            temp_plant.__hoshino_t7_barren_task = nil
-                                            SpawnPrefab("glass_fx").Transform:SetPosition(temp_plant.Transform:GetWorldPosition())
+                                            if temp_plant and temp_plant:IsValid() then
+                                                pcall(inst.components.wateryprotection.SpreadProtection,inst.components.wateryprotection,temp_plant)
+                                                temp_plant.__hoshino_t7_barren_task = nil                                            
+                                                SpawnPrefab("glass_fx").Transform:SetPosition(temp_plant.Transform:GetWorldPosition())
+                                            end
                                         end)
                                     end
                                 end

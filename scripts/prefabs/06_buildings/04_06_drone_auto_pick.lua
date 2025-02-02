@@ -94,7 +94,7 @@
             target = ret_plant,
             onhit = function()
                 if ret_plant then
-                    if ret_plant:IsValid() and ret_plant.components.pickable and ret_plant.components.pickable:CanBePicked() then                    
+                    if ret_plant:IsValid() and ret_plant.components.pickable and ret_plant.components.pickable:CanBePicked() and inst.components.inventory  then                    
                         ------------------------------------------------------------------------
                         --- 模拟玩家采集
                             -- local flag,loot = ret_plant.components.pickable:Pick(player)
