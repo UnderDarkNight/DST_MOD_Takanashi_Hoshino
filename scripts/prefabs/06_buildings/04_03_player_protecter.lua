@@ -48,6 +48,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function attacking_event(inst)
+        if inst.components.container:IsOpen() then
+            return
+        end
         if inst:IsBusy() or not inst:IsWorking() or not inst:HasEquipment("eyeturret_item") then
             -- print("无人机无法进行攻击：忙碌",inst:IsBusy()," 工作状态",inst:IsWorking()," 标签",inst:HasTag("eyeturret_item"))
             inst:SetTarget(nil,true)

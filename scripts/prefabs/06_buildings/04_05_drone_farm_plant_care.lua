@@ -22,6 +22,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function searching_task(inst)
+        if inst.components.container:IsOpen() then
+            return
+        end
         if inst:IsBusy() or not inst:IsWorking() or not inst:HasEquipment("orangeamulet") then
             return
         end

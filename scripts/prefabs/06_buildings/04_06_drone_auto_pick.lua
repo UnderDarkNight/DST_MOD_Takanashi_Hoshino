@@ -59,6 +59,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 扫描可采集的目标并采集
     local function searching_task(inst)
+        if inst.components.container:IsOpen() then
+            return
+        end
         if inst:IsBusy() or not inst:IsWorking() or not inst:HasEquipment("orangeamulet") or inst.components.container:IsFull() then
             return
         end
@@ -128,6 +131,9 @@
         if inst.components.container == nil then
             return
         end
+        if inst.components.container:IsOpen() then
+            return
+        end
         local items_in_slot = inst.components.container:GetAllItems()
         local serching_list = {}
         local need_2_search_flag = false
@@ -165,16 +171,32 @@
 return function(inst)
     inst:DoPeriodicTask(2,searching_task)
     inst:DoPeriodicTask(5,auto_pick_item_task)
-    --- 伪装成玩家，以便采集植物
-    inst:AddComponent("inventory")
-    inst.components.inventory.maxslots = 0
-    inst.components.inventory.GiveItem = function(self,item,...)
-        if item and item.components.inventoryitem then
-            if item.components.inventoryitem.cangoincontainer then
-                self.inst.components.container:GiveItem(item,...)
-            else
-                -- item.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
+
+    inst:ListenForEvent("allow_auto_pick",function()
+        --- 伪装成玩家，以便采集植物
+        inst:AddComponent("inventory")
+        inst.components.inventory.maxslots = 0
+        inst.components.inventory.GiveItem = function(self,item,...)
+            if item and item.components.inventoryitem then
+                if item.components.inventoryitem.cangoincontainer then
+                    self.inst.components.container:GiveItem(item,...)
+                else
+                    -- item.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
+                end
             end
         end
-    end
+    end)
+    inst:ListenForEvent("deny_auto_pick",function()
+        inst:RemoveComponent("inventory")
+    end)
+    inst:DoTaskInTime(0,function()
+        inst:PushEvent("allow_auto_pick")
+    end)
+    inst:ListenForEvent("onopen",function()
+        inst:PushEvent("deny_auto_pick")
+    end)
+    inst:ListenForEvent("onclose",function()
+        inst:PushEvent("allow_auto_pick")
+    end)
+
 end
