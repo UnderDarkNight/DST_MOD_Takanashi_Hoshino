@@ -275,6 +275,14 @@ local function debuff_fn()
         --- 血量2倍
             target.components.health:SetMaxHealth(TUNING.MUTATED_WARG_HEALTH*2)
         -----------------------------------------------------
+        ---位面伤害2倍
+            if target.components.planardamage then
+                target.components.planardamage:AddMultiplier(inst,2)
+            end
+        -----------------------------------------------------
+        ---移速2倍
+            target.components.locomotor.walkspeed = target.components.locomotor.walkspeed*2
+            target.components.locomotor.runspeed = target.components.locomotor.runspeed*2
         --- 死亡广播
             -- target:ListenForEvent("minhealth",function()
             --     local x,y,z = target.Transform:GetWorldPosition()
