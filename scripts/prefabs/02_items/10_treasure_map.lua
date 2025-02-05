@@ -215,8 +215,13 @@ end
                 box.components.container:GiveItem(item)
             end
         ----------------------------------------------------------
+        ---铥矿
+            local thulecite = SpawnPrefab("thulecite")
+            thulecite.components.stackable.stacksize = math.random(10,20)
+            box.components.container:GiveItem(thulecite)
+        ----------------------------------------------------------
         --- 装备
-            local equip_list = {"ruins_bat","ruinshat","armorruins","armor_sanity","nightsword","glasscutter"}
+            local equip_list = {"ruins_bat","ruinshat","armorruins","armor_sanity","nightsword","glasscutter","armordreadstone","dreadstonehat"}
             local equip_num = math.random(1,3)
             local equip = GetRandomNumFromTable(equip_list,equip_num)
             for i=1,#equip do

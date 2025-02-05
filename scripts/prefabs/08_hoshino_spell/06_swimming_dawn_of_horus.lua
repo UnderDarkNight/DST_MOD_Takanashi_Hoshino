@@ -85,11 +85,14 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     -----------------------------------------------------
     ----
         if target.components.health then
-            inst:DoPeriodicTask(3,function()
+            inst:DoPeriodicTask(1,function()
                 target.components.health:DoDelta(3)
             end)
         end
     -----------------------------------------------------
+        if target.components.combat then
+            target.components.combat.externaldamagemultipliers:SetModifier(inst, 2.5)
+        end
 end
 
 local function buff_fn()

@@ -301,15 +301,15 @@ local function debuff_fn()
         -- inst.Network:SetClassifiedTarget(target)
         inst.Transform:SetPosition(0, 0, 0)
         -----------------------------------------------------
-        --- 60%减伤
-            target.components.combat.externaldamagetakenmultipliers:SetModifier(inst, 0.4)
+        --- 80%减伤
+            target.components.health.externalabsorbmodifiers:SetModifier(inst, 0.8)
         -----------------------------------------------------
         --- 2倍攻击
             target.components.combat.externaldamagemultipliers:SetModifier(inst, 2)
         -----------------------------------------------------
-        --- 血量2倍
+        --- 血量4倍
             local max_health = target.components.health.maxhealth
-            target.components.health:SetMaxHealth(max_health*2)
+            target.components.health:SetMaxHealth(max_health*4)
         -----------------------------------------------------
         --- 位面抵抗
             if target.components.planarentity == nil then
@@ -317,8 +317,8 @@ local function debuff_fn()
             end
         -----------------------------------------------------
         --- 移速2倍
-            -- target.components.locomotor.walkspeed = target.components.locomotor.walkspeed*2
-            -- target.components.locomotor.runspeed = target.components.locomotor.runspeed*2
+            target.components.locomotor.walkspeed = target.components.locomotor.walkspeed*2
+            target.components.locomotor.runspeed = target.components.locomotor.runspeed*2
         -----------------------------------------------------
         --- 死亡广播
             target:ListenForEvent("minhealth",function()

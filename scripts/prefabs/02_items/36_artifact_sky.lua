@@ -22,7 +22,7 @@ Artifact 天
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 -- 参数
     local SPELL_ACTIVE_RADIUS = 6  --- 施法范围
-    local MAX_COOL_DOWN_TIME = 10
+    local MAX_COOL_DOWN_TIME = 15
     --- 怪物扫描的tag ，复制自 亮茄魔杖
     local BOUNCE_MUST_TAGS = { "_combat" }
     local BOUNCE_NO_TAGS = { "INLIMBO", "wall", "notarget", "player", "companion", "flight", "invisible", "noattack", "hiding" }
@@ -136,8 +136,7 @@ Artifact 天
             --     inst.components.finiteuses:Use(20)
             -- end
         --------------------------------------------------------------------------------------------
-        --- 特效
-            SpawnPrefab("moonpulse_spawner").Transform:SetPosition(pt.x,0,pt.z)
+        SpawnPrefab("moonpulse_spawner").Transform:SetPosition(pt.x,0,pt.z)
         --------------------------------------------------------------------------------------------
         return true
     end

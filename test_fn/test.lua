@@ -35,7 +35,7 @@ local flg,error_code = pcall(function()
         --             -- "card_colourful",
         --             -- "card_golden",
         --             -- "card_black",
-                    -- "the_eye_of_horus_finiteuses_down_block",
+                    "unlock_spell_all_swimming",
         --             -- "unlock_spell_normal_ex",
         --             -- "unlock_spell_swimming_ex",
         --             -- "unlock_spell_all_normal",
@@ -84,7 +84,7 @@ local flg,error_code = pcall(function()
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_23")
+        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_08")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
 
