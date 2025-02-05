@@ -132,6 +132,8 @@ local function fn()
     --------------------------------------------------------------------
     --- 容器安装
         add_container_before_not_ismastersim_return(inst)
+        inst.RemoveComponent = function(...)            
+        end
     --------------------------------------------------------------------
     if not TheWorld.ismastersim then
 
