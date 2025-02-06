@@ -216,7 +216,9 @@
                 end
             end
 
-            inst:DoTaskInTime(TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15,function()
+            local start_time_delay = TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15            
+            TheNet:Announce(tostring(start_time_delay).."秒后，你会看到一只鲨鱼和熊，请注意防护")
+            inst:DoTaskInTime(start_time_delay,function()
                 if not inst.components.hoshino_data:Get("boss_spawned") then
                     inst.components.hoshino_data:Set("boss_spawned",true)
 

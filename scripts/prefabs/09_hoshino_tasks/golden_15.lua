@@ -154,7 +154,9 @@
                 end
             end)
             --- 召唤BOSS
-            inst:DoTaskInTime(TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15,function()
+            local start_time_delay = TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15            
+            TheNet:Announce(tostring(start_time_delay).."秒后将有强大生物到达，请注意防护")
+            inst:DoTaskInTime(start_time_delay,function()
                 if not inst.components.hoshino_data:Get("boss_spawned") then
                         local pt = TUNING.HOSHINO_FNS:Get_Random_Point(Vector3(owner.Transform:GetWorldPosition()),15)
                         if type(pt) == type(Vector3(0,0,0)) then
