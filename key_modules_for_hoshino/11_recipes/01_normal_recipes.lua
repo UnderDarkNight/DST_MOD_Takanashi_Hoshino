@@ -369,23 +369,25 @@ end
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 24小时商店
 --------------------------------------------------------------------------------------------------------------------------------------------
-    AddRecipeToFilter("hoshino_building_shop24_pre","STRUCTURES")     ---- 添加物品到目标标签
-    AddRecipe2(
-        "hoshino_building_shop24_pre",            --  --  inst.prefab  实体名字
-        {Ingredient("boards", 5),Ingredient("cutstone", 5),Ingredient("gears", 1)} ,
-        TECH.NONE, --- 
-        {
-            -- nounlock=true,
-            no_deconstruction = false,
-            -- builder_tag = "hoshino",
-            atlas = "images/map_icons/hoshino_building_shop24.xml",
-            image = "hoshino_building_shop24.tex",
-            placer = "hoshino_building_shop24_pre_placer",                       -------- 建筑放置器
-            -- sg_state="carvewood",
-        },
-        {"STRUCTURES"}
-    )
-    RemoveRecipeFromFilter("hoshino_building_shop24_pre","MODS")
+    if TUNING["hoshino.Config"].ALLOW_24H_SHOP_CREATE then
+        AddRecipeToFilter("hoshino_building_shop24_pre","STRUCTURES")     ---- 添加物品到目标标签
+        AddRecipe2(
+            "hoshino_building_shop24_pre",            --  --  inst.prefab  实体名字
+            {Ingredient("boards", 5),Ingredient("cutstone", 5),Ingredient("gears", 1)} ,
+            TECH.NONE, --- 
+            {
+                -- nounlock=true,
+                no_deconstruction = false,
+                -- builder_tag = "hoshino",
+                atlas = "images/map_icons/hoshino_building_shop24.xml",
+                image = "hoshino_building_shop24.tex",
+                placer = "hoshino_building_shop24_pre_placer",                       -------- 建筑放置器
+                -- sg_state="carvewood",
+            },
+            {"STRUCTURES"}
+        )
+        RemoveRecipeFromFilter("hoshino_building_shop24_pre","MODS")
+    end
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 24小时商店 升级芯片 LV 1 - 3
 --------------------------------------------------------------------------------------------------------------------------------------------
