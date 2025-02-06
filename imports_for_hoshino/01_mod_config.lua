@@ -19,6 +19,7 @@ TUNING["hoshino.Config"].Language = GetModConfigData("LANGUAGE")
     TUNING["hoshino.Config"].LEVEL_UP_ANNOUNCEMENT = GetModConfigData("LEVEL_UP_ANNOUNCEMENT")     --- 升级通告
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 杂项
+    TUNING["hoshino.Config"].ALLOW_24H_SHOP_CREATE = GetModConfigData("ALLOW_24H_SHOP_CREATE")     --- 允许24小时商店创建
     TUNING["hoshino.Config"].CARDS_GOLDEN = GetModConfigData("CARDS_GOLDEN")     --- 金色卡牌
     TUNING["hoshino.Config"].CARDS_COLOURFUL = GetModConfigData("CARDS_COLOURFUL")     --- 彩色卡牌
 

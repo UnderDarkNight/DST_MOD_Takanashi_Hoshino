@@ -276,6 +276,16 @@ configuration_options = {
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {name = "AAAA",label = IsChinese() and GetTitle("杂项") or GetTitle("Miscellaneous"),hover = "",options = {{description = "",data = 0}},default = 0},
   {
+      name = "ALLOW_24H_SHOP_CREATE",
+      label = IsChinese() and "允许创建24H商店" or "Allow 24h Shop Create",
+      hover = IsChinese() and "允许创建24H商店" or "Allow 24h Shop Create",
+      options = {
+        {description = "OFF",data = false},
+        {description = "ON",data = true},
+      },
+      default = true
+  },
+  {
       name = "CARDS_GOLDEN",
       label = IsChinese() and "金色卡牌池" or "Golden Cards",
       hover = IsChinese() and "金色卡牌池" or "Golden Cards",

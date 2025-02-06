@@ -275,6 +275,11 @@ local function fn()
         inst:DoTaskInTime(0,function()
             if not inst.components.hoshino_data:Get("Ready") then
                 inst:Remove()
+                return
+            end
+            if not TUNING["hoshino.Config"].ALLOW_24H_SHOP_CREATE then
+                inst:Remove()
+                return
             end
         end)
     -------------------------------------------------------------------------------------
