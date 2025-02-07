@@ -9,22 +9,8 @@ local hoshino_com_tag_sys = Class(function(self, inst)
     self.inst = inst
 
     self.tags = {}
-    self._net_flag = false
-    self.__net_json = net_string(inst.GUID,"hoshino_com_tag_sys","hoshino_com_tag_sys")
-    if not TheNet:IsDedicated() then
-        self.inst:ListenForEvent("hoshino_com_tag_sys",function()
-            local str = self.__net_json:value()
-            local crash_flag, data = pcall(json.decode,str)
-            if crash_flag then
-                self.tags = data.tags or {}
-            end
-        end)
-    end
-    if TheWorld.ismastersim then
-        self.inst:DoPeriodicTask(2,function()
-            self:SendData2Client(self.tags)
-        end)
-    end
+    self.tags_by_time = {}
+
 end,
 nil,
 {
@@ -33,25 +19,28 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 ----- event push
     function hoshino_com_tag_sys:EventPush()
-        self.inst:PushEvent("hoshino_com_tag_sys.refresh")        
+        self.inst:PushEvent("hoshino_com_tag_sys.refresh")
+        
     end
 ------------------------------------------------------------------------------------------------------------------------------
 ------
-    function hoshino_com_tag_sys:SendData2Client(tags)
-        local new_table = {}
-        for tag, flag in pairs(tags) do
-            if tag and flag then
-                new_table[tag] = true
+    function hoshino_com_tag_sys:SwitchTagByCMD(cmd_table)
+        -- local rpc_data = {
+        --     ["tag_name"] = tag_name,
+        --     ["time"] = os.time(),
+        --     ["AddTag"] = true,
+        -- }
+        local current_tag = cmd_table.tag_name
+        local new_tag_time = cmd_table.time
+
+        local old_tag_time = self.tags_by_time[current_tag] or 0
+        if new_tag_time > old_tag_time then
+            self.tags_by_time[current_tag] = new_tag_time
+            if cmd_table.AddTag then
+                self.tags[current_tag] = true
+            else
+                self.tags[current_tag] = false
             end
-        end
-        self.tags = new_table
-        if TheWorld.ismastersim then
-            local send_data = {
-                tags = new_table,
-                flag = self._net_flag,
-            }
-            self.__net_json:set(json.encode(send_data))
-            self._net_flag = not self._net_flag
         end
         self:EventPush()
     end
