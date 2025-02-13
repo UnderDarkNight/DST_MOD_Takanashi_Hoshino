@@ -75,7 +75,8 @@ return function(inst)
     --- 经验值上限更新函数。模块初始化的时候也会执行一次。
         inst.components.hoshino_com_level_sys:SetMaxExpUpdateFn(function(self)
             local level = self:GetLevel()
-            local MAX_EXP_MULT = TUNING["hoshino.Config"].LEVEL_UP_MAX_EXP_MULT/1000 or 1
+            -- local MAX_EXP_MULT = TUNING["hoshino.Config"].LEVEL_UP_MAX_EXP_MULT/1000 or 1
+            local MAX_EXP_MULT = 1
             --- 更新经验曲线（修改max_exp）
                 if level < 10 then
                     self:SetMaxExp((50+60*(level-1))*MAX_EXP_MULT)
@@ -97,8 +98,14 @@ return function(inst)
                 local mult_from_debuff = inst.components.hoshino_com_debuff:GetExpMult() + 1
 
             -------------------------------------------------------------------------------
+            --- 来自设置的倍增器
+                local mult_from_setting = TUNING["hoshino.Config"].LEVEL_UP_EXP_MULT/1000
+            -------------------------------------------------------------------------------
             ---
-                inst.components.hoshino_com_level_sys:EXP_SetModifier(inst,mult_from_debuff)
+                local ret_mult = mult_from_debuff * mult_from_setting
+            -------------------------------------------------------------------------------
+            ---
+                inst.components.hoshino_com_level_sys:EXP_SetModifier(inst,ret_mult)
             -------------------------------------------------------------------------------
         end)
         inst:DoTaskInTime(1,function()

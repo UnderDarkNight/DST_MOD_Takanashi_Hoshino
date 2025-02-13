@@ -8,7 +8,7 @@ TUNING["hoshino.Config"].Language = GetModConfigData("LANGUAGE")
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- 角色配置
-    TUNING["hoshino.Config"].LEVEL_UP_MAX_EXP_MULT = GetModConfigData("LEVEL_UP_MAX_EXP_MULT")     --- 升级经验倍数
+    TUNING["hoshino.Config"].LEVEL_UP_EXP_MULT = GetModConfigData("LEVEL_UP_EXP_MULT")     --- 获得的经验 倍增器
     TUNING["hoshino.Config"].NEW_SPAWN_GIFT_TYPE = GetModConfigData("NEW_SPAWN_GIFT_TYPE")     --- 初始礼物
     TUNING["hoshino.Config"].MAX_LEVEL = GetModConfigData("MAX_LEVEL")     --- 最大等级
 
