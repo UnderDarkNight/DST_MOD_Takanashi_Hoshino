@@ -199,7 +199,7 @@ configuration_options = {
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {
-    name = "LEVEL_UP_MAX_EXP_MULT",
+    name = "LEVEL_UP_EXP_MULT",
     label = IsChinese() and "经验倍率" or "Experience Multiplier",
     hover = IsChinese() and "经验倍率" or "Experience Multiplier",
     options = Create_Percent_Setting_With_1000_Mult(100,4000,100),
