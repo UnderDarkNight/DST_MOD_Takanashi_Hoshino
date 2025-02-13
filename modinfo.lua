@@ -200,16 +200,10 @@ configuration_options = {
 ------------------------------------------------------------------------------------------------------------------------------------------------------
   {
     name = "LEVEL_UP_MAX_EXP_MULT",
-    label = IsChinese() and "升级难度" or "Experience Difficulty",
-    hover = IsChinese() and "升级难度" or "Experience Difficulty",
-    options = {
-      {description = "无双",data = 1},
-      {description = "简单",data = 2},
-      {description = "普通",data = 3},
-      {description = "困难",data = 7},
-      {description = "极难",data = 10},
-    },
-    default = 3
+    label = IsChinese() and "经验倍率" or "Experience Multiplier",
+    hover = IsChinese() and "经验倍率" or "Experience Multiplier",
+    options = Create_Percent_Setting_With_1000_Mult(100,4000,100),
+    default = 1000,
   },
   {
     name = "NEW_SPAWN_GIFT_TYPE",

@@ -75,7 +75,7 @@ return function(inst)
     --- 经验值上限更新函数。模块初始化的时候也会执行一次。
         inst.components.hoshino_com_level_sys:SetMaxExpUpdateFn(function(self)
             local level = self:GetLevel()
-            local MAX_EXP_MULT = TUNING["hoshino.Config"].LEVEL_UP_MAX_EXP_MULT or 1
+            local MAX_EXP_MULT = TUNING["hoshino.Config"].LEVEL_UP_MAX_EXP_MULT/1000 or 1
             --- 更新经验曲线（修改max_exp）
                 if level < 10 then
                     self:SetMaxExp((50+60*(level-1))*MAX_EXP_MULT)
