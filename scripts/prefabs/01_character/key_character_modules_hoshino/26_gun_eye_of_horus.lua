@@ -48,9 +48,9 @@ return function(inst)
             [3] = 60
         }
         local attack_range = {
-            [1] = 7+3,
-            [2] = 9+3,
-            [3] = 11+3,
+            [1] = 6+3,
+            [2] = 7+3,
+            [3] = 10+3,
         }
         local attack_range_offset_fix = {
             [1] = 3.0,

@@ -255,46 +255,39 @@ return function(inst)
         end
     ----------------------------------------------------------------------------------
     --- t7 施肥?  半径30码内的枯萎植物会恢复
-        if inst.level >= 7 then
-            --------------------------------------------------------------------------
-            --- 水花爆炸
-                inst:AddComponent("wateryprotection")
-                inst.components.wateryprotection.extinguishheatpercent = TUNING.FIRESUPPRESSOR_EXTINGUISH_HEAT_PERCENT
-                inst.components.wateryprotection.temperaturereduction = TUNING.FIRESUPPRESSOR_TEMP_REDUCTION
-                inst.components.wateryprotection.witherprotectiontime = TUNING.FIRESUPPRESSOR_PROTECTION_TIME
-                inst.components.wateryprotection.addcoldness = 0
-                inst.components.wateryprotection:AddIgnoreTag("player")
-                inst.components.wateryprotection:AddIgnoreTag("companion")
-            --------------------------------------------------------------------------
-            local area_fertilize_task = nil
-            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                if area_fertilize_task == nil then
-                    area_fertilize_task = inst:DoPeriodicTask(5,function()
-                                local x,y,z = owner.Transform:GetWorldPosition()
-                                local ents = TheSim:FindEntities(x,y,z,30,nil,{"burnt"})
-                                for i, temp_plant in pairs(ents) do
-                                    if temp_plant and temp_plant:IsValid() and temp_plant.components.pickable and temp_plant.components.pickable:IsBarren() and temp_plant.__hoshino_t7_barren_task == nil then
-                                        temp_plant.__hoshino_t7_barren_task = true
-                                        inst:DoTaskInTime(math.random(0,50)/10,function()
-                                            -- inst.components.wateryprotection:SpreadProtection(temp_plant)
-                                            if temp_plant and temp_plant:IsValid() then
-                                                pcall(inst.components.wateryprotection.SpreadProtection,inst.components.wateryprotection,temp_plant)
-                                                temp_plant.__hoshino_t7_barren_task = nil                                            
-                                                SpawnPrefab("glass_fx").Transform:SetPosition(temp_plant.Transform:GetWorldPosition())
-                                            end
-                                        end)
-                                    end
-                                end
-                    end)
-                end
-            end)
-            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
-                if area_fertilize_task ~= nil then
-                    area_fertilize_task:Cancel()
-                    area_fertilize_task = nil
-                end
-            end)
-        end
+    if inst.level >= 7 then
+        --------------------------------------------------------------------------
+        --- 水花爆炸
+        inst:AddComponent("wateryprotection")
+        inst.components.wateryprotection.extinguishheatpercent = TUNING.FIRESUPPRESSOR_EXTINGUISH_HEAT_PERCENT
+        inst.components.wateryprotection.temperaturereduction = TUNING.FIRESUPPRESSOR_TEMP_REDUCTION
+        inst.components.wateryprotection.witherprotectiontime = TUNING.FIRESUPPRESSOR_PROTECTION_TIME
+        inst.components.wateryprotection.addcoldness = 0
+        inst.components.wateryprotection:AddIgnoreTag("player")
+        inst.components.wateryprotection:AddIgnoreTag("companion")
+        --------------------------------------------------------------------------
+        local area_fertilize_task = nil
+        inst:ListenForEvent("Special_Fn_Active", function(inst, owner)
+            if area_fertilize_task == nil then
+                area_fertilize_task = inst:DoPeriodicTask(5, function()
+                    local x, y, z = owner.Transform:GetWorldPosition()
+                    local ents = TheSim:FindEntities(x, y, z, 120, nil, nil, { "witherable" }) -- 使用官方API查找可枯萎的实体
+                    for i, temp_plant in ipairs(ents) do
+                        if temp_plant and temp_plant:IsValid() and temp_plant.components.witherable then
+                            temp_plant.components.witherable:Protect(60) -- 使用官方API保护植物
+                            SpawnPrefab("glass_fx").Transform:SetPosition(temp_plant.Transform:GetWorldPosition()) -- 添加特效
+                        end
+                    end
+                end)
+            end
+        end)
+        inst:ListenForEvent("Special_Fn_Deactive", function(inst, owner)
+            if area_fertilize_task ~= nil then
+                area_fertilize_task:Cancel()
+                area_fertilize_task = nil
+            end
+        end)
+    end
     ----------------------------------------------------------------------------------
     --- t8 每次睡觉时获得一包升级卡包，此效果每一天仅可触发1次。检查周期 30s
         if inst.level >= 8 then

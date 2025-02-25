@@ -290,6 +290,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "让胃口更好",
                 ["recipe_desc"] = "让胃口更好",
             },
+            ["hoshino_weapon_pepe_hammer"] = {
+                ["name"] = "时光震荡",
+                ["inspect_str"] = "我要把这枚莲花纹章，盖在你的脸上！",
+                ["recipe_desc"] = "我要把这枚莲花纹章，盖在你的脸上！",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

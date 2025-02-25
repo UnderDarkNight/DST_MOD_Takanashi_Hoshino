@@ -38,7 +38,7 @@
 ----
     local function SpawnGiftByType(inst)
         if GIFT_TYPE == 6 then
-            for i = 1, 10, 1 do
+            for i = 1, 3, 1 do
                 local item = SpawnPrefab("hoshino_item_cards_pack")
                 item:PushEvent("Type","hoshino_item_cards_pack_supreme_mystery")
                 inst.components.inventory:GiveItem(item)
@@ -46,11 +46,11 @@
         elseif GIFT_TYPE == 5 then
             for i = 1, 3, 1 do
                 local item = SpawnPrefab("hoshino_item_cards_pack")
-                item:PushEvent("Type","hoshino_item_cards_pack_supreme_mystery")
+                item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
                 inst.components.inventory:GiveItem(item)
             end
         elseif GIFT_TYPE == 4 then
-            for i = 1, 3, 1 do
+            for i = 1, 1, 1 do
                 local item = SpawnPrefab("hoshino_item_cards_pack")
                 item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
                 inst.components.inventory:GiveItem(item)

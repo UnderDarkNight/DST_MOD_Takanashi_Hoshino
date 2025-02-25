@@ -80,14 +80,14 @@ return function(inst)
             --- 更新经验曲线（修改max_exp）
                 if level < 10 then
                     self:SetMaxExp((50+60*(level-1))*MAX_EXP_MULT)
-                elseif level < 40 then
-                    self:SetMaxExp((590+20*(level-10))*MAX_EXP_MULT)
+                elseif level < 50 then
+                    self:SetMaxExp((450 * math.pow(1.1, level-10))*MAX_EXP_MULT)
                 elseif level < 200 then
-                    self:SetMaxExp((1100+10*(level-40))*MAX_EXP_MULT)
+                    self:SetMaxExp((20400 * math.pow(1.08, level-50))*MAX_EXP_MULT)
                 elseif level < 400 then
-                    self:SetMaxExp((2100+5*(level-200))*MAX_EXP_MULT)
+                    self:SetMaxExp((1000000 * math.pow(1.015, level-200))*MAX_EXP_MULT)
                 else
-                    self:SetMaxExp((3100+3000*(level-400))*MAX_EXP_MULT)
+                    self:SetMaxExp((20000000+100*(level-400))*MAX_EXP_MULT)
                 end
         end)
     ----------------------------------------------------------------------------------------------------------------------------------------------------------
