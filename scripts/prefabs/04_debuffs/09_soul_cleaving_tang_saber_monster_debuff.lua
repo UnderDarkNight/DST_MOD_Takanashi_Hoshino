@@ -50,18 +50,28 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             return target_old_DoDelta(self,num, overtime, cause, ignore_invincible, afflicter, ignore_absorb,...)
         end
     -----------------------------------------------------
+    --- 意外删除,相互删。 
+        local linked_remove_event = function()
+            linked_monster:Remove()            
+        end
+        target:ListenForEvent("onremove",linked_remove_event)
+        linked_monster:ListenForEvent("onremove",function()
+            target:Remove()
+        end)
+    -----------------------------------------------------
     --- 
         inst:ListenForEvent("minhealth",function()
             linked_monster:RemoveTag("linked_by_soul_cleaving_tang_saber")
             target.components.health.DoDelta = target_old_DoDelta
             linked_monster.components.health.DoDelta = linked_monster_old_DoDelta
+            linked_monster:RemoveEventCallback("onremove",linked_remove_event) -- 解绑互删
             inst:Remove()
             local brain_debuff = linked_monster:GetDebuff("hoshino_debuff_gun_eye_of_horus_spell_monster_brain_stop")
             if brain_debuff then
                 brain_debuff:PushEvent("force_remove")
             end
         end,target)
-    -----------------------------------------------------
+    -----------------------------------------------------    
 end
 local function fn()
     local inst = CreateEntity()
