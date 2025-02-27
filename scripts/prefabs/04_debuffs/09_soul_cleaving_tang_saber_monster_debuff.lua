@@ -62,6 +62,14 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
             end
         end,target)
     -----------------------------------------------------
+    --- 意外删除,相互删。
+        linked_monster:ListenForEvent("onremove",function()
+            target:Remove()
+        end)
+        target:ListenForEvent("onremove",function()
+            linked_monster:Remove()
+        end)    
+    -----------------------------------------------------
 end
 local function fn()
     local inst = CreateEntity()
