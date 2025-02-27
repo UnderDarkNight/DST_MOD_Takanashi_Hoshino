@@ -57,7 +57,7 @@ AddReplicableComponent("hoshino_com_polymorphic_attack_action")  --- 多态攻�
             local replica_com = self.replica[name] or self.replica._[name]
             if replica_com then
                 self:PushEvent("HOSHINO_OnEntityReplicated."..tostring(name),replica_com)
-                self.replica[name] = replica_com
+                -- self.replica[name] = replica_com
             end
         end
 

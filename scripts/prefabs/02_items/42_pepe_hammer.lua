@@ -5,6 +5,8 @@ local assets =
     Asset("ANIM", "anim/fx_hoshino_hammer_hit.zip"),
     Asset( "IMAGE", "images/inventoryimages/hoshino_weapon_pepe_hammer.tex" ),
     Asset( "ATLAS", "images/inventoryimages/hoshino_weapon_pepe_hammer.xml" ),
+    Asset( "SOUND", "sound/hoshino_pepe_hammer.fsb" ),
+    Asset( "SOUNDPACKAGE", "sound/hoshino_pepe_hammer.fev" ),
 }
 local function canuse()
 	return true
@@ -102,8 +104,8 @@ local function ShouldAcceptItem(inst, item)
     (item.prefab == "goldenaxe" and inst.pepe_HasAxe == false)or
     (item.prefab == "goldenpickaxe" and inst.pepe_HasPickaxe == false)or
     (item.prefab == "goldenshovel" and inst.pepe_HasShovel == false)or
-    (item.prefab == "fishingrod" and inst.pepe_HasRod == false) or
-    (item.prefab == "bugnet" and inst.pepe_HasNet == false) or
+    --(item.prefab == "fishingrod" and inst.pepe_HasRod == false) or
+    --(item.prefab == "bugnet" and inst.pepe_HasNet == false) or
     (item.prefab == "hoshino_item_yi")
     ) then
 	   return true
@@ -152,16 +154,16 @@ local function OnGetItemFromPlayer(inst, giver, item)
     elseif item and item.prefab == "goldenshovel" then
         inst.pepe_HasShovel = true
         remove_item(item)
-    elseif item and item.prefab == "fishingrod" then
-        inst.pepe_HasRod = true
-        inst:AddComponent("fishingrod")                         --钓鱼功能
-        inst.components.fishingrod:SetWaitTimes(4, 16)           
-        inst.components.fishingrod:SetStrainTimes(60, 60)       --钓鱼功能到这里结束
-        remove_item(item)
-    elseif item and item.prefab == "bugnet" then
-        inst.pepe_HasNet = true
-        inst:AddTag("NET_tool")
-        remove_item(item)
+    --elseif item and item.prefab == "fishingrod" then
+    --    inst.pepe_HasRod = true
+    --    inst:AddComponent("fishingrod")                         --钓鱼功能
+    --    inst.components.fishingrod:SetWaitTimes(4, 16)           
+    --    inst.components.fishingrod:SetStrainTimes(60, 60)       --钓鱼功能到这里结束
+    --    remove_item(item)
+    --elseif item and item.prefab == "bugnet" then
+    --    inst.pepe_HasNet = true
+    --    inst:AddTag("NET_tool")
+    --    remove_item(item)
     elseif item and item.prefab == "hoshino_item_yi" then
         inst.pepe_level = (inst.pepe_level or 0) + 1
         inst.components.weapon:SetDamage((34 + ((inst.pepe_level or 0) * 3.4)) * (1 + (0.5*(inst.pepe_attack_times or 0))))
@@ -251,15 +253,15 @@ local function onload(inst, data)
         --
     end
 
-    if inst.pepe_HasRod and inst.pepe_HasRod == true then
-        inst:AddComponent("fishingrod")
-        inst.components.fishingrod:SetWaitTimes(4, 16)           
-        inst.components.fishingrod:SetStrainTimes(60, 60)
-    end
+    --if inst.pepe_HasRod and inst.pepe_HasRod == true then
+    --    inst:AddComponent("fishingrod")
+    --    inst.components.fishingrod:SetWaitTimes(4, 16)           
+    --    inst.components.fishingrod:SetStrainTimes(60, 60)
+    --end
 
-    if inst.pepe_HasNet and inst.pepe_HasNet == true then
-        inst:AddTag("NET_tool")
-    end
+    --if inst.pepe_HasNet and inst.pepe_HasNet == true then
+    --    inst:AddTag("NET_tool")
+    --end
 
     if inst.pepe_level then
         inst.components.weapon:SetDamage((34 + ((inst.pepe_level or 0) * 3.4)) * (1 + (0.5*(inst.pepe_attack_times or 0))))
@@ -293,6 +295,11 @@ local function onattack(inst, attacker, target)
         fx1.Transform:SetPosition(x,y,z)
         local scale = 1.5 + (.15 * (inst.pepe_attack_times or 0))
         fx1.Transform:SetScale(scale, scale, scale)
+    end
+    if (inst.pepe_attack_times or 0) >= 3 then
+        attacker.SoundEmitter:PlaySound("hoshino_pepe_hammer/hoshino_pepe_hammer/heavy_hit", nil, 1.5)
+    else
+        attacker.SoundEmitter:PlaySound("hoshino_pepe_hammer/hoshino_pepe_hammer/hit", nil, 2.1)
     end
 
     local ents = TheSim:FindEntities(x, y, z, 3 + (inst.pepe_attack_times or 0), {"_combat", "_health"}, {"INLIMBO", "FX", "wall", "smashable", "companion"}, nil)
@@ -351,8 +358,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("hammer")
-    inst.AnimState:SetBuild("swap_hammer")
+    inst.AnimState:SetBank("hoshino_weapon_pepe_hammer")
+    inst.AnimState:SetBuild("hoshino_weapon_pepe_hammer")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("hammer")
@@ -404,7 +411,7 @@ local function fn()
     inst:RemoveTag("MINE_TOOL")
 	inst:RemoveTag("HAMMER_tool")
 	inst:RemoveTag("DIG_tool")
-    inst:RemoveTag("NET_tool")
+    --inst:RemoveTag("NET_tool")
 
 	inst:AddComponent("waterproofer")
     inst.components.waterproofer:SetEffectiveness(0)
@@ -442,6 +449,10 @@ local function fn()
     inst.components.trader.onaccept = OnGetItemFromPlayer
     inst.components.trader.acceptnontradable = true --可以交易无交易组件的物品
     inst.components.trader.deleteitemonaccept = false--接受物品时不移除
+
+    inst:AddComponent("fishingrod")                         --钓鱼功能
+    inst.components.fishingrod:SetWaitTimes(4, 16)           
+    inst.components.fishingrod:SetStrainTimes(60, 60)       --钓鱼功能到这里结束
 
     return inst
 end

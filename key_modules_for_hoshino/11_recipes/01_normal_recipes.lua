@@ -427,8 +427,8 @@ AddRecipe2(
         -- nounlock=true,
         no_deconstruction=false,--属性：不可拆解，为false则为可拆解
         --builder_tag = "hoshino",    
-        --atlas = "images/inventoryimages/hoshino_weapon_gun_eye_of_horus.xml",
-        image = "hammer.tex",
+        atlas = "images/inventoryimages/hoshino_weapon_pepe_hammer.xml",
+        image = "hoshino_weapon_pepe_hammer.tex",
     },
     {"CHARACTER",}
 )
