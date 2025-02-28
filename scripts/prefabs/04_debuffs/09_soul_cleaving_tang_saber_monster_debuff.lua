@@ -53,11 +53,11 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     --- 意外删除,相互删。 
         linked_monster.____hoshino_debuff_soul_cleaving_tang_saber_monster_debuff__remove_event = function()
             target:RemoveEventCallback("onremove",target.____hoshino_debuff_soul_cleaving_tang_saber_monster_debuff__remove_event)
-            linked_monster:Remove()
+            target:Remove()
         end
         target.____hoshino_debuff_soul_cleaving_tang_saber_monster_debuff__remove_event = function()
             linked_monster:RemoveEventCallback("onremove",linked_monster.____hoshino_debuff_soul_cleaving_tang_saber_monster_debuff__remove_event)
-            target:Remove()
+            linked_monster:Remove()
         end
         target:ListenForEvent("onremove",target.____hoshino_debuff_soul_cleaving_tang_saber_monster_debuff__remove_event)
         linked_monster:ListenForEvent("onremove",linked_monster.____hoshino_debuff_soul_cleaving_tang_saber_monster_debuff__remove_event)
