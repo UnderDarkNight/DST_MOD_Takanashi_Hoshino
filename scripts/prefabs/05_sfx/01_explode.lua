@@ -102,4 +102,34 @@ local function fx()
     return inst
 end
 
-return Prefab("hoshino_sfx_explode",fx,assets)
+local function fxfn(name, bank, build, anim, fn)
+	return Prefab(name, function()
+		local inst = CreateEntity()
+		inst.entity:AddTransform()
+		inst.entity:AddAnimState()
+		inst.entity:AddNetwork()
+		
+		if not TheWorld.ismastersim then
+			return inst
+		end
+		
+		inst.AnimState:SetBank(bank)
+		inst.AnimState:SetBuild(build)
+		inst.AnimState:PlayAnimation(anim)
+		
+		if fn then
+			fn(inst)
+		end
+		inst:ListenForEvent("animover", inst.Remove)
+		return inst
+	end)
+end
+
+return fxfn("fx_hoshino_hammer_hit_ground","fx_hoshino_hammer_hit_ground","fx_hoshino_hammer_hit_ground", "0", function(inst)
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround) --设置贴地
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+end),
+
+fxfn("fx_hoshino_hammer_hit","fx_hoshino_hammer_hit","fx_hoshino_hammer_hit", "0",nil),
+
+Prefab("hoshino_sfx_explode",fx,assets)

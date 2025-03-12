@@ -597,11 +597,11 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Speed_Mult(3/100)
-                inst.components.hoshino_com_debuff:Add_Damage_Mult(8/100)
+                inst.components.hoshino_com_debuff:Add_Speed_Mult(-10/100)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(17/100)
             end,
             text = function(inst)
-                return "移动速度+3%，基础攻击伤害+8%"
+                return "【重装战士】\n移动速度-10%，基础攻击伤害+17%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

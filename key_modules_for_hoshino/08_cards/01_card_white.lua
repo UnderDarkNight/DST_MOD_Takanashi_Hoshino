@@ -108,10 +108,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.03)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.02)
             end,
             text = function(inst)
-                return "攻击伤害+3%"
+                return "攻击伤害+2%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -254,7 +254,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.07)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(0.05)
                 local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
                 while true do
                     local debuff_inst = inst:GetDebuff(debuff_prefab)
@@ -266,7 +266,7 @@ local cards = {
                 inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
             end,
             text = function(inst)
-                return "【邪咒】攻击伤害+7%\n接下来两天内每次失去san时会流失等量生命"
+                return "【邪咒】攻击伤害+5%\n接下来两天内每次失去san时会流失等量生命"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -415,3 +415,21 @@ end
         )
         RemoveRecipeFromFilter(chip_prefab,"MODS")
     end
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 时光震荡
+--------------------------------------------------------------------------------------------------------------------------------------------
+AddRecipeToFilter("hoshino_weapon_pepe_hammer","CHARACTER")     ---- 添加物品到目标标签
+AddRecipe2(
+    "hoshino_weapon_pepe_hammer",            --  --  inst.prefab  实体名字
+    { Ingredient("marble", 6),Ingredient("pigskin", 4),Ingredient("goldnugget", 22) }, 
+    TECH.SCIENCE_ONE, --科学一本 
+    {
+        -- nounlock=true,
+        no_deconstruction=false,--属性：不可拆解，为false则为可拆解
+        --builder_tag = "hoshino",    
+        atlas = "images/inventoryimages/hoshino_weapon_pepe_hammer.xml",
+        image = "hoshino_weapon_pepe_hammer.tex",
+    },
+    {"CHARACTER",}
+)
+RemoveRecipeFromFilter("hoshino_weapon_pepe_hammer","MODS")

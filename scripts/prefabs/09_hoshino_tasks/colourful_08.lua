@@ -190,7 +190,9 @@
                 return ret_table,num
             end
             local spider_prefabs,spider_num = GetSpiders()
-            inst:DoTaskInTime(TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15,function()
+            local start_time_delay = TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15            
+            TheNet:Announce(tostring(start_time_delay).."秒后将有蜘蛛大军到达，请注意防护")
+            inst:DoTaskInTime(start_time_delay,function()
                 if not inst.components.hoshino_data:Get("monster_spawned") then
                     -- inst.components.hoshino_data:Set("monster_spawned",true)
                     local spider_prefabs,spider_num = GetSpiders()

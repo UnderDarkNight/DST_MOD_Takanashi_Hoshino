@@ -117,7 +117,7 @@ return function(inst)
     --- 速度控制
         inst:ListenForEvent("hoshino_event.spell_type_changed",function()
             if inst:Hoshino_Get_Spell_Type() == SWIMMING_TYPE then
-                inst.components.locomotor:SetExternalSpeedMultiplier(temp_inst, "hoshino_spell_type_speed", 1.25)
+                inst.components.locomotor:SetExternalSpeedMultiplier(temp_inst, "hoshino_spell_type_speed", 1.1)
             else
                 inst.components.locomotor:SetExternalSpeedMultiplier(temp_inst, "hoshino_spell_type_speed", 1.0)
             end

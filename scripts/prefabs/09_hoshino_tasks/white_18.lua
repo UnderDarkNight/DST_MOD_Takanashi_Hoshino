@@ -166,7 +166,9 @@
                 end
             end)
 
-            inst:DoTaskInTime(TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15,function()
+            local start_time_delay = TUNING.HOSHINO_DEBUGGING_MODE and 5 or 15            
+            TheNet:Announce(tostring(start_time_delay).."秒后将有蜘蛛潮到达，请注意防护")
+            inst:DoTaskInTime(start_time_delay,function()
                 if not inst.components.hoshino_data:Get("spider_spawned") then
                         for i = 1, 32, 1 do
                             owner:DoTaskInTime(0.2*i,function()

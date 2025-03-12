@@ -7,7 +7,7 @@ author = "天就是天 幕夜之下 树萝莉"
 ---                   第二位为大版本号，进行主题更新、大DLC发布的时候进行增量。
 ---                   第一位暂时预留。 
 ----------------------------------------------------------------------------
-local the_version = "1.00.00.16"
+local the_version = "1.00.00.19"
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 -- 语言相关的基础API  ---- 参数表： loc.lua 里面的localizations 表，code 为 这里用的index
@@ -213,9 +213,9 @@ configuration_options = {
       {description = "基础之理 x1",data = 1},
       {description = "神秘核心 x1",data = 2},
       {description = "神秘核心 x3",data = 3},
-      {description = "窥秘权柄 x3",data = 4},
-      {description = "最高神秘 x3",data = 5},
-      {description = "最高神秘 x10",data = 6},
+      {description = "窥秘权柄 x1",data = 4},
+      {description = "窥秘权柄 x3",data = 5},
+      {description = "最高神秘 x3",data = 6},
     },
     default = 1
   },
@@ -226,6 +226,7 @@ configuration_options = {
     options = {
       {description = "20",data = 20},
       {description = "50",data = 50},
+      {description = "75",data = 75},
       {description = "100",data = 100},
       {description = "200",data = 200},
       {description = "300",data = 300},

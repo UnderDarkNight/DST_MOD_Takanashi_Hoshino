@@ -59,7 +59,9 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
 
             --- 刷新距离参数
             for player, _ in pairs(inst.player_list) do
-                inst.player_list[player] = player:GetDistanceSqToInst(target)
+                if player and player:IsValid() then  -- 检查玩家是否有效
+                    inst.player_list[player] = player:GetDistanceSqToInst(target)
+                end
             end
             --- 遍历玩家
             local need_to_remove_list = {}

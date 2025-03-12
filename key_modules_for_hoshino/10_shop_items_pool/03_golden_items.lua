@@ -300,19 +300,6 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   is_permanent = false, -- 是否永久。0 非永久 1 永久
 },
 -----------------------------------------------------------
---  houndstooth_blowpipe
-{
-  prefab = "houndstooth_blowpipe",
-  bg = "item_slot_golden.tex",
-  icon = {atlas = GetInventoryItemAtlas("houndstooth_blowpipe.tex"), image = "houndstooth_blowpipe.tex"},
-  price = 1, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "laplite", -- 货币需求。
-  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
 --  shadowheart
 {
   prefab = "shadowheart",
@@ -332,19 +319,6 @@ TUNING.HOSHINO_SHOP_ITEMS_POOL["golden"] = {
   bg = "item_slot_golden.tex",
   icon = {atlas = GetInventoryItemAtlas("moonstorm_static_item.tex"), image = "moonstorm_static_item.tex"},
   price = 1800, -- 价格
-  num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
-  price_type = "credit_coins", -- 货币需求。
-  level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
-  type = "special", -- 类型。normal special 。这个可以不下发。
-  is_permanent = false, -- 是否永久。0 非永久 1 永久
-},
------------------------------------------------------------
---  hoshino_item_cards_pack_authority_to_unveil_secrets
-{
-  prefab = "hoshino_item_cards_pack_authority_to_unveil_secrets",
-  bg = "item_slot_golden.tex",
-  icon = {atlas = "images/inventoryimages/hoshino_item_cards_pack_authority_to_unveil_secrets.xml", image = "hoshino_item_cards_pack_authority_to_unveil_secrets.tex"},
-  price = 4200, -- 价格
   num_to_give = 1, -- 单次购买的数量。【注意】nil 自动处理为1。
   price_type = "credit_coins", -- 货币需求。
   level = 2, -- 等级限制。这个可以不下发。用来解锁。 【注意】做nil 自动处理为0。
