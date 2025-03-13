@@ -647,11 +647,14 @@ local cards = {
                 local following_prefab = {}
                 local num = 0
                 for monster, v in pairs(inst.components.leader.followers) do
-                    if monster and monster:IsValid() then
+                    if monster and monster:IsValid() and monster.components.combat then
                         table.insert(following_prefab,monster.prefab)
                         monster:Remove()
                         num = num + 1
                     end
+                end
+                if num == 0 then
+                    return
                 end
                 local x,y,z = inst.Transform:GetWorldPosition()
                 local ret_monster_prefab = following_prefab[math.random(#following_prefab)]
