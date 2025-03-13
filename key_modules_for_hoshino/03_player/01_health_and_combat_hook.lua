@@ -48,11 +48,22 @@ AddPlayerPostInit(function(inst)
             inst:AddComponent("hoshino_com_combat_hooker")
 
             if inst.components.combat then
-                local old_GetAttacked = inst.components.combat.GetAttacked
-                inst.components.combat.GetAttacked = function(self, attacker, damage, weapon, stimuli, spdamage,...)
-                    damage,spdamage = self.inst.components.hoshino_com_combat_hooker:Active(attacker,damage,weapon,stimuli,spdamage,...)
-                    return old_GetAttacked(self, attacker, damage, weapon, stimuli, spdamage,...)
-                end
+                ------------------------------------------------------------------------
+                --- GetAttacked
+                    local old_GetAttacked = inst.components.combat.GetAttacked
+                    inst.components.combat.GetAttacked = function(self, attacker, damage, weapon, stimuli, spdamage,...)
+                        damage,spdamage = self.inst.components.hoshino_com_combat_hooker:GetAttackedActive(attacker,damage,weapon,stimuli,spdamage,...)
+                        return old_GetAttacked(self, attacker, damage, weapon, stimuli, spdamage,...)
+                    end
+                ------------------------------------------------------------------------
+                --- CalcDamage
+                    local old_CalcDamage = inst.components.combat.CalcDamage
+                    inst.components.combat.CalcDamage = function(self,target, weapon, multiplier,...)
+                        local origin_ret = {old_CalcDamage(self,target, weapon, multiplier,...)}
+                        origin_ret[1],origin_ret[2] = self.inst.components.hoshino_com_combat_hooker:ActiveCalcDamage(target,origin_ret[1],origin_ret[2],weapon,multiplier)
+                        return unpack(origin_ret)
+                    end
+                ------------------------------------------------------------------------
                 print("info : combat hooker added")
                 inst.components.combat.hoshino_test_fn = function()
                     print("info : combat hooker test fn")

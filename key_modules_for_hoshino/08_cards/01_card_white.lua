@@ -518,6 +518,51 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】 【格斗高手】你使用攻击距离小于等于2的武器时伤害+12%（可叠加）
+        ["weapon_damage_up_by_range"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_weapon_dmg_up_by_range","hoshino_card_debuff_weapon_dmg_up_by_range")
+            end,
+            text = function(inst)
+                return "【格斗高手】你使用攻击距离小于等于2的武器时伤害+12%（可叠加）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】 【重装战士】移速-10% 基础攻击+5%，受到的伤害*0.95（此效果全部为乘算叠加，即选n次卡之后受伤为0.95n）
+        ["armored_warrior"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_armored_warrior","hoshino_card_debuff_armored_warrior")
+            end,
+            text = function(inst)
+                return "【重装战士】移速-10%*X(-最多90%) \n基础攻击+5%*X，受到的伤害*0.95*X"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】 【雨中漫步】当你的潮湿度大于50时，造成的基础伤害提升10% (可叠加)
+        ["moisture_and_dmg"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_moisture_and_dmg","hoshino_card_debuff_moisture_and_dmg")
+            end,
+            text = function(inst)
+                return "【雨中漫步】当你的潮湿度大于50时，造成的基础伤害提升10%*X"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

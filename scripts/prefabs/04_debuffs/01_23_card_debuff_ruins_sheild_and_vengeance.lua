@@ -17,7 +17,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     --- 
         local working_task = nil
         local sheild_inst = nil
-        target.components.hoshino_com_combat_hooker:Add_Modifier(inst,function(player,attacker, damage, weapon, stimuli, spdamage)
+        target.components.hoshino_com_combat_hooker:Add_GetAttacked_Modifier(inst,function(player,attacker, damage, weapon, stimuli, spdamage)
             if working_task then
                 --- 处理吸血
                 local vengeance_percent = player.components.hoshino_com_debuff:Add("hoshino_card_debuff_ruins_sheild_and_vengeance",0)

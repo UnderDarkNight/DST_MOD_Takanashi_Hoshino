@@ -86,9 +86,7 @@ local flg,error_code = pcall(function()
         -- SpawnPrefab("hoshino_sfx_explode"):PushEvent("Set",{
         --     target = ThePlayer,
         -- })
-        for i = 1, 10, 1 do
-            ThePlayer:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
-        end
+        ThePlayer:AddDebuff("hoshino_card_debuff_weapon_dmg_up_by_range","hoshino_card_debuff_weapon_dmg_up_by_range")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
