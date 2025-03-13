@@ -64,6 +64,8 @@ local prefabs_name_list = {
     "08_gun_eye_of_horus_spell_monster_brain_stop",                 --- 荷鲁斯之眼 战术镇压 的笨怪deubff
 
     "09_soul_cleaving_tang_saber_monster_debuff",                 --- 灵魂撕裂 剑术 的笨怪deubff
+
+    "10_bomb_shield",                 --- 爆炸护盾
 }
 
 ---------------------------------------------------------------------------

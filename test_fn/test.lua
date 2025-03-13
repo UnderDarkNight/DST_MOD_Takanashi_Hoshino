@@ -79,8 +79,16 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        ThePlayer.components.hoshino_com_debuff:Add_Planar_Defense(200)
-        
+        -- ThePlayer.components.hoshino_com_debuff:Add_Planar_Defense(200)
+        -- ThePlayer.components.hoshino_com_inventory_custom_apply_damage:AddBeforeApplyDamageFn(ThePlayer,function(inst,damage, attacker, weapon, spdamage)
+        --     return 0,nil
+        -- end)
+        -- SpawnPrefab("hoshino_sfx_explode"):PushEvent("Set",{
+        --     target = ThePlayer,
+        -- })
+        for i = 1, 10, 1 do
+            ThePlayer:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
+        end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
