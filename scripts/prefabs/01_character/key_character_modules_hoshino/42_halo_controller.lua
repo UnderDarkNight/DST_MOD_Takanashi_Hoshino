@@ -10,6 +10,12 @@ return function(inst)
     if not TheWorld.ismastersim then
         return
     end
+    local function get_halo_light_radius()
+        if inst.components.hoshino_com_debuff then
+            return inst.components.hoshino_com_debuff:Get_Halo_Radius()
+        end
+        return 0
+    end
     local light_fx = nil
     local function CreateLight()
         if light_fx and light_fx:IsValid() then
@@ -19,7 +25,7 @@ return function(inst)
 
         light_fx.Light:SetFalloff(0.6)
         light_fx.Light:SetIntensity(.35)
-        light_fx.Light:SetRadius(1)
+        light_fx.Light:SetRadius(1 + get_halo_light_radius())
         light_fx.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
 
         -- if inst.__light_test then
