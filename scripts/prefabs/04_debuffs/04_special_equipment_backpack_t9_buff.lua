@@ -22,7 +22,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     -----------------------------------------------------
     --- 
         if target.components.hoshino_com_combat_hooker then
-            target.components.hoshino_com_combat_hooker:Add_Modifier(inst,function(player,attacker, damage, weapon, stimuli, spdamage)
+            target.components.hoshino_com_combat_hooker:Add_GetAttacked_Modifier(inst,function(player,attacker, damage, weapon, stimuli, spdamage)
                 -- print("特殊装备背包T9 BUFF 函数 开始")
                 --------------------------------------------
                 -- 

@@ -34,70 +34,43 @@
         --------------------------------------------------------------------------------
         --- 血量上限
             function self:Add_Max_Helth(value)
-                local current_max_health = inst.components.health.maxhealth
-                inst.components.health.maxhealth = current_max_health + value
-                inst.components.health:DoDelta(value)
+                inst.components.hoshino_com_max_value_controller:AddTempExtraHealth(GetSpeedMultInst(self),value)
             end
-            self:AddOnSaveFn(function()
-                self:Set("max_health",inst.components.health.maxhealth)
-                self:Set("current_health",inst.components.health.currenthealth)
-            end)
             self:AddOnLoadFn(function()
                 local max_health = self:Get("max_health")
-                local current_health = self:Get("current_health")
-                if max_health and current_health then
-                    inst.components.health.maxhealth = max_health
-                    inst.components.health.currenthealth = current_health
+                if max_health then
+                    inst.components.hoshino_com_max_value_controller:AddTempExtraHealth(GetSpeedMultInst(self),max_health)
+                    self:Set("max_health",nil)
                 end
-                self:Set("max_health",nil)
-                self:Set("current_health",nil)
             end)
         --------------------------------------------------------------------------------
         --- San上限
             function self:Add_Max_Sanity(value)
-                local current_max_sanity = inst.components.sanity.max
-                inst.components.sanity.max = current_max_sanity + value
-                inst.components.sanity:DoDelta(value)
+                inst.components.hoshino_com_max_value_controller:AddTempExtraSanity(GetSpeedMultInst(self),value)
             end
-            self:AddOnSaveFn(function()
-                self:Set("max_sanity",inst.components.sanity.max)
-                self:Set("current_sanity",inst.components.sanity.current)
-            end)
             self:AddOnLoadFn(function()
                 local max_sanity = self:Get("max_sanity")
-                local current_sanity = self:Get("current_sanity")
-                if max_sanity and current_sanity then
-                    inst.components.sanity.max = max_sanity
-                    inst.components.sanity.current = current_sanity
+                if max_sanity then
+                    inst.components.hoshino_com_max_value_controller:AddTempExtraSanity(GetSpeedMultInst(self),max_sanity)
+                    self:Set("max_sanity",nil)
                 end
-                self:Set("max_sanity",nil)
-                self:Set("current_sanity",nil)
             end)
         --------------------------------------------------------------------------------
         --- hunger 上限
             function self:Add_Max_Hunger(value)
-                local current_max_hunger = inst.components.hunger.max
-                inst.components.hunger.max = current_max_hunger + value
-                inst.components.hunger:DoDelta(1)
+                inst.components.hoshino_com_max_value_controller:AddTempExtraHunger(GetSpeedMultInst(self),value)
             end
-            self:AddOnSaveFn(function()
-                self:Set("max_hunger",inst.components.hunger.max)
-                self:Set("current_hunger",inst.components.hunger.current)
-            end)
             self:AddOnLoadFn(function()
                 local max_hunger = self:Get("max_hunger")
-                local current_hunger = self:Get("current_hunger")
-                if max_hunger and current_hunger then
-                    inst.components.hunger.max = max_hunger
-                    inst.components.hunger.current = current_hunger
+                if max_hunger then
+                    inst.components.hoshino_com_max_value_controller:AddTempExtraHunger(GetSpeedMultInst(self),max_hunger)
+                    self:Set("max_hunger",nil)
                 end
-                self:Set("max_hunger",nil)
-                self:Set("current_hunger",nil)
             end)
         --------------------------------------------------------------------------------
         --- 移动速度加成
             function self:Add_Speed_Mult(value)
-                local speed_mult = self:Add("speed_mult",value) + 1
+                local speed_mult = math.max(self:Add("speed_mult",value) + 1,0.01)
                 inst.components.locomotor:SetExternalSpeedMultiplier(GetSpeedMultInst(self), "hoshino_com_debuff_speed_mult",speed_mult)
             end
             self:AddOnLoadFn(function()
@@ -246,7 +219,7 @@
         --------------------------------------------------------------------------------
         -- 位面防御
             function self:Add_Planar_Defense(value)
-                self:Add("planar_defense_value",value)
+                self:Add("planar_defense_value",value,0,1000000000000000000)
                 self.inst:PushEvent("hoshino_other_armor_item_param_refresh")
             end
             function self:Get_Planar_Defense()
@@ -296,6 +269,22 @@
                 return self:Add("health_down_reduce",0)
             end
         --------------------------------------------------------------------------------
+        --- 光环半径
+            function self:Add_Halo_Radius(value)
+                self:Add("halo_radius",value)
+            end
+            function self:Get_Halo_Radius()
+                return self:Add("halo_radius",0)
+            end
+        --------------------------------------------------------------------------------
+        --- 猪王交易和宝石概率
+            function self:Add_PigKing_Trade_And_Gems_Percent(value)
+                self:Add("pigking_trade_and_gems_percent",value,0,1)
+            end
+            function self:Get_PigKing_Trade_And_Gems_Percent()
+                return self:Add("pigking_trade_and_gems_percent",0)
+            end
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组
@@ -337,12 +326,11 @@
     end
 ------------------------------------------------------------------------------------------------------------------------------
 ----- 数据读取/储存
-
-    function hoshino_com_debuff:Get(index)
+    function hoshino_com_debuff:Get(index,default)
         if index then
-            return self.DataTable[index]
+            return self.DataTable[index] or default
         end
-        return nil
+        return default
     end
     function hoshino_com_debuff:Set(index,theData)
         if index then
@@ -350,10 +338,15 @@
         end
     end
 
-    function hoshino_com_debuff:Add(index,num)
+    function hoshino_com_debuff:Add(index,num,min,max)
         if index then
-            self.DataTable[index] = (self.DataTable[index] or 0) + ( num or 0 )
-            return self.DataTable[index]
+            if max == nil and min == nil then
+                self.DataTable[index] = (self.DataTable[index] or 0) + ( num or 0 )
+                return self.DataTable[index]
+            elseif type(max) == "number" and type(min) == "number" then
+                self.DataTable[index] = math.clamp( (self.DataTable[index] or 0) + ( num or 0 ) , min , max )
+                return self.DataTable[index]
+            end                    
         end
         return 0
     end

@@ -56,7 +56,7 @@ return function(inst)
     ----------------------------------------------------------------------------------------
     ---
         inst:DoTaskInTime(0,function()
-            inst.components.hoshino_com_combat_hooker:Add_Modifier(temp_inst,function(inst,attacker, damage, weapon, stimuli, spdamage)
+            inst.components.hoshino_com_combat_hooker:Add_GetAttacked_Modifier(temp_inst,function(inst,attacker, damage, weapon, stimuli, spdamage)
                 if blocking_flag then
                     return 0,nil
                 else

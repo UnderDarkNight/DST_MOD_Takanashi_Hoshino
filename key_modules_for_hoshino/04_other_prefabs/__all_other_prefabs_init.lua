@@ -15,3 +15,6 @@ modimport("key_modules_for_hoshino/04_other_prefabs/04_cursed_monkey_token.lua")
 
 modimport("key_modules_for_hoshino/04_other_prefabs/05_tumbleweed.lua") 
 -- 风滚草 hook
+
+modimport("key_modules_for_hoshino/04_other_prefabs/06_pigking.lua") 
+-- 猪王交易和宝石概率

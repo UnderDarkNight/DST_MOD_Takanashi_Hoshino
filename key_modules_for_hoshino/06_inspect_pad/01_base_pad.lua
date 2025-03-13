@@ -50,6 +50,11 @@ AddPrefabPostInit(
                 root:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)   --- 缩放模式
                 root:SetPosition(180,0)
             -----------------------------------------------------------------------------------
+            --- 回环event
+                root.inst:ListenForEvent("onremove",function()
+                    ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_close")
+                end)
+            -----------------------------------------------------------------------------------
             ---
                 local MainScale = 0.6
             -----------------------------------------------------------------------------------

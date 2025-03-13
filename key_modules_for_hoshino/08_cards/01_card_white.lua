@@ -518,6 +518,217 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】 【格斗高手】你使用攻击距离小于等于2的武器时伤害+12%（可叠加）
+        ["weapon_damage_up_by_range"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_weapon_dmg_up_by_range","hoshino_card_debuff_weapon_dmg_up_by_range")
+            end,
+            text = function(inst)
+                return "【格斗高手】你使用攻击距离小于等于2的武器时伤害+12%（可叠加）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】 【重装战士】移速-10% 基础攻击+5%，受到的伤害*0.95（此效果全部为乘算叠加，即选n次卡之后受伤为0.95n）
+        ["armored_warrior"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_armored_warrior","hoshino_card_debuff_armored_warrior")
+            end,
+            text = function(inst)
+                return "【重装战士】移速-10%*X(-最多90%) \n基础攻击+5%*X，受到的伤害*0.95*X"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】 【雨中漫步】当你的潮湿度大于50时，造成的基础伤害提升10% (可叠加)
+        ["moisture_and_dmg"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_moisture_and_dmg","hoshino_card_debuff_moisture_and_dmg")
+            end,
+            text = function(inst)
+                return "【雨中漫步】当你的潮湿度大于50时，造成的基础伤害提升10%*X"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】 【苦路】你的饥饿，san，血量立刻开始以10/s的速度降低，在其中一项达到0的时候停止，你在此期间内每降低一点饥饿/san/血量就会获得2信用点
+        ["road_of_pain"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_road_of_pain_"..math.random(1000000),"hoshino_card_debuff_road_of_pain")
+            end,
+            text = function(inst)
+                return "【苦路】你的饥饿，san，血量立刻开始以10/s的速度降低，在其中一项达到0的时候停止。\n你在此期间内每降低一点饥饿/san/血量就会获得2信用点"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【电灯泡】你的光环发光半径+0.1（发光范围叠加）
+        ["halo_radius_up"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Halo_Radius(0.1)
+            end,
+            text = function(inst)
+                return "【电灯泡】你的光环发光半径+0.1（发光范围叠加）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【窃贼】击杀血量高于50的生物会获得2信用点 【选择之后从卡组移除】
+        ["kill_and_coins_up_thief"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                for i = 1, 10, 1 do
+                    if inst:GetDebuff("hoshino_card_debuff_kill_and_coins_up_thief") then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local test_num = 10
+                while test_num > 0 do
+                    inst:AddDebuff("hoshino_card_debuff_kill_and_coins_up_thief","hoshino_card_debuff_kill_and_coins_up_thief")
+                    test_num = test_num - 1
+                end
+            end,
+            text = function(inst)
+                return "【窃贼】击杀血量高于50的生物会获得2信用点\n【选择之后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【嗝屁猫的尾巴】将金卡权重提高1，诅咒卡权重提高0.5
+        ["the_tail_of_the_fart_cat"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_golden",1)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_black",0.5)
+            end,
+            text = function(inst)
+                return "【嗝屁猫的尾巴】将金卡权重提高1，诅咒卡权重提高0.5"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【形变】将你的所有随从变为永久跟随你的同一种，并恢复满血
+        ["set_the_same_followers"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                if inst.components.leader:CountFollowers() <= 0 then
+                    return
+                end
+                local following_prefab = {}
+                local num = 0
+                for monster, v in pairs(inst.components.leader.followers) do
+                    if monster and monster:IsValid() and monster.components.combat then
+                        table.insert(following_prefab,monster.prefab)
+                        monster:Remove()
+                        num = num + 1
+                    end
+                end
+                if num == 0 then
+                    return
+                end
+                local x,y,z = inst.Transform:GetWorldPosition()
+                local ret_monster_prefab = following_prefab[math.random(#following_prefab)]
+                for i = 1, num, 1 do
+                    local temp_monster = SpawnPrefab(ret_monster_prefab)
+                    temp_monster.Transform:SetPosition(x+math.random(-20,20)/10,0,z+math.random(-20,20)/10)
+                    inst:PushEvent("makefriend")
+                    inst.components.leader:AddFollower(temp_monster)
+                    SpawnPrefab("crab_king_shine").Transform:SetPosition(temp_monster.Transform:GetWorldPosition())                    
+                end
+            end,
+            text = function(inst)
+                return "【形变】将你的所有随从变为永久跟随你的同一种，并恢复满血"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【空投支援】 接下来3天内获得物资支援，每到新的一天时在从空中落下一个物资支援包 其内从以下四种物品中随机出现一种(土豆手雷*4 12号霰弹*10 神名文字碎片*1 能量药水*3 )
+        ["air_drop_support"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_air_drop_support","hoshino_card_debuff_air_drop_support")
+            end,
+            text = function(inst)
+                return "【白】【空投支援】接下来3天内获得物资支援，每到新的一天时在从空中落下一个物资支援包\n天数叠加"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【交易高手】与猪王交易时2.5%额外获得一颗随机初级宝石【红，蓝，紫】，达到100%后移除
+        ["trading_master_pigking_and_gems"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_PigKing_Trade_And_Gems_Percent() < 1
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_PigKing_Trade_And_Gems_Percent(2.5/100)
+                inst:AddDebuff("hoshino_card_debuff_trading_master_pigking_and_gems","hoshino_card_debuff_trading_master_pigking_and_gems")
+            end,
+            text = function(inst)
+                return "【交易高手】与猪王交易时2.5%额外获得一颗随机初级宝石【红/蓝/紫】，达到100%后移除"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【似曾相识】标记月岛和远古的位置（选择后从卡池移除）
+        --【笔记】不能在平板开启状态下 执行代码，容易造成玩家脱控。通过debuff 中转
+        -- 平板关闭后再执行坐标查看。
+        ["mark_moon_land_and_ancient_land"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                if TheWorld:HasTag("cave") and not inst.components.hoshino_com_debuff:Get("mark_moon_land_and_ancient_land.cave") then
+                    return true
+                elseif not TheWorld:HasTag("cave") and not inst.components.hoshino_com_debuff:Get("mark_moon_land_and_ancient_land.ground") then
+                    return true
+                end
+                return false
+            end,
+            fn = function(inst)
+                if TheWorld:HasTag("cave") then
+                    inst.components.hoshino_com_debuff:Set("mark_moon_land_and_ancient_land.cave",true)
+                else                    
+                    inst.components.hoshino_com_debuff:Set("mark_moon_land_and_ancient_land.ground",true)
+                end
+                inst:AddDebuff("hoshino_card_debuff_mark_moon_land_and_ancient_land","hoshino_card_debuff_mark_moon_land_and_ancient_land")
+            end,
+            text = function(inst)
+                return "【似曾相识】标记月岛和远古的位置（选择后从卡池移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

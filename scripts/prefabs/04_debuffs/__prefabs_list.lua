@@ -51,6 +51,14 @@ local prefabs_name_list = {
     "01_21_card_debuff_level_up_and_double_card_pack",                      --- 卡牌debuff：升级和双倍卡包
     "01_22_card_debuff_absolute_defense",                                   --- 卡牌debuff：绝对防御
     "01_23_card_debuff_ruins_sheild_and_vengeance",                         --- 卡牌debuff：铥矿护盾和吸血
+    "01_24_card_debuff_weapon_dmg_up_by_range",                             --- 卡牌debuff：武器伤害随距离增加
+    "01_25_card_debuff_armored_warrior",                                    --- 卡牌debuff：重装战士
+    "01_26_card_debuff_moisture_and_dmg",                                   --- 卡牌debuff：湿度和伤害
+    "01_27_card_debuff_road_of_pain",                                       --- 卡牌debuff：痛苦之路
+    "01_28_card_debuff_kill_and_coins_up_thief",                            --- 卡牌debuff：击杀和金币增加
+    "01_29_card_debuff_air_drop_support",                                   --- 卡牌debuff：空投支援
+    "01_30_card_debuff_trading_master_pigking_and_gems",                    --- 卡牌debuff：猪王交易和宝石
+    "01_31_card_debuff_mark_moon_land_and_ancient_land",                    --- 卡牌debuff：标记月岛和远古的位置
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
@@ -64,6 +72,8 @@ local prefabs_name_list = {
     "08_gun_eye_of_horus_spell_monster_brain_stop",                 --- 荷鲁斯之眼 战术镇压 的笨怪deubff
 
     "09_soul_cleaving_tang_saber_monster_debuff",                 --- 灵魂撕裂 剑术 的笨怪deubff
+
+    "10_bomb_shield",                 --- 爆炸护盾
 }
 
 ---------------------------------------------------------------------------

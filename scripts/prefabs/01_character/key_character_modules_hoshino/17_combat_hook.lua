@@ -16,7 +16,7 @@ return function(inst)
 
     --     local old_GetAttacked = inst.components.combat.GetAttacked
     --     inst.components.combat.GetAttacked = function(self, attacker, damage, weapon, stimuli, spdamage,...)
-    --         damage,spdamage = self.inst.components.hoshino_com_combat_hooker:Active(attacker,damage,weapon,stimuli,spdamage,...)
+    --         damage,spdamage = self.inst.components.hoshino_com_combat_hooker:GetAttackedActive(attacker,damage,weapon,stimuli,spdamage,...)
     --         return old_GetAttacked(self, attacker, damage, weapon, stimuli, spdamage,...)
     --     end
 
