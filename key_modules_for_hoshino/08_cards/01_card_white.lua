@@ -617,6 +617,22 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【嗝屁猫的尾巴】将金卡权重提高1，诅咒卡权重提高0.5
+        ["the_tail_of_the_fart_cat"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_golden",1)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_black",0.5)
+            end,
+            text = function(inst)
+                return "【嗝屁猫的尾巴】将金卡权重提高1，诅咒卡权重提高0.5"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
