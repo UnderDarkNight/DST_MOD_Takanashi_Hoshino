@@ -87,7 +87,33 @@ local flg,error_code = pcall(function()
         --     target = ThePlayer,
         -- })
         -- ThePlayer:AddDebuff("hoshino_card_debuff_weapon_dmg_up_by_range","hoshino_card_debuff_weapon_dmg_up_by_range")
-        print(math.random(-10,10))
+        -- print(math.random(-10,10))
+        -- local item = SpawnPrefab("log")
+        -- -- item.Transform:SetPosition(x,y,z)
+        -- -- LaunchAt(item,ThePlayer, nil, 0.2, 0.1)
+        -- local record = item:GetSaveRecord()
+        -- for k, v in pairs(record) do
+        --     print(k,v)
+        -- end
+
+        local gift_pack = SpawnPrefab("hoshino_item_special_gift_pack")
+        gift_pack:PushEvent("Set",{
+            num = math.random(6),
+            name = "AAAAA",
+            desc = "BBBBB",
+        })
+        gift_pack:PushEvent("AddItemRecord",SpawnPrefab("log"))
+        gift_pack:PushEvent("AddItemRecord",SpawnPrefab("goldnugget"))
+        gift_pack:PushEvent("AddItemRecord",SpawnPrefab("moonrocknugget"))
+
+        local s_pt = Vector3(x,y,z)
+        SpawnPrefab("hoshino_sfx_colorful_sky_door"):PushEvent("Set",{
+            pt = Vector3(s_pt.x,s_pt.y+1,s_pt.z),
+            scale = Vector3(2.5,1,2.5)
+        })
+        ThePlayer:DoTaskInTime(3,function()
+            gift_pack.Transform:SetPosition(s_pt.x,8,s_pt.z)
+        end)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

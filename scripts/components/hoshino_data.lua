@@ -42,11 +42,11 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 ----- 数据读取/储存
 
-    function hoshino_data:Get(index)
+    function hoshino_data:Get(index,default)
         if index then
-            return self.DataTable[index]
+            return self.DataTable[index] or default
         end
-        return nil
+        return default
     end
     function hoshino_data:Set(index,theData)
         if index then

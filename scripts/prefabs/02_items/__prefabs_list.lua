@@ -28,6 +28,7 @@ local Prefabs_addr_base = string.sub(temp_addr,1,temp_str_index2) .. "/"    --- 
 local prefabs_name_list = {
 
 
+    "00_special_gift_pack",                     --- 特殊礼物盒
     "01_cards_pack",                            --- 卡牌包
     "02_gun_eye_of_horus",                      --- 专属武器 荷鲁斯之眼
     "03_abydos_high_purity_alloy",              --- 阿拜索斯高纯度合金
