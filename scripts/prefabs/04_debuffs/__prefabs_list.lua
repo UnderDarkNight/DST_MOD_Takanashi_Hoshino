@@ -55,6 +55,7 @@ local prefabs_name_list = {
     "01_25_card_debuff_armored_warrior",                                    --- 卡牌debuff：重装战士
     "01_26_card_debuff_moisture_and_dmg",                                   --- 卡牌debuff：湿度和伤害
     "01_27_card_debuff_road_of_pain",                                       --- 卡牌debuff：痛苦之路
+    "01_28_card_debuff_kill_and_coins_up_thief",                            --- 卡牌debuff：击杀和金币增加
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。

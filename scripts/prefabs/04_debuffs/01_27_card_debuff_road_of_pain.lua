@@ -46,7 +46,7 @@ local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿�
                 player.components.hunger.current = player.components.hunger.current - 1
             ---------------------------------------------
             --- credit
-                player.components.hoshino_com_shop:CreditCoinDelta(2)
+                player.components.hoshino_com_shop:CreditCoinDelta(2*3)
             ---------------------------------------------
         end)
     -----------------------------------------------------

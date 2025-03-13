@@ -593,6 +593,30 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【窃贼】击杀血量高于50的生物会获得2信用点 【选择之后从卡组移除】
+        ["kill_and_coins_up_thief"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                for i = 1, 10, 1 do
+                    if inst:GetDebuff("hoshino_card_debuff_kill_and_coins_up_thief") then
+                        return false
+                    end
+                end
+                return true
+            end,
+            fn = function(inst)
+                local test_num = 10
+                while test_num > 0 do
+                    inst:AddDebuff("hoshino_card_debuff_kill_and_coins_up_thief","hoshino_card_debuff_kill_and_coins_up_thief")
+                    test_num = test_num - 1
+                end
+            end,
+            text = function(inst)
+                return "【窃贼】击杀血量高于50的生物会获得2信用点\n【选择之后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
