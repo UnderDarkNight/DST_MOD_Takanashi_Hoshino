@@ -633,6 +633,41 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【形变】将你的所有随从变为永久跟随你的同一种，并恢复满血
+        ["set_the_same_followers"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                if inst.components.leader:CountFollowers() <= 0 then
+                    return
+                end
+                local following_prefab = {}
+                local num = 0
+                for monster, v in pairs(inst.components.leader.followers) do
+                    if monster and monster:IsValid() then
+                        table.insert(following_prefab,monster.prefab)
+                        monster:Remove()
+                        num = num + 1
+                    end
+                end
+                local x,y,z = inst.Transform:GetWorldPosition()
+                local ret_monster_prefab = following_prefab[math.random(#following_prefab)]
+                for i = 1, num, 1 do
+                    local temp_monster = SpawnPrefab(ret_monster_prefab)
+                    temp_monster.Transform:SetPosition(x+math.random(-20,20)/10,0,z+math.random(-20,20)/10)
+                    inst:PushEvent("makefriend")
+                    inst.components.leader:AddFollower(temp_monster)
+                    SpawnPrefab("crab_king_shine").Transform:SetPosition(temp_monster.Transform:GetWorldPosition())                    
+                end
+            end,
+            text = function(inst)
+                return "【形变】将你的所有随从变为永久跟随你的同一种，并恢复满血"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
