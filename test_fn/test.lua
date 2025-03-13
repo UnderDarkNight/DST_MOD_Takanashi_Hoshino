@@ -96,24 +96,33 @@ local flg,error_code = pcall(function()
         --     print(k,v)
         -- end
 
-        local gift_pack = SpawnPrefab("hoshino_item_special_gift_pack")
-        gift_pack:PushEvent("Set",{
-            num = math.random(6),
-            name = "AAAAA",
-            desc = "BBBBB",
-        })
-        gift_pack:PushEvent("AddItemRecord",SpawnPrefab("log"))
-        gift_pack:PushEvent("AddItemRecord",SpawnPrefab("goldnugget"))
-        gift_pack:PushEvent("AddItemRecord",SpawnPrefab("moonrocknugget"))
+        -- local gift_pack = SpawnPrefab("hoshino_item_special_gift_pack")
+        -- gift_pack:PushEvent("Set",{
+        --     num = math.random(6),
+        --     name = "AAAAA",
+        --     desc = "BBBBB",
+        -- })
+        -- gift_pack:PushEvent("AddItemRecord",SpawnPrefab("log"))
+        -- gift_pack:PushEvent("AddItemRecord",SpawnPrefab("goldnugget"))
+        -- gift_pack:PushEvent("AddItemRecord",SpawnPrefab("moonrocknugget"))
 
-        local s_pt = Vector3(x,y,z)
-        SpawnPrefab("hoshino_sfx_colorful_sky_door"):PushEvent("Set",{
-            pt = Vector3(s_pt.x,s_pt.y+1,s_pt.z),
-            scale = Vector3(2.5,1,2.5)
-        })
-        ThePlayer:DoTaskInTime(3,function()
-            gift_pack.Transform:SetPosition(s_pt.x,8,s_pt.z)
-        end)
+        -- local s_pt = Vector3(x,y,z)
+        -- SpawnPrefab("hoshino_sfx_colorful_sky_door"):PushEvent("Set",{
+        --     pt = Vector3(s_pt.x,s_pt.y+1,s_pt.z),
+        --     scale = Vector3(2.5,1,2.5)
+        -- })
+        -- ThePlayer:DoTaskInTime(3,function()
+        --     gift_pack.Transform:SetPosition(s_pt.x,8,s_pt.z)
+        -- end)
+
+        -- local temp = {"A","B","C","KK"}
+        local temp = {
+            ["A"] = "aff",
+            ["B"] = "bff",
+            ["C"] = "cff",
+            ["KK"] = "kkk",
+        }
+        print(GetRandomItemWithIndex(temp))
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

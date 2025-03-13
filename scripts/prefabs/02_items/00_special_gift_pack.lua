@@ -28,12 +28,18 @@
 --- 
     local function unwrapped_Fn(inst,pos,doer)
         local x,y,z = inst.Transform:GetWorldPosition()
+        local launcher = doer
+        if inst.components.inventoryitem.owner then
+            x,y,z = doer.Transform:GetWorldPosition()
+        else
+            launcher = inst
+        end
         local items_record = inst.data_com:Get("data",{ items_record = {} }).items_record
         for k, temp_record in pairs(items_record) do
             local item = SpawnSaveRecord(temp_record)
             item.Transform:SetPosition(x,0,z)
             if item.components.inventoryitem then
-                LaunchAt(item,doer, nil, 0.2, 0.1)
+                LaunchAt(item,launcher, nil, 0.2, 0.1)
             end
         end
         inst:Remove()

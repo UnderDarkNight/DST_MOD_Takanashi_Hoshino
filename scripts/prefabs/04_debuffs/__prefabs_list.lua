@@ -56,6 +56,7 @@ local prefabs_name_list = {
     "01_26_card_debuff_moisture_and_dmg",                                   --- 卡牌debuff：湿度和伤害
     "01_27_card_debuff_road_of_pain",                                       --- 卡牌debuff：痛苦之路
     "01_28_card_debuff_kill_and_coins_up_thief",                            --- 卡牌debuff：击杀和金币增加
+    "01_29_card_debuff_air_drop_support",                                   --- 卡牌debuff：空投支援
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
