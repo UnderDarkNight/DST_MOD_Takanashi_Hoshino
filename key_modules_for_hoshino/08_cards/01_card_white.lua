@@ -699,6 +699,33 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【似曾相识】标记月岛和远古的位置（选择后从卡池移除）
+        --【笔记】不能在平板开启状态下 执行代码，容易造成玩家脱控。通过debuff 中转
+        -- 平板关闭后再执行坐标查看。
+        ["mark_moon_land_and_ancient_land"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                if TheWorld:HasTag("cave") and not inst.components.hoshino_com_debuff:Get("mark_moon_land_and_ancient_land.cave") then
+                    return true
+                elseif not TheWorld:HasTag("cave") and not inst.components.hoshino_com_debuff:Get("mark_moon_land_and_ancient_land.ground") then
+                    return true
+                end
+                return false
+            end,
+            fn = function(inst)
+                if TheWorld:HasTag("cave") then
+                    inst.components.hoshino_com_debuff:Set("mark_moon_land_and_ancient_land.cave",true)
+                else                    
+                    inst.components.hoshino_com_debuff:Set("mark_moon_land_and_ancient_land.ground",true)
+                end
+                inst:AddDebuff("hoshino_card_debuff_mark_moon_land_and_ancient_land","hoshino_card_debuff_mark_moon_land_and_ancient_land")
+            end,
+            text = function(inst)
+                return "【似曾相识】标记月岛和远古的位置（选择后从卡池移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

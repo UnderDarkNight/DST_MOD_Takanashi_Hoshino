@@ -36,6 +36,7 @@
             local MainScale = 0.6
             root.inst:ListenForEvent("pad_close",function()
                 root:Kill()
+                ThePlayer.replica.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_close")
             end,front_root.inst)
         -----------------------------------------------------------------------------------
         ---

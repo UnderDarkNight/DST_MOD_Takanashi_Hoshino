@@ -58,6 +58,7 @@ local prefabs_name_list = {
     "01_28_card_debuff_kill_and_coins_up_thief",                            --- 卡牌debuff：击杀和金币增加
     "01_29_card_debuff_air_drop_support",                                   --- 卡牌debuff：空投支援
     "01_30_card_debuff_trading_master_pigking_and_gems",                    --- 卡牌debuff：猪王交易和宝石
+    "01_31_card_debuff_mark_moon_land_and_ancient_land",                    --- 卡牌debuff：标记月岛和远古的位置
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
