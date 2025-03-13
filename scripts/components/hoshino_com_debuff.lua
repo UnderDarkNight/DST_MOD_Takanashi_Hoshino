@@ -281,6 +281,14 @@
                 return self:Add("halo_radius",0)
             end
         --------------------------------------------------------------------------------
+        --- 猪王交易和宝石概率
+            function self:Add_PigKing_Trade_And_Gems_Percent(value)
+                self:Add("pigking_trade_and_gems_percent",value,0,1)
+            end
+            function self:Get_PigKing_Trade_And_Gems_Percent()
+                return self:Add("pigking_trade_and_gems_percent",0)
+            end
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组

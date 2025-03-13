@@ -683,6 +683,22 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【交易高手】与猪王交易时2.5%额外获得一颗随机初级宝石【红，蓝，紫】，达到100%后移除
+        ["trading_master_pigking_and_gems"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_PigKing_Trade_And_Gems_Percent() < 1
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_PigKing_Trade_And_Gems_Percent(2.5/100)
+                inst:AddDebuff("hoshino_card_debuff_trading_master_pigking_and_gems","hoshino_card_debuff_trading_master_pigking_and_gems")
+            end,
+            text = function(inst)
+                return "【交易高手】与猪王交易时2.5%额外获得一颗随机初级宝石【红/蓝/紫】，达到100%后移除"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
