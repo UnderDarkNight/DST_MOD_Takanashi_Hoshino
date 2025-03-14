@@ -624,6 +624,22 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【战车】当你接触到敌对生物时(半径6），每0.3秒扣除其10点生命值（重复选择伤害叠加）
+        ["war_chariot"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add("war_chariot",10)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_war_chariot","hoshino_card_debuff_war_chariot",true)
+            end,
+            text = function(inst)
+                return "【战车】当你接触到敌对生物时，每0.3秒扣除其10点生命值（重复选择伤害叠加）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
