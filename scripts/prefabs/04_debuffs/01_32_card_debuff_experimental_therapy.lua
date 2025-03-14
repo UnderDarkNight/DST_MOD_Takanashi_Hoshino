@@ -107,7 +107,7 @@
             end
         -----------------------------------------------------
         ---
-            inst:DoTaskInTime(10,inst.Remove)
+            inst:DoTaskInTime(13,inst.Remove)
         -----------------------------------------------------
         --- 下发数据
             local data = {
@@ -146,17 +146,28 @@
             local start_y = 0
             local offset_y = 30
             local time = 0
-            local time_offset = 0.6
-            for _, anim_name in pairs(anim_data) do
-                local temp = root:AddChild(UIAnim())
-                temp:SetPosition(start_x,start_y,0)
-                temp:GetAnimState():SetBank("hoshino_card_debuff_experimental_therapy")
-                temp:GetAnimState():SetBuild("hoshino_card_debuff_experimental_therapy")
-                temp:GetAnimState():PlayAnimation(anim_name,true)
-                temp:GetAnimState():SetTime(time)
-                temp:SetScale(scale,scale,scale)
-                start_y = start_y + offset_y
-                time = time + time_offset
+            local time_offset = 0.4
+            -- for _, anim_name in pairs(anim_data) do
+            --     local temp = root:AddChild(UIAnim())
+            --     temp:SetPosition(start_x,start_y,0)
+            --     temp:GetAnimState():SetBank("hoshino_card_debuff_experimental_therapy")
+            --     temp:GetAnimState():SetBuild("hoshino_card_debuff_experimental_therapy")
+            --     temp:GetAnimState():PlayAnimation(anim_name,true)
+            --     temp:GetAnimState():SetTime(time)
+            --     temp:SetScale(scale,scale,scale)
+            --     start_y = start_y + offset_y
+            --     time = time + time_offset
+            -- end
+            for i ,anim_name  in pairs(anim_data) do
+                root.inst:DoTaskInTime((i-1)*time_offset,function()
+                    local temp = root:AddChild(UIAnim())
+                    temp:SetPosition(start_x,start_y+(i-1)*offset_y,0)
+                    temp:GetAnimState():SetBank("hoshino_card_debuff_experimental_therapy")
+                    temp:GetAnimState():SetBuild("hoshino_card_debuff_experimental_therapy")
+                    temp:GetAnimState():PlayAnimation(anim_name,true)
+                    -- temp:GetAnimState():SetTime(0)
+                    temp:SetScale(scale,scale,scale)                    
+                end)
             end
         -----------------------------------------------------
         --- 
