@@ -113,13 +113,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
@@ -216,13 +210,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_bloodshed"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_bloodshed"
@@ -243,13 +231,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_max_health_1"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_max_health_1"
@@ -270,13 +252,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
@@ -297,13 +273,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
@@ -342,13 +312,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
@@ -374,13 +338,7 @@ local cards = {
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_equipment_blocker"
                 inst.components.hoshino_com_debuff:Add(debuff_prefab,2*480)
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_equipment_blocker"
@@ -397,13 +355,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
@@ -424,13 +376,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_reduced_work_efficiency"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_reduced_work_efficiency"

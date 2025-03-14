@@ -128,14 +128,8 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_data:Add("hoshino_card_debuff_health_down_and_coins_up",60*6) --- 计时器累加
-                local buff_prefab = "hoshino_card_debuff_health_down_and_coins_up"  -- 用while上BUFF
-                while true do
-                    local buff_inst = inst:GetDebuff(buff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(buff_prefab,buff_prefab)
-                end
+                local buff_prefab = "hoshino_card_debuff_health_down_and_coins_up"
+                inst:AddDebuff(buff_prefab,buff_prefab)
             end,
             text = function(inst)
                 return "【焉知非福】\n每次失去生命值的时候，获得10点「信用点」，持续6分钟"
@@ -200,16 +194,11 @@ local cards = {
                                 }
                 local ret_monster_prefab = monster_list[math.random(#monster_list)]
                 local monster = SpawnPrefab(ret_monster_prefab or "hound")
-                local debuff_prefab = "hoshino_card_debuff_for_monster_drop_cards_pack"
-                while true do
-                    local debuff_inst = monster:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    monster:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                local debuff_prefab = "hoshino_card_debuff_for_monster_drop_cards_pack"                
+                monster:AddDebuff(debuff_prefab,debuff_prefab)
+                monster:AddDebuff(debuff_prefab,debuff_prefab)
+                monster:AddDebuff(debuff_prefab,debuff_prefab)
                 monster.Transform:SetPosition(x,y,z)
-
                 inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_force_close")
 
             end,
@@ -228,13 +217,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_temperature_locker",5*480)
                 local debuff_prefab = "hoshino_card_debuff_temperature_locker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
             end,
             text = function(inst)
                 return "【寒暑不侵】 恒温5天"
@@ -370,13 +353,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_health_penalty_blocker"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_health_penalty_blocker"

@@ -256,13 +256,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Damage_Mult(0.05)
                 local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
                 inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
             end,
             text = function(inst)
@@ -337,13 +331,7 @@ local cards = {
                 ----------------------------------------------------------------------------------------------------------
                 --- 添加BUFF
                     local debuff_prefab = "hoshino_card_debuff_sleep_and_coins"
-                    while true do
-                        local debuff_inst = inst:GetDebuff(debuff_prefab)
-                        if debuff_inst and debuff_inst:IsValid() then
-                            break
-                        end
-                        inst:AddDebuff(debuff_prefab,debuff_prefab)
-                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
                 ----------------------------------------------------------------------------------------------------------
                 --- 来自 曼德拉草(mandrake) 的代码。
                     local function start_sleep(inst)
@@ -599,19 +587,11 @@ local cards = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
-                for i = 1, 10, 1 do
-                    if inst:GetDebuff("hoshino_card_debuff_kill_and_coins_up_thief") then
-                        return false
-                    end
-                end
-                return true
+                local debuff_prefab = "hoshino_card_debuff_kill_and_coins_up_thief"
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
-            fn = function(inst)
-                local test_num = 10
-                while test_num > 0 do
-                    inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_kill_and_coins_up_thief","hoshino_card_debuff_kill_and_coins_up_thief",true)
-                    test_num = test_num - 1
-                end
+            fn = function(inst)                
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_kill_and_coins_up_thief","hoshino_card_debuff_kill_and_coins_up_thief",true)                    
             end,
             text = function(inst)
                 return "【窃贼】击杀血量高于50的生物会获得2信用点\n【选择之后从卡组移除】"
@@ -789,15 +769,8 @@ local cards = {
                 inst.components.sanity:SetPercent(1)
                 local debuff_prefab = "hoshino_card_debuff_energy_burst"
                 local debuff_inst = nil
-                local test_num = 100
-                while test_num > 0 do
-                    debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                    test_num = test_num - 1
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
+                debuff_inst = inst:GetDebuff(debuff_prefab)
                 if debuff_inst then
                     debuff_inst:PushEvent("add_time",5*60)
                 end

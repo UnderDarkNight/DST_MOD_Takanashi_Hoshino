@@ -162,13 +162,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Damage_Mult(0.1)
                 local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
                 inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
             end,
             text = function(inst)
@@ -497,14 +491,8 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_data:Add("hoshino_card_debuff_health_down_and_coins_up",480*2) --- 计时器累加
-                local buff_prefab = "hoshino_card_debuff_health_down_and_coins_up"  -- 用while上BUFF
-                while true do
-                    local buff_inst = inst:GetDebuff(buff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(buff_prefab,buff_prefab)
-                end
+                local buff_prefab = "hoshino_card_debuff_health_down_and_coins_up"
+                inst:AddDebuff(buff_prefab,buff_prefab)
             end,
             text = function(inst)
                 return "每次失去生命值的时候，获得10点「信用点」，持续2天"
@@ -538,24 +526,12 @@ local cards = {
             front = {atlas = "images/inspect_pad/card_excample_a.xml" ,image = "card_excample_a.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 inst.components.hoshino_com_shop:CreditCoinDelta(9999)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
             end,
             text = function(inst)
                 return "立即获得9999「信用点」，同时获得诅咒「凡庸」"
@@ -572,13 +548,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_data:Add("hoshino_card_debuff_temperature_locker",5*480)
                 local debuff_prefab = "hoshino_card_debuff_temperature_locker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
             end,
             text = function(inst)
                 return "恒温5天"

@@ -62,13 +62,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_i_have_expanded"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_i_have_expanded"
@@ -90,13 +84,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_kill_and_explode"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_kill_and_explode"
@@ -113,13 +101,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_level_up_and_double_card_pack"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_level_up_and_double_card_pack"
@@ -136,13 +118,7 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_absolute_defense"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_absolute_defense"
