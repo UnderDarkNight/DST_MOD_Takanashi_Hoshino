@@ -640,6 +640,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【负重前行】当你获得诅咒时，获得一个神秘核心（选择后从卡池移除）
+        ["burdened_forward"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_burdened_forward") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_burdened_forward","hoshino_card_debuff_burdened_forward",true)
+            end,
+            text = function(inst)
+                return "【负重前行】当你获得诅咒时，获得一个神秘核心（选择后从卡池移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
