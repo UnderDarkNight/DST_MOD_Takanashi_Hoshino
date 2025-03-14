@@ -643,7 +643,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_seek_good_avoid_bad","hoshino_card_debuff_seek_good_avoid_bad",true)
             end,
             text = function(inst)
-                return "【趋吉避凶】当你选择诅咒牌时，真正的诅咒会被高亮标出（选择后从卡牌移除）"
+                return "【趋吉避凶】你能看出哪张牌是真正的诅咒牌（选择后从卡牌移除）"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

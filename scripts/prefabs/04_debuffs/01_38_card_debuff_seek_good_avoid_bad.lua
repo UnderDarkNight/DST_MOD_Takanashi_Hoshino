@@ -51,12 +51,15 @@
                 if cards_data[i].is_curse_card then
                     local card_node = cards[i]
                     local icon = card_node:AddChild(UIAnim())
-                    icon:GetAnimState():SetBank("charliesnap")
-                    icon:GetAnimState():SetBuild("charliesnap")
-                    icon:GetAnimState():PlayAnimation("snap",true)
+                    -- icon:GetAnimState():SetBank("charliesnap")
+                    -- icon:GetAnimState():SetBuild("charliesnap")
+                    -- icon:GetAnimState():PlayAnimation("snap",true)
+                    icon:GetAnimState():SetBank("statue_ruins_fx")
+                    icon:GetAnimState():SetBuild("statue_ruins_fx")
+                    icon:GetAnimState():PlayAnimation("transform_nightmare",true)
                     local scale = 0.5
                     icon:SetScale(scale,scale,scale)
-                    icon:SetPosition(0,100,0)
+                    icon:SetPosition(0,-100,0)
                 end
             end
         end,ThePlayer)
