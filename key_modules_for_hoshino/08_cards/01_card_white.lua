@@ -741,7 +741,22 @@ local cards = {
                 inst:AddDebuff("hoshino_card_debuff_experimental_therapy"..math.random(1000000000),"hoshino_card_debuff_experimental_therapy")
             end,
             text = function(inst)
-                return "【白】【实验性疗法】在血、San、饥饿、移速、攻击、位面防御中，随机增加四项属性，减少两项属性（血，san，饥饿，变化量：10（三维不低于1），攻击，移速5%，位面防御：3（位面防御不会低于0）"
+                return "【实验性疗法】在血、San、饥饿、移速、攻击、位面防御中，随机增加四项属性，减少两项属性（血，san，饥饿，变化量：10（三维不低于1），攻击，移速5%，位面防御：3（位面防御不会低于0）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【精力分配】每次使用技能有10%概率返还1点cost （到达50%后移出池子）
+        ["energy_distribution"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Energy_Distribution() < 0.5
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Energy_Distribution(0.1)
+            end,
+            text = function(inst)
+                return "【精力分配】每次使用技能有10%概率返还1点cost （到达50%后移出池子）"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

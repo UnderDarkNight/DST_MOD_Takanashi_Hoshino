@@ -285,6 +285,23 @@
                 return self:Add("pigking_trade_and_gems_percent",0)
             end
         --------------------------------------------------------------------------------
+        --- 卡牌：【精力分配】 energy_distribution
+            function self:Add_Energy_Distribution(value)
+                self:Add("energy_distribution",value,0,0.5)
+            end
+            function self:Get_Energy_Distribution()
+                return self:Add("energy_distribution",0)
+            end
+            inst:ListenForEvent("hoshino_com_power_cost_update",function(inst,_table)
+                local old = _table and _table.old or 0
+                local new = _table and _table.new or 0
+                if new < old then
+                    if math.random(1000)/1000 <= self:Get_Energy_Distribution() then
+                        inst.components.hoshino_com_power_cost:DoDelta(1)
+                    end
+                end
+            end)
+        --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
 --- 模块组

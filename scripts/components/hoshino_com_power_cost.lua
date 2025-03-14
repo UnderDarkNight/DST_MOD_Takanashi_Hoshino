@@ -36,7 +36,14 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 ---
     function hoshino_com_power_cost:SetCurrent(value)
+        local old = self.current
         self.current = math.clamp(value, 0, self.max)
+        if old ~= self.current then
+            self.inst:PushEvent("hoshino_com_power_cost_update",{
+                old = old,
+                new = self.current,
+            })
+        end
     end
     function hoshino_com_power_cost:SetMax(value)
         self.max = value
