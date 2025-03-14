@@ -594,11 +594,29 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【收集癖】你每拥有1个卡牌词条，伤害+1% 【选择之后从卡组移除】
+        ["collecting_fetish"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_collecting_fetish") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_collecting_fetish","hoshino_card_debuff_collecting_fetish",true)
+            end,
+            text = function(inst)
+                return "【收集癖】你每拥有1个卡牌词条，伤害+1% 【选择之后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
-
+TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING = TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING or {}
 for card_name,data in pairs(cards) do
+    if TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] ~= nil then
+        table.insert(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING,card_name)
+    end
     TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] = data
     --- 自动插入卡牌正面
     local front_data = data.front

@@ -18,6 +18,10 @@
         inst.player = player
         -----------------------------------------------------
         --
+            inst.event_cd_timers = {}
+            inst.remember_targets = {}
+        -----------------------------------------------------
+        --
             inst:DoPeriodicTask(DELTA_TIME,function()
                 local dmg = player.components.hoshino_com_debuff:Add("purifying_light",0)
                 local x,y,z = player.Transform:GetWorldPosition()
@@ -27,8 +31,16 @@
                     if temp_target and temp_target:IsValid()
                         and temp_target.components.health and not temp_target.components.health:IsDead()
                         and temp_target.sg and temp_target.brainfn
+                        and (temp_target.components.combat and temp_target.components.combat.target and temp_target.components.combat.target:HasOneOfTags({"player","companion","wall"}) or inst.remember_targets[temp_target] ) -- 防止惹到中立怪
                         then
-                        temp_target.components.health:DoDelta(-dmg)
+                                temp_target.components.health:DoDelta(-dmg)
+                                inst.remember_targets[temp_target] = true
+                                if inst.event_cd_timers[temp_target] == nil then
+                                    inst.event_cd_timers[temp_target] = inst:DoTaskInTime(10,function()
+                                        inst.event_cd_timers[temp_target] = nil
+                                    end)
+                                    temp_target:PushEvent("attacked", {attacker = player, damage = dmg})
+                                end
                     end
                 end
             end)

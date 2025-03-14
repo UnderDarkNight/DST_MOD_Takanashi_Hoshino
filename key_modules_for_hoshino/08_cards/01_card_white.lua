@@ -810,8 +810,11 @@ local cards = {
 
 }
 
-
+TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING = TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING or {}
 for card_name,data in pairs(cards) do
+    if TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] ~= nil then
+        table.insert(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING,card_name)
+    end
     TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] = data
     --- 自动插入卡牌正面
     local front_data = data.front
@@ -822,3 +825,15 @@ for card_name,data in pairs(cards) do
         table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
     end
 end
+
+AddPlayerPostInit(function(inst)
+    if not TheWorld.ismastersim then return end
+    inst:DoTaskInTime(3, function()
+        if #TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING > 0 then
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            for _,card_name in ipairs(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING) do
+                print("警告：重复定义的卡牌数据为 : ",card_name)
+            end
+        end
+    end)
+end)

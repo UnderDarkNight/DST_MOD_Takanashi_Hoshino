@@ -199,8 +199,11 @@ local cards = {
 
 }
 
-
+TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING = TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING or {}
 for card_name,data in pairs(cards) do
+    if TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] ~= nil then
+        table.insert(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING,card_name)
+    end
     TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] = data
     --- 自动插入卡牌正面
     local front_data = data.front
