@@ -609,6 +609,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【实质打击】基础攻击伤害-50%，但是你的所有攻击会扣除敌人30点生命值 （选择之后从卡池移除）
+        ["substantive_strike"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_substantive_strike") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_substantive_strike","hoshino_card_debuff_substantive_strike",true)
+            end,
+            text = function(inst)
+                return "【实质打击】基础攻击伤害-50%，但是你的所有攻击会扣除敌人30点生命值。\n【选择之后从卡池移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
