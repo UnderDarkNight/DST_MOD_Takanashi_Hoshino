@@ -61,6 +61,7 @@ local prefabs_name_list = {
     "01_31_card_debuff_mark_moon_land_and_ancient_land",                    --- 卡牌debuff：标记月岛和远古的位置
     "01_32_card_debuff_experimental_therapy",                               --- 卡牌debuff：实验性疗法
     "01_33_card_debuff_purifying_light",                                    --- 卡牌debuff：净化之光
+    "01_33_card_debuff_energy_burst",                                       --- 卡牌debuff：活力迸发
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。

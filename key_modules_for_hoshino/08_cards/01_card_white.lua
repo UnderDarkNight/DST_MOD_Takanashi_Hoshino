@@ -776,6 +776,37 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【活力迸发】回复所有三维（生命，饥饿，san），并获得buff：攻击+50%，此buff持续5min。
+        ["energy_burst"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.health:SetPercent(1)
+                inst.components.hunger:SetPercent(1)
+                inst.components.sanity:SetPercent(1)
+                local debuff_prefab = "hoshino_card_debuff_energy_burst"
+                local debuff_inst = nil
+                local test_num = 100
+                while test_num > 0 do
+                    debuff_inst = inst:GetDebuff(debuff_prefab)
+                    if debuff_inst and debuff_inst:IsValid() then
+                        break
+                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
+                    test_num = test_num - 1
+                end
+                if debuff_inst then
+                    debuff_inst:PushEvent("add_time",5*60)
+                end
+            end,
+            text = function(inst)
+                return "【活力迸发】回复所有三维并获得buff：攻击+50%，此buff持续5min。"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
