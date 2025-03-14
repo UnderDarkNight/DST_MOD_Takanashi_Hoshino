@@ -52,6 +52,7 @@ ms_playerreroll
                     inst.components[component_name]:OnLoad(data[component_name])
                 end
                 TheWorld.components.hoshino_data:Set(GetIndex(inst),nil)
+                inst:PushEvent("hoshino_event.data_back_after_reroll")
             end
         -------------------------------------------------------------------------
         --- 特殊装备
@@ -78,6 +79,8 @@ ms_playerreroll
                 end
                 TheWorld.components.hoshino_data:Set(sp_equip_index,nil)
             end
+        -------------------------------------------------------------------------
+        ---
         -------------------------------------------------------------------------
     end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -526,7 +526,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst:AddDebuff("hoshino_card_debuff_weapon_dmg_up_by_range","hoshino_card_debuff_weapon_dmg_up_by_range")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_weapon_dmg_up_by_range","hoshino_card_debuff_weapon_dmg_up_by_range",true)
             end,
             text = function(inst)
                 return "【格斗高手】你使用攻击距离小于等于2的武器时伤害+12%（可叠加）"
@@ -541,7 +541,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst:AddDebuff("hoshino_card_debuff_armored_warrior","hoshino_card_debuff_armored_warrior")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_armored_warrior","hoshino_card_debuff_armored_warrior",true)
             end,
             text = function(inst)
                 return "【重装战士】移速-10%*X(-最多90%) \n基础攻击+5%*X，受到的伤害*0.95*X"
@@ -556,7 +556,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst:AddDebuff("hoshino_card_debuff_moisture_and_dmg","hoshino_card_debuff_moisture_and_dmg")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_moisture_and_dmg","hoshino_card_debuff_moisture_and_dmg",true)
             end,
             text = function(inst)
                 return "【雨中漫步】当你的潮湿度大于50时，造成的基础伤害提升10%*X"
@@ -571,7 +571,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst:AddDebuff("hoshino_card_debuff_road_of_pain_"..math.random(1000000),"hoshino_card_debuff_road_of_pain")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_road_of_pain_"..math.random(1000000),"hoshino_card_debuff_road_of_pain",true)
             end,
             text = function(inst)
                 return "【苦路】你的饥饿，san，血量立刻开始以10/s的速度降低，在其中一项达到0的时候停止。\n你在此期间内每降低一点饥饿/san/血量就会获得2信用点"
@@ -609,7 +609,7 @@ local cards = {
             fn = function(inst)
                 local test_num = 10
                 while test_num > 0 do
-                    inst:AddDebuff("hoshino_card_debuff_kill_and_coins_up_thief","hoshino_card_debuff_kill_and_coins_up_thief")
+                    inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_kill_and_coins_up_thief","hoshino_card_debuff_kill_and_coins_up_thief",true)
                     test_num = test_num - 1
                 end
             end,
@@ -696,7 +696,7 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_PigKing_Trade_And_Gems_Percent(2.5/100)
-                inst:AddDebuff("hoshino_card_debuff_trading_master_pigking_and_gems","hoshino_card_debuff_trading_master_pigking_and_gems")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_trading_master_pigking_and_gems","hoshino_card_debuff_trading_master_pigking_and_gems",true)
             end,
             text = function(inst)
                 return "【交易高手】与猪王交易时2.5%额外获得一颗随机初级宝石【红/蓝/紫】，达到100%后移除"
@@ -757,6 +757,22 @@ local cards = {
             end,
             text = function(inst)
                 return "【精力分配】每次使用技能有10%概率返还1点cost （到达50%后移出池子）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【净化之光】每0.2s扣除半径6码范围内所有敌人1点生命【重复选择扣血量叠加】
+        ["purifying_light"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add("purifying_light",1)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_purifying_light","hoshino_card_debuff_purifying_light",true)
+            end,
+            text = function(inst)
+                return "【净化之光】每0.2s扣除半径6码范围内所有敌人1点生命【重复选择扣血量叠加】"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

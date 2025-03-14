@@ -60,6 +60,7 @@ local prefabs_name_list = {
     "01_30_card_debuff_trading_master_pigking_and_gems",                    --- 卡牌debuff：猪王交易和宝石
     "01_31_card_debuff_mark_moon_land_and_ancient_land",                    --- 卡牌debuff：标记月岛和远古的位置
     "01_32_card_debuff_experimental_therapy",                               --- 卡牌debuff：实验性疗法
+    "01_33_card_debuff_purifying_light",                                    --- 卡牌debuff：净化之光
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。

@@ -72,13 +72,7 @@ local cards = {
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_i_have_expanded"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
                 inst.components.hoshino_com_debuff:Add_Max_Helth(300)
                 inst.components.hoshino_com_debuff:Add_Max_Sanity(300)
                 inst.components.hoshino_com_debuff:Add_Max_Hunger(300)
@@ -106,13 +100,7 @@ local cards = {
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_kill_and_explode"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return "【照我以火】 击杀任意生物会产生半径8，伤害200的爆炸\n被爆炸击杀的单位也一样触发"
@@ -135,13 +123,7 @@ local cards = {
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_level_up_and_double_card_pack"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return "【神秘解放】 每次升级额外获得一个「神秘核心」\n同时每次升级 10%概率获得随机诅咒"
@@ -164,13 +146,7 @@ local cards = {
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_absolute_defense"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return "【绝对防御】\n每5s，血量扣除总额不超过最大生命值的20%"
@@ -213,13 +189,7 @@ local cards = {
                     inst.components.hoshino_com_debuff:Set("hoshino_card_debuff_ruins_sheild_and_vengeance",1)
                 end
                 local debuff_prefab = "hoshino_card_debuff_ruins_sheild_and_vengeance"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return " \n【壁垒】 受到攻击后，获得一个6s的护盾\n效果持续期间，敌人伤害的5%转换为玩家血量\n重复选择吸血百分比叠加"

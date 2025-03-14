@@ -175,14 +175,6 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_shop:CreditCoinDelta(5555)
-                -- local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                -- while true do
-                --     local debuff_inst = inst:GetDebuff(debuff_prefab)
-                --     if debuff_inst and debuff_inst:IsValid() then
-                --         break
-                --     end
-                --     inst:AddDebuff(debuff_prefab,debuff_prefab)
-                -- end
                 inst.components.hoshino_cards_sys:AcitveCardFnByIndex("mediocre")
                 inst.components.hoshino_cards_sys:RememberActivedCard("mediocre")
                 inst.components.hoshino_com_debuff:Set("golden_card_unlocked_give_me_some_money",true)
@@ -388,13 +380,7 @@ local cards = {
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_health_penalty_blocker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return "【坚毅】 清除所有血量上限惩罚值（黑血）\n永远不再出现惩罚"
@@ -411,13 +397,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_health_auto_up",1)
                 local debuff_prefab = "hoshino_card_debuff_health_auto_up"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return "【基沃托斯超人】 每10s恢复1点生命值"
@@ -434,13 +414,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_direct_kill_target",0.1/100)
                 local debuff_prefab = "hoshino_card_debuff_direct_kill_target"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return " \n【最高神秘】\n对于血量低于70%的目标，有0.1%的直接击杀概率\n重复卡牌则概率叠加"

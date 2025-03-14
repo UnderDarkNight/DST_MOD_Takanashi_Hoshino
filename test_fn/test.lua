@@ -35,7 +35,7 @@ local flg,error_code = pcall(function()
         --             -- "card_colourful",
         --             -- "card_golden",
         --             -- "card_black",
-                    "experimental_therapy",
+                    "purifying_light",
         --             -- "unlock_spell_normal_ex",
         --             -- "unlock_spell_swimming_ex",
         --             -- "unlock_spell_all_normal",
@@ -143,6 +143,8 @@ local flg,error_code = pcall(function()
         --     ThePlayer.test_root:Kill()
         -- end
         -- ThePlayer.test_root = CreateHudInfo(anim_data)
+
+        print(ThePlayer:GetDebuff("hoshino_card_debuff_purifying_light"))
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

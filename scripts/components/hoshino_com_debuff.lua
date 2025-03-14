@@ -269,6 +269,50 @@
                 return self:Add("health_down_reduce",0)
             end
         --------------------------------------------------------------------------------
+        --- BUFF记忆起。用来给换角色后，重新加载BUFF
+            function self:Add_Buff_Memory(buff_name,buff_prefab,active_flag)
+                local Buff_Memory_Data = self:Get("Buff_Memory_Data") or {}
+                Buff_Memory_Data[buff_name] = Buff_Memory_Data[buff_name] or {}
+                Buff_Memory_Data[buff_name].buff_prefab = buff_prefab
+                Buff_Memory_Data[buff_name].num = (Buff_Memory_Data[buff_name].num or 0) + 1
+                self:Set("Buff_Memory_Data",Buff_Memory_Data)
+
+                if active_flag then
+                    local debuff_inst = nil
+                    local test_num = 100
+                    while test_num > 0 do
+                        self.inst:AddDebuff(buff_name,buff_prefab)
+                        local debuff_inst = self.inst:GetDebuff(buff_name)
+                        if debuff_inst and debuff_inst:IsValid() then
+                            break
+                        end
+                        test_num = test_num - 1
+                    end
+                end
+                
+            end
+            function self:Remove_Buff_Memory(buff_name,active_flag)
+                local Buff_Memory_Data = self:Get("Buff_Memory_Data") or {}
+                Buff_Memory_Data[buff_name] = Buff_Memory_Data[buff_name] or {}
+                Buff_Memory_Data[buff_name].num = Buff_Memory_Data[buff_name].num - 1
+                if active_flag then
+                    for i = 1, 5, 1 do
+                        local debuff_inst = inst:GetDebuff(buff_name)
+                        if debuff_inst and debuff_inst:IsValid() then
+                            debuff_inst:Remove()
+                        end
+                    end
+                end
+            end
+            inst:ListenForEvent("hoshino_event.data_back_after_reroll",function()
+                local Buff_Memory_Data = self:Get("Buff_Memory_Data") or {}
+                for buff_name, buff_data in pairs(Buff_Memory_Data) do
+                    for i = 1, buff_data.num do
+                        inst:AddDebuff(buff_name,buff_data.buff_prefab)
+                    end
+                end
+            end)
+        --------------------------------------------------------------------------------
         --- 光环半径
             function self:Add_Halo_Radius(value)
                 self:Add("halo_radius",value)
@@ -301,6 +345,7 @@
                     end
                 end
             end)
+        --------------------------------------------------------------------------------
         --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
