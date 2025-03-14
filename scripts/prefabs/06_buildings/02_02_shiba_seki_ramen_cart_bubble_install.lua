@@ -54,7 +54,7 @@
             end,inst)
         -----------------------------------------------------
         --- 绑定更新点
-            TheInput:Hoshino_Add_Update_Modify_Fn(root.inst,function()
+            TheInput:Hoshino_Add_Update_Custom_Fn(root.inst,function()
                 if ThePlayer:GetDistanceSqToInst(inst) < DISPLAY_RADIUS_SQ then
                     local s_pt_x,s_pt_y= TheSim:GetScreenPos(inst.Transform:GetWorldPosition()) -- 左下角为原点。
                     -- print("player in screen",s_pt_x,s_pt_y)
@@ -240,7 +240,7 @@ return function(inst)
     inst:ListenForEvent("item_update",update_display)
     inst:DoTaskInTime(1,function()
         if TheInput and ThePlayer then
-            TheInput:Hoshino_Add_Update_Modify_Fn(inst,function()
+            TheInput:Hoshino_Add_Update_Custom_Fn(inst,function()
                 local in_range_flag = inst:GetDistanceSqToInst(ThePlayer) < DISPLAY_RADIUS_SQ
                 if in_range_flag and inst.__near_player == nil then
                     inst.__near_player = ThePlayer

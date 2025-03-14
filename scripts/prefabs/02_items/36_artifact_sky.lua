@@ -35,7 +35,7 @@ Artifact 天
         local dotted_circle = SpawnPrefab("hoshino_sfx_dotted_circle_client")
         inst.dotted_circle = dotted_circle
         dotted_circle:PushEvent("Set",{ range = SPELL_ACTIVE_RADIUS })
-        TheInput:Hoshino_Add_Update_Modify_Fn(dotted_circle,function()
+        TheInput:Hoshino_Add_Update_Custom_Fn(dotted_circle,function()
             local pt = TheInput:GetWorldPosition()
             dotted_circle.Transform:SetPosition(pt.x,0,pt.z)
         end)

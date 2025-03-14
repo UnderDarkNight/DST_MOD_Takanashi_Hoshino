@@ -118,7 +118,7 @@
         --------------------------------------------------------------------------------
         --- 攻击伤害倍率
             function self:Add_Damage_Mult(value)
-                local damage_mult = self:Add("damage_mult",value) + 1
+                local damage_mult = math.max(self:Add("damage_mult",value) + 1,0)
                 inst.components.combat.externaldamagemultipliers:SetModifier(GetSpeedMultInst(self),damage_mult)
                 if value > 0 then
                     -- 添加debuff、时间、触发event

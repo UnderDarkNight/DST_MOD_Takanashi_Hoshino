@@ -84,7 +84,7 @@ end)
         --         self.fx:Remove()
         --     end
         -- end)
-        TheInput:Hoshino_Add_Update_Modify_Fn(self.inst,function()
+        TheInput:Hoshino_Add_Update_Custom_Fn(self.inst,function()
             local pt = TheInput:GetWorldPosition()
             if pt and self.inst:IsValid() then
                 self.fx.Transform:SetPosition(pt.x,0,pt.z)
