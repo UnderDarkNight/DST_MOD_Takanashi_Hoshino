@@ -587,6 +587,7 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Halo_Radius(0.1)
+                inst:PushEvent("hoshino_event.halo_refresh")
             end,
             text = function(inst)
                 return "【电灯泡】你的光环发光半径+0.1（发光范围叠加）"

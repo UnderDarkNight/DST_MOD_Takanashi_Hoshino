@@ -12,6 +12,9 @@
         if weapon == nil or weapon.components.weapon == nil then
             return false
         end
+        -- if TUNING.HOSHINO_DEBUGGING_MODE then
+        --     return true
+        -- end
         if (weapon.components.weapon.attackrange or 0) < WEAPON_RANGE then
             return true
         end
@@ -35,6 +38,7 @@ local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿�
     -----------------------------------------------------
     --- 你使用攻击距离小于等于2的武器时伤害+12%（可叠加）
         player.components.hoshino_com_combat_hooker:Add_CalcDamage_Modifier(inst,function(player,target,damage,spdamage,weapon,multiplier)
+            -- print("AAAAAAAAAAA",player,target,damage,weapon,weapon_checker(weapon))
             if weapon_checker(weapon) then
                 local num = inst.components.hoshino_data:Get("num") or 1
                 damage = damage*(1+num*0.12)
@@ -44,6 +48,7 @@ local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿�
                     end
                 end
             end
+            return damage,spdamage
         end)
     -----------------------------------------------------
 end

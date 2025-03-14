@@ -26,27 +26,27 @@ local flg,error_code = pcall(function()
         end
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --         cards = {
-        -- --             -- "card_golden",
-        -- --             -- "card_white",
-        -- --             -- "card_colourful",
-        -- --             -- "card_colourful",
-        -- --             -- "card_golden",
-        -- --             -- "card_black",
-        --             "mark_moon_land_and_ancient_land",
-        -- --             -- "unlock_spell_normal_ex",
-        -- --             -- "unlock_spell_swimming_ex",
-        -- --             -- "unlock_spell_all_normal",
-        -- --             -- "unlock_spell_all_swimming",
-        -- --             -- "kill_and_explode",
-        -- --             -- "give_me_some_money",
-        -- --             "level_up_and_double_card_pack",
-        --         },
-        --     }
-        -- )
-        -- ThePlayer.components.inventory:GiveItem(item)
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+                cards = {
+        --             -- "card_golden",
+        --             -- "card_white",
+        --             -- "card_colourful",
+        --             -- "card_colourful",
+        --             -- "card_golden",
+        --             -- "card_black",
+                    "mark_moon_land_and_ancient_land",
+        --             -- "unlock_spell_normal_ex",
+        --             -- "unlock_spell_swimming_ex",
+        --             -- "unlock_spell_all_normal",
+        --             -- "unlock_spell_all_swimming",
+        --             -- "kill_and_explode",
+        --             -- "give_me_some_money",
+        --             "level_up_and_double_card_pack",
+                },
+            }
+        )
+        ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
     --- 调试任务栏
         -- ThePlayer.___task_board_widget_fn = function(inst,front_root)
@@ -79,9 +79,9 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        -- for k, v in pairs(Ents) do
-        --     print(k,v)
-        -- end
+        -- local inst = ThePlayer
+        -- inst.components.hoshino_com_debuff:Add_Halo_Radius(1)
+        -- inst:PushEvent("hoshino_event.halo_refresh")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

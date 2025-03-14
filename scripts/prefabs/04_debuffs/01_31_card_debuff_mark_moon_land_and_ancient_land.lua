@@ -23,7 +23,7 @@
                 target_prefab = "ancient_altar"
             end
             for k, v in pairs(Ents) do
-                if v and v:IsValid() and v.prefab == "moon_fissure" then
+                if v and v:IsValid() and v.prefab == target_prefab then
                     target = v
                     break
                 end
