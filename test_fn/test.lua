@@ -29,13 +29,16 @@ local flg,error_code = pcall(function()
         local item = SpawnPrefab("hoshino_item_cards_pack")
         item:PushEvent("Set",{
                 cards = {
-        --             -- "card_golden",
-        --             -- "card_white",
+                    "card_golden",
+                    -- "card_white",
         --             -- "card_colourful",
         --             -- "card_colourful",
         --             -- "card_golden",
-        --             -- "card_black",
-                    "experimental_therapy",
+                    "card_black",
+                    "card_black",
+                    "card_colourful",
+
+                    -- "experimental_therapy",
         --             -- "unlock_spell_normal_ex",
         --             -- "unlock_spell_swimming_ex",
         --             -- "unlock_spell_all_normal",
@@ -144,7 +147,9 @@ local flg,error_code = pcall(function()
         -- end
         -- ThePlayer.test_root = CreateHudInfo(anim_data)
 
-        print(ThePlayer:GetDebuff("hoshino_card_debuff_purifying_light"))
+        ThePlayer:AddDebuff("hoshino_card_debuff_seek_good_avoid_bad","hoshino_card_debuff_seek_good_avoid_bad")
+
+
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -263,6 +263,8 @@ local function page_create(front_root,MainScale)
                             current_cards[card_index]:SetTextures(atlas,image,image,image,image,image)
                             card_select_box:SetDescByCardName(card_name) -- 设置描述文本                            
                         end,ThePlayer)
+                        ---- 广播事件，用来外部处理。
+                        ThePlayer:PushEvent("hoshino_event.cards_selectting_box_created_in_pad",current_cards)
                         return current_cards
                 end
             end

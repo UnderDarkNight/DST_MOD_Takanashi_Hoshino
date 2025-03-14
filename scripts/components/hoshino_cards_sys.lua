@@ -401,8 +401,9 @@ nil,
         else
             need_to_send_to_client_data = {}
             for i, v in ipairs(cards_back) do
-                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex"}
+                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex" ,}
                 need_to_send_to_client_data[i].card_name = "card_black"
+                need_to_send_to_client_data[i].is_curse_card = self:GetCardTypeByName(cards_front[i].card_name) == "card_black"
             end
         end
 
@@ -525,8 +526,9 @@ nil,
         else
             need_to_send_to_client_data = {}
             for i, v in ipairs(cards_back) do
-                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex"}
+                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex" ,}
                 need_to_send_to_client_data[i].card_name = "card_black"
+                need_to_send_to_client_data[i].is_curse_card = self:GetCardTypeByName(cards_front[i].card_name) == "card_black"
             end
         end
         self.need_to_send_to_client_data = need_to_send_to_client_data

@@ -655,6 +655,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【趋吉避凶】当你选择诅咒牌时，真正的诅咒会被高亮标出（选择后从卡牌移除）
+        ["seek_good_avoid_bad"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_seek_good_avoid_bad") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_seek_good_avoid_bad","hoshino_card_debuff_seek_good_avoid_bad",true)
+            end,
+            text = function(inst)
+                return "【趋吉避凶】当你选择诅咒牌时，真正的诅咒会被高亮标出（选择后从卡牌移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

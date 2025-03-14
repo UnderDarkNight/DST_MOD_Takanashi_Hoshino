@@ -66,6 +66,7 @@ local prefabs_name_list = {
     "01_35_card_debuff_substantive_strike",                                 --- 卡牌debuff：实质性打击
     "01_36_card_debuff_war_chariot",                                        --- 卡牌debuff：战车
     "01_37_card_debuff_burdened_forward",                                   --- 卡牌debuff：负重前行
+    "01_38_card_debuff_seek_good_avoid_bad",                                --- 卡牌debuff：趋吉避凶
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
