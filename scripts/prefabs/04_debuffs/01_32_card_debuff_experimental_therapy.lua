@@ -39,17 +39,20 @@
             -------------------------------------------------------------
             --- 随机抽取2个，数值变负数。
                 local random_keys = {}
-                for k,v in pairs(data) do
-                    table.insert(random_keys,k)
+                for k in pairs(data) do
+                    table.insert(random_keys, k)
                 end
-                local random_keys_2 = {}
-                for i=1,2 do
-                    local random_key = random_keys[math.random(#random_keys)]
-                    table.insert(random_keys_2,random_key)
-                    random_keys[random_key] = nil
+                -- 随机抽取2个不同的键，并将它们的值变为负数
+                local selected_keys = {}
+                for i = 1, 2 do
+                    local index = math.random(#random_keys)
+                    local random_key = random_keys[index]
+                    table.insert(selected_keys, random_key)                    
+                    -- 移除已选中的键，防止重复选择
+                    table.remove(random_keys, index)
                 end
-                for _,random_key in ipairs(random_keys_2) do
-                    data[random_key] = -data[random_key]
+                for _, key in ipairs(selected_keys) do
+                    data[key] = -data[key]
                 end
             -------------------------------------------------------------
             local anim_cmd_table = {}
