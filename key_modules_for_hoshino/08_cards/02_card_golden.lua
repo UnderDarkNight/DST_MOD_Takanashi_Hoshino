@@ -781,6 +781,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【独行天途】当30码内没有友方单位时，获得buff:每次造成伤害+0.1cost，cost恢复速度+0.04/s【选择后从卡池移除】
+        ["solitary_heaven_path"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_solitary_heaven_path") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_solitary_heaven_path","hoshino_card_debuff_solitary_heaven_path",true)
+            end,
+            text = function(inst)
+                return "【独行天途】当30码内没有友方单位时，获得buff:每次造成伤害+0.1cost，cost恢复速度+0.04/s【选择后从卡池移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
