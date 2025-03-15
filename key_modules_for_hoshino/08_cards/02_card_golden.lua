@@ -712,6 +712,29 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【亚巴顿】生命上限-50%（黑血），根据扣除生命上限的数额获得[n/5]次【爆炸护盾】
+        ["abaddon"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local max_health_1 = inst.components.health:GetMaxWithPenalty()
+                inst.components.health:DeltaPenalty(0.5)
+                local max_health_2 = inst.components.health:GetMaxWithPenalty()
+                local delta_health = math.abs(max_health_1 - max_health_2)
+                local num = math.max( math.floor(delta_health / 5) , 1 )
+                for i = 1, num, 1 do
+                    inst:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
+                end
+                TheNet:Announce("【亚巴顿】"..inst:GetDisplayName().."获得"..num.."层【爆炸护盾】")
+            end,
+            text = function(inst)
+                return "【亚巴顿】生命上限-50%（黑血），根据扣除生命上限的数额获得[n/5]次【爆炸护盾】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
