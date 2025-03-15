@@ -750,6 +750,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【貔貅】你每拥有每500信用点 +1%伤害 以此法提供的伤害加成最多不超过100%【选择之后从卡池移除】
+        ["coins_and_dmg_up"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_coins_and_dmg_up") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_coins_and_dmg_up","hoshino_card_debuff_coins_and_dmg_up",true)
+            end,
+            text = function(inst)
+                return "【貔貅】你每拥有每500信用点 +1%伤害 以此法提供的伤害加成最多不超过100%\n【选择之后从卡池移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
