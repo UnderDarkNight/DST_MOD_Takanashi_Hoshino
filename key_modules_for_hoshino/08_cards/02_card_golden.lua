@@ -678,7 +678,22 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_cat_amulet","hoshino_card_debuff_cat_amulet",true)
             end,
             text = function(inst)
-                return "【金】【嗝屁猫的项圈】当你死亡时，50%的概率立即复活"
+                return "【金】【嗝屁猫的项圈】当你死亡时，50%的概率立即复活。\n（选择之后从卡池移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【嗝屁猫的爪子】生命上限-40（最低保留1），获得3点固定减伤（受到的伤害-3，不包含过冷过热等扣血效果）
+        ["cat_hand"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_cat_hand","hoshino_card_debuff_cat_hand",true)
+            end,
+            text = function(inst)
+                return "【金】【嗝屁猫的爪子】生命上限-40（最低保留1,可叠加）\n获得3点固定减伤（可叠加，不包含过冷过热等扣血效果,不包括位面、阵营伤害）"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

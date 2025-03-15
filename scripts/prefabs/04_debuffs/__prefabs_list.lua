@@ -69,6 +69,7 @@ local prefabs_name_list = {
     "01_38_card_debuff_seek_good_avoid_bad",                                --- 卡牌debuff：趋吉避凶
     "01_39_card_debuff_nine_lives_cat",                                     --- 卡牌debuff：九命猫
     "01_40_card_debuff_cat_amulet",                                         --- 卡牌debuff：九命猫的项圈
+    "01_41_card_debuff_cat_hand",                                           --- 卡牌debuff：猫爪
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
