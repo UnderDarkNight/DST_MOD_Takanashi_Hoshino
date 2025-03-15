@@ -663,7 +663,22 @@ local cards = {
                 end
             end,
             text = function(inst)
-                return "【趋吉避凶】你能看出哪张牌是真正的诅咒牌（选择后从卡牌移除）"
+                return "【嗝屁猫】当你死亡时，你立刻复活，此效果最多触发九次，但是你获得诅咒【无实体】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【嗝屁猫的项圈】当你死亡时，50%的概率立即复活
+        ["cat_amulet"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_cat_amulet") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_cat_amulet","hoshino_card_debuff_cat_amulet",true)
+            end,
+            text = function(inst)
+                return "【金】【嗝屁猫的项圈】当你死亡时，50%的概率立即复活"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
