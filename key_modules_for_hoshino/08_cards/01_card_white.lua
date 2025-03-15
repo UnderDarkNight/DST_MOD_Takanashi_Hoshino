@@ -804,8 +804,12 @@ AddPlayerPostInit(function(inst)
     inst:DoTaskInTime(3, function()
         if #TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING > 0 then
             TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
             for _,card_name in ipairs(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING) do
-                print("警告：重复定义的卡牌数据为 : ",card_name)
+                print("Error ：重复定义的卡牌数据为 : ",card_name)
             end
         end
     end)
