@@ -73,6 +73,7 @@ local prefabs_name_list = {
     "01_42_card_debuff_hell_contract",                                      --- 卡牌debuff：地狱契约
     "01_43_card_debuff_neatness_obsession",                                 --- 卡牌debuff：洁癖
     "01_44_card_debuff_coins_and_dmg_up",                                   --- 卡牌debuff：金币和伤害增加
+    "01_45_card_debuff_gem_hunter",                                         --- 卡牌debuff：宝石猎人
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。

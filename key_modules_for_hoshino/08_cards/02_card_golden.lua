@@ -765,6 +765,22 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【宝石猎人】破坏石头时5%概率获得1随机宝石（彩虹宝石除外）（到达50%后移出池子）
+        ["gem_hunter"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Gem_Hunter() < 0.5
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Gem_Hunter(0.05)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_gem_hunter","hoshino_card_debuff_gem_hunter",true)
+            end,
+            text = function(inst)
+                return "【宝石猎人】破坏石头时5%概率获得1随机宝石（彩虹宝石除外）（到达50%后移出池子）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

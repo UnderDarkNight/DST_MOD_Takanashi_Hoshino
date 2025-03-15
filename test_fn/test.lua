@@ -38,7 +38,7 @@ local flg,error_code = pcall(function()
                     -- "card_black",
                     -- "card_colourful",
 
-                    "abaddon",
+                    "gem_hunter",
         --             -- "unlock_spell_normal_ex",
         --             -- "unlock_spell_swimming_ex",
         --             -- "unlock_spell_all_normal",
