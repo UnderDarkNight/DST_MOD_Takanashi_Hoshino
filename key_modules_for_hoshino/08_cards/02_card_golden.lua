@@ -735,6 +735,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【洁癖】基础攻击伤害+60% 生命上限+60 但你每获得1全新词条，降低2%基础伤害 减少2生命上限【选择之后从卡组移除】
+        ["neatness_obsession"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_neatness_obsession") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_neatness_obsession","hoshino_card_debuff_neatness_obsession",true)
+            end,
+            text = function(inst)
+                return "【洁癖】基础攻击伤害+60% 生命上限+60 \n但你每获得1全新词条，降低2%基础伤害 减少2生命上限\n【选择之后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

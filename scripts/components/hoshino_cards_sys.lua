@@ -701,6 +701,10 @@ nil,
         if all_data[card_name_index] and all_data[card_name_index].fn then
             all_data[card_name_index].fn(self.inst)
             print("+++ 成功激活卡牌",card_name_index)
+            self.inst:PushEvent("hoshino_cards_sys.actived_card_fn",{
+                card_name = card_name_index,
+                card_type = self:GetCardTypeByName(card_name_index),
+            })
         end
     end
     function hoshino_cards_sys:AcitveCardFnByIndexWithTest(card_name_index)  --- 获取卡牌的激活函数,带test
@@ -708,6 +712,10 @@ nil,
         if all_data[card_name_index] and all_data[card_name_index].fn and (all_data[card_name_index].test == nil or all_data[card_name_index].test(self.inst)) then
             all_data[card_name_index].fn(self.inst)
             print("+++ 成功激活卡牌",card_name_index)
+            self.inst:PushEvent("hoshino_cards_sys.actived_card_fn",{
+                card_name = card_name_index,
+                card_type = self:GetCardTypeByName(card_name_index),
+            })
             return true
         end
         return false

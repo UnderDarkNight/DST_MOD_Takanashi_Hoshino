@@ -346,6 +346,13 @@
                 end
             end)
         --------------------------------------------------------------------------------
+        --- 卡牌：【洁癖】 neatness_obsession
+            function self:Add_Neatness_Obsession(value)
+                self:Add("neatness_obsession",value,0,1000000)
+            end
+            function self:Get_Neatness_Obsession()
+                return self:Add("neatness_obsession",0)
+            end
         --------------------------------------------------------------------------------
     end
 ----------------------------------------------------------------------------------------------------------------------------------
