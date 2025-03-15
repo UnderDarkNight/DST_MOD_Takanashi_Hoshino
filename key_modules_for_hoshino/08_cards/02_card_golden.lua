@@ -693,7 +693,22 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_cat_hand","hoshino_card_debuff_cat_hand",true)
             end,
             text = function(inst)
-                return "【金】【嗝屁猫的爪子】生命上限-40（最低保留1,可叠加）\n获得3点固定减伤（可叠加，不包含过冷过热等扣血效果,不包括位面、阵营伤害）"
+                return "【嗝屁猫的爪子】生命上限-40（最低保留1,可叠加）\n获得3点固定减伤（可叠加，不包含过冷过热等扣血效果,不包括位面、阵营伤害）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【地狱契约】击杀生物时，66%的概率双倍掉落
+        ["hell_contract"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_hell_contract") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_hell_contract","hoshino_card_debuff_hell_contract",true)
+            end,
+            text = function(inst)
+                return "【地狱契约】亲自击杀生物时，66%的概率再掉落一次\n（选择之后从卡池移除）\n(一击致死的不算数)"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
