@@ -370,7 +370,7 @@ nil,
         end
         return nil
     end
-    function hoshino_cards_sys:AcitveCardFnByIndex(card_name_index)  --- 获取卡牌的激活函数
+    function hoshino_cards_sys:AcitveCardFnByIndexWithoutTest(card_name_index)  --- 获取卡牌的激活函数
         local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
         if all_data[card_name_index] and all_data[card_name_index].fn then
             all_data[card_name_index].fn(self.inst)
@@ -448,7 +448,7 @@ nil,
             self:SendCardsToClient(self.cards_data)  --- 下发卡牌数据
         -----------------------------------------------------------------------------------------
         --- 激活卡牌功能函数。
-            self:AcitveCardFnByIndex(ret_card_name_index)
+            self:AcitveCardFnByIndexWithoutTest(ret_card_name_index)
         -----------------------------------------------------------------------------------------
         --- 下发展示命令
             self.inst:DoTaskInTime(0.2,function()

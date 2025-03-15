@@ -169,8 +169,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_shop:CreditCoinDelta(5555)
-                inst.components.hoshino_cards_sys:AcitveCardFnByIndex("mediocre")
-                inst.components.hoshino_cards_sys:RememberActivedCard("mediocre")
+                if inst.components.hoshino_cards_sys:AcitveCardFnByIndexWithTest("mediocre") then
+                    inst.components.hoshino_cards_sys:RememberActivedCard("mediocre")
+                end
                 inst.components.hoshino_com_debuff:Set("golden_card_unlocked_give_me_some_money",true)
             end,
             text = function(inst)
@@ -241,8 +242,9 @@ local cards = {
                 end
                 if math.random(10000)/10000 <= 0.2 then
                     -- inst.components.hoshino_cards_sys:Card_Pool_Delata("card_white",5)
-                    inst.components.hoshino_cards_sys:AcitveCardFnByIndex("keyhole_mountain_chick")
-                    inst.components.hoshino_cards_sys:RememberActivedCard("keyhole_mountain_chick")
+                    if inst.components.hoshino_cards_sys:AcitveCardFnByIndexWithTest("keyhole_mountain_chick") then
+                        inst.components.hoshino_cards_sys:RememberActivedCard("keyhole_mountain_chick")
+                    end
                 end
             end,
             text = function(inst)
@@ -641,6 +643,24 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_seek_good_avoid_bad","hoshino_card_debuff_seek_good_avoid_bad",true)
+            end,
+            text = function(inst)
+                return "【趋吉避凶】你能看出哪张牌是真正的诅咒牌（选择后从卡牌移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【嗝屁猫】当你死亡时，你立刻复活，此效果最多触发九次，但是你获得诅咒【无实体】
+        ["nine_lives_cat"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_nine_lives_cat","hoshino_card_debuff_nine_lives_cat")
+                if inst.components.hoshino_cards_sys:AcitveCardFnByIndexWithTest("max_health_1") then
+                    inst.components.hoshino_cards_sys:RememberActivedCard("max_health_1")
+                end
             end,
             text = function(inst)
                 return "【趋吉避凶】你能看出哪张牌是真正的诅咒牌（选择后从卡牌移除）"

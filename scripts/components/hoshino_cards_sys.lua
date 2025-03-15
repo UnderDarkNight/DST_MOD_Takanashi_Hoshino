@@ -696,12 +696,21 @@ nil,
         end
         return nil
     end
-    function hoshino_cards_sys:AcitveCardFnByIndex(card_name_index)  --- 获取卡牌的激活函数
+    function hoshino_cards_sys:AcitveCardFnByIndexWithoutTest(card_name_index)  --- 获取卡牌的激活函数,跳过test
         local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
         if all_data[card_name_index] and all_data[card_name_index].fn then
             all_data[card_name_index].fn(self.inst)
             print("+++ 成功激活卡牌",card_name_index)
         end
+    end
+    function hoshino_cards_sys:AcitveCardFnByIndexWithTest(card_name_index)  --- 获取卡牌的激活函数,带test
+        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+        if all_data[card_name_index] and all_data[card_name_index].fn and (all_data[card_name_index].test == nil or all_data[card_name_index].test(self.inst)) then
+            all_data[card_name_index].fn(self.inst)
+            print("+++ 成功激活卡牌",card_name_index)
+            return true
+        end
+        return false
     end
     function hoshino_cards_sys:SelectRandomCardFromPoolByType(card_type)  --- 从卡池中随机抽取一张卡牌
         local all_cards_index = self:GetCardsIndexByType(card_type)
@@ -773,7 +782,7 @@ nil,
             end 
         -----------------------------------------------------------------------------------------
         --- 
-            self:AcitveCardFnByIndex(selected_card_name_index) -- 激活卡牌
+            self:AcitveCardFnByIndexWithoutTest(selected_card_name_index) -- 激活卡牌
             self:RememberActivedCard(selected_card_name_index) -- 记忆卡牌
             self.inst:PushEvent("hoshino_cards_sys.card_activated",{
                 index = index,
