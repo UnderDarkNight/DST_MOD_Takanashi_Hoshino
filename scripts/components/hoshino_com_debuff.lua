@@ -34,37 +34,34 @@
         --------------------------------------------------------------------------------
         --- 血量上限
             function self:Add_Max_Helth(value)
-                inst.components.hoshino_com_max_value_controller:AddTempExtraHealth(GetSpeedMultInst(self),value)
+                inst.components.hoshino_com_max_value_controller:AddTempExtraHealth(GetSpeedMultInst(self),self:Add("max_health",value))
             end
             self:AddOnLoadFn(function()
                 local max_health = self:Get("max_health")
                 if max_health then
                     inst.components.hoshino_com_max_value_controller:AddTempExtraHealth(GetSpeedMultInst(self),max_health)
-                    self:Set("max_health",nil)
                 end
             end)
         --------------------------------------------------------------------------------
         --- San上限
             function self:Add_Max_Sanity(value)
-                inst.components.hoshino_com_max_value_controller:AddTempExtraSanity(GetSpeedMultInst(self),value)
+                inst.components.hoshino_com_max_value_controller:AddTempExtraSanity(GetSpeedMultInst(self),self:Add("max_sanity",value))
             end
             self:AddOnLoadFn(function()
                 local max_sanity = self:Get("max_sanity")
                 if max_sanity then
                     inst.components.hoshino_com_max_value_controller:AddTempExtraSanity(GetSpeedMultInst(self),max_sanity)
-                    self:Set("max_sanity",nil)
                 end
             end)
         --------------------------------------------------------------------------------
         --- hunger 上限
             function self:Add_Max_Hunger(value)
-                inst.components.hoshino_com_max_value_controller:AddTempExtraHunger(GetSpeedMultInst(self),value)
+                inst.components.hoshino_com_max_value_controller:AddTempExtraHunger(GetSpeedMultInst(self),self:Add("max_hunger",value))
             end
             self:AddOnLoadFn(function()
                 local max_hunger = self:Get("max_hunger")
                 if max_hunger then
                     inst.components.hoshino_com_max_value_controller:AddTempExtraHunger(GetSpeedMultInst(self),max_hunger)
-                    self:Set("max_hunger",nil)
                 end
             end)
         --------------------------------------------------------------------------------
