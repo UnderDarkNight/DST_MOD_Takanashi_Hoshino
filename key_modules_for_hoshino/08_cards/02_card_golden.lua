@@ -709,7 +709,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_hell_contract","hoshino_card_debuff_hell_contract",true)
             end,
             text = function(inst)
-                return "【地狱契约】亲自击杀生物时，66%的概率再掉落一次\n（选择之后从卡池移除）\n(一击致死的不算数)"
+                return "\n【地狱契约】亲自击杀生物时，66%的概率再掉落一次\n（选择之后从卡池移除）\n(一击致死的不算数)"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
