@@ -78,7 +78,7 @@ local prefabs_name_list = {
     "01_47_card_debuff_destruction",                                        --- 卡牌debuff：破灭
     "01_48_card_debuff_block_health_auto_up",                               --- 卡牌debuff：封眠
     "01_49_card_debuff_air_drop_support_golden",                            --- 卡牌debuff：空投支援（金）
-
+    "01_50_card_debuff_pad_stone",                                          --- 卡牌debuff：垫脚石
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
     "03_special_equipment_backpack_t8_buff",                 --- 特殊装备：T8背包 的 buff

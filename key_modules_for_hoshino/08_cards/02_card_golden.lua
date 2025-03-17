@@ -842,6 +842,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【垫脚石】你的攻击倍率和移速倍率不低于1.0
+        ["pad_stone"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_pad_stone") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_pad_stone","hoshino_card_debuff_pad_stone",true)
+            end,
+            text = function(inst)
+                return "【垫脚石】你的攻击倍率和移速倍率不低于1.0"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
