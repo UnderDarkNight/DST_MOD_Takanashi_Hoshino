@@ -534,6 +534,7 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Max_Helth(20)
+                inst.components.health:DoDelta(20)
                 inst.components.hoshino_com_debuff:Add_Max_Sanity(20)
                 inst.components.hoshino_com_debuff:Add_Max_Hunger(20)                
             end,

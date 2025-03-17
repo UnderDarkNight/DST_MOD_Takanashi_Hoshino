@@ -53,8 +53,10 @@ local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿�
     --- 函数
         player.components.hoshino_com_inventory_custom_apply_damage:AddBeforeApplyDamageFn(inst,function(player,damage, attacker, weapon,spdamage)
             DoAoe(player,inst)
+            print("【爆炸护盾】触发")
             if inst.components.hoshino_data:Add("num",-1) <= 0 then
                 inst:Remove()
+                print("【炸弹护盾】使用完毕",inst)
             end
             return 0,nil
         end)

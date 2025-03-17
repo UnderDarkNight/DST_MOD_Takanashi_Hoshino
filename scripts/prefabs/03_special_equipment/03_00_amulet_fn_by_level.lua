@@ -57,17 +57,12 @@ return function(inst)
             end
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 inst:ListenForEvent("newstate",player_pinned_block_state_event_fn,owner)
-                if not owner.components.hoshino_data:Get("max_health_active.t1_amulet") then
-                    owner.components.hoshino_data:Set("max_health_active.t1_amulet",true)
-                    owner.components.hoshino_com_debuff:Add_Max_Helth(20)
-                end
+                owner.components.hoshino_com_max_value_controller:AddTempExtraHealth(inst,20)
+                owner.components.health:DoDelta(20)
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
                 inst:RemoveEventCallback("newstate",player_pinned_block_state_event_fn,owner)
-                if owner.components.hoshino_data:Get("max_health_active.t1_amulet") then
-                    owner.components.hoshino_data:Set("max_health_active.t1_amulet",false)
-                    owner.components.hoshino_com_debuff:Add_Max_Helth(-20)
-                end
+                owner.components.hoshino_com_max_value_controller:RemoveTempExtraHealth(inst)
             end)
         end
     ----------------------------------------------------------------------------------

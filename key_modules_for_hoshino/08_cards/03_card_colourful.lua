@@ -68,6 +68,7 @@ local cards = {
                 local debuff_prefab = "hoshino_card_debuff_i_have_expanded"
                 inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
                 inst.components.hoshino_com_debuff:Add_Max_Helth(300)
+                inst.components.health:DoDelta(300)
                 inst.components.hoshino_com_debuff:Add_Max_Sanity(300)
                 inst.components.hoshino_com_debuff:Add_Max_Hunger(300)
 

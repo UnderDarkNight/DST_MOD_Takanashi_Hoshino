@@ -55,32 +55,22 @@ return function(inst)
     --- 生命上限+20
         if inst.level >= 1 then            
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                if not owner.components.hoshino_data:Get("max_health_active.backpack_t1") then
-                    owner.components.hoshino_data:Set("max_health_active.backpack_t1",true)
-                    owner.components.hoshino_com_debuff:Add_Max_Helth(20)
-                end
+                owner.components.hoshino_com_max_value_controller:AddTempExtraHealth(inst,20)
+                owner.components.health:DoDelta(20)
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
-                if owner.components.hoshino_data:Get("max_health_active.backpack_t1") then
-                    owner.components.hoshino_data:Set("max_health_active.backpack_t1",false)
-                    owner.components.hoshino_com_debuff:Add_Max_Helth(-20)
-                end
+                owner.components.hoshino_com_max_value_controller:RemoveTempExtraHealth(inst)
             end)
         end
     ----------------------------------------------------------------------------------
     --- 生命上限+30
         if inst.level >= 2 then            
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                if not owner.components.hoshino_data:Get("max_health_active.backpack_t2") then
-                    owner.components.hoshino_data:Set("max_health_active.backpack_t2",true)
-                    owner.components.hoshino_com_debuff:Add_Max_Helth(30)
-                end
+                owner.components.hoshino_com_max_value_controller:AddTempExtraHealth(inst,30)
+                owner.components.health:DoDelta(30)
             end)
             inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
-                if owner.components.hoshino_data:Get("max_health_active.backpack_t2") then
-                    owner.components.hoshino_data:Set("max_health_active.backpack_t2",false)
-                    owner.components.hoshino_com_debuff:Add_Max_Helth(-30)
-                end
+                owner.components.hoshino_com_max_value_controller:RemoveTempExtraHealth(inst)
             end)
         end
     ----------------------------------------------------------------------------------

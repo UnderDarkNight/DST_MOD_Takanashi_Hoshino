@@ -59,7 +59,10 @@
             local player_name = player:GetDisplayName()
             local health = data.health
             player.components.hoshino_com_debuff:Add_Max_Helth(health)
-            -- TheNet:Announce("【实验性疗法】"..player_name.."的最大生命值变更："..health)
+            if health > 0 then
+                player.components.health:DoDelta(health)
+            end
+            TheNet:Announce("【实验性疗法】"..player_name.."的最大生命值变更："..health)
             if health > 0 then
                 table.insert(anim_cmd_table,"up_health")
             else
@@ -67,7 +70,7 @@
             end
             local sanity = data.sanity
             player.components.hoshino_com_debuff:Add_Max_Sanity(sanity)
-            -- TheNet:Announce("【实验性疗法】"..player_name.."的最大精神值变更："..sanity)
+            TheNet:Announce("【实验性疗法】"..player_name.."的最大精神值变更："..sanity)
             if sanity > 0 then
                 table.insert(anim_cmd_table,"up_sanity")
             else
@@ -75,7 +78,7 @@
             end
             local hunger = data.hunger
             player.components.hoshino_com_debuff:Add_Max_Hunger(hunger)
-            -- TheNet:Announce("【实验性疗法】"..player_name.."的最大饥饿值变更："..hunger)
+            TheNet:Announce("【实验性疗法】"..player_name.."的最大饥饿值变更："..hunger)
             if hunger > 0 then
                 table.insert(anim_cmd_table,"up_hunger")
             else
@@ -83,7 +86,7 @@
             end
             local damage = data.damage
             player.components.hoshino_com_debuff:Add_Damage_Mult(damage)
-            -- TheNet:Announce("【实验性疗法】"..player_name.."的伤害倍率变更："..damage)
+            TheNet:Announce("【实验性疗法】"..player_name.."的伤害倍率变更："..damage)
             if damage > 0 then
                 table.insert(anim_cmd_table,"up_damage")
             else
@@ -91,7 +94,7 @@
             end
             local speed = data.speed
             player.components.hoshino_com_debuff:Add_Speed_Mult(speed)
-            -- TheNet:Announce("【实验性疗法】"..player_name.."的速度倍率变更："..speed)
+            TheNet:Announce("【实验性疗法】"..player_name.."的速度倍率变更："..speed)
             if speed > 0 then
                 table.insert(anim_cmd_table,"up_speed")
             else
@@ -99,7 +102,7 @@
             end
             local planar_defense = data.planar_defense
             player.components.hoshino_com_debuff:Add_Planar_Defense(planar_defense)
-            -- TheNet:Announce("【实验性疗法】"..player_name.."的位面防御变更："..planar_defense)
+            TheNet:Announce("【实验性疗法】"..player_name.."的位面防御变更："..planar_defense)
             if planar_defense > 0 then
                 table.insert(anim_cmd_table,"up_planar_defense")
             else
