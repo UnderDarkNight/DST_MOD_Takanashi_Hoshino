@@ -49,6 +49,7 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Max_Helth(9)
+                inst.components.health:DoDelta(9)
             end,
             text = function(inst)
                 return "生命上限+9"

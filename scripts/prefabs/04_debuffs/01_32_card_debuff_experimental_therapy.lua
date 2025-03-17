@@ -59,6 +59,9 @@
             local player_name = player:GetDisplayName()
             local health = data.health
             player.components.hoshino_com_debuff:Add_Max_Helth(health)
+            if health > 0 then
+                player.components.health:DoDelta(health)
+            end
             -- TheNet:Announce("【实验性疗法】"..player_name.."的最大生命值变更："..health)
             if health > 0 then
                 table.insert(anim_cmd_table,"up_health")
