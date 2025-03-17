@@ -7,7 +7,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local DELTA_TIME = 0.3
-    local RADIUS = TUNING.HOSHINO_DEBUGGING_MODE and 15 or 6
+    local RADIUS = TUNING.HOSHINO_DEBUGGING_MODE and 15 or 3
     local BOUNCE_MUST_TAGS = { "_combat" }
     local BOUNCE_NO_TAGS = { "INLIMBO", "wall", "notarget", "player", "companion", "flight", "invisible", "noattack", "hiding" }
 ------------------------------------------------------------------------------------------------------------------------------------------------

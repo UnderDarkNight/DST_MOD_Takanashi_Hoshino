@@ -25,7 +25,7 @@
             local last_info_lives_num = nil
             inst:DoPeriodicTask(5,function()
                 if player:HasTag("playerghost") and player.components.playercontroller:IsEnabled() and cd_task == nil then
-                    cd_task = inst:DoTaskInTime(30,function()
+                    cd_task = inst:DoTaskInTime(15,function()
                         cd_task = nil
                     end)
                     player:PushEvent("respawnfromghost", { source = inst })

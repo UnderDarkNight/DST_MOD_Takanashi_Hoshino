@@ -17,7 +17,7 @@
         -----------------------------------------------------
         -- 
             inst:ListenForEvent("death",function()
-                inst:DoTaskInTime(10,function()
+                inst:DoTaskInTime(5,function()
                     if not player:HasTag("playerghost") then
                         return
                     end
