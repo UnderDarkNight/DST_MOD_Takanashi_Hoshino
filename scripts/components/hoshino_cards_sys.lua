@@ -255,7 +255,12 @@ nil,
 -- 概率池修改
     function hoshino_cards_sys:Card_Pool_Delata(index,value)
         if self.CardPools[tostring(index)] then
-            self.CardPools[index] = self.CardPools[index] + value
+            self.CardPools[index] = matth.max(self.CardPools[index] + value,0)
+        end
+    end
+    function hoshino_cards_sys:Card_Pool_Set(index,value)
+        if self.CardPools[tostring(index)] then
+            self.CardPools[index] = math.max(value,1)
         end
     end
     function hoshino_cards_sys:Get_Card_From_Pool()  --- 从概率池获取一个卡牌
@@ -648,6 +653,10 @@ nil,
             for _,single_card_data in pairs(cards_data) do
                 local card_name_index = single_card_data.card_name
                 local card_type = self:GetCardTypeByName(card_name_index)
+                self.inst:PushEvent("hoshino_cards_sys.card_recycled",{
+                    card_name = card_name_index,
+                    card_type = card_type,
+                })
                 local temp_num =  (type_with_num[card_type] or 0)
                 if temp_num > ret_num then
                     ret_num = temp_num

@@ -15,10 +15,10 @@
         -- if TUNING.HOSHINO_DEBUGGING_MODE then
         --     return true
         -- end
-        if (weapon.components.weapon.attackrange or 0) < WEAPON_RANGE then
+        if (weapon.components.weapon.attackrange or 0) <= WEAPON_RANGE then
             return true
         end
-        if (weapon.components.weapon.attackrange or 0) < WEAPON_RANGE then
+        if (weapon.components.weapon.attackrange or 0) <= WEAPON_RANGE then
             return true
         end
         return false

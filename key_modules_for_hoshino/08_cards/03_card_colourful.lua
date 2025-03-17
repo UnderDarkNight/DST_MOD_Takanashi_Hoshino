@@ -172,6 +172,96 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【彩】【虚空之喉】每当玩家进行一次攻击动作，获得一个围绕在玩家周围（半径为4.5）的，持续3s的黑圈，触碰到黑圈的敌人每0.05s受到15真实伤害（受攻击倍率影响，无伤害来源），且被黑圈杀死的敌人有3%的概率给予玩家一层【爆炸护盾】【重复选择伤害和概率叠加】
+        ["void_throat"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_void_throat","hoshino_card_debuff_void_throat",true)
+            end,
+            text = function(inst)
+                return "【虚空之喉】每当玩家进行一次攻击动作，获得一个围绕在玩家周围（半径为4.5）的，持续3s的黑圈，触碰到黑圈的敌人每0.05s受到15真实伤害（受攻击倍率影响，无伤害来源），且被黑圈杀死的敌人有3%的概率给予玩家一层【爆炸护盾】【重复选择伤害和概率叠加】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【彩】【混沌】使你的所有卡牌权重变为相等
+        ["chaos"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local CardPools = {
+                    ["card_white"] = 100,
+                    ["card_colourful"] = 100,
+                    ["card_golden"] = 100,
+                    ["card_black"] = 100,
+                }
+                for card_type, value in pairs(CardPools) do
+                    inst.components.hoshino_cards_sys:Card_Pool_Set(card_type,value)
+                end
+            end,
+            text = function(inst)
+                return "【混沌】使你的所有卡牌权重变为相等"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【彩】【献祭】杀死你的所有随从，并获得等量一选一金色卡包
+        ["sacrifice"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                if inst.components.leader == nil then
+                    return
+                end
+                local function GiveItem()
+                    local item = SpawnPrefab("hoshino_item_cards_pack")
+                    item:PushEvent("Set",{
+                            cards = {
+                                "card_golden",    
+                            },
+                        }
+                    )
+                    inst.components.inventory:GiveItem(item)
+                end
+                for follower, flag in pairs(inst.components.leader.followers) do
+                    if follower and follower:IsValid() and follower.components.health and not follower.components.health:IsDead() then
+                        follower.components.health:Kill()
+                        inst:DoTaskInTime(0.5,function()
+                            if follower.components.health and follower.components.health:IsDead() then
+                                GiveItem()
+                            end
+                        end)
+                    end
+                end
+            end,
+            text = function(inst)
+                return "【献祭】杀死你的所有随从，并获得等量一选一金色卡包"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【彩】 【裁定】此后被回收的卡牌将从卡组中移除，且返还信用点（白卡100 金卡500 彩卡2000）    【选择之后从卡组移除】
+        ["judgment"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_judgment") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_judgment","hoshino_card_debuff_judgment",true)
+            end,
+            text = function(inst)
+                return "【裁定】此后被回收的卡牌将从卡组中移除（黑卡不算数、不移除）。\n每张卡返还信用点（白卡100 金卡500 彩卡2000）\n【选择之后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

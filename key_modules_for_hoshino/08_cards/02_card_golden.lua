@@ -812,6 +812,66 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【封眠】受到你造成伤害的生物无法再恢复生命值
+        ["block_monster_health_auto_up"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_block_health_auto_up") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_block_health_auto_up","hoshino_card_debuff_block_health_auto_up",true)
+            end,
+            text = function(inst)
+                return "【封眠】受到你造成伤害的生物无法再恢复生命值，\n【选择后从卡池移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【援助补给】接下来10天内，每到新的一天都会从天而降一个资源补给箱，资源补给箱从下列几种物资中随机出现一个(曼德拉草浓缩液*1 超级打包盒-千年改*1 神秘核心*1  12mm霰弹*20 能量药水*6)
+        ["air_drop_support_golden"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_air_drop_support_golden","hoshino_card_debuff_air_drop_support_golden")
+            end,
+            text = function(inst)
+                return "【援助补给】接下来10天内，每到新的一天都会从天而降一个资源补给箱，资源补给箱从下列几种物资中随机出现一个(曼德拉草浓缩液*1 超级打包盒-千年改*1 神秘核心*1  12mm霰弹*20 能量药水*6)"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【垫脚石】你的攻击倍率和移速倍率不低于1.0
+        ["pad_stone"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_pad_stone") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_pad_stone","hoshino_card_debuff_pad_stone",true)
+            end,
+            text = function(inst)
+                return "【垫脚石】你的攻击倍率和移速倍率不低于1.0"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【弹簧】选择这张卡时检测人物基础攻击倍率，若小于等于1则翻倍，若大于等于1.5则-30%，其他情况下选中则无影响。
+        ["spring"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_spring"..tostring(math.random(1000000)),"hoshino_card_debuff_spring")
+            end,
+            text = function(inst)
+                return "【弹簧】激活这张卡时检测人物基础攻击倍率,\n若小于等于1则翻倍,若大于等于1.5则-30%。\n其他情况下选中则无影响。\n角色重选则失效"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
