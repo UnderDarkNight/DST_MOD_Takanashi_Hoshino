@@ -26,15 +26,15 @@ local flg,error_code = pcall(function()
         end
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --         cards = {
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+                cards = {
         -- --             -- "card_golden",
         -- --             -- "card_white",
         -- --             -- "card_colourful",
         -- --             -- "card_colourful",
-        -- --             -- "card_golden",
-        -- --             -- "card_black",
+                     "mark_moon_land_and_ancient_land",
+        --             -- "card_black",
         --             "mark_moon_land_and_ancient_land",
         -- --             -- "unlock_spell_normal_ex",
         -- --             -- "unlock_spell_swimming_ex",
@@ -43,10 +43,10 @@ local flg,error_code = pcall(function()
         -- --             -- "kill_and_explode",
         -- --             -- "give_me_some_money",
         -- --             "level_up_and_double_card_pack",
-        --         },
-        --     }
-        -- )
-        -- ThePlayer.components.inventory:GiveItem(item)
+                },
+            }
+        )
+        ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
     --- 调试任务栏
         -- ThePlayer.___task_board_widget_fn = function(inst,front_root)
@@ -56,7 +56,7 @@ local flg,error_code = pcall(function()
 
         -- print(TheWorld.Map:GetTileAtPoint(x,y,z))
 
-        local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
+        local box = TheSim:FindFirstEntityWithTag("set_the_same_followers")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_31")
