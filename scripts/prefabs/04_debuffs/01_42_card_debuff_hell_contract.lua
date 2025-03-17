@@ -17,10 +17,12 @@
         end,player)
         inst:ListenForEvent("killed",function(_,_table)
             local monster = _table and _table.victim
-            if monster and monster.sg and monster.brainfn and monster.components.lootdropper and not actived_list[monster] then
-                monster.components.lootdropper:DropLoot()
-                actived_list[monster] = true
+            if (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE )
+                and monster and monster.sg and monster.brainfn and monster.components.lootdropper 
+                and not actived_list[monster] then
+                    monster.components.lootdropper:DropLoot()
             end
+            actived_list[monster] = true
         end,player)
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,12 +30,13 @@
     local function OnAttached_For_Monster(inst,monster)        
         inst:ListenForEvent("entity_droploot",function(_,_table)
             if _table and _table.inst and _table.inst == monster and monster.components.lootdropper 
-                and (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE ) and not actived_list[monster] then
+                and (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE ) 
+                and not actived_list[monster] then
                 inst:Remove()
                 monster.components.lootdropper:DropLoot()
                 print("【地狱契约】掉落物翻倍",monster)
-                actived_list[monster] = true
             end
+            actived_list[monster] = true
         end,TheWorld)
         print("【地狱契约】debuff 添加成功",monster)
     end
