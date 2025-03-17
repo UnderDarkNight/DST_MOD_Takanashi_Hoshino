@@ -188,6 +188,29 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【彩】【混沌】使你的所有卡牌权重变为相等
+        ["chaos"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local CardPools = {
+                    ["card_white"] = 100,
+                    ["card_colourful"] = 100,
+                    ["card_golden"] = 100,
+                    ["card_black"] = 100,
+                }
+                for card_type, value in pairs(CardPools) do
+                    inst.components.hoshino_cards_sys:Card_Pool_Set(card_type,value)
+                end
+            end,
+            text = function(inst)
+                return "【混沌】使你的所有卡牌权重变为相等"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

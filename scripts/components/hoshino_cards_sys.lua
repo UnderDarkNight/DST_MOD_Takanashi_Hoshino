@@ -255,7 +255,12 @@ nil,
 -- 概率池修改
     function hoshino_cards_sys:Card_Pool_Delata(index,value)
         if self.CardPools[tostring(index)] then
-            self.CardPools[index] = self.CardPools[index] + value
+            self.CardPools[index] = matth.max(self.CardPools[index] + value,0)
+        end
+    end
+    function hoshino_cards_sys:Card_Pool_Set(index,value)
+        if self.CardPools[tostring(index)] then
+            self.CardPools[index] = math.max(value,1)
         end
     end
     function hoshino_cards_sys:Get_Card_From_Pool()  --- 从概率池获取一个卡牌
