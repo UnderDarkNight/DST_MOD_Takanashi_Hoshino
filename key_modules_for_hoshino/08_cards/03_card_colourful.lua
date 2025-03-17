@@ -211,6 +211,43 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【彩】【献祭】杀死你的所有随从，并获得等量一选一金色卡包
+        ["sacrifice"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                if inst.components.leader == nil then
+                    return
+                end
+                local function GiveItem()
+                    local item = SpawnPrefab("hoshino_item_cards_pack")
+                    item:PushEvent("Set",{
+                            cards = {
+                                "card_golden",    
+                            },
+                        }
+                    )
+                    inst.components.inventory:GiveItem(item)
+                end
+                for follower, flag in pairs(inst.components.leader.followers) do
+                    if follower and follower:IsValid() and follower.components.health and not follower.components.health:IsDead() then
+                        follower.components.health:Kill()
+                        inst:DoTaskInTime(0.5,function()
+                            if follower.components.health and follower.components.health:IsDead() then
+                                GiveItem()
+                            end
+                        end)
+                    end
+                end
+            end,
+            text = function(inst)
+                return "【献祭】杀死你的所有随从，并获得等量一选一金色卡包"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
