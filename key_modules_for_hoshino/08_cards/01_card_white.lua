@@ -773,7 +773,7 @@ local cards = {
                 inst:AddDebuff(debuff_prefab,debuff_prefab)
                 debuff_inst = inst:GetDebuff(debuff_prefab)
                 if debuff_inst then
-                    debuff_inst:PushEvent("add_time",5*60)
+                    debuff_inst:PushEvent("add_time",5*60+10)
                 end
             end,
             text = function(inst)

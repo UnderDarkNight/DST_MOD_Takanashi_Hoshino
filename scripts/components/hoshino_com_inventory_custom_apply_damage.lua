@@ -55,6 +55,7 @@ nil,
                     new_table[k] = v
                 end
             end
+            self.__BeforeApplyDamageFns = new_table
             self.inst:RemoveEventCallback("onremove", self.__remove_event_fn_before, tempInst)
         end
     end
@@ -88,6 +89,7 @@ nil,
                     new_table[k] = v
                 end
             end
+            self.__AfterApplyDamageFns = new_table
             self.inst:RemoveEventCallback("onremove", self.__remove_event_fn_after, tempInst)
         end
     end
