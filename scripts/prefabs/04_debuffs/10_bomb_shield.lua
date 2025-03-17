@@ -58,7 +58,7 @@ local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿�
                 inst:Remove()
                 print("【炸弹护盾】使用完毕",inst)
             end
-            return 0,nil
+            return 0,{}
         end)
     -----------------------------------------------------
     ---
