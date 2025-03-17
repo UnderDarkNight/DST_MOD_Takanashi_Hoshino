@@ -10,7 +10,7 @@
     local actived_list = {}
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-    local function OnAttached_For_Monster(inst,monster)        
+    local function OnAttached_For_Monster(inst,monster,from_player_killed_event)        
         -- inst:ListenForEvent("entity_droploot",function(_,_table)
         --     if _table and _table.inst and _table.inst == monster and monster.components.lootdropper 
         --         and (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE ) 
@@ -42,8 +42,10 @@
             monster.components.lootdropper:Hoshino_Block()
         else
             inst:ListenForEvent("entity_droploot",function(_,_table)
-                if _table and _table.inst and _table.inst == monster then                
-                    inst:Remove()
+                if _table and _table.inst and _table.inst == monster then
+                    if not from_player_killed_event then
+                        inst:Remove()
+                    end
                     monster.components.lootdropper:DropLoot()
                     print("【地狱契约】掉落物翻倍",monster)
                 end
@@ -71,7 +73,7 @@
         inst:ListenForEvent("killed",function(_,_table)
             local monster = _table and _table.victim
             if monster then
-                OnAttached_For_Monster(inst,monster)
+                OnAttached_For_Monster(inst,monster,true)
                 inst.components.hoshino_data:Set("result",nil)
             end
         end,player)
