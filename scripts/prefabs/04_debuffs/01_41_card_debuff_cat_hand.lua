@@ -29,7 +29,7 @@
         -----------------------------------------------------
         --- 固定减伤
             player.components.hoshino_com_inventory_custom_apply_damage:AddAfterApplyDamageFn(inst,function(player,damage, attacker, weapon, spdamage)
-                local defense_num = 3*inst.components.hoshino_data:Add("defense_num",0)
+                local defense_num = 3*inst.components.hoshino_data:Add("active_times",0)
                 damage = math.max( damage - defense_num , 0 )
                 if type(spdamage) == "table" then
                     for dmg_type, value in pairs(spdamage) do

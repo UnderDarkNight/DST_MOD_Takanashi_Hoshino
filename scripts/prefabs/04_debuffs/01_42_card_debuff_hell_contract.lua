@@ -15,30 +15,54 @@
                 monster:AddDebuff("hoshino_card_debuff_hell_contract","hoshino_card_debuff_hell_contract")
             end
         end,player)
-        inst:ListenForEvent("killed",function(_,_table)
-            local monster = _table and _table.victim
-            if (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE )
-                and monster and monster.sg and monster.brainfn and monster.components.lootdropper 
-                and not actived_list[monster] then
-                    monster.components.lootdropper:DropLoot()
-            end
-            actived_list[monster] = true
-        end,player)
+        -- inst:ListenForEvent("killed",function(_,_table)
+        --     local monster = _table and _table.victim
+        --     if (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE )
+        --         and monster and monster.sg and monster.brainfn and monster.components.lootdropper 
+        --         and not actived_list[monster] then
+        --             monster.components.lootdropper:DropLoot()
+        --     end
+        --     actived_list[monster] = true
+        -- end,player)
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function OnAttached_For_Monster(inst,monster)        
-        inst:ListenForEvent("entity_droploot",function(_,_table)
-            if _table and _table.inst and _table.inst == monster and monster.components.lootdropper 
-                and (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE ) 
-                and not actived_list[monster] then
-                inst:Remove()
-                monster.components.lootdropper:DropLoot()
+        -- inst:ListenForEvent("entity_droploot",function(_,_table)
+        --     if _table and _table.inst and _table.inst == monster and monster.components.lootdropper 
+        --         and (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE ) 
+        --         and not actived_list[monster] then
+        --         inst:Remove()
+        --         monster.components.lootdropper:DropLoot()
+        --         print("【地狱契约】掉落物翻倍",monster)
+        --     end
+        --     actived_list[monster] = true
+        -- end,TheWorld)
+        -- print("【地狱契约】debuff 添加成功",monster)
+
+        if monster.components.hoshino_data:Get("result") == nil then
+            if math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE then
+                inst.components.hoshino_data:Set("result","double")
                 print("【地狱契约】掉落物翻倍",monster)
+            else
+                inst.components.hoshino_data:Set("result","block")
+                print("【地狱契约】不掉落任何东西",monster)
             end
-            actived_list[monster] = true
-        end,TheWorld)
-        print("【地狱契约】debuff 添加成功",monster)
+        end
+        if not monster.components.lootdropper then
+            return
+        end
+        if inst.components.hoshino_data:Get("result") == "block" then
+            monster.components.lootdropper:Hoshino_Block()
+        else
+            inst:ListenForEvent("entity_droploot",function(_,_table)
+                if _table and _table.inst and _table.inst == monster then                
+                    inst:Remove()
+                    monster.components.lootdropper:DropLoot()
+                    print("【地狱契约】掉落物翻倍",monster)
+                end
+            end,TheWorld)
+        end
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -71,6 +95,7 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
+    inst:AddComponent("hoshino_data")
     inst:AddComponent("debuff")
     inst.components.debuff:SetAttachedFn(OnAttached)
     inst.components.debuff.keepondespawn = true -- 是否保持debuff 到下次登陆
