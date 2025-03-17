@@ -805,8 +805,10 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_destruction","hoshino_card_debuff_destruction",true)
-                inst.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
+                inst:DoTaskInTime(0.3,function()
+                    inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_destruction","hoshino_card_debuff_destruction",true)
+                    inst.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
+                end)                
             end,
             text = function(inst)
                 return "【破灭】立即获得一包【神秘核心】,下一张激活的卡牌将从卡组中永久移除"
