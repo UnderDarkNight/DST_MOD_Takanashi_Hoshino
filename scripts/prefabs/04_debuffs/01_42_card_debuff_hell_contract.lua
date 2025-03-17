@@ -40,7 +40,7 @@
         -- end,TheWorld)
         -- print("【地狱契约】debuff 添加成功",monster)
 
-        if monster.components.hoshino_data:Get("result") == nil then
+        if inst.components.hoshino_data:Get("result") == nil then
             if math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE then
                 inst.components.hoshino_data:Set("result","double")
                 print("【地狱契约】掉落物翻倍",monster)
