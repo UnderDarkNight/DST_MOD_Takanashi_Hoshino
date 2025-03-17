@@ -1,20 +1,22 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
-    【空投支援】 接下来3天内获得物资支援，
-    每到新的一天时在从空中落下一个物资支援包 其内从以下四种物品中随机出现一种(土豆手雷*4 12号霰弹*10 神名文字碎片*1 能量药水*3 )
+【金】【援助补给】接下来10天内，每到新的一天都会从天而降一个资源补给箱，资源补给箱从下列几种物资中随机出现一个
+
+(曼德拉草浓缩液*1 超级打包盒-千年改*1 神秘核心*1  12mm霰弹*20 能量药水*6)
 
 ]]--
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- 参数
-    local SUPPORT_DAYS = 3 -- 支援天数
+    local SUPPORT_DAYS = 10 -- 支援天数
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local gift_list = {
-        ["potato"] = 4,
-        ["hoshino_item_12mm_shotgun_shells"] = 10,
-        ["hoshino_item_fragments_of_divine_script"] = 1,
-        ["hoshino_food_energy_drink"] = 3,
+        ["hoshino_food_mandrake_concentrate"] = 1,      -- 曼德拉草浓缩液
+        ["hoshino_item_12mm_shotgun_shells"] = 20,      -- 12mm霰弹
+        ["hoshino_item_special_packer"] = 1,            -- 超级打包盒
+        ["hoshino_item_cards_pack"] = 1,                -- 神秘核心
+        ["hoshino_food_energy_drink"] = 6,              -- 能量药水
     }
     local function SpawnGift(x,y,z)
         local gift_pack = SpawnPrefab("hoshino_item_special_gift_pack")
@@ -86,4 +88,4 @@ local function fn()
     return inst
 end
 
-return Prefab("hoshino_card_debuff_air_drop_support", fn)
+return Prefab("hoshino_card_debuff_air_drop_support_golden", fn)
