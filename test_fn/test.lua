@@ -83,10 +83,9 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        ThePlayer:AddDebuff("hoshino_card_debuff_pad_stone","hoshino_card_debuff_pad_stone")
-        local temp_inst = CreateEntity()
-        ThePlayer.components.locomotor:SetExternalSpeedMultiplier(temp_inst,tostring(temp_inst.GUID),0.5)
-        temp_inst:DoTaskInTime(10,temp_inst.Remove)
+        for i = 1, 30, 1 do
+            ThePlayer:AddDebuff("hoshino_card_debuff_void_throat","hoshino_card_debuff_void_throat")
+        end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
