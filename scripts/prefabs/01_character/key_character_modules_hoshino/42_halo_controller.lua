@@ -61,6 +61,13 @@ return function(inst)
             end
         end
     end)
+    inst:ListenForEvent("hoshino_event.halo_refresh",function()
+        if show_flag and light_fx then
+            light_fx:Remove()
+            light_fx = nil
+            CreateLight()
+        end
+    end)
     inst:ListenForEvent("hoshino_event.spell_type_changed",function()
         inst:PushEvent("hoshino_event.halo")
     end)

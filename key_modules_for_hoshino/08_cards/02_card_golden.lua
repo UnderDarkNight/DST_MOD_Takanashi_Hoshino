@@ -128,14 +128,8 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_data:Add("hoshino_card_debuff_health_down_and_coins_up",60*6) --- 计时器累加
-                local buff_prefab = "hoshino_card_debuff_health_down_and_coins_up"  -- 用while上BUFF
-                while true do
-                    local buff_inst = inst:GetDebuff(buff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(buff_prefab,buff_prefab)
-                end
+                local buff_prefab = "hoshino_card_debuff_health_down_and_coins_up"
+                inst:AddDebuff(buff_prefab,buff_prefab)
             end,
             text = function(inst)
                 return "【焉知非福】\n每次失去生命值的时候，获得10点「信用点」，持续6分钟"
@@ -175,16 +169,9 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_shop:CreditCoinDelta(5555)
-                -- local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                -- while true do
-                --     local debuff_inst = inst:GetDebuff(debuff_prefab)
-                --     if debuff_inst and debuff_inst:IsValid() then
-                --         break
-                --     end
-                --     inst:AddDebuff(debuff_prefab,debuff_prefab)
-                -- end
-                inst.components.hoshino_cards_sys:AcitveCardFnByIndex("mediocre")
-                inst.components.hoshino_cards_sys:RememberActivedCard("mediocre")
+                if inst.components.hoshino_cards_sys:AcitveCardFnByIndexWithTest("mediocre") then
+                    inst.components.hoshino_cards_sys:RememberActivedCard("mediocre")
+                end
                 inst.components.hoshino_com_debuff:Set("golden_card_unlocked_give_me_some_money",true)
             end,
             text = function(inst)
@@ -208,16 +195,11 @@ local cards = {
                                 }
                 local ret_monster_prefab = monster_list[math.random(#monster_list)]
                 local monster = SpawnPrefab(ret_monster_prefab or "hound")
-                local debuff_prefab = "hoshino_card_debuff_for_monster_drop_cards_pack"
-                while true do
-                    local debuff_inst = monster:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    monster:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                local debuff_prefab = "hoshino_card_debuff_for_monster_drop_cards_pack"                
+                monster:AddDebuff(debuff_prefab,debuff_prefab)
+                monster:AddDebuff(debuff_prefab,debuff_prefab)
+                monster:AddDebuff(debuff_prefab,debuff_prefab)
                 monster.Transform:SetPosition(x,y,z)
-
                 inst.components.hoshino_com_rpc_event:PushEvent("hoshino_event.inspect_hud_force_close")
 
             end,
@@ -236,13 +218,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_temperature_locker",5*480)
                 local debuff_prefab = "hoshino_card_debuff_temperature_locker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
             end,
             text = function(inst)
                 return "【寒暑不侵】 恒温5天"
@@ -266,8 +242,9 @@ local cards = {
                 end
                 if math.random(10000)/10000 <= 0.2 then
                     -- inst.components.hoshino_cards_sys:Card_Pool_Delata("card_white",5)
-                    inst.components.hoshino_cards_sys:AcitveCardFnByIndex("keyhole_mountain_chick")
-                    inst.components.hoshino_cards_sys:RememberActivedCard("keyhole_mountain_chick")
+                    if inst.components.hoshino_cards_sys:AcitveCardFnByIndexWithTest("keyhole_mountain_chick") then
+                        inst.components.hoshino_cards_sys:RememberActivedCard("keyhole_mountain_chick")
+                    end
                 end
             end,
             text = function(inst)
@@ -378,23 +355,11 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_health_penalty_blocker"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_health_penalty_blocker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return "【坚毅】 清除所有血量上限惩罚值（黑血）\n永远不再出现惩罚"
@@ -411,13 +376,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_health_auto_up",1)
                 local debuff_prefab = "hoshino_card_debuff_health_auto_up"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return "【基沃托斯超人】 每10s恢复1点生命值"
@@ -434,13 +393,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add("hoshino_card_debuff_direct_kill_target",0.1/100)
                 local debuff_prefab = "hoshino_card_debuff_direct_kill_target"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             text = function(inst)
                 return " \n【最高神秘】\n对于血量低于70%的目标，有0.1%的直接击杀概率\n重复卡牌则概率叠加"
@@ -620,11 +573,253 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【收集癖】你每拥有1个卡牌词条，伤害+1% 【选择之后从卡组移除】
+        ["collecting_fetish"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_collecting_fetish") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_collecting_fetish","hoshino_card_debuff_collecting_fetish",true)
+            end,
+            text = function(inst)
+                return "【收集癖】你每拥有1个卡牌词条，伤害+1% 【选择之后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【实质打击】基础攻击伤害-50%，但是你的所有攻击会扣除敌人30点生命值 （选择之后从卡池移除）
+        ["substantive_strike"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_substantive_strike") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_substantive_strike","hoshino_card_debuff_substantive_strike",true)
+            end,
+            text = function(inst)
+                return "【实质打击】基础攻击伤害-50%，但是你的所有攻击会扣除敌人30点生命值。\n【选择之后从卡池移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【战车】当你接触到敌对生物时(半径6），每0.3秒扣除其10点生命值（重复选择伤害叠加）
+        ["war_chariot"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add("war_chariot",10)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_war_chariot","hoshino_card_debuff_war_chariot",true)
+            end,
+            text = function(inst)
+                return "【战车】当你接触到敌对生物时，每0.3秒扣除其10点生命值（重复选择伤害叠加）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【负重前行】当你获得诅咒时，获得一个神秘核心（选择后从卡池移除）
+        ["burdened_forward"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_burdened_forward") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_burdened_forward","hoshino_card_debuff_burdened_forward",true)
+            end,
+            text = function(inst)
+                return "【负重前行】当你获得诅咒时，获得一个神秘核心（选择后从卡池移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【趋吉避凶】当你选择诅咒牌时，真正的诅咒会被高亮标出（选择后从卡牌移除）
+        ["seek_good_avoid_bad"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_seek_good_avoid_bad") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_seek_good_avoid_bad","hoshino_card_debuff_seek_good_avoid_bad",true)
+            end,
+            text = function(inst)
+                return "【趋吉避凶】你能看出哪张牌是真正的诅咒牌（选择后从卡牌移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【嗝屁猫】当你死亡时，你立刻复活，此效果最多触发九次，但是你获得诅咒【无实体】
+        ["nine_lives_cat"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_nine_lives_cat","hoshino_card_debuff_nine_lives_cat")
+                if inst.components.hoshino_cards_sys:AcitveCardFnByIndexWithTest("max_health_1") then
+                    inst.components.hoshino_cards_sys:RememberActivedCard("max_health_1")
+                end
+            end,
+            text = function(inst)
+                return "【嗝屁猫】当你死亡时，你立刻复活，此效果最多触发九次，但是你获得诅咒【无实体】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【嗝屁猫的项圈】当你死亡时，50%的概率立即复活
+        ["cat_amulet"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_cat_amulet") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_cat_amulet","hoshino_card_debuff_cat_amulet",true)
+            end,
+            text = function(inst)
+                return "【金】【嗝屁猫的项圈】当你死亡时，50%的概率立即复活。\n（选择之后从卡池移除）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【嗝屁猫的爪子】生命上限-40（最低保留1），获得3点固定减伤（受到的伤害-3，不包含过冷过热等扣血效果）
+        ["cat_hand"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_cat_hand","hoshino_card_debuff_cat_hand",true)
+            end,
+            text = function(inst)
+                return "【嗝屁猫的爪子】生命上限-40（最低保留1,可叠加）\n获得3点固定减伤（可叠加，不包含过冷过热等扣血效果,不包括位面、阵营伤害）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【地狱契约】击杀生物时，66%的概率双倍掉落
+        ["hell_contract"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_hell_contract") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_hell_contract","hoshino_card_debuff_hell_contract",true)
+            end,
+            text = function(inst)
+                return "【地狱契约】亲自击杀生物时，66%的概率再掉落一次\n（选择之后从卡池移除）\n(一击致死的不算数)"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【亚巴顿】生命上限-50%（黑血），根据扣除生命上限的数额获得[n/5]次【爆炸护盾】
+        ["abaddon"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local max_health_1 = inst.components.health:GetMaxWithPenalty()
+                inst.components.health:DeltaPenalty(0.5)
+                local max_health_2 = inst.components.health:GetMaxWithPenalty()
+                local delta_health = math.abs(max_health_1 - max_health_2)
+                local num = math.max( math.floor(delta_health / 5) , 1 )
+                for i = 1, num, 1 do
+                    inst:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
+                end
+                TheNet:Announce("【亚巴顿】"..inst:GetDisplayName().."获得"..num.."层【爆炸护盾】")
+            end,
+            text = function(inst)
+                return "【亚巴顿】生命上限-50%（黑血），根据扣除生命上限的数额获得[n/5]次【爆炸护盾】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【洁癖】基础攻击伤害+60% 生命上限+60 但你每获得1全新词条，降低2%基础伤害 减少2生命上限【选择之后从卡组移除】
+        ["neatness_obsession"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_neatness_obsession") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_neatness_obsession","hoshino_card_debuff_neatness_obsession",true)
+            end,
+            text = function(inst)
+                return "【洁癖】基础攻击伤害+60% 生命上限+60 \n但你每获得1全新词条，降低2%基础伤害 减少2生命上限\n【选择之后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【貔貅】你每拥有每500信用点 +1%伤害 以此法提供的伤害加成最多不超过100%【选择之后从卡池移除】
+        ["coins_and_dmg_up"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_coins_and_dmg_up") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_coins_and_dmg_up","hoshino_card_debuff_coins_and_dmg_up",true)
+            end,
+            text = function(inst)
+                return "【貔貅】你每拥有每500信用点 +1%伤害 以此法提供的伤害加成最多不超过100%\n【选择之后从卡池移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【宝石猎人】破坏石头时5%概率获得1随机宝石（彩虹宝石除外）（到达50%后移出池子）
+        ["gem_hunter"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Gem_Hunter() < 0.5
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Gem_Hunter(0.05)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_gem_hunter","hoshino_card_debuff_gem_hunter",true)
+            end,
+            text = function(inst)
+                return "【宝石猎人】破坏石头时5%概率获得1随机宝石（彩虹宝石除外）（到达50%后移出池子）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【独行天途】当30码内没有友方单位时，获得buff:每次造成伤害+0.1cost，cost恢复速度+0.04/s【选择后从卡池移除】
+        ["solitary_heaven_path"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_solitary_heaven_path") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_solitary_heaven_path","hoshino_card_debuff_solitary_heaven_path",true)
+            end,
+            text = function(inst)
+                return "【独行天途】当30码内没有友方单位时，获得buff:每次造成伤害+0.1cost，cost恢复速度+0.04/s【选择后从卡池移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【破灭】立即获得一包【神秘核心】，该神秘核心中你选择的卡牌将从卡组中移除
+        ["destruction"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_destruction","hoshino_card_debuff_destruction",true)
+                inst.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
+            end,
+            text = function(inst)
+                return "【破灭】立即获得一包【神秘核心】,下一张激活的卡牌将从卡组中永久移除"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
-
+TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING = TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING or {}
 for card_name,data in pairs(cards) do
+    if TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] ~= nil then
+        table.insert(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING,card_name)
+    end
     TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] = data
     --- 自动插入卡牌正面
     local front_data = data.front

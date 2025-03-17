@@ -212,11 +212,11 @@ nil,
 ------------------------------------------------------------------------------------------------------------------------------
 ----- 数据读取/储存
 
-    function hoshino_cards_sys:Get(index)
+    function hoshino_cards_sys:Get(index,default)
         if index then
-            return self.DataTable[index]
+            return self.DataTable[index] or default
         end
-        return nil
+        return default
     end
     function hoshino_cards_sys:Set(index,theData)
         if index then
@@ -224,10 +224,15 @@ nil,
         end
     end
 
-    function hoshino_cards_sys:Add(index,num)
+    function hoshino_cards_sys:Add(index,num,min,max)
         if index then
-            self.DataTable[index] = (self.DataTable[index] or 0) + ( num or 0 )
-            return self.DataTable[index]
+            if max == nil and min == nil then
+                self.DataTable[index] = (self.DataTable[index] or 0) + ( num or 0 )
+                return self.DataTable[index]
+            elseif type(max) == "number" and type(min) == "number" then
+                self.DataTable[index] = math.clamp( (self.DataTable[index] or 0) + ( num or 0 ) , min , max )
+                return self.DataTable[index]
+            end                    
         end
         return 0
     end
@@ -401,8 +406,9 @@ nil,
         else
             need_to_send_to_client_data = {}
             for i, v in ipairs(cards_back) do
-                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex"}
+                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex" ,}
                 need_to_send_to_client_data[i].card_name = "card_black"
+                need_to_send_to_client_data[i].is_curse_card = self:GetCardTypeByName(cards_front[i].card_name) == "card_black"
             end
         end
 
@@ -525,8 +531,9 @@ nil,
         else
             need_to_send_to_client_data = {}
             for i, v in ipairs(cards_back) do
-                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex"}
+                need_to_send_to_client_data[i] = {atlas = "images/inspect_pad/page_level_up.xml",image = "card_black.tex" ,}
                 need_to_send_to_client_data[i].card_name = "card_black"
+                need_to_send_to_client_data[i].is_curse_card = self:GetCardTypeByName(cards_front[i].card_name) == "card_black"
             end
         end
         self.need_to_send_to_client_data = need_to_send_to_client_data
@@ -694,12 +701,29 @@ nil,
         end
         return nil
     end
-    function hoshino_cards_sys:AcitveCardFnByIndex(card_name_index)  --- 获取卡牌的激活函数
+    function hoshino_cards_sys:AcitveCardFnByIndexWithoutTest(card_name_index)  --- 获取卡牌的激活函数,跳过test
         local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
         if all_data[card_name_index] and all_data[card_name_index].fn then
             all_data[card_name_index].fn(self.inst)
             print("+++ 成功激活卡牌",card_name_index)
+            self.inst:PushEvent("hoshino_cards_sys.actived_card_fn",{
+                card_name = card_name_index,
+                card_type = self:GetCardTypeByName(card_name_index),
+            })
         end
+    end
+    function hoshino_cards_sys:AcitveCardFnByIndexWithTest(card_name_index)  --- 获取卡牌的激活函数,带test
+        local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+        if all_data[card_name_index] and all_data[card_name_index].fn and (all_data[card_name_index].test == nil or all_data[card_name_index].test(self.inst)) then
+            all_data[card_name_index].fn(self.inst)
+            print("+++ 成功激活卡牌",card_name_index)
+            self.inst:PushEvent("hoshino_cards_sys.actived_card_fn",{
+                card_name = card_name_index,
+                card_type = self:GetCardTypeByName(card_name_index),
+            })
+            return true
+        end
+        return false
     end
     function hoshino_cards_sys:SelectRandomCardFromPoolByType(card_type)  --- 从卡池中随机抽取一张卡牌
         local all_cards_index = self:GetCardsIndexByType(card_type)
@@ -709,7 +733,15 @@ nil,
         local ret_card_index = all_cards_index[math.random(#all_cards_index)]
         return ret_card_index
     end
+    local ever_removed_card_test_fn = function(inst)
+        return false
+    end
     function hoshino_cards_sys:GetTestFnByCardName(card_name_index)  --- 获取卡牌的test函数
+        --- 永久移除卡牌
+        if self:HasEverRemovedCard(card_name_index) then
+            print("+++ 卡牌已永久移除,返回必定失败的test函数",card_name_index)
+            return ever_removed_card_test_fn
+        end            
         local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
         if all_data[card_name_index] and all_data[card_name_index].test then
             return all_data[card_name_index].test
@@ -729,6 +761,15 @@ nil,
             return all_data[card_name_index].back
         end
         return "card_white"
+    end
+    function hoshino_cards_sys:RemoveCardForever(card_name_index)  --- 永久移除卡牌
+        local ever_removed_cards = self:Get("ever_removed_cards",{}) or {}
+        ever_removed_cards[card_name_index] = true
+        self:Set("ever_removed_cards",ever_removed_cards)
+    end
+    function hoshino_cards_sys:HasEverRemovedCard(card_name_index)  --- 是否已经移除过卡牌
+        local ever_removed_cards = self:Get("ever_removed_cards",{}) or {}
+        return ever_removed_cards[card_name_index] or false
     end
 ------------------------------------------------------------------------------------------------------------------------------
 -- 卡牌点击后
@@ -771,7 +812,7 @@ nil,
             end 
         -----------------------------------------------------------------------------------------
         --- 
-            self:AcitveCardFnByIndex(selected_card_name_index) -- 激活卡牌
+            self:AcitveCardFnByIndexWithoutTest(selected_card_name_index) -- 激活卡牌
             self:RememberActivedCard(selected_card_name_index) -- 记忆卡牌
             self.inst:PushEvent("hoshino_cards_sys.card_activated",{
                 index = index,

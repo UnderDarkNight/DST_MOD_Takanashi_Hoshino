@@ -118,7 +118,7 @@
         --------------------------------------------------------------------------------
         --- 攻击伤害倍率
             function self:Add_Damage_Mult(value)
-                local damage_mult = self:Add("damage_mult",value) + 1
+                local damage_mult = math.max(self:Add("damage_mult",value) + 1,0)
                 inst.components.combat.externaldamagemultipliers:SetModifier(GetSpeedMultInst(self),damage_mult)
                 if value > 0 then
                     -- 添加debuff、时间、触发event
@@ -269,6 +269,50 @@
                 return self:Add("health_down_reduce",0)
             end
         --------------------------------------------------------------------------------
+        --- BUFF记忆起。用来给换角色后，重新加载BUFF
+            function self:Add_Buff_Memory(buff_name,buff_prefab,active_flag)
+                local Buff_Memory_Data = self:Get("Buff_Memory_Data") or {}
+                Buff_Memory_Data[buff_name] = Buff_Memory_Data[buff_name] or {}
+                Buff_Memory_Data[buff_name].buff_prefab = buff_prefab
+                Buff_Memory_Data[buff_name].num = (Buff_Memory_Data[buff_name].num or 0) + 1
+                self:Set("Buff_Memory_Data",Buff_Memory_Data)
+
+                if active_flag then
+                    local debuff_inst = nil
+                    local test_num = 100
+                    while test_num > 0 do
+                        self.inst:AddDebuff(buff_name,buff_prefab)
+                        local debuff_inst = self.inst:GetDebuff(buff_name)
+                        if debuff_inst and debuff_inst:IsValid() then
+                            break
+                        end
+                        test_num = test_num - 1
+                    end
+                end
+                
+            end
+            function self:Remove_Buff_Memory(buff_name,active_flag)
+                local Buff_Memory_Data = self:Get("Buff_Memory_Data") or {}
+                Buff_Memory_Data[buff_name] = Buff_Memory_Data[buff_name] or {}
+                Buff_Memory_Data[buff_name].num = Buff_Memory_Data[buff_name].num - 1
+                if active_flag then
+                    for i = 1, 5, 1 do
+                        local debuff_inst = inst:GetDebuff(buff_name)
+                        if debuff_inst and debuff_inst:IsValid() then
+                            debuff_inst:Remove()
+                        end
+                    end
+                end
+            end
+            inst:ListenForEvent("hoshino_event.data_back_after_reroll",function()
+                local Buff_Memory_Data = self:Get("Buff_Memory_Data") or {}
+                for buff_name, buff_data in pairs(Buff_Memory_Data) do
+                    for i = 1, buff_data.num do
+                        inst:AddDebuff(buff_name,buff_data.buff_prefab)
+                    end
+                end
+            end)
+        --------------------------------------------------------------------------------
         --- 光环半径
             function self:Add_Halo_Radius(value)
                 self:Add("halo_radius",value)
@@ -283,6 +327,39 @@
             end
             function self:Get_PigKing_Trade_And_Gems_Percent()
                 return self:Add("pigking_trade_and_gems_percent",0)
+            end
+        --------------------------------------------------------------------------------
+        --- 卡牌：【精力分配】 energy_distribution
+            function self:Add_Energy_Distribution(value)
+                self:Add("energy_distribution",value,0,0.5)
+            end
+            function self:Get_Energy_Distribution()
+                return self:Add("energy_distribution",0)
+            end
+            inst:ListenForEvent("hoshino_com_power_cost_update",function(inst,_table)
+                local old = _table and _table.old or 0
+                local new = _table and _table.new or 0
+                if new < old then
+                    if math.random(1000)/1000 <= self:Get_Energy_Distribution() then
+                        inst.components.hoshino_com_power_cost:DoDelta(1)
+                    end
+                end
+            end)
+        --------------------------------------------------------------------------------
+        --- 卡牌：【洁癖】 neatness_obsession
+            function self:Add_Neatness_Obsession(value)
+                self:Add("neatness_obsession",value,0,1000000)
+            end
+            function self:Get_Neatness_Obsession()
+                return self:Add("neatness_obsession",0)
+            end
+        --------------------------------------------------------------------------------
+        --- 卡牌：【宝石猎人】 gem_hunter
+            function self:Add_Gem_Hunter(value)
+                self:Add("gem_hunter",value,0,1)
+            end
+            function self:Get_Gem_Hunter()
+                return self:Add("gem_hunter",0)
             end
         --------------------------------------------------------------------------------
     end

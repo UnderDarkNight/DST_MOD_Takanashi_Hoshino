@@ -470,6 +470,12 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             ["hoshino_buff_special_equipment_backpack_t8"] = {
                 ["name"] = "伤害分摊",
             },
+            ["hoshino_card_debuff_nine_lives_cat"] = {
+                ["name"] = "【嗝屁猫】",
+            },
+            ["hoshino_card_debuff_cat_amulet"] = {
+                ["name"] = "【嗝屁猫的项圈】",
+            },
         --------------------------------------------------------------------
         --- 06_buildings
             ["hoshino_building_shop24"] = {

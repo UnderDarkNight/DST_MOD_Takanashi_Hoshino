@@ -113,29 +113,15 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                for i = 1, 5, 1 do
-                    local buff_inst = inst:GetDebuff(debuff_prefab)
-                    if buff_inst and buff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab, debuff_prefab,true)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_builder_blocker"
-                for i = 1, 100, 1 do
-                    inst:RemoveDebuff("hoshino_card_debuff_builder_blocker")
-                end
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
                 inst.components.hoshino_com_builder_blocker:ResetDailyMax()
             end,
             text = function(inst)
@@ -203,13 +189,7 @@ local cards = {
                 --------------------------------------------------------------------------------------------
                 --- 没debuff就上debuff
                     local debuff_prefab = "hoshino_card_debuff_price_mult"
-                    while true do
-                        local debuff_inst = inst:GetDebuff(debuff_prefab)
-                        if debuff_inst and debuff_inst:IsValid() then
-                            break
-                        end
-                        inst:AddDebuff(debuff_prefab,debuff_prefab)
-                    end
+                    inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
                 --------------------------------------------------------------------------------------------
                 --- 更新debuff的参数
                     inst:PushEvent("hoshino_event.black_card_price_mult_update")
@@ -230,32 +210,15 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_bloodshed"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_bloodshed"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_bloodshed"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        debuff_inst:Remove()
-                    end
-                end
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
             end,
             text = function(inst)
                 return "【流血】\n当你受到伤害掉血X点（向上取整）\n的时候，在X秒内每秒掉1点"
@@ -268,32 +231,15 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_max_health_1"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_max_health_1"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_max_health_1"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        debuff_inst:Remove()
-                    end
-                end
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
             end,
             text = function(inst)
                 return "【无实体】 “你觉得自己没有了实体”"
@@ -306,32 +252,15 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_force_night_sleep"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        debuff_inst:Remove()
-                    end
-                end
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
             end,
             text = function(inst)
                 return "【嗜睡】 每到晚上，立马原地睡觉"
@@ -344,32 +273,15 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_exp_and_epic"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        debuff_inst:Remove()
-                    end
-                end
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
             end,
             text = function(inst)
                 return "【斗争之心】 只能从BOSS生物中获取经验值"
@@ -400,32 +312,15 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_sanity_ever_zero"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        debuff_inst:Remove()
-                    end
-                end
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
                 inst.components.sanity:DoDelta(100)
             end,
             text = function(inst)
@@ -443,13 +338,7 @@ local cards = {
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_equipment_blocker"
                 inst.components.hoshino_com_debuff:Add(debuff_prefab,2*480)
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_equipment_blocker"
@@ -466,32 +355,15 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_moisture_down_blocker"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        debuff_inst:Remove()
-                    end
-                end
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
             end,
             text = function(inst)
                 return "【潮湿】 你的潮湿度永远无法降低"
@@ -504,32 +376,15 @@ local cards = {
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
             test = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_reduced_work_efficiency"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        return false
-                    end
-                end
-                return true
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
             fn = function(inst)
                 local debuff_prefab = "hoshino_card_debuff_reduced_work_efficiency"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
             end,
             deactive_fn = function(inst) --- 诅咒去除（单次）
                 local debuff_prefab = "hoshino_card_debuff_reduced_work_efficiency"
-                for i = 1, 5, 1 do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst and debuff_inst:IsValid() then
-                        debuff_inst:Remove()
-                    end
-                end
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
             end,
             text = function(inst)
                 return "【虚弱】 工作效率降低50%"
@@ -540,8 +395,11 @@ local cards = {
 
 }
 
-
+TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING = TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING or {}
 for card_name,data in pairs(cards) do
+    if TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] ~= nil then
+        table.insert(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING,card_name)
+    end
     TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] = data
     --- 自动插入卡牌正面
     local front_data = data.front
@@ -552,3 +410,4 @@ for card_name,data in pairs(cards) do
         table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
     end
 end
+

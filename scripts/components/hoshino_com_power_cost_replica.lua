@@ -15,10 +15,10 @@ local hoshino_com_power_cost = Class(function(self, inst)
     self.max = 100
 
     self.__update_fns = {}
-    self._current = net_float(inst.GUID,"hoshino_com_power_cost.current","hoshino_com_power_cost_update")
-    self._max = net_float(inst.GUID,"hoshino_com_power_cost.max","hoshino_com_power_cost_update")
+    self._current = net_float(inst.GUID,"hoshino_com_power_cost.current","hoshino_com_power_cost_replica_update")
+    self._max = net_float(inst.GUID,"hoshino_com_power_cost.max","hoshino_com_power_cost_replica_update")
 
-    inst:ListenForEvent("hoshino_com_power_cost_update",function()
+    inst:ListenForEvent("hoshino_com_power_cost_replica_update",function()
         self.current = self._current:value()
         self.max = self._max:value()
         self:Update()

@@ -1,14 +1,16 @@
+origin分支已经改到gitee，不再需要访问GitHub了。
+
 前期准备：
     1、下载安装 git  （git 是工具，github是网站，是两个东西）： https://registry.npmmirror.com/-/binary/git-for-windows/v2.43.0.windows.1/Git-2.43.0-64-bit.exe
     
-    2、下载安装 Watt Toolkit  。这个是 通用加速器，能加速 github 。官网 ：  https://steampp.net/
+    
     
 git bash 黑框技巧：
     快捷键 shift + insert  是粘贴
     快捷键 ctrl + insert 是复制
 
 下载步骤：
-    1、启用 Watt Toolkit 。加速选项里  勾选 【Github】  和 【国外验证码平台】、【公共CDN】
+    1、
 
     2、进入 饥荒 MOD的根目录，如【E:\SteamLibrary\steamapps\common\Don't Starve Together\mods】
 
@@ -18,7 +20,7 @@ git bash 黑框技巧：
         git config --global http.sslverify false
 
     5、 输入 命令   ：     
-        git clone https://github.com/UnderDarkNight/DST_MOD_Takanashi_Hoshino.git
+        git clone https://gitee.com/under_dark_night/DST_MOD_Takanashi_Hoshino.git
 
     6、 等待下载完成。这个时候会多出个文件夹【DST_MOD_Takanashi_Hoshino】。这个就是MOD的所有东西。
 
@@ -34,7 +36,7 @@ git bash 黑框技巧：
         git pull origin master
 
 更新步骤：
-    1、启用 Watt Toolkit 。加速选项里  勾选 【Github】  和 【国外验证码平台】、【公共CDN】
+    1、
 
     2、进入【DST_MOD_Takanashi_Hoshino】文件夹，重新右键【Git Bash Here】
 

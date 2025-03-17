@@ -59,6 +59,23 @@ local prefabs_name_list = {
     "01_29_card_debuff_air_drop_support",                                   --- 卡牌debuff：空投支援
     "01_30_card_debuff_trading_master_pigking_and_gems",                    --- 卡牌debuff：猪王交易和宝石
     "01_31_card_debuff_mark_moon_land_and_ancient_land",                    --- 卡牌debuff：标记月岛和远古的位置
+    "01_32_card_debuff_experimental_therapy",                               --- 卡牌debuff：实验性疗法
+    "01_33_card_debuff_purifying_light",                                    --- 卡牌debuff：净化之光
+    "01_33_card_debuff_energy_burst",                                       --- 卡牌debuff：活力迸发
+    "01_34_card_debuff_collecting_fetish",                                  --- 卡牌debuff：收集癖
+    "01_35_card_debuff_substantive_strike",                                 --- 卡牌debuff：实质性打击
+    "01_36_card_debuff_war_chariot",                                        --- 卡牌debuff：战车
+    "01_37_card_debuff_burdened_forward",                                   --- 卡牌debuff：负重前行
+    "01_38_card_debuff_seek_good_avoid_bad",                                --- 卡牌debuff：趋吉避凶
+    "01_39_card_debuff_nine_lives_cat",                                     --- 卡牌debuff：九命猫
+    "01_40_card_debuff_cat_amulet",                                         --- 卡牌debuff：九命猫的项圈
+    "01_41_card_debuff_cat_hand",                                           --- 卡牌debuff：猫爪
+    "01_42_card_debuff_hell_contract",                                      --- 卡牌debuff：地狱契约
+    "01_43_card_debuff_neatness_obsession",                                 --- 卡牌debuff：洁癖
+    "01_44_card_debuff_coins_and_dmg_up",                                   --- 卡牌debuff：金币和伤害增加
+    "01_45_card_debuff_gem_hunter",                                         --- 卡牌debuff：宝石猎人
+    "01_46_card_debuff_solitary_heaven_path",                               --- 卡牌debuff：独行天途
+    "01_47_card_debuff_destruction",                                        --- 卡牌debuff：破灭
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。

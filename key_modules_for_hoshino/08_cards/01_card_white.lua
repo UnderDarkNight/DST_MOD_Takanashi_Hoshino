@@ -256,13 +256,7 @@ local cards = {
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Damage_Mult(0.05)
                 local debuff_prefab = "hoshino_card_debuff_damage_mult_and_sanity"
-                while true do
-                    local debuff_inst = inst:GetDebuff(debuff_prefab)
-                    if debuff_inst then
-                        break
-                    end
-                    inst:AddDebuff(debuff_prefab,debuff_prefab)
-                end
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
                 inst.components.hoshino_data:Add(debuff_prefab,2*480) -- 上两天时间
             end,
             text = function(inst)
@@ -337,13 +331,7 @@ local cards = {
                 ----------------------------------------------------------------------------------------------------------
                 --- 添加BUFF
                     local debuff_prefab = "hoshino_card_debuff_sleep_and_coins"
-                    while true do
-                        local debuff_inst = inst:GetDebuff(debuff_prefab)
-                        if debuff_inst and debuff_inst:IsValid() then
-                            break
-                        end
-                        inst:AddDebuff(debuff_prefab,debuff_prefab)
-                    end
+                    inst:AddDebuff(debuff_prefab,debuff_prefab)
                 ----------------------------------------------------------------------------------------------------------
                 --- 来自 曼德拉草(mandrake) 的代码。
                     local function start_sleep(inst)
@@ -526,7 +514,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst:AddDebuff("hoshino_card_debuff_weapon_dmg_up_by_range","hoshino_card_debuff_weapon_dmg_up_by_range")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_weapon_dmg_up_by_range","hoshino_card_debuff_weapon_dmg_up_by_range",true)
             end,
             text = function(inst)
                 return "【格斗高手】你使用攻击距离小于等于2的武器时伤害+12%（可叠加）"
@@ -541,7 +529,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst:AddDebuff("hoshino_card_debuff_armored_warrior","hoshino_card_debuff_armored_warrior")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_armored_warrior","hoshino_card_debuff_armored_warrior",true)
             end,
             text = function(inst)
                 return "【重装战士】移速-10%*X(-最多90%) \n基础攻击+5%*X，受到的伤害*0.95*X"
@@ -556,7 +544,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst:AddDebuff("hoshino_card_debuff_moisture_and_dmg","hoshino_card_debuff_moisture_and_dmg")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_moisture_and_dmg","hoshino_card_debuff_moisture_and_dmg",true)
             end,
             text = function(inst)
                 return "【雨中漫步】\n当你的潮湿度大于50时，造成的基础伤害提升10%*X"
@@ -571,7 +559,7 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst:AddDebuff("hoshino_card_debuff_road_of_pain_"..math.random(1000000),"hoshino_card_debuff_road_of_pain")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_road_of_pain_"..math.random(1000000),"hoshino_card_debuff_road_of_pain",true)
             end,
             text = function(inst)
                 return " \n【苦路】你的饥饿，san，血量\n立刻开始以10/s的速度降低，在其中一项达到0的时候停止。\n你在此期间内每降低一点\n饥饿/san/血量就会获得2信用点"
@@ -587,6 +575,7 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Halo_Radius(0.1)
+                inst:PushEvent("hoshino_event.halo_refresh")
             end,
             text = function(inst)
                 return "【电灯泡】你的光环发光半径+0.1（发光范围叠加）"
@@ -598,19 +587,11 @@ local cards = {
             back = "card_white",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
             test = function(inst)
-                for i = 1, 10, 1 do
-                    if inst:GetDebuff("hoshino_card_debuff_kill_and_coins_up_thief") then
-                        return false
-                    end
-                end
-                return true
+                local debuff_prefab = "hoshino_card_debuff_kill_and_coins_up_thief"
+                return inst:GetDebuff(debuff_prefab) == nil
             end,
-            fn = function(inst)
-                local test_num = 10
-                while test_num > 0 do
-                    inst:AddDebuff("hoshino_card_debuff_kill_and_coins_up_thief","hoshino_card_debuff_kill_and_coins_up_thief")
-                    test_num = test_num - 1
-                end
+            fn = function(inst)                
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_kill_and_coins_up_thief","hoshino_card_debuff_kill_and_coins_up_thief",true)                    
             end,
             text = function(inst)
                 return "【窃贼】击杀血量高于50的生物会获得2信用点\n【选择之后从卡组移除】"
@@ -695,7 +676,7 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_PigKing_Trade_And_Gems_Percent(2.5/100)
-                inst:AddDebuff("hoshino_card_debuff_trading_master_pigking_and_gems","hoshino_card_debuff_trading_master_pigking_and_gems")
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_trading_master_pigking_and_gems","hoshino_card_debuff_trading_master_pigking_and_gems",true)
             end,
             text = function(inst)
                 return "\n【交易高手】与猪王交易时\n2.5%额外获得一颗随机初级宝石【红/蓝/紫】\n达到100%后移除"
@@ -729,11 +710,84 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【实验性疗法】在血、San、饥饿、移速、攻击、位面防御中，随机增加四项属性，减少两项属性（血，san，饥饿，变化量：10（三维不低于1），攻击，移速5%，位面防御：3（位面防御不会低于0）
+        ["experimental_therapy"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst:AddDebuff("hoshino_card_debuff_experimental_therapy"..math.random(1000000000),"hoshino_card_debuff_experimental_therapy")
+            end,
+            text = function(inst)
+                return "【实验性疗法】在血、San、饥饿、移速、攻击、位面防御中，随机增加四项属性，减少两项属性（血，san，饥饿，变化量：10（三维不低于1），攻击，移速5%，位面防御：3（位面防御不会低于0）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【精力分配】每次使用技能有10%概率返还1点cost （到达50%后移出池子）
+        ["energy_distribution"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return inst.components.hoshino_com_debuff:Get_Energy_Distribution() < 0.5
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Energy_Distribution(0.1)
+            end,
+            text = function(inst)
+                return "【精力分配】每次使用技能有10%概率返还1点cost （到达50%后移出池子）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【净化之光】每0.2s扣除半径6码范围内所有敌人1点生命【重复选择扣血量叠加】
+        ["purifying_light"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add("purifying_light",1)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_purifying_light","hoshino_card_debuff_purifying_light",true)
+            end,
+            text = function(inst)
+                return "【净化之光】每0.2s扣除半径6码范围内所有敌人1点生命【重复选择扣血量叠加】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【活力迸发】回复所有三维（生命，饥饿，san），并获得buff：攻击+50%，此buff持续5min。
+        ["energy_burst"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.health:SetPercent(1)
+                inst.components.hunger:SetPercent(1)
+                inst.components.sanity:SetPercent(1)
+                local debuff_prefab = "hoshino_card_debuff_energy_burst"
+                local debuff_inst = nil
+                inst:AddDebuff(debuff_prefab,debuff_prefab)
+                debuff_inst = inst:GetDebuff(debuff_prefab)
+                if debuff_inst then
+                    debuff_inst:PushEvent("add_time",5*60)
+                end
+            end,
+            text = function(inst)
+                return "【活力迸发】回复所有三维并获得buff：攻击+50%，此buff持续5min。"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
-
+TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING = TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING or {}
 for card_name,data in pairs(cards) do
+    if TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] ~= nil then
+        table.insert(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING,card_name)
+    end
     TUNING.HOSHINO_CARDS_DATA_AND_FNS[card_name] = data
     --- 自动插入卡牌正面
     local front_data = data.front
@@ -744,3 +798,19 @@ for card_name,data in pairs(cards) do
         table.insert(Assets, Asset("IMAGE", "images/inspect_pad/"..image ) )
     end
 end
+
+AddPlayerPostInit(function(inst)
+    if not TheWorld.ismastersim then return end
+    inst:DoTaskInTime(3, function()
+        if #TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING > 0 then
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            TheNet:Announce("警告：检测到有重复的卡牌数据，请检查是否重复定义了卡牌")
+            for _,card_name in ipairs(TUNING.HOSHINO_CARDS_DATA_AND_FNS_WARNING) do
+                print("Error ：重复定义的卡牌数据为 : ",card_name)
+            end
+        end
+    end)
+end)
