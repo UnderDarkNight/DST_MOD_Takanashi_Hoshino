@@ -10,7 +10,7 @@
     local actived_list = {}
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-    local function OnAttached_For_Monster(inst,monster,from_player_killed_event)        
+    local function OnAttached_For_Monster(inst,monster)        
         -- inst:ListenForEvent("entity_droploot",function(_,_table)
         --     if _table and _table.inst and _table.inst == monster and monster.components.lootdropper 
         --         and (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE ) 
@@ -43,9 +43,7 @@
         else
             inst:ListenForEvent("entity_droploot",function(_,_table)
                 if _table and _table.inst and _table.inst == monster then
-                    if not from_player_killed_event then
-                        inst:Remove()
-                    end
+                    inst:Remove()
                     monster.components.lootdropper:DropLoot()
                     print("【地狱契约】掉落物翻倍",monster)
                 end
@@ -61,21 +59,19 @@
                 monster:AddDebuff("hoshino_card_debuff_hell_contract","hoshino_card_debuff_hell_contract")
             end
         end,player)
-        -- inst:ListenForEvent("killed",function(_,_table)
-        --     local monster = _table and _table.victim
-        --     if (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE )
-        --         and monster and monster.sg and monster.brainfn and monster.components.lootdropper 
-        --         and not actived_list[monster] then
-        --             monster.components.lootdropper:DropLoot()
-        --     end
-        --     actived_list[monster] = true
-        -- end,player)
         inst:ListenForEvent("killed",function(_,_table)
             local monster = _table and _table.victim
-            if monster then
-                OnAttached_For_Monster(inst,monster,true)
-                inst.components.hoshino_data:Set("result",nil)
+            if monster and monster.sg and monster.brainfn and monster.components.lootdropper 
+                and not actived_list[monster] then
+                    if (math.random(10000)/10000 <= 0.66 or TUNING.HOSHINO_DEBUGGING_MODE ) then
+                        monster.components.lootdropper:DropLoot()
+                        print("【地狱契约】掉落物翻倍",monster)
+                    else
+                        monster.components.lootdropper:Hoshino_Block()
+                        print("【地狱契约】不掉落任何东西",monster)
+                    end
             end
+            actived_list[monster] = true
         end,player)
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
