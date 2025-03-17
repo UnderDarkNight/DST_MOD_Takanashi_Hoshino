@@ -688,7 +688,7 @@ nil,
         if self.all_cards_data_and_fn[card_type] then
             local ret_indexs = {}
             for card_name_index, single_card_data in pairs(self.all_cards_data_and_fn[card_type]) do
-                local test_fn = single_card_data.test
+                local test_fn = self:GetTestFnByCardName(card_name_index)
                 if test_fn and test_fn(self.inst) then
                     table.insert(ret_indexs,card_name_index)
                 end
@@ -775,6 +775,7 @@ nil,
         local ever_removed_cards = self:Get("ever_removed_cards",{}) or {}
         ever_removed_cards[card_name_index] = true
         self:Set("ever_removed_cards",ever_removed_cards)
+        print("永久移除卡牌:",card_name_index,self.inst)
     end
     function hoshino_cards_sys:HasEverRemovedCard(card_name_index)  --- 是否已经移除过卡牌
         local ever_removed_cards = self:Get("ever_removed_cards",{}) or {}
