@@ -76,6 +76,7 @@ local prefabs_name_list = {
     "01_45_card_debuff_gem_hunter",                                         --- 卡牌debuff：宝石猎人
     "01_46_card_debuff_solitary_heaven_path",                               --- 卡牌debuff：独行天途
     "01_47_card_debuff_destruction",                                        --- 卡牌debuff：破灭
+    "01_48_card_debuff_block_health_auto_up",                               --- 卡牌debuff：封眠
 
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。

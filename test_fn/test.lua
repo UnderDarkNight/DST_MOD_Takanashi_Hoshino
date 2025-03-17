@@ -24,6 +24,7 @@ local flg,error_code = pcall(function()
         if TheWorld.ismastersim then
             ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
         end
+        
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
         local item = SpawnPrefab("hoshino_item_cards_pack")

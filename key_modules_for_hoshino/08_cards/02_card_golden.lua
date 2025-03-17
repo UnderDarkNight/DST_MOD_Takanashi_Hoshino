@@ -812,6 +812,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【封眠】受到你造成伤害的生物无法再恢复生命值
+        ["block_monster_health_auto_up"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_block_health_auto_up") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_block_health_auto_up","hoshino_card_debuff_block_health_auto_up",true)
+            end,
+            text = function(inst)
+                return "【封眠】受到你造成伤害的生物无法再恢复生命值，\n【选择后从卡池移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
