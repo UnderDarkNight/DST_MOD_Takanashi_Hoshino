@@ -653,6 +653,10 @@ nil,
             for _,single_card_data in pairs(cards_data) do
                 local card_name_index = single_card_data.card_name
                 local card_type = self:GetCardTypeByName(card_name_index)
+                self.inst:PushEvent("hoshino_cards_sys.card_recycled",{
+                    card_name = card_name_index,
+                    card_type = card_type,
+                })
                 local temp_num =  (type_with_num[card_type] or 0)
                 if temp_num > ret_num then
                     ret_num = temp_num
