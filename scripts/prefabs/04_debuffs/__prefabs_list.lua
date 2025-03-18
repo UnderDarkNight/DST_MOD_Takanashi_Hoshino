@@ -82,6 +82,7 @@ local prefabs_name_list = {
     "01_51_card_debuff_spring",                                             --- 卡牌debuff：弹簧
     "01_52_card_debuff_void_throat",                                        --- 卡牌debuff：虚空之喉
     "01_53_card_debuff_judgment",                                           --- 卡牌debuff：裁定
+    "01_54_card_debuff_fate_continues",                                     --- 卡牌debuff：命途不止
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
     "03_special_equipment_backpack_t8_buff",                 --- 特殊装备：T8背包 的 buff
