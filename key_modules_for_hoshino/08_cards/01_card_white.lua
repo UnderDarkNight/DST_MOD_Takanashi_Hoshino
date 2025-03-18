@@ -623,14 +623,22 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                if inst.components.leader:CountFollowers() <= 0 then
-                    return
-                end
-                local following_prefab = {}
+                local monster_list = {
+                    ["pigman"] = true,
+                    ["bunnyman"] = true,
+                    ["bishop_nightmare"] = true,
+                    ["knight_nightmare"] = true,
+                    ["rook_nightmare"] = true,
+                    ["beefalo"] = true,
+                    ["spider_warrior"] = true,
+                    ["spider_spitter"] = true,
+                    ["spider_healer"] = true,
+                    ["spider_dropper"] = true,
+                    ["hound"] = true,
+                }
                 local num = 0
                 for monster, v in pairs(inst.components.leader.followers) do
-                    if monster and monster:IsValid() and monster.components.combat then
-                        table.insert(following_prefab,monster.prefab)
+                    if monster and monster:IsValid() and monster_list[monster.prefab] then                        
                         monster:Remove()
                         num = num + 1
                     end
@@ -639,7 +647,7 @@ local cards = {
                     return
                 end
                 local x,y,z = inst.Transform:GetWorldPosition()
-                local ret_monster_prefab = following_prefab[math.random(#following_prefab)]
+                local ret_monster_prefab,flag = GetRandomItemWithIndex(monster_list)
                 for i = 1, num, 1 do
                     local temp_monster = SpawnPrefab(ret_monster_prefab)
                     temp_monster.Transform:SetPosition(x+math.random(-20,20)/10,0,z+math.random(-20,20)/10)

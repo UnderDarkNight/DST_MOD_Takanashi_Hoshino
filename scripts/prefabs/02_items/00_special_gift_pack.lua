@@ -35,7 +35,7 @@
             launcher = inst
         end
         local items_record = inst.data_com:Get("data",{ items_record = {} }).items_record
-        for k, temp_record in pairs(items_record) do
+        for k, temp_record in pairs(items_record or {}) do
             local item = SpawnSaveRecord(temp_record)
             item.Transform:SetPosition(x,0,z)
             if item.components.inventoryitem then
