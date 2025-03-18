@@ -30,23 +30,23 @@ local flg,error_code = pcall(function()
         local item = SpawnPrefab("hoshino_item_cards_pack")
         item:PushEvent("Set",{
                 cards = {
-        --             -- "card_golden",
-        --             -- "card_white",
-        -- --             -- "card_colourful",
-        -- --             -- "card_colourful",
-        -- --             -- "card_golden",
-        --             -- "card_black",
-        --             -- "card_black",
+                    -- "card_golden",
+                    -- "card_white",
         --             -- "card_colourful",
+        --             -- "card_colourful",
+        --             -- "card_golden",
+                    -- "card_black",
+                    -- "card_black",
+                    -- "card_colourful",
 
-                    "pad_stone",
-        -- --             -- "unlock_spell_normal_ex",
-        -- --             -- "unlock_spell_swimming_ex",
-        -- --             -- "unlock_spell_all_normal",
-        -- --             -- "unlock_spell_all_swimming",
-        -- --             -- "kill_and_explode",
-        -- --             -- "give_me_some_money",
-        -- --             "level_up_and_double_card_pack",
+                    "fate_continues",
+        --             -- "unlock_spell_normal_ex",
+        --             -- "unlock_spell_swimming_ex",
+        --             -- "unlock_spell_all_normal",
+        --             -- "unlock_spell_all_swimming",
+        --             -- "kill_and_explode",
+        --             -- "give_me_some_money",
+        --             "level_up_and_double_card_pack",
                 },
             }
         )
@@ -83,10 +83,7 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        -- for i = 1, 30, 1 do
-        --     ThePlayer:AddDebuff("hoshino_card_debuff_void_throat","hoshino_card_debuff_void_throat")
-        -- end
-        -- ThePlayer:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
+        
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

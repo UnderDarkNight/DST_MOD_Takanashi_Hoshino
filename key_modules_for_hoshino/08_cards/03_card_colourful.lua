@@ -263,6 +263,36 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【彩】【命途不止】 当你死亡时，免疫死亡事件，并把生命恢复到1，上述效果持续10s，cd3min   【选择后从卡组移除】
+        ["fate_continues"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_fate_continues") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_fate_continues","hoshino_card_debuff_fate_continues",true)
+            end,
+            text = function(inst)
+                return "【命途不止】 当你死亡时，免疫死亡事件，并把生命恢复到1，上述效果持续10s，cd3min   【选择后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【彩】【狸猫树叶】当你超过一秒未进行任何操作时，免疫所有血量扣除，一旦进行任何操作就会失去上述免疫效果。【选择后从卡组移除】
+        ["raccoon_leaf"] = {
+            back = "card_colourful",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_raccoon_leaf") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_raccoon_leaf","hoshino_card_debuff_raccoon_leaf",true)
+            end,
+            text = function(inst)
+                return "【狸猫树叶】当你超过一秒未进行任何操作时，免疫所有血量扣除，一旦进行任何操作就会失去上述免疫效果。【选择后从卡组移除】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
