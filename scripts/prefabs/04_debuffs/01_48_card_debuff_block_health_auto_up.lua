@@ -28,7 +28,7 @@
             end
             local old_current = _table and _table.val or 0
             local new_current = _table and _table.old_health or 0          
-            if new_current < old_current then
+            if new_current > old_current then
                 inst.blocking_lock = true
                 monster.components.health:SetVal(old_current,inst.prefab)
                 inst.blocking_lock = false

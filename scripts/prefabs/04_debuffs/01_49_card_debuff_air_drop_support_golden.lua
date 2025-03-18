@@ -26,6 +26,7 @@
             desc = "空投支援",
         })
         local prefab,num = GetRandomItemWithIndex(gift_list)
+        print("【援助补给】",prefab,num)
         local item = SpawnPrefab(prefab)
         if item.components.stackable then
             item.components.stackable:SetStackSize(num or 1)

@@ -8,6 +8,10 @@
 ---
     local TIME = 1
     local UPDATE_TIME = 0.1
+
+    local BLOCKING_SG = {
+
+    }
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
@@ -33,6 +37,24 @@
                 end
                 return num
             end)
+            player.components.hoshino_com_inventory_custom_apply_damage:AddBeforeApplyDamageFn(inst,function(player,damage, attacker, weapon,spdamage)
+                if inst.__working_flag > TIME then
+                    return 0,{}
+                end
+                return damage,spdamage
+            end)
+        -----------------------------------------------------
+        --- 屏蔽sg切换
+            inst:ListenForEvent("newstate",function(_,_table)
+                if not inst.__working_flag > TIME then
+                    return
+                end
+                local statename = _table and _table.statename
+                -- print("6666666",statename)
+                if BLOCKING_SG[statename] then
+                    player.sg:GoToState("idle")
+                end
+            end,player)
         -----------------------------------------------------
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
