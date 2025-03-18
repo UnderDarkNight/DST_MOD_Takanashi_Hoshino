@@ -6,7 +6,12 @@
 ]]--
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-    local TASK_REFRESH_TIME = 1
+    local locomotor_speed_mult_override_fn = function(player,mult,debuff_inst)
+        if mult < 1 then
+            return 1
+        end
+        return mult
+    end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
@@ -15,37 +20,47 @@
         inst.Transform:SetPosition(0,0,0)
         inst.player = player
         -----------------------------------------------------
-        --- 周期性检查。先把自己的参数设为1，再重算倍增参数        
-            inst:DoPeriodicTask(TASK_REFRESH_TIME,function()
-                ---------------------------------------------
-                --- combat
-                    if player.components.combat then
-                        player.components.combat.externaldamagemultipliers:SetModifier(inst,1)
-                        --- 得到当前的总参数
-                        local dmg_mult = player.components.combat.externaldamagemultipliers:Get()
-                        if dmg_mult < 1 and dmg_mult > 0 then -- 0 ~ 1.0   强制倍乘为1
-                            local ret_dmg_mult = 1/dmg_mult
-                            player.components.combat.externaldamagemultipliers:SetModifier(inst,ret_dmg_mult)
-                        end
+        --- 
+        -----------------------------------------------------
+        --- 
+            if player.components.combat then
+                player.components.combat.externaldamagemultipliers:Hoshino_AddGotOverrideFn(inst,function(inst,mult)
+                    if mult < 1 then
+                        return 1
                     end
-                ---------------------------------------------
-                --- locomotor
-                    if player.components.locomotor then
-                        player.components.locomotor:SetExternalSpeedMultiplier(inst,inst.prefab, 1.0)
-                        local speed_mult = player.components.locomotor:GetSpeedMultiplier()
-                        if not player.components.rider:IsRiding() and speed_mult < 1 and speed_mult > 0 then
-                            local ret_speed = 1/speed_mult
-                            player.components.locomotor:SetExternalSpeedMultiplier(inst,inst.prefab, ret_speed)
-                            -- print("跑路速度 被重置为1.0")
-                        end
+                    return mult
+                end)
+            end
+        -----------------------------------------------------
+        --- 
+            if player.components.locomotor then
+                player.components.locomotor:Hoshino_AddSpeedMultOverrideFn(inst,locomotor_speed_mult_override_fn)
+                inst.__net_target:set(player)
+                inst:DoPeriodicTask(1,function()
+                    if inst.__net_target:value() == player then
+                        inst.__net_target:set(inst)
+                    else
+                        inst.__net_target:set(player)
                     end
-                ---------------------------------------------
-            end)
+                end)
+            end
+        -----------------------------------------------------
         -----------------------------------------------------
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function ExtendDebuff(inst)
+    end
+------------------------------------------------------------------------------------------------------------------------------------------------
+---
+    local function net_target_update_event(inst)
+        local target = inst.__net_target:value()
+        if target and target:HasTag("player") and not inst.__client_side_inited then
+            inst.__client_side_inited = true
+            if target.components.locomotor and target.components.locomotor.Hoshino_AddSpeedMultOverrideFn then
+                target.components.locomotor:Hoshino_AddSpeedMultOverrideFn(inst,locomotor_speed_mult_override_fn)
+            end
+        end
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
@@ -55,6 +70,10 @@ local function fn()
     inst.entity:AddTransform()
     inst:AddTag("CLASSIFIED")
     inst.entity:SetPristine()
+    inst.__net_target = net_entity(inst.GUID,"net_target","net_target_update")
+    if not TheNet:IsDedicated() then
+        inst:ListenForEvent("net_target_update",net_target_update_event)
+    end
     if not TheWorld.ismastersim then
         return inst
     end

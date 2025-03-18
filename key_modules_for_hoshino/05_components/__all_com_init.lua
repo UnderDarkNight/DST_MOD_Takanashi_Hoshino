@@ -28,3 +28,8 @@ modimport("key_modules_for_hoshino/05_components/09_lootdropper_hook_for_block.l
 
 modimport("key_modules_for_hoshino/05_components/10_inventory_hook_for_apply_damage.lua") 
 --- inventory_hook_for_apply_damage hook
+
+modimport("key_modules_for_hoshino/05_components/11_sourcemodifierlist.lua") 
+--- 官方倍增器。
+modimport("key_modules_for_hoshino/05_components/12_locomotor.lua") 
+--- locomotor hook
