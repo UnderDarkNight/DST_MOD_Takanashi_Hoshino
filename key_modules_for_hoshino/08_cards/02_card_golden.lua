@@ -875,6 +875,22 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【全域反击】你的【荆棘】伤害翻倍（单次增加数额不超过100）
+        ["global_counterattack"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local current = inst.components.hoshino_com_debuff:Get_Counter_Damage()
+                inst.components.hoshino_com_debuff:Add_Counter_Damage(math.min(100,current))
+            end,
+            text = function(inst)
+                return "【金】【全域反击】你的【荆棘】伤害翻倍（单次增加数额不超过100）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

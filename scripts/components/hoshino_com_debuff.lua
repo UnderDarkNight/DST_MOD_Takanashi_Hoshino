@@ -150,6 +150,9 @@
             function self:Add_Counter_Damage(value)
                 self:Add("counter_damage",value)
             end
+            function self:Get_Counter_Damage()
+                return self:Add("counter_damage",0)
+            end
             inst:ListenForEvent("attacked",function(inst,_table)
                 local attacker = _table and _table.attacker
                 local damage = _table and _table.damage or 0
