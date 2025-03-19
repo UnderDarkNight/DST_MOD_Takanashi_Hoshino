@@ -789,6 +789,26 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【白】【祭品】三维MAX-10，移速，攻击倍率-5%，卡牌刷新次数+30
+        ["sacrifice_white"] = {
+            back = "card_white",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Max_Helth(-10)
+                inst.components.hoshino_com_debuff:Add_Max_Sanity(-10)
+                inst.components.hoshino_com_debuff:Add_Max_Hunger(-10)
+                inst.components.hoshino_com_debuff:Add_Speed_Mult(-0.05)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(-0.05)
+                inst.components.hoshino_cards_sys:AddRefreshNum(30)
+            end,
+            text = function(inst)
+                return "【祭品】三维MAX-10，移速，攻击倍率-5%，卡牌刷新次数+30"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
