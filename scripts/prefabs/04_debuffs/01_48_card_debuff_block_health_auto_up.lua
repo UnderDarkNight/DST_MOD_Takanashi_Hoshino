@@ -21,19 +21,12 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
     local function OnAttached_for_monster(inst,monster)
-        inst.blocking_lock = false
-        inst:ListenForEvent("pre_health_setval",function(_,_table)
-            if inst.blocking_lock then
-                return
+        monster.components.hoshino_com_health_hooker:Add_Modifier(inst,function(num)
+            if num > 0 then
+                return 0
             end
-            local old_current = _table and _table.val or 0
-            local new_current = _table and _table.old_health or 0          
-            if new_current > old_current then
-                inst.blocking_lock = true
-                monster.components.health:SetVal(old_current,inst.prefab)
-                inst.blocking_lock = false
-            end
-        end,monster)
+            return num
+        end)
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- 

@@ -33,3 +33,5 @@ modimport("key_modules_for_hoshino/05_components/11_sourcemodifierlist.lua")
 --- 官方倍增器。
 modimport("key_modules_for_hoshino/05_components/12_locomotor.lua") 
 --- locomotor hook
+modimport("key_modules_for_hoshino/05_components/13_health_hook.lua") 
+--- health hook

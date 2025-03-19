@@ -46,7 +46,7 @@
         -----------------------------------------------------
         --- 屏蔽sg切换
             inst:ListenForEvent("newstate",function(_,_table)
-                if not inst.__working_flag > TIME then
+                if inst.__working_flag < TIME then
                     return
                 end
                 local statename = _table and _table.statename
