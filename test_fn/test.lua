@@ -83,7 +83,7 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        ThePlayer:AddDebuff("hoshino_card_debuff_thunder_thighs","hoshino_card_debuff_thunder_thighs")
+        ThePlayer:AddDebuff("hoshino_card_debuff_tower_curse","hoshino_card_debuff_tower_curse")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
