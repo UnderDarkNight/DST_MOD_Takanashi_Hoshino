@@ -10,6 +10,9 @@ return function(inst)
         if inst.components.hoshino_com_rpc_event == nil then
             inst:AddComponent("hoshino_com_rpc_event")
         end
+        if inst.components.hoshino_com_stewer_hooker == nil then
+            inst:AddComponent("hoshino_com_stewer_hooker")
+        end
     end
 
     local modules = {

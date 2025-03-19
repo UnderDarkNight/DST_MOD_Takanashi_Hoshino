@@ -214,6 +214,7 @@ local function fn()
     end
     inst:AddComponent("debuff")
     inst.components.debuff:SetAttachedFn(OnAttached)
+    inst.components.debuff:SetDetachedFn(inst.Remove)
 
     return inst
 end

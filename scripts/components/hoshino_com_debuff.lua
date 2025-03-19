@@ -67,7 +67,7 @@
         --------------------------------------------------------------------------------
         --- 移动速度加成
             function self:Add_Speed_Mult(value)
-                local speed_mult = math.max(self:Add("speed_mult",value) + 1,0.001)
+                local speed_mult = math.max(self:Add("speed_mult",value) + 1,0)
                 inst.components.locomotor:SetExternalSpeedMultiplier(GetSpeedMultInst(self), "hoshino_com_debuff_speed_mult",speed_mult)
             end
             self:AddOnLoadFn(function()
@@ -115,7 +115,7 @@
         --------------------------------------------------------------------------------
         --- 攻击伤害倍率
             function self:Add_Damage_Mult(value)
-                local damage_mult = math.max(self:Add("damage_mult",value) + 1,0.001)
+                local damage_mult = math.max(self:Add("damage_mult",value) + 1,0)
                 inst.components.combat.externaldamagemultipliers:SetModifier(GetSpeedMultInst(self),damage_mult)
                 if value > 0 then
                     -- 添加debuff、时间、触发event
@@ -149,6 +149,9 @@
         --- 反伤
             function self:Add_Counter_Damage(value)
                 self:Add("counter_damage",value)
+            end
+            function self:Get_Counter_Damage()
+                return self:Add("counter_damage",0)
             end
             inst:ListenForEvent("attacked",function(inst,_table)
                 local attacker = _table and _table.attacker

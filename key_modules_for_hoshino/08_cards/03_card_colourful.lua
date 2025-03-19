@@ -212,7 +212,7 @@ local cards = {
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 【彩】【献祭】杀死你的所有随从，并获得等量一选一金色卡包
-        ["sacrifice"] = {
+        ["sacrifice_colourful"] = {
             back = "card_colourful",
             front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_colourful.tex"},
             test = function(inst)

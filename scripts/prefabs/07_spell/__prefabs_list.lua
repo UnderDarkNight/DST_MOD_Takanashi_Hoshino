@@ -29,6 +29,7 @@ local prefabs_name_list = {
 
 
     "01_gun_eye_of_horus_level_up",                             --- 专属武器 荷鲁斯之眼 升级配方
+    "02_01_black_beggar",                                       --- 黑色乞丐
 
 }
 

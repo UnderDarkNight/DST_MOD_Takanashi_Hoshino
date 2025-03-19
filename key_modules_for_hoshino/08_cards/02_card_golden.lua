@@ -875,6 +875,52 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【全域反击】你的【荆棘】伤害翻倍（单次增加数额不超过100）
+        ["global_counterattack"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                local current = inst.components.hoshino_com_debuff:Get_Counter_Damage()
+                inst.components.hoshino_com_debuff:Add_Counter_Damage(math.min(100,current))
+            end,
+            text = function(inst)
+                return "【全域反击】你的【荆棘】伤害翻倍（单次增加数额不超过100）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【全年无休】每日委托刷新次数+1
+        ["year_round"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_task_sys_for_player:Add_Daily_Refresh_Num(1)
+            end,
+            text = function(inst)
+                return "【全年无休】每日委托刷新次数+1"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【黑暗乞丐】选择后生成一个跟随玩家的黑暗乞丐【选择之后移出卡池】
+        ["black_beggar"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_black_beggar") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_black_beggar","hoshino_card_debuff_black_beggar",true)
+            end,
+            text = function(inst)
+                return "【黑暗乞丐】选择后生成一个跟随玩家的黑暗乞丐，给吃的能得随机效果【选择之后移出卡池】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 

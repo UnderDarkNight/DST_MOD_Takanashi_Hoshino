@@ -1,33 +1,57 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 
-【金】【嗝屁猫的项圈】当你死亡时，50%的概率立即复活
+【诅咒】【塔之诅咒】受伤时会随机在半径15码范围内生成6个点燃的火药
 
 ]]--
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
-
+    local function combine_tables(...)
+        local args = {...}
+        local result = {}
+        for i,t in ipairs(args) do
+            for j,v in ipairs(t) do
+                table.insert(result,v)
+            end
+        end
+        return result
+    end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿越洞穴、重新进存档 也会执行。
         inst.entity:SetParent(player.entity)
         -- inst.Network:SetClassifiedTarget(player)
         inst.Transform:SetPosition(0,0,0)
-        inst.player = player
+        inst.player = player        
         -----------------------------------------------------
-        -- 
-            inst:ListenForEvent("death",function()
-                inst:DoTaskInTime(5,function()
-                    if not player:HasTag("playerghost") then
-                        return
+        ---
+            inst:ListenForEvent("attacked",function()
+                local x,y,z = player.Transform:GetWorldPosition()
+                local pos_tables = {}
+                for i= 3,15,3 do
+                    local temp_points = TUNING.HOSHINO_FNS:GetSurroundPoints({
+                        target = player,
+                        range = i,
+                        num = 8*i,
+                    })
+                    table.insert(pos_tables,temp_points)
+                end
+                local points = combine_tables(unpack(pos_tables))
+                --- 抽取不同的随机6个点
+                local ret_points = {}
+                for i=1,6 do
+                    local index = math.random(1,#points)
+                    table.insert(ret_points,points[index])
+                    table.remove(points,index)
+                    if #points == 0 then
+                        break
                     end
-                    if math.random() < 0.5 then
-                        player:PushEvent("respawnfromghost", { source = inst })
-                    else
-                        local player_name = player:GetDisplayName()
-                        TheNet:Announce("【嗝屁猫的项圈】"..player_name.."复活失败")
-                    end
-                end)
+                end
+                for i,pos in ipairs(ret_points) do
+                    local item = SpawnPrefab("gunpowder")
+                    item.Transform:SetPosition(pos.x,0,pos.z)
+                    item.components.burnable:Ignite()
+                end
             end,player)
         -----------------------------------------------------
     end
@@ -51,7 +75,8 @@ local function fn()
     inst.components.debuff.keepondespawn = true -- 是否保持debuff 到下次登陆
     inst.components.debuff:SetExtendedFn(ExtendDebuff)
     inst.components.debuff:SetDetachedFn(inst.Remove)
+
     return inst
 end
 
-return Prefab("hoshino_card_debuff_cat_amulet", fn)
+return Prefab("hoshino_card_debuff_tower_curse", fn)

@@ -46,7 +46,7 @@
         -----------------------------------------------------
         --- 屏蔽sg切换
             inst:ListenForEvent("newstate",function(_,_table)
-                if not inst.__working_flag > TIME then
+                if inst.__working_flag < TIME then
                     return
                 end
                 local statename = _table and _table.statename
@@ -77,6 +77,8 @@ local function fn()
     inst.components.debuff:SetAttachedFn(OnAttached)
     inst.components.debuff.keepondespawn = true -- 是否保持debuff 到下次登陆
     inst.components.debuff:SetExtendedFn(ExtendDebuff)
+    inst.components.debuff:SetDetachedFn(inst.Remove)
+
     return inst
 end
 
