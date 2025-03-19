@@ -391,6 +391,27 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【诅咒】【禁入厨房】你无法使用烹饪锅
+        ["no_entry_kitchen"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_no_entry_kitchen"
+                return inst:GetDebuff(debuff_prefab) == nil
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_no_entry_kitchen"
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_no_entry_kitchen"
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
+            end,
+            text = function(inst)
+                return "【禁入厨房】你无法使用烹饪锅"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 }

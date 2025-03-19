@@ -35,3 +35,5 @@ modimport("key_modules_for_hoshino/05_components/12_locomotor.lua")
 --- locomotor hook
 modimport("key_modules_for_hoshino/05_components/13_health_hook.lua") 
 --- health hook
+modimport("key_modules_for_hoshino/05_components/14_stewer.lua") 
+--- stewer hook

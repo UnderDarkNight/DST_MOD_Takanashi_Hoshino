@@ -84,6 +84,7 @@ local prefabs_name_list = {
     "01_53_card_debuff_judgment",                                           --- 卡牌debuff：裁定
     "01_54_card_debuff_fate_continues",                                     --- 卡牌debuff：命途不止
     "01_55_card_debuff_raccoon_leaf",                                       --- 卡牌debuff：狸猫树叶
+    "01_56_card_debuff_no_entry_kitchen",                                   --- 卡牌debuff：禁入厨房
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
     "03_special_equipment_backpack_t8_buff",                 --- 特殊装备：T8背包 的 buff
