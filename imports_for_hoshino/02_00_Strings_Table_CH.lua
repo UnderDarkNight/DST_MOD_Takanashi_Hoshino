@@ -520,6 +520,10 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "商店",
                 ["recipe_desc"] = "升级到3级",
             },
+            ["hoshino_spell_black_beggar"] = {
+                ["name"] = "黑暗乞丐",
+                ["inspect_str"] = "他需要吃的",
+            },
         --------------------------------------------------------------------
         --- 09_hoshino_tasks
             ["hoshino_building_task_board_pre"] = {

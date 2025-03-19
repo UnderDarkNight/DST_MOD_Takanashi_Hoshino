@@ -13,15 +13,9 @@
 --- API
     --- 跟随玩家
     local function following_player_task(inst)
-        if inst.components.container:IsOpen() then
-            return
-        end
         local player = inst:GetPlayer()
         if player == nil then
             inst:Remove()
-            return
-        end
-        if inst.components.fueled:IsEmpty() then
             return
         end
         if inst:HasTag("flying") and not inst:IsBusy() and inst:GetDistanceSqToInst(player) > CLOSE_DISTANCE_SQ then
@@ -52,7 +46,6 @@
     --- 链接玩家
     local function link_fn(inst,player)
         inst.player = player
-        player.components.hoshino_com_drone_leader:AddDrone(inst)
         inst._linked_player:set(player)
         inst:AddTag(tostring(player.userid))
     end
@@ -66,26 +59,16 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 return function(inst)
+    inst:ListenForEvent("force_close_2_player",entitysleep_event_fn)
     inst:ListenForEvent("link",link_fn)
     inst:DoPeriodicTask(FRAMES*2,following_player_task)
     -- inst:ListenForEvent("entitysleep",entitysleep_event_fn)
-    inst:ListenForEvent("force_close_2_player",entitysleep_event_fn)
-
     inst:SetSpeed(FOLLOW_SPEED + math.random(20)/10)
     inst.components.projectile:SetHitDist(math.random(15,40)/10)
-
     inst.GetPlayer = GetPlayer
-
     inst:DoTaskInTime(2,function()
         if inst:GetPlayer() == nil then
             inst:Remove()
-        end
-    end)
-
-    inst:ListenForEvent("trans_2_item",function()
-        local player = inst:GetPlayer()
-        if player then
-            player.components.hoshino_com_drone_leader:RemoveDroneByGUID(inst.GUID)
         end
     end)
 end

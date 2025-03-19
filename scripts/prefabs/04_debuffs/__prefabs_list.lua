@@ -87,6 +87,7 @@ local prefabs_name_list = {
     "01_56_card_debuff_no_entry_kitchen",                                   --- 卡牌debuff：禁入厨房
     "01_57_card_debuff_thunder_thighs",                                     --- 卡牌debuff：【霹雳大腿】
     "01_58_card_debuff_tower_curse",                                        --- 卡牌debuff：【塔之诅咒】
+    "01_59_card_debuff_black_beggar",                                       --- 卡牌debuff：【黑暗乞丐】
 
     "02_monster_damage_down_debuff",                         --- 怪物伤害倍增器。
     "03_special_equipment_backpack_t8_buff",                 --- 特殊装备：T8背包 的 buff

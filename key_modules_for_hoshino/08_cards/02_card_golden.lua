@@ -906,6 +906,21 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【黑暗乞丐】选择后生成一个跟随玩家的黑暗乞丐【选择之后移出卡池】
+        ["black_beggar"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return inst:GetDebuff("hoshino_card_debuff_black_beggar") == nil
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_black_beggar","hoshino_card_debuff_black_beggar",true)
+            end,
+            text = function(inst)
+                return "【黑暗乞丐】选择后生成一个跟随玩家的黑暗乞丐，给吃的能得随机效果【选择之后移出卡池】"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
 
