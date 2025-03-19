@@ -412,6 +412,27 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【诅咒】【霹雳大腿】你碰撞的所有建筑会被摧毁，移动速度-25%
+        ["thunder_thighs"] = {
+            back = "card_black",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_black.tex"},
+            test = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_thunder_thighs"
+                return inst:GetDebuff(debuff_prefab) == nil
+            end,
+            fn = function(inst)
+                local debuff_prefab = "hoshino_card_debuff_thunder_thighs"
+                inst.components.hoshino_com_debuff:Add_Buff_Memory(debuff_prefab,debuff_prefab,true)
+            end,
+            deactive_fn = function(inst) --- 诅咒去除（单次）
+                local debuff_prefab = "hoshino_card_debuff_thunder_thighs"
+                inst.components.hoshino_com_debuff:Remove_Buff_Memory(debuff_prefab,true)
+            end,
+            text = function(inst)
+                return "【诅咒】【霹雳大腿】你碰撞的所有建筑会被摧毁，移动速度-25%"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 }

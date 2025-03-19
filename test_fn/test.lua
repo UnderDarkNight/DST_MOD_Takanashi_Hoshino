@@ -83,13 +83,7 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        ThePlayer:AddDebuff("hoshino_card_debuff_no_entry_kitchen","hoshino_card_debuff_no_entry_kitchen")
-        ThePlayer:RemoveDebuff("hoshino_card_debuff_no_entry_kitchen")
-        -- print(ThePlayer:HasDebuff("hoshino_card_debuff_no_entry_kitchen"))
-
-        for k, v in pairs(ThePlayer.components.hoshino_com_stewer_hooker.__start_cooking_blockers) do
-            print(k,v,k:IsValid())
-        end
+        ThePlayer:AddDebuff("hoshino_card_debuff_thunder_thighs","hoshino_card_debuff_thunder_thighs")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
