@@ -19,15 +19,17 @@ local hoshino_com_task_sys_for_player = Class(function(self, inst)
     ------------------------------------------------
     --- 刷新次数。
         self.refresh_num = 5
-        self.refresh_num_max = 5
+        self.refresh_num_daily = 5
         self:AddOnLoadFn(function()
             self.refresh_num = self:Get("refresh_num") or 0
+            self.refresh_num_daily = self:Get("refresh_num_daily") or 5
         end)
         self:AddOnSaveFn(function()
             self:Set("refresh_num", self.refresh_num)
+            self:Set("refresh_num_daily", self.refresh_num_daily)
         end)
         inst:WatchWorldState("cycles",function()
-            self:Refresh_DoDelta(5)
+            self.refresh_num = self.refresh_num_daily
         end)
     ------------------------------------------------
     --- 初始化
@@ -135,7 +137,10 @@ nil,
         return self.refresh_num
     end
     function hoshino_com_task_sys_for_player:Refresh_DoDelta(num)
-        self.refresh_num = math.clamp(self.refresh_num + num,0,self.refresh_num_max)
+        self.refresh_num = math.max(0,self.refresh_num + num)
+    end
+    function hoshino_com_task_sys_for_player:Add_Daily_Refresh_Num(num)
+        self.refresh_num_daily = math.max(0,self.refresh_num_daily + num)
     end
 ------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数

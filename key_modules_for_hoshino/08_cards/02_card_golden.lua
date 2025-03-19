@@ -887,7 +887,22 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Counter_Damage(math.min(100,current))
             end,
             text = function(inst)
-                return "【金】【全域反击】你的【荆棘】伤害翻倍（单次增加数额不超过100）"
+                return "【全域反击】你的【荆棘】伤害翻倍（单次增加数额不超过100）"
+            end,
+        },
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --- 【金】【全年无休】每日委托刷新次数+1
+        ["year_round"] = {
+            back = "card_golden",
+            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_golden.tex"},
+            test = function(inst)
+                return true
+            end,
+            fn = function(inst)
+                inst.components.hoshino_com_task_sys_for_player:Add_Daily_Refresh_Num(1)
+            end,
+            text = function(inst)
+                return "【全年无休】每日委托刷新次数+1"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
