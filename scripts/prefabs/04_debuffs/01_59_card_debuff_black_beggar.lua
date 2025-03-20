@@ -17,13 +17,17 @@
         local percent = math.random(1000)/1000
         if percent <= 0.2 then
             --- 随机蜘蛛
-            local spider_list = {"spider_dropper","spider_healer"}
+            local spider_list = {"spider_dropper"}
             local ret_spider = spider_list[math.random(1,#spider_list)]
             local monster = SpawnPrefab(ret_spider)
             local x,y,z = player.Transform:GetWorldPosition()
             monster.Transform:SetPosition(x+math.random(-20,20)/10,0,z+math.random(-20,20)/10)
-            player:PushEvent("makefriend")
-            player.components.leader:AddFollower(monster)
+            if math.random() < 0.5 then
+                player:PushEvent("makefriend")
+                player.components.leader:AddFollower(monster)
+            else
+                monster.components.combat:SuggestTarget(player)
+            end
             SpawnPrefab("crab_king_shine").Transform:SetPosition(monster.Transform:GetWorldPosition())
             monster:AddDebuff(inst.prefab,inst.prefab)
             print("【黑暗乞丐】 蜘蛛")
@@ -50,16 +54,21 @@
             print("【黑暗乞丐】 移除卡牌：",ret_remove_card_name)
         elseif percent <= 0.9 then
             --- 治疗玩家25%生命值
-            local max_health = player.components.health.maxhealth
-            player.components.health:DoDelta(max_health*0.25)
-            print("【黑暗乞丐】 恢复血量")
+            if player.components.health:GetPercent() == 1 then
+                inst:PushEvent("start_reward_full",player)
+                print("【黑暗乞丐】 满血重新ROLL")
+            else
+                local max_health = player.components.health.maxhealth
+                player.components.health:DoDelta(max_health*0.25)
+                print("【黑暗乞丐】 恢复血量")
+            end
         else
             --- 10%的概率治疗玩家25%黑血（如果没有黑血则重新roll一次效果）
             if player.components.health.penalty > 0 then
                 player.components.health:DeltaPenalty(-0.25)
             else
                 print("【黑暗乞丐】 重新ROLL")
-                inst:PushEvent("hunger_full",player)                
+                inst:PushEvent("start_reward_full",player)                
             end
         end
     end
@@ -82,15 +91,16 @@
                     return false
                 end
                 beggar:PushEvent("on_eat")
-                local hunger_value = item.components.edible.hungervalue or 0
+                local healthvalue = item.components.edible.healthvalue or 0
                 if item.components.stackable then
                     item.components.stackable:Get():Remove()
                 else
                     item:Remove()
                 end
-                local ret_value = inst.components.hoshino_data:Add("hunger",hunger_value)
-                if ret_value >= 100 then
-                    inst:PushEvent("hunger_full",player)
+                healthvalue = math.max(0,healthvalue)
+                local ret_value = inst.components.hoshino_data:Add("hunger",healthvalue)
+                while ret_value >= 100 do
+                    inst:PushEvent("start_reward_full",player)
                     ret_value = inst.components.hoshino_data:Add("hunger",-100)
                 end
                 beggar:SetHunger(ret_value)
@@ -131,7 +141,7 @@
         -----------------------------------------------------
         ---
             SpawnBeggar(inst,player)
-            inst:ListenForEvent("hunger_full",start_reward_fn)
+            inst:ListenForEvent("start_reward_full",start_reward_fn)
         -----------------------------------------------------
    end
 ------------------------------------------------------------------------------------------------------------------------------------------------

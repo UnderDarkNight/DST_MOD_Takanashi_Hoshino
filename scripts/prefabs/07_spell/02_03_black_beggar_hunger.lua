@@ -29,7 +29,7 @@
             end)
         -----------------------------------------------------
         --- 文字节点
-            local hunger_text = root:AddChild(Text(CODEFONT,30,"󰀎100",{  255/255 , 255/255 ,255/255 , 1}))
+            local hunger_text = root:AddChild(Text(CODEFONT,30,"󰀍100",{  255/255 , 255/255 ,255/255 , 1}))
             hunger_text:SetPosition(0,-35)
             hunger_text.show_flag_num = 0
         -----------------------------------------------------            
@@ -45,7 +45,7 @@
                     hunger_text.show_flag_num = hunger_text.show_flag_num + 1
                     if hunger_text.show_flag_num > 60 then
                         hunger_text:Show()
-                        hunger_text:SetString("󰀎"..inst:GetHunger())
+                        hunger_text:SetString("󰀍"..inst:GetHunger())
                     end
                 end
 
