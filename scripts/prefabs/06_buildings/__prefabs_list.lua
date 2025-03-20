@@ -33,6 +33,7 @@ local prefabs_name_list = {
     "03_ether_pool",                            --- 以太池子
     "04_01_white_drone",                        --- 白色无人机
     "04_09_drone_fueled_buff",                        --- 白色无人机 能量buff
+    "05_nilou_fire",                            --- 尼卢火
 
 }
 

@@ -433,3 +433,22 @@ AddRecipe2(
     {"CHARACTER",}
 )
 RemoveRecipeFromFilter("hoshino_weapon_pepe_hammer","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 尼卢火
+--------------------------------------------------------------------------------------------------------------------------------------------
+AddRecipeToFilter("hoshino_building_nilou_fire","CHARACTER")     ---- 添加物品到目标标签
+AddRecipe2(
+    "hoshino_building_nilou_fire",            --  --  inst.prefab  实体名字
+    {  }, 
+    TECH.NONE, --科学一本 
+    {
+        -- nounlock=true,
+        no_deconstruction=false,                --属性：不可拆解，为false则为可拆解
+        builder_tag = "hoshino",
+        placer = "hoshino_building_nilou_fire_placer",                       -------- 建筑放置器
+        atlas = "images/map_icons/hoshino_building_nilou_fire.xml",
+        image = "hoshino_building_nilou_fire.tex",
+    },
+    {"CHARACTER",}
+)
+RemoveRecipeFromFilter("hoshino_building_nilou_fire","MODS")

@@ -111,7 +111,7 @@
     local function PlayAnimAndCallBack(inst,anim_name,call_back_fn)
         if call_back_fn then
             if inst.temp_anim_call_back_fn ~= nil then
-                inst:DoTaskInTime(0,function()
+                inst:DoTaskInTime(FRAMES,function()
                     PlayAnimAndCallBack(inst,anim_name,call_back_fn)
                 end)
                 return

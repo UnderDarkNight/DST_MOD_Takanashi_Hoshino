@@ -508,6 +508,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "白子的无人机",
                 ["recipe_desc"] = "白子的无人机",
             },
+            ["hoshino_building_nilou_fire"] = {
+                ["name"] = "尼卢火",
+                ["inspect_str"] = "尼卢火",
+                ["recipe_desc"] = "尼卢火",
+            },
         --------------------------------------------------------------------
         --- 07_spell
             ["hoshino_spell_gun_eye_of_horus_level_1_to_2"] = {
