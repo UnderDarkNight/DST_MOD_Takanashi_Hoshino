@@ -90,20 +90,42 @@
                 if item.components.edible == nil then
                     return false
                 end
-                beggar:PushEvent("on_eat")
+                if beggar:IsBusy() then
+                    return false
+                end
                 local healthvalue = item.components.edible.healthvalue or 0
                 if item.components.stackable then
                     item.components.stackable:Get():Remove()
                 else
                     item:Remove()
                 end
-                healthvalue = math.max(0,healthvalue)
-                local ret_value = inst.components.hoshino_data:Add("hunger",healthvalue)
-                while ret_value >= 100 do
-                    inst:PushEvent("start_reward_full",player)
-                    ret_value = inst.components.hoshino_data:Add("hunger",-100)
-                end
-                beggar:SetHunger(ret_value)
+                beggar:SetBusy("eating")
+                --- 基于动画控制器，动画播放完才执行动作。
+                beggar:PlayAnimAndCallBack("on_eat",function()
+                    healthvalue = math.max(0,healthvalue)
+                    local ret_value = inst.components.hoshino_data:Add("hunger",healthvalue)
+                    local reward_times = 0
+                    while ret_value >= 100 do
+                        -- inst:PushEvent("start_reward_full",player)
+                        reward_times = reward_times + 1
+                        ret_value = inst.components.hoshino_data:Add("hunger",-100)
+                    end
+                    beggar:SetHunger(ret_value)
+                    beggar:RemoveBusy("eating")                    
+                    if reward_times == 0 then
+                        beggar:PlayAnimAndCallBack("idle")
+                    else
+                        beggar:SetBusy("giving_reward")
+                        beggar:PlayAnimAndCallBack("give_reward",function()
+                            beggar:RemoveBusy("giving_reward")
+                            for i = 1, reward_times, 1 do
+                                inst:PushEvent("start_reward_full",player)
+                            end
+                            beggar:PlayAnimAndCallBack("idle")
+                        end)
+                    end
+                end)
+                
                 return true
             end)
         ---------------------------------------------------

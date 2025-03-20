@@ -7,12 +7,12 @@
 --- 素材
     local assets =
     {
-        -- Asset("ANIM", "anim/hoshino_building_white_drone.zip"),
+        Asset("ANIM", "anim/hoshino_spell_black_beggar.zip"),
 
     }
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 参数
-    local ANIM_SCALE = 1.5
+    local ANIM_SCALE = 0.7
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- API
     local function FaceTo(inst,target_or_v3_or_x,_y,_z) --- 做多模态自适应
@@ -108,6 +108,27 @@
     end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
+    local function PlayAnimAndCallBack(inst,anim_name,call_back_fn)
+        if call_back_fn then
+            if inst.temp_anim_call_back_fn ~= nil then
+                inst:DoTaskInTime(0,function()
+                    PlayAnimAndCallBack(inst,anim_name,call_back_fn)
+                end)
+                return
+            end
+            inst.temp_anim_call_back_fn = function()
+                inst:RemoveEventCallback("animover",inst.temp_anim_call_back_fn)
+                call_back_fn(inst)
+                inst.temp_anim_call_back_fn = nil
+            end
+            inst:ListenForEvent("animover",inst.temp_anim_call_back_fn)
+            inst.AnimState:PlayAnimation(anim_name,false)
+        else
+            inst.AnimState:PlayAnimation(anim_name,true)
+        end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--- 
     local function fn()
         local inst = CreateEntity()
 
@@ -128,13 +149,13 @@
         inst:AddTag("NOBLOCK")      -- 不会影响种植和放置
 
         -- inst:AddTag("flying")
-        inst.AnimState:SetScale(ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
+        inst.AnimState:SetScale(-ANIM_SCALE,ANIM_SCALE,ANIM_SCALE)
 
-        inst.AnimState:SetBank("hoshino_building_white_drone")
-        inst.AnimState:SetBuild("hoshino_building_white_drone")
-        inst.AnimState:PlayAnimation("ground")
+        inst.AnimState:SetBank("hoshino_spell_black_beggar")
+        inst.AnimState:SetBuild("hoshino_spell_black_beggar")
+        inst.AnimState:PlayAnimation("idle",true)
 
-        inst.Transform:SetFourFaced()
+        inst.Transform:SetTwoFaced()
         -----------------------------------------------------------------
         --- 
             inst._linked_player = net_entity(inst.GUID,"_linked_player","_linked_player")
@@ -176,6 +197,8 @@
             inst.IsBusy = IsBusy
             inst.IsWorking = IsWorking
             inst.StopMoving = StopMoving
+        -----------------------------------------------------------------
+            inst.PlayAnimAndCallBack = PlayAnimAndCallBack
         -----------------------------------------------------------------
         --- 各种系统安装
             Follow_Player_Sys_Install(inst)
