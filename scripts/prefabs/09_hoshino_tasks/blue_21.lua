@@ -21,6 +21,8 @@
     {
         Asset("IMAGE", "images/hoshino_mission/blue_mission.tex"),
         Asset("ATLAS", "images/hoshino_mission/blue_mission.xml"),
+        Asset("IMAGE", "images/hoshino_mission/b_mission_b_21.tex"),
+        Asset("ATLAS", "images/hoshino_mission/b_mission_b_21.xml"),
     }
     local button_atlas = "images/inspect_pad/page_main.xml"     --- 按钮图集
     local button_give_up_img = "button_give_up.tex"             --- 放弃按钮
@@ -140,7 +142,7 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/blue_mission.xml","blue_mission_21_board.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/b_mission_b_21.xml","b_mission_b_21.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 

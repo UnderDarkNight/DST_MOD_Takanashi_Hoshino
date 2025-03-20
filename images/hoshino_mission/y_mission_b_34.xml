@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="y_mission_b_34.tex" />
+	<Elements>
+		<Element name="y_mission_b_34.tex" u1="0.001" u2="0.97946875" v2="0.999" v1="0.29396875" variant="" />
+	</Elements>
+</Atlas>
