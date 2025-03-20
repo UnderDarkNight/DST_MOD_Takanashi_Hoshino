@@ -105,6 +105,11 @@ local function page_create(front_root,MainScale)
                 refresh_num_text:SetString(tostring(ThePlayer.PAD_DATA and ThePlayer.PAD_DATA.refresh_num or ThePlayer.replica.hoshino_cards_sys:Get_refresh_num()))
             end)
             page.inst:PushEvent("refresh_num_update")
+            page.inst:ListenForEvent("hoshino_event.pad_data_update",function()
+                page.inst:DoTaskInTime(0,function()
+                    page.inst:PushEvent("refresh_num_update")
+                end)
+            end,ThePlayer)
         --------------------------------------------------------------------------------------
         --- 卡牌描述文本
             local card_desc_text = card_select_box:AddChild(Text(CODEFONT,50,"500",{ 0/255 , 0/255 ,0/255 , 1}))

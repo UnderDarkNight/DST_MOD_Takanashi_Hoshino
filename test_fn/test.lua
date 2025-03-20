@@ -65,7 +65,7 @@ local flg,error_code = pcall(function()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_31")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
-        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
+        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_46")
 
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_02",2)
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_02",3)
@@ -86,33 +86,7 @@ local flg,error_code = pcall(function()
         -- ThePlayer:AddDebuff("hoshino_card_debuff_black_beggar","hoshino_card_debuff_black_beggar")
         -- print(ThePlayer:GetDebuff("hoshino_card_debuff_black_beggar"))
 
-        local gift_pack = SpawnPrefab("hoshino_item_special_gift_pack")
 
-        gift_pack:PushEvent("Set",{
-            num = math.random(6),
-            name = "test gift pack",
-            desc = "test gift pack 666",
-        })
-        -- item:PushEvent("AddItemRecord",SpawnPrefab("hoshino_item_cards_pack"))
-
-        -- ThePlayer.components.inventory:GiveItem(item)
-
-        local num = 1
-        local prefab = "hoshino_item_cards_pack"
-        local item = SpawnPrefab(prefab)
-
-        if item.components.stackable then
-            item.components.stackable:SetStackSize(num or 1)
-            gift_pack:PushEvent("AddItemRecord",item)
-        else
-            gift_pack:PushEvent("AddItemRecord",item)
-            num = num - 1
-            for i=1,num do
-                gift_pack:PushEvent("AddItemRecord",SpawnPrefab(prefab))
-            end
-        end
-
-        gift_pack.Transform:SetPosition(x,y,z)
         
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
