@@ -179,7 +179,7 @@
         -----------------------------------------------------
         --- 刷新. 0.8的N次方
             inst:ListenForEvent("refresh",function(inst)
-                local level = inst.components.hoshino_data:Add("level",1,0,3)
+                local level = inst.components.hoshino_data:Add("level",0,0,3)
                 local mult = math.pow(0.8,level) 
                 player.components.combat.externaldamagetakenmultipliers:SetModifier(inst,mult)
             end,player)

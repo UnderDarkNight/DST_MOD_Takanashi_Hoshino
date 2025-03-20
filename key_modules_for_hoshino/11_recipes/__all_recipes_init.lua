@@ -1,6 +1,9 @@
 
 
 
+modimport("key_modules_for_hoshino/11_recipes/00_tech_init.lua") 
+-- 专属科技初始化
+
 modimport("key_modules_for_hoshino/11_recipes/01_normal_recipes.lua") 
 -- 普通物品列表
 

@@ -513,6 +513,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "尼卢火",
                 ["recipe_desc"] = "尼卢火",
             },
+            ["hoshino_building_millennium_tactics_delegate_terminal"] = {
+                ["name"] = "千年战术委托终端",
+                ["inspect_str"] = "千年战术委托终端",
+                ["recipe_desc"] = "千年战术委托终端",
+            },
         --------------------------------------------------------------------
         --- 07_spell
             ["hoshino_spell_gun_eye_of_horus_level_1_to_2"] = {
