@@ -565,6 +565,7 @@ nil,
         self.inst:DoTaskInTime(0.5,function()
             self:GetRPC():PushEvent("hoshino_event.pad_data_update_by_refresh")            
         end)
+        self.inst:PushEvent("hoshino_cards_sys.refresh_clicked")
     end
     function hoshino_cards_sys:AddRefreshNum(num)
         self.refresh_num = self.refresh_num + num

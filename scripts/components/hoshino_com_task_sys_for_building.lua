@@ -115,7 +115,7 @@ nil,
     end
     function hoshino_com_task_sys_for_building:Get_White_Mission_Prefabs()
         local ret_table = {}
-        for i = 1, 47 do
+        for i = 1, 200 do
             -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
             local formatted_number = string.format("%02d", i)
             local ret_prefab = "hoshino_mission_white_" .. formatted_number
@@ -127,7 +127,7 @@ nil,
     end
     function hoshino_com_task_sys_for_building:Get_Blue_Mission_Prefabs()
         local ret_table = {}
-        for i = 1, 45 do
+        for i = 1, 200 do
             -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
             local formatted_number = string.format("%02d", i)
             local ret_prefab = "hoshino_mission_blue_" .. formatted_number
@@ -139,7 +139,7 @@ nil,
     end
     function hoshino_com_task_sys_for_building:Get_Golden_Mission_Prefabs()
         local ret_table = {}
-        for i = 1, 34 do
+        for i = 1, 200 do
             -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
             local formatted_number = string.format("%02d", i)
             local ret_prefab = "hoshino_mission_golden_" .. formatted_number
@@ -154,7 +154,7 @@ nil,
             return {}
         end
         local ret_table = {}
-        for i = 1, 11 do
+        for i = 1, 200 do
             -- 使用 string.format 格式化数字，确保至少有两个数字，不足的前面补0
             local formatted_number = string.format("%02d", i)
             local ret_prefab = "hoshino_mission_colourful_" .. formatted_number

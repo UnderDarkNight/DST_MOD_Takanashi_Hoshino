@@ -32,6 +32,7 @@
             item.components.stackable:SetStackSize(num or 1)
             gift_pack:PushEvent("AddItemRecord",item)
         else
+            gift_pack:PushEvent("AddItemRecord",item)
             num = num - 1
             for i=1,num do
                 gift_pack:PushEvent("AddItemRecord",SpawnPrefab(prefab))

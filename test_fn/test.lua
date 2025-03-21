@@ -65,7 +65,7 @@ local flg,error_code = pcall(function()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_31")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
-        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_white_11")
+        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_46")
 
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_02",2)
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_02",3)
@@ -84,7 +84,14 @@ local flg,error_code = pcall(function()
     ----------------------------------------------------------------------------------------------------------------
     --- 
         -- ThePlayer:AddDebuff("hoshino_card_debuff_black_beggar","hoshino_card_debuff_black_beggar")
-        print(ThePlayer:GetDebuff("hoshino_card_debuff_black_beggar"))
+        -- print(ThePlayer:GetDebuff("hoshino_card_debuff_black_beggar"))
+
+        local inst = TheSim:FindFirstEntityWithTag("hoshino_building_nilou_fire")
+        inst.Light:SetFalloff(0.2)
+        inst.Light:SetIntensity(.8)
+        inst.Light:SetRadius(3)
+        inst.Light:SetColour(223 / 255, 208 / 255, 69 / 255)
+        
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

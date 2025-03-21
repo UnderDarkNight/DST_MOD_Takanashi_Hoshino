@@ -18,6 +18,7 @@ local files_name = {
 	---- 06_buildings
 		"hoshino_building_shop24",								--- 24小时商店
 		"hoshino_building_ether_pool",							--- 以太池
+		"hoshino_building_nilou_fire",							--- 尼卢火
 	-------------------------------------------------------------------------------------------------
 	---- 09_hoshino_tasks
 		"hoshino_building_task_board",							--- 任务公告栏
