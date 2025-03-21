@@ -27,9 +27,9 @@ local flg,error_code = pcall(function()
         
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 卡牌调试
-        -- local item = SpawnPrefab("hoshino_item_cards_pack")
-        -- item:PushEvent("Set",{
-        --         cards = {
+        local item = SpawnPrefab("hoshino_item_cards_pack")
+        item:PushEvent("Set",{
+                cards = {
         --             -- "card_golden",
         --             -- "card_white",
         -- --             -- "card_colourful",
@@ -39,7 +39,7 @@ local flg,error_code = pcall(function()
         --             -- "card_black",
         --             -- "card_colourful",
 
-        --             "fate_continues",
+                    "air_drop_support_golden",
         -- --             -- "unlock_spell_normal_ex",
         -- --             -- "unlock_spell_swimming_ex",
         -- --             -- "unlock_spell_all_normal",
@@ -47,10 +47,10 @@ local flg,error_code = pcall(function()
         -- --             -- "kill_and_explode",
         -- --             -- "give_me_some_money",
         -- --             "level_up_and_double_card_pack",
-        --         },
-        --     }
-        -- )
-        -- ThePlayer.components.inventory:GiveItem(item)
+                },
+            }
+        )
+        ThePlayer.components.inventory:GiveItem(item)
     ----------------------------------------------------------------------------------------------------------------
     --- 调试任务栏
         -- ThePlayer.___task_board_widget_fn = function(inst,front_root)

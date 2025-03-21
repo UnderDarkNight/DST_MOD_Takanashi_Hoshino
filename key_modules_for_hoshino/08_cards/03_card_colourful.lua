@@ -274,7 +274,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_fate_continues","hoshino_card_debuff_fate_continues",true)
             end,
             text = function(inst)
-                return "【命途不止】 当你死亡时，免疫死亡事件，并把生命恢复到1，上述效果持续10s，cd3min   【选择后从卡组移除】"
+                return " \n【命途不止】\n当你受到致命伤害时，把生命恢复到1\n并锁血10s，cd3min   【选择后从卡组移除】"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -289,7 +289,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_raccoon_leaf","hoshino_card_debuff_raccoon_leaf",true)
             end,
             text = function(inst)
-                return "【狸猫树叶】当你超过一秒未进行任何操作时，免疫所有血量扣除，一旦进行任何操作就会失去上述免疫效果。【选择后从卡组移除】"
+                return " \n【狸猫树叶】\n当你超过一秒未进行任何操作时，免疫所有血量扣除]\n一旦进行任何操作就会失去上述免疫效果。\n【选择后从卡组移除】"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
