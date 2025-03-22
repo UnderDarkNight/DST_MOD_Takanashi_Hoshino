@@ -534,6 +534,30 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["name"] = "黑暗乞丐",
                 ["inspect_str"] = "他需要吃的",
             },
+            ["hoshino_spell_unlock_gun_eye_of_horus_ex"] = {
+                ["name"] = "解锁：战术镇压",
+                ["recipe_desc"] = "解锁：战术镇压",
+            },
+            ["hoshino_spell_unlock_swimming_ex_support"] = {
+                ["name"] = "解锁：水上支援",
+                ["recipe_desc"] = "解锁：水上支援",
+            },
+            ["hoshino_spell_unlock_normal_heal"] = {
+                ["name"] = "解锁：疗愈",
+                ["recipe_desc"] = "解锁：疗愈",
+            },
+            ["hoshino_spell_unlock_normal_covert_operation"] = {
+                ["name"] = "解锁：隐秘行动",
+                ["recipe_desc"] = "解锁：隐秘行动",
+            },
+            ["hoshino_spell_unlock_swimming_emergency_assistance"] = {
+                ["name"] = "解锁：急援",
+                ["recipe_desc"] = "解锁：急援",
+            },
+            ["hoshino_spell_unlock_swimming_dawn_of_horus"] = {
+                ["name"] = "解锁：晓之荷鲁斯",
+                ["recipe_desc"] = "解锁：晓之荷鲁斯",
+            },
         --------------------------------------------------------------------
         --- 09_hoshino_tasks
             ["hoshino_building_task_board_pre"] = {
