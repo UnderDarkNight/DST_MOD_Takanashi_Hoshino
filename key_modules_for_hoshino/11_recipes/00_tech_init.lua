@@ -4,8 +4,8 @@
 
 --------- 添加活动tag给指定的 prefab，不能大写。 制作栏 左上角 的图标 和 鼠标过去的文字
 PROTOTYPER_DEFS["hoshino_building_millennium_tactics_delegate_terminal"] = {      ----- 必须是 prefab 的名字
-    icon_atlas = "images/global_redux.xml", 
-    icon_image = "radiobutton_filled_gold_new.tex",	
+    icon_atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal.xml", 
+    icon_image = "hoshino_building_millennium_tactics_delegate_terminal.tex",	
     is_crafting_station = true,
     -- action_str = "TRADE",  --- 相关参数 参考 recipes.lua
     filter_text = "千年战术委托终端"
@@ -15,8 +15,8 @@ PROTOTYPER_DEFS["hoshino_building_millennium_tactics_delegate_terminal"] = {    
 RECIPETABS[string.upper("millennium_tactics_delegate_terminal")] = { 
     str = string.upper("millennium_tactics_delegate_terminal"),
     sort = 999, 
-    icon = "tab_quagmire_swampigelder.tex", 
-    icon_atlas = "images/quagmire_hud.xml", 
+    icon_atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal.xml", 
+    icon_image = "hoshino_building_millennium_tactics_delegate_terminal.tex",	
     crafting_station = true,
     shop = true
 }

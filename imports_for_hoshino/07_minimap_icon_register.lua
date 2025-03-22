@@ -24,6 +24,7 @@ local files_name = {
 		"hoshino_building_task_board",							--- 任务公告栏
 		"hoshino_building_shiba_seki_ramen_cart_map",			--- 柴关拉面店
 		"hoshino_building_shiba_seki_ramen_cart",				--- 柴关拉面店
+		"hoshino_building_millennium_tactics_delegate_terminal",				--- 千年战术 终端
 	-------------------------------------------------------------------------------------------------
 
 }
