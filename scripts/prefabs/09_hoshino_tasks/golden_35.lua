@@ -19,10 +19,10 @@
 --- 素材
     local assets =
     {
-        Asset("IMAGE", "images/hoshino_mission/b_mission_b_46.tex"),
-        Asset("ATLAS", "images/hoshino_mission/b_mission_b_46.xml"),
-        Asset("IMAGE", "images/hoshino_mission/b_mission_s_46.tex"),
-        Asset("ATLAS", "images/hoshino_mission/b_mission_s_46.xml"),
+        Asset("IMAGE", "images/hoshino_mission/y_mission_b_35.tex"),
+        Asset("ATLAS", "images/hoshino_mission/y_mission_b_35.xml"),
+        Asset("IMAGE", "images/hoshino_mission/y_mission_s_35.tex"),
+        Asset("ATLAS", "images/hoshino_mission/y_mission_s_35.xml"),
     }
     local button_atlas = "images/inspect_pad/page_main.xml"     --- 按钮图集
     local button_give_up_img = "button_give_up.tex"             --- 放弃按钮
@@ -32,9 +32,9 @@
     local button_delivery_location = Vector3(270,-20,0)         --- 交付按钮位置
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 专属参数
-    local MISSION_TYPE = "blue" -- "white" "golden" "blue" "colourful" --- 给任务栏用的
-    local MISSION_REQUIRE_NUM = 10
-    local MISSION_REQUIRE_PREFAB = "item_tentacles"
+    local MISSION_TYPE = "golden" -- "white" "golden" "blue" "colourful" --- 给任务栏用的
+    local MISSION_REQUIRE_NUM = 30
+    local MISSION_REQUIRE_PREFAB = "rock_avocado_fruit"
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@
     end
 
     local GetPadDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/b_mission_s_46.xml","b_mission_s_46.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/y_mission_s_35.xml","y_mission_s_35.tex"))
         --------------------------------------------------------------------------
         --- 放弃按钮
             local button_give_up = CreateGiveUpButton(bg,button_give_up_location.x,button_give_up_location.y,function()
@@ -106,7 +106,7 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 用于任务栏显示的组件，返回Widget图像。client端调用
     local GetBoardDisplayBox = function(inst,box)
-        local bg = box:AddChild(Image("images/hoshino_mission/b_mission_b_46.xml","b_mission_b_46.tex"))
+        local bg = box:AddChild(Image("images/hoshino_mission/y_mission_b_35.xml","y_mission_b_35.tex"))
         ------- 任务描述
         -- local display_text = bg:AddChild(Text(CODEFONT,40,"10只猎犬",{ 0/255 , 0/255 ,0/255 , 1}))
 
@@ -124,11 +124,9 @@
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.10 -- 10% 经验
+                local exp = current_max_exp*0.25 -- 10% 经验
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                if owner.components.hoshino_cards_sys then
-                    owner.components.hoshino_cards_sys:AddRefreshNum(15)
-                end
+                owner.components.hoshino_com_shop:CreditCoinDelta(200)
 
             end
         end)
@@ -153,13 +151,18 @@
                 end
             end
         end
+
         --- 激活任务
         inst:ListenForEvent("active",function(inst,owner)
             inst:DoPeriodicTask(5,mission_check)
             inst:DoTaskInTime(0,mission_check)
-            inst:ListenForEvent("hoshino_cards_sys.refresh_clicked",function()
-                inst.components.hoshino_data:Add(MISSION_REQUIRE_PREFAB,1,0,MISSION_REQUIRE_NUM)
-                mission_check()
+            
+            inst:ListenForEvent("working",function(_,_table)
+                local target = _table and _table.target
+                if target and target.prefab == MISSION_REQUIRE_PREFAB then
+                    inst.components.hoshino_data:Add(MISSION_REQUIRE_PREFAB,1,0,MISSION_REQUIRE_NUM)
+                    mission_check()
+                end
             end,owner)
         end)
 
@@ -229,4 +232,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoshino_mission_blue_46", fn, assets)
+return Prefab("hoshino_mission_golden_35", fn, assets)

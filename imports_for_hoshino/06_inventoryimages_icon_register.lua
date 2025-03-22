@@ -86,6 +86,14 @@ local files_name = {
 	-- 06_buildings
 		"hoshino_building_white_drone_item",								--- 白子无人机
 	---------------------------------------------------------------------------------------
+	-- 07_spell
+		"hoshino_spell_unlock_gun_eye_of_horus_ex",								--- 
+		"hoshino_spell_unlock_swimming_ex_support",								--- 
+		"hoshino_spell_unlock_normal_heal",										--- 
+		"hoshino_spell_unlock_normal_covert_operation",							--- 
+		"hoshino_spell_unlock_swimming_emergency_assistance",					--- 
+		"hoshino_spell_unlock_swimming_dawn_of_horus",							--- 
+	---------------------------------------------------------------------------------------
 	-- 10_foods
 		"hoshino_food_shiba_seki_ramen",								--- 柴关拉面
 		"hoshino_food_mandrake_concentrate",								--- 曼德拉草浓缩液
