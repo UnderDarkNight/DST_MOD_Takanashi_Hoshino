@@ -87,13 +87,20 @@ return function(inst)
             if doer and doer.components.hoshino_com_shop then
                 local coins = recycle_coins_count()
                 if coins > 0 then
+                    local prefab_idx = {}
                     -- doer.components.hoshino_com_shop:CreditCoinDelta(coins,true)
                     doer.components.hoshino_com_shop:CreditCoinDelta(coins)
                     inst.components.container:ForEachItem(function(item)
                         if item and item.prefab then
                             item:Remove()
+                            prefab_idx[item.prefab] = true
                         end
                     end)
+                    local item_prefabs = {}
+                    for k, v in pairs(prefab_idx) do
+                        table.insert(item_prefabs, k)
+                    end
+                    doer:PushEvent("hoshino_event.24_shop_recycled",{ prefabs = item_prefabs,coins = coins})
                 end
                 doer.components.hoshino_com_shop:RecycleCoinsRefresh(0)
             else

@@ -63,7 +63,7 @@ local flg,error_code = pcall(function()
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
-        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_31")
+        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_39")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_46")
 
@@ -86,11 +86,21 @@ local flg,error_code = pcall(function()
         -- ThePlayer:AddDebuff("hoshino_card_debuff_black_beggar","hoshino_card_debuff_black_beggar")
         -- print(ThePlayer:GetDebuff("hoshino_card_debuff_black_beggar"))
 
-        local inst = TheSim:FindFirstEntityWithTag("hoshino_building_nilou_fire")
-        inst.Light:SetFalloff(0.2)
-        inst.Light:SetIntensity(.8)
-        inst.Light:SetRadius(3)
-        inst.Light:SetColour(223 / 255, 208 / 255, 69 / 255)
+        -- local inst = TheSim:FindFirstEntityWithTag("hoshino_building_nilou_fire")
+        -- inst.Light:SetFalloff(0.2)
+        -- inst.Light:SetIntensity(.8)
+        -- inst.Light:SetRadius(3)
+        -- inst.Light:SetColour(223 / 255, 208 / 255, 69 / 255)
+
+        -- x,y,z = TheWorld.Map:GetTileCenterPoint(x,y,z)
+        -- local node_index = TheWorld.Map:GetNodeIdAtPoint(x, 0, z) or 0                
+        -- local node = TheWorld.topology.nodes[node_index] or {}
+        -- local tx, ty = TheWorld.Map:GetTileXYAtPoint(x,y,z)
+        -- local current_tile = TheWorld.Map:GetTileAtPoint(x,y,z) -- 地皮
+        -- print("node_index",node_index,tx,ty,current_tile)
+        -- for k, v in pairs(node.tags or {}) do
+        --     print(k,v)
+        -- end
         
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
