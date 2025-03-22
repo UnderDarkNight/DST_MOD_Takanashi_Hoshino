@@ -170,7 +170,7 @@
 --- 怪物专属
     local function OnAttached_for_monster(inst,monster)
         if monster.components.combat then
-            monster.components.combat.externaldamagemultipliers:SetModifier(inst,2)
+            monster.components.combat.externaldamagemultipliers:SetModifier(inst,5)
         end
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------

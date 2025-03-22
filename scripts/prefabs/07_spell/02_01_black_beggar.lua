@@ -183,7 +183,7 @@
             inst:AddComponent("weapon")
             inst.components.weapon:SetDamage(0)
             inst:AddComponent("projectile")
-            inst.components.projectile:SetSpeed(20)
+            inst.components.projectile:SetSpeed(10)
             inst.components.projectile:SetHoming(false)
             inst.components.projectile:SetHitDist(1.5)
             inst.components.projectile:SetOnHitFn(OnHit)
