@@ -63,7 +63,7 @@ local flg,error_code = pcall(function()
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_39")
+        -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_39")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_46")
 
@@ -101,7 +101,19 @@ local flg,error_code = pcall(function()
         -- for k, v in pairs(node.tags or {}) do
         --     print(k,v)
         -- end
-        
+        TUNING.__test_fn = function(temp_monster,attacker,DAMAGE,inst)
+                -- -- temp_monster.components.combat:GetAttacked(attacker,DAMAGE,inst)
+                -- MakeHauntablePanic(temp_monster)
+                -- -- MakeHauntablePanicAndIgnite(temp_monster)
+                -- -- print(temp_monster)
+                -- if temp_monster.components.hauntable then
+                --     temp_monster.components.hauntable:Panic(10)                    
+                -- end
+
+                require "behaviours/panic"
+                Panic(temp_monster)
+                
+        end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

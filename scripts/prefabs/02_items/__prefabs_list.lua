@@ -73,7 +73,8 @@ local prefabs_name_list = {
 
     "41_worm_core",                                   --- 蠕虫之口
 
-    "42_pepe_hammer"                                  --- 时光震荡
+    "42_pepe_hammer",                                  --- 时光震荡
+    "43_grass_grenade",                                  --- 干草手雷
 
 
 }
