@@ -10,6 +10,13 @@
     local UPDATE_TIME = 0.1
 
     local BLOCKING_SG = {
+        ["knockback"] = true,
+        ["pinned_hit"] = true,
+        ["pinned"] = true,
+        ["pinned_pre"] = true,
+        ["mindcontrolled"] = true,
+        ["mindcontrolled_loop"] = true,
+        ["mindcontrolled_pst"] = true,
 
     }
 ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -46,11 +53,12 @@
         -----------------------------------------------------
         --- 屏蔽sg切换
             inst:ListenForEvent("newstate",function(_,_table)
+                local statename = _table and _table.statename
+                print("进入sg:",statename)
                 if inst.__working_flag < TIME then
                     return
                 end
-                local statename = _table and _table.statename
-                -- print("6666666",statename)
+               
                 if BLOCKING_SG[statename] then
                     player.sg:GoToState("idle")
                 end
