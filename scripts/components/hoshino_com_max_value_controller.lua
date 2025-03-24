@@ -108,7 +108,7 @@ nil,
             local saved_hunger = self:Get("saved_current_hunger")
             -- print("info saved_hunger",saved_hunger)
             if saved_hunger and self.inst.components.hunger then
-                self.inst.components.hunger.current = math.clamp(saved_hunger,0,self.inst.components.hunger.max) - refresh_delta_value
+                self.inst.components.hunger.current = math.clamp(saved_hunger - refresh_delta_value,0,self.inst.components.hunger.max) 
                 self.inst.components.hunger:DoDelta(refresh_delta_value,true)
                 self:Set("saved_current_hunger",nil)
                 -- print("info +++ set hunger",saved_hunger,self.inst.components.hunger.current,self.inst.components.hunger.max)
@@ -116,7 +116,7 @@ nil,
             local saved_sanity = self:Get("saved_current_sanity")
             -- print("info saved_sanity",saved_sanity)
             if saved_sanity and self.inst.components.sanity then
-                self.inst.components.sanity.current = math.clamp(saved_sanity,0,self.inst.components.sanity.max) - refresh_delta_value
+                self.inst.components.sanity.current = math.clamp(saved_sanity - refresh_delta_value,0,self.inst.components.sanity.max) 
                 self.inst.components.sanity:DoDelta(refresh_delta_value,true)
                 self:Set("saved_current_sanity",nil)
                 -- print("info +++ set sanity",saved_sanity,self.inst.components.sanity.current,self.inst.components.sanity.max)
