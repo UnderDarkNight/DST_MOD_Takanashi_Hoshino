@@ -23,14 +23,14 @@ end
     -- AddRecipeToFilter("hoshino_building_millennium_tactics_delegate_terminal","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_building_millennium_tactics_delegate_terminal",            --  --  inst.prefab  实体名字
-        { }, 
+        { Ingredient("gears", 2),Ingredient("boards", 4),Ingredient("papyrus", 4) }, 
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
             no_deconstruction=false,
             builder_tag = "hoshino",    
-            atlas = "images/inventoryimages/hoshino_weapon_gun_eye_of_horus.xml",
-            image = "hoshino_weapon_gun_eye_of_horus.tex",
+            atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal.xml",
+            image = "hoshino_building_millennium_tactics_delegate_terminal.tex",
             placer = "hoshino_building_millennium_tactics_delegate_terminal_placer",                       -------- 建筑放置器
 
         },
@@ -502,3 +502,22 @@ CustomAddRecipe2(
     {"CHARACTER",}
 )
 RemoveRecipeFromFilter("hoshino_building_nilou_fire","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 干草手雷
+--------------------------------------------------------------------------------------------------------------------------------------------
+-- AddRecipeToFilter("hoshino_building_nilou_fire","CHARACTER")     ---- 添加物品到目标标签
+CustomAddRecipe2(
+    "hoshino_item_grass_grenade",            --  --  inst.prefab  实体名字
+    { Ingredient("cutgrass", 10),Ingredient("nitre", 2),Ingredient("flint", 5) }, 
+    TECH.NONE, --科学一本 
+    {
+        -- nounlock=true,
+        no_deconstruction=false,                --属性：不可拆解，为false则为可拆解
+        builder_tag = "hoshino",
+        atlas = "images/inventoryimages/hoshino_item_grass_grenade.xml",
+        image = "hoshino_item_grass_grenade.tex",
+        numtogive = 5,
+    },
+    {"CHARACTER",}
+)
+RemoveRecipeFromFilter("hoshino_item_grass_grenade","MODS")

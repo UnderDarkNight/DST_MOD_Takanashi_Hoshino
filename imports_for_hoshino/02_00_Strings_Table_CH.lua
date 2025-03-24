@@ -295,6 +295,11 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
                 ["inspect_str"] = "我要把这枚莲花纹章，盖在你的脸上！",
                 ["recipe_desc"] = "我要把这枚莲花纹章，盖在你的脸上！",
             },
+            ["hoshino_item_grass_grenade"] = {
+                ["name"] = "干草手雷",
+                ["inspect_str"] = "干草手雷",
+                ["recipe_desc"] = "干草手雷",
+            },
         --------------------------------------------------------------------
         --- 03_special_equipment
             ["hoshino_equipment_excample_shoes"] = {

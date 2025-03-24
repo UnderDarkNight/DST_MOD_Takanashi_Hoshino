@@ -67,6 +67,7 @@ local files_name = {
 		"hoshino_weapon_soul_cleaving_tang_saber",						--- 灵斩刀
 		"hoshino_equipment_worm_core",									--- 蠕虫之口
 		"hoshino_weapon_pepe_hammer",									--- 时光震荡
+		"hoshino_item_grass_grenade",									--- 干草手雷
 	---------------------------------------------------------------------------------------
 	-- 03_special_equipment
 		"hoshino_special_equipment_shoes_clear",								--- 清除鞋子
