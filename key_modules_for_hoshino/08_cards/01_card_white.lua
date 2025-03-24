@@ -575,11 +575,11 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:Add_Halo_Radius(0.1)
+                inst.components.hoshino_com_debuff:Add_Halo_Radius(0.5)
                 inst:PushEvent("hoshino_event.halo_refresh")
             end,
             text = function(inst)
-                return "【电灯泡】你的光环发光半径+0.1（发光范围叠加）"
+                return "【电灯泡】你的光环发光半径+0.5（发光范围叠加）"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -785,7 +785,7 @@ local cards = {
                 end
             end,
             text = function(inst)
-                return "【活力迸发】\n回复所有三维并获得buff\n攻击+50%，此buff持续5min。"
+                return " \n【活力迸发】\n回复所有三维并获得buff\n攻击+50%，此buff持续5min。"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

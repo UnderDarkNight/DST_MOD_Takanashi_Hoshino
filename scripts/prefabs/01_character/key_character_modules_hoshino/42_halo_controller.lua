@@ -28,7 +28,7 @@ return function(inst)
         local light_radius = 1 + get_halo_light_radius()
         print("星野光环半径：",light_radius)
         light_fx.Light:SetRadius(light_radius)
-        light_fx.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
+        light_fx.Light:SetColour(240 / 255, 187 / 255, 203 / 255)
 
         -- if inst.__light_test then
         --     inst.__light_test(light_fx)
