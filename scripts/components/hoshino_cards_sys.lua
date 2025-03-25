@@ -255,7 +255,7 @@ nil,
 -- 概率池修改
     function hoshino_cards_sys:Card_Pool_Delata(index,value)
         if self.CardPools[tostring(index)] then
-            self.CardPools[index] = matth.max(self.CardPools[index] + value,0)
+            self.CardPools[index] = math.max(self.CardPools[index] + value,0)
         end
     end
     function hoshino_cards_sys:Card_Pool_Set(index,value)
