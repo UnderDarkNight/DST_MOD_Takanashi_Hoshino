@@ -21,6 +21,7 @@
 ---
     local function StartFxTask(inst,player)
         if inst.fx_task then
+            inst.timer = REMAIN_TIME
             return
         end
         inst.timer = REMAIN_TIME
@@ -88,7 +89,6 @@
 ---
     local function ExtendDebuff(inst)
         inst.components.hoshino_data:Add("level",1)
-        inst.timer = REMAIN_TIME
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 local function fn()
