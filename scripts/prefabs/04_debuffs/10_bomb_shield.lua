@@ -32,7 +32,7 @@
                 SpawnPrefab("hoshino_sfx_explode"):PushEvent("Set",{
                     target = tempMonster,
                 })
-                tempMonster.components.health:DoDelta(-666)
+                tempMonster.components.health:DoDelta(-666,nil,nil,nil,nil,true)
             end
         end
         Active_Sheild_Fx(player,inst)
