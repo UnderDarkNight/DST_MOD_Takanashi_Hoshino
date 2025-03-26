@@ -24,8 +24,9 @@
     local function do_aoe(inst,attacker)
         local x,y,z = inst.Transform:GetWorldPosition()
         -- SpawnPrefab("hoshino_item_grass_grenade_fx"):PushEvent("Set",{pt = Vector3(x,0,z)})
+        SpawnPrefab("bomb_lunarplant_explode_fx").Transform:SetPosition(x,0,z)
         local fx_points = {}
-        table.insert(fx_points,Vector3(x,0,z))
+        -- table.insert(fx_points,Vector3(x,0,z))
         local ents = TheSim:FindEntities(x,0,z,DAMAGE_RADIUS,BOUNCE_MUST_TAGS,BOUNCE_NO_TAGS)
         for k,temp_monster in pairs(ents) do
             if temp_monster.components.combat then

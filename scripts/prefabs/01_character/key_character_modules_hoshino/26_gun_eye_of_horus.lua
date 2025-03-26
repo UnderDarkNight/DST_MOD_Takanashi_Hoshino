@@ -100,7 +100,7 @@ return function(inst)
             local mult = inst.components.combat.externaldamagemultipliers:Get() -- 伤害倍增器。
             local real_damage = value*mult
             local monster_current_health = target.components.health.currenthealth
-            target.components.health:DoDelta(-real_damage,nil, nil, nil, nil, true)
+            inst.components.hoshino_com_real_damage:DoRealDamage(target,real_damage)
             if real_damage >= monster_current_health then
                 inst:PushEvent("hoshino_event.eye_of_horus_real_damage_kill_monster",{target=target})
             end

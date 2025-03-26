@@ -280,20 +280,20 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 13、【白】【节约风气】【使用专属武器「荷鲁斯之眼（枪）」的时候，有10%概率不消耗耐久，最高100%概率】【满概率后从卡池移除】
-        ["the_eye_of_horus_finiteuses_down_block"] = {
-            back = "card_white",
-            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
-            test = function(inst)
-                return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 1
-            end,
-            fn = function(inst)
-                inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.1)
-            end,
-            text = function(inst)
-                return "【节约风气】 使用荷鲁斯之眼时有10%的概率不消耗耐久"
-            end,
-        },
+    -- --- 13、【白】【节约风气】【使用专属武器「荷鲁斯之眼（枪）」的时候，有10%概率不消耗耐久，最高100%概率】【满概率后从卡池移除】
+    --     ["the_eye_of_horus_finiteuses_down_block"] = {
+    --         back = "card_white",
+    --         front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+    --         test = function(inst)
+    --             return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 1
+    --         end,
+    --         fn = function(inst)
+    --             inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.1)
+    --         end,
+    --         text = function(inst)
+    --             return "【节约风气】 使用荷鲁斯之眼时有10%的概率不消耗耐久"
+    --         end,
+    --     },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 14、【白】【白日梦】【选择之后传送到一个位置并开始睡觉，每一秒获得9点「信用点」，直到醒来】
         ["sleep_and_coins"] = {
@@ -437,20 +437,20 @@ local cards = {
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --- 20、【白】【汲取】【从食物获取的「正向」三维x2.5的同时，增加厨子的挑食机制】【从卡池移除】
-        ["warly_eater_modules_unlock"] = {
-            back = "card_white",
-            front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
-            test = function(inst)
-                return inst.components.hoshino_data:Get("Player_Unlocked_Warly_Eater_Modules") ~= true
-            end,
-            fn = function(inst)
-                inst:PushEvent("player_unlocked_warly_eater_modules")
-            end,
-            text = function(inst)
-                return "【汲取】\n从食物获取的「正向」三维x2.5的同时，增加厨子的挑食机制"
-            end,
-        },
+    -- --- 20、【白】【汲取】【从食物获取的「正向」三维x2.5的同时，增加厨子的挑食机制】【从卡池移除】
+    --     ["warly_eater_modules_unlock"] = {
+    --         back = "card_white",
+    --         front = {atlas = "images/inspect_pad/page_level_up.xml" ,image = "card_white.tex"},
+    --         test = function(inst)
+    --             return inst.components.hoshino_data:Get("Player_Unlocked_Warly_Eater_Modules") ~= true
+    --         end,
+    --         fn = function(inst)
+    --             inst:PushEvent("player_unlocked_warly_eater_modules")
+    --         end,
+    --         text = function(inst)
+    --             return "【汲取】\n从食物获取的「正向」三维x2.5的同时，增加厨子的挑食机制"
+    --         end,
+    --     },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --- 21、【白】【巧匠】【每次制作物品的时候，有1%概率返还制作材料，最高50%】【满概率后从卡池移除】
         ["probability_of_returning_full_recipe"] = {

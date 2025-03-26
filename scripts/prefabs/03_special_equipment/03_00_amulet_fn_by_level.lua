@@ -274,7 +274,7 @@ return function(inst)
                                             -- inst.components.wateryprotection:SpreadProtection(temp_plant)
                                             if temp_plant and temp_plant:IsValid() then
                                                 pcall(inst.components.wateryprotection.SpreadProtection,inst.components.wateryprotection,temp_plant)
-                                                temp_plant.__hoshino_t7_barren_task = nil                                            
+                                                -- temp_plant.__hoshino_t7_barren_task = nil
                                                 SpawnPrefab("glass_fx").Transform:SetPosition(temp_plant.Transform:GetWorldPosition())
                                             end
                                         end)

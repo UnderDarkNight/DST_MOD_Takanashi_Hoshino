@@ -521,3 +521,22 @@ CustomAddRecipe2(
     {"CHARACTER",}
 )
 RemoveRecipeFromFilter("hoshino_item_grass_grenade","MODS")
+--------------------------------------------------------------------------------------------------------------------------------------------
+---- 反熵水晶殖轮
+--------------------------------------------------------------------------------------------------------------------------------------------
+-- AddRecipeToFilter("hoshino_item_anti_entropy_crystal_wheel","CHARACTER")     ---- 添加物品到目标标签
+CustomAddRecipe2(
+    "hoshino_item_anti_entropy_crystal_wheel",            --  --  inst.prefab  实体名字
+    { Ingredient("hoshino_item_yi", 1),Ingredient("moonglass", 4),Ingredient("slurtleslime", 3) }, 
+    TECH.NONE, --科学一本 
+    {
+        -- nounlock=true,
+        no_deconstruction=false,                --属性：不可拆解，为false则为可拆解
+        builder_tag = "hoshino",
+        atlas = "images/inventoryimages/hoshino_item_anti_entropy_crystal_wheel.xml",
+        image = "hoshino_item_anti_entropy_crystal_wheel.tex",
+        numtogive = 5,
+    },
+    {"CHARACTER",}
+)
+RemoveRecipeFromFilter("hoshino_item_anti_entropy_crystal_wheel","MODS")
