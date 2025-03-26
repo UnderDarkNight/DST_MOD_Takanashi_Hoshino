@@ -20,3 +20,6 @@ modimport("key_modules_for_hoshino/03_player/06_white_drone_leader.lua")
 
 modimport("key_modules_for_hoshino/03_player/07_player_debuffalbe_death_bug_fix.lua") 
 --- debuffable 组件 处理 玩家死亡 移除debuff 的bug
+
+modimport("key_modules_for_hoshino/03_player/08_real_damage.lua") 
+--- 真伤模块

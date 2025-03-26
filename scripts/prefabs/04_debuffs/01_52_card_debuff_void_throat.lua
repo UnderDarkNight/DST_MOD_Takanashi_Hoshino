@@ -21,6 +21,7 @@
 ---
     local function StartFxTask(inst,player)
         if inst.fx_task then
+            inst.timer = REMAIN_TIME
             return
         end
         inst.timer = REMAIN_TIME
@@ -49,7 +50,7 @@
                 for k, temp_monster in pairs(ents) do
                     if temp_monster and temp_monster:IsValid() and temp_monster.components.health and not temp_monster.components.health:IsDead() then
                         local current_health = temp_monster.components.health.currenthealth
-                        temp_monster.components.health:DoDelta(-damage)
+                        player.components.hoshino_com_real_damage:DoRealDamage(temp_monster,damage)
                         local new_health_value = temp_monster.components.health.currenthealth
                             if current_health > 0 and new_health_value <= 0 and tested_monsters[temp_monster] == nil then
                                 tested_monsters[temp_monster] = true

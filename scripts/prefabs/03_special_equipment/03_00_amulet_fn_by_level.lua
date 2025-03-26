@@ -262,19 +262,20 @@ return function(inst)
                 inst.components.wateryprotection:AddIgnoreTag("companion")
             --------------------------------------------------------------------------
             local area_fertilize_task = nil
+            local plant_target_lockers = {}
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
                 if area_fertilize_task == nil then
                     area_fertilize_task = inst:DoPeriodicTask(5,function()
                                 local x,y,z = owner.Transform:GetWorldPosition()
                                 local ents = TheSim:FindEntities(x,y,z,30,nil,{"burnt"})
                                 for i, temp_plant in pairs(ents) do
-                                    if temp_plant and temp_plant:IsValid() and temp_plant.components.pickable and temp_plant.components.pickable:IsBarren() and temp_plant.__hoshino_t7_barren_task == nil then
-                                        temp_plant.__hoshino_t7_barren_task = true
+                                    if temp_plant and temp_plant:IsValid() and plant_target_lockers[temp_plant] == nil and temp_plant.components.pickable and temp_plant.components.pickable:IsBarren() then
+                                        plant_target_lockers[temp_plant] = temp_plant:DoTaskInTime(30,function()
+                                            plant_target_lockers[temp_plant] = nil
+                                        end)
                                         inst:DoTaskInTime(math.random(0,50)/10,function()
-                                            -- inst.components.wateryprotection:SpreadProtection(temp_plant)
                                             if temp_plant and temp_plant:IsValid() then
                                                 pcall(inst.components.wateryprotection.SpreadProtection,inst.components.wateryprotection,temp_plant)
-                                                temp_plant.__hoshino_t7_barren_task = nil                                            
                                                 SpawnPrefab("glass_fx").Transform:SetPosition(temp_plant.Transform:GetWorldPosition())
                                             end
                                         end)

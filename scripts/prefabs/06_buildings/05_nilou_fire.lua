@@ -72,31 +72,39 @@
 --- combat
     local BOUNCE_MUST_TAGS = { "_combat" }
     local BOUNCE_NO_TAGS = { "INLIMBO", "wall", "notarget", "player", "companion", "flight", "invisible", "noattack", "hiding" }
-    local function combat_attacked_event(inst,_table)
-        local attacker = _table and _table.attacker
-        local userid = attacker and attacker.userid
-        if not (userid and inst.components.hoshino_data:Get("userid") == userid  or TUNING.HOSHINO_DEBUGGING_MODE ) then
-            return
-        end
-        -- print("触发了尼卢火")
+    local function GetPlayer(inst)  --- 范围内寻找玩家
         local x,y,z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x,y,z,15,BOUNCE_MUST_TAGS,BOUNCE_NO_TAGS)
+        local ents = TheSim:FindEntities(x, 0,z ,15,{"player"})
+        for k, v in pairs(ents) do
+            if v and v:IsValid() and ( v.userid == inst.components.hoshino_data:Get("userid") or TUNING.HOSHINO_DEBUGGING_MODE ) then
+                return v
+            end
+        end
+        return nil
+    end
+    local function player_on_hit_event(player) -- 玩家攻击事件
+        local x,y,z = player.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x,y,z,7,BOUNCE_MUST_TAGS,BOUNCE_NO_TAGS)
         for k, temp_monster in pairs(ents) do
             if temp_monster and temp_monster:IsValid()
                 and temp_monster.components.health and not temp_monster.components.health then
                 local damage = 150
-                temp_monster.components.health:DoDelta(-damage)
-                temp_monster:PushEvent("attacked", {attacker = attacker, damage = damage})
+                player.components.hoshino_com_real_damage:DoRealDamage(temp_monster,damage)
+                temp_monster:PushEvent("attacked", {attacker = player, damage = damage})
             end
         end
     end
-    local function combat_install(inst)
-        inst:AddComponent("health")
-        inst:AddComponent("combat")
-        inst.components.health.SetVal = function(self,...)
-            self.currenthealth = self.maxhealth
+    local function search_player_task(inst) --- 周期性扫描
+        local player = GetPlayer(inst)
+        if player and not inst.linked_player then --- 玩家入圈，但是没安装事件
+            inst:ListenForEvent("onhitother",player_on_hit_event,player)
+        elseif inst.linked_player and player == nil then
+            inst:RemoveEventCallback("onhitother",player_on_hit_event,player)
+            inst.linked_player = nil
         end
-        inst:ListenForEvent("attacked",combat_attacked_event)
+    end
+    local function combat_install(inst)
+        inst:DoPeriodicTask(1,search_player_task)
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- 扫描事件，杀掉目标
