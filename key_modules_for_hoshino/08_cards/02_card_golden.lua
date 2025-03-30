@@ -725,7 +725,8 @@ local cards = {
                 inst.components.health:DeltaPenalty(0.5)
                 local max_health_2 = inst.components.health:GetMaxWithPenalty()
                 local delta_health = math.abs(max_health_1 - max_health_2)
-                local num = math.max( math.floor(delta_health / 5) , 1 )
+                -- local num = math.max( math.floor(delta_health / 5) , 1 )
+                local num = max_health_1 / 10
                 for i = 1, num, 1 do
                     inst:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
                 end

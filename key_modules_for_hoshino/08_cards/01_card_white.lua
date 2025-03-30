@@ -429,8 +429,8 @@ local cards = {
                 return true
             end,
             fn = function(inst)
-                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_colourful",0.03)
-                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_golden",0.2)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_colourful",0.01)
+                inst.components.hoshino_cards_sys:Card_Pool_Delata("card_golden",0.3)
             end,
             text = function(inst)
                 return "【好运】 金卡和彩卡的出现权重很~大~幅~度~上升"
