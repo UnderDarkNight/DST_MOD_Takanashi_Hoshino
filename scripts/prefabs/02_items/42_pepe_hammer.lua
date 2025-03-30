@@ -57,11 +57,14 @@
         local aoe_radius = BASE_AOE_RADIUS + GetHitLevel(inst)*AOE_RADIUS_DELTA_PER_LEVEL
         local ents = TheSim:FindEntities(x,0, z,4, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS)
         for i, temp_target in ipairs(ents) do
-            if temp_target ~= target
-                and temp_target.components.combat
+            if temp_target.components.combat
                 and temp_target.components.health and not temp_target.components.health:IsDead() then
+                    local tx,ty,tz = temp_target.Transform:GetWorldPosition()
+                    SpawnPrefab("fx_hoshino_hammer_hit_ground").Transform:SetPosition(tx,0,tz)
+                    SpawnPrefab("fx_hoshino_hammer_hit").Transform:SetPosition(tx,0,tz)
                     local damage,spdamage = inst.components.weapon:GetDamage(attacker,target)
-                    temp_target.components.combat:GetAttacked(attacker,damage,inst,nil,spdamage)
+                    -- temp_target.components.combat:GetAttacked(attacker,damage,inst,nil,spdamage)
+                    attacker.components.hoshino_com_real_damage:DoRealDamage(temp_target,damage)
                 end
         end
     end
@@ -166,6 +169,11 @@
             --- 初始化 tag
                 inst:RemoveTag("HAMMER_tool")
                 inst:RemoveTag("DIG_tool")
+            -----------------------------------------------------------------------------
+            --- 
+                if inst.components.hoshino_data:Get("pick_helper") then
+                    inst:AddTag("pick_helper")
+                end
             -----------------------------------------------------------------------------
         end)
         ---- 外部调用用来解锁特定功能
@@ -279,6 +287,19 @@
                 end,
             },            
         -------------------------------------------------------------------
+        --- hoshino_item_blue_schist
+            ["hoshino_item_blue_schist"] = {
+                test = function(inst,item,doer,right_click)
+                    return not inst:HasTag("pick_helper")
+                end,
+                on_accept = function(inst,item,doer)
+                    item.components.stackable:Get():Remove()
+                    inst.components.hoshino_data:Set("pick_helper",true)
+                    inst:PushEvent("init_tool_types")
+                    return true
+                end,
+            },            
+        -------------------------------------------------------------------
     }    
     local function acceptable_test_fn(inst,item,doer,right_click)
         if item and item.prefab and _on_accept_fns[item.prefab] then
@@ -316,7 +337,9 @@
         if inst:HasTag("HAMMER_tool") then
             inst:RemoveTag("HAMMER_tool")
             inst:RemoveTag("DIG_tool")
+            doer.components.talker:Say("关闭锤子模式")
         else
+            doer.components.talker:Say("开启锤子模式")
             inst:AddTag("HAMMER_tool")
             if inst.components.hoshino_data:Get("goldenshovel") then
                 inst:AddTag("DIG_tool")                
@@ -336,6 +359,9 @@
 --- 通用施法组件（点、目标）
     local function custom_spell_caster_test_fn(inst,doer,target,pt,right_click)
         if not right_click then --- 施法用右键
+            return false
+        end
+        if not inst:HasTag("pick_helper") then
             return false
         end
         if inst:HasTag("HAMMER_tool") then  --- 锤子功能激活的时候，不允许施法
