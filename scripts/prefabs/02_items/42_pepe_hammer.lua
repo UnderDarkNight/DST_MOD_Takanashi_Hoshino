@@ -64,7 +64,9 @@
                     SpawnPrefab("fx_hoshino_hammer_hit").Transform:SetPosition(tx,0,tz)
                     local damage,spdamage = inst.components.weapon:GetDamage(attacker,target)
                     -- temp_target.components.combat:GetAttacked(attacker,damage,inst,nil,spdamage)
-                    attacker.components.hoshino_com_real_damage:DoRealDamage(temp_target,damage)
+                     temp_target.components.health:SetVal(temp_target.components.health.currenthealth - (damage / 2))
+                    temp_target.components.combat:SuggestTarget(attacker)
+                    temp_target:PushEvent("attacked", { attacker = attacker, damage = damage / 2 }) --减半的伤害推送给事件
                 end
         end
     end
@@ -504,9 +506,9 @@
             inst.components.equippable.walkspeedmult = 1
         ----------------------------------------------------------------------------------------------------------
         --- 钓鱼功能
-            -- inst:AddComponent("fishingrod")                         --钓鱼功能
-            -- inst.components.fishingrod:SetWaitTimes(4, 16)           
-            -- inst.components.fishingrod:SetStrainTimes(60, 60)       --钓鱼功能到这里结束
+            inst:AddComponent("fishingrod")                         --钓鱼功能
+            inst.components.fishingrod:SetWaitTimes(4, 16)           
+            inst.components.fishingrod:SetStrainTimes(60, 60)       --钓鱼功能到这里结束
         ----------------------------------------------------------------------------------------------------------
         return inst
     end
