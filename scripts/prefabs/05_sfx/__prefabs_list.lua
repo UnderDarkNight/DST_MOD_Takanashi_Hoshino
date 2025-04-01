@@ -37,7 +37,8 @@ local prefabs_name_list = {
     "07_wave",                                --- 浪花圈圈 特效
     "08_victorian_fx",                          --- 粒子特效 特效
     --"09_pepe_hammer_fx"                        ---佩佩锤子 特效
-    "10_colorful_sky_door"                      --- 彩色天空门
+    "10_colorful_sky_door",                      --- 彩色天空门
+    "11_black_sheild",                      --- 
 
 }
 
