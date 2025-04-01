@@ -83,37 +83,12 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        -- ThePlayer:AddDebuff("hoshino_card_debuff_black_beggar","hoshino_card_debuff_black_beggar")
-        -- print(ThePlayer:GetDebuff("hoshino_card_debuff_black_beggar"))
-
-        -- local inst = TheSim:FindFirstEntityWithTag("hoshino_building_nilou_fire")
-        -- inst.Light:SetFalloff(0.2)
-        -- inst.Light:SetIntensity(.8)
-        -- inst.Light:SetRadius(3)
-        -- inst.Light:SetColour(223 / 255, 208 / 255, 69 / 255)
-
-        -- x,y,z = TheWorld.Map:GetTileCenterPoint(x,y,z)
-        -- local node_index = TheWorld.Map:GetNodeIdAtPoint(x, 0, z) or 0                
-        -- local node = TheWorld.topology.nodes[node_index] or {}
-        -- local tx, ty = TheWorld.Map:GetTileXYAtPoint(x,y,z)
-        -- local current_tile = TheWorld.Map:GetTileAtPoint(x,y,z) -- 地皮
-        -- print("node_index",node_index,tx,ty,current_tile)
-        -- for k, v in pairs(node.tags or {}) do
-        --     print(k,v)
-        -- end
-        TUNING.__test_fn = function(temp_monster,attacker,DAMAGE,inst)
-                -- -- temp_monster.components.combat:GetAttacked(attacker,DAMAGE,inst)
-                -- MakeHauntablePanic(temp_monster)
-                -- -- MakeHauntablePanicAndIgnite(temp_monster)
-                -- -- print(temp_monster)
-                -- if temp_monster.components.hauntable then
-                --     temp_monster.components.hauntable:Panic(10)                    
-                -- end
-
-                require "behaviours/panic"
-                Panic(temp_monster)
-                
+        if  ThePlayer.test_fx then
+            ThePlayer.test_fx:Remove()
         end
+
+        ThePlayer.test_fx = ThePlayer:SpawnChild("hoshino_sfx_black_sheild")
+        ThePlayer.test_fx.AnimState:SetMultColour(1,1,1,0.8)
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

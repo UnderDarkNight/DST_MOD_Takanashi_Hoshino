@@ -64,7 +64,8 @@ local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿�
     -----------------------------------------------------
     ---
         if inst.__sheild_fx == nil then
-            inst.__sheild_fx = player:SpawnChild("hoshino_sfx_ruiins_sheild")
+            -- inst.__sheild_fx = player:SpawnChild("hoshino_sfx_ruiins_sheild")
+            inst.__sheild_fx = player:SpawnChild("hoshino_sfx_black_sheild")
         end
         inst:ListenForEvent("onremove",function()
             inst.__sheild_fx:PushEvent("close")
