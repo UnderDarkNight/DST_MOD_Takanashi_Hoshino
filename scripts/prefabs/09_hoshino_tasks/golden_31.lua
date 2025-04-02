@@ -153,10 +153,10 @@
                 end
 
                 local x,y,z = owner.Transform:GetWorldPosition()
-                local ents = TheSim:FindEntities(x,0,z,10,{"ghost"})
+                local ents = TheSim:FindEntities(x,0,z,10,nil,nil,{"ghost","ghostkid","playerghost"})
                 local near_ghost_flag = false
                 for k, monster in pairs(ents) do
-                    if monster and monster:IsValid() and monster.prefab == "ghost" then
+                    if monster and monster:IsValid() then
                         near_ghost_flag = true
                         break
                     end
