@@ -65,6 +65,7 @@
                     local damage,spdamage = inst.components.weapon:GetDamage(attacker,target)
                     -- temp_target.components.combat:GetAttacked(attacker,damage,inst,nil,spdamage)
                      temp_target.components.health:SetVal(temp_target.components.health.currenthealth - (damage / 2))
+                     temp_target.components.health:DoDelta(0)
                     temp_target.components.combat:SuggestTarget(attacker)
                     temp_target:PushEvent("attacked", { attacker = attacker, damage = damage / 2 }) --减半的伤害推送给事件
                 end
