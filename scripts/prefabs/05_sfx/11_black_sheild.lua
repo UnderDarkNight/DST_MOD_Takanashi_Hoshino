@@ -68,7 +68,7 @@ local function fn()
     inst.AnimState:SetBank("hoshino_backguard")
     inst.AnimState:SetBuild("hoshino_backguard")
     inst.AnimState:PlayAnimation("idle",true)
-    inst.AnimState:SetMultColour(1,1,1,0.8)
+    inst.AnimState:SetMultColour(1,1,1,1)
 
     inst.AnimState:SetFinalOffset(1)
 

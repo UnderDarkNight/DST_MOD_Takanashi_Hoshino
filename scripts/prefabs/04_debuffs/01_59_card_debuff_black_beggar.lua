@@ -45,8 +45,8 @@
                 end
             end
             if #actived_cards == 0 then
+                inst:PushEvent("start_reward_full",player)
                 print("【黑暗乞丐】 移除卡牌：没有可移除的诅咒卡牌")
-                player.components.talker:Say("没有可移除的诅咒卡牌")
                 return
             end
             local ret_remove_card_name = actived_cards[math.random(1,#actived_cards)]

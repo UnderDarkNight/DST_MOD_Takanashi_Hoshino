@@ -163,8 +163,10 @@ return function(inst)
     if not TheWorld.ismastersim then
         return
     end
-    inst:DoTaskInTime(0,function()
-        Hook_Player_AnimState(inst)
-        hat_body_hide_api(inst)
+    inst:DoTaskInTime(1,function()
+        if inst and inst:IsValid() then
+            Hook_Player_AnimState(inst)
+            hat_body_hide_api(inst)
+        end
     end)
 end
