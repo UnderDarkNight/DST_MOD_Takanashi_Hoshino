@@ -55,7 +55,7 @@
     local BOUNCE_NO_TAGS = { "INLIMBO", "wall", "notarget", "player", "companion", "flight", "invisible", "noattack", "hiding" }
     local function do_aoe(inst,attacker,target,x,z)
         local aoe_radius = BASE_AOE_RADIUS + GetHitLevel(inst)*AOE_RADIUS_DELTA_PER_LEVEL
-        local ents = TheSim:FindEntities(x,0, z,4, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS)
+        local ents = TheSim:FindEntities(x,0, z,aoe_radius, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS)
         for i, temp_target in ipairs(ents) do
             if temp_target.components.combat
                 and temp_target.components.health and not temp_target.components.health:IsDead() then
