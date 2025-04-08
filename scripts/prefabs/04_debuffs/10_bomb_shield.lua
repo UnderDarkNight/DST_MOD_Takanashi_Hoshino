@@ -15,11 +15,13 @@
             target = player,
             type = 2,
             scale = 5,
+            sound = "hoshino_sfx_blackguard/hoshino_sfx_blackguard/hoshino_sfx_blackguard_hit",
         })
         SpawnPrefab("hoshino_fx_blackguard_poof"):PushEvent("Set",{
             target = player,
             type = 3,
             scale = 5,
+            sound = "hoshino_sfx_blackguard/hoshino_sfx_blackguard/hoshino_sfx_blackguard_hit",
         })
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -33,12 +35,10 @@
                     target = tempMonster,
                     type = 1,
                     scale = 5,
+                    sound = "hoshino_sfx_blackguard/hoshino_sfx_blackguard/hoshino_sfx_blackguard_hit",
                 })
                 -- tempMonster.components.health:DoDelta(-666)
                 player.components.hoshino_com_real_damage:DoRealDamage(tempMonster,666)
-                if tempMonster.SoundEmitter then
-                    tempMonster.SoundEmitter:PlayingSound("hoshino_sfx_blackguard/hoshino_sfx_blackguard/hoshino_sfx_blackguard_hit")
-                end
             end
         end
         Active_Sheild_Fx(player,inst)
