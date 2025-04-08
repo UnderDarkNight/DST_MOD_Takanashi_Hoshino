@@ -36,6 +36,8 @@
         inst.AnimState:SetBuild("hoshino_building_millennium_tactics_delegate_terminal")
         inst.AnimState:PlayAnimation("idle")
 
+        inst:AddTag("hoshino_building_millennium_tactics_delegate_terminal")
+        
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
@@ -49,7 +51,7 @@
         -- inst.components.prototyper.onturnon = prototyper_onturnon
         -- inst.components.prototyper.onturnoff = prototyper_onturnoff
         -- inst.components.prototyper.onactivate = prototyper_onactivate
-        inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES[string.upper("millennium_tactics_delegate_terminal")]
+        inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES[string.upper("hoshino_building_millennium_tactics_delegate_terminal")]
         inst:ListenForEvent("onbuilt",on_build_event)
 
         return inst

@@ -1,20 +1,7 @@
 
 
-local function GetTech()
-    return TECH[string.upper("millennium_tactics_delegate_terminal_one")]
-end
-local function GetRecipeFilter()
-    return {string.upper("millennium_tactics_delegate_terminal")}
-end
-
 local function CustomAddRecipe2(prefab,_Ingredients,tech,data,recipe_filters)
-    data.nounlock = true            -- 去自制科技树必须
-    data.no_deconstruction = true   -- 去自制科技树必须
-    data.station_tag = nil
-    tech = GetTech()
-    _Ingredients = _Ingredients or {}
-    recipe_filters = GetRecipeFilter()
-    AddRecipe2(prefab,_Ingredients,tech,data,recipe_filters)
+    TUNING.HOSHINO_TECH_ADD_RECIPE(prefab,_Ingredients,tech,data,recipe_filters)
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -489,7 +476,7 @@ RemoveRecipeFromFilter("hoshino_weapon_pepe_hammer","MODS")
 -- AddRecipeToFilter("hoshino_building_nilou_fire","CHARACTER")     ---- 添加物品到目标标签
 CustomAddRecipe2(
     "hoshino_building_nilou_fire",            --  --  inst.prefab  实体名字
-    {  }, 
+    { Ingredient("opalstaff", 3),Ingredient("hoshino_item_yi", 1), }, 
     TECH.NONE, --科学一本 
     {
         -- nounlock=true,

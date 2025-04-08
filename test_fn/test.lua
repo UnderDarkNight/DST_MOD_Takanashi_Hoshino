@@ -83,12 +83,14 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        if  ThePlayer.test_fx then
-            ThePlayer.test_fx:Remove()
-        end
+        for index, data in pairs(AllRecipes) do
+            print("++++++++++++++++++")
+            for k, v in pairs(data.level) do
+                print(k,v)
+            end
+            print("++++++++++++++++++")
 
-        ThePlayer.test_fx = ThePlayer:SpawnChild("hoshino_sfx_black_sheild")
-        ThePlayer.test_fx.AnimState:SetMultColour(1,1,1,0.8)
+        end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

@@ -1,18 +1,6 @@
-local function GetTech()
-    return TECH[string.upper("millennium_tactics_delegate_terminal_one")]
-end
-local function GetRecipeFilter()
-    return {string.upper("millennium_tactics_delegate_terminal")}
-end
 
 local function CustomAddRecipe2(prefab,_Ingredients,tech,data,recipe_filters)
-    data.nounlock = true            -- 去自制科技树必须
-    data.no_deconstruction = true   -- 去自制科技树必须
-    data.station_tag = nil
-    tech = GetTech()
-    _Ingredients = _Ingredients or {}
-    recipe_filters = GetRecipeFilter()
-    AddRecipe2(prefab,_Ingredients,tech,data,recipe_filters)
+    TUNING.HOSHINO_TECH_ADD_RECIPE(prefab,_Ingredients,tech,data,recipe_filters)
 end
 
 
