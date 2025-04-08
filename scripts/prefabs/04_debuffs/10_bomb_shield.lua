@@ -11,16 +11,16 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function Active_Sheild_Fx(player,inst) -- 激活护盾特效
-        -- if inst.__sheild_fx == nil then
-        --     inst.__sheild_fx = player:SpawnChild("hoshino_sfx_ruiins_sheild")
-        -- end
-        -- if inst.__sheild_fx_remove_task then
-        --     inst.__sheild_fx_remove_task:Cancel()
-        -- end
-        -- inst.__sheild_fx_remove_task = inst.__sheild_fx:DoTaskInTime(2,function()
-        --     inst.__sheild_fx:PushEvent("close")
-        --     inst.__sheild_fx_remove_task = nil
-        -- end)
+        SpawnPrefab("hoshino_fx_blackguard_poof"):PushEvent("Set",{
+            target = player,
+            type = 2,
+            scale = 5,
+        })
+        SpawnPrefab("hoshino_fx_blackguard_poof"):PushEvent("Set",{
+            target = player,
+            type = 3,
+            scale = 5,
+        })
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -29,11 +29,16 @@
         local ents = TheSim:FindEntities(x,0,z, AOE_RADIUS, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS)
         for k, tempMonster in pairs(ents) do
             if tempMonster.components.health and not tempMonster.components.health:IsDead() then
-                SpawnPrefab("hoshino_sfx_explode"):PushEvent("Set",{
+                SpawnPrefab("hoshino_fx_blackguard_poof"):PushEvent("Set",{
                     target = tempMonster,
+                    type = 1,
+                    scale = 5,
                 })
                 -- tempMonster.components.health:DoDelta(-666)
                 player.components.hoshino_com_real_damage:DoRealDamage(tempMonster,666)
+                if tempMonster.SoundEmitter then
+                    tempMonster.SoundEmitter:PlayingSound("hoshino_sfx_blackguard/hoshino_sfx_blackguard/hoshino_sfx_blackguard_hit")
+                end
             end
         end
         Active_Sheild_Fx(player,inst)

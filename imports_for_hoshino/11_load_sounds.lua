@@ -8,6 +8,7 @@ end
     local fev_sound_files = {
 
         "hoshino_sound.fev",        ---- 单纯有这个文件没用。得有对应的 fsb 文件。 fsb里面才是真正的声音。
+        "hoshino_sfx_blackguard.fev",        ---- 单纯有这个文件没用。得有对应的 fsb 文件。 fsb里面才是真正的声音。
 
         
     }
@@ -23,6 +24,7 @@ end
     local fsb_sound_files = {
 
         "hoshino_sound.fsb",    
+        "hoshino_sfx_blackguard.fsb",    
 
     }
     for k, file_name in pairs(fsb_sound_files) do

@@ -83,14 +83,13 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        for index, data in pairs(AllRecipes) do
-            print("++++++++++++++++++")
-            for k, v in pairs(data.level) do
-                print(k,v)
-            end
-            print("++++++++++++++++++")
+        ThePlayer:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
 
-        end
+        -- SpawnPrefab("hoshino_fx_blackguard_poof"):PushEvent("Set",{
+        --     target = ThePlayer,
+        --     scale = 5,
+        --     type = 3,
+        -- })
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)
