@@ -87,7 +87,7 @@
         local ents = TheSim:FindEntities(x,y,z,7,BOUNCE_MUST_TAGS,BOUNCE_NO_TAGS)
         for k, temp_monster in pairs(ents) do
             if temp_monster and temp_monster:IsValid()
-                and temp_monster.components.health and not temp_monster.components.health then
+                and temp_monster.components.health and not temp_monster.components.health:IsDead() then
                 local damage = 150
                 player.components.hoshino_com_real_damage:DoRealDamage(temp_monster,damage)
                 temp_monster:PushEvent("attacked", {attacker = player, damage = damage})
@@ -98,6 +98,7 @@
         local player = GetPlayer(inst)
         if player and not inst.linked_player then --- 玩家入圈，但是没安装事件
             inst:ListenForEvent("onhitother",player_on_hit_event,player)
+            inst.linked_player = player            
         elseif inst.linked_player and player == nil then
             inst:RemoveEventCallback("onhitother",player_on_hit_event,player)
             inst.linked_player = nil
