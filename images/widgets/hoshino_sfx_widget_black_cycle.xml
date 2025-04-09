@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="hoshino_sfx_widget_black_cycle.tex" />
+	<Elements>
+		<Element name="hoshino_sfx_widget_black_cycle.tex" u1="0.001" u2="0.608375" v2="0.999" v1="0.391625" variant="" />
+	</Elements>
+</Atlas>

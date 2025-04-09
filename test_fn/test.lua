@@ -83,12 +83,8 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        if  ThePlayer.test_fx then
-            ThePlayer.test_fx:Remove()
-        end
-
-        ThePlayer.test_fx = ThePlayer:SpawnChild("hoshino_sfx_black_sheild")
-        ThePlayer.test_fx.AnimState:SetMultColour(1,1,1,0.8)
+        ThePlayer:AddDebuff("hoshino_card_debuff_void_throat","hoshino_card_debuff_void_throat")
+        -- ThePlayer:RemoveDebuff("hoshino_card_debuff_void_throat","hoshino_card_debuff_void_throat")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

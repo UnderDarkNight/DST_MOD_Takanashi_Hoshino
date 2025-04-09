@@ -39,6 +39,8 @@ local prefabs_name_list = {
     --"09_pepe_hammer_fx"                        ---佩佩锤子 特效
     "10_colorful_sky_door",                      --- 彩色天空门
     "11_black_sheild",                      --- 
+    "12_blackguard_poof",                      --- 
+    "13_widget_black_cycle",                      --- 
 
 }
 
