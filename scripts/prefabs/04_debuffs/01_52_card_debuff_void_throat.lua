@@ -20,48 +20,66 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local function StartFxTask(inst,player)
-        if inst.fx_task then
+        if inst.fx_task or inst.fx_starting then
             inst.timer = REMAIN_TIME
             return
         end
         inst.timer = REMAIN_TIME
-        local fx = player:SpawnChild("hoshino_sfx_dotted_circle")
+        -- local fx = player:SpawnChild("hoshino_sfx_dotted_circle")
+        -- fx:PushEvent("Set",{
+        --     pt = Vector3(0,0,0),
+        --     radius = SEARCH_RADIUS,
+        --     color = Vector3(50/255,50/255,50/255),
+        -- })
+        local fx = SpawnPrefab("hoshino_fx_mawofthevoid")
         fx:PushEvent("Set",{
-            pt = Vector3(0,0,0),
-            radius = SEARCH_RADIUS,
-            color = Vector3(50/255,50/255,50/255),
+            target = player, -- 绑定给玩家
+            scale = 3,  -- 尺寸缩放
+            height = 2, --- 高度
         })
-        local tested_monsters = {}
-        inst.fx_task = inst:DoPeriodicTask(DAMAGE_UPDATE_TIME,function()
-            ----------------------------------------------------------------------------------------------------------
-            --- 计时器
-                inst.timer = inst.timer - DAMAGE_UPDATE_TIME
-                if inst.timer <= 0 then
-                    inst.fx_task:Cancel()
-                    inst.fx_task = nil
-                    fx:Remove()
-                end
-            ----------------------------------------------------------------------------------------------------------
-            --- 造成伤害
-                local level = inst.components.hoshino_data:Get("level") or 1
-                local damage = DAMAGE_PER_LEVEL * level
-                local x,y,z = player.Transform:GetWorldPosition()
-                local ents = TheSim:FindEntities(x,0,z,SEARCH_RADIUS,BOUNCE_MUST_TAGS,BOUNCE_NO_TAGS)
-                for k, temp_monster in pairs(ents) do
-                    if temp_monster and temp_monster:IsValid() and temp_monster.components.health and not temp_monster.components.health:IsDead() then
-                        local current_health = temp_monster.components.health.currenthealth
-                        player.components.hoshino_com_real_damage:DoRealDamage(temp_monster,damage)
-                        local new_health_value = temp_monster.components.health.currenthealth
-                            if current_health > 0 and new_health_value <= 0 and tested_monsters[temp_monster] == nil then
-                                tested_monsters[temp_monster] = true
-                                if math.random() <= SHIELD_PERCENT_PER_LEVEL * level then
-                                    player:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
-                                end
-                            end 
+        fx:RemoveAllEventCallbacks() -- 移除所有事件。
+        fx.AnimState:PlayAnimation("start",false)
+        inst.fx_starting = true
+        fx:ListenForEvent("animover",function()
+            fx:RemoveAllEventCallbacks() -- 移除所有事件。
+            fx.AnimState:PlayAnimation("loop",true) -- 播放动画
+            inst.fx_starting = nil
+            local tested_monsters = {}
+            inst.fx_task = inst:DoPeriodicTask(DAMAGE_UPDATE_TIME,function()
+                ----------------------------------------------------------------------------------------------------------
+                --- 计时器
+                    inst.timer = inst.timer - DAMAGE_UPDATE_TIME
+                    if inst.timer <= 0 then
+                        inst.fx_task:Cancel()
+                        inst.fx_task = nil
+                        -- fx:Remove()
+                        fx:RemoveAllEventCallbacks() -- 移除所有事件。
+                        fx.AnimState:PlayAnimation("end",false)
+                        fx:ListenForEvent("animover",fx.Remove)
                     end
-                end
-            ----------------------------------------------------------------------------------------------------------
+                ----------------------------------------------------------------------------------------------------------
+                --- 造成伤害
+                    local level = inst.components.hoshino_data:Get("level") or 1
+                    local damage = DAMAGE_PER_LEVEL * level
+                    local x,y,z = player.Transform:GetWorldPosition()
+                    local ents = TheSim:FindEntities(x,0,z,SEARCH_RADIUS,BOUNCE_MUST_TAGS,BOUNCE_NO_TAGS)
+                    for k, temp_monster in pairs(ents) do
+                        if temp_monster and temp_monster:IsValid() and temp_monster.components.health and not temp_monster.components.health:IsDead() then
+                            local current_health = temp_monster.components.health.currenthealth
+                            player.components.hoshino_com_real_damage:DoRealDamage(temp_monster,damage)
+                            local new_health_value = temp_monster.components.health.currenthealth
+                                if current_health > 0 and new_health_value <= 0 and tested_monsters[temp_monster] == nil then
+                                    tested_monsters[temp_monster] = true
+                                    if math.random() <= SHIELD_PERCENT_PER_LEVEL * level then
+                                        player:AddDebuff("hoshino_debuff_bomb_shield","hoshino_debuff_bomb_shield")
+                                    end
+                                end 
+                        end
+                    end
+                ----------------------------------------------------------------------------------------------------------
+            end)
         end)
+
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
@@ -85,11 +103,11 @@
             end,player)
         -----------------------------------------------------
         --- 给玩家挂特效
-            local fx = SpawnPrefab("hoshino_fx_mawofthevoid")
-            fx:PushEvent("Set",{target = player,scale = 3})
-            inst:ListenForEvent("onremove",function()
-                fx:Remove()
-            end)
+            -- local fx = SpawnPrefab("hoshino_fx_mawofthevoid")
+            -- fx:PushEvent("Set",{target = player,scale = 3})
+            -- inst:ListenForEvent("onremove",function()
+            --     fx:Remove()
+            -- end)
         -----------------------------------------------------
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
