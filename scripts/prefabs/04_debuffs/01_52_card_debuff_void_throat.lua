@@ -85,8 +85,8 @@
             end,player)
         -----------------------------------------------------
         --- 给玩家挂特效
-            local fx = SpawnPrefab("hoshino_sfx_widget_black_cycle")
-            fx:PushEvent("Set",{target = player})
+            local fx = SpawnPrefab("hoshino_fx_mawofthevoid")
+            fx:PushEvent("Set",{target = player,scale = 3})
             inst:ListenForEvent("onremove",function()
                 fx:Remove()
             end)

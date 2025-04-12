@@ -38,9 +38,10 @@ local prefabs_name_list = {
     "08_victorian_fx",                          --- 粒子特效 特效
     --"09_pepe_hammer_fx"                        ---佩佩锤子 特效
     "10_colorful_sky_door",                      --- 彩色天空门
-    "11_black_sheild",                      --- 
-    "12_blackguard_poof",                      --- 
+    "11_black_sheild",                      --- 黑色护盾
+    "12_blackguard_poof",                      --- 爆炸特效
     "13_widget_black_cycle",                      --- 
+    "14_mawofthevoid",                      --- 
 
 }
 
