@@ -119,41 +119,88 @@
             end
         --------------------------------------------------------------------------
         ----
-            local button_phone = root:AddChild(ImageButton(
-                atlas,"button_phone.tex","button_phone.tex","button_phone.tex","button_phone.tex","button_phone.tex"
-            ))
-            local button_scale = 0.8
-            button_phone:SetScale(button_scale,button_scale,button_scale)
-            button_phone:SetOnClick(function()
-                -- print("button_phone clicked")
-                -- if ThePlayer.___test_phone_fn then
-                --     ThePlayer.___test_phone_fn()
-                -- end
-                ThePlayer:PushEvent("hoshino_event.little_smart_phone_open",smart_phone_widget)
-                root.inst:PushEvent("clicked")
-            end)
+            -- local button_phone = root:AddChild(ImageButton(
+            --     atlas,"button_phone.tex","button_phone.tex","button_phone.tex","button_phone.tex","button_phone.tex"
+            -- ))
+            -- local button_scale = 0.8
+            -- button_phone:SetScale(button_scale,button_scale,button_scale)
+            -- button_phone:SetOnClick(function()
+            --     -- print("button_phone clicked")
+            --     -- if ThePlayer.___test_phone_fn then
+            --     --     ThePlayer.___test_phone_fn()
+            --     -- end
+            --     ThePlayer:PushEvent("hoshino_event.little_smart_phone_open",smart_phone_widget)
+            --     root.inst:PushEvent("clicked")
+            -- end)
         --------------------------------------------------------------------------
         --- 警示图标
-            local warnning_arrow = root:AddChild(UIAnim())
-            local arrow_anim = warnning_arrow:GetAnimState()
-            arrow_anim:SetBuild("hoshino_self_inspect_button_warning")
-            arrow_anim:SetBank("hoshino_self_inspect_button_warning")
-            arrow_anim:PlayAnimation("idle",true)
-            warnning_arrow:Hide()
-            warnning_arrow:SetClickable(false)
-            local arrow_scale = 1
-            warnning_arrow:SetScale(arrow_scale,arrow_scale,arrow_scale)
-            root.inst:ListenForEvent("clicked",function(inst)
-                warnning_arrow:Hide()
-            end)
+            -- local warnning_arrow = root:AddChild(UIAnim())
+            -- local arrow_anim = warnning_arrow:GetAnimState()
+            -- arrow_anim:SetBuild("hoshino_self_inspect_button_warning")
+            -- arrow_anim:SetBank("hoshino_self_inspect_button_warning")
+            -- arrow_anim:PlayAnimation("idle",true)
+            -- warnning_arrow:Hide()
+            -- warnning_arrow:SetClickable(false)
+            -- local arrow_scale = 1
+            -- warnning_arrow:SetScale(arrow_scale,arrow_scale,arrow_scale)
+            -- root.inst:ListenForEvent("clicked",function(inst)
+            --     warnning_arrow:Hide()
+            -- end)
+            -- root.inst:ListenForEvent("hoshino_event.little_smart_phone_warnning",function()
+            --     if not Is_Smart_Phone_Openning() then
+            --         warnning_arrow:Show()
+            --     end
+            -- end,ThePlayer)
+            -- root.inst:ListenForEvent("onremove",function()
+            --     warnning_arrow:Kill()
+            -- end)
+        --------------------------------------------------------------------------
+        --- 新的图标
+            local button_phone = root:AddChild(AnimButton("hoshino_ui_other_characters_mission_warning",{
+                idle = "idle",
+                over = "idle",
+                disabled = "idle"
+            }))
+            local button_scale = 0.5
+            button_phone:SetScale(button_scale,button_scale,button_scale)
+            button_phone.anim.old_GetAnimState = button_phone.anim.GetAnimState
+            button_phone.anim.GetAnimState = function(self)
+                local AnimState = button_phone.anim:old_GetAnimState()
+                local new_animstate = {}
+                function new_animstate:PlayAnimation(anim)
+                    AnimState:PlayAnimation(anim,true)
+                end
+                return new_animstate
+            end
+            function button_phone:Show_Warning(flag)
+                if not flag then
+                    button_phone.animstates = {
+                        idle = "idle",
+                        over = "idle",
+                        disabled = "idle"
+                    }
+                    button_phone.anim:GetAnimState():PlayAnimation("idle")
+                else
+                    button_phone.animstates = {
+                        idle = "info",
+                        over = "info",
+                        disabled = "info"
+                    }
+                    button_phone.anim:GetAnimState():PlayAnimation("info",true)
+                end
+            end
             root.inst:ListenForEvent("hoshino_event.little_smart_phone_warnning",function()
                 if not Is_Smart_Phone_Openning() then
-                    warnning_arrow:Show()
+                    button_phone:Show_Warning(true)
                 end
             end,ThePlayer)
-            root.inst:ListenForEvent("onremove",function()
-                warnning_arrow:Kill()
+            button_phone:SetOnClick(function()
+                ThePlayer:PushEvent("hoshino_event.little_smart_phone_open",smart_phone_widget)
+                root.inst:PushEvent("clicked")
+                button_phone:Show_Warning(false)
             end)
+        --------------------------------------------------------------------------
+        ---
         --------------------------------------------------------------------------
         ---
             -- local old_update = root.Update or function() end

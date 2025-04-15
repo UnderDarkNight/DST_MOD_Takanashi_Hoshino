@@ -39,6 +39,7 @@
         if _table and _table.builder then
             inst.components.hoshino_data:Set("userid",_table.builder.userid)
             _table.builder.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_building_nilou_fire_debuff","hoshino_building_nilou_fire_debuff",true)
+            TheNet:Announce("尼卢火建造，".._table.builder:GetDisplayName().."获得debuff")
         end
         inst.AnimState:PlayAnimation("place")
         inst.AnimState:PushAnimation("idle")
@@ -93,16 +94,19 @@
                 temp_monster:PushEvent("attacked", {attacker = player, damage = damage})
             end
         end
+        TheNet:Announce("尼卢火:绑定玩家在范围内攻击"..math.random(1000))
     end
     local function search_player_task(inst) --- 周期性扫描
         local player = GetPlayer(inst)
-        if player and not inst.linked_player then --- 玩家入圈，但是没安装事件
+        if player and inst.linked_player == nil then --- 玩家入圈，但是没安装事件
             inst:ListenForEvent("onhitother",player_on_hit_event,player)
-            inst.linked_player = player            
-        elseif inst.linked_player and player == nil then
+            inst.linked_player = player
+            TheNet:Announce("尼卢火:绑定玩家【进入】范围")
+        elseif player == nil and inst.linked_player ~= nil then --- 玩家离开，并且之前有安装事件
             inst:RemoveEventCallback("onhitother",player_on_hit_event,player)
             inst.linked_player = nil
-        end
+            TheNet:Announce("尼卢火:绑定玩家【离开】范围")
+        end        
     end
     local function combat_install(inst)
         inst:DoPeriodicTask(1,search_player_task)
