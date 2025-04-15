@@ -8,7 +8,7 @@ end
 ---- 千年战术委托终端
 --------------------------------------------------------------------------------------------------------------------------------------------
     -- AddRecipeToFilter("hoshino_building_millennium_tactics_delegate_terminal","CHARACTER")     ---- 添加物品到目标标签
-    CustomAddRecipe2(
+    AddRecipe2(
         "hoshino_building_millennium_tactics_delegate_terminal",            --  --  inst.prefab  实体名字
         { Ingredient("gears", 2),Ingredient("boards", 4),Ingredient("papyrus", 4) }, 
         TECH.NONE, --- 魔法三本
@@ -21,7 +21,7 @@ end
             placer = "hoshino_building_millennium_tactics_delegate_terminal_placer",                       -------- 建筑放置器
 
         },
-        {"CHARACTER",}
+        {string.upper("millennium_tactics_delegate_terminal")}
     )
     RemoveRecipeFromFilter("hoshino_building_millennium_tactics_delegate_terminal","MODS")
 
