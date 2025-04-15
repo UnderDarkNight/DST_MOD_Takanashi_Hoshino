@@ -1,36 +1,45 @@
 
+----------------------------------------------------------------------------------------
+--- 添加常驻分类栏
+    AddRecipeFilter({ 
+        name = string.upper("millennium_tactics_delegate_terminal"),
+        atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal.xml",
+        image = "hoshino_building_millennium_tactics_delegate_terminal.tex"
+    })
+    STRINGS.UI.CRAFTING_FILTERS[string.upper("millennium_tactics_delegate_terminal")] = "战术终端"
+-----------------------------------------------------------------------------------------
 
 local BUILDING_PREFAB = string.upper("hoshino_building_millennium_tactics_delegate_terminal")
 ----------------------------------------------------------------------------------------
---- 专属科技建筑。  添加活动tag给指定的 prefab，不能大写。 制作栏 左上角 的图标 和 鼠标过去的文字
-    --- 绝对不能使用  AddPrototyperDef 函数
-    PROTOTYPER_DEFS["hoshino_building_millennium_tactics_delegate_terminal"] = {      ----- 必须是 prefab 的名字
-        icon_atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal_128.xml", 
-        icon_image = "hoshino_building_millennium_tactics_delegate_terminal_128.tex",	
-        is_crafting_station = true,
-        -- action_str = "TRADE",  --- 相关参数 参考 recipes.lua
-        filter_text = "千年战术委托终端"
-    }
+--- 弹出式 专属科技建筑。  添加活动tag给指定的 prefab，不能大写。 制作栏 左上角 的图标 和 鼠标过去的文字
+    -- --- 绝对不能使用  AddPrototyperDef 函数
+    -- PROTOTYPER_DEFS["hoshino_building_millennium_tactics_delegate_terminal"] = {      ----- 必须是 prefab 的名字
+    --     icon_atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal_128.xml", 
+    --     icon_image = "hoshino_building_millennium_tactics_delegate_terminal_128.tex",	
+    --     is_crafting_station = true,
+    --     -- action_str = "TRADE",  --- 相关参数 参考 recipes.lua
+    --     filter_text = "千年战术委托终端"
+    -- }
 ----------------------------------------------------------------------------------------
---- 分类注册
-    RECIPETABS[BUILDING_PREFAB] = { 
-        str = BUILDING_PREFAB,
-        sort = 999, 
-        icon_atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal.xml", 
-        icon_image = "hoshino_building_millennium_tactics_delegate_terminal.tex",	
-        crafting_station = true,
-        shop = true
-    }
+--- 弹出式分类注册
+    -- RECIPETABS[BUILDING_PREFAB] = { 
+    --     str = BUILDING_PREFAB,
+    --     sort = 999, 
+    --     icon_atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal.xml", 
+    --     icon_image = "hoshino_building_millennium_tactics_delegate_terminal.tex",	
+    --     crafting_station = true,
+    --     shop = true
+    -- }
 ----------------------------------------------------------------------------------------
---- 科技树交互参数 配置
+-- --- 科技树交互参数 配置
     local TechTree = require("techtree")
     table.insert(TechTree.AVAILABLE_TECH,BUILDING_PREFAB) ---- 添加到科技树
     table.insert(TechTree.BONUS_TECH,BUILDING_PREFAB) ---- 有奖励的科技树
     -------------------- 科技参数
     TECH.NONE[BUILDING_PREFAB] = 0
-    -- TECH[string.upper("millennium_tactics_delegate_terminal_one")] = {
-    --     [BUILDING_PREFAB] = 1,
-    -- } -- 【重要笔记：有独立的分类的时候，不需要这个】
+    TECH[string.upper("millennium_tactics_delegate_terminal_one")] = {
+        [BUILDING_PREFAB] = 1,
+    } -- 【重要笔记：有独立的"弹出式"分类的时候，不需要这个】
     for k,v in pairs(TUNING.PROTOTYPER_TREES) do    ---------- 给其他标签注入0参数
         v[BUILDING_PREFAB] = 0
     end
@@ -46,19 +55,24 @@ local BUILDING_PREFAB = string.upper("hoshino_building_millennium_tactics_delega
 ----------------------------------------------------------------------------------------
 --- 注册 AddRecipe2
     local function GetTech()
-        return TECH.NONE
+        -- return TECH.NONE
+        return TECH[string.upper("millennium_tactics_delegate_terminal_one")]
     end
     local function GetRecipeFilter()
-        return {BUILDING_PREFAB}
+        -- return {BUILDING_PREFAB}  --- 弹出的分类栏用。
+        return {string.upper("millennium_tactics_delegate_terminal")}  --- 常驻的分类栏用
     end
     local function CustomAddRecipe2(prefab,_Ingredients,tech,data,recipe_filters)
-        data.nounlock = true            -- 去自制科技树必须
-        data.no_deconstruction = true   -- 去自制科技树必须
-        -- data.station_tag = "hoshino_building_millennium_tactics_delegate_terminal"
-        data.station_tag = nil
+        if data.placer == nil then
+            data.nounlock = true            -- 去自制科技树必须
+            data.no_deconstruction = true   -- 去自制科技树必须
+        end
+        -- data.station_tag = nil
+        data.station_tag = "hoshino_building_millennium_tactics_delegate_terminal"
         tech = GetTech()
         _Ingredients = _Ingredients or {}
         recipe_filters = GetRecipeFilter()
+        
         AddRecipe2(prefab,_Ingredients,tech,data,recipe_filters)
     end
     TUNING.HOSHINO_TECH_ADD_RECIPE = CustomAddRecipe2
