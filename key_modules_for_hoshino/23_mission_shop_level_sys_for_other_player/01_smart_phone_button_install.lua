@@ -161,7 +161,7 @@
                 over = "idle",
                 disabled = "idle"
             }))
-            local button_scale = 0.5
+            local button_scale = 0.4
             button_phone:SetScale(button_scale,button_scale,button_scale)
             button_phone.anim.old_GetAnimState = button_phone.anim.GetAnimState
             button_phone.anim.GetAnimState = function(self)

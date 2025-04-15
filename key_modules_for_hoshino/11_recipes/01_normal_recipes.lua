@@ -15,7 +15,7 @@ end
         {
             -- nounlock=true,
             no_deconstruction=false,
-            builder_tag = "hoshino",    
+            -- builder_tag = "hoshino",    
             atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal.xml",
             image = "hoshino_building_millennium_tactics_delegate_terminal.tex",
             placer = "hoshino_building_millennium_tactics_delegate_terminal_placer",                       -------- 建筑放置器
