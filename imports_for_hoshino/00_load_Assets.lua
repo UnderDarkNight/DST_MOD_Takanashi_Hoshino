@@ -50,7 +50,8 @@ local temp_assets = {
 	---------------------------------------------------------------------------
 	--- 给其他角色的智能手机素材
 		Asset("IMAGE", "images/inspect_pad/little_smart_phone.tex"),			--- 智能手机素材
-		Asset("ATLAS", "images/inspect_pad/little_smart_phone.xml"),
+		Asset("ATLAS", "images/inspect_pad/little_smart_phone.xml"),		
+		Asset("ANIM", "anim/hoshino_ui_other_characters_mission_warning.zip"),	--- 
 	---------------------------------------------------------------------------
 	--- 无人机控制器素材
 		Asset("IMAGE", "images/widgets/hoshino_drone_controller.tex"),			

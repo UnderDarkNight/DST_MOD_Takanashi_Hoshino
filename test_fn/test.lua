@@ -21,7 +21,7 @@ local flg,error_code = pcall(function()
     local x,y,z =    ThePlayer.Transform:GetWorldPosition()  
     ----------------------------------------------------------------------------------------------------------------    ----------------------------------------------------------------------------------------------------------------
     --- 
-        if TheWorld.ismastersim then
+        if TheWorld.ismastersim and ThePlayer.components.hoshino_com_power_cost then
             ThePlayer.components.hoshino_com_power_cost:DoDelta(100)
         end
         
@@ -90,18 +90,20 @@ local flg,error_code = pcall(function()
         -- })
 
 
-        if TUNING.__fx then
-            TUNING.__fx:Remove()
-        end
+        -- if TUNING.__fx then
+        --     TUNING.__fx:Remove()
+        -- end
 
 
-        TUNING.__fx = SpawnPrefab("hoshino_fx_mawofthevoid")
+        -- TUNING.__fx = SpawnPrefab("hoshino_fx_mawofthevoid")
 
-        TUNING.__fx:PushEvent("Set",{
-            target = ThePlayer,
-            -- height = 1,
-            scale = 3,
-        })
+        -- TUNING.__fx:PushEvent("Set",{
+        --     target = ThePlayer,
+        --     -- height = 1,
+        --     scale = 3,
+        -- })
+        -- ThePlayer.components.hoshino_com_rpc_event:PushEvent("hoshino_event.little_smart_phone_warnning")
+        ThePlayer:PushEvent("hoshino_event.pad_warnning")
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

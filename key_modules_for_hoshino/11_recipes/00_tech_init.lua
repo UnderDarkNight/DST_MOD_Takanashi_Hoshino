@@ -3,8 +3,8 @@
 --- 添加常驻分类栏
     AddRecipeFilter({ 
         name = string.upper("millennium_tactics_delegate_terminal"),
-        atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal.xml",
-        image = "hoshino_building_millennium_tactics_delegate_terminal.tex"
+        atlas = "images/map_icons/hoshino_building_millennium_tactics_delegate_terminal_128.xml",
+        image = "hoshino_building_millennium_tactics_delegate_terminal_128.tex"
     })
     STRINGS.UI.CRAFTING_FILTERS[string.upper("millennium_tactics_delegate_terminal")] = "战术终端"
 -----------------------------------------------------------------------------------------
