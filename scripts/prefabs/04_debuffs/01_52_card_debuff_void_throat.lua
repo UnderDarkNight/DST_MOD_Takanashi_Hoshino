@@ -35,7 +35,7 @@
         fx:PushEvent("Set",{
             target = player, -- 绑定给玩家
             scale = 3,  -- 尺寸缩放
-            height = 2, --- 高度
+            height = 1, --- 高度
         })
         fx:RemoveAllEventCallbacks() -- 移除所有事件。
         fx.AnimState:PlayAnimation("start",false)

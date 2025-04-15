@@ -145,7 +145,7 @@ end
         {
             -- nounlock=true,
             no_deconstruction=true,
-            builder_tag = "hoshino_building_shop24_level_1",
+            -- builder_tag = "hoshino_building_shop24_level_1",
             atlas = "images/inventoryimages/hoshino_item_fragments_of_divine_script.xml",
             image = "hoshino_item_fragments_of_divine_script.tex",
             -- sg_state="carvewood",
@@ -474,21 +474,21 @@ RemoveRecipeFromFilter("hoshino_weapon_pepe_hammer","MODS")
 ---- 尼卢火
 --------------------------------------------------------------------------------------------------------------------------------------------
 -- AddRecipeToFilter("hoshino_building_nilou_fire","CHARACTER")     ---- 添加物品到目标标签
-CustomAddRecipe2(
-    "hoshino_building_nilou_fire",            --  --  inst.prefab  实体名字
-    { Ingredient("opalstaff", 3),Ingredient("hoshino_item_yi", 1), }, 
-    TECH.NONE, --科学一本 
-    {
-        -- nounlock=true,
-        no_deconstruction=false,                --属性：不可拆解，为false则为可拆解
-        builder_tag = "hoshino",
-        placer = "hoshino_building_nilou_fire_placer",                       -------- 建筑放置器
-        atlas = "images/map_icons/hoshino_building_nilou_fire.xml",
-        image = "hoshino_building_nilou_fire.tex",
-    },
-    {"CHARACTER",}
-)
-RemoveRecipeFromFilter("hoshino_building_nilou_fire","MODS")
+-- CustomAddRecipe2(
+--     "hoshino_building_nilou_fire",            --  --  inst.prefab  实体名字
+--     { Ingredient("opalstaff", 3),Ingredient("hoshino_item_yi", 1), }, 
+--     TECH.NONE, --科学一本 
+--     {
+--         -- nounlock=true,
+--         no_deconstruction=false,                --属性：不可拆解，为false则为可拆解
+--         builder_tag = "hoshino",
+--         placer = "hoshino_building_nilou_fire_placer",                       -------- 建筑放置器
+--         atlas = "images/map_icons/hoshino_building_nilou_fire.xml",
+--         image = "hoshino_building_nilou_fire.tex",
+--     },
+--     {"CHARACTER",}
+-- )
+-- RemoveRecipeFromFilter("hoshino_building_nilou_fire","MODS")
 --------------------------------------------------------------------------------------------------------------------------------------------
 ---- 干草手雷
 --------------------------------------------------------------------------------------------------------------------------------------------

@@ -14,13 +14,13 @@
         SpawnPrefab("hoshino_fx_blackguard_poof"):PushEvent("Set",{
             target = player,
             type = 2,
-            scale = 5,
+            scale = 8,
             sound = "hoshino_sfx_blackguard/hoshino_sfx_blackguard/hoshino_sfx_blackguard_hit",
         })
         SpawnPrefab("hoshino_fx_blackguard_poof"):PushEvent("Set",{
             target = player,
             type = 3,
-            scale = 5,
+            scale = 8,
             sound = "hoshino_sfx_blackguard/hoshino_sfx_blackguard/hoshino_sfx_blackguard_hit",
         })
     end

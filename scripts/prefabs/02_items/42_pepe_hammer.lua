@@ -60,8 +60,6 @@
             if temp_target.components.combat
                 and temp_target.components.health and not temp_target.components.health:IsDead() then
                     local tx,ty,tz = temp_target.Transform:GetWorldPosition()
-                    SpawnPrefab("fx_hoshino_hammer_hit_ground").Transform:SetPosition(tx,0,tz)
-                    SpawnPrefab("fx_hoshino_hammer_hit").Transform:SetPosition(tx,0,tz)
                     local damage,spdamage = inst.components.weapon:GetDamage(attacker,target)
                     -- temp_target.components.combat:GetAttacked(attacker,damage,inst,nil,spdamage)
                      temp_target.components.health:SetVal(temp_target.components.health.currenthealth - (damage / 2))
@@ -78,8 +76,19 @@
             local x,y,z = (target or inst).Transform:GetWorldPosition()
         --------------------------------------------------------
         --- 特效
-            SpawnPrefab("fx_hoshino_hammer_hit_ground").Transform:SetPosition(x,y,z)
-            SpawnPrefab("fx_hoshino_hammer_hit").Transform:SetPosition(x,y,z)
+        local fx = SpawnPrefab("fx_hoshino_hammer_hit_ground")
+        if fx then
+            fx.Transform:SetPosition(x,y,z)
+            local scale = 1.5 + (.1 * (inst.hit_level or 0))
+            fx.Transform:SetScale(scale, scale, scale)
+        end
+    
+        local fx1 = SpawnPrefab("fx_hoshino_hammer_hit")
+        if fx1 then
+            fx1.Transform:SetPosition(x,y,z)
+            local scale = 1.5 + (.15 * (inst.hit_level or 0))
+            fx1.Transform:SetScale(scale, scale, scale)
+        end
         --------------------------------------------------------
         --- AOE 函数
             do_aoe(inst,attacker,target,x,z)
@@ -437,7 +446,7 @@
         replica_com:SetDistance(SPELL_ACITVE_RADIUS)
         replica_com:SetTestFn(custom_spell_caster_test_fn)
         replica_com:SetText("hoshino_weapon_pepe_hammer","施法")
-        replica_com:SetSGAction("play_strum")
+        replica_com:SetSGAction("cointosscastspell")
     end
     local function custom_spell_caster_install(inst)
         inst:ListenForEvent("HOSHINO_OnEntityReplicated.hoshino_com_point_and_target_spell_caster",custom_spell_caster_replica_init)
