@@ -80,7 +80,7 @@ local hoshino_cards_sys = Class(function(self, inst)
         self.CardPools = {
             ["card_white"] = 100,
             ["card_colourful"] = 0.3,
-            ["card_golden"] = 5,
+            ["card_golden"] = 7,
             ["card_black"] = 0.6,
         }
         self:AddOnSaveFn(function()

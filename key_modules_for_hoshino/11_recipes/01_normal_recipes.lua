@@ -10,7 +10,7 @@ end
     -- AddRecipeToFilter("hoshino_building_millennium_tactics_delegate_terminal","CHARACTER")     ---- 添加物品到目标标签
     AddRecipe2(
         "hoshino_building_millennium_tactics_delegate_terminal",            --  --  inst.prefab  实体名字
-        { Ingredient("gears", 2),Ingredient("boards", 4),Ingredient("papyrus", 4) }, 
+        { Ingredient("gears", 1),Ingredient("boards", 4),Ingredient("papyrus", 4) }, 
         TECH.NONE, --- 魔法三本
         {
             -- nounlock=true,
@@ -349,7 +349,7 @@ end
     -- AddRecipeToFilter("hoshino_equipment_used_mechanical_sheets","MAGIC")     ---- 添加物品到目标标签
     CustomAddRecipe2(
         "hoshino_equipment_used_mechanical_sheets",            --  --  inst.prefab  实体名字
-        {Ingredient("trinket_6", 15),Ingredient("trinket_1", 15),Ingredient("gears", 15)} ,
+        {Ingredient("trinket_6", 15),Ingredient("trinket_1", 10),Ingredient("gears", 10)} ,
         TECH.ANCIENT_FOUR, -- 
         {
             nounlock = true,

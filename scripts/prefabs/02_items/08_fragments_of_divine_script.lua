@@ -45,8 +45,8 @@ local assets = {
             -------------------------------------------------------------------------------------
             --- 暂时预留多次使用功能
                 local weights_per_time = {
-                    ["card_golden"] = 0.6,
-                    ["card_colourful"] = 0.1,
+                    ["card_golden"] = 0.8,
+                    ["card_colourful"] = 0.05,
                 }
                 for i = 1, num, 1 do
                     for card_type, weight in pairs(weights_per_time) do
