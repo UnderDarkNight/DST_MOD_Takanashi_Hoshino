@@ -14,7 +14,7 @@ AddGlobalClassPostConstruct("util/sourcemodifierlist", "SourceModifierList", fun
 
     self.__hoshino_got_override_fns = {}
     self.__hoshino_temp_inst_remove_event = function(temp_inst)
-       self:RemoveGotOverrideFn(temp_inst) 
+       self:Hoshino_RemoveGotOverrideFn(temp_inst) 
     end
     self.Hoshino_AddGotOverrideFn = function(self,temp_inst,fn)
         if self.__hoshino_got_override_fns[temp_inst] == nil then
