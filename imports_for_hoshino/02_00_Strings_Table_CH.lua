@@ -404,7 +404,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_backpack_t6"] = {
                 ["name"] = "T6:恶魔之翼挎包",
-                ["inspect_str"] = "拥有其下位的效果\n基础攻击伤害+30%，cost恢复+0.02/s",
+                ["inspect_str"] = "拥有其下位的效果\n30码内的其他玩家受到伤害的60%由你承担\ncost恢复+0.05/s",
                 -- ["recipe_desc"] = "???",
             },
             ["hoshino_special_equipment_backpack_t7"] = {
@@ -414,7 +414,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_backpack_t8"] = {
                 ["name"] = "T8:蝴蝶单肩包",
-                ["inspect_str"] = "拥有其下位的效果\n30码内的其他玩家受到伤害的60%由你承担\ncost恢复+0.05/s",
+                ["inspect_str"] = "拥有其下位的效果\n基础攻击伤害+30%，cost恢复+0.02/s",
                 -- ["recipe_desc"] = "???",
             },
             ["hoshino_special_equipment_backpack_t9"] = {
@@ -444,7 +444,7 @@ TUNING["hoshino.Strings"][this_language] = TUNING["hoshino.Strings"][this_langua
             },
             ["hoshino_special_equipment_amulet_t5"] = {
                 ["name"] = "T5:迷彩不倒翁",
-                ["inspect_str"] = "拥有其下位的效果\n半径30码内所有玩家基础攻击伤害+33%\n且每次攻击恢复5点san值",
+                ["inspect_str"] = "拥有其下位的效果\n半径30码内所有玩家基础攻击伤害+20%\n且每次攻击恢复5点san值",
                 -- ["recipe_desc"] = "???",
             },
             ["hoshino_special_equipment_amulet_t6"] = {

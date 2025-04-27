@@ -46,18 +46,14 @@ nil,
         end
         
         if target.components.health then
-            -- 穿透型伤害实现
             local health = target.components.health
             local final_damage = damage
-            
-            -- 绕过所有条件检查直接操作
-            health.currenthealth = math.max(0, health.currenthealth - final_damage)
-            
-            -- 使用原始数据更新方式
-            health:DoDelta(0, true) -- 强制刷新显示
+
+            target.components.health:SetVal(target.components.health.currenthealth - damage)
+
+            health:DoDelta(0, true)
             health:SetCurrentHealth(health.currenthealth)
-            
-            -- 直接触发死亡事件链
+
             if health.currenthealth <= 0 then
                 target:PushEvent("death", { 
                     afflicter = self.inst, 

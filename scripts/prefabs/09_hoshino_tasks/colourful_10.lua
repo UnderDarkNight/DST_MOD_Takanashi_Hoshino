@@ -172,8 +172,9 @@
                 Remove_Items_By_Prefab(owner,MISSION_REQUIRE_PREFAB,MISSION_REQUIRE_NUM)
 
                 local item = SpawnPrefab("hoshino_item_cards_pack")
-                item:PushEvent("Type","hoshino_item_cards_pack_supreme_mystery")
+                item:PushEvent("Type","hoshino_item_cards_pack_authority_to_unveil_secrets")
                 owner.components.inventory:GiveItem(item) -- 给予物品
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_blue_schist"))
             end
         end)
         inst:ListenForEvent("task_give_up", function()

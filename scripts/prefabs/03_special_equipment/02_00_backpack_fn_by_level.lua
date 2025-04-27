@@ -132,14 +132,34 @@ return function(inst)
         end
     ----------------------------------------------------------------------------------
     --- 攻击伤害倍增器
-        if inst.level >= 6 then
+        if inst.level >= 8 then
             inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                owner.components.combat.externaldamagemultipliers:SetModifier(inst,1.3)
+                inst:DoPeriodicTask(2,function()
+                    ------------------------------------------------------------------
+                        if owner:HasTag("playerghost") then
+                            return
+                        end
+                    ------------------------------------------------------------------
+                    --- 获取周围玩家
+                        local x,y,z = owner.Transform:GetWorldPosition()
+                        local ents = TheSim:FindEntities(x,y,z,30,{"player"})
+                        for k, temp_player in pairs(ents) do
+                            if temp_player ~= owner then                            
+                                local debuff_prefab = "hoshino_buff_special_equipment_backpack_t8"
+                                while true do
+                                    local debuff_inst = temp_player:GetDebuff(debuff_prefab)
+                                    if debuff_inst and debuff_inst:IsValid() then
+                                        debuff_inst:PushEvent("link",owner)
+                                        break
+                                    end
+                                    temp_player:AddDebuff(debuff_prefab,debuff_prefab)
+                                end
+                            end
+                        end
+                    ------------------------------------------------------------------
+                end)
             end)
-            inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
-                owner.components.combat.externaldamagemultipliers:RemoveModifier(inst)
-            end)
-        end
+        end 
     ----------------------------------------------------------------------------------
     --- 商店价格倍增器
         if inst.level >= 7 then
@@ -173,34 +193,14 @@ return function(inst)
         end
     ----------------------------------------------------------------------------------
     --- 承担其他玩家伤害
-        if inst.level >= 8 then
-            inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
-                inst:DoPeriodicTask(2,function()
-                    ------------------------------------------------------------------
-                        if owner:HasTag("playerghost") then
-                            return
-                        end
-                    ------------------------------------------------------------------
-                    --- 获取周围玩家
-                        local x,y,z = owner.Transform:GetWorldPosition()
-                        local ents = TheSim:FindEntities(x,y,z,30,{"player"})
-                        for k, temp_player in pairs(ents) do
-                            if temp_player ~= owner then                            
-                                local debuff_prefab = "hoshino_buff_special_equipment_backpack_t8"
-                                while true do
-                                    local debuff_inst = temp_player:GetDebuff(debuff_prefab)
-                                    if debuff_inst and debuff_inst:IsValid() then
-                                        debuff_inst:PushEvent("link",owner)
-                                        break
-                                    end
-                                    temp_player:AddDebuff(debuff_prefab,debuff_prefab)
-                                end
-                            end
-                        end
-                    ------------------------------------------------------------------
-                end)
-            end)
-        end  
+    if inst.level >= 6 then
+        inst:ListenForEvent("Special_Fn_Active",function(inst,owner)
+            owner.components.combat.externaldamagemultipliers:SetModifier(inst,1.3)
+        end)
+        inst:ListenForEvent("Special_Fn_Deactive",function(inst,owner)
+            owner.components.combat.externaldamagemultipliers:RemoveModifier(inst)
+        end)
+    end
     ----------------------------------------------------------------------------------
     --- 套护盾buff
         if inst.level >= 9 then

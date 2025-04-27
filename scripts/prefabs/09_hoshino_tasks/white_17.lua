@@ -130,16 +130,16 @@
             local delta_y = -22
             local front_size = 25
             
-            local wagpunk_bits_text = bg:AddChild(Text(CODEFONT,front_size,"0/10",{ 91/255 , 112/255 ,136/255 , 1}))
+            local wagpunk_bits_text = bg:AddChild(Text(CODEFONT,front_size,"0/3",{ 91/255 , 112/255 ,136/255 , 1}))
             wagpunk_bits_text:SetPosition(x,y)
 
-            local gears_text = bg:AddChild(Text(CODEFONT,front_size,"0/10",{ 91/255 , 112/255 ,136/255 , 1}))
+            local gears_text = bg:AddChild(Text(CODEFONT,front_size,"0/2",{ 91/255 , 112/255 ,136/255 , 1}))
             gears_text:SetPosition(x,y+delta_y)
 
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
-                local gears_flag,gears_num = Has_Enough_Items(ThePlayer,"gears",3)
+                local gears_flag,gears_num = Has_Enough_Items(ThePlayer,"gears",2)
                 local wagpunk_bits_flag,wagpunk_bits_num = Has_Enough_Items(ThePlayer,"wagpunk_bits",3)
 
                 if gears_flag and wagpunk_bits_flag then
@@ -147,10 +147,10 @@
                 else
                     button_delivery:Hide()
                 end
-                gears_num = math.clamp(gears_num,0,3)
+                gears_num = math.clamp(gears_num,0,2)
                 wagpunk_bits_num = math.clamp(wagpunk_bits_num,0,3)
 
-                gears_text:SetString(""..gears_num.."/3")
+                gears_text:SetString(""..gears_num.."/2")
                 wagpunk_bits_text:SetString(""..wagpunk_bits_num.."/3")
             end
             update_fn()
@@ -173,7 +173,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"gears",3) and Has_Enough_Items(owner,"wagpunk_bits",3) then
+            if owner and Has_Enough_Items(owner,"gears",2) and Has_Enough_Items(owner,"wagpunk_bits",3) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
@@ -183,7 +183,7 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 owner.components.hoshino_com_shop:CreditCoinDelta(200)
 
-                Remove_Items_By_Prefab(owner,"gears",3)
+                Remove_Items_By_Prefab(owner,"gears",2)
                 Remove_Items_By_Prefab(owner,"wagpunk_bits",3)
 
 
@@ -204,16 +204,16 @@
 
             if owner then
 
-                local gears_flag,gears_num = Has_Enough_Items(owner,"gears",3)
+                local gears_flag,gears_num = Has_Enough_Items(owner,"gears",2)
                 local wagpunk_bits_flag,wagpunk_bits_num = Has_Enough_Items(owner,"wagpunk_bits",3)
 
-                gears_num = math.clamp(gears_num,0,3)
+                gears_num = math.clamp(gears_num,0,2)
                 wagpunk_bits_num = math.clamp(wagpunk_bits_num,0,3)
 
                 inst.__gears_num:set(gears_num)
                 inst.__wagpunk_bits_num:set(wagpunk_bits_num)
 
-                if gears_num >= 3 and wagpunk_bits_num >= 3 then
+                if gears_num >= 2 and wagpunk_bits_num >= 3 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 

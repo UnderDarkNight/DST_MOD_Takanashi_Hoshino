@@ -95,12 +95,12 @@
         --- 检查任务是否完成
             local update_fn = function()
                 local num = inst.num or inst.__num:value() or 0
-                if num >= 20 then
+                if num >= 5 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/20")
+                display_text:SetString(""..num.."/5")
             end
             update_fn()
             display_text.inst:ListenForEvent("hoshino_mission_white_42",update_fn,inst)
@@ -122,7 +122,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and inst.components.hoshino_data:Add("num",0) >= 20 then
+            if owner and inst.components.hoshino_data:Add("num",0) >= 5 then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
@@ -154,7 +154,7 @@
         inst:ListenForEvent("active",function(inst,owner)
 
             inst:DoPeriodicTask(5,function()
-                if inst.components.hoshino_data:Add("num",0) >= 20 then
+                if inst.components.hoshino_data:Add("num",0) >= 5 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
             end)
@@ -166,9 +166,9 @@
                 local prefab = tostring(_table and _table.prefab)
                 local num = _table and _table.num
                 local other_data = _table and _table.other_data or {}
-                local num = inst.components.hoshino_data:Add("num",num or 1,0,20)
+                local num = inst.components.hoshino_data:Add("num",num or 1,0,5)
                 inst.__num:set(num)
-                if num >= 20 then
+                if num >= 5 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 

@@ -205,7 +205,7 @@
                 item.components.stackable.stacksize = 3
                 owner.components.inventory:GiveItem(item)
 
-                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_ether_essence"))
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack_authority_to_unveil_secrets"))
 
 
             end

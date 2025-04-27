@@ -125,6 +125,7 @@
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 -- owner.components.hoshino_com_shop:CreditCoinDelta(200)
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_yi"))
 
             end
         end)

@@ -24,8 +24,8 @@
                 local target = _table and _table.target
                 if target and target.components.health and not target.components.health:IsDead() then
                     inst.__dmg_lock = true
-                    target.components.health:DoDelta(-30)
-                    target:PushEvent("attacked", {attacker = player, damage = -30} )
+                    target.components.health:DoDelta(-50,nil,nil,nil,nil,true)
+                    target:PushEvent("attacked", {attacker = player, damage = -50} )
                     inst.__dmg_lock = false
                 end
             end,player)

@@ -126,7 +126,7 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 owner.components.hoshino_com_shop:CreditCoinDelta(1000)
 
-                local item = SpawnPrefab("hoshino_item_abydos_high_purity_alloy")
+                local item = SpawnPrefab("hoshino_building_white_drone_item")
                 -- item.components.stackable.stacksize = 10
                 owner.components.inventory:GiveItem(item)
 

@@ -7,7 +7,7 @@ local function OnAttached(inst,target) -- 玩家得到 debuff 的瞬间。 穿�
     inst.player = target
     -----------------------------------------------------
     --- 
-        target.components.combat.externaldamagemultipliers:SetModifier(inst, 1.33)
+        target.components.combat.externaldamagemultipliers:SetModifier(inst, 1.2)
     -----------------------------------------------------
     ---
         inst:DoPeriodicTask(1.5,function()

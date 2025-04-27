@@ -40,6 +40,8 @@
     local MISSION_ITEM_1_NUM = 1
     local MISSION_ITEM_2 = "minifan"
     local MISSION_ITEM_2_NUM = 5
+    local MISSION_ITEM_3 = "hoshino_item_blue_schist"
+    local MISSION_ITEM_3_NUM = 1
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
     local function Has_Enough_Items(owner,prefab,num)
@@ -85,9 +87,11 @@
 
         inst.__staff_tornado_num = net_uint(inst.GUID, "hoshino_mission_colourful_09.staff_tornado","hoshino_mission_colourful_09")
         inst.__minifan_num = net_uint(inst.GUID, "hoshino_mission_colourful_09.minifan","hoshino_mission_colourful_09")
+        inst.__hoshino_item_blue_schist_num = net_uint(inst.GUID, "hoshino_mission_colourful_09.hoshino_item_blue_schist","hoshino_mission_colourful_09")
         inst:ListenForEvent("hoshino_mission_colourful_09",function()
             inst.staff_tornado_num = inst.__staff_tornado_num:value()
             inst.minifan_num = inst.__minifan_num:value()
+            inst.hoshino_item_blue_schist_num = inst.__hoshino_item_blue_schist_num:value()
         end)
 
         if not TheWorld.ismastersim then
@@ -144,22 +148,28 @@
             local minifan_text = bg:AddChild(Text(CODEFONT,front_size,"0/10",{ 91/255 , 112/255 ,136/255 , 1}))
             minifan_text:SetPosition(x,y+delta_y)
 
+            local hoshino_item_blue_schist_text = bg:AddChild(Text(CODEFONT,front_size,"0/10",{ 91/255 , 112/255 ,136/255 , 1}))
+            hoshino_item_blue_schist_text:SetPosition(x,y+delta_y*2)
+
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
                 local staff_tornado_flag,staff_tornado_num = Has_Enough_Items(ThePlayer,"staff_tornado",MISSION_ITEM_1_NUM)
                 local minifan_flag,minifan_num = Has_Enough_Items(ThePlayer,"minifan",MISSION_ITEM_2_NUM)
+                local hoshino_item_blue_schist_flag,hoshino_item_blue_schist_num = Has_Enough_Items(ThePlayer,"hoshino_item_blue_schist",MISSION_ITEM_3_NUM)
 
-                if staff_tornado_flag and minifan_flag then
+                if staff_tornado_flag and minifan_flag and hoshino_item_blue_schist_flag then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
                 staff_tornado_num = math.clamp(staff_tornado_num,0,MISSION_ITEM_1_NUM)
                 minifan_num = math.clamp(minifan_num,0,MISSION_ITEM_2_NUM)
+                hoshino_item_blue_schist_num = math.clamp(hoshino_item_blue_schist_num,0,MISSION_ITEM_3_NUM)
 
                 staff_tornado_text:SetString(""..staff_tornado_num.."/"..MISSION_ITEM_1_NUM)
                 minifan_text:SetString(""..minifan_num.."/"..MISSION_ITEM_2_NUM)
+                hoshino_item_blue_schist_text:SetString(""..hoshino_item_blue_schist_num.."/"..MISSION_ITEM_3_NUM)
             end
             update_fn()
             staff_tornado_text.inst:ListenForEvent("hoshino_mission_colourful_09",update_fn,inst)
@@ -181,7 +191,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"staff_tornado",MISSION_ITEM_1_NUM) and Has_Enough_Items(owner,"minifan",MISSION_ITEM_2_NUM) then
+            if owner and Has_Enough_Items(owner,"staff_tornado",MISSION_ITEM_1_NUM) and Has_Enough_Items(owner,"minifan",MISSION_ITEM_2_NUM) and Has_Enough_Items(owner,"hoshino_item_blue_schist",MISSION_ITEM_3_NUM) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
@@ -193,6 +203,7 @@
 
                 Remove_Items_By_Prefab(owner,"staff_tornado",MISSION_ITEM_1_NUM)
                 Remove_Items_By_Prefab(owner,"minifan",MISSION_ITEM_2_NUM)
+                Remove_Items_By_Prefab(owner,"hoshino_item_blue_schist",MISSION_ITEM_3_NUM)
 
                 owner.components.inventory:GiveItem(SpawnPrefab("hoshino_equipment_sandstorm_core"))
 
@@ -215,14 +226,17 @@
 
                 local staff_tornado_flag,staff_tornado_num = Has_Enough_Items(owner,"staff_tornado",MISSION_ITEM_1_NUM)
                 local minifan_flag,minifan_num = Has_Enough_Items(owner,"minifan",MISSION_ITEM_2_NUM)
+                local hoshino_item_blue_schist_flag,hoshino_item_blue_schist_num = Has_Enough_Items(owner,"hoshino_item_blue_schist",MISSION_ITEM_3_NUM)
 
                 staff_tornado_num = math.clamp(staff_tornado_num,0,MISSION_ITEM_1_NUM)
                 minifan_num = math.clamp(minifan_num,0,MISSION_ITEM_2_NUM)
+                hoshino_item_blue_schist_num = math.clamp(hoshino_item_blue_schist_num,0,MISSION_ITEM_3_NUM)
 
                 inst.__staff_tornado_num:set(staff_tornado_num)
                 inst.__minifan_num:set(minifan_num)
+                inst.__hoshino_item_blue_schist_num:set(hoshino_item_blue_schist_num)
 
-                if staff_tornado_num >= MISSION_ITEM_1_NUM and minifan_num >= MISSION_ITEM_2_NUM then
+                if staff_tornado_num >= MISSION_ITEM_1_NUM and minifan_num >= MISSION_ITEM_2_NUM and hoshino_item_blue_schist_num >= MISSION_ITEM_3_NUM then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 

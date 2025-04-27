@@ -125,12 +125,12 @@
         --- 检查任务是否完成
             local update_fn = function()
                 local num = inst.num or inst.__num:value() or 0
-                if num >= 20 then
+                if num >= 10 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/20")
+                display_text:SetString(""..num.."/10")
             end
             update_fn()
             display_text.inst:ListenForEvent("hoshino_mission_white_22",update_fn,inst)
@@ -152,7 +152,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"berries",20) then
+            if owner and Has_Enough_Items(owner,"berries",10) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
@@ -164,7 +164,7 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 owner.components.hoshino_com_shop:CreditCoinDelta(350)
 
-                Remove_Items_By_Prefab(owner,"berries",20)
+                Remove_Items_By_Prefab(owner,"berries",10)
                 -- owner.components.inventory:GiveItem(SpawnPrefab("wetgoop")) -- 给予物品
             end
         end)
@@ -185,9 +185,9 @@
             if owner then
                 local flag,num = Has_Enough_Items(owner,prefab,item_num)
 
-                item_num = math.clamp(num,0,20)
+                item_num = math.clamp(num,0,10)
                 inst.__num:set(item_num)
-                if item_num >= 20 then
+                if item_num >= 10 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 

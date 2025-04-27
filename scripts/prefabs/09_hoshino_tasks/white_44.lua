@@ -166,7 +166,7 @@
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(700) -- 150 信用币
+                owner.components.hoshino_com_shop:CreditCoinDelta(1000) -- 150 信用币
 
                 Remove_Items_By_Prefab(owner,MISSION_REQUIRE_PREFAB,MISSION_REQUIRE_NUM)
                 -- owner.components.inventory:GiveItem(SpawnPrefab("wetgoop")) -- 给予物品

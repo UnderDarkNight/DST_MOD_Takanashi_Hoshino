@@ -22,7 +22,13 @@ local function OnAttached(inst,player) -- 玩家得到 debuff 的瞬间。 穿�
         inst:ListenForEvent("refresh",function()
             local num = inst.components.hoshino_data:Get("num") or 1
             player.components.combat.externaldamagemultipliers:SetModifier(inst,1+(0.05*num))
-            player.components.combat.externaldamagetakenmultipliers:SetModifier(inst,math.pow(0.95,num))
+            -- player.components.combat.externaldamagetakenmultipliers:SetModifier(inst,math.pow(0.95,num))
+            player.components.hoshino_com_health_hooker:Add_Modifier(inst, function(damage)
+                if damage < 0 then 
+                    return damage * math.pow(0.95, num) 
+                end
+                return damage
+            end)
             player.components.locomotor:SetExternalSpeedMultiplier(inst, "hoshino_card_debuff_armored_warrior", math.max( 1.0-(0.1*num) , 0.1 )  )
         end)
     -----------------------------------------------------

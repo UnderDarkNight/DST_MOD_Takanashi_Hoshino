@@ -129,6 +129,10 @@
                 item.components.stackable.stacksize = 5
                 owner.components.inventory:GiveItem(item)
 
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_treasure_map"))
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_fragments_of_divine_script"))
+                
+
             end
         end)
         inst:ListenForEvent("task_give_up", function()

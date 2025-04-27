@@ -76,10 +76,10 @@
     local function Net_Vars_Install(inst)
 
         inst.__silk_num = net_uint(inst.GUID, "hoshino_mission_white_12.silk","hoshino_mission_white_12")
-        inst.__trinket_1_num = net_uint(inst.GUID, "hoshino_mission_white_12.trinket_1","hoshino_mission_white_12")
+        inst.__sewing_kit_num = net_uint(inst.GUID, "hoshino_mission_white_12.sewing_kit","hoshino_mission_white_12")
         inst:ListenForEvent("hoshino_mission_white_12",function()
             inst.silk_num = inst.__silk_num:value()
-            inst.trinket_1_num = inst.__trinket_1_num:value()
+            inst.sewing_kit_num = inst.__sewing_kit_num:value()
         end)
 
         if not TheWorld.ismastersim then
@@ -130,8 +130,8 @@
             local delta_y = -22
             local front_size = 25
 
-            local trinket_1_text = bg:AddChild(Text(CODEFONT,front_size,"0/3",{ 91/255 , 112/255 ,136/255 , 1}))
-            trinket_1_text:SetPosition(x,y)
+            local sewing_kit_text = bg:AddChild(Text(CODEFONT,front_size,"0/1",{ 91/255 , 112/255 ,136/255 , 1}))
+            sewing_kit_text:SetPosition(x,y)
 
             local silk_text = bg:AddChild(Text(CODEFONT,front_size,"0/3",{ 91/255 , 112/255 ,136/255 , 1}))
             silk_text:SetPosition(x,y+delta_y)
@@ -143,21 +143,21 @@
         --- 检查任务是否完成
             local update_fn = function()
                 local silk_flag,silk_num = Has_Enough_Items(ThePlayer,"silk",3)
-                local trinket_1_flag,trinket_1_num = Has_Enough_Items(ThePlayer,"trinket_1",3)
+                local sewing_kit_flag,sewing_kit_num = Has_Enough_Items(ThePlayer,"sewing_kit",1)
 
-                if silk_flag and trinket_1_flag then
+                if silk_flag and sewing_kit_flag then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
                 silk_num = math.clamp(silk_num,0,3)
-                trinket_1_num = math.clamp(trinket_1_num,0,3)
+                sewing_kit_num = math.clamp(sewing_kit_num,0,1)
 
                 silk_text:SetString(""..silk_num.."/3")
-                trinket_1_text:SetString(""..trinket_1_num.."/3")
+                sewing_kit_text:SetString(""..sewing_kit_num.."/1")
             end
             update_fn()
-            trinket_1_text.inst:ListenForEvent("hoshino_mission_white_12",update_fn,inst)
+            sewing_kit_text.inst:ListenForEvent("hoshino_mission_white_12",update_fn,inst)
         --------------------------------------------------------------------------
         return bg
     end
@@ -176,7 +176,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"silk",3) and Has_Enough_Items(owner,"trinket_1",3) then
+            if owner and Has_Enough_Items(owner,"silk",3) and Has_Enough_Items(owner,"sewing_kit",1) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
@@ -184,10 +184,10 @@
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
                 local exp = current_max_exp*0.05 -- 5% 经验
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(300)
+                owner.components.hoshino_com_shop:CreditCoinDelta(500)
 
                 Remove_Items_By_Prefab(owner,"silk",3)
-                Remove_Items_By_Prefab(owner,"trinket_1",3)
+                Remove_Items_By_Prefab(owner,"sewing_kit",1)
 
                 local item = SpawnPrefab("moonglass")
                 item.components.stackable.stacksize = 4
@@ -211,15 +211,15 @@
             if owner then
 
                 local silk_flag,silk_num = Has_Enough_Items(owner,"silk",3)
-                local trinket_1_flag,trinket_1_num = Has_Enough_Items(owner,"trinket_1",3)
+                local sewing_kit_flag,sewing_kit_num = Has_Enough_Items(owner,"sewing_kit",1)
 
                 silk_num = math.clamp(silk_num,0,3)
-                trinket_1_num = math.clamp(trinket_1_num,0,3)
+                sewing_kit_num = math.clamp(sewing_kit_num,0,1)
 
                 inst.__silk_num:set(silk_num)
-                inst.__trinket_1_num:set(trinket_1_num)
+                inst.__sewing_kit_num:set(sewing_kit_num)
 
-                if silk_num >= 3 and trinket_1_num >= 3 then
+                if silk_num >= 3 and sewing_kit_num >= 1 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 

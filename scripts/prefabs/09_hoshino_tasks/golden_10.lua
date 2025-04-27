@@ -86,12 +86,12 @@
         --- 检查任务是否完成
             local update_fn = function()
                 local num = inst.num or inst.__num:value() or 0
-                if num >= 20 then
+                if num >= 2 then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                display_text:SetString(""..num.."/20")
+                display_text:SetString(""..num.."/2")
             end
             update_fn()
             display_text.inst:ListenForEvent("hoshino_mission_golden_10",update_fn,inst)
@@ -113,7 +113,7 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and inst.components.hoshino_data:Add("num",0) >= 20 then
+            if owner and inst.components.hoshino_data:Add("num",0) >= 2 then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
@@ -145,15 +145,15 @@
             --- 定时检查
             inst:DoPeriodicTask(10,function()
                 local num = inst.components.hoshino_data:Add("num",0)
-                if num >= 20 then
+                if num >= 2 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
             end)            
             --- 虫洞跳成功事件
             inst:ListenForEvent("wormholespit",function()
-                local num = inst.components.hoshino_data:Add("num",1,0,20)
+                local num = inst.components.hoshino_data:Add("num",1,0,2)
                 inst.__num:set(num)
-                if num >= 20 then
+                if num >= 2 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
             end,owner)

@@ -50,7 +50,7 @@ return function(inst)
         local attack_range = {
             [1] = 6+3,
             [2] = 7+3,
-            [3] = 10+3,
+            [3] = 9+3,
         }
         local attack_range_offset_fix = {
             [1] = 3.0,
@@ -84,13 +84,13 @@ return function(inst)
             if not is_real_damage then
                 --- 普通伤害
                 if GetGunLevel() >= 3 then
-                    return 68/2
+                    return 45/2
                 else
                     return 45
                 end
             else
                 --- 真实伤害
-                return 68/2
+                return 45/2
             end
         end
         local function DoRealDamage(target,weapon,value) -- 真实伤害

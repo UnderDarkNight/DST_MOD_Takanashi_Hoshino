@@ -196,6 +196,8 @@
                 local item = SpawnPrefab("hoshino_item_12mm_shotgun_shells")
                 item.components.stackable.stacksize = 10
                 owner.components.inventory:GiveItem(item) -- 给予物品
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_fragments_of_divine_script"))
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
 
                 -- owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack")) -- 给予物品
 

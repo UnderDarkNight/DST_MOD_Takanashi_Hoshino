@@ -162,7 +162,7 @@
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.30 -- 30% 经验
+                local exp = current_max_exp*0.45 -- 30% 经验
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)

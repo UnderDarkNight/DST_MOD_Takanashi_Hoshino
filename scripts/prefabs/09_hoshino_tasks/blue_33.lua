@@ -203,8 +203,8 @@
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
 
-                local item = SpawnPrefab("goldnugget")
-                item.components.stackable.stacksize = 10
+                local item = SpawnPrefab("thulecite")
+                item.components.stackable.stacksize = 4
                 owner.components.inventory:GiveItem(item) -- 给予物品
 
             end

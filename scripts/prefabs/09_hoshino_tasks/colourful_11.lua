@@ -126,7 +126,7 @@
                 owner.components.hoshino_com_shop:CreditCoinDelta(3000)
 
                 local item = SpawnPrefab("hoshino_item_blue_schist")
-                item.components.stackable.stacksize = 2
+                item.components.stackable.stacksize = 5
                 owner.components.inventory:GiveItem(item)
 
                 SpawnPrefab("resurrectionstone").Transform:SetPosition(owner.Transform:GetWorldPosition())
@@ -214,7 +214,7 @@
                     end)
                 end
             end
-            inst:DoPeriodicTask(20,function()
+            inst:DoPeriodicTask(30,function()
                 if inst.components.hoshino_data:Add("num",0) >= 1 then
                     return
                 end
@@ -321,7 +321,7 @@ local function debuff_fn()
         inst.Transform:SetPosition(0, 0, 0)
         -----------------------------------------------------
         --- 85%减伤
-            target.components.health.externalabsorbmodifiers:SetModifier(inst, 0.85)
+            target.components.health.externalabsorbmodifiers:SetModifier(inst, 0.8)
         -----------------------------------------------------
         --- 4倍攻击
             target.components.combat.externaldamagemultipliers:SetModifier(inst, 4)
@@ -329,7 +329,7 @@ local function debuff_fn()
         --- 7倍血量
             if target.components.health then
                 local max_health = target.components.health.maxhealth
-                target.components.health:SetMaxHealth(max_health * 7)
+                target.components.health:SetMaxHealth(max_health * 5)
             end
         -----------------------------------------------------
         --- 位面抵抗

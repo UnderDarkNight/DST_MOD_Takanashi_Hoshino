@@ -39,7 +39,7 @@ local flg,error_code = pcall(function()
         --             -- "card_black",
         --             -- "card_colourful",
 
-                    "absolute_defense",
+                    "air_drop_support",
         -- --             -- "unlock_spell_normal_ex",
         -- --             -- "unlock_spell_swimming_ex",
         -- --             -- "unlock_spell_all_normal",
@@ -63,7 +63,7 @@ local flg,error_code = pcall(function()
         local box = TheSim:FindFirstEntityWithTag("hoshino_building_task_board")
         -- box.components.container:GiveItem(SpawnPrefab("hoshino_mission_white_12"))
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_12")
-        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_golden_31")
+        box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_colourful_09")
         -- box.components.hoshino_com_task_sys_for_building:Refresh_All()
         -- box.components.hoshino_com_task_sys_for_building:Debug_Set_Mission("hoshino_mission_blue_46")
 

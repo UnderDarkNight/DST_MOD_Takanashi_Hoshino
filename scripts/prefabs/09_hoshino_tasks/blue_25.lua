@@ -166,7 +166,8 @@
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(700)
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_fragments_of_divine_script"))
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack"))
 
                 Remove_Items_By_Prefab(owner,MISSION_REQUIRE_PREFAB,MISSION_REQUIRE_NUM)
                 owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_fragments_of_divine_script")) -- 给予物品

@@ -11,7 +11,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ---
     local gift_list = {
-        ["potato"] = 4,
+        ["hoshino_item_grass_grenade"] = 4,
         ["hoshino_item_12mm_shotgun_shells"] = 10,
         ["hoshino_item_fragments_of_divine_script"] = 1,
         ["hoshino_food_energy_drink"] = 3,

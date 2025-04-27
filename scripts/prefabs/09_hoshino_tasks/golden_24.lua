@@ -197,7 +197,7 @@
                 -- print("debug",owner.components.hoshino_com_level_sys:GetDebugString())
                 -- print("获得经验",exp)
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
-                owner.components.hoshino_com_shop:CreditCoinDelta(400)
+                owner.components.hoshino_com_shop:CreditCoinDelta(240)
 
                 Remove_Items_By_Prefab(owner,"redmooneye",MISSION_ITEM_1_NUM)
                 Remove_Items_By_Prefab(owner,"greenmooneye",MISSION_ITEM_2_NUM)
@@ -207,7 +207,6 @@
                 -- item.components.stackable.stacksize = 5
                 -- owner.components.inventory:GiveItem(item) -- 给予物品
 
-                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_special_packer")) -- 给予物品
                 owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_treasure_map")) -- 给予物品
 
             end

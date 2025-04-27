@@ -126,9 +126,10 @@
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 owner.components.hoshino_com_shop:CreditCoinDelta(1000)
 
-                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_abydos_high_purity_alloy"))
+                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_fragments_of_divine_script"))
 
                 owner.components.sanity:SetPercent(0)
+                owner.components.hunger:SetPercent(0)
                 --------------------------------------------------------------------------------------------
                 --- 上debuff
                     local debuff_prefab = "hoshino_mission_golden_09_debuff"
@@ -286,7 +287,7 @@ local function debuff_fn()
                     inst:Remove()
                 end
                 if not target.components.health:IsDead() then
-                    target.components.health:DoDelta(-2,true)
+                    target.components.health:DoDelta(-3,true)
                 end
             end)
         -----------------------------------------------------

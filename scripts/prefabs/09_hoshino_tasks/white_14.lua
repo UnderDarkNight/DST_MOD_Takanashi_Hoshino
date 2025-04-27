@@ -130,29 +130,29 @@
             local delta_y = -22
             local front_size = 25
 
-            local dug_grass_text = bg:AddChild(Text(CODEFONT,front_size,"0/10",{ 91/255 , 112/255 ,136/255 , 1}))
+            local dug_grass_text = bg:AddChild(Text(CODEFONT,front_size,"0/5",{ 91/255 , 112/255 ,136/255 , 1}))
             dug_grass_text:SetPosition(x,y)
             
-            local dug_sapling_text = bg:AddChild(Text(CODEFONT,front_size,"0/10",{ 91/255 , 112/255 ,136/255 , 1}))
+            local dug_sapling_text = bg:AddChild(Text(CODEFONT,front_size,"0/5",{ 91/255 , 112/255 ,136/255 , 1}))
             dug_sapling_text:SetPosition(x,y+delta_y)
 
 
         --------------------------------------------------------------------------
         --- 检查任务是否完成
             local update_fn = function()
-                local dug_grass_flag,dug_grass_num = Has_Enough_Items(ThePlayer,"dug_grass",10)
-                local dug_sapling_flag,dug_sapling_num = Has_Enough_Items(ThePlayer,"dug_sapling",10)
+                local dug_grass_flag,dug_grass_num = Has_Enough_Items(ThePlayer,"dug_grass",5)
+                local dug_sapling_flag,dug_sapling_num = Has_Enough_Items(ThePlayer,"dug_sapling",5)
 
                 if dug_grass_flag and dug_sapling_flag then
                     button_delivery:Show()
                 else
                     button_delivery:Hide()
                 end
-                dug_grass_num = math.clamp(dug_grass_num,0,10)
-                dug_sapling_num = math.clamp(dug_sapling_num,0,10)
+                dug_grass_num = math.clamp(dug_grass_num,0,5)
+                dug_sapling_num = math.clamp(dug_sapling_num,0,5)
 
-                dug_grass_text:SetString(""..dug_grass_num.."/10")
-                dug_sapling_text:SetString(""..dug_sapling_num.."/10")
+                dug_grass_text:SetString(""..dug_grass_num.."/5")
+                dug_sapling_text:SetString(""..dug_sapling_num.."/5")
             end
             update_fn()
             dug_sapling_text.inst:ListenForEvent("hoshino_mission_white_14",update_fn,inst)
@@ -174,18 +174,18 @@
         inst:ListenForEvent("task_delivery", function()
             print("提交任务",inst:GetOwner())
             local owner = inst:GetOwner()            
-            if owner and Has_Enough_Items(owner,"dug_grass",10) and Has_Enough_Items(owner,"dug_sapling",10) then
+            if owner and Has_Enough_Items(owner,"dug_grass",5) and Has_Enough_Items(owner,"dug_sapling",5) then
                 inst:Remove()
                 owner.components.hoshino_com_rpc_event:PushEvent("hoshino_event.update_task_box")
                 owner:PushEvent("hoshino_event.delivery_task",{prefab = inst.prefab,inst = inst,type = inst.type}) -- 提交任务广播
 
                 local current_max_exp = owner.components.hoshino_com_level_sys:GetMaxExp()
-                local exp = current_max_exp*0.25 -- 25% 经验
+                local exp = current_max_exp*0.40 -- 40% 经验
                 owner.components.hoshino_com_level_sys:Exp_DoDelta(exp)
                 owner.components.hoshino_com_shop:CreditCoinDelta(150)
 
-                Remove_Items_By_Prefab(owner,"dug_grass",10)
-                Remove_Items_By_Prefab(owner,"dug_sapling",10)
+                Remove_Items_By_Prefab(owner,"dug_grass",5)
+                Remove_Items_By_Prefab(owner,"dug_sapling",5)
 
 
             end
@@ -205,16 +205,16 @@
 
             if owner then
 
-                local dug_grass_flag,dug_grass_num = Has_Enough_Items(owner,"dug_grass",10)
-                local dug_sapling_flag,dug_sapling_num = Has_Enough_Items(owner,"dug_sapling",10)
+                local dug_grass_flag,dug_grass_num = Has_Enough_Items(owner,"dug_grass",5)
+                local dug_sapling_flag,dug_sapling_num = Has_Enough_Items(owner,"dug_sapling",5)
 
-                dug_grass_num = math.clamp(dug_grass_num,0,10)
-                dug_sapling_num = math.clamp(dug_sapling_num,0,10)
+                dug_grass_num = math.clamp(dug_grass_num,0,5)
+                dug_sapling_num = math.clamp(dug_sapling_num,0,5)
 
                 inst.__dug_grass_num:set(dug_grass_num)
                 inst.__dug_sapling_num:set(dug_sapling_num)
 
-                if dug_grass_num >= 10 and dug_sapling_num >= 10 then
+                if dug_grass_num >= 5 and dug_sapling_num >= 5 then
                     owner:PushEvent("hoshino_event.pad_warnning","main_page")
                 end
 

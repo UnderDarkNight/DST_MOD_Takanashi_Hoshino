@@ -295,6 +295,7 @@ local cards = {
                             inst.components.health.maxhealth = origin_max_health
                             inst.components.health:DoDelta(1)
                         end
+                        -- TheNet:Announce("【竭泽】"..player_name.."的生命buff已消除")
                     end,
                     [2] = function(inst) -- San值
                         local origin_max_sanity = TUNING[string.upper("hoshino").."_SANITY"]
@@ -305,6 +306,7 @@ local cards = {
                             inst.components.sanity.max = origin_max_sanity
                             inst.components.sanity:DoDelta(1)
                         end
+                        -- TheNet:Announce("【竭泽】"..player_name.."的理智buff已消除")
                     end,
                     [3] = function(inst) -- 饥饿
                         local origin_max_hunger = TUNING[string.upper("hoshino").."_HUNGER"]
@@ -315,27 +317,34 @@ local cards = {
                             inst.components.hunger.max = origin_max_hunger
                             inst.components.hunger:DoDelta(1)
                         end
+                        -- TheNet:Announce("【竭泽】"..player_name.."的饥饿buff已消除")
                     end,
                     [4] = function(inst) -- 移速
                         inst.components.hoshino_com_debuff:Set("speed_mult",0) -- 清除数据
                         inst.components.hoshino_com_debuff:Add_Speed_Mult(0) -- 刷新倍增器参数
+                        -- TheNet:Announce("【竭泽】"..player_name.."的移速倍率恢复为1")
                     end,
                     [5] = function(inst) -- 经验
                         inst.components.hoshino_com_debuff:Set("exp_up_mult",0)
+                        -- TheNet:Announce("【竭泽】"..player_name.."的经验倍率恢复为1")
                     end,
                     [6] = function(inst) -- 攻击
                         inst.components.hoshino_com_debuff:Set("damage_mult",0)
                         inst.components.hoshino_com_debuff:Add_Damage_Mult(0)
+                        -- TheNet:Announce("【竭泽】"..player_name.."的攻击倍率恢复为1")
                     end,
                     [7] = function(inst) -- 阵营减伤
                         inst.components.hoshino_com_debuff:Add_Damage_Type_Resist(-100)
+                        -- TheNet:Announce("【竭泽】"..player_name.."的阵营减伤归零")
                     end,
                     [8] = function(inst) -- 反伤
                         inst.components.hoshino_com_debuff:Set("counter_damage",0)
+                        -- TheNet:Announce("【竭泽】"..player_name.."的反伤归零")
                     end,
                     [9] = function(inst) -- 位面防御
                         local current = inst.components.hoshino_com_debuff:Add("planar_defense_value",0)
                         inst.components.hoshino_com_debuff:Add("planar_defense_value",-current)
+                        -- TheNet:Announce("【竭泽】"..player_name.."的位面防御归零")
                     end,
                 }
                 local ret_fn = active_fns[math.random(#active_fns)]
@@ -552,10 +561,10 @@ local cards = {
             end,
             fn = function(inst)
                 inst.components.hoshino_com_debuff:Add_Speed_Mult(3/100)
-                inst.components.hoshino_com_debuff:Add_Damage_Mult(7/100)
+                inst.components.hoshino_com_debuff:Add_Damage_Mult(5/100)
             end,
             text = function(inst)
-                return "移动速度+3%，基础攻击伤害7%"
+                return "移动速度+3%，基础攻击伤害5%"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -600,7 +609,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_substantive_strike","hoshino_card_debuff_substantive_strike",true)
             end,
             text = function(inst)
-                return "【实质打击】\n基础攻击伤害-50%，但是你的所有攻击会扣除敌人30点生命值。【选择之后从卡池移除】"
+                return " \n【实质打击】\n攻击修正*0.5，但你的攻击会扣除目标50生命。\n【选择之后从卡池移除】"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -616,7 +625,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_war_chariot","hoshino_card_debuff_war_chariot",true)
             end,
             text = function(inst)
-                return "【战车】\n当你接触到敌对生物时，每0.3秒扣除其10点生命值（重复选择伤害叠加）"
+                return "【战车】\n当你接触到敌对生物时，每0.3秒对其造成10点伤害（重复选择伤害叠加）"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -709,7 +718,7 @@ local cards = {
                 inst.components.hoshino_com_debuff:Add_Buff_Memory("hoshino_card_debuff_hell_contract","hoshino_card_debuff_hell_contract",true)
             end,
             text = function(inst)
-                return " \n【地狱契约】亲自击杀生物时，66%的概率再掉落一次\n（选择之后从卡池移除）\n(一击致死的不算数)"
+                return " \n【地狱契约】亲自击杀生物时，66%的概率再掉落一次\n若未触发则不会有任何掉落物。（选择之后从卡池移除）"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

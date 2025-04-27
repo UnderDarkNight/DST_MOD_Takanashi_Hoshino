@@ -140,7 +140,6 @@
                 RemoveCoins(owner,1000)
 
                 owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack")) -- 给予物品
-                owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_cards_pack")) -- 给予物品
                 owner.components.inventory:GiveItem(SpawnPrefab("hoshino_item_yi")) -- 给予物品
             end
         end)
