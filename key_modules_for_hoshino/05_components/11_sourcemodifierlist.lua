@@ -8,9 +8,11 @@
 ------------------------------------------------------------------------------------------------------------------------------------
 -- local SourceModifierList = require("util/sourcemodifierlist")
 
-
-AddGlobalClassPostConstruct("util/sourcemodifierlist", "SourceModifierList", function(self)
+local function hook_SourceModifierList(self)
     
+    if self.__hoshino_got_override_fns ~= nil then
+        return
+    end
 
     self.__hoshino_got_override_fns = {}
     self.__hoshino_temp_inst_remove_event = function(temp_inst)
@@ -63,4 +65,26 @@ AddGlobalClassPostConstruct("util/sourcemodifierlist", "SourceModifierList", fun
         end
 
     end)
+end
+
+
+AddGlobalClassPostConstruct("util/sourcemodifierlist", "SourceModifierList",hook_SourceModifierList)
+
+
+AddPlayerPostInit(function(inst)
+
+    if not TheWorld.ismastersim then
+        return
+    end
+    if inst.components.combat == nil then
+        return
+    end
+    hook_SourceModifierList(inst.components.combat.externaldamagemultipliers)
+    hook_SourceModifierList(inst.components.combat.externaldamagetakenmultipliers)
+
+end)
+
+AddComponentPostInit("combat", function(self)
+    hook_SourceModifierList(self.externaldamagemultipliers)
+    hook_SourceModifierList(self.externaldamagetakenmultipliers)
 end)
