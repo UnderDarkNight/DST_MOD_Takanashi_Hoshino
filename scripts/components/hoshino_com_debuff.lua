@@ -294,7 +294,7 @@
             function self:Remove_Buff_Memory(buff_name,active_flag)
                 local Buff_Memory_Data = self:Get("Buff_Memory_Data") or {}
                 Buff_Memory_Data[buff_name] = Buff_Memory_Data[buff_name] or {}
-                Buff_Memory_Data[buff_name].num = Buff_Memory_Data[buff_name].num - 1
+                Buff_Memory_Data[buff_name].num = math.max((Buff_Memory_Data[buff_name].num or 0) - 1,0)
                 if active_flag then
                     for i = 1, 5, 1 do
                         local debuff_inst = inst:GetDebuff(buff_name)

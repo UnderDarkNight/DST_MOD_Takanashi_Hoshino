@@ -108,6 +108,15 @@
     end
     local function data_com_init(inst)
         inst.data_com = inst:AddComponent("hoshino_data")
+        if inst.data_com ~= inst.components.hoshino_data then
+            inst.data_com = inst.components.hoshino_data
+            inst:DoTaskInTime(0,function()
+                if inst.data_com ~= inst.components.hoshino_data then
+                    TheNet:Announce("某个礼物包裹组件错误，删除礼物避免崩溃")
+                    inst:Remove()
+                end
+            end)
+        end
         inst:ListenForEvent("Set",set_data_fn)
         inst:ListenForEvent("AddItemRecord",AddItemRecord)
         inst.data_com:AddOnLoadFn(set_data_fn)
