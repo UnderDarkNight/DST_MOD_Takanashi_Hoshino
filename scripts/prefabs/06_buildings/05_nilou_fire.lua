@@ -84,14 +84,14 @@
         return nil
     end
     local function player_on_hit_event(player) -- 玩家攻击事件
-        local x,y,z = player.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x,y,z,7,BOUNCE_MUST_TAGS,BOUNCE_NO_TAGS)
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x, 0, z, 7, BOUNCE_MUST_TAGS, BOUNCE_NO_TAGS)
         for k, temp_monster in pairs(ents) do
             if temp_monster and temp_monster:IsValid()
                 and temp_monster.components.health and not temp_monster.components.health:IsDead() then
                 local damage = 150
                 player.components.hoshino_com_real_damage:DoRealDamage(temp_monster,damage)
-                temp_monster:PushEvent("attacked", {attacker = player, damage = damage})
+                temp_monster:PushEvent("attacked", {attacker = inst, damage = damage})
             end
         end
         TheNet:Announce("尼卢火:绑定玩家在范围内攻击"..math.random(1000))
@@ -101,11 +101,11 @@
         if player and inst.linked_player == nil then --- 玩家入圈，但是没安装事件
             inst:ListenForEvent("onhitother",player_on_hit_event,player)
             inst.linked_player = player
-            TheNet:Announce("尼卢火:绑定玩家【进入】范围")
+            -- TheNet:Announce("尼卢火:绑定玩家【进入】范围")
         elseif player == nil and inst.linked_player ~= nil then --- 玩家离开，并且之前有安装事件
             inst:RemoveEventCallback("onhitother",player_on_hit_event,player)
             inst.linked_player = nil
-            TheNet:Announce("尼卢火:绑定玩家【离开】范围")
+            -- TheNet:Announce("尼卢火:绑定玩家【离开】范围")
         end        
     end
     local function combat_install(inst)
