@@ -83,27 +83,11 @@ local flg,error_code = pcall(function()
         -- print(ThePlayer.components.hoshino_data:Add("travel_traces_spanwer_golden",0,0,1000))
     ----------------------------------------------------------------------------------------------------------------
     --- 
-        -- ThePlayer:AddDebuff("hoshino_card_debuff_void_throat","hoshino_card_debuff_void_throat")
-        -- ThePlayer:RemoveDebuff("hoshino_card_debuff_void_throat","hoshino_card_debuff_void_throat")
-        -- SpawnPrefab("hoshino_fx_mawofthevoid"):PushEvent("Set",{
-        --     target = ThePlayer,
-        -- })
+        -- ThePlayer.components.hoshino_com_spell_cd_timer:DebugUnlockAll()
 
-
-        -- if TUNING.__fx then
-        --     TUNING.__fx:Remove()
-        -- end
-
-
-        -- TUNING.__fx = SpawnPrefab("hoshino_fx_mawofthevoid")
-
-        -- TUNING.__fx:PushEvent("Set",{
-        --     target = ThePlayer,
-        --     -- height = 1,
-        --     scale = 3,
-        -- })
-        -- ThePlayer.components.hoshino_com_rpc_event:PushEvent("hoshino_event.little_smart_phone_warnning")
-        ThePlayer:PushEvent("hoshino_event.pad_warnning")
+        for k, v in pairs(TheWorld.HOSHINO_ALLPLEYERS:GetAll()) do
+            print(k,v)
+        end
     ----------------------------------------------------------------------------------------------------------------
     print("WARNING:PCALL END   +++++++++++++++++++++++++++++++++++++++++++++++++")
 end)

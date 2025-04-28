@@ -164,6 +164,13 @@ Creating_Synchronization_Controllers() or {}
         end)
     end
 ------------------------------------------------------------------------------------------------------------------------------
+---
+    function hoshino_com_spell_cd_timer:DebugUnlockAll()
+        for spell_name, v in pairs(all_spell_names) do
+            self:Unlock_Spell(spell_name)
+        end
+    end
+------------------------------------------------------------------------------------------------------------------------------
 ----- onload/onsave 函数
     function hoshino_com_spell_cd_timer:AddOnLoadFn(fn)
         if type(fn) == "function" then
