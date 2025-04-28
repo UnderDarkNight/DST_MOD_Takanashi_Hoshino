@@ -34,7 +34,7 @@
         else
             launcher = inst
         end
-        local items_record = inst.data_com:Get("data",{ items_record = {} }).items_record
+        local items_record = inst.components.hoshino_data:Get("data",{ items_record = {} }).items_record
         for k, temp_record in pairs(items_record or {}) do
             local item = SpawnSaveRecord(temp_record)
             item.Transform:SetPosition(x,0,z)
@@ -76,7 +76,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
     local function set_data_fn(inst,_table)
-        local _table = _table or inst.data_com:Get("data",{
+        local _table = _table or inst.components.hoshino_data:Get("data",{
             num = math.random(6),
             name = "test gift pack",
             desc = "test gift pack 666",
@@ -90,10 +90,10 @@
         SetSkin(inst,_table.num or _table.bank,_table.build,_table.anim,_table.atlas,_table.imagename)
         inst.components.inspectable:SetDescription(_table.desc)
         inst.components.named:SetName(_table.name)
-        inst.data_com:Set("data",_table)
+        inst.components.hoshino_data:Set("data",_table)
     end
     local function AddItemRecord(inst,record_or_item)
-        local data = inst.data_com:Get("data")
+        local data = inst.components.hoshino_data:Get("data")
         if data == nil then
             return
         end
@@ -104,22 +104,13 @@
             record_or_item:Remove()
         end
         table.insert(data.items_record,record)
-        inst.data_com:Set("data",data)
+        inst.components.hoshino_data:Set("data",data)
     end
     local function data_com_init(inst)
-        inst.data_com = inst:AddComponent("hoshino_data")
-        if inst.data_com ~= inst.components.hoshino_data then
-            inst.data_com = inst.components.hoshino_data
-            inst:DoTaskInTime(0,function()
-                if inst.data_com ~= inst.components.hoshino_data then
-                    TheNet:Announce("某个礼物包裹组件错误，删除礼物避免崩溃")
-                    inst:Remove()
-                end
-            end)
-        end
+        inst:AddComponent("hoshino_data")
         inst:ListenForEvent("Set",set_data_fn)
         inst:ListenForEvent("AddItemRecord",AddItemRecord)
-        inst.data_com:AddOnLoadFn(set_data_fn)
+        inst.components.hoshino_data:AddOnLoadFn(set_data_fn)
     end
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
