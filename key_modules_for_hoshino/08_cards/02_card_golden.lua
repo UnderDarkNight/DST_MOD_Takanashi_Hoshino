@@ -851,7 +851,7 @@ local cards = {
                 inst:AddDebuff("hoshino_card_debuff_air_drop_support_golden","hoshino_card_debuff_air_drop_support_golden")
             end,
             text = function(inst)
-                return "【援助补给】\n接下来10天内，每到新的一天都会从天而降一个资源补给箱。"
+                return "【援助补给】\n接下来10天内，每天都会从天而降一个大号资源补给箱。"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -881,7 +881,7 @@ local cards = {
                 inst:AddDebuff("hoshino_card_debuff_spring"..tostring(math.random(1000000)),"hoshino_card_debuff_spring")
             end,
             text = function(inst)
-                return " \n【弹簧】激活这张卡时检测人物基础攻击倍率,\n若小于等于1则翻倍,若大于等于1.5则-30%。\n其他情况下选中则无影响。\n角色重选则失效"
+                return " \n【弹簧】激活这张卡时检测人物基础攻击倍率,\n若小于等于1则翻倍,若大于等于1.5则-30%。"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -939,10 +939,10 @@ local cards = {
                 return inst.components.hoshino_com_debuff:Get_TheEyeOfHorus_Finiteuses_Down_Block_Percent() < 1
             end,
             fn = function(inst)
-                inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.1)
+                inst.components.hoshino_com_debuff:TheEyeOfHorus_Finiteuses_Down_Block(0.15)
             end,
             text = function(inst)
-                return "【节约风气】 使用荷鲁斯之眼时有10%的概率不消耗耐久"
+                return "【节约风气】 使用荷鲁斯之眼时有15%的概率不消耗耐久"
             end,
         },
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
