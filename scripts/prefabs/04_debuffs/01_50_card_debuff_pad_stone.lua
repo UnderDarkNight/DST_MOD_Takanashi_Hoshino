@@ -23,7 +23,8 @@
         --- 
         -----------------------------------------------------
         --- 
-            if player.components.combat then
+            if player.components.combat and player.components.combat.externaldamagemultipliers
+                and player.components.combat.externaldamagemultipliers.Hoshino_AddGotOverrideFn then
                 player.components.combat.externaldamagemultipliers:Hoshino_AddGotOverrideFn(inst,function(inst,mult)
                     if mult < 1 then
                         return 1
