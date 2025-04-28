@@ -76,6 +76,9 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --- 
     local function set_data_fn(inst,_table)
+        if not (inst and inst.components and inst.components.hoshino_data) then
+            return
+        end
         local _table = _table or inst.components.hoshino_data:Get("data",{
             num = math.random(6),
             name = "test gift pack",
