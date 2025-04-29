@@ -33,10 +33,15 @@
         -----------------------------------------------------
         ---
             inst:ListenForEvent("refresh_param_down",function()
-                local num = player.components.hoshino_com_debuff:Get_Neatness_Obsession() or 0
-                -- player.components.combat.externaldamagemultipliers:SetModifier(inst.helper,math.max(0,1-0.02*num))
-                player.components.hoshino_com_max_value_controller:SetTempExtraHealth(inst.helper,-2*num)
-                print("info 【洁癖】 Down 层数 : ",num,player)
+                local crash_flag,crash_reason = pcall(function()
+                    local num = player.components.hoshino_com_debuff:Get_Neatness_Obsession() or 0
+                    -- player.components.combat.externaldamagemultipliers:SetModifier(inst.helper,math.max(0,1-0.02*num))
+                    player.components.hoshino_com_max_value_controller:SetTempExtraHealth(inst.helper,-2*num)
+                    print("info 【洁癖】 Down 层数 : ",num,player)
+                end)
+                if not crash_flag then
+                    print("error 【洁癖】 层数检查: ",crash_reason)
+                end
             end)
         -----------------------------------------------------
         ---
