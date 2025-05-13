@@ -321,7 +321,6 @@ nil,
     function hoshino_cards_sys:Excluding_Duplicate_Options_And_Adding_New_Ones(cards_front)  -- 排除重复选项并添加新选项
         --- 本段代码来自AI生成，用于排除重复选项并替换成同类型新选项
         local seen_cards = {}  -- 用于存储已经出现过的卡片名称
-
         for i, card_data in ipairs(cards_front) do
             local card_name = card_data.card_name
             local card_type = self:GetCardBackByIndex(card_name)
@@ -331,7 +330,8 @@ nil,
                 -- print("发现卡组里存在相同选项")
                 -- 生成新的同类型卡牌，确保新卡牌不是已经存在的卡牌
                 local new_card_found = false
-                while not new_card_found do
+                local test_num = 1000 -- 避免死循环
+                while not new_card_found and test_num > 0 do
                     local new_card_name_index = self:SelectRandomCardFromPoolByType(card_type)
                     local test_fn = self:GetTestFnByCardName(new_card_name_index)
                     local test_succeed = test_fn == nil or test_fn(self.inst)
@@ -344,6 +344,7 @@ nil,
                         -- 记录新卡片
                         seen_cards[new_card_name_index] = true
                     end
+                    test_num = test_num - 1
                 end
             else
                 -- 如果没有重复，记录下这张卡片
