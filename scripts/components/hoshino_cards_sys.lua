@@ -774,6 +774,14 @@ nil,
         return "card_white"
     end
     function hoshino_cards_sys:RemoveCardForever(card_name_index)  --- 永久移除卡牌
+        -----------------------------------------------------
+        --- 跳出永久移除
+            local all_data = TUNING.HOSHINO_CARDS_DATA_AND_FNS or {}
+            local this_card_data = all_data[card_name_index] or {}
+            if this_card_data.skip_ever_remove then
+                return
+            end
+        -----------------------------------------------------
         local ever_removed_cards = self:Get("ever_removed_cards",{}) or {}
         ever_removed_cards[card_name_index] = true
         self:Set("ever_removed_cards",ever_removed_cards)
