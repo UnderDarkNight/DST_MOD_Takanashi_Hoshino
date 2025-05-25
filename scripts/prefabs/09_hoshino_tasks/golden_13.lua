@@ -288,24 +288,24 @@ local function debuff_fn()
             -- target.components.health:SetMaxHealth(TUNING.MUTATED_WARG_HEALTH*2)
         -----------------------------------------------------
         --- 死亡广播
-            -- target:ListenForEvent("minhealth",function()
-            --     local x,y,z = target.Transform:GetWorldPosition()
-            --     local ents = TheSim:FindEntities(x,0, z, 100, {"player"})
-            --     for k, v in pairs(ents) do
-            --         v:PushEvent("hoshino_mission_blue_18_kill_with_debuff",target)
-            --     end
-            -- end)
-            inst:ListenForEvent("entity_droploot",function(_,_table)
-                if _table and _table.inst == target then
-                    -- target.components.lootdropper:SpawnLootPrefab("krampus_sack")
-                    local x,y,z = target.Transform:GetWorldPosition()
-                    local ents = TheSim:FindEntities(x,0, z, 100, {"player"})
-                    for k, v in pairs(ents) do
-                        v:PushEvent("hoshino_mission_golden_13_kill_with_debuff",target)
-                    end
+            target:ListenForEvent("minhealth",function()
+                local x,y,z = target.Transform:GetWorldPosition()
+                local ents = TheSim:FindEntities(x,0, z, 100, {"player"})
+                for k, v in pairs(ents) do
+                    v:PushEvent("hoshino_mission_golden_13_kill_with_debuff",target)
                 end
-            end,TheWorld)
-            target.hoshino_mission_golden_13_debuff = true
+            end)
+            -- inst:ListenForEvent("entity_droploot",function(_,_table)
+            --     if _table and _table.inst == target then
+            --         -- target.components.lootdropper:SpawnLootPrefab("krampus_sack")
+            --         local x,y,z = target.Transform:GetWorldPosition()
+            --         local ents = TheSim:FindEntities(x,0, z, 100, {"player"})
+            --         for k, v in pairs(ents) do
+            --             v:PushEvent("hoshino_mission_golden_13_kill_with_debuff",target)
+            --         end
+            --     end
+            -- end,TheWorld)
+            -- target.hoshino_mission_golden_13_debuff = true
         -----------------------------------------------------
         ---
             target:DoPeriodicTask(3,function()

@@ -39,7 +39,7 @@ local flg,error_code = pcall(function()
         --             -- "card_black",
         --             -- "card_colourful",
 
-                    "neatness_obsession",
+                    "the_eye_of_horus_finiteuses_down_block",
         -- --             -- "unlock_spell_normal_ex",
         -- --             -- "unlock_spell_swimming_ex",
         -- --             -- "unlock_spell_all_normal",

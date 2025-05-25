@@ -283,24 +283,24 @@ local function debuff_fn()
             target.components.health:SetMaxHealth(current_max_health * 10)
         -----------------------------------------------------
         --- 死亡广播
-            -- target:ListenForEvent("minhealth",function()
-            --     local x,y,z = target.Transform:GetWorldPosition()
-            --     local ents = TheSim:FindEntities(x,0, z, 100, {"player"})
-            --     for k, v in pairs(ents) do
-            --         v:PushEvent("hoshino_mission_blue_18_kill_with_debuff",target)
-            --     end
-            -- end)
-            inst:ListenForEvent("entity_droploot",function(_,_table)
-                if _table and _table.inst == target then
-                    target.components.lootdropper:SpawnLootPrefab("krampus_sack")
-
-                    local x,y,z = target.Transform:GetWorldPosition()
-                    local ents = TheSim:FindEntities(x,0, z, 100, {"player"})
-                    for k, v in pairs(ents) do
-                        v:PushEvent("hoshino_mission_golden_04_kill_with_debuff",target)
-                    end
+            target:ListenForEvent("minhealth",function()
+                local x,y,z = target.Transform:GetWorldPosition()
+                local ents = TheSim:FindEntities(x,0, z, 100, {"player"})
+                for k, v in pairs(ents) do
+                    v:PushEvent("hoshino_mission_golden_04_kill_with_debuff",target)
                 end
-            end,TheWorld)
+            end)
+            -- inst:ListenForEvent("entity_droploot",function(_,_table)
+            --     if _table and _table.inst == target then
+            --         target.components.lootdropper:SpawnLootPrefab("krampus_sack")
+
+            --         local x,y,z = target.Transform:GetWorldPosition()
+            --         local ents = TheSim:FindEntities(x,0, z, 100, {"player"})
+            --         for k, v in pairs(ents) do
+            --             v:PushEvent("hoshino_mission_golden_04_kill_with_debuff",target)
+            --         end
+            --     end
+            -- end,TheWorld)
             target.hoshino_mission_golden_04_debuff = true
         -----------------------------------------------------
         ---

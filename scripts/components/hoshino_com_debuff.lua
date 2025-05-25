@@ -173,7 +173,8 @@
                 return self:Add("the_eye_of_horus_finiteuses_down_block",0)
             end
             function self:TheEyeOfHorus_Finiteuses_Down_Check_Need_2_Block()
-                if math.random(10000)/10000 < self:Add("the_eye_of_horus_finiteuses_down_block",0) then
+                local success_rate = math.min(self:Add("the_eye_of_horus_finiteuses_down_block",0), 1.0)
+                if math.random() < success_rate then
                     return true
                 end
                 return false
