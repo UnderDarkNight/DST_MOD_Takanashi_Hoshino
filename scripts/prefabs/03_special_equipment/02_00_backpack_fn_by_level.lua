@@ -119,6 +119,8 @@ return function(inst)
         if inst.level >= 5 then
             inst:AddComponent("planardefense")
             inst.components.planardefense:SetBaseDefense(10)
+        else
+            inst.components.planardefense:SetBaseDefense(0.1)
         end
     ----------------------------------------------------------------------------------
     --- 经验倍率：

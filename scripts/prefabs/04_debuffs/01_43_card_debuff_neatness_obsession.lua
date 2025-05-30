@@ -21,13 +21,13 @@
         -----------------------------------------------------
         -- 基础词条
             -- player.components.combat.externaldamagemultipliers:SetModifier(inst,1+0.6)
-            player.components.hoshino_com_debuff:Add_Damage_Mult(0.6)
-            player.components.hoshino_com_max_value_controller:AddTempExtraHealth(inst,60)
+            player.components.hoshino_com_debuff:Add_Damage_Mult(0.75)
+            player.components.hoshino_com_max_value_controller:AddTempExtraHealth(inst,75)
         -----------------------------------------------------
         --- 激活卡牌的时候记录
             inst:ListenForEvent("hoshino_cards_sys.actived_card_fn",function(_,data)
                 player.components.hoshino_com_debuff:Add_Neatness_Obsession(1)
-                player.components.hoshino_com_debuff:Add_Damage_Mult(-2/100)
+                player.components.hoshino_com_debuff:Add_Damage_Mult(-1/100)
                 inst:PushEvent("refresh_param_down")
             end,player)
         -----------------------------------------------------
@@ -36,7 +36,7 @@
                 -- local crash_flag,crash_reason = pcall(function()
                     local num = player.components.hoshino_com_debuff:Get_Neatness_Obsession() or 0
                     -- player.components.combat.externaldamagemultipliers:SetModifier(inst.helper,math.max(0,1-0.02*num))
-                    player.components.hoshino_com_max_value_controller:AddTempExtraHealth(inst.helper,-2*num)
+                    player.components.hoshino_com_max_value_controller:AddTempExtraHealth(inst.helper,-1*num)
                     print("info 【洁癖】 Down 层数 : ",num,player)
                 -- end)
                 -- if not crash_flag then
